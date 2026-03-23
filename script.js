@@ -13,10 +13,19 @@ async function loadPartial(targetId, file) {
 
 function markActiveLink() {
   const path = window.location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".site-nav a").forEach((link) => {
+
+  document.querySelectorAll(".site-nav a, .nav-dropdown-menu a").forEach((link) => {
     const href = link.getAttribute("href");
-    if (href === path) link.classList.add("is-active");
+    if (href === path) {
+      link.classList.add("is-active");
+    }
   });
+
+  const infoPages = ["info.html", "about.html", "guarantees.html", "faq.html", "contact.html"];
+  if (infoPages.includes(path)) {
+    const dropdown = document.querySelector(".nav-dropdown");
+    if (dropdown) dropdown.classList.add("open");
+  }
 }
 
 function initMenuToggle() {
@@ -29,9 +38,23 @@ function initMenuToggle() {
   });
 }
 
+function initDropdownToggle() {
+  const toggle = document.getElementById("infoDropdownToggle");
+  const dropdown = document.querySelector(".nav-dropdown");
+  if (!toggle || !dropdown) return;
+
+  toggle.addEventListener("click", (e) => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   await loadPartial("header-placeholder", "header.html");
   await loadPartial("footer-placeholder", "footer.html");
   markActiveLink();
   initMenuToggle();
+  initDropdownToggle();
 });
