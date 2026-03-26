@@ -187,25 +187,33 @@ a {
 
 .hero-badge-wrap {
   display: flex;
-  justify-content: flex-start;
+  width: 100%;
+}
+
+.hero-badge-wrap .hero-badge {
+  width: 100%;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 0 16px;
-  border: 1px solid var(--line);
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(184, 116, 76, 0.42);
   border-radius: 999px;
-  color: var(--muted);
+  color: #d8c1b5;
   font-size: 14px;
-  background: rgba(255, 255, 255, 0.02);
+  background:
+    linear-gradient(180deg, rgba(184, 116, 76, 0.08), rgba(255, 255, 255, 0.02));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 8px 24px rgba(0,0,0,0.18);
   text-align: center;
 }
 
 .hero-badge-static {
-  width: auto;
+  width: 100%;
   max-width: 100%;
 }
 
@@ -242,9 +250,10 @@ a {
 .hero h1 {
   margin: 0 0 14px;
   max-width: 100%;
-  font-size: clamp(28px, 3.8vw, 46px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-size: clamp(24px, 2.45vw, 34px);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .hero-text-block {
@@ -872,6 +881,11 @@ a {
 
   .hero-badge-wrap {
     justify-content: flex-start;
+  }
+
+  .hero-badge-wrap .hero-badge,
+  .hero-badge-static {
+    width: 100%;
   }
 }
 
