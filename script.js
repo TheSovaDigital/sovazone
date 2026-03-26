@@ -33,20 +33,42 @@ function initMenuToggle() {
   const nav = document.getElementById("siteNav");
   if (!toggle || !nav) return;
 
-  toggle.addEventListener("click", () => {
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
     nav.classList.toggle("open");
   });
 }
 
 function initDropdownToggle() {
   const toggle = document.getElementById("infoDropdownToggle");
-  const dropdown = document.querySelector(".nav-dropdown");
-  if (!toggle || !dropdown) return;
+  const dropdown = document.getElementById("infoDropdown");
+  const menu = document.getElementById("infoDropdownMenu");
 
+  if (!toggle || !dropdown || !menu) return;
+
+  // Открытие/закрытие по клику на всех устройствах
   toggle.addEventListener("click", (e) => {
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-      dropdown.classList.toggle("open");
+    e.preventDefault();
+    e.stopPropagation();
+    dropdown.classList.toggle("open");
+  });
+
+  // Клик внутри меню не закрывает его мгновенно
+  menu.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  // Закрытие по клику вне dropdown
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove("open");
+    }
+  });
+
+  // Закрытие по Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      dropdown.classList.remove("open");
     }
   });
 }
