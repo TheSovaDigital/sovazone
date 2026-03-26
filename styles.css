@@ -47,7 +47,7 @@ a {
 
 .page-content {
   flex: 1;
-  padding: 48px 0 72px;
+  padding: 24px 0 72px;
 }
 
 /* header */
@@ -177,20 +177,38 @@ a {
 /* hero */
 
 .hero {
-  padding: 44px 0 24px;
+  padding: 22px 0 18px;
 }
 
 .hero-split {
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 48px;
-  align-items: center;
+  gap: 44px;
+  align-items: start;
 }
 
 .hero-side {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.hero-badge-static {
+  width: fit-content;
+  max-width: 100%;
 }
 
 .hero-logo-card {
@@ -201,7 +219,7 @@ a {
     rgba(255,255,255,0.02),
     rgba(255,255,255,0.01)
   );
-  padding: 22px;
+  padding: 18px;
 }
 
 .hero-logo {
@@ -221,34 +239,26 @@ a {
   width: 100%;
 }
 
-.hero-kicker {
-  display: inline-block;
-  margin-bottom: 14px;
-  padding: 8px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
 .hero h1 {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   max-width: 760px;
-  font-size: clamp(38px, 5.4vw, 72px);
-  line-height: 1.02;
+  font-size: clamp(34px, 4.6vw, 62px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
 }
 
-.hero p {
+.hero-lead {
   max-width: 760px;
   color: var(--muted);
   font-size: 18px;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
 }
 
 .hero-mini-points {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 18px;
 }
 
 .mini-point {
@@ -265,6 +275,16 @@ a {
   color: var(--text);
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.04);
+}
+
+.hero-seo-text {
+  max-width: 760px;
+}
+
+.hero-seo-text p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 16px;
 }
 
 /* buttons */
@@ -303,7 +323,7 @@ a {
 /* sections */
 
 .section {
-  margin-top: 56px;
+  margin-top: 52px;
 }
 
 .section-head {
@@ -532,15 +552,20 @@ a {
   }
 
   .page-content {
-    padding: 24px 0 56px;
+    padding: 20px 0 56px;
   }
 
   .hero {
-    padding: 18px 0 10px;
+    padding: 14px 0 10px;
   }
 
   .hero-side {
     max-width: 100%;
+  }
+
+  .hero-badge-static {
+    width: 100%;
+    justify-content: center;
   }
 
   .hero-logo-card {
@@ -553,12 +578,16 @@ a {
   }
 
   .hero h1 {
-    font-size: clamp(32px, 9vw, 44px);
+    font-size: clamp(30px, 9vw, 42px);
     line-height: 1.06;
   }
 
-  .hero p {
+  .hero-lead {
     font-size: 16px;
+  }
+
+  .hero-seo-text p {
+    font-size: 15px;
   }
 
   .section {
