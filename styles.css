@@ -379,7 +379,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 238px;
+  min-height: 200px;
   padding: 18px;
   border-radius: 20px;
   border: 1px solid var(--line);
@@ -406,15 +406,22 @@ a {
   z-index: 1;
 }
 
+.username-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .username-platform {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+  opacity: 0.92;
 }
 
 .platform-icon {
@@ -434,7 +441,7 @@ a {
 }
 
 .username-name {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: clamp(22px, 2vw, 28px);
   font-weight: 700;
   line-height: 1.1;
@@ -443,7 +450,7 @@ a {
 
 .username-link {
   display: inline-block;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.4;
@@ -455,19 +462,12 @@ a {
   color: var(--text);
 }
 
-.username-price-label {
-  margin-bottom: 4px;
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
 .username-price {
   color: var(--text);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.01em;
+  line-height: 1.4;
 }
 
 .username-buy {
