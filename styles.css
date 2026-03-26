@@ -177,26 +177,11 @@ a {
   color: var(--muted);
 }
 
-.nav-dropdown-menu a:hover,
-.nav-dropdown-menu a.is-active {
-  color: var(--text);
-  background: linear-gradient(
-    90deg,
-    rgba(122, 77, 255, 0.14),
-    rgba(255, 79, 160, 0.14),
-    rgba(255, 122, 89, 0.14)
-  );
-}
-
-/* главное исправление */
-
 .nav-dropdown:hover .nav-dropdown-menu {
   display: flex;
 }
 
-.nav-dropdown.open .nav-dropdown-menu {
-  display: flex;
-}
+
 
 /* HERO */
 
