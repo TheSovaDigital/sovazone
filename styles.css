@@ -379,7 +379,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 176px;
+  min-height: 238px;
   padding: 18px;
   border-radius: 20px;
   border: 1px solid var(--line);
@@ -406,17 +406,67 @@ a {
   z-index: 1;
 }
 
+.username-platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.platform-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+  opacity: 0.92;
+}
+
+.platform-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
 .username-name {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-size: clamp(22px, 2vw, 28px);
   font-weight: 700;
   line-height: 1.1;
   word-break: break-word;
 }
 
-.username-price {
+.username-link {
+  display: inline-block;
+  margin-bottom: 14px;
   color: var(--muted);
-  font-size: 16px;
+  font-size: 13px;
+  line-height: 1.4;
+  word-break: break-all;
+  transition: 0.2s ease;
+}
+
+.username-link:hover {
+  color: var(--text);
+}
+
+.username-price-label {
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.username-price {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
   letter-spacing: 0.01em;
 }
 
@@ -687,7 +737,7 @@ a {
   }
 
   .username-card {
-    min-height: 154px;
+    min-height: 220px;
     border-radius: 18px;
   }
 
