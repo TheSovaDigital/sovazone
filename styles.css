@@ -47,7 +47,7 @@ a {
 
 .page-content {
   flex: 1;
-  padding: 24px 0 72px;
+  padding: 12px 0 72px;
 }
 
 /* header */
@@ -177,7 +177,7 @@ a {
 /* hero */
 
 .hero {
-  padding: 22px 0 18px;
+  padding: 10px 0 18px;
 }
 
 .hero-split {
@@ -190,7 +190,7 @@ a {
 .hero-side {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .hero-badge {
@@ -240,25 +240,33 @@ a {
 }
 
 .hero h1 {
-  margin: 0 0 16px;
-  max-width: 760px;
-  font-size: clamp(34px, 4.6vw, 62px);
+  margin: 0 0 14px;
+  max-width: 620px;
+  font-size: clamp(30px, 4.2vw, 52px);
   line-height: 1.04;
   letter-spacing: -0.02em;
 }
 
-.hero-lead {
+.hero-text-block {
   max-width: 760px;
+  margin-bottom: 18px;
+}
+
+.hero-text-block p {
+  margin: 0 0 12px;
   color: var(--muted);
+  font-size: 16px;
+}
+
+.hero-lead {
+  color: var(--text);
   font-size: 18px;
-  margin: 0 0 20px;
 }
 
 .hero-mini-points {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 18px;
 }
 
 .mini-point {
@@ -275,16 +283,6 @@ a {
   color: var(--text);
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.04);
-}
-
-.hero-seo-text {
-  max-width: 760px;
-}
-
-.hero-seo-text p {
-  margin: 0 0 12px;
-  color: var(--muted);
-  font-size: 16px;
 }
 
 /* buttons */
@@ -552,11 +550,11 @@ a {
   }
 
   .page-content {
-    padding: 20px 0 56px;
+    padding: 16px 0 56px;
   }
 
   .hero {
-    padding: 14px 0 10px;
+    padding: 8px 0 10px;
   }
 
   .hero-side {
@@ -564,8 +562,7 @@ a {
   }
 
   .hero-badge-static {
-    width: 100%;
-    justify-content: center;
+    width: fit-content;
   }
 
   .hero-logo-card {
@@ -578,15 +575,12 @@ a {
   }
 
   .hero h1 {
-    font-size: clamp(30px, 9vw, 42px);
-    line-height: 1.06;
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.08;
   }
 
+  .hero-text-block p,
   .hero-lead {
-    font-size: 16px;
-  }
-
-  .hero-seo-text p {
     font-size: 15px;
   }
 
