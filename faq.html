@@ -33,6 +33,212 @@
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
   <meta name="twitter:image:alt" content="SovaZone">
 
+  <style>
+    .doc-page{
+      --doc-line: rgba(255,255,255,.08);
+      --doc-line-strong: rgba(198,134,80,.22);
+      --doc-text: #f3f3f8;
+      --doc-muted: #b6b6c8;
+      --doc-accent: #d9b38c;
+      --doc-accent-soft: rgba(217,179,140,.14);
+      --doc-link: #dcdcff;
+    }
+    .doc-page .doc-wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 8px 0 70px;
+    }
+    .doc-page .doc-hero{
+      position: relative;
+      padding: 18px 0 30px;
+      border-bottom: 1px solid var(--doc-line);
+      margin-bottom: 26px;
+    }
+    .doc-page .doc-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color: var(--doc-accent);
+      margin-bottom:16px;
+    }
+    .doc-page .doc-kicker::before{
+      content:"";
+      width:34px;
+      height:1px;
+      background: linear-gradient(90deg, rgba(217,179,140,.9), rgba(217,179,140,0));
+    }
+    .doc-page .doc-hero h1{
+      margin:0 0 14px;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.02;
+      letter-spacing:-.04em;
+      color: var(--doc-text);
+      max-width: 820px;
+    }
+    .doc-page .doc-lead{
+      margin:0;
+      max-width: 860px;
+      color: var(--doc-muted);
+      font-size: 18px;
+      line-height: 1.72;
+    }
+    .doc-page .doc-meta{
+      margin-top:22px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+    }
+    .doc-page .doc-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid var(--doc-line);
+      color: var(--doc-muted);
+      font-size: 14px;
+      background: rgba(255,255,255,.02);
+    }
+    .doc-page .doc-chip a{ color: var(--doc-link); }
+    .doc-page .doc-toc{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      margin: 0 0 28px;
+      padding: 0 0 10px;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .doc-page .doc-toc a{
+      color: var(--doc-link);
+      font-size:14px;
+      padding:8px 0;
+      border-bottom:1px solid transparent;
+    }
+    .doc-page .doc-toc a:hover{
+      border-bottom-color: rgba(217,179,140,.65);
+      color:#fff;
+    }
+    .doc-page .doc-section{
+      padding: 24px 0 28px;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .doc-page .doc-section:last-of-type{
+      border-bottom:0;
+      padding-bottom:12px;
+    }
+    .doc-page .doc-section h2{
+      margin:0 0 12px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height:1.08;
+      letter-spacing:-.03em;
+      color:#fff;
+    }
+    .doc-page .doc-section p{
+      margin: 0 0 12px;
+      color: var(--doc-muted);
+      font-size: 17px;
+      line-height: 1.82;
+    }
+    .doc-page .doc-section p:last-child{ margin-bottom:0; }
+    .doc-page .doc-section strong{ color:#fff; }
+    .doc-page .doc-list{
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap:10px;
+    }
+    .doc-page .doc-list li{
+      position:relative;
+      padding-left:20px;
+      color: var(--doc-muted);
+      line-height:1.8;
+      font-size:16px;
+    }
+    .doc-page .doc-list li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.7em;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background: linear-gradient(180deg, rgba(217,179,140,.95), rgba(140,82,255,.95));
+      box-shadow: 0 0 0 6px rgba(217,179,140,.08);
+    }
+    .doc-page .faq-item{
+      padding:18px 0;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+    .doc-page .faq-item:first-child{ border-top:0; padding-top:0; }
+    .doc-page .faq-q{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+    .doc-page .doc-note{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px dashed var(--doc-line-strong);
+      color: var(--doc-muted);
+      font-size:15px;
+      line-height:1.75;
+    }
+    .doc-page .doc-links{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px 24px;
+      margin-top: 18px;
+    }
+    .doc-page .doc-links a{
+      color: var(--doc-link);
+      padding: 10px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .doc-page .doc-links a:hover{
+      color:#fff;
+      border-bottom-color: rgba(217,179,140,.45);
+    }
+    .doc-page .doc-related{
+      margin-top:42px;
+      padding-top:22px;
+      border-top:1px solid var(--doc-line);
+    }
+    .doc-page .doc-related h3{
+      margin:0 0 14px;
+      font-size:18px;
+      letter-spacing:.02em;
+      color:#fff;
+    }
+    .doc-page .doc-related-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 16px;
+    }
+    .doc-page .doc-related-grid a{
+      color: var(--doc-link);
+      font-size:15px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding-bottom:4px;
+    }
+    .doc-page a{
+      color: var(--doc-link);
+      text-decoration:none;
+    }
+    .doc-page a:hover{ color:#fff; }
+    @media (max-width: 760px){
+      .doc-page .doc-wrap{ padding-bottom:48px; }
+      .doc-page .doc-hero h1{ font-size: 40px; }
+      .doc-page .doc-lead{ font-size:16px; }
+      .doc-page .doc-links{ grid-template-columns: 1fr; }
+    }
+  </style>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -246,114 +452,115 @@
   </script>
 </head>
 <body>
-  <div class="site-shell">
+  <div class="site-shell doc-page">
     <div id="header-placeholder"></div>
     <main class="page-content">
       <div class="container">
-        <section class="section page-hero">
-          <div class="section-head">
+        <div class="doc-wrap">
+          <section class="doc-hero">
+            <div class="doc-kicker">SovaZone / FAQ</div>
             <h1>FAQ</h1>
-            <p class="lead">Ответы на частые вопросы о покупке username, передаче аккаунта, гарантиях и сопутствующих услугах.</p>
-          </div>
-        </section>
+            <p class="doc-lead">Ответы на частые вопросы о покупке username, передаче аккаунта, гарантиях и сопутствующих услугах.</p>
+            <div class="doc-meta">
+              <span class="doc-chip"><a href="/contacts.html">Связь</a></span>
+              <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a></span>
+              <span class="doc-chip"><a href="/usernames.html">Каталог username</a></span>
+            </div>
+          </section>
 
-        <section class="section">
-          <div class="content-block">
-            <h2>Как происходит сделка?</h2>
+          <nav class="doc-toc" aria-label="Навигация по странице">
+            <a href="#q1">Как происходит сделка?</a><a href="#q2">Какие гарантии?</a><a href="#q3">Как мне сменить данные?</a><a href="#q4">Как поставить ник на свой аккаунт?</a><a href="#q5">Сколько стоит перенос никнейма?</a><a href="#q6">Почему я не могу перенести ник самостоятельно?</a><a href="#q7">Есть ли другие методы, чтобы изменить ник самостоятельно?</a><a href="#q8">Какие шансы потерять ник при самостоятельном переносе?</a>
+          </nav>
+
+          <section class="faq-item" id="q1">
+            <h2 class="faq-q">Как происходит сделка?</h2>
             <p>После согласования деталей вы оплачиваете товар и получаете данные от аккаунта или иной согласованный формат передачи.</p><p>При крупных суммах возможна сделка при личной встрече. Страна и город обсуждаются отдельно.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Какие гарантии?</h2>
+          </section>
+          <section class="faq-item" id="q2">
+            <h2 class="faq-q">Какие гарантии?</h2>
             <p>Работа ведётся с 2009 года, есть профильная репутация, опыт сделок и подтверждаемые следы деятельности на тематических площадках.</p><p>При необходимости может обсуждаться сделка при личной встрече.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Как мне сменить данные?</h2>
+          </section>
+          <section class="faq-item" id="q3">
+            <h2 class="faq-q">Как мне сменить данные?</h2>
             <p>После передачи вы получаете данные для безопасного входа в аккаунт. Далее вы можете изменить данные на свои, сменить почту, привязать собственный номер и при необходимости привязать дополнительные сервисы.</p><p>В зависимости от комплектации сделки вам также могут передаваться данные от актуальной и исходной почты, которые затем меняются на ваши.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Как поставить ник на свой аккаунт?</h2>
+          </section>
+          <section class="faq-item" id="q4">
+            <h2 class="faq-q">Как поставить ник на свой аккаунт?</h2>
             <p>Перенос никнейма является отдельной платной услугой. Стоимость обсуждается индивидуально для конкретного username.</p><p>Самостоятельно снимать ник со старого аккаунта и пытаться поставить его на другой аккаунт не рекомендуется из-за высокого риска потери username.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Сколько стоит перенос никнейма?</h2>
+          </section>
+          <section class="faq-item" id="q5">
+            <h2 class="faq-q">Сколько стоит перенос никнейма?</h2>
             <p>Стоимость зависит от конкретного ника, его редкости, уровня интереса к нему и технической сложности переноса.</p><p>Ориентир может находиться в диапазоне от 500 до 3000 USD и выше, если речь идёт о более сложных или ценных username.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Почему я не могу перенести ник самостоятельно?</h2>
+          </section>
+          <section class="faq-item" id="q6">
+            <h2 class="faq-q">Почему я не могу перенести ник самостоятельно?</h2>
             <p>На платформе Instagram username после определённых действий может быть недоступен для немедленного безопасного переноса без специальных мер и без риска его потери.</p><p>Даже если формально ждать окончания периода удержания, на практике интересный ник могут перехватить другие пользователи или автоматизированные инструменты.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Есть ли другие методы, чтобы изменить ник самостоятельно?</h2>
+          </section>
+          <section class="faq-item" id="q7">
+            <h2 class="faq-q">Есть ли другие методы, чтобы изменить ник самостоятельно?</h2>
             <p>Технически пользователь может самостоятельно пытаться освободить ник и занять его на другом аккаунте, однако такие действия совершаются исключительно на свой риск.</p><p>Если username представляет интерес для других участников рынка, вероятность его перехвата остаётся высокой.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Какие шансы потерять ник при самостоятельном переносе?</h2>
+          </section>
+          <section class="faq-item" id="q8">
+            <h2 class="faq-q">Какие шансы потерять ник при самостоятельном переносе?</h2>
             <p>Короткие username, особенно редкие и популярные варианты, чаще всего относятся к категории повышенного риска.</p><p>Чем короче и ценнее ник, тем выше вероятность его потери при самостоятельных действиях без сопровождения.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Я хочу купить ник</h2>
+          </section>
+          <section class="faq-item" id="q9">
+            <h2 class="faq-q">Я хочу купить ник</h2>
             <p>Выберите подходящий username на сайте или в Telegram-канале SovaDigital и свяжитесь с нами для обсуждения деталей сделки.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Я хочу ник, но на сайте ничего не приглянулось</h2>
+          </section>
+          <section class="faq-item" id="q10">
+            <h2 class="faq-q">Я хочу ник, но на сайте ничего не приглянулось</h2>
             <p>Напишите в Telegram. Возможно, в наличии есть username, которые не выставлены публично на сайте.</p><p>Обычно такой формат имеет смысл, если у вас есть понятный бюджет и конкретное представление о желаемом уровне ника.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Я хочу ник, но им пользуются</h2>
+          </section>
+          <section class="faq-item" id="q11">
+            <h2 class="faq-q">Я хочу ник, но им пользуются</h2>
             <p>Если username активно используется владельцем, вопрос решается напрямую с владельцем аккаунта. Мы не работаем с никами, за которыми стоит активный пользователь, использующий аккаунт по назначению.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Я хочу ник, которым не пользуются</h2>
+          </section>
+          <section class="faq-item" id="q12">
+            <h2 class="faq-q">Я хочу ник, которым не пользуются</h2>
             <p>Стоимость username под заказ зависит от сложности задачи, статуса аккаунта, редкости ника и дополнительных факторов.</p><p>Редкие, короткие и популярные слова, имена или фамилии могут стоить существенно дороже базового уровня.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Насколько возможно получить заброшенный ник?</h2>
+          </section>
+          <section class="faq-item" id="q13">
+            <h2 class="faq-q">Насколько возможно получить заброшенный ник?</h2>
             <p>Успешность зависит от бюджета, уровня редкости ника, длительности неактивности аккаунта и реальной доступности сценария.</p><p>Каждый случай рассматривается отдельно, универсальной гарантии результата не существует.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Мне нужен конкретный ник, за который я готов заплатить любую сумму</h2>
+          </section>
+          <section class="faq-item" id="q14">
+            <h2 class="faq-q">Мне нужен конкретный ник, за который я готов заплатить любую сумму</h2>
             <p>Если аккаунт с нужным username длительное время неактивен, в отдельных случаях возможен индивидуальный разбор под заказ.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Я хочу красивый и короткий ник, но не могу определиться</h2>
+          </section>
+          <section class="faq-item" id="q15">
+            <h2 class="faq-q">Я хочу красивый и короткий ник, но не могу определиться</h2>
             <p>В таком случае лучше обратиться за подбором. Мы можем посмотреть ваши предпочтения, примеры понравившихся username и предложить варианты, которые ближе по стилю и задаче.</p>
-          </div>
-        </section>
-        <section class="section">
-          <div class="content-block">
-            <h2>Я хочу 2-значный или 3-значный ник</h2>
+          </section>
+          <section class="faq-item" id="q16">
+            <h2 class="faq-q">Я хочу 2-значный или 3-значный ник</h2>
             <p>Подобные запросы обсуждаются отдельно. Для таких username бюджет и условия зависят от уровня редкости, актуальной доступности и формата задачи.</p>
-          </div>
-        </section>
+          </section>
+          <section class="doc-related">
+            <h3>Полезные переходы</h3>
+            <div class="doc-related-grid">
+              <a href="/how-to-buy.html">Как купить</a>
+              <a href="/client-terms.html">Условия для клиентов</a>
+              <a href="/guarantees.html">Гарантии</a>
+              <a href="/contacts.html">Контакты</a>
+            </div>
+          </section>
 
+
+          <section class="doc-related">
+            <h3>Связанные страницы</h3>
+            <div class="doc-related-grid">
+              <a href="/about.html">О проекте</a>
+              <a href="/how-to-buy.html">Как купить</a>
+              <a href="/sell.html">Как продать</a>
+              <a href="/guarantees.html">Гарантии</a>
+              <a href="/faq.html">FAQ</a>
+              <a href="/contacts.html">Контакты</a>
+              <a href="/privacy.html">Политика конфиденциальности</a>
+              <a href="/client-terms.html">Условия для клиентов</a>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
     <div id="footer-placeholder"></div>
