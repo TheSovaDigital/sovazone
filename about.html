@@ -6,18 +6,15 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-
   <title>О проекте SovaZone | Никнеймы, digital-услуги и экосистема проектов</title>
   <meta name="description" content="SovaZone — digital studio и экосистема проектов: каталог никнеймов, помощь с аккаунтами, консультации, статьи, блог и сопутствующие направления.">
   <link rel="canonical" href="https://sovazone.com/about.html">
-
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="/styles.css">
-
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
@@ -29,30 +26,97 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-
+  <meta property="og:image:alt" content="SovaZone">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="О проекте SovaZone | Никнеймы, digital-услуги и экосистема проектов">
   <meta name="twitter:description" content="SovaZone — digital studio и экосистема проектов: каталог никнеймов, помощь с аккаунтами, консультации, статьи, блог и сопутствующие направления.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+  <meta name="twitter:image:alt" content="SovaZone">
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "О проекте SovaZone | Никнеймы, digital-услуги и экосистема проектов",
-    "url": "https://sovazone.com/about.html",
-    "description": "SovaZone — digital studio и экосистема проектов: каталог никнеймов, помощь с аккаунтами, консультации, статьи, блог и сопутствующие направления.",
-    "inLanguage": "ru-RU"
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://sovazone.com/#organization",
+      "name": "SovaZone",
+      "alternateName": "SovaZone Digital Studio",
+      "url": "https://sovazone.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sovazone.com/logo.png"
+      },
+      "image": "https://sovazone.com/og-image.png",
+      "sameAs": [
+        "https://t.me/SovaDigital",
+        "https://t.me/SovaDS",
+        "https://t.me/SovaUsername",
+        "https://sovads.ru/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://t.me/SovaDS",
+        "availableLanguage": [
+          "ru"
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sovazone.com/#website",
+      "url": "https://sovazone.com/",
+      "name": "SovaZone",
+      "inLanguage": "ru-RU",
+      "publisher": {
+        "@id": "https://sovazone.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://sovazone.com/about.html#webpage",
+      "url": "https://sovazone.com/about.html",
+      "name": "О проекте SovaZone | Никнеймы, digital-услуги и экосистема проектов",
+      "description": "SovaZone — digital studio и экосистема проектов: каталог никнеймов, помощь с аккаунтами, консультации, статьи, блог и сопутствующие направления.",
+      "inLanguage": "ru-RU",
+      "isPartOf": {
+        "@id": "https://sovazone.com/#website"
+      },
+      "about": {
+        "@id": "https://sovazone.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://sovazone.com/og-image.png"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://sovazone.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "О проекте",
+          "item": "https://sovazone.com/about.html"
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body>
   <div class="site-shell">
     <div id="header-placeholder"></div>
-
     <main class="page-content">
       <div class="container">
-
         <section class="section page-hero">
           <div class="section-head">
             <h1>О проекте</h1>
@@ -81,10 +145,8 @@
 
       </div>
     </main>
-
     <div id="footer-placeholder"></div>
   </div>
-
   <script src="/script.js"></script>
 </body>
 </html>
