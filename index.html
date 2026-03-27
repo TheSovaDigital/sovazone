@@ -3,59 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SovaZone Digital Studio — никнеймы для Instagram, запуск профиля и digital-услуги</title>
-  <meta name="description" content="SovaZone Digital Studio — никнеймы для Instagram, подбор username, ник под заказ, запуск профиля, верификация, помощь с аккаунтами и digital-поддержка.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://sovazone.com/">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
+  <title>SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка</title>
+  <meta name="description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
+  <link rel="canonical" href="https://sovazone.com/">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="SovaZone Digital Studio">
-  <meta property="og:title" content="SovaZone Digital Studio — никнеймы для Instagram, запуск профиля и digital-услуги">
+  <meta property="og:site_name" content="SovaZone">
+  <meta property="og:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
   <meta property="og:description" content="Продажа и подбор никнеймов для Instagram, ник под заказ, верификация, помощь с аккаунтами и запуск digital-проектов.">
   <meta property="og:url" content="https://sovazone.com/">
-  <meta property="og:image" content="https://sovazone.com/logo.png">
+  <meta property="og:image" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SovaZone — тёмное премиальное превью с фирменной совой">
 
+  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SovaZone Digital Studio — никнеймы для Instagram, запуск профиля и digital-услуги">
-  <meta name="twitter:description" content="Продажа никнеймов для Instagram, подбор username, запуск профиля и помощь с аккаунтами.">
-  <meta name="twitter:image" content="https://sovazone.com/logo.png">
+  <meta name="twitter:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
+  <meta name="twitter:description" content="Продажа и подбор никнеймов для Instagram, ник под заказ, верификация, помощь с аккаунтами и запуск digital-проектов.">
+  <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+  <meta name="twitter:image:alt" content="SovaZone — тёмное премиальное превью с фирменной совой">
 
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "SovaZone Digital Studio",
-    "url": "https://sovazone.com/",
-    "logo": "https://sovazone.com/logo.png",
-    "sameAs": [
-      "https://t.me/SovaDigital",
-      "https://t.me/SovaDS",
-      "https://sovads.ru/"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer support",
-      "url": "https://t.me/SovaDS",
-      "availableLanguage": ["ru"]
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Популярные никнеймы для Instagram",
-    "itemListElement": [
-      {"@type":"ListItem","position":1,"url":"https://sovazone.com/username/m4d.html","name":"@M4D"},
-      {"@type":"ListItem","position":2,"url":"https://sovazone.com/username/o05.html","name":"@o05"},
-      {"@type":"ListItem","position":3,"url":"https://sovazone.com/username/krot.html","name":"@KROT"},
-      {"@type":"ListItem","position":4,"url":"https://sovazone.com/username/tryd.html","name":"@TRYD"},
-      {"@type":"ListItem","position":5,"url":"https://sovazone.com/username/podlets.html","name":"@PODLETS"},
-      {"@type":"ListItem","position":6,"url":"https://sovazone.com/username/koketka.html","name":"@KOKETKA"},
-      {"@type":"ListItem","position":7,"url":"https://sovazone.com/username/deluks.html","name":"@DELUKS"},
-      {"@type":"ListItem","position":8,"url":"https://sovazone.com/username/keyed.html","name":"@KEYED"}
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://sovazone.com/#organization",
+        "name": "SovaZone",
+        "alternateName": "SovaZone Digital Studio",
+        "url": "https://sovazone.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://sovazone.com/logo.png"
+        },
+        "image": "https://sovazone.com/og-image.png",
+        "sameAs": [
+          "https://t.me/SovaDigital",
+          "https://t.me/SovaDS",
+          "https://sovads.ru/"
+        ],
+        "description": "SovaZone — digital studio и проект по продаже никнеймов, подбору username, запуску профилей и digital-поддержке.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "url": "https://t.me/SovaDS",
+          "availableLanguage": ["ru"]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://sovazone.com/#website",
+        "url": "https://sovazone.com/",
+        "name": "SovaZone",
+        "inLanguage": "ru-RU",
+        "publisher": {
+          "@id": "https://sovazone.com/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://sovazone.com/#webpage",
+        "url": "https://sovazone.com/",
+        "name": "SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка",
+        "isPartOf": {
+          "@id": "https://sovazone.com/#website"
+        },
+        "about": {
+          "@id": "https://sovazone.com/#organization"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://sovazone.com/og-image.png"
+        },
+        "description": "SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы и выбрать формат старта.",
+        "inLanguage": "ru-RU"
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://sovazone.com/#popular-usernames",
+        "name": "Популярные никнеймы для Instagram",
+        "itemListOrder": "https://schema.org/ItemListOrderAscending",
+        "numberOfItems": 8,
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"url":"https://sovazone.com/username/m4d.html","name":"@M4D"},
+          {"@type":"ListItem","position":2,"url":"https://sovazone.com/username/o05.html","name":"@o05"},
+          {"@type":"ListItem","position":3,"url":"https://sovazone.com/username/krot.html","name":"@KROT"},
+          {"@type":"ListItem","position":4,"url":"https://sovazone.com/username/tryd.html","name":"@TRYD"},
+          {"@type":"ListItem","position":5,"url":"https://sovazone.com/username/podlets.html","name":"@PODLETS"},
+          {"@type":"ListItem","position":6,"url":"https://sovazone.com/username/koketka.html","name":"@KOKETKA"},
+          {"@type":"ListItem","position":7,"url":"https://sovazone.com/username/deluks.html","name":"@DELUKS"},
+          {"@type":"ListItem","position":8,"url":"https://sovazone.com/username/keyed.html","name":"@KEYED"}
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://sovazone.com/#services",
+        "name": "Услуги SovaZone",
+        "itemListOrder": "https://schema.org/ItemListOrderAscending",
+        "numberOfItems": 4,
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Продажа никнеймов","url":"https://sovazone.com/usernames.html"},
+          {"@type":"ListItem","position":2,"name":"Никнейм под заказ","url":"https://sovazone.com/services.html"},
+          {"@type":"ListItem","position":3,"name":"Верификация","url":"https://sovazone.com/services.html"},
+          {"@type":"ListItem","position":4,"name":"Помощь с аккаунтом","url":"https://sovazone.com/services.html"}
+        ]
+      }
     ]
   }
   </script>
