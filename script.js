@@ -1,1 +1,0 @@
-(async function(){async function inject(id,path){const el=document.getElementById(id);if(!el)return;try{const r=await fetch(path,{cache:'no-cache'});if(!r.ok)return;el.innerHTML=await r.text()}catch(e){}}await Promise.all([inject('header-placeholder','/header.html'),inject('footer-placeholder','/footer.html')]);})();
