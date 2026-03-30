@@ -38,312 +38,57 @@
   <style>
     .doc-page{
       --doc-line: rgba(255,255,255,.08);
-      --doc-line-strong: rgba(198,134,80,.26);
+      --doc-line-strong: rgba(198,134,80,.24);
       --doc-text: #f3f3f8;
       --doc-muted: #b6b6c8;
       --doc-accent: #d9b38c;
-      --doc-accent-soft: rgba(217,179,140,.12);
       --doc-link: #dcdcff;
       --doc-panel: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018));
     }
-
-    .doc-page .doc-wrap{
-      max-width: 1020px;
-      margin: 0 auto;
-      padding: 8px 0 72px;
-    }
-
-    .doc-page .doc-hero{
-      position: relative;
-      padding: 18px 0 28px;
-      margin-bottom: 26px;
-      border-bottom: 1px solid var(--doc-line);
-    }
-
-    .doc-page .doc-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-size:12px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color: var(--doc-accent);
-      margin-bottom:16px;
-      text-shadow: 0 0 18px rgba(217,179,140,.18);
-    }
-
-    .doc-page .doc-kicker::before{
-      content:"";
-      width:36px;
-      height:1px;
-      background: linear-gradient(90deg, rgba(217,179,140,.95), rgba(217,179,140,0));
-      box-shadow: 0 0 14px rgba(217,179,140,.22);
-    }
-
-    .doc-page .doc-hero h1{
-      margin:0 0 14px;
-      font-size: clamp(34px, 5vw, 60px);
-      line-height: 1.02;
-      letter-spacing:-.04em;
-      color: var(--doc-text);
-      max-width: 820px;
-    }
-
-    .doc-page .doc-lead{
-      margin:0;
-      max-width: 860px;
-      color: var(--doc-muted);
-      font-size: 18px;
-      line-height: 1.72;
-    }
-
-    .doc-page .doc-meta{
-      margin-top:22px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 12px;
-    }
-
-    .doc-page .doc-chip{
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 14px;
-      border-radius:999px;
-      border:1px solid var(--doc-line);
-      color: var(--doc-muted);
-      font-size: 14px;
-      background: rgba(255,255,255,.02);
-    }
-
-    .doc-page .doc-chip a{ color: var(--doc-link); }
-
-    .doc-page .doc-toc{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 12px;
-      margin: 0 0 28px;
-      padding: 0 0 10px;
-      border-bottom:1px solid rgba(255,255,255,.04);
-    }
-
-    .doc-page .doc-toc a{
-      color: var(--doc-link);
-      font-size:14px;
-      padding:8px 0;
-      border-bottom:1px solid transparent;
-    }
-
-    .doc-page .doc-toc a:hover{
-      border-bottom-color: rgba(217,179,140,.65);
-      color:#fff;
-    }
-
-    .contacts-premium-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .contacts-premium-grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .contacts-card{
-      position: relative;
-      overflow: hidden;
-      padding: 22px 22px 20px;
-      border: 1px solid var(--doc-line);
-      background: var(--doc-panel);
-      border-radius: 18px;
-      backdrop-filter: blur(8px);
-    }
-
-    .contacts-card--accent{
-      border-color: var(--doc-line-strong);
-      box-shadow: inset 0 0 0 1px rgba(217,179,140,.06);
-    }
-
-    .contacts-card--cut{
-      clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 0 100%);
-    }
-
-    .contacts-card::after{
-      content:"";
-      position:absolute;
-      inset:auto -30px -30px auto;
-      width:120px;
-      height:120px;
-      background: radial-gradient(circle, rgba(217,179,140,.10), transparent 70%);
-      pointer-events:none;
-    }
-
-    .contacts-card h2{
-      margin:0 0 10px;
-      font-size: clamp(22px, 3vw, 30px);
-      line-height:1.08;
-      letter-spacing:-.03em;
-      color:#fff;
-    }
-
-    .contacts-card p{
-      margin:0 0 12px;
-      color: var(--doc-muted);
-      font-size:16px;
-      line-height:1.78;
-    }
-
-    .contacts-card p:last-child{
-      margin-bottom:0;
-    }
-
-    .contacts-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .contacts-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:46px;
-      padding:0 18px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      color:#fff;
-      font-size:15px;
-      font-weight:700;
-      text-decoration:none;
-      transition:.18s ease;
-    }
-
-    .contacts-btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.18);
-      background: rgba(255,255,255,.05);
-    }
-
-    .contacts-btn--primary{
-      border:none;
-      background: linear-gradient(90deg, #8c52ff, #ff6d6d);
-    }
-
-    .contacts-btn--ghost{
-      color: var(--doc-link);
-    }
-
-    .contacts-links{
-      display:grid;
-      gap:10px;
-      margin-top:8px;
-    }
-
-    .contacts-link-row{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:14px;
-      padding:12px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-
-    .contacts-link-row:last-child{
-      border-bottom:0;
-      padding-bottom:0;
-    }
-
-    .contacts-link-meta{
-      min-width:0;
-    }
-
-    .contacts-link-label{
-      display:block;
-      font-size:13px;
-      color: #9ea0b9;
-      margin-bottom:4px;
-      letter-spacing:.02em;
-    }
-
-    .contacts-link-value{
-      color:#fff;
-      font-size:16px;
-      line-height:1.55;
-      word-break:break-word;
-    }
-
-    .contacts-link-value a{
-      color: var(--doc-link);
-    }
-
-    .contacts-mini-note{
-      margin-top:14px;
-      padding-top:14px;
-      border-top:1px dashed rgba(217,179,140,.22);
-      color: var(--doc-muted);
-      font-size:14px;
-      line-height:1.7;
-    }
-
-    .doc-related{
-      margin-top:42px;
-      padding-top:22px;
-      border-top:1px solid var(--doc-line);
-    }
-
-    .doc-related h3{
-      margin:0 0 14px;
-      font-size:18px;
-      letter-spacing:.02em;
-      color:#fff;
-    }
-
-    .doc-related-grid{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 16px;
-    }
-
-    .doc-related-grid a{
-      color: var(--doc-link);
-      font-size:15px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      padding-bottom:4px;
-    }
-
-    .doc-related-grid a:hover{
-      color:#fff;
-      border-bottom-color: rgba(217,179,140,.45);
-    }
-
-    .doc-page a{
-      color: var(--doc-link);
-      text-decoration:none;
-    }
-
-    .doc-page a:hover{ color:#fff; }
-
-    @media (max-width: 900px){
-      .contacts-premium-grid,
-      .contacts-premium-grid-3{
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px){
-      .doc-page .doc-wrap{ padding-bottom:48px; }
-      .doc-page .doc-hero h1{ font-size: 40px; }
-      .doc-page .doc-lead{ font-size:16px; }
-      .contacts-link-row{
-        flex-direction:column;
-      }
-    }
+    .doc-page .doc-wrap{max-width:1020px;margin:0 auto;padding:8px 0 72px;}
+    .doc-page .doc-hero{position:relative;padding:18px 0 28px;margin-bottom:28px;border-bottom:1px solid var(--doc-line);}
+    .doc-page .doc-kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--doc-accent);margin-bottom:16px;text-shadow:0 0 18px rgba(217,179,140,.18);}
+    .doc-page .doc-kicker::before{content:"";width:36px;height:1px;background:linear-gradient(90deg, rgba(217,179,140,.95), rgba(217,179,140,0));box-shadow:0 0 14px rgba(217,179,140,.22);}
+    .doc-page .doc-hero h1{margin:0 0 14px;font-size:clamp(34px,5vw,60px);line-height:1.02;letter-spacing:-.04em;color:var(--doc-text);max-width:820px;}
+    .doc-page .doc-lead{margin:0;max-width:860px;color:var(--doc-muted);font-size:18px;line-height:1.72;}
+    .doc-page .doc-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 12px;}
+    .doc-page .doc-chip{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--doc-line);color:var(--doc-muted);font-size:14px;background:rgba(255,255,255,.02);}
+    .doc-page .doc-chip a{color:var(--doc-link);}
+    .contacts-premium-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-bottom:18px;}
+    .contacts-premium-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:18px;}
+    .contacts-card{position:relative;overflow:hidden;padding:22px 22px 20px;border:1px solid var(--doc-line);background:var(--doc-panel);border-radius:18px;backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,.02);}
+    .contacts-card--accent{border-color:var(--doc-line-strong);box-shadow:inset 0 0 0 1px rgba(217,179,140,.05);}
+    .contacts-card--cut{border-top-right-radius:28px;border-bottom-left-radius:28px;}
+    .contacts-card::after{content:"";position:absolute;inset:auto -30px -30px auto;width:120px;height:120px;background:radial-gradient(circle, rgba(217,179,140,.10), transparent 70%);pointer-events:none;}
+    .contacts-card h2{margin:0 0 10px;font-size:clamp(22px,3vw,30px);line-height:1.08;letter-spacing:-.03em;color:#fff;}
+    .contacts-card p{margin:0 0 12px;color:var(--doc-muted);font-size:16px;line-height:1.78;}
+    .contacts-card p:last-child{margin-bottom:0;}
+    .contacts-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px;}
+    .contacts-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;width:100%;padding:0 18px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:#fff;font-size:15px;font-weight:700;text-decoration:none;transition:.18s ease;text-align:center;}
+    .contacts-btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.05);}
+    .contacts-btn--primary{border:none;background:linear-gradient(90deg,#8c52ff,#ff6d6d);}
+    .contacts-btn--ghost{color:var(--doc-link);}
+    .contacts-links{display:grid;gap:10px;margin-top:8px;}
+    .contacts-link-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+    .contacts-link-row:last-child{border-bottom:0;padding-bottom:0;}
+    .contacts-link-meta{min-width:0;}
+    .contacts-link-label{display:block;font-size:13px;color:#9ea0b9;margin-bottom:4px;letter-spacing:.02em;}
+    .contacts-link-value{color:#fff;font-size:16px;line-height:1.55;word-break:break-word;}
+    .contacts-link-value a{color:var(--doc-link);}
+    .contacts-mini-note{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(217,179,140,.22);color:var(--doc-muted);font-size:14px;line-height:1.7;}
+    .contacts-guidance{display:grid;gap:12px;margin-top:14px;}
+    .contacts-guidance-item{padding:14px 16px;border:1px solid rgba(255,255,255,.06);border-radius:14px;background:rgba(255,255,255,.02);}
+    .contacts-guidance-item strong{display:block;margin-bottom:5px;color:#fff;font-size:15px;line-height:1.45;}
+    .contacts-guidance-item span{color:var(--doc-muted);font-size:15px;line-height:1.7;display:block;}
+    .doc-related{margin-top:42px;padding-top:22px;border-top:1px solid var(--doc-line);}
+    .doc-related h3{margin:0 0 14px;font-size:18px;letter-spacing:.02em;color:#fff;}
+    .doc-related-grid{display:flex;flex-wrap:wrap;gap:10px 16px;}
+    .doc-related-grid a{color:var(--doc-link);font-size:15px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:4px;}
+    .doc-related-grid a:hover{color:#fff;border-bottom-color:rgba(217,179,140,.45);}
+    .doc-page a{color:var(--doc-link);text-decoration:none;}
+    .doc-page a:hover{color:#fff;}
+    @media (max-width:900px){.contacts-premium-grid,.contacts-premium-grid-3{grid-template-columns:1fr;}}
+    @media (max-width:760px){.doc-page .doc-wrap{padding-bottom:48px;}.doc-page .doc-hero h1{font-size:40px;}.doc-page .doc-lead{font-size:16px;}.contacts-link-row{flex-direction:column;}.contacts-actions{grid-template-columns:1fr;}}
   </style>
 
   <script type="application/ld+json">
@@ -447,14 +192,8 @@
             </div>
           </section>
 
-          <nav class="doc-toc" aria-label="Навигация по странице">
-            <a href="#main-contact">Основная связь</a>
-            <a href="#project-links">Площадки и ссылки</a>
-            <a href="#how-to-write">Как лучше писать</a>
-          </nav>
-
           <div class="contacts-premium-grid">
-            <section class="contacts-card contacts-card--accent contacts-card--cut" id="main-contact">
+            <section class="contacts-card contacts-card--accent contacts-card--cut">
               <h2>Основная связь</h2>
               <p>
                 Для обсуждения покупки username, технических вопросов и услуг используй
@@ -468,7 +207,6 @@
               <div class="contacts-actions">
                 <a class="contacts-btn contacts-btn--primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
                 <a class="contacts-btn contacts-btn--ghost" href="/how-to-buy.html">Как купить</a>
-                <a class="contacts-btn contacts-btn--ghost" href="/client-terms.html">Условия для клиентов</a>
               </div>
 
               <div class="contacts-mini-note">
@@ -476,22 +214,37 @@
               </div>
             </section>
 
-            <section class="contacts-card" id="how-to-write">
+            <section class="contacts-card">
               <h2>Как лучше писать</h2>
               <p>
-                Если вопрос связан с конкретным username, пришли его название или ссылку на страницу ника.
-                Если нужен подбор, можно кратко описать бюджет, стиль и желаемый формат.
+                Чтобы обсуждение шло быстрее и без лишних уточнений, лучше сразу дать короткий и понятный контекст обращения.
               </p>
 
-              <ul class="doc-list">
-                <li>по покупке — название username или ссылка на карточку;</li>
-                <li>по подбору — примеры того, что нравится;</li>
-                <li>по продаже собственного ника — сначала страница <a href="/sell.html">Как продать</a> и правила площадки.</li>
-              </ul>
+              <div class="contacts-guidance">
+                <div class="contacts-guidance-item">
+                  <strong>Если тебя интересует конкретный username</strong>
+                  <span>Пришли его название или ссылку на нужную страницу ника.</span>
+                </div>
+
+                <div class="contacts-guidance-item">
+                  <strong>Если нужен подбор</strong>
+                  <span>Можно кратко описать бюджет, стиль и желаемый формат username.</span>
+                </div>
+
+                <div class="contacts-guidance-item">
+                  <strong>Если вопрос касается продажи собственного ника</strong>
+                  <span>Сначала открой страницу <a href="/sell.html">Как продать</a> и посмотри правила площадки.</span>
+                </div>
+              </div>
+
+              <div class="contacts-actions">
+                <a class="contacts-btn contacts-btn--ghost" href="/sell.html">Как продать</a>
+                <a class="contacts-btn contacts-btn--ghost" href="/client-terms.html">Условия для клиентов</a>
+              </div>
             </section>
           </div>
 
-          <section class="contacts-card contacts-card--accent" id="project-links">
+          <section class="contacts-card contacts-card--accent">
             <h2>Площадки и ссылки</h2>
 
             <div class="contacts-links">
@@ -502,7 +255,7 @@
                     <a href="https://t.me/SovaDigital" target="_blank" rel="noopener">SovaDigital</a>
                   </div>
                 </div>
-                <div class="contacts-actions">
+                <div class="contacts-actions" style="max-width:220px; margin-top:0;">
                   <a class="contacts-btn" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал</a>
                 </div>
               </div>
@@ -514,7 +267,7 @@
                     <a href="https://t.me/SovaUsername" target="_blank" rel="noopener">SovaUsername</a>
                   </div>
                 </div>
-                <div class="contacts-actions">
+                <div class="contacts-actions" style="max-width:220px; margin-top:0;">
                   <a class="contacts-btn" href="https://t.me/SovaUsername" target="_blank" rel="noopener">Перейти в канал</a>
                 </div>
               </div>
@@ -526,7 +279,7 @@
                     <a href="https://sovads.ru/" target="_blank" rel="noopener">sovads.ru</a>
                   </div>
                 </div>
-                <div class="contacts-actions">
+                <div class="contacts-actions" style="max-width:220px; margin-top:0;">
                   <a class="contacts-btn" href="https://sovads.ru/" target="_blank" rel="noopener">Открыть магазин</a>
                 </div>
               </div>
@@ -537,10 +290,9 @@
             <section class="contacts-card">
               <h2>Покупка username</h2>
               <p>
-                Если тебя интересует конкретный ник, сначала лучше открыть
-                <a href="/how-to-buy.html">страницу покупки</a> и затем перейти к обсуждению деталей.
+                Если тебя интересует конкретный ник, сначала лучше открыть страницу покупки и затем перейти к обсуждению деталей.
               </p>
-              <div class="contacts-actions">
+              <div class="contacts-actions" style="grid-template-columns:1fr;">
                 <a class="contacts-btn" href="/how-to-buy.html">Открыть “Как купить”</a>
               </div>
             </section>
@@ -548,10 +300,9 @@
             <section class="contacts-card">
               <h2>Продажа username</h2>
               <p>
-                Если ты хочешь разместить объявление о продаже ника, используй страницу
-                <a href="/sell.html">Как продать</a> и площадку SovaUsername.
+                Если ты хочешь разместить объявление о продаже ника, используй страницу “Как продать” и площадку SovaUsername.
               </p>
-              <div class="contacts-actions">
+              <div class="contacts-actions" style="grid-template-columns:1fr;">
                 <a class="contacts-btn" href="/sell.html">Открыть “Как продать”</a>
               </div>
             </section>
@@ -559,10 +310,9 @@
             <section class="contacts-card">
               <h2>Частые вопросы</h2>
               <p>
-                Для типовых вопросов по сделке, передаче, рискам и сопровождению удобнее сначала посмотреть
-                <a href="/faq.html">FAQ</a>.
+                Для типовых вопросов по сделке, передаче, рискам и сопровождению удобнее сначала посмотреть FAQ.
               </p>
-              <div class="contacts-actions">
+              <div class="contacts-actions" style="grid-template-columns:1fr;">
                 <a class="contacts-btn" href="/faq.html">Открыть FAQ</a>
               </div>
             </section>
