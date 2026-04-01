@@ -106,8 +106,8 @@
     .doc-page .doc-toc{
       display:flex;
       flex-wrap:wrap;
-      gap:10px 12px;
-      margin: 0 0 28px;
+      gap:14px 16px;
+      margin: 6px 0 32px;
       padding: 0 0 10px;
       border-bottom:1px solid rgba(255,255,255,.04);
     }
@@ -124,6 +124,19 @@
     .doc-page .doc-section{
       padding: 24px 0 28px;
       border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    /* Premium refinement — section cards */
+    .doc-page .doc-section{
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 18px;
+      padding: 24px 26px 26px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(6px);
+    }
+    .doc-page .doc-section:last-of-type{
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .doc-page .doc-section:last-of-type{
       border-bottom:0;
