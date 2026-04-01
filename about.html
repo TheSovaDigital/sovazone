@@ -44,15 +44,15 @@
       --doc-link: #dcdcff;
     }
     .doc-page .doc-wrap{
-      max-width: 980px;
+      max-width: 1020px;
       margin: 0 auto;
-      padding: 8px 0 70px;
+      padding: 10px 0 72px;
     }
     .doc-page .doc-hero{
       position: relative;
-      padding: 18px 0 30px;
+      padding: 20px 0 34px;
       border-bottom: 1px solid var(--doc-line);
-      margin-bottom: 26px;
+      margin-bottom: 30px;
     }
     .doc-page .doc-kicker{
       display:inline-flex;
@@ -107,31 +107,54 @@
       display:flex;
       flex-wrap:wrap;
       gap:10px 12px;
-      margin: 0 0 28px;
-      padding: 0 0 10px;
-      border-bottom:1px solid rgba(255,255,255,.04);
+      margin: 0 0 30px;
+      padding: 0;
+      border-bottom:0;
     }
     .doc-page .doc-toc a{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.02);
       color: var(--doc-link);
       font-size:14px;
-      padding:8px 0;
-      border-bottom:1px solid transparent;
+      transition:.18s ease;
     }
     .doc-page .doc-toc a:hover{
-      border-bottom-color: rgba(217,179,140,.65);
       color:#fff;
+      border-color: rgba(217,179,140,.34);
+      background:rgba(255,255,255,.035);
+      transform:translateY(-1px);
     }
     .doc-page .doc-section{
-      padding: 24px 0 28px;
-      border-bottom:1px solid rgba(255,255,255,.05);
+      position:relative;
+      padding: 26px 28px 28px;
+      margin-bottom:18px;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+      overflow:hidden;
     }
     .doc-page .doc-section:last-of-type{
-      border-bottom:0;
-      padding-bottom:12px;
+      margin-bottom:0;
+    }
+    .doc-page .doc-section::after{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg, rgba(217,179,140,.26), rgba(217,179,140,0));
+      opacity:.9;
+      pointer-events:none;
     }
     .doc-page .doc-section h2{
-      margin:0 0 12px;
-      font-size: clamp(24px, 3vw, 34px);
+      margin:0 0 10px;
+      font-size: clamp(24px, 3vw, 32px);
       line-height:1.08;
       letter-spacing:-.03em;
       color:#fff;
@@ -139,8 +162,8 @@
     .doc-page .doc-section p{
       margin: 0 0 12px;
       color: var(--doc-muted);
-      font-size: 17px;
-      line-height: 1.82;
+      font-size: 16px;
+      line-height: 1.78;
     }
     .doc-page .doc-section p:last-child{ margin-bottom:0; }
     .doc-page .doc-section strong{ color:#fff; }
@@ -183,11 +206,11 @@
     }
     .doc-page .doc-note{
       margin-top:18px;
-      padding-top:16px;
+      padding:16px 18px 0 0;
       border-top:1px dashed var(--doc-line-strong);
       color: var(--doc-muted);
       font-size:15px;
-      line-height:1.75;
+      line-height:1.72;
     }
     .doc-page .doc-links{
       display:grid;
@@ -236,6 +259,8 @@
       .doc-page .doc-hero h1{ font-size: 40px; }
       .doc-page .doc-lead{ font-size:16px; }
       .doc-page .doc-links{ grid-template-columns: 1fr; }
+      .doc-page .doc-section{ padding:20px 18px 22px; border-radius:18px; }
+      .doc-page .doc-toc{ gap:8px 10px; }
     }
   </style>
 
