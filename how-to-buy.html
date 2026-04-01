@@ -106,8 +106,8 @@
     .doc-page .doc-toc{
       display:flex;
       flex-wrap:wrap;
-      gap:10px 12px;
-      margin: 0 0 28px;
+      gap:14px 16px;
+      margin: 6px 0 32px;
       padding: 0 0 10px;
       border-bottom:1px solid rgba(255,255,255,.04);
     }
@@ -124,6 +124,19 @@
     .doc-page .doc-section{
       padding: 24px 0 28px;
       border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    /* Premium step card refinement */
+    .doc-page .doc-step-card{
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 18px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(6px);
+    }
+    .doc-page .doc-step-card h2{
+      margin-bottom: 10px;
     }
     .doc-page .doc-section:last-of-type{
       border-bottom:0;
@@ -339,25 +352,25 @@
             <a href="#choose">Выберите username</a><a href="#contact">Свяжитесь с нами до оплаты</a><a href="#payment">Оплата и передача</a><a href="#support">Передача и сопровождение</a>
           </nav>
 
-          <section class="doc-section" id="choose">
+          <section class="doc-section doc-step-card" id="choose">
             <h2>1. Выберите username</h2>
             <p>Откройте <a href='/usernames.html'>каталог никнеймов</a> и выберите подходящий вариант. На странице каждого username указаны цена, краткое описание и кнопки для связи.</p>
             
             
           </section>
-          <section class="doc-section" id="contact">
+          <section class="doc-section doc-step-card" id="contact">
             <h2>2. Свяжитесь с нами до оплаты</h2>
             <p>Перед покупкой необходимо связаться с нами в <a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a> для обсуждения деталей сделки, актуальности ника и порядка передачи.</p><p>Это обязательный этап, потому что каждый товар на сайте уникален и может требовать индивидуального порядка действий после покупки.</p>
             
             
           </section>
-          <section class="doc-section" id="payment">
+          <section class="doc-section doc-step-card" id="payment">
             <h2>3. Оплата и передача</h2>
             <p>После согласования условий вы оплачиваете товар и получаете данные от аккаунта или иной согласованный формат передачи.</p><p>При крупных суммах возможен отдельный формат проведения сделки, включая личную встречу, если это заранее согласовано сторонами.</p>
             
             
           </section>
-          <section class="doc-section" id="support">
+          <section class="doc-section doc-step-card" id="support">
             <h2>4. Передача и сопровождение</h2>
             <p>Когда детали согласованы, переходим к самой передаче username и, при необходимости, к дополнительному сопровождению.</p><p>После передачи мы можем оказывать дальнейшую поддержку и консультации по вопросам перепривязки, смены данных, базовой технической логики и безопасного завершения процедуры передачи.</p>
             
