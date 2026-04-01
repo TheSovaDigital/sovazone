@@ -106,8 +106,8 @@
     .doc-page .doc-toc{
       display:flex;
       flex-wrap:wrap;
-      gap:10px 12px;
-      margin: 0 0 28px;
+      gap:14px 16px;
+      margin: 6px 0 32px;
       padding: 0 0 10px;
       border-bottom:1px solid rgba(255,255,255,.04);
     }
@@ -124,6 +124,16 @@
     .doc-page .doc-section{
       padding: 24px 0 28px;
       border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    /* Premium refinement — step cards */
+    .doc-page .doc-step-card{
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 18px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(6px);
     }
     .doc-page .doc-section:last-of-type{
       border-bottom:0;
@@ -339,13 +349,13 @@
             <a href="#where">Где размещать объявление</a><a href="#before">Что сделать перед публикацией</a><a href="#moderation">Модерация и удаление</a>
           </nav>
 
-          <section class="doc-section" id="where">
+          <section class="doc-section doc-step-card" id="where">
             <h2>Где размещать объявление</h2>
             <p>Для размещения объявления о продаже username используйте площадку <a href="https://t.me/SovaUsername" target="_blank" rel="noopener">SovaUsername</a>.</p><p>Объявления публикуются в соответствии с правилами, указанными в закреплённом сообщении и в примере поста от администрации.</p>
             
             
           </section>
-          <section class="doc-section" id="before">
+          <section class="doc-section doc-step-card" id="before">
             <h2>Что сделать перед публикацией</h2>
             <p>Перед размещением объявления необходимо внимательно изучить правила канала, требования к оформлению и пример корректного объявления.</p><p>Это обязательное условие публикации. Объявление должно полностью соответствовать правилам площадки.</p>
             
@@ -354,7 +364,7 @@
       <a href="/faq.html">Открыть FAQ по username</a>
     </div>
           </section>
-          <section class="doc-section" id="moderation">
+          <section class="doc-section doc-step-card" id="moderation">
             <h2>Модерация и удаление</h2>
             <p>Объявления, оформленные с нарушением правил, могут быть удалены администрацией без дополнительного согласования.</p><p>Если вы хотите разместить username корректно и без лишних правок, ориентируйтесь на закреплённый пост и шаблон, опубликованный администрацией канала.</p>
             
