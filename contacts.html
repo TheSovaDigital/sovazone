@@ -54,12 +54,11 @@
     .doc-page .doc-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 12px;}
     .doc-page .doc-chip{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--doc-line);color:var(--doc-muted);font-size:14px;background:rgba(255,255,255,.02);}
     .doc-page .doc-chip a{color:var(--doc-link);}
-    .contacts-premium-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-bottom:24px;align-items:stretch;}
+    .contacts-premium-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-bottom:24px;align-items:start;}
     .contacts-premium-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:18px;align-items:stretch;}
-    .contacts-card{position:relative;overflow:hidden;padding:22px 22px 20px;border:1px solid var(--doc-line);background:var(--doc-panel);border-radius:18px;backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,.02);height:100%;}
+    .contacts-card{position:relative;overflow:hidden;padding:22px 22px 20px;border:1px solid var(--doc-line);background:var(--doc-panel);border-radius:18px;backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,.02);}
     .contacts-card--accent{border-color:var(--doc-line-strong);box-shadow:inset 0 0 0 1px rgba(217,179,140,.05);}
     .contacts-card--cut{border-top-right-radius:28px;border-bottom-left-radius:28px;}
-    .contacts-card::after{content:"";position:absolute;inset:auto -30px -30px auto;width:120px;height:120px;background:radial-gradient(circle, rgba(217,179,140,.10), transparent 70%);pointer-events:none;}
     .contacts-card h2{margin:0 0 10px;font-size:clamp(22px,3vw,30px);line-height:1.08;letter-spacing:-.03em;color:#fff;}
     .contacts-card p{margin:0 0 12px;color:var(--doc-muted);font-size:16px;line-height:1.78;}
     .contacts-card p:last-child{margin-bottom:0;}
@@ -189,7 +188,7 @@
           </section>
 
           <div class="contacts-premium-grid">
-            <section class="contacts-card contacts-card--accent contacts-card--cut">
+            <section class="contacts-card contacts-card--accent contacts-card--cut" style="min-height:100%;">
               <h2>Основная связь</h2>
               <p>
                 Для обсуждения покупки username, технических вопросов и услуг используй
@@ -210,17 +209,17 @@
               </div>
             </section>
 
-            <section class="contacts-card">
+            <section class="contacts-card" style="min-height:100%;">
               <h2>Как лучше писать</h2>
               <p>
                 Чтобы обсуждение шло быстрее и без лишних уточнений, лучше сразу дать короткий и понятный контекст обращения.
               </p>
 
               <p>
-                Если тебя интересует конкретный username, можно сразу отправить его название или ссылку на нужную страницу.
-                Если нужен подбор, достаточно коротко обозначить бюджет, стиль и желаемый формат.
-                Если вопрос касается продажи собственного ника, сначала удобно посмотреть страницу
-                <a href="/sell.html">Как продать</a>, а затем уже перейти к обсуждению деталей.
+                Если тебя интересует конкретный username, лучше сразу отправить его название или ссылку на нужную страницу.
+                Если нужен подбор, можно коротко обозначить бюджет, стиль и желаемый формат.
+                Если вопрос касается продажи собственного ника, сначала открой страницу <a href="/sell.html">Как продать</a>,
+                а затем уже переходи к обсуждению деталей.
               </p>
 
               <div class="contacts-actions" style="margin-top:18px;">
