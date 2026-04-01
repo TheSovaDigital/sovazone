@@ -126,11 +126,13 @@
     .services-page .services-panel{
       position:relative;
       overflow:hidden;
-      padding:22px 24px;
+      padding:24px 26px;
       border:1px solid var(--doc-line);
-      border-radius:22px;
-      background: var(--doc-panel);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+      border-radius:24px;
+      background:
+        radial-gradient(120% 100% at 0% 0%, rgba(168,85,247,.08), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,.038), rgba(255,255,255,.016));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
     }
     .services-page .services-panel--accent{
       border-color: var(--doc-line-strong);
@@ -204,66 +206,98 @@
     .services-page .services-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:18px;
+      gap:22px;
     }
     .services-page .service-card{
       position:relative;
       display:flex;
       flex-direction:column;
       min-height:100%;
-      padding:22px 22px 20px;
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.07);
-      background: var(--doc-panel);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+      padding:26px 24px 24px;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(140% 120% at 0% 0%, rgba(168,85,247,.12), transparent 42%),
+        radial-gradient(120% 120% at 100% 0%, rgba(236,72,153,.10), transparent 44%),
+        linear-gradient(180deg, rgba(255,255,255,.048), rgba(255,255,255,.018));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 18px 40px rgba(0,0,0,.18);
       overflow:hidden;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+    .services-page .service-card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:1px;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(236,72,153,.45), rgba(249,115,22,.36), rgba(255,255,255,0));
+      opacity:.9;
+      pointer-events:none;
     }
     .services-page .service-card::after{
       content:"";
       position:absolute;
-      inset:0 auto auto 0;
-      width:100%;
-      height:1px;
-      background:linear-gradient(90deg, rgba(217,179,140,.26), rgba(217,179,140,0));
+      inset:auto -30px -30px auto;
+      width:110px;
+      height:110px;
+      background:radial-gradient(circle, rgba(255,255,255,.05), rgba(255,255,255,0) 70%);
       pointer-events:none;
     }
     .services-page .service-card:hover{
-      transform:translateY(-2px);
-      border-color: rgba(217,179,140,.26);
-      background:linear-gradient(180deg, rgba(255,255,255,.042), rgba(255,255,255,.02));
+      transform:translateY(-4px);
+      border-color: rgba(236,72,153,.22);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 24px 54px rgba(0,0,0,.24);
+      background:
+        radial-gradient(140% 120% at 0% 0%, rgba(168,85,247,.15), transparent 42%),
+        radial-gradient(120% 120% at 100% 0%, rgba(236,72,153,.13), transparent 44%),
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
     }
     .services-page .service-card h3{
-      margin:0 0 10px;
-      font-size:24px;
-      line-height:1.12;
-      letter-spacing:-.025em;
+      margin:0 0 12px;
+      font-size:26px;
+      line-height:1.08;
+      letter-spacing:-.03em;
       color:#fff;
+      max-width:90%;
     }
     .services-page .service-card p{
-      margin:0 0 16px;
+      margin:0 0 18px;
       color: var(--doc-muted);
       font-size:15.5px;
-      line-height:1.72;
+      line-height:1.74;
       flex:1;
+      max-width:95%;
     }
     .services-page .service-card .service-link{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      width:max-content;
-      min-height:40px;
-      padding:0 14px;
-      border-radius:999px;
+      justify-content:space-between;
+      gap:12px;
+      width:100%;
+      min-height:46px;
+      padding:0 16px;
+      border-radius:16px;
       border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.02);
+      background:rgba(255,255,255,.03);
       color:#fff;
       font-size:14px;
       font-weight:700;
+      letter-spacing:.01em;
+    }
+    .services-page .service-card .service-link::after{
+      content:"↗";
+      color: rgba(255,255,255,.72);
+      font-size:15px;
+      line-height:1;
     }
     .services-page .service-card .service-link:hover{
-      border-color: rgba(217,179,140,.32);
-      background:rgba(255,255,255,.04);
+      border-color: rgba(236,72,153,.22);
+      background:rgba(255,255,255,.045);
     }
     .services-page .doc-related{
       margin-top:42px;
@@ -316,8 +350,16 @@
       .services-page .service-card{
         border-radius:18px;
       }
+      .services-page .service-card{
+        padding:22px 18px 18px;
+      }
       .services-page .service-card h3{
         font-size:22px;
+        max-width:100%;
+      }
+      .services-page .service-card .service-link{
+        min-height:44px;
+        border-radius:14px;
       }
     }
   </style>
@@ -331,7 +373,7 @@
           <section class="doc-hero">
             <div class="doc-kicker">SovaZone / Услуги</div>
             <h1>Услуги SovaZone</h1>
-            <p class="doc-lead">Подбор и продажа никнеймов, помощь с аккаунтом, консультации, верификация и digital-поддержка. Каждая услуга ведёт на отдельную страницу, где можно подробнее посмотреть формат, детали и порядок обсуждения.</p>
+            <p class="doc-lead">Подбор и продажа никнеймов, помощь с аккаунтом, консультации, верификация и digital-поддержка. Аккуратно собранные направления для тех, кому нужен сильный digital-старт, точечное сопровождение и понятный формат работы.</p>
             <div class="doc-meta">
               <span class="doc-chip"><a href="/contacts.html">Связь</a></span>
               <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a></span>
@@ -343,9 +385,9 @@
           <div class="services-intro">
             <section class="services-panel services-panel--accent">
               <h2>Формат услуг</h2>
-              <p>Внутри SovaZone услуги оформлены как отдельные направления. Это позволяет не перегружать одну страницу и подробнее раскрывать каждую тему отдельно: от подбора username и консультаций до помощи с аккаунтом и сопровождения.</p>
-              <p>Если тебе нужен конкретный формат, удобнее открыть нужную страницу услуги и уже оттуда перейти к обсуждению деталей.</p>
-              <div class="services-panel-note">Структура страницы сохранена под отдельные услуги: каждая карточка ниже ведёт на собственную страницу с более подробным описанием.</div>
+              <p>SovaZone объединяет несколько направлений: готовые username, подбор под задачу, консультации, помощь с аккаунтом, сопровождение и смежные digital-услуги.</p>
+              <p>Каждое направление собрано отдельно и подаётся в понятном, аккуратном формате — без перегруза, с фокусом на сути, удобстве и визуальном качестве.</p>
+              <div class="services-panel-note">Выбери подходящее направление и переходи к обсуждению деталей.</div>
             </section>
 
             <section class="services-panel">
@@ -362,43 +404,43 @@
           <section class="services-grid" aria-label="Список услуг">
             <article class="service-card">
               <h3>Продажа никнеймов</h3>
-              <p>Готовые username-решения для Instagram и других социальных сетей. Отдельная страница услуги нужна для более подробного описания формата покупки и вариантов выбора.</p>
+              <p>Готовые username-решения для Instagram и других социальных сетей. Для тех, кому нужен сильный, редкий и визуально запоминающийся актив под личный бренд или проект.</p>
               <a class="service-link" href="/services/username-sale.html">Подробнее</a>
             </article>
 
             <article class="service-card">
               <h3>Никнейм под заказ</h3>
-              <p>Подбор ника под конкретную задачу, нишу и позиционирование. На отдельной странице можно подробнее раскрыть формат подбора, логику запроса и дальнейшие шаги.</p>
+              <p>Подбор username под конкретную задачу, нишу и позиционирование. Когда нужен не случайный вариант, а имя, которое действительно работает на образ и восприятие.</p>
               <a class="service-link" href="/services/custom-username.html">Подробнее</a>
             </article>
 
             <article class="service-card">
               <h3>Верификация</h3>
-              <p>Сопровождение и консультации по вопросам подтверждения профиля. Отдельная страница позволяет аккуратно раскрыть формат услуги без перегруза основного раздела.</p>
+              <p>Сопровождение и консультации по вопросам подтверждения профиля. Подходит тем, кому важно выстроить более серьёзное и статусное присутствие.</p>
               <a class="service-link" href="/services/verification.html">Подробнее</a>
             </article>
 
             <article class="service-card">
               <h3>Помощь с аккаунтом</h3>
-              <p>Решение технических вопросов, восстановление и помощь по аккаунту. Подробная страница услуги нужна для описания сценариев, ограничений и порядка обсуждения.</p>
+              <p>Решение технических вопросов, восстановление и помощь по аккаунту. Практичный формат для ситуаций, где важны аккуратность, логика действий и опыт.</p>
               <a class="service-link" href="/services/account-help.html">Подробнее</a>
             </article>
 
             <article class="service-card">
               <h3>Восстановление после взлома</h3>
-              <p>Пошаговая помощь и консультация по восстановлению доступа. Отдельная страница делает подачу услуги аккуратнее и помогает раскрыть формат сопровождения подробнее.</p>
+              <p>Пошаговая помощь и консультация по восстановлению доступа. Направление для ситуаций, где важно быстро сориентироваться и выстроить дальнейшие шаги без хаоса.</p>
               <a class="service-link" href="/services/recovery-after-hack.html">Подробнее</a>
             </article>
 
             <article class="service-card">
               <h3>Перенос никнейма</h3>
-              <p>Подготовка и сопровождение переноса username при наличии сценария передачи. На отдельной странице можно подробнее объяснить риски, порядок действий и условия.</p>
+              <p>Подготовка и сопровождение переноса username при наличии сценария передачи. Для случаев, где особенно важны точность, тайминг и аккуратное исполнение.</p>
               <a class="service-link" href="/services/username-transfer.html">Подробнее</a>
             </article>
 
             <article class="service-card">
               <h3>Консультации</h3>
-              <p>Личный разбор ситуации и подбор формата старта или решения. Такая страница помогает красиво и структурно описать консультационный формат отдельно от остальных услуг.</p>
+              <p>Личный разбор ситуации и подбор формата старта или решения. Подходит, когда нужен не общий совет, а понятный вектор действий под конкретную задачу.</p>
               <a class="service-link" href="/services/consultation.html">Подробнее</a>
             </article>
           </section>
