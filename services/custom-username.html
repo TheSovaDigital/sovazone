@@ -1,217 +1,557 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Никнейм под заказ | SovaZone</title>
+  <meta name="description" content="Никнейм под заказ для Instagram и TikTok. Проверка аккаунта, сроки, стоимость и возврат средств при невозможности получения username.">
+  <link rel="canonical" href="https://sovazone.com/services/custom-username.html">
 
-<title>Никнейм под заказ — SovaZone</title>
-<meta name="description" content="Заказ никнейма для Instagram и TikTok. Проверка аккаунта, конкретные сроки и возврат средств при невозможности получения username." />
-<link rel="canonical" href="https://sovazone.com/services/custom-username.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
 
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Никнейм под заказ — SovaZone" />
-<meta property="og:description" content="Получение конкретного username или подбор вариантов под проект." />
-<meta property="og:url" content="https://sovazone.com/services/custom-username.html" />
-<meta property="og:image" content="https://sovazone.com/og-image.png" />
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SovaZone">
+  <meta property="og:title" content="Никнейм под заказ | SovaZone">
+  <meta property="og:description" content="Конкретные условия, сроки и стоимость получения username для Instagram и TikTok.">
+  <meta property="og:url" content="https://sovazone.com/services/custom-username.html">
+  <meta property="og:image" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SovaZone">
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Никнейм под заказ — SovaZone" />
-<meta name="twitter:description" content="Конкретные условия, сроки и стоимость получения username." />
-<meta name="twitter:image" content="https://sovazone.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Никнейм под заказ | SovaZone">
+  <meta name="twitter:description" content="Проверка аккаунта, сроки, стоимость и возврат средств при невозможности получения username.">
+  <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+  <meta name="twitter:image:alt" content="SovaZone">
 
+  <style>
+    .service-page{
+      --doc-line: rgba(255,255,255,.08);
+      --doc-line-strong: rgba(198,134,80,.22);
+      --doc-text: #f3f3f8;
+      --doc-muted: #b6b6c8;
+      --doc-accent: #d9b38c;
+      --doc-link: #dcdcff;
+    }
+    .service-page .doc-wrap{
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 0 74px;
+    }
+    .service-page .doc-hero{
+      position: relative;
+      padding: 20px 0 34px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--doc-line);
+    }
+    .service-page .doc-breadcrumbs{
+      display:inline-flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0 0 16px;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color: var(--doc-accent);
+    }
+    .service-page .doc-breadcrumbs::before{
+      content:"";
+      width:34px;
+      height:1px;
+      background: linear-gradient(90deg, rgba(217,179,140,.9), rgba(217,179,140,0));
+      flex:0 0 auto;
+    }
+    .service-page .doc-breadcrumbs a,
+    .service-page .doc-breadcrumbs span{
+      color: var(--doc-accent);
+      text-decoration:none;
+    }
+    .service-page .doc-breadcrumbs-sep{
+      opacity:.68;
+      margin:0 -2px;
+    }
+    .service-page .doc-breadcrumbs a:hover{
+      color:#f1d2b3;
+    }
+    .service-page .doc-hero h1{
+      margin:0 0 14px;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      color: var(--doc-text);
+      max-width: 860px;
+    }
+    .service-page .doc-lead{
+      margin:0;
+      max-width: 880px;
+      color: var(--doc-muted);
+      font-size: 18px;
+      line-height: 1.72;
+    }
+
+    .service-page .service-note{
+      margin-bottom: 22px;
+      padding: 18px 20px;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+    }
+    .service-page .service-note p{
+      margin:0;
+      color: var(--doc-muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .service-page .service-section{
+      margin-bottom: 24px;
+    }
+    .service-page .service-section-title{
+      margin:0 0 14px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height:1.08;
+      letter-spacing:-.03em;
+      color:#fff;
+    }
+
+    .service-page .service-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .service-page .service-card{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      padding:24px 22px 22px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(120% 100% at 0% 0%, rgba(168,85,247,.08), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.018));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      overflow:hidden;
+    }
+    .service-page .service-card::before{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg, rgba(236,72,153,.32), rgba(249,115,22,.22), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .service-page .service-card h3{
+      margin:0 0 12px;
+      font-size:24px;
+      line-height:1.1;
+      letter-spacing:-.03em;
+      color:#fff;
+      max-width:95%;
+    }
+    .service-page .service-list{
+      margin:0 0 16px;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+      flex:1;
+    }
+    .service-page .service-list li{
+      position:relative;
+      padding-left:18px;
+      color: var(--doc-muted);
+      font-size:14.5px;
+      line-height:1.62;
+    }
+    .service-page .service-list li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.68em;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background: linear-gradient(180deg, rgba(217,179,140,.95), rgba(140,82,255,.95));
+      box-shadow: 0 0 0 6px rgba(217,179,140,.08);
+    }
+    .service-page .service-meta{
+      display:grid;
+      gap:8px;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+      margin-top:auto;
+    }
+    .service-page .service-meta-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .service-page .service-meta-label{
+      color: var(--doc-muted);
+      font-size:13px;
+      line-height:1.4;
+    }
+    .service-page .service-meta-value{
+      color:#fff;
+      font-size:15px;
+      font-weight:700;
+      line-height:1.4;
+      text-align:right;
+    }
+
+    .service-page .doc-meta{
+      margin-top:34px;
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.06);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      justify-content:center;
+    }
+    .service-page .doc-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid var(--doc-line);
+      color: var(--doc-muted);
+      font-size:14px;
+      background: rgba(255,255,255,.02);
+    }
+    .service-page .doc-chip a,
+    .service-page a{
+      color: var(--doc-link);
+      text-decoration:none;
+    }
+    .service-page .doc-chip a:hover,
+    .service-page a:hover{
+      color:#fff;
+    }
+
+    @media (max-width: 980px){
+      .service-page .service-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width: 760px){
+      .service-page .doc-wrap{
+        padding-bottom:48px;
+      }
+      .service-page .doc-hero h1{
+        font-size:42px;
+      }
+      .service-page .doc-lead{
+        font-size:16px;
+      }
+      .service-page .service-card{
+        padding:22px 18px 18px;
+        border-radius:18px;
+      }
+      .service-page .service-card h3{
+        font-size:22px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://sovazone.com/#organization",
+        "name":"SovaZone",
+        "alternateName":"SovaZone Digital Studio",
+        "url":"https://sovazone.com/",
+        "logo":{
+          "@type":"ImageObject",
+          "url":"https://sovazone.com/logo.png"
+        },
+        "image":"https://sovazone.com/og-image.png",
+        "sameAs":[
+          "https://t.me/SovaDigital",
+          "https://t.me/SovaDS",
+          "https://t.me/SovaUsername",
+          "https://sovads.ru/"
+        ],
+        "contactPoint":{
+          "@type":"ContactPoint",
+          "contactType":"customer support",
+          "url":"https://t.me/SovaDS",
+          "availableLanguage":["ru"]
+        }
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://sovazone.com/#website",
+        "url":"https://sovazone.com/",
+        "name":"SovaZone",
+        "inLanguage":"ru-RU",
+        "publisher":{
+          "@id":"https://sovazone.com/#organization"
+        }
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://sovazone.com/services/custom-username.html#webpage",
+        "url":"https://sovazone.com/services/custom-username.html",
+        "name":"Никнейм под заказ | SovaZone",
+        "description":"Никнейм под заказ для Instagram и TikTok. Проверка аккаунта, сроки, стоимость, возврат средств при невозможности получения username.",
+        "inLanguage":"ru-RU",
+        "isPartOf":{
+          "@id":"https://sovazone.com/#website"
+        },
+        "about":{
+          "@id":"https://sovazone.com/#organization"
+        },
+        "primaryImageOfPage":{
+          "@type":"ImageObject",
+          "url":"https://sovazone.com/og-image.png"
+        }
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {
+            "@type":"ListItem",
+            "position":1,
+            "name":"Главная",
+            "item":"https://sovazone.com/"
+          },
+          {
+            "@type":"ListItem",
+            "position":2,
+            "name":"Услуги",
+            "item":"https://sovazone.com/services.html"
+          },
+          {
+            "@type":"ListItem",
+            "position":3,
+            "name":"Никнейм под заказ",
+            "item":"https://sovazone.com/services/custom-username.html"
+          }
+        ]
+      },
+      {
+        "@type":"Service",
+        "name":"Никнейм под заказ",
+        "serviceType":"Получение конкретного username или подбор никнейма под задачу для Instagram и TikTok",
+        "provider":{
+          "@id":"https://sovazone.com/#organization"
+        },
+        "areaServed":"Worldwide",
+        "availableChannel":{
+          "@type":"ServiceChannel",
+          "serviceUrl":"https://t.me/SovaDS"
+        },
+        "description":"Работа с конкретными username для Instagram и TikTok, включая проверку аккаунта, оценку сроков, стоимости и вероятности получения."
+      }
+    ]
+  }
+  </script>
 </head>
-
 <body>
-
-<section class="service-hero">
-
-<div class="breadcrumb">
-Главная / Услуги / Никнейм под заказ
-</div>
-
-<h1>
-Никнейм под заказ
-</h1>
-
-<p class="lead">
-Работаем с конкретными username для Instagram и TikTok.  
-Перед началом выполняется проверка аккаунта.  
-После проверки озвучиваются точные сроки, стоимость и вероятность получения.
-</p>
-
-</section>
-
-
-<section class="service-panel">
-
-<h2>
-Общие условия
-</h2>
-
-<ul>
-
-<li>
-Ник должен быть заброшен более 3 лет
-</li>
-
-<li>
-Перед работой проводится обязательная проверка аккаунта
-</li>
-
-<li>
-Если ник не будет получен — полная сумма возвращается
-</li>
-
-<li>
-Если у аккаунта есть активный владелец — выкупом не занимаемся
-</li>
-
-<li>
-Финальные сроки и процент успеха определяются после проверки
-</li>
-
-</ul>
-
-</section>
-
-
-<section class="service-panel">
-
-<h2>
-Instagram ник под заказ
-</h2>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>
-Конкретный ник — стандартный
-</h3>
-
-<ul>
-<li>Не популярное слово</li>
-<li>Не имя и не фамилия</li>
-<li>Может состоять из 2 слов или символов</li>
-<li>Минимум от 6 символов</li>
-</ul>
-
-<p>
-Сроки: от 3 до 30 дней  
-Стоимость: от 5000$
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Конкретный ник — премиум
-</h3>
-
-<ul>
-<li>Популярные слова</li>
-<li>Имена или фамилии</li>
-<li>Короткие username от 3 символов</li>
-</ul>
-
-<p>
-Сроки: от 3 до 45 дней  
-Стоимость: от 15000$
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Подбор никнейма
-</h3>
-
-<ul>
-<li>Для тех, кто готов рассматривать варианты</li>
-<li>Подбор нескольких возможных username</li>
-<li>Минимум от 2 символов</li>
-</ul>
-
-<p>
-Сроки: от 2 до 14 дней  
-Стоимость: от 2000$
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="service-panel">
-
-<h2>
-TikTok ник под заказ
-</h2>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>
-Конкретный ник — стандартный
-</h3>
-
-<p>
-Сроки: от 3 до 30 дней  
-Стоимость: от 3000$
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Конкретный ник — премиум
-</h3>
-
-<p>
-Сроки: от 3 до 45 дней  
-Стоимость: от 8000$
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Подбор никнейма
-</h3>
-
-<p>
-Сроки: от 2 до 14 дней  
-Стоимость: от 1500$
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="service-note">
-
-<p>
-Возможны пакеты подбора и работы сразу по нескольким социальным сетям.  
-Условия и стоимость обсуждаются отдельно.
-</p>
-
-</section>
-
-
+  <div class="site-shell service-page">
+    <div id="header-placeholder"></div>
+
+    <main class="page-content">
+      <div class="container">
+        <div class="doc-wrap">
+
+          <section class="doc-hero">
+            <nav class="doc-breadcrumbs" aria-label="Навигация по разделу">
+              <a href="/">Главная</a>
+              <span class="doc-breadcrumbs-sep">/</span>
+              <a href="/services.html">Услуги</a>
+              <span class="doc-breadcrumbs-sep">/</span>
+              <span>Никнейм под заказ</span>
+            </nav>
+
+            <h1>Никнейм под заказ</h1>
+            <p class="doc-lead">
+              Работаем с конкретными username для Instagram и TikTok. Перед стартом проводится
+              обязательная проверка аккаунта. После проверки озвучиваются точные сроки, стоимость
+              и вероятность получения.
+            </p>
+          </section>
+
+          <section class="service-note">
+            <p>
+              Общие условия для всех форматов: ник должен быть заброшен более 3 лет. Если аккаунт
+              имеет активного владельца, выкупом мы не занимаемся. Если ник не будет получен,
+              полная сумма оплаченных средств возвращается клиенту. Финальные сроки, стоимость
+              и процент успеха определяются после проверки аккаунта.
+            </p>
+          </section>
+
+          <section class="service-section" aria-labelledby="instagram-custom-title">
+            <h2 class="service-section-title" id="instagram-custom-title">Instagram ник под заказ</h2>
+
+            <div class="service-grid">
+              <article class="service-card">
+                <h3>Конкретный ник — стандартный</h3>
+                <ul class="service-list">
+                  <li>Не популярное слово</li>
+                  <li>Не имя и не фамилия</li>
+                  <li>Может состоять из 2 слов или содержать символы</li>
+                  <li>Минимум от 6 символов</li>
+                </ul>
+                <div class="service-meta">
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Сроки</span>
+                    <span class="service-meta-value">от 3 до 30 дней</span>
+                  </div>
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Стоимость</span>
+                    <span class="service-meta-value">от 5000$</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3>Конкретный ник — премиум</h3>
+                <ul class="service-list">
+                  <li>Популярные слова</li>
+                  <li>Имена или фамилии</li>
+                  <li>Короткие username от 3 символов</li>
+                </ul>
+                <div class="service-meta">
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Сроки</span>
+                    <span class="service-meta-value">от 3 до 45 дней</span>
+                  </div>
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Стоимость</span>
+                    <span class="service-meta-value">от 15000$</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3>Подбор никнейма</h3>
+                <ul class="service-list">
+                  <li>Для тех, кто готов рассматривать разные варианты</li>
+                  <li>Не один конкретный ник</li>
+                  <li>Подбор нескольких возможных username</li>
+                  <li>Минимум от 2 символов</li>
+                </ul>
+                <div class="service-meta">
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Сроки</span>
+                    <span class="service-meta-value">от 2 до 14 дней</span>
+                  </div>
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Стоимость</span>
+                    <span class="service-meta-value">от 2000$</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="service-section" aria-labelledby="tiktok-custom-title">
+            <h2 class="service-section-title" id="tiktok-custom-title">TikTok ник под заказ</h2>
+
+            <div class="service-grid">
+              <article class="service-card">
+                <h3>Конкретный ник — стандартный</h3>
+                <ul class="service-list">
+                  <li>Общие условия применяются полностью</li>
+                  <li>Формат для более простых запросов</li>
+                  <li>После проверки определяется финальная вероятность получения</li>
+                </ul>
+                <div class="service-meta">
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Сроки</span>
+                    <span class="service-meta-value">от 3 до 30 дней</span>
+                  </div>
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Стоимость</span>
+                    <span class="service-meta-value">от 3000$</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3>Конкретный ник — премиум</h3>
+                <ul class="service-list">
+                  <li>Для более сложных и ценных запросов</li>
+                  <li>Популярные форматы, более заметные слова и короткие варианты</li>
+                  <li>Точная оценка только после проверки аккаунта</li>
+                </ul>
+                <div class="service-meta">
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Сроки</span>
+                    <span class="service-meta-value">от 3 до 45 дней</span>
+                  </div>
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Стоимость</span>
+                    <span class="service-meta-value">от 8000$</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3>Подбор никнейма</h3>
+                <ul class="service-list">
+                  <li>Для тех, кто готов рассматривать несколько вариантов</li>
+                  <li>Подбор под задачу, стиль и формат аккаунта</li>
+                  <li>Без жёсткой привязки к одному конкретному username</li>
+                </ul>
+                <div class="service-meta">
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Сроки</span>
+                    <span class="service-meta-value">от 2 до 14 дней</span>
+                  </div>
+                  <div class="service-meta-row">
+                    <span class="service-meta-label">Стоимость</span>
+                    <span class="service-meta-value">от 1500$</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="service-note">
+            <p>
+              Возможны пакеты подбора и работы сразу по нескольким социальным сетям. Такие форматы
+              обсуждаются отдельно.
+            </p>
+          </section>
+
+          <div class="doc-meta">
+            <span class="doc-chip"><a href="/contacts.html">Связь</a></span>
+            <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a></span>
+            <span class="doc-chip"><a href="/services.html">Услуги</a></span>
+            <span class="doc-chip"><a href="/about.html">О проекте</a></span>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+  </div>
+
+  <script src="/script.js"></script>
 </body>
 </html>
