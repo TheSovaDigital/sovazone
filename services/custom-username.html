@@ -130,6 +130,42 @@
       border-bottom:1px solid rgba(255,255,255,.06);
       position:relative;
     }
+    .service-page .service-section-title-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .service-page .service-section-icon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      color:#fff;
+      font-size:16px;
+      line-height:1;
+      flex:0 0 auto;
+    }
+    .service-page .service-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      width:max-content;
+      margin:0 0 12px;
+    }
     .service-page .service-section-head::after{
       content:"";
       position:absolute;
@@ -199,7 +235,7 @@
     }
     .service-page .service-card h3{
       margin:0 0 12px;
-      font-size:24px;
+      font-size:22px;
       line-height:1.1;
       letter-spacing:-.03em;
       color:#fff;
@@ -217,8 +253,8 @@
       position:relative;
       padding-left:18px;
       color: var(--doc-muted);
-      font-size:13.5px;
-      line-height:1.5;
+      font-size:12.5px;
+      line-height:1.36;
     }
     .service-page .service-list li::before{
       content:"";
@@ -305,6 +341,9 @@
       .service-page .service-section-head{
         align-items:flex-start;
         flex-direction:column;
+      }
+      .service-page .service-section-title-wrap{
+        width:100%;
       }
       .service-page .service-card{
         padding:22px 18px 18px;
@@ -436,6 +475,11 @@
               обязательная проверка аккаунта. После проверки озвучиваются точные сроки, стоимость
               и вероятность получения.
             </p>
+
+            <p class="doc-lead" style="margin-top:10px;font-size:15px;opacity:.85;">
+              Также периодически работаем с другими социальными сетями: TikTok, X (Twitter), Telegram и другими платформами.
+            </p>
+
           </section>
 
           <section class="service-note">
@@ -445,16 +489,25 @@
               полная сумма оплаченных средств возвращается клиенту. Финальные сроки, стоимость
               и процент успеха определяются после проверки аккаунта.
             </p>
+
+            <p class="doc-lead" style="margin-top:10px;font-size:15px;opacity:.85;">
+              Также периодически работаем с другими социальными сетями: TikTok, X (Twitter), Telegram и другими платформами.
+            </p>
+
           </section>
 
           <section class="service-section" aria-labelledby="instagram-custom-title">
             <div class="service-section-head">
-              <h2 class="service-section-title" id="instagram-custom-title">Instagram ник под заказ</h2>
+              <div class="service-section-title-wrap">
+                <span class="service-section-icon" aria-hidden="true">◎</span>
+                <h2 class="service-section-title" id="instagram-custom-title">Instagram ник под заказ</h2>
+              </div>
               <a class="service-section-ask" href="https://t.me/SovaDS" target="_blank" rel="noopener">Задать вопрос</a>
             </div>
 
             <div class="service-grid">
               <article class="service-card">
+                <span class="service-badge">Standard</span>
                 <h3>Конкретный ник 6+</h3>
                 <ul class="service-list">
                   <li>Не популярное слово</li>
@@ -475,6 +528,7 @@
               </article>
 
               <article class="service-card">
+                <span class="service-badge">Premium</span>
                 <h3>Конкретный ник</h3>
                 <ul class="service-list">
                   <li>Популярные слова</li>
@@ -494,6 +548,7 @@
               </article>
 
               <article class="service-card">
+                <span class="service-badge">Selection</span>
                 <h3>Подбор никнейма</h3>
                 <ul class="service-list">
                   <li>Для тех, кто открыт к разным вариантам</li>
@@ -517,12 +572,16 @@
 
           <section class="service-section" aria-labelledby="tiktok-custom-title">
             <div class="service-section-head">
-              <h2 class="service-section-title" id="tiktok-custom-title">TikTok ник под заказ</h2>
+              <div class="service-section-title-wrap">
+                <span class="service-section-icon" aria-hidden="true">♫</span>
+                <h2 class="service-section-title" id="tiktok-custom-title">TikTok ник под заказ</h2>
+              </div>
               <a class="service-section-ask" href="https://t.me/SovaDS" target="_blank" rel="noopener">Задать вопрос</a>
             </div>
 
             <div class="service-grid">
               <article class="service-card">
+                <span class="service-badge">Standard</span>
                 <h3>Конкретный ник 6+</h3>
                 <ul class="service-list">
                   <li>Общие условия применяются полностью</li>
@@ -542,6 +601,7 @@
               </article>
 
               <article class="service-card">
+                <span class="service-badge">Premium</span>
                 <h3>Конкретный ник</h3>
                 <ul class="service-list">
                   <li>Для более сложных и ценных запросов</li>
@@ -561,6 +621,7 @@
               </article>
 
               <article class="service-card">
+                <span class="service-badge">Selection</span>
                 <h3>Подбор никнейма</h3>
                 <ul class="service-list">
                   <li>Для тех, кто открыт к разным вариантам</li>
@@ -586,6 +647,11 @@
               Возможны пакеты подбора и работы сразу по нескольким социальным сетям. Такие форматы
               обсуждаются отдельно.
             </p>
+
+            <p class="doc-lead" style="margin-top:10px;font-size:15px;opacity:.85;">
+              Также периодически работаем с другими социальными сетями: TikTok, X (Twitter), Telegram и другими платформами.
+            </p>
+
           </section>
 
           <div class="doc-meta">
