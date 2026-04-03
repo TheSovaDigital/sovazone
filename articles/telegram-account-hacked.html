@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
+  <title>Взлом Telegram: как вернуть аккаунт | SovaZone</title>
+  <meta name="description" content="Практическая инструкция: что делать, если взломали Telegram, как отслеживать время снятия ограничений, куда писать и как повысить шансы на возврат аккаунта.">
+  <link rel="canonical" href="https://sovazone.com/articles/telegram-account-hacked.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="SovaZone">
+  <meta property="og:title" content="Взлом Telegram: как вернуть аккаунт | SovaZone">
+  <meta property="og:description" content="Что делать, если взломали Telegram: отслеживание времени, поддержка, дополнительные каналы и порядок действий.">
+  <meta property="og:url" content="https://sovazone.com/articles/telegram-account-hacked.html">
+  <meta property="og:image" content="https://sovazone.com/image/recovery_telegram_web.jpg">
+  <meta property="og:image:secure_url" content="https://sovazone.com/image/recovery_telegram_web.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Взлом Telegram: как вернуть аккаунт | SovaZone">
+  <meta name="twitter:description" content="Практическая инструкция по возврату Telegram аккаунта после взлома.">
+  <meta name="twitter:image" content="https://sovazone.com/image/recovery_telegram_web.jpg">
+
+  <style>
+    .article-page{
+      --doc-line: rgba(255,255,255,.08);
+      --doc-text:#f3f3f8;
+      --doc-muted:#b6b6c8;
+      --doc-accent:#d9b38c;
+      --doc-link:#dcdcff;
+    }
+    .article-page .doc-wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:10px 0 74px;
+    }
+    .article-page .doc-hero{
+      position:relative;
+      padding:20px 0 30px;
+      margin-bottom:28px;
+      border-bottom:1px solid var(--doc-line);
+    }
+    .article-page .doc-breadcrumbs{
+      display:inline-flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--doc-accent);
+    }
+    .article-page .doc-breadcrumbs::before{
+      content:"";
+      width:34px;
+      height:1px;
+      background:linear-gradient(90deg, rgba(217,179,140,.9), rgba(217,179,140,0));
+      flex:0 0 auto;
+    }
+    .article-page .doc-breadcrumbs a,
+    .article-page .doc-breadcrumbs span{
+      color:var(--doc-accent);
+      text-decoration:none;
+    }
+    .article-page .doc-breadcrumbs-sep{opacity:.68;margin:0 -2px;}
+    .article-page .doc-breadcrumbs a:hover{color:#f1d2b3;}
+
+    .article-page .article-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:24px;
+    }
+    .article-page .article-panel{
+      position:relative;
+      overflow:hidden;
+      padding:28px 30px;
+      border:1px solid var(--doc-line);
+      border-radius:24px;
+      background:
+        radial-gradient(120% 100% at 0% 0%, rgba(168,85,247,.08), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,.038), rgba(255,255,255,.016));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .article-page .article-panel::after{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg, rgba(217,179,140,.30), rgba(217,179,140,0));
+      pointer-events:none;
+    }
+    .article-page .article-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      margin:0 0 18px;
+      color:var(--doc-muted);
+      font-size:14px;
+    }
+    .article-page .article-meta span{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid var(--doc-line);
+      background:rgba(255,255,255,.02);
+    }
+    .article-page .article-title{
+      margin:0 0 18px;
+      font-size:clamp(28px,4vw,44px);
+      line-height:1.06;
+      letter-spacing:-.03em;
+      color:var(--doc-text);
+      max-width:860px;
+    }
+    .article-page .article-content h2,
+    .article-page .article-content h3{
+      color:#fff;
+      letter-spacing:-.02em;
+      margin:30px 0 12px;
+      font-weight:800;
+    }
+    .article-page .article-content h2{font-size:28px; line-height:1.15;}
+    .article-page .article-content h3{font-size:23px; line-height:1.18;}
+    .article-page .article-content p{
+      margin:0 0 16px;
+      color:var(--doc-muted);
+      font-size:16px;
+      line-height:1.8;
+    }
+    .article-page .article-content strong,
+    .article-page .article-content b{color:#fff;}
+    .article-page .article-content ul,
+    .article-page .article-content ol{
+      margin:0 0 18px;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .article-page .article-content li{
+      position:relative;
+      padding-left:18px;
+      color:var(--doc-muted);
+      font-size:16px;
+      line-height:1.75;
+    }
+    .article-page .article-content li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.72em;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:linear-gradient(180deg, rgba(217,179,140,.95), rgba(140,82,255,.95));
+      box-shadow:0 0 0 6px rgba(217,179,140,.08);
+    }
+    .article-page .article-content a{
+      color:#f1d2b3;
+      text-decoration:none;
+      word-break:break-word;
+    }
+    .article-page .article-content a:hover{color:#fff;}
+    .article-page .article-content img{
+      display:block;
+      width:100%;
+      max-width:520px;
+      height:auto;
+      margin:18px auto;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
+    }
+    .article-page .article-note{
+      margin:20px 0 24px;
+      padding:16px 18px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+    }
+    .article-page .article-note p{
+      margin:0;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--doc-muted);
+    }
+    .article-page .quote-box{
+      margin:22px 0;
+      padding:18px 20px;
+      border-left:3px solid rgba(217,179,140,.75);
+      background:rgba(255,255,255,.02);
+      border-radius:0 16px 16px 0;
+    }
+    .article-page .quote-box p{
+      margin:0;
+      color:var(--doc-muted);
+      font-size:15px;
+      line-height:1.75;
+      white-space:pre-line;
+    }
+    .article-page .article-help{
+      margin-top:24px;
+      padding:22px 24px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+    }
+    .article-page .article-help h3{
+      margin:0 0 10px;
+      font-size:24px;
+      color:#fff;
+    }
+    .article-page .article-help p{
+      margin:0 0 14px;
+      color:var(--doc-muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+    .article-page .article-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:#fff;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:700;
+      transition:.18s ease;
+    }
+    .article-page .article-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(217,179,140,.28);
+      background:rgba(255,255,255,.045);
+      color:#fff;
+    }
+    .article-page .doc-meta{
+      margin-top:34px;
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.06);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      justify-content:center;
+    }
+    .article-page .doc-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid var(--doc-line);
+      color:var(--doc-muted);
+      font-size:14px;
+      background:rgba(255,255,255,.02);
+    }
+    .article-page .doc-chip a,
+    .article-page a{color:var(--doc-link);text-decoration:none;}
+    .article-page .doc-chip a:hover,
+    .article-page a:hover{color:#fff;}
+
+    @media (max-width:760px){
+      .article-page .doc-wrap{padding-bottom:48px;}
+      .article-page .article-panel{padding:22px 18px; border-radius:18px;}
+      .article-page .article-title{font-size:34px;}
+      .article-page .article-content p,
+      .article-page .article-content li{font-size:15px; line-height:1.72;}
+      .article-page .article-content h2{font-size:24px;}
+      .article-page .article-content h3{font-size:21px;}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://sovazone.com/#organization",
+        "name":"SovaZone",
+        "alternateName":"SovaZone Digital Studio",
+        "url":"https://sovazone.com/",
+        "logo":{"@type":"ImageObject","url":"https://sovazone.com/logo.png"},
+        "image":"https://sovazone.com/og-image.png"
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://sovazone.com/#website",
+        "url":"https://sovazone.com/",
+        "name":"SovaZone",
+        "inLanguage":"ru-RU",
+        "publisher":{"@id":"https://sovazone.com/#organization"}
+      },
+      {
+        "@type":"Article",
+        "@id":"https://sovazone.com/articles/telegram-account-hacked.html#article",
+        "headline":"Взлом Telegram: как вернуть аккаунт",
+        "name":"Взлом Telegram: как вернуть аккаунт",
+        "description":"Практическая инструкция: что делать, если Telegram аккаунт взломали, где отслеживать ограничения, куда писать и какие шаги предпринять для возврата доступа.",
+        "inLanguage":"ru-RU",
+        "datePublished":"2026-04-03",
+        "dateModified":"2026-04-03",
+        "author":{"@type":"Organization","name":"SovaZone Digital Studio"},
+        "publisher":{"@id":"https://sovazone.com/#organization"},
+        "mainEntityOfPage":{"@id":"https://sovazone.com/articles/telegram-account-hacked.html#webpage"},
+        "image":["https://sovazone.com/image/recovery_telegram_web.jpg"]
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://sovazone.com/articles/telegram-account-hacked.html#webpage",
+        "url":"https://sovazone.com/articles/telegram-account-hacked.html",
+        "name":"Взлом Telegram: как вернуть аккаунт | SovaZone",
+        "inLanguage":"ru-RU",
+        "isPartOf":{"@id":"https://sovazone.com/#website"}
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Главная","item":"https://sovazone.com/"},
+          {"@type":"ListItem","position":2,"name":"Статьи","item":"https://sovazone.com/articles.html"},
+          {"@type":"ListItem","position":3,"name":"Взлом Telegram: как вернуть аккаунт","item":"https://sovazone.com/articles/telegram-account-hacked.html"}
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-shell article-page">
+    <div id="header-placeholder"></div>
+
+    <main class="page-content">
+      <div class="container">
+        <div class="doc-wrap">
+
+          <section class="doc-hero">
+            <nav class="doc-breadcrumbs" aria-label="Навигация по разделу">
+              <a href="/">Главная</a>
+              <span class="doc-breadcrumbs-sep">/</span>
+              <a href="/articles.html">Статьи</a>
+              <span class="doc-breadcrumbs-sep">/</span>
+              <span>Взлом Telegram: как вернуть аккаунт</span>
+            </nav>
+          </section>
+
+          <section class="article-layout">
+            <article class="article-panel article-content">
+
+              <div class="article-meta">
+                <span>Опубликовано: 3 апреля 2026</span>
+                <span>Автор: SovaZone Digital Studio</span>
+                <span>Категория: Безопасность аккаунтов</span>
+              </div>
+
+              <h1 class="article-title">Взлом Telegram: как вернуть аккаунт</h1>
+
+              <p>
+                Если Telegram аккаунт взломали или к нему потерян доступ, действовать нужно быстро и
+                без хаотичных попыток. Ниже — рабочая последовательность шагов: где отслеживать
+                ограничения, куда писать и что делать параллельно, чтобы повысить шансы на возврат
+                аккаунта.
+              </p>
+
+              <h2>1. Отслеживайте время снятия ограничений</h2>
+              <p>
+                По этой ссылке можно отслеживать время, если вопрос не решится через поддержку и нужно
+                будет подловить момент, когда ограничение снимется, чтобы сразу выполнить вход:
+              </p>
+              <p><a href="https://web.telegram.org/a/" target="_blank" rel="noopener">https://web.telegram.org/a/</a></p>
+              <img src="/image/recovery_telegram_web.jpg" alt="Скриншот Telegram Web для отслеживания ограничений">
+
+              <div class="article-note">
+                <p>
+                  Если доступ временно ограничен, задача — не пропустить момент снятия ограничения и
+                  сразу попытаться войти в аккаунт, пока ситуация не усложнилась.
+                </p>
+              </div>
+
+              <h2>2. Повторно проверяйте Web-версию</h2>
+              <p>
+                Через ту же ссылку имеет смысл периодически проверять статус:
+              </p>
+              <p><a href="https://web.telegram.org/a/" target="_blank" rel="noopener">https://web.telegram.org/a/</a></p>
+              <p>
+                Если через поддержку вопрос не решается, именно здесь можно увидеть окно, когда
+                ограничения уже сняты и вход снова становится возможен.
+              </p>
+
+              <h2>3. Дополнительный канал через X (Twitter)</h2>
+              <p>
+                Дополнительно можно написать сюда:
+              </p>
+              <p><a href="https://twitter.com/smstelegram" target="_blank" rel="noopener">https://twitter.com/smstelegram</a></p>
+              <ul>
+                <li>Подписаться на аккаунт.</li>
+                <li>Отправить номер телефона и username.</li>
+                <li>После этого добавить короткое сообщение с причиной обращения.</li>
+              </ul>
+
+              <h2>4. Написать в поддержку Telegram из другого аккаунта</h2>
+              <p>
+                Дополнительно можно написать в поддержку внутри Telegram со второго аккаунта. Иногда
+                они не решают вопрос напрямую, но могут помочь перенаправить обращение дальше.
+              </p>
+              <p>
+                Если пишет не владелец аккаунта, это лучше сразу указать в сообщении.
+              </p>
+
+              <h3>Как написать по шагам</h3>
+              <ul>
+                <li>Открыть Telegram со второго аккаунта.</li>
+                <li>Зайти в настройки приложения.</li>
+                <li>Открыть раздел Help / Помощь.</li>
+                <li>Выбрать обращение в поддержку или кнопку с отправкой вопроса.</li>
+                <li>Коротко описать ситуацию: какой аккаунт взломан, какой номер был привязан, какой username у аккаунта.</li>
+                <li>Указать, что сообщение пишет не владелец, если это действительно так.</li>
+                <li>Добавить, если есть, примерную дату взлома или потери доступа.</li>
+              </ul>
+
+              <div class="quote-box">
+                <p>Hello. I am writing regarding a Telegram account that appears to be hacked or inaccessible.
+
+Username: @username
+Phone number: +xxxxxxxxxxx
+
+The owner has lost access to the account. I am writing from another account to help forward the issue. Please advise if this request can be redirected to the appropriate support team.</p>
+              </div>
+
+              <h2>Что ещё важно сделать сразу</h2>
+              <ul>
+                <li>Проверить, работает ли ещё номер телефона, который был привязан к аккаунту.</li>
+                <li>Не передавать коды входа никому, даже если сообщение выглядит официально.</li>
+                <li>Не использовать подозрительные сервисы, которые обещают мгновенный возврат аккаунта.</li>
+                <li>Подготовить все данные заранее: номер, username, примерную дату потери доступа, описание проблемы.</li>
+                <li>Если вход станет возможен, сразу проверить активные сессии и завершить лишние устройства.</li>
+              </ul>
+
+              <h2>Если доступ удалось вернуть</h2>
+              <ul>
+                <li>Сразу завершить все незнакомые сессии.</li>
+                <li>Проверить привязанный номер и почту, если используется email.</li>
+                <li>Включить двухэтапную аутентификацию.</li>
+                <li>Обновить пароль облачного пароля Telegram, если он использовался ранее.</li>
+                <li>Проверить, не были ли изменены имя, username и настройки аккаунта.</li>
+              </ul>
+
+              <div class="article-note">
+                <p>
+                  Если Telegram аккаунт критически важен, лучше действовать параллельно по нескольким
+                  направлениям: отслеживание через Web, обращение через поддержку и попытка ускорить
+                  вопрос через дополнительные каналы.
+                </p>
+              </div>
+
+            </article>
+
+            <section class="article-help">
+              <h3>Нужна помощь с аккаунтом?</h3>
+              <p>
+                Если нужна помощь с возвратом Telegram аккаунта, разбором ситуации или настройкой
+                безопасности после восстановления доступа, можно написать нам напрямую.
+              </p>
+              <a class="article-btn" href="https://t.me/SovaDS" target="_blank" rel="noopener">Задать вопрос</a>
+            </section>
+          </section>
+
+          <div class="doc-meta">
+            <span class="doc-chip"><a href="/contacts.html">Связь</a></span>
+            <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a></span>
+            <span class="doc-chip"><a href="/articles.html">Статьи</a></span>
+            <span class="doc-chip"><a href="/about.html">О проекте</a></span>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
