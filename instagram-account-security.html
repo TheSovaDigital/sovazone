@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
+  <title>Безопасность Instagram аккаунта | SovaZone</title>
+  <meta name="description" content="Практическая статья о безопасности Instagram аккаунта: почта, номер телефона, пароль, 2FA, резервные коды, фишинг и базовая защита аккаунта. Эти же принципы полезны и для других соцсетей.">
+  <link rel="canonical" href="https://sovazone.com/articles/instagram-account-security.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="SovaZone">
+  <meta property="og:title" content="Безопасность Instagram аккаунта | SovaZone">
+  <meta property="og:description" content="Почта, номер телефона, пароль, 2FA, резервные коды и защита Instagram аккаунта от взлома.">
+  <meta property="og:url" content="https://sovazone.com/articles/instagram-account-security.html">
+  <meta property="og:image" content="https://hsto.org/webt/za/zi/6x/zazi6xci1_ct6k6dhplthjzp4dg.png">
+  <meta property="og:image:secure_url" content="https://hsto.org/webt/za/zi/6x/zazi6xci1_ct6k6dhplthjzp4dg.png">
+  <meta property="og:image:type" content="image/png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Безопасность Instagram аккаунта | SovaZone">
+  <meta name="twitter:description" content="Практическое руководство по защите Instagram аккаунта и базовой безопасности других соцсетей.">
+  <meta name="twitter:image" content="https://hsto.org/webt/za/zi/6x/zazi6xci1_ct6k6dhplthjzp4dg.png">
+
+  <style>
+    .article-page{
+      --doc-line: rgba(255,255,255,.08);
+      --doc-text:#f3f3f8;
+      --doc-muted:#b6b6c8;
+      --doc-accent:#d9b38c;
+      --doc-link:#dcdcff;
+    }
+    .article-page .doc-wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:10px 0 74px;
+    }
+    .article-page .doc-hero{
+      position:relative;
+      padding:20px 0 30px;
+      margin-bottom:28px;
+      border-bottom:1px solid var(--doc-line);
+    }
+    .article-page .doc-breadcrumbs{
+      display:inline-flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0 0 16px;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--doc-accent);
+    }
+    .article-page .doc-breadcrumbs::before{
+      content:"";
+      width:34px;
+      height:1px;
+      background:linear-gradient(90deg, rgba(217,179,140,.9), rgba(217,179,140,0));
+      flex:0 0 auto;
+    }
+    .article-page .doc-breadcrumbs a,
+    .article-page .doc-breadcrumbs span{
+      color:var(--doc-accent);
+      text-decoration:none;
+    }
+    .article-page .doc-breadcrumbs-sep{opacity:.68; margin:0 -2px;}
+    .article-page .doc-breadcrumbs a:hover{color:#f1d2b3;}
+    .article-page .doc-hero h1{
+      margin:0 0 14px;
+      font-size:clamp(36px,5vw,60px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      color:var(--doc-text);
+      max-width:900px;
+    }
+    .article-page .article-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      color:var(--doc-muted);
+      font-size:14px;
+    }
+    .article-page .article-meta span{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid var(--doc-line);
+      background:rgba(255,255,255,.02);
+    }
+
+    .article-page .article-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:24px;
+    }
+    .article-page .article-panel{
+      position:relative;
+      overflow:hidden;
+      padding:28px 30px;
+      border:1px solid var(--doc-line);
+      border-radius:24px;
+      background:
+        radial-gradient(120% 100% at 0% 0%, rgba(168,85,247,.08), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,.038), rgba(255,255,255,.016));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .article-page .article-panel::after{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg, rgba(217,179,140,.30), rgba(217,179,140,0));
+      pointer-events:none;
+    }
+    .article-page .article-content h1,
+    .article-page .article-content h2,
+    .article-page .article-content h3,
+    .article-page .article-content h4,
+    .article-page .article-content h5{
+      color:#fff;
+      letter-spacing:-.02em;
+      margin:30px 0 12px;
+      font-weight:800;
+    }
+    .article-page .article-content h1{font-size:36px; line-height:1.1; margin-top:0;}
+    .article-page .article-content h2{font-size:28px; line-height:1.15;}
+    .article-page .article-content h3{font-size:23px; line-height:1.18;}
+    .article-page .article-content h4,
+    .article-page .article-content h5{font-size:20px; line-height:1.2;}
+    .article-page .article-content p{
+      margin:0 0 16px;
+      color:var(--doc-muted);
+      font-size:16px;
+      line-height:1.8;
+    }
+    .article-page .article-content strong,
+    .article-page .article-content b{color:#fff;}
+    .article-page .article-content em,
+    .article-page .article-content i{color:#d8d8e8;}
+    .article-page .article-content hr{
+      border:0;
+      height:1px;
+      margin:22px 0;
+      background:linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    }
+    .article-page .article-content img{
+      display:block;
+      width:100%;
+      max-width:760px;
+      height:auto;
+      margin:18px auto;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
+    }
+    .article-page .article-help{
+      margin-top:24px;
+      padding:22px 24px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+    }
+    .article-page .article-help h3{
+      margin:0 0 10px;
+      font-size:24px;
+      color:#fff;
+    }
+    .article-page .article-help p{
+      margin:0 0 14px;
+      color:var(--doc-muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+    .article-page .article-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:#fff;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:700;
+      transition:.18s ease;
+    }
+    .article-page .article-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(217,179,140,.28);
+      background:rgba(255,255,255,.045);
+      color:#fff;
+    }
+    .article-page .doc-meta{
+      margin-top:34px;
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.06);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      justify-content:center;
+    }
+    .article-page .doc-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid var(--doc-line);
+      color:var(--doc-muted);
+      font-size:14px;
+      background:rgba(255,255,255,.02);
+    }
+    .article-page .doc-chip a,
+    .article-page a{color:var(--doc-link); text-decoration:none;}
+    .article-page .doc-chip a:hover,
+    .article-page a:hover{color:#fff;}
+    @media (max-width:760px){
+      .article-page .doc-wrap{padding-bottom:48px;}
+      .article-page .doc-hero h1{font-size:40px;}
+      .article-page .article-panel{padding:22px 18px; border-radius:18px;}
+      .article-page .article-content p{font-size:15px; line-height:1.72;}
+      .article-page .article-content h2{font-size:24px;}
+      .article-page .article-content h3{font-size:21px;}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://sovazone.com/#organization",
+        "name":"SovaZone",
+        "alternateName":"SovaZone Digital Studio",
+        "url":"https://sovazone.com/",
+        "logo":{"@type":"ImageObject","url":"https://sovazone.com/logo.png"},
+        "image":"https://sovazone.com/og-image.png"
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://sovazone.com/#website",
+        "url":"https://sovazone.com/",
+        "name":"SovaZone",
+        "inLanguage":"ru-RU",
+        "publisher":{"@id":"https://sovazone.com/#organization"}
+      },
+      {
+        "@type":"Article",
+        "@id":"https://sovazone.com/articles/instagram-account-security.html#article",
+        "headline":"Безопасность аккаунта в социальных сетях",
+        "name":"Безопасность аккаунта в социальных сетях",
+        "description":"Практическая статья о безопасности Instagram аккаунта: почта, номер телефона, пароль, 2FA, резервные коды, фишинг и базовая защита аккаунта.",
+        "inLanguage":"ru-RU",
+        "datePublished":"2026-04-03",
+        "dateModified":"2026-04-03",
+        "author":{"@type":"Organization","name":"SovaZone Digital Studio"},
+        "publisher":{"@id":"https://sovazone.com/#organization"},
+        "mainEntityOfPage":{"@id":"https://sovazone.com/articles/instagram-account-security.html#webpage"},
+        "image":["https://hsto.org/webt/za/zi/6x/zazi6xci1_ct6k6dhplthjzp4dg.png","https://habrastorage.org/webt/ll/ji/tn/lljitn24i1oqnlh99aws0wubld4.png"]
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://sovazone.com/articles/instagram-account-security.html#webpage",
+        "url":"https://sovazone.com/articles/instagram-account-security.html",
+        "name":"Безопасность Instagram аккаунта | SovaZone",
+        "inLanguage":"ru-RU",
+        "isPartOf":{"@id":"https://sovazone.com/#website"}
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Главная","item":"https://sovazone.com/"},
+          {"@type":"ListItem","position":2,"name":"Статьи","item":"https://sovazone.com/articles.html"},
+          {"@type":"ListItem","position":3,"name":"Безопасность Instagram аккаунта","item":"https://sovazone.com/articles/instagram-account-security.html"}
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-shell article-page">
+    <div id="header-placeholder"></div>
+
+    <main class="page-content">
+      <div class="container">
+        <div class="doc-wrap">
+
+          <section class="doc-hero">
+            <nav class="doc-breadcrumbs" aria-label="Навигация по разделу">
+              <a href="/">Главная</a>
+              <span class="doc-breadcrumbs-sep">/</span>
+              <a href="/articles.html">Статьи</a>
+              <span class="doc-breadcrumbs-sep">/</span>
+              <span>Безопасность Instagram аккаунта</span>
+            </nav>
+
+            <h1>Безопасность аккаунта в социальных сетях</h1>
+            <div class="article-meta">
+              <span>Опубликовано: 3 апреля 2026</span>
+              <span>Автор: SovaZone Digital Studio</span>
+              <span>Категория: Безопасность аккаунтов</span>
+            </div>
+          </section>
+
+          <section class="article-layout">
+            <article class="article-panel article-content">
+              <h1>Безопасность в социальных сетях</h1>
+<p><i>В связи с участившимися случаями взломов, мы решили рассказать, как обезопасить свои аккаунты! Данная статья содержит в себе информацию о безопасности в социальных сетях, как обезопасить аккаунты и рекомендации чтобы избегать проблем.</i>
+</p>
+<p></p>
+<p><b><span style="color: rgb(12, 12, 12);">Что делать если вы сомневаетесь в надежности своего аккаунта? И хотите максимально обезопасить его в 4 шага:</span></b>
+</p>
+<p><b><i>- Создаем новый почтовый адрес на </i></b><b><i>Gmail</i></b><b><i>.</i></b><b><i>com</i></b><b><i> и привязываем, </i></b>
+</p>
+<p><b><i>- Выпускаем и привязываем к аккаунту новый номер телефона, лучше всего </i></b><b><i>eSim</i></b><b><i>,</i></b></p>
+<p><b><i>- Обновляем пароль, используя надежный и уникальный пароль для каждой соц. сети.</i></b>
+</p>
+<p><b><i>- включаем 2</i></b><b><i>FA</i></b><b><i> и выпускаем резервные коды.</i></b>
+</p>
+<p><b></b></p>
+<p><b><i><img alt="Защитить аккаунт от взлома в инстаграм" b"="" src="https://hsto.org/webt/za/zi/6x/zazi6xci1_ct6k6dhplthjzp4dg.png"/></i></b>
+</p>
+<p><b></b>
+</p>
+<h2>- Безопасная почта<br></h2>
+<p><strong>Основная причина взломов</strong> – это емайл адрес связанный с учетной записью. Безопасная почта и анонимность – 1 правило для защиты! Мы советуем использовать почту gmail.com от гугл, она не только надежная, но и самая беспроблемная со стороны соц. сетей, т.к. на большинство других почтовиков нередко письма не доходят. 
+</p>
+<p>Рекомендуется избавится от всех российских почтовых ящиков такие как mail.ru , Yandex.ru, rambler.ru и другие. Зарегистрировать новую почту и привязать её к своим аккаунтам, если у вас уже есть почта gmail.com , можете использовать её если она не использовалась ранее и не является публичной. 
+</p>
+<p>Чем меньше данных злоумышленник будет знать о вас и вашем аккаунте, тем меньше шансов взлома! Не используйте одну и ту же почту на различных платформах, менее значительные площадки где есть риски слива данных пользователей. Зарубежные соц. сети – одна почта, для всего остального другая. Не используйте почту от ваших аккаунтов во ВКонтакте, одноклассники и прочие ру сервисы и сайты. Так же не указывайте в качестве доп. Почты или резервной свои старые почтовики или даже новые с уязвимых почтовых сервисов.
+</p>
+<hr/>
+<h3>- Безопасный номер телефона</h3>
+<p>Не редко пользователи сталкиваются с проблемой, когда их сим-карты восстанавливают с помощью ген. Доверенности, перехват смс, дубликат сим карты и т.п. что в большей части являются мифами и получить номер к вашему номеру порой бывает гораздо проще получить чем это кажется на самом деле.
+</p>
+<p><b>Анонимность</b>! Используйте номер телефона в своих аккаунтах о котором никто не будет знать, полностью приватный номер телефона, используйте только на важных аккаунтах! Самое простое решение в данном случаи выпустить eSim и привязать его к своему телефону и аккаунтам в соц. сетях ( зарубежные соц. сети ) рекомендуется использовать операторов МТС и Мегафон, в некоторых случаях МТС превосходит, потому что нередко пользователи сталкиваются с проблемой что у других операторов не приходят коды.
+</p>
+<hr/>
+<h4>- Безопасный пароль</h4>
+<p>Тут всё просто – используйте комбинацию строчных и заглавных букв, цифр и символов. <b>Пример</b> надежного пароля: <b>!</b><b>KIK920</b><b>tk47?</b>
+</p>
+<p>Храните пароль в надежном месте, не сохраняйте его в браузерах, а для большей надежности и в самом телефоне или на компьютере, вместо этого можно записать на листочек и спрятать под подушкой :) Так же не используйте один и тот же пароль на почте и на аккаунтах, в идеальном соотношении пароль должен быть разный для каждого сайта, будь это почтовый сервис или аккаунт в соц. сетях.</p>
+<hr/>
+<h5>- Двухфакторная аутентификация (2FA)</h5>
+<p>Данный метод используется для дополнительной защиты, можно использовать приложение и мобильный номер телефона. Если вы хорошо разбираетесь как устроено приложение, лучше использовать его, но зная как пользователи бывают невнимательны, мы всё же рекомендуем использовать номер телефона. После того как вы включите функцию 2FA, <b>ОБЯЗАТЕЛЬНО выпустите резервные коды</b>, они помогут подтвердить вход, если будут проблемы на стороне сервисов или смс коды не будут приходить.
+</p>
+<hr/>
+<h5>- Facebook</h5>
+<p>В качестве дополнительной безопасности свяжите свой аккаунт фейсбук со своим аккаунтом в инстаграм, в некоторых случаях при проблемах в инстаграм, связанный аккаунт фейсбук помогает в их решении. Сделать это можно через Центр аккаунтов.
+</p>
+<hr/>
+<h5>- Фишинг</h5>
+<p>Иногда для безопасности лучше ничего не делать, это касается писем и ссылок предлагающих перейти по ссылке, установить приложение или войти в свой аккаунт на другом сайте. Не переходите по ссылкам, которые вам приходят в директ якобы от сотрудников сервиса, где они обещают галочки и т.п., Если вам пришло не понятное письмо на почту с соц. сетей так же внимательно проверьте отправителя и содержание сообщения насколько это вас касается.
+</p>
+<p>Не используйте свои данные и пароли в различных сервисах накруток, а так же не устанавливайте приложения которые просят доступ к вашим данным.
+</p>
+<p>
+</p>
+<p><b><img alt="Защитить аккаунт от взлома" src="https://hsto.org/webt/za/zi/6x/zazi6xci1_ct6k6dhplthjzp4dg.png"/><br></b>
+</p>
+<p>
+</p>
+<h2>Руководство</h2>
+<h3>Пройти проверку безопасности в инстаграм </h3>
+<p><b>Меню – Настройки – Безопасность – Проверка безопасности</b>
+</p>
+<p>*Вы можете зайти в данный раздел и следую инструкциям, изменить почту и номер, обновить пароль, включить 2fa и выпустить резервные коды.
+</p>
+<p>
+</p>
+<p><b><img alt="SovaZone" src="https://habrastorage.org/webt/ll/ji/tn/lljitn24i1oqnlh99aws0wubld4.png"/><br></b>
+</p>
+<p>
+</p>
+<p><b>Как изменить почту и номер в инстаграм</b>
+</p>
+<p><b>Изменить – Настройка личной информации – Изменить почту и номер</b>
+</p>
+<p>*После того как изменили емайл, нужно подтвердить на новой почте.
+</p>
+<p>*После изменения номера телефона, возможно, попросит подтвердить его.
+</p>
+<p><br>
+</p>
+<p><img alt="SovaZone" src="https://habrastorage.org/webt/fd/rc/-f/fdrc-flbrqp8etvebgzhura5pro.png"/><br>
+</p>
+<p>
+</p>
+<p><b>Как включить 2</b><b>FA</b><b> и выпустить резервные коды</b>
+</p>
+<p><b>Меню – Настройки – Безопасность – Двухфакторная аутентификация – </b><b>SMS</b><b></b>
+</p>
+<p>*Если у вас была включена 2fa после смены почты и номера она отключится.
+</p>
+<p><br>
+</p>
+<p><img alt="SovaZone" src="https://habrastorage.org/webt/wm/w6/ep/wmw6epxpheeqh1jmz4vorkjokyw.png"/><br>
+</p>
+<p>
+</p>
+<p><b>Меню – Настройки – Безопасность – Двухфакторная аутентификация – Дополнительные способы – Резервные коды</b>
+</p>
+<p>*Если вы решили не менять номер, перевыпустите резервные коды.
+</p>
+<p><br>
+</p>
+<p><img alt="SovaZone" src="https://habrastorage.org/webt/er/pv/k8/erpvk83ucqqsna0iwajk6norb6o.png"/><br>
+</p>
+<p>
+</p>
+<p><b>Как связать аккаунт фейсбук с инстаграм</b>
+</p>
+<p><b>Меню – Настройки – Центр аккаунтов – Аккаунты – Добавить Аккаунты</b><b></b><b></b>
+</p>
+<p>
+</p>
+<p><b><img alt="SovaZone" src="https://habrastorage.org/webt/ga/da/b_/gadab_fj6zfgcezzxjvgnkpayfo.png"/><br></b>
+</p>
+<p>
+</p>
+<p><b><img alt="Защитить аккаунт от взлома" src="https://hsto.org/webt/za/zi/6x/zazi6xci1_ct6k6dhplthjzp4dg.png"/><br></b>
+</p>
+<p>
+</p>
+<h3>Возможные проблемы в инстаграм: </h3>
+<p><b>Подтверждение почты – </b>после того как вы привязали новый емайл, нужно подтвердить его, если вы сделали это через профиль ( настройка личной информации ), то на почту придет письмо и для подтверждения нужно перейти по ссылке из письма, если вы видите долгое окно загрузки, вы можете выполнить вход в браузере, далее вставить ссылку из письма в браузере где выполнен вход в инстаграм. Решение 2 – подтвердить его через «Проверку безопасности» в этом случаи в письме так же будет код подтверждения и его можно вручную ввести в приложении и подтвердить его.
+</p>
+<hr/>
+<p><b>Смена пароля – </b>при смене пароля, если у вас требует ввести старый пароль, а вы его не помните или по какой-то причине он не подходит, то следует его сначала восстановить. Попробуйте изменить пароль через «Проверка безопасности», если данное решение не помогло, то нужно открыть в браузере инстаграм и нажать «Забыли пароль» далее на емайл адрес придет сообщение с предложением выполнить вход, ниже в сообщении будет текст «Сбросить пароль» нужно перейти по ссылке и задать новый пароль.
+</p>
+<hr/>
+<p><b>Неизвестная ошибка – </b>если на каком-то этапе у вас появилась непредвиденная ошибка нужно повторить попытку 2-3 раза, если решение не помогает прождите 24 часа и попробуйте снова. Если после этого проблема осталась, вы можете попробовать через 2 недели в 99% случаев проблема исчезнет.<b></b>
+</p>
+<hr/>
+<p><b>Дополнительно - </b>проверьте и отключите подключенные приложения и сайты, а также входы в аккаунт:
+</p>
+<p><b>Меню – Настройки – Безопасность – Приложения и сайты</b>
+</p>
+<p><b>Меню – Настройки – Безопасность – Входы в аккаунт</b>
+</p>
+<p>
+</p>
+<p><b>Безопасность вашего аккаунта в ваших руках!</b><b></b>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p style="text-align: center;">
+</p>
+<p style="text-align: center;"><a href="https://sovads.ru/"><img alt="Купить ники инстаграм" src="https://hsto.org/webt/qr/yj/lq/qryjlqkrk_dhahwr5piztyo5zdm.gif"/></a>
+</p>
+<p style="text-align: center;"><img alt="Ники инстаграм" src="https://hsto.org/webt/vr/tv/ct/vrtvctmg8xexpxsznqdbipkc2k8.png"/>
+</p>
+            </article>
+
+            <section class="article-help">
+              <h3>Нужна помощь с аккаунтом?</h3>
+              <p>
+                Если у тебя есть вопросы по безопасности аккаунта, восстановлению доступа, настройке
+                2FA, почты, номера телефона или защите от взлома — можно написать нам напрямую.
+              </p>
+              <a class="article-btn" href="https://t.me/SovaDS" target="_blank" rel="noopener">Задать вопрос</a>
+            </section>
+          </section>
+
+          <div class="doc-meta">
+            <span class="doc-chip"><a href="/contacts.html">Связь</a></span>
+            <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a></span>
+            <span class="doc-chip"><a href="/articles.html">Статьи</a></span>
+            <span class="doc-chip"><a href="/about.html">О проекте</a></span>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
