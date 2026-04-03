@@ -2,7 +2,7 @@ backend:
   name: github
   repo: TheSovaDigital/sovazone
   branch: main
-  base_url: https://YOUR-OAUTH-PROXY-DOMAIN
+  base_url: https://vocal-pony-d77133.netlify.app
   auth_endpoint: auth
 
 media_folder: "image/blog"
