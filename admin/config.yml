@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: TheSovaDigital/sovazone
   branch: main
+  base_url: https://YOUR-OAUTH-PROXY-DOMAIN
+  auth_endpoint: auth
 
 media_folder: "image/blog"
 public_folder: "/image/blog"
@@ -18,15 +21,12 @@ collections:
     summary: "{{title}} — {{category}}"
     fields:
       - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", hint: "Например: instagram-security-tips" }
+      - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Дата", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
       - label: "Категория"
         name: "category"
         widget: "select"
-        options:
-          - "Статьи"
-          - "Новости"
-          - "Кейсы"
+        options: ["Статьи", "Новости", "Кейсы"]
       - { label: "Краткое описание", name: "description", widget: "text" }
       - { label: "Обложка", name: "cover", widget: "image", required: false }
       - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
