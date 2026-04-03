@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: TheSovaDigital/sovazone
+  name: git-gateway
   branch: main
 
 media_folder: "image/blog"
