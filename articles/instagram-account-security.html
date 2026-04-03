@@ -239,7 +239,18 @@
       .article-page .article-content h2{font-size:24px;}
       .article-page .article-content h3{font-size:21px;}
     }
-  </style>
+  
+/* FIX: hide duplicated first title inside article body */
+.article-page .article-content h1:first-of-type{
+  display:none;
+}
+
+/* FIX: override black inline text colors */
+.article-page .article-content [style*="color"]{
+  color:#e6e6f0 !important;
+}
+
+</style>
 
   <script type="application/ld+json">
   {
