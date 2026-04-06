@@ -34,32 +34,28 @@ export default async function handler(req, res) {
     return;
   }
 
-  const token = data.access_token;
-  const adminUrl = `https://sovazone.vercel.app/admin/index.html#access_token=${token}&token_type=bearer`;
+ const token = data.access_token;
 
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.send(`
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <title>Authorizing…</title>
-      </head>
-      <body>
-        <script>
-          (function () {
-            try {
-              if (window.opener && !window.opener.closed) {
-                window.opener.location.href = ${JSON.stringify(adminUrl)};
-                window.close();
-                return;
-              }
-            } catch (e) {}
-
-            window.location.href = ${JSON.stringify(adminUrl)};
-          })();
-        </script>
-      </body>
-    </html>
-  `);
-}
+// Вместо редиректа отправляем postMessage
+res.setHeader("Content-Type", "text/html; charset=utf-8");
+res.send(`
+  <!doctype html>
+  <html>
+  <body>
+    <script>
+      (function() {
+        function receiveMessage(e) {
+          if (e.data === "authorizing:github") {
+            window.opener.postMessage(
+              'authorization:github:success:{"token":"${token}","provider":"github"}',
+              e.origin
+            );
+          }
+        }
+        window.addEventListener("message", receiveMessage, false);
+        window.opener.postMessage("authorizing:github", "*");
+      })()
+    </script>
+  </body>
+  </html>
+`);
