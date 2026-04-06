@@ -1,24 +1,20 @@
 export default async function handler(req, res) {
   const code = req.query.code;
-  const host = req.headers.host;
-  const redirect_uri = `https://${host}/api/callback`;
+  const redirect_uri = "https://sovazone.vercel.app/api/callback";
 
-  const response = await fetch(
-    "https://github.com/login/oauth/access_token",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        client_id: process.env.GITHUB_CLIENT_ID,
-        client_secret: process.env.GITHUB_CLIENT_SECRET,
-        code,
-        redirect_uri,
-      }),
-    }
-  );
+  const response = await fetch("https://github.com/login/oauth/access_token", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      code,
+      redirect_uri,
+    }),
+  });
 
   const data = await response.json();
 
