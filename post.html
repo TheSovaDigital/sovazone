@@ -9,6 +9,7 @@
 
   <title>Статья — SovaZone</title>
   <meta name="description" content="Статья блога SovaZone. Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.">
+  <meta name="keywords" content="SovaZone блог, блог SovaZone, новости SovaZone, кейсы аккаунтов, никнеймы, digital-проекты, помощь с аккаунтами">
   <link rel="canonical" href="https://sovazone.com/post.html">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -24,6 +25,10 @@
   <meta property="og:description" content="Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.">
   <meta property="og:url" content="https://sovazone.com/post.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Статья — SovaZone">
@@ -33,15 +38,21 @@
   <link rel="stylesheet" href="/styles.css">
 
   <style>
+    .post-section {
+      padding-top: 8px;
+    }
+
     .post-wrap {
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
     }
 
     .post-breadcrumb {
-      margin-bottom: 18px;
+      max-width: 860px;
+      margin: 0 auto 18px;
       font-size: 14px;
-      opacity: 0.74;
+      line-height: 1.5;
+      opacity: 0.72;
     }
 
     .post-breadcrumb a {
@@ -54,38 +65,65 @@
     }
 
     .post-meta {
+      max-width: 860px;
+      margin: 0 auto 18px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 18px;
-      margin-bottom: 18px;
       font-size: 14px;
+      line-height: 1.5;
       opacity: 0.78;
     }
 
     .post-title {
-      margin: 0 0 18px;
-      font-size: 42px;
-      line-height: 1.1;
+      max-width: 860px;
+      margin: 0 auto 22px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
     }
 
     .post-cover {
-      width: 100%;
-      border-radius: 18px;
-      margin: 0 0 26px;
       display: none;
+      width: 100%;
+      max-width: 860px;
+      height: 420px;
+      object-fit: cover;
+      object-position: center;
+      margin: 0 auto 28px;
+      border-radius: 18px;
+      box-shadow: none !important;
+      filter: none !important;
+      background: none !important;
     }
 
     .post-content {
+      max-width: 860px;
+      margin: 0 auto;
       font-size: 17px;
-      line-height: 1.78;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.94);
     }
 
     .post-content h2,
     .post-content h3,
     .post-content h4 {
-      margin-top: 34px;
-      margin-bottom: 14px;
-      line-height: 1.22;
+      margin: 36px 0 14px;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+    }
+
+    .post-content h2 {
+      font-size: clamp(25px, 3vw, 34px);
+    }
+
+    .post-content h3 {
+      font-size: clamp(21px, 2.4vw, 28px);
+    }
+
+    .post-content h4 {
+      font-size: clamp(18px, 2vw, 22px);
     }
 
     .post-content p {
@@ -94,7 +132,7 @@
 
     .post-content ul,
     .post-content ol {
-      margin: 0 0 18px 0;
+      margin: 0 0 18px;
       padding-left: 22px;
     }
 
@@ -102,30 +140,140 @@
       margin-bottom: 8px;
     }
 
+    .post-content strong {
+      color: #ffffff;
+    }
+
+    .post-content a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: break-word;
+    }
+
+    .post-content blockquote {
+      margin: 28px 0;
+      padding: 18px 20px;
+      border-left: 2px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 14px 14px 0;
+      opacity: 0.95;
+    }
+
+    .post-content hr {
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 34px 0;
+    }
+
     .post-content img {
       display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 26px 0;
+      width: 100%;
+      max-width: 860px;
+      height: 420px;
+      object-fit: cover;
+      object-position: center;
+      margin: 28px auto;
       border-radius: 18px;
+      box-shadow: none !important;
+      filter: none !important;
+      background: none !important;
+    }
+
+    .post-content img + em,
+    .post-content p > em:only-child {
+      display: block;
+      margin: -8px auto 22px;
+      max-width: 860px;
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.7;
+      font-style: normal;
+      text-align: center;
     }
 
     .post-state {
+      max-width: 860px;
+      margin: 0 auto;
       font-size: 17px;
-      line-height: 1.7;
+      line-height: 1.75;
       opacity: 0.86;
     }
 
     @media (max-width: 900px) {
-      .post-title {
-        font-size: 34px;
+      .post-section {
+        padding-top: 0;
+      }
+
+      .post-cover,
+      .post-content img {
+        height: 260px;
+        border-radius: 16px;
       }
 
       .post-content {
         font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .post-meta {
+        gap: 8px 14px;
       }
     }
   </style>
+
+  <script type="application/ld+json" id="schema-breadcrumb">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Главная",
+        "item":"https://sovazone.com/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Блог",
+        "item":"https://sovazone.com/blog.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Статья",
+        "item":"https://sovazone.com/post.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json" id="schema-article">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Статья — SovaZone",
+    "description":"Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.",
+    "image":["https://sovazone.com/og-image.png"],
+    "mainEntityOfPage":"https://sovazone.com/post.html",
+    "author":{
+      "@type":"Organization",
+      "name":"SovaZone"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"SovaZone",
+      "url":"https://sovazone.com/",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://sovazone.com/android-chrome-512x512.png"
+      }
+    },
+    "datePublished":"2026-04-07",
+    "dateModified":"2026-04-07"
+  }
+  </script>
 </head>
 <body>
   <div class="site-shell">
@@ -133,24 +281,24 @@
 
     <main class="page-content">
       <div class="container">
-        <section class="section">
-          <div class="post-wrap">
+        <section class="section post-section">
+          <article class="post-wrap" itemscope itemtype="https://schema.org/Article">
             <div class="post-breadcrumb">
               <a href="/index.html">Главная</a> / <a href="/blog.html">Блог</a> / <span id="post-breadcrumb-current">Статья</span>
             </div>
 
             <div class="post-meta">
-              <div>Опубликовано: <span id="post-date">—</span></div>
-              <div>Автор: <span id="post-author">SovaZone</span></div>
+              <div>Опубликовано: <span id="post-date" itemprop="datePublished">—</span></div>
+              <div>Автор: <span id="post-author" itemprop="author">SovaZone</span></div>
               <div>Категория: <span id="post-category">Блог</span></div>
             </div>
 
-            <h1 class="post-title" id="post-title">Загрузка...</h1>
+            <h1 class="post-title" id="post-title" itemprop="headline">Загрузка...</h1>
 
-            <img id="post-cover" class="post-cover" src="" alt="Обложка статьи">
+            <img id="post-cover" class="post-cover" src="" alt="Обложка статьи" itemprop="image">
 
-            <div id="post-content" class="post-content post-state">Загружаем статью...</div>
-          </div>
+            <div id="post-content" class="post-content post-state" itemprop="articleBody">Загружаем статью...</div>
+          </article>
         </section>
       </div>
     </main>
@@ -226,22 +374,95 @@
       throw new Error("POST_NOT_FOUND");
     }
 
-    function applySeo(meta, slug) {
+    function setMeta(selector, value) {
+      const node = document.querySelector(selector);
+      if (node) {
+        node.setAttribute("content", value);
+      }
+    }
+
+    function setLink(selector, value) {
+      const node = document.querySelector(selector);
+      if (node) {
+        node.setAttribute("href", value);
+      }
+    }
+
+    function applySeo(meta, slug, formattedDate) {
       const title = meta.title ? meta.title + " — SovaZone" : "Статья — SovaZone";
       const description = meta.description || "Статья блога SovaZone.";
       const canonical = "https://sovazone.com/post.html?slug=" + encodeURIComponent(slug);
       const image = meta.cover ? "https://sovazone.com" + meta.cover : "https://sovazone.com/og-image.png";
+      const published = meta.date || "2026-04-07";
+      const modified = meta.updated || meta.date || published;
+      const authorName = meta.author || "SovaZone";
 
       document.title = title;
-      document.querySelector('meta[name="description"]').setAttribute("content", description);
-      document.querySelector('link[rel="canonical"]').setAttribute("href", canonical);
-      document.querySelector('meta[property="og:title"]').setAttribute("content", title);
-      document.querySelector('meta[property="og:description"]').setAttribute("content", description);
-      document.querySelector('meta[property="og:url"]').setAttribute("content", canonical);
-      document.querySelector('meta[property="og:image"]').setAttribute("content", image);
-      document.querySelector('meta[name="twitter:title"]').setAttribute("content", title);
-      document.querySelector('meta[name="twitter:description"]').setAttribute("content", description);
-      document.querySelector('meta[name="twitter:image"]').setAttribute("content", image);
+      setMeta('meta[name="description"]', description);
+      setMeta('meta[name="keywords"]', (meta.keywords || "SovaZone блог, блог SovaZone, новости SovaZone, кейсы аккаунтов, никнеймы, digital-проекты, помощь с аккаунтами"));
+      setLink('link[rel="canonical"]', canonical);
+
+      setMeta('meta[property="og:title"]', title);
+      setMeta('meta[property="og:description"]', description);
+      setMeta('meta[property="og:url"]', canonical);
+      setMeta('meta[property="og:image"]', image);
+      setMeta('meta[property="og:image:secure_url"]', image);
+
+      setMeta('meta[name="twitter:title"]', title);
+      setMeta('meta[name="twitter:description"]', description);
+      setMeta('meta[name="twitter:image"]', image);
+
+      const breadcrumbSchema = {
+        "@context":"https://schema.org",
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {
+            "@type":"ListItem",
+            "position":1,
+            "name":"Главная",
+            "item":"https://sovazone.com/"
+          },
+          {
+            "@type":"ListItem",
+            "position":2,
+            "name":"Блог",
+            "item":"https://sovazone.com/blog.html"
+          },
+          {
+            "@type":"ListItem",
+            "position":3,
+            "name": meta.title || "Статья",
+            "item": canonical
+          }
+        ]
+      };
+
+      const articleSchema = {
+        "@context":"https://schema.org",
+        "@type":"Article",
+        "headline": meta.title || "Статья — SovaZone",
+        "description": description,
+        "image": [image],
+        "mainEntityOfPage": canonical,
+        "author": {
+          "@type":"Organization",
+          "name": authorName
+        },
+        "publisher": {
+          "@type":"Organization",
+          "name":"SovaZone",
+          "url":"https://sovazone.com/",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://sovazone.com/android-chrome-512x512.png"
+          }
+        },
+        "datePublished": published,
+        "dateModified": modified
+      };
+
+      document.getElementById("schema-breadcrumb").textContent = JSON.stringify(breadcrumbSchema, null, 2);
+      document.getElementById("schema-article").textContent = JSON.stringify(articleSchema, null, 2);
     }
 
     async function loadPost() {
@@ -261,13 +482,13 @@
         const markdown = parsed.content || "";
 
         const title = meta.title || "Статья";
-        const date = formatDate(meta.date || "");
+        const formattedDate = formatDate(meta.date || "");
         const author = meta.author || "SovaZone";
         const category = meta.category || "Блог";
 
         document.getElementById("post-title").textContent = title;
         document.getElementById("post-breadcrumb-current").textContent = title;
-        document.getElementById("post-date").textContent = date;
+        document.getElementById("post-date").textContent = formattedDate;
         document.getElementById("post-author").textContent = author;
         document.getElementById("post-category").textContent = category;
 
@@ -281,11 +502,11 @@
         contentEl.classList.remove("post-state");
         contentEl.innerHTML = marked.parse(markdown);
 
-        applySeo(meta, slug);
+        applySeo(meta, slug, formattedDate);
       } catch (error) {
         document.getElementById("post-title").textContent = "Статья не найдена";
         contentEl.classList.add("post-state");
-        contentEl.textContent = "Пост не загрузился ни с сайта, ни из GitHub CDN. Значит проблема уже не в шаблоне страницы, а в доступности markdown-файла в репозитории или деплое.";
+        contentEl.textContent = "Пост не загрузился ни с сайта, ни из GitHub CDN. Проверь путь к markdown-файлу, наличие файла в репозитории и завершение деплоя.";
       }
     }
 
