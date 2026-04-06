@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Тестовый пост",
+    "slug": "test-post",
+    "date": "2026-04-07",
+    "description": "Это тестовый пост для проверки связки блога и Decap CMS.",
+    "category": "Новости",
+    "author": "SovaZone"
+  }
+]
