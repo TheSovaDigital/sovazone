@@ -39,20 +39,20 @@
 
   <style>
     .post-section {
-      padding-top: 8px;
+      padding-top: 2px;
     }
 
     .post-wrap {
-      max-width: 980px;
+      max-width: 920px;
       margin: 0 auto;
     }
 
     .post-breadcrumb {
-      max-width: 860px;
-      margin: 0 auto 18px;
+      max-width: 760px;
+      margin: 0 auto 16px;
       font-size: 14px;
       line-height: 1.5;
-      opacity: 0.72;
+      opacity: 0.7;
     }
 
     .post-breadcrumb a {
@@ -65,7 +65,7 @@
     }
 
     .post-meta {
-      max-width: 860px;
+      max-width: 760px;
       margin: 0 auto 18px;
       display: flex;
       flex-wrap: wrap;
@@ -76,18 +76,18 @@
     }
 
     .post-title {
-      max-width: 860px;
-      margin: 0 auto 22px;
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.06;
+      max-width: 760px;
+      margin: 0 auto 20px;
+      font-size: clamp(30px, 4.5vw, 48px);
+      line-height: 1.05;
       letter-spacing: -0.02em;
     }
 
     .post-cover {
       display: none;
       width: 100%;
-      max-width: 860px;
-      height: 420px;
+      max-width: 620px;
+      height: 250px;
       object-fit: cover;
       object-position: center;
       margin: 0 auto 28px;
@@ -98,28 +98,28 @@
     }
 
     .post-content {
-      max-width: 860px;
+      max-width: 760px;
       margin: 0 auto;
       font-size: 17px;
-      line-height: 1.8;
+      line-height: 1.82;
       color: rgba(255,255,255,0.94);
     }
 
     .post-content h2,
     .post-content h3,
     .post-content h4 {
-      margin: 36px 0 14px;
+      margin: 34px 0 14px;
       line-height: 1.18;
       letter-spacing: -0.01em;
       color: #ffffff;
     }
 
     .post-content h2 {
-      font-size: clamp(25px, 3vw, 34px);
+      font-size: clamp(24px, 3vw, 32px);
     }
 
     .post-content h3 {
-      font-size: clamp(21px, 2.4vw, 28px);
+      font-size: clamp(20px, 2.3vw, 27px);
     }
 
     .post-content h4 {
@@ -152,9 +152,9 @@
     }
 
     .post-content blockquote {
-      margin: 28px 0;
+      margin: 26px 0;
       padding: 18px 20px;
-      border-left: 2px solid rgba(255,255,255,0.18);
+      border-left: 2px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.02);
       border-radius: 0 14px 14px 0;
       opacity: 0.95;
@@ -169,11 +169,11 @@
     .post-content img {
       display: block;
       width: 100%;
-      max-width: 860px;
-      height: 420px;
+      max-width: 620px;
+      height: 250px;
       object-fit: cover;
       object-position: center;
-      margin: 28px auto;
+      margin: 26px auto;
       border-radius: 18px;
       box-shadow: none !important;
       filter: none !important;
@@ -183,17 +183,17 @@
     .post-content img + em,
     .post-content p > em:only-child {
       display: block;
-      margin: -8px auto 22px;
-      max-width: 860px;
+      margin: -8px auto 20px;
+      max-width: 620px;
       font-size: 14px;
       line-height: 1.5;
-      opacity: 0.7;
+      opacity: 0.68;
       font-style: normal;
       text-align: center;
     }
 
     .post-state {
-      max-width: 860px;
+      max-width: 760px;
       margin: 0 auto;
       font-size: 17px;
       line-height: 1.75;
@@ -201,19 +201,28 @@
     }
 
     @media (max-width: 900px) {
-      .post-section {
-        padding-top: 0;
+      .post-wrap {
+        max-width: 100%;
+      }
+
+      .post-breadcrumb,
+      .post-meta,
+      .post-title,
+      .post-content,
+      .post-state {
+        max-width: 100%;
       }
 
       .post-cover,
       .post-content img {
-        height: 260px;
+        max-width: 100%;
+        height: 210px;
         border-radius: 16px;
       }
 
       .post-content {
         font-size: 16px;
-        line-height: 1.75;
+        line-height: 1.76;
       }
 
       .post-meta {
@@ -388,7 +397,7 @@
       }
     }
 
-    function applySeo(meta, slug, formattedDate) {
+    function applySeo(meta, slug) {
       const title = meta.title ? meta.title + " — SovaZone" : "Статья — SovaZone";
       const description = meta.description || "Статья блога SovaZone.";
       const canonical = "https://sovazone.com/post.html?slug=" + encodeURIComponent(slug);
@@ -502,7 +511,7 @@
         contentEl.classList.remove("post-state");
         contentEl.innerHTML = marked.parse(markdown);
 
-        applySeo(meta, slug, formattedDate);
+        applySeo(meta, slug);
       } catch (error) {
         document.getElementById("post-title").textContent = "Статья не найдена";
         contentEl.classList.add("post-state");
