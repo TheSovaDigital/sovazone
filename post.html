@@ -110,10 +110,6 @@
       border-radius: 18px;
     }
 
-    .post-content a {
-      word-break: break-word;
-    }
-
     .post-state {
       font-size: 17px;
       line-height: 1.7;
@@ -167,26 +163,19 @@
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
 
   <script>
+    const BLOG_REPO_OWNER = "TheSovaDigital";
+    const BLOG_REPO_NAME = "sovazone";
+    const BLOG_REPO_BRANCH = "main";
+
     function getSlug() {
       const params = new URLSearchParams(window.location.search);
       return (params.get("slug") || "").trim();
     }
 
-    function escapeHtml(value) {
-      return String(value || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
     function formatDate(value) {
       if (!value) return "—";
-
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return value;
-
       return date.toLocaleDateString("ru-RU", {
         day: "numeric",
         month: "long",
@@ -218,16 +207,20 @@
     }
 
     async function fetchPostMarkdown(slug) {
+      const cacheBust = Date.now();
       const attempts = [
-        "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + Date.now(),
-        "./content/blog/" + encodeURIComponent(slug) + ".md?v=" + Date.now()
+        "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + cacheBust,
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + cacheBust
       ];
 
       for (const url of attempts) {
-        const response = await fetch(url, { cache: "no-store" });
-        if (response.ok) {
-          return await response.text();
-        }
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (response.ok) {
+            return await response.text();
+          }
+        } catch (e) {}
       }
 
       throw new Error("POST_NOT_FOUND");
@@ -292,7 +285,7 @@
       } catch (error) {
         document.getElementById("post-title").textContent = "Статья не найдена";
         contentEl.classList.add("post-state");
-        contentEl.innerHTML = "Файл статьи пока не найден. Проверь, открывается ли напрямую путь <strong>/content/blog/" + escapeHtml(slug) + ".md</strong> на сайте.";
+        contentEl.textContent = "Пост не загрузился ни с сайта, ни из GitHub CDN. Значит проблема уже не в шаблоне страницы, а в доступности markdown-файла в репозитории или деплое.";
       }
     }
 
