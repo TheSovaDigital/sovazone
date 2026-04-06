@@ -39,11 +39,11 @@
 
   <style>
     .post-section {
-      padding-top: 2px;
+      padding-top: 4px;
     }
 
     .post-wrap {
-      max-width: 920px;
+      max-width: 980px;
       margin: 0 auto;
     }
 
@@ -52,7 +52,7 @@
       margin: 0 auto 16px;
       font-size: 14px;
       line-height: 1.5;
-      opacity: 0.7;
+      opacity: 0.72;
     }
 
     .post-breadcrumb a {
@@ -90,16 +90,37 @@
       height: 250px;
       object-fit: cover;
       object-position: center;
-      margin: 0 auto 28px;
+      margin: 0 auto 26px;
       border-radius: 18px;
       box-shadow: none !important;
       filter: none !important;
       background: none !important;
     }
 
-    .post-content {
+    .post-card {
       max-width: 760px;
-      margin: 0 auto;
+      margin: 0 auto 26px;
+      padding: 28px 30px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018));
+      border: 1px solid rgba(255,255,255,0.065);
+      box-shadow: none !important;
+      filter: none !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
+    .post-content {
+      position: relative;
+      z-index: 1;
       font-size: 17px;
       line-height: 1.82;
       color: rgba(255,255,255,0.94);
@@ -192,31 +213,121 @@
       text-align: center;
     }
 
-    .post-state {
+    .share-block,
+    .related-block,
+    .latest-block {
       max-width: 760px;
-      margin: 0 auto;
+      margin: 0 auto 22px;
+      padding: 22px 24px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .block-title {
+      margin: 0 0 16px;
+      font-size: 19px;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #ffffff;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 128px;
+      padding: 18px 18px 16px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .mini-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    }
+
+    .mini-card-kicker {
+      font-size: 12px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.58;
+    }
+
+    .mini-card-title {
+      font-size: 16px;
+      line-height: 1.45;
+      color: #ffffff;
+    }
+
+    .mini-card-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      opacity: 0.78;
+    }
+
+    .post-state {
       font-size: 17px;
       line-height: 1.75;
       opacity: 0.86;
     }
 
     @media (max-width: 900px) {
-      .post-wrap {
-        max-width: 100%;
-      }
-
-      .post-breadcrumb,
-      .post-meta,
-      .post-title,
-      .post-content,
-      .post-state {
-        max-width: 100%;
-      }
-
       .post-cover,
       .post-content img {
         max-width: 100%;
         height: 210px;
+        border-radius: 16px;
+      }
+
+      .post-card,
+      .share-block,
+      .related-block,
+      .latest-block {
+        padding: 20px 18px;
         border-radius: 16px;
       }
 
@@ -225,8 +336,8 @@
         line-height: 1.76;
       }
 
-      .post-meta {
-        gap: 8px 14px;
+      .cards-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -306,7 +417,65 @@
 
             <img id="post-cover" class="post-cover" src="" alt="Обложка статьи" itemprop="image">
 
-            <div id="post-content" class="post-content post-state" itemprop="articleBody">Загружаем статью...</div>
+            <div class="post-card">
+              <div id="post-content" class="post-content post-state" itemprop="articleBody">Загружаем статью...</div>
+            </div>
+
+            <section class="share-block" aria-labelledby="share-title">
+              <h2 class="block-title" id="share-title">Поделиться</h2>
+              <div class="share-buttons">
+                <a class="share-btn" id="share-telegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+                <a class="share-btn" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <button class="share-btn" id="share-copy" type="button">Скопировать ссылку</button>
+              </div>
+            </section>
+
+            <section class="related-block" aria-labelledby="related-title">
+              <h2 class="block-title" id="related-title">Избранные статьи</h2>
+              <div class="cards-grid">
+                <a class="mini-card" href="https://sovazone.com/articles/how-to-choose-instagram-username.html">
+                  <div class="mini-card-kicker">Instagram</div>
+                  <div class="mini-card-title">Как выбрать никнейм для Instagram</div>
+                  <div class="mini-card-desc">Практические принципы выбора короткого, сильного и запоминающегося username.</div>
+                </a>
+
+                <a class="mini-card" href="https://sovazone.com/articles/instagram-account-security.html">
+                  <div class="mini-card-kicker">Безопасность</div>
+                  <div class="mini-card-title">Безопасность аккаунта Instagram</div>
+                  <div class="mini-card-desc">Что стоит проверить заранее, чтобы не потерять доступ к своему профилю.</div>
+                </a>
+
+                <a class="mini-card" href="https://sovazone.com/articles/unblock-instagram-account.html">
+                  <div class="mini-card-kicker">Разблокировка</div>
+                  <div class="mini-card-title">Как разблокировать аккаунт Instagram</div>
+                  <div class="mini-card-desc">Базовая последовательность действий, если профиль столкнулся с ограничением.</div>
+                </a>
+
+                <a class="mini-card" href="https://sovazone.com/articles/meta-subscription-eligibility.html">
+                  <div class="mini-card-kicker">Meta</div>
+                  <div class="mini-card-title">Подписка Meta: требования</div>
+                  <div class="mini-card-desc">Кому подходит подписка, на что влияет и что важно учитывать перед подачей.</div>
+                </a>
+
+                <a class="mini-card" href="https://sovazone.com/articles/why-instagram-accounts-get-banned.html">
+                  <div class="mini-card-kicker">Ограничения</div>
+                  <div class="mini-card-title">Почему блокируют аккаунты Instagram</div>
+                  <div class="mini-card-desc">Главные причины ограничений и что обычно приводит аккаунт к бану.</div>
+                </a>
+              </div>
+            </section>
+
+            <section class="latest-block" aria-labelledby="latest-title">
+              <h2 class="block-title" id="latest-title">Последние статьи</h2>
+              <div class="cards-grid" id="latest-posts">
+                <a class="mini-card" href="/blog.html">
+                  <div class="mini-card-kicker">Блог</div>
+                  <div class="mini-card-title">Публикации скоро появятся</div>
+                  <div class="mini-card-desc">Когда в блоге станет больше материалов, этот блок будет показывать последние посты автоматически.</div>
+                </a>
+              </div>
+            </section>
           </article>
         </section>
       </div>
@@ -363,15 +532,8 @@
       };
     }
 
-    async function fetchPostMarkdown(slug) {
-      const cacheBust = Date.now();
-      const attempts = [
-        "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + cacheBust,
-        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + cacheBust,
-        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + cacheBust
-      ];
-
-      for (const url of attempts) {
+    async function fetchTextWithFallback(paths) {
+      for (const url of paths) {
         try {
           const response = await fetch(url, { cache: "no-store" });
           if (response.ok) {
@@ -379,22 +541,48 @@
           }
         } catch (e) {}
       }
+      throw new Error("NOT_FOUND");
+    }
 
-      throw new Error("POST_NOT_FOUND");
+    async function fetchJsonWithFallback(paths) {
+      for (const url of paths) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (response.ok) {
+            return await response.json();
+          }
+        } catch (e) {}
+      }
+      throw new Error("NOT_FOUND");
+    }
+
+    async function fetchPostMarkdown(slug) {
+      const cacheBust = Date.now();
+      const file = encodeURIComponent(slug) + ".md";
+      return fetchTextWithFallback([
+        "/content/blog/" + file + "?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/content/blog/" + file + "?v=" + cacheBust,
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/content/blog/" + file + "?v=" + cacheBust
+      ]);
+    }
+
+    async function fetchBlogIndex() {
+      const cacheBust = Date.now();
+      return fetchJsonWithFallback([
+        "/content/blog/index.json?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/content/blog/index.json?v=" + cacheBust,
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/content/blog/index.json?v=" + cacheBust
+      ]);
     }
 
     function setMeta(selector, value) {
       const node = document.querySelector(selector);
-      if (node) {
-        node.setAttribute("content", value);
-      }
+      if (node) node.setAttribute("content", value);
     }
 
     function setLink(selector, value) {
       const node = document.querySelector(selector);
-      if (node) {
-        node.setAttribute("href", value);
-      }
+      if (node) node.setAttribute("href", value);
     }
 
     function applySeo(meta, slug) {
@@ -408,7 +596,7 @@
 
       document.title = title;
       setMeta('meta[name="description"]', description);
-      setMeta('meta[name="keywords"]', (meta.keywords || "SovaZone блог, блог SovaZone, новости SovaZone, кейсы аккаунтов, никнеймы, digital-проекты, помощь с аккаунтами"));
+      setMeta('meta[name="keywords"]', meta.keywords || "SovaZone блог, блог SovaZone, новости SovaZone, кейсы аккаунтов, никнеймы, digital-проекты, помощь с аккаунтами");
       setLink('link[rel="canonical"]', canonical);
 
       setMeta('meta[property="og:title"]', title);
@@ -421,57 +609,90 @@
       setMeta('meta[name="twitter:description"]', description);
       setMeta('meta[name="twitter:image"]', image);
 
-      const breadcrumbSchema = {
+      document.getElementById("schema-breadcrumb").textContent = JSON.stringify({
         "@context":"https://schema.org",
         "@type":"BreadcrumbList",
         "itemListElement":[
-          {
-            "@type":"ListItem",
-            "position":1,
-            "name":"Главная",
-            "item":"https://sovazone.com/"
-          },
-          {
-            "@type":"ListItem",
-            "position":2,
-            "name":"Блог",
-            "item":"https://sovazone.com/blog.html"
-          },
-          {
-            "@type":"ListItem",
-            "position":3,
-            "name": meta.title || "Статья",
-            "item": canonical
-          }
+          { "@type":"ListItem", "position":1, "name":"Главная", "item":"https://sovazone.com/" },
+          { "@type":"ListItem", "position":2, "name":"Блог", "item":"https://sovazone.com/blog.html" },
+          { "@type":"ListItem", "position":3, "name": meta.title || "Статья", "item": canonical }
         ]
-      };
+      }, null, 2);
 
-      const articleSchema = {
+      document.getElementById("schema-article").textContent = JSON.stringify({
         "@context":"https://schema.org",
         "@type":"Article",
         "headline": meta.title || "Статья — SovaZone",
         "description": description,
         "image": [image],
         "mainEntityOfPage": canonical,
-        "author": {
-          "@type":"Organization",
-          "name": authorName
-        },
+        "author": { "@type":"Organization", "name": authorName },
         "publisher": {
           "@type":"Organization",
           "name":"SovaZone",
           "url":"https://sovazone.com/",
-          "logo":{
+          "logo": {
             "@type":"ImageObject",
             "url":"https://sovazone.com/android-chrome-512x512.png"
           }
         },
         "datePublished": published,
         "dateModified": modified
-      };
+      }, null, 2);
+    }
 
-      document.getElementById("schema-breadcrumb").textContent = JSON.stringify(breadcrumbSchema, null, 2);
-      document.getElementById("schema-article").textContent = JSON.stringify(articleSchema, null, 2);
+    function initShareButtons(title) {
+      const url = window.location.href;
+      const encodedUrl = encodeURIComponent(url);
+      const encodedTitle = encodeURIComponent(title || document.title);
+
+      document.getElementById("share-telegram").href = "https://t.me/share/url?url=" + encodedUrl + "&text=" + encodedTitle;
+      document.getElementById("share-twitter").href = "https://twitter.com/intent/tweet?url=" + encodedUrl + "&text=" + encodedTitle;
+      document.getElementById("share-facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
+
+      document.getElementById("share-copy").addEventListener("click", async function() {
+        try {
+          await navigator.clipboard.writeText(url);
+          this.textContent = "Ссылка скопирована";
+          setTimeout(() => {
+            this.textContent = "Скопировать ссылку";
+          }, 1800);
+        } catch (e) {
+          this.textContent = "Не удалось скопировать";
+          setTimeout(() => {
+            this.textContent = "Скопировать ссылку";
+          }, 1800);
+        }
+      });
+    }
+
+    async function renderLatestPosts(currentSlug) {
+      const container = document.getElementById("latest-posts");
+
+      try {
+        const posts = await fetchBlogIndex();
+
+        if (!Array.isArray(posts) || !posts.length) {
+          return;
+        }
+
+        const latest = posts
+          .filter(post => post && post.slug && post.slug !== currentSlug)
+          .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+          .slice(0, 4);
+
+        if (!latest.length) {
+          return;
+        }
+
+        container.innerHTML = latest.map(post => `
+          <a class="mini-card" href="/post.html?slug=${encodeURIComponent(post.slug)}">
+            <div class="mini-card-kicker">${post.category || "Блог"}</div>
+            <div class="mini-card-title">${post.title || "Без названия"}</div>
+            <div class="mini-card-desc">${post.description || "Новая публикация блога SovaZone."}</div>
+          </a>
+        `).join("");
+      } catch (e) {}
     }
 
     async function loadPost() {
@@ -512,10 +733,13 @@
         contentEl.innerHTML = marked.parse(markdown);
 
         applySeo(meta, slug);
+        initShareButtons(title);
+        renderLatestPosts(slug);
       } catch (error) {
         document.getElementById("post-title").textContent = "Статья не найдена";
         contentEl.classList.add("post-state");
         contentEl.textContent = "Пост не загрузился ни с сайта, ни из GitHub CDN. Проверь путь к markdown-файлу, наличие файла в репозитории и завершение деплоя.";
+        initShareButtons("SovaZone");
       }
     }
 
