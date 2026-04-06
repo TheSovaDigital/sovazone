@@ -8,7 +8,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
   <title>Статья — SovaZone</title>
-  <meta name="description" content="Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.">
+  <meta name="description" content="Статья блога SovaZone. Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.">
   <link rel="canonical" href="https://sovazone.com/post.html">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -33,182 +33,270 @@
   <link rel="stylesheet" href="/styles.css">
 
   <style>
+    .post-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-  .article-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-  }
+    .post-breadcrumb {
+      margin-bottom: 18px;
+      font-size: 14px;
+      opacity: 0.74;
+    }
 
-  .breadcrumb {
-    font-size: 14px;
-    opacity: 0.7;
-    margin-bottom: 20px;
-  }
+    .post-breadcrumb a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  .article-meta {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    font-size: 14px;
-    opacity: 0.75;
-    margin-bottom: 16px;
-  }
+    .post-breadcrumb a:hover {
+      opacity: 0.92;
+    }
 
-  .article-title {
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      opacity: 0.78;
+    }
 
-  .article-content {
-    line-height: 1.7;
-    font-size: 17px;
-  }
+    .post-title {
+      margin: 0 0 18px;
+      font-size: 42px;
+      line-height: 1.1;
+    }
 
-  .article-content img {
-    max-width: 100%;
-    border-radius: 12px;
-    margin: 24px 0;
-  }
+    .post-cover {
+      width: 100%;
+      border-radius: 18px;
+      margin: 0 0 26px;
+      display: none;
+    }
 
+    .post-content {
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    .post-content h2,
+    .post-content h3,
+    .post-content h4 {
+      margin-top: 34px;
+      margin-bottom: 14px;
+      line-height: 1.22;
+    }
+
+    .post-content p {
+      margin: 0 0 18px;
+    }
+
+    .post-content ul,
+    .post-content ol {
+      margin: 0 0 18px 0;
+      padding-left: 22px;
+    }
+
+    .post-content li {
+      margin-bottom: 8px;
+    }
+
+    .post-content img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 26px 0;
+      border-radius: 18px;
+    }
+
+    .post-content a {
+      word-break: break-word;
+    }
+
+    .post-state {
+      font-size: 17px;
+      line-height: 1.7;
+      opacity: 0.86;
+    }
+
+    @media (max-width: 900px) {
+      .post-title {
+        font-size: 34px;
+      }
+
+      .post-content {
+        font-size: 16px;
+      }
+    }
   </style>
-
 </head>
-
 <body>
+  <div class="site-shell">
+    <div id="header-placeholder"></div>
 
-<div class="site-shell">
+    <main class="page-content">
+      <div class="container">
+        <section class="section">
+          <div class="post-wrap">
+            <div class="post-breadcrumb">
+              <a href="/index.html">Главная</a> / <a href="/blog.html">Блог</a> / <span id="post-breadcrumb-current">Статья</span>
+            </div>
 
-  <div id="header-placeholder"></div>
+            <div class="post-meta">
+              <div>Опубликовано: <span id="post-date">—</span></div>
+              <div>Автор: <span id="post-author">SovaZone</span></div>
+              <div>Категория: <span id="post-category">Блог</span></div>
+            </div>
 
-  <main class="page-content">
+            <h1 class="post-title" id="post-title">Загрузка...</h1>
 
-    <div class="container">
+            <img id="post-cover" class="post-cover" src="" alt="Обложка статьи">
 
-      <div class="article-wrapper">
-
-        <div class="breadcrumb">
-          Главная / Блог / <span id="post-title-breadcrumb">Статья</span>
-        </div>
-
-        <div class="article-meta">
-
-          <div>
-            Опубликовано:
-            <span id="post-date">—</span>
+            <div id="post-content" class="post-content post-state">Загружаем статью...</div>
           </div>
-
-          <div>
-            Автор:
-            <span id="post-author">SovaZone</span>
-          </div>
-
-          <div>
-            Категория:
-            <span id="post-category">Блог</span>
-          </div>
-
-        </div>
-
-        <h1 class="article-title" id="post-title">
-          Загрузка...
-        </h1>
-
-        <div class="article-content" id="post-content">
-          Загружаем статью...
-        </div>
-
+        </section>
       </div>
+    </main>
 
-    </div>
+    <div id="footer-placeholder"></div>
+  </div>
 
-  </main>
+  <script src="/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
 
-  <div id="footer-placeholder"></div>
-
-</div>
-
-<script src="/script.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
-
-<script>
-
-function getSlug() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("slug");
-}
-
-async function loadPost() {
-
-  const slug = getSlug();
-
-  if (!slug) {
-    document.getElementById("post-content").innerHTML =
-      "Статья не найдена.";
-    return;
-  }
-
-  try {
-
-    const response = await fetch(
-      "/content/blog/" + slug + ".md"
-    );
-
-    if (!response.ok) {
-      document.getElementById("post-content").innerHTML =
-        "Статья не найдена.";
-      return;
+  <script>
+    function getSlug() {
+      const params = new URLSearchParams(window.location.search);
+      return (params.get("slug") || "").trim();
     }
 
-    const text = await response.text();
-
-    const parts = text.split("---");
-
-    let meta = {};
-    let content = text;
-
-    if (parts.length > 2) {
-
-      meta = jsyaml.load(parts[1]);
-      content = parts.slice(2).join("---");
-
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
     }
 
-    document.getElementById("post-title").textContent =
-      meta.title || "Статья";
+    function formatDate(value) {
+      if (!value) return "—";
 
-    document.getElementById(
-      "post-title-breadcrumb"
-    ).textContent =
-      meta.title || "Статья";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
 
-    document.getElementById("post-date").textContent =
-      meta.date || "—";
+      return date.toLocaleDateString("ru-RU", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
 
-    document.getElementById("post-author").textContent =
-      meta.author || "SovaZone";
+    function parseFrontmatter(text) {
+      if (!text.startsWith("---")) {
+        return { meta: {}, content: text };
+      }
 
-    document.getElementById("post-category").textContent =
-      meta.category || "Блог";
+      const match = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+      if (!match) {
+        return { meta: {}, content: text };
+      }
 
-    document.getElementById("post-content").innerHTML =
-      marked.parse(content);
+      let meta = {};
+      try {
+        meta = jsyaml.load(match[1]) || {};
+      } catch (e) {
+        meta = {};
+      }
 
-  }
+      return {
+        meta: meta,
+        content: match[2] || ""
+      };
+    }
 
-  catch (error) {
+    async function fetchPostMarkdown(slug) {
+      const attempts = [
+        "/content/blog/" + encodeURIComponent(slug) + ".md?v=" + Date.now(),
+        "./content/blog/" + encodeURIComponent(slug) + ".md?v=" + Date.now()
+      ];
 
-    document.getElementById("post-content").innerHTML =
-      "Ошибка загрузки статьи.";
+      for (const url of attempts) {
+        const response = await fetch(url, { cache: "no-store" });
+        if (response.ok) {
+          return await response.text();
+        }
+      }
 
-  }
+      throw new Error("POST_NOT_FOUND");
+    }
 
-}
+    function applySeo(meta, slug) {
+      const title = meta.title ? meta.title + " — SovaZone" : "Статья — SovaZone";
+      const description = meta.description || "Статья блога SovaZone.";
+      const canonical = "https://sovazone.com/post.html?slug=" + encodeURIComponent(slug);
+      const image = meta.cover ? "https://sovazone.com" + meta.cover : "https://sovazone.com/og-image.png";
 
-loadPost();
+      document.title = title;
+      document.querySelector('meta[name="description"]').setAttribute("content", description);
+      document.querySelector('link[rel="canonical"]').setAttribute("href", canonical);
+      document.querySelector('meta[property="og:title"]').setAttribute("content", title);
+      document.querySelector('meta[property="og:description"]').setAttribute("content", description);
+      document.querySelector('meta[property="og:url"]').setAttribute("content", canonical);
+      document.querySelector('meta[property="og:image"]').setAttribute("content", image);
+      document.querySelector('meta[name="twitter:title"]').setAttribute("content", title);
+      document.querySelector('meta[name="twitter:description"]').setAttribute("content", description);
+      document.querySelector('meta[name="twitter:image"]').setAttribute("content", image);
+    }
 
-</script>
+    async function loadPost() {
+      const slug = getSlug();
+      const contentEl = document.getElementById("post-content");
 
+      if (!slug) {
+        document.getElementById("post-title").textContent = "Статья не найдена";
+        contentEl.textContent = "В ссылке не передан slug статьи.";
+        return;
+      }
+
+      try {
+        const raw = await fetchPostMarkdown(slug);
+        const parsed = parseFrontmatter(raw);
+        const meta = parsed.meta || {};
+        const markdown = parsed.content || "";
+
+        const title = meta.title || "Статья";
+        const date = formatDate(meta.date || "");
+        const author = meta.author || "SovaZone";
+        const category = meta.category || "Блог";
+
+        document.getElementById("post-title").textContent = title;
+        document.getElementById("post-breadcrumb-current").textContent = title;
+        document.getElementById("post-date").textContent = date;
+        document.getElementById("post-author").textContent = author;
+        document.getElementById("post-category").textContent = category;
+
+        if (meta.cover) {
+          const coverEl = document.getElementById("post-cover");
+          coverEl.src = meta.cover;
+          coverEl.alt = title;
+          coverEl.style.display = "block";
+        }
+
+        contentEl.classList.remove("post-state");
+        contentEl.innerHTML = marked.parse(markdown);
+
+        applySeo(meta, slug);
+      } catch (error) {
+        document.getElementById("post-title").textContent = "Статья не найдена";
+        contentEl.classList.add("post-state");
+        contentEl.innerHTML = "Файл статьи пока не найден. Проверь, открывается ли напрямую путь <strong>/content/blog/" + escapeHtml(slug) + ".md</strong> на сайте.";
+      }
+    }
+
+    loadPost();
+  </script>
 </body>
 </html>
