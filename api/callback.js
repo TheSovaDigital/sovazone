@@ -23,16 +23,12 @@ export default async function handler(req, res) {
   const data = await response.json();
 
   if (!data.access_token) {
-    res.status(500).send(`
-      <pre>${JSON.stringify(data, null, 2)}</pre>
-    `);
+    res.status(500).send(`<pre>${JSON.stringify(data, null, 2)}</pre>`);
     return;
   }
 
-  const payload = {
-    token: data.access_token,
-    provider: "github",
-  };
+  const token = data.access_token;
+  const adminUrl = `https://sovazone.vercel.app/admin/#access_token=${token}&token_type=bearer`;
 
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.send(`
@@ -41,16 +37,14 @@ export default async function handler(req, res) {
       <body>
         <script>
           (function() {
-            const payload = ${JSON.stringify(payload)};
-            if (window.opener) {
-          window.opener.postMessage(
-  "authorization:github:success:" + JSON.stringify(payload),
-  "*"
-);
-              window.close();
-            } else {
-              document.body.innerHTML = "<pre>OAuth success, but no opener window found.</pre>";
-            }
+            try {
+              if (window.opener && !window.opener.closed) {
+                window.opener.location.href = ${JSON.stringify(adminUrl)};
+                window.close();
+                return;
+              }
+            } catch (e) {}
+            window.location.href = ${JSON.stringify(adminUrl)};
           })();
         </script>
       </body>
