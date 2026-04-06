@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
+  <title>Статья — SovaZone</title>
+  <meta name="description" content="Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.">
+  <link rel="canonical" href="https://sovazone.com/post.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="SovaZone">
+  <meta property="og:title" content="Статья — SovaZone">
+  <meta property="og:description" content="Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.">
+  <meta property="og:url" content="https://sovazone.com/post.html">
+  <meta property="og:image" content="https://sovazone.com/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Статья — SovaZone">
+  <meta name="twitter:description" content="Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.">
+  <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+
+  .article-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    opacity: 0.75;
+    margin-bottom: 16px;
+  }
+
+  .article-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .article-content {
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  .article-content img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 24px 0;
+  }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="site-shell">
+
+  <div id="header-placeholder"></div>
+
+  <main class="page-content">
+
+    <div class="container">
+
+      <div class="article-wrapper">
+
+        <div class="breadcrumb">
+          Главная / Блог / <span id="post-title-breadcrumb">Статья</span>
+        </div>
+
+        <div class="article-meta">
+
+          <div>
+            Опубликовано:
+            <span id="post-date">—</span>
+          </div>
+
+          <div>
+            Автор:
+            <span id="post-author">SovaZone</span>
+          </div>
+
+          <div>
+            Категория:
+            <span id="post-category">Блог</span>
+          </div>
+
+        </div>
+
+        <h1 class="article-title" id="post-title">
+          Загрузка...
+        </h1>
+
+        <div class="article-content" id="post-content">
+          Загружаем статью...
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+</div>
+
+<script src="/script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+
+<script>
+
+function getSlug() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("slug");
+}
+
+async function loadPost() {
+
+  const slug = getSlug();
+
+  if (!slug) {
+    document.getElementById("post-content").innerHTML =
+      "Статья не найдена.";
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      "/content/blog/" + slug + ".md"
+    );
+
+    if (!response.ok) {
+      document.getElementById("post-content").innerHTML =
+        "Статья не найдена.";
+      return;
+    }
+
+    const text = await response.text();
+
+    const parts = text.split("---");
+
+    let meta = {};
+    let content = text;
+
+    if (parts.length > 2) {
+
+      meta = jsyaml.load(parts[1]);
+      content = parts.slice(2).join("---");
+
+    }
+
+    document.getElementById("post-title").textContent =
+      meta.title || "Статья";
+
+    document.getElementById(
+      "post-title-breadcrumb"
+    ).textContent =
+      meta.title || "Статья";
+
+    document.getElementById("post-date").textContent =
+      meta.date || "—";
+
+    document.getElementById("post-author").textContent =
+      meta.author || "SovaZone";
+
+    document.getElementById("post-category").textContent =
+      meta.category || "Блог";
+
+    document.getElementById("post-content").innerHTML =
+      marked.parse(content);
+
+  }
+
+  catch (error) {
+
+    document.getElementById("post-content").innerHTML =
+      "Ошибка загрузки статьи.";
+
+  }
+
+}
+
+loadPost();
+
+</script>
+
+</body>
+</html>
