@@ -6,14 +6,17 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
   <title>Блог SovaZone</title>
   <meta name="description" content="Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.">
   <link rel="canonical" href="https://sovazone.com/blog.html">
+
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
@@ -25,37 +28,238 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Блог SovaZone">
   <meta name="twitter:description" content="Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+
   <link rel="stylesheet" href="/styles.css">
+
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"CollectionPage",
+    "@type":"Blog",
     "name":"Блог SovaZone",
     "url":"https://sovazone.com/blog.html",
-    "description":"Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам."
+    "description":"Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"SovaZone",
+      "url":"https://sovazone.com/"
+    }
   }
   </script>
+
+  <style>
+    .blog-intro {
+      max-width: 900px;
+      margin: 0 auto 28px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 100%;
+      min-height: 250px;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      font-size: 13px;
+      opacity: 0.72;
+    }
+
+    .blog-card-title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .blog-card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .blog-card-title a:hover {
+      opacity: 0.92;
+    }
+
+    .blog-card-desc {
+      margin: 0;
+      line-height: 1.65;
+      opacity: 0.9;
+    }
+
+    .blog-card-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .blog-empty,
+    .blog-error,
+    .blog-loading {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .blog-empty,
+    .blog-error {
+      line-height: 1.7;
+      opacity: 0.82;
+    }
+
+    @media (max-width: 900px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-card {
+        min-height: unset;
+      }
+
+      .blog-card-title {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="site-shell">
     <div id="header-placeholder"></div>
+
     <main class="page-content">
       <div class="container">
         <section class="section page-hero">
-          <div class="section-head"><h1>Блог</h1><p class="lead">Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.</p></div>
-          <div class="grid grid-2">
-<article class="card project-card"><h3>Новости</h3><p>Обновления проекта, платформ и важные изменения.</p></article>
-<article class="card project-card"><h3>Кейсы</h3><p>Разборы ситуаций, запусков и примеров работы с username и аккаунтами.</p></article>
-</div>
+          <div class="blog-intro">
+            <div class="section-head">
+              <h1>Блог</h1>
+              <p class="lead">Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.</p>
+            </div>
+          </div>
+
+          <div id="blog-loading" class="blog-loading">
+            Загружаем публикации...
+          </div>
+
+          <div id="blog-error" class="blog-error" style="display:none;">
+            Не удалось загрузить публикации.
+          </div>
+
+          <div id="blog-empty" class="blog-empty" style="display:none;">
+            Публикации скоро появятся.
+          </div>
+
+          <div id="blog-list" class="blog-grid" style="display:none;"></div>
         </section>
       </div>
     </main>
+
     <div id="footer-placeholder"></div>
   </div>
+
   <script src="/script.js"></script>
+
+  <script>
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatDate(value) {
+      if (!value) return "Без даты";
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+
+      return date.toLocaleDateString("ru-RU", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    async function loadBlogIndex() {
+      const loading = document.getElementById("blog-loading");
+      const error = document.getElementById("blog-error");
+      const empty = document.getElementById("blog-empty");
+      const list = document.getElementById("blog-list");
+
+      try {
+        const response = await fetch("/content/blog/index.json?v=" + Date.now(), {
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error("Index file not found");
+        }
+
+        const posts = await response.json();
+
+        loading.style.display = "none";
+
+        if (!Array.isArray(posts) || posts.length === 0) {
+          empty.style.display = "block";
+          return;
+        }
+
+        posts.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
+        list.innerHTML = posts.map(function(post) {
+          const title = escapeHtml(post.title || "Без названия");
+          const slug = encodeURIComponent(post.slug || "");
+          const description = escapeHtml(post.description || "");
+          const date = escapeHtml(formatDate(post.date || ""));
+          const category = escapeHtml(post.category || "Блог");
+          const author = escapeHtml(post.author || "SovaZone");
+
+          return `
+            <article class="card project-card blog-card">
+              <div class="blog-card-meta">
+                <span>${date}</span>
+                <span>${category}</span>
+                <span>${author}</span>
+              </div>
+
+              <h2 class="blog-card-title">
+                <a href="/post.html?slug=${slug}">${title}</a>
+              </h2>
+
+              <p class="blog-card-desc">${description}</p>
+
+              <a class="blog-card-link" href="/post.html?slug=${slug}">
+                Читать статью
+              </a>
+            </article>
+          `;
+        }).join("");
+
+        list.style.display = "grid";
+      } catch (e) {
+        loading.style.display = "none";
+        error.style.display = "block";
+      }
+    }
+
+    loadBlogIndex();
+  </script>
 </body>
 </html>
