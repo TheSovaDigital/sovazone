@@ -70,6 +70,26 @@
       gap: 14px;
       height: 100%;
       min-height: 250px;
+      box-shadow: none !important;
+      filter: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background-image: none !important;
+    }
+
+    .blog-card::before,
+    .blog-card::after {
+      display: none !important;
+      content: none !important;
+      box-shadow: none !important;
+      background: none !important;
+      filter: none !important;
+    }
+
+    .blog-card:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      filter: none !important;
     }
 
     .blog-card-meta {
