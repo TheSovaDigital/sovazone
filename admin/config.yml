@@ -2,7 +2,7 @@ backend:
   name: github
   repo: TheSovaDigital/sovazone
   branch: main
-  base_url: https://sovazone-bmvwy65m7-thesovadigitals-projects.vercel.app
+  base_url: https://sovazone.vercel.app
   auth_endpoint: api/auth
 
 media_folder: "image/blog"
