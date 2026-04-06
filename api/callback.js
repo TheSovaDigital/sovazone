@@ -43,10 +43,10 @@ export default async function handler(req, res) {
           (function() {
             const payload = ${JSON.stringify(payload)};
             if (window.opener) {
-              window.opener.postMessage(
-                "authorization:github:success:" + JSON.stringify(payload),
-                window.location.origin
-              );
+          window.opener.postMessage(
+  "authorization:github:success:" + JSON.stringify(payload),
+  "*"
+);
               window.close();
             } else {
               document.body.innerHTML = "<pre>OAuth success, but no opener window found.</pre>";
