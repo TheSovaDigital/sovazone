@@ -38,18 +38,49 @@
   <link rel="stylesheet" href="/styles.css">
 
   <style>
-    .post-section {
-      padding-top: 4px;
+    .post-page {
+      position: relative;
+      overflow: hidden;
     }
 
-    .post-wrap {
-      max-width: 980px;
+    .post-page::before,
+    .post-page::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .post-page::before {
+      top: 18px;
+      left: -180px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(111, 31, 94, 0.20) 0%, rgba(111, 31, 94, 0.00) 70%);
+      filter: blur(24px);
+      opacity: 0.9;
+    }
+
+    .post-page::after {
+      top: 70px;
+      right: -180px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(25, 48, 130, 0.18) 0%, rgba(25, 48, 130, 0.00) 72%);
+      filter: blur(28px);
+      opacity: 0.9;
+    }
+
+    .post-shell {
+      position: relative;
+      z-index: 1;
+      max-width: 1360px;
       margin: 0 auto;
     }
 
     .post-breadcrumb {
-      max-width: 760px;
-      margin: 0 auto 16px;
+      margin: 0 0 20px;
       font-size: 14px;
       line-height: 1.5;
       opacity: 0.72;
@@ -64,49 +95,81 @@
       opacity: 0.92;
     }
 
+    .post-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 820px) 320px;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .post-main {
+      min-width: 0;
+    }
+
     .post-meta {
-      max-width: 760px;
-      margin: 0 auto 18px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 18px;
+      margin: 0 0 18px;
       font-size: 14px;
       line-height: 1.5;
       opacity: 0.78;
     }
 
     .post-title {
-      max-width: 760px;
-      margin: 0 auto 20px;
-      font-size: clamp(30px, 4.5vw, 48px);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      margin: 0 0 22px;
+      font-size: clamp(36px, 4.6vw, 62px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      max-width: 900px;
+      text-wrap: balance;
+    }
+
+    .post-hero-frame {
+      position: relative;
+      max-width: 720px;
+      margin: 0 0 28px;
+      padding: 10px;
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.01)),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .post-hero-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(199, 155, 76, 0.10), rgba(255,255,255,0.00) 42%, rgba(58, 74, 180, 0.10));
+      pointer-events: none;
     }
 
     .post-cover {
       display: none;
       width: 100%;
-      max-width: 620px;
-      height: 250px;
+      max-width: 700px;
+      height: 220px;
       object-fit: cover;
       object-position: center;
-      margin: 0 auto 26px;
-      border-radius: 18px;
+      border-radius: 20px;
+      position: relative;
+      z-index: 1;
       box-shadow: none !important;
       filter: none !important;
       background: none !important;
     }
 
     .post-card {
-      max-width: 760px;
-      margin: 0 auto 26px;
-      padding: 28px 30px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018));
-      border: 1px solid rgba(255,255,255,0.065);
-      box-shadow: none !important;
-      filter: none !important;
       position: relative;
+      max-width: 760px;
+      padding: 34px 34px 30px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
+        linear-gradient(120deg, rgba(31, 36, 70, 0.28), rgba(0,0,0,0));
+      border: 1px solid rgba(255,255,255,0.07);
       overflow: hidden;
     }
 
@@ -114,7 +177,9 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.00) 42%),
+        radial-gradient(circle at top right, rgba(190, 144, 69, 0.07), transparent 34%);
       pointer-events: none;
     }
 
@@ -122,25 +187,25 @@
       position: relative;
       z-index: 1;
       font-size: 17px;
-      line-height: 1.82;
-      color: rgba(255,255,255,0.94);
+      line-height: 1.86;
+      color: rgba(255,255,255,0.95);
     }
 
     .post-content h2,
     .post-content h3,
     .post-content h4 {
-      margin: 34px 0 14px;
-      line-height: 1.18;
-      letter-spacing: -0.01em;
+      margin: 36px 0 14px;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
       color: #ffffff;
     }
 
     .post-content h2 {
-      font-size: clamp(24px, 3vw, 32px);
+      font-size: clamp(25px, 2.8vw, 34px);
     }
 
     .post-content h3 {
-      font-size: clamp(20px, 2.3vw, 27px);
+      font-size: clamp(21px, 2.2vw, 28px);
     }
 
     .post-content h4 {
@@ -173,18 +238,17 @@
     }
 
     .post-content blockquote {
-      margin: 26px 0;
-      padding: 18px 20px;
-      border-left: 2px solid rgba(255,255,255,0.14);
+      margin: 28px 0;
+      padding: 18px 22px;
+      border-left: 2px solid rgba(201, 156, 85, 0.38);
       background: rgba(255,255,255,0.02);
-      border-radius: 0 14px 14px 0;
-      opacity: 0.95;
+      border-radius: 0 16px 16px 0;
     }
 
     .post-content hr {
       border: 0;
       border-top: 1px solid rgba(255,255,255,0.08);
-      margin: 34px 0;
+      margin: 36px 0;
     }
 
     .post-content img {
@@ -194,8 +258,8 @@
       height: 250px;
       object-fit: cover;
       object-position: center;
-      margin: 26px auto;
-      border-radius: 18px;
+      margin: 28px auto;
+      border-radius: 20px;
       box-shadow: none !important;
       filter: none !important;
       background: none !important;
@@ -208,32 +272,52 @@
       max-width: 620px;
       font-size: 14px;
       line-height: 1.5;
-      opacity: 0.68;
+      opacity: 0.66;
       font-style: normal;
       text-align: center;
     }
 
-    .share-block,
-    .related-block,
-    .latest-block {
-      max-width: 760px;
-      margin: 0 auto 22px;
-      padding: 22px 24px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: none !important;
-      filter: none !important;
+    .post-sidebar {
+      position: sticky;
+      top: 94px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .block-title {
-      margin: 0 0 16px;
-      font-size: 19px;
+    .side-panel {
+      position: relative;
+      padding: 20px 20px 18px;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)),
+        linear-gradient(135deg, rgba(39, 38, 73, 0.18), rgba(0,0,0,0));
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+    }
+
+    .side-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.00) 40%);
+      pointer-events: none;
+    }
+
+    .side-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .side-title {
+      margin: 0 0 14px;
+      font-size: 17px;
       line-height: 1.2;
+      letter-spacing: -0.02em;
       color: #ffffff;
     }
 
-    .share-buttons {
+    .share-stack {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -244,12 +328,12 @@
       align-items: center;
       justify-content: center;
       min-height: 42px;
-      padding: 0 16px;
+      padding: 0 15px;
       border-radius: 999px;
       text-decoration: none;
       color: #ffffff;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.09);
       transition: transform .18s ease, border-color .18s ease, background .18s ease;
       box-shadow: none !important;
       filter: none !important;
@@ -261,52 +345,54 @@
       background: rgba(255,255,255,0.06);
     }
 
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .mini-card {
+    .side-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      min-height: 128px;
-      padding: 18px 18px 16px;
+      gap: 12px;
+    }
+
+    .side-card {
+      display: block;
+      padding: 14px 14px 13px;
       border-radius: 16px;
       text-decoration: none;
       color: inherit;
-      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.055);
       transition: transform .18s ease, border-color .18s ease, background .18s ease;
       box-shadow: none !important;
       filter: none !important;
     }
 
-    .mini-card:hover {
+    .side-card:hover {
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.14);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      background: rgba(255,255,255,0.04);
     }
 
-    .mini-card-kicker {
-      font-size: 12px;
+    .side-kicker {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 11px;
       line-height: 1.4;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      opacity: 0.58;
+      letter-spacing: 0.1em;
+      opacity: 0.55;
     }
 
-    .mini-card-title {
-      font-size: 16px;
+    .side-card-title {
+      display: block;
+      font-size: 15px;
       line-height: 1.45;
       color: #ffffff;
     }
 
-    .mini-card-desc {
-      font-size: 14px;
+    .side-card-desc {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
       line-height: 1.55;
-      opacity: 0.78;
+      opacity: 0.74;
     }
 
     .post-state {
@@ -315,20 +401,49 @@
       opacity: 0.86;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1160px) {
+      .post-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .post-sidebar {
+        position: static;
+        top: auto;
+      }
+
+      .post-main,
+      .post-card,
+      .post-title,
+      .post-meta,
+      .post-breadcrumb,
+      .post-hero-frame {
+        max-width: 100%;
+      }
+
       .post-cover,
       .post-content img {
         max-width: 100%;
-        height: 210px;
-        border-radius: 16px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .post-title {
+        font-size: clamp(30px, 8vw, 42px);
       }
 
-      .post-card,
-      .share-block,
-      .related-block,
-      .latest-block {
-        padding: 20px 18px;
-        border-radius: 16px;
+      .post-card {
+        padding: 24px 18px 22px;
+        border-radius: 22px;
+      }
+
+      .post-cover {
+        height: 210px;
+        border-radius: 18px;
+      }
+
+      .post-hero-frame {
+        padding: 8px;
+        border-radius: 22px;
       }
 
       .post-content {
@@ -336,8 +451,9 @@
         line-height: 1.76;
       }
 
-      .cards-grid {
-        grid-template-columns: 1fr;
+      .post-content img {
+        height: 210px;
+        border-radius: 18px;
       }
     }
   </style>
@@ -399,83 +515,91 @@
   <div class="site-shell">
     <div id="header-placeholder"></div>
 
-    <main class="page-content">
+    <main class="page-content post-page">
       <div class="container">
-        <section class="section post-section">
-          <article class="post-wrap" itemscope itemtype="https://schema.org/Article">
+        <section class="section">
+          <article class="post-shell" itemscope itemtype="https://schema.org/Article">
             <div class="post-breadcrumb">
               <a href="/index.html">Главная</a> / <a href="/blog.html">Блог</a> / <span id="post-breadcrumb-current">Статья</span>
             </div>
 
-            <div class="post-meta">
-              <div>Опубликовано: <span id="post-date" itemprop="datePublished">—</span></div>
-              <div>Автор: <span id="post-author" itemprop="author">SovaZone</span></div>
-              <div>Категория: <span id="post-category">Блог</span></div>
+            <div class="post-grid">
+              <div class="post-main">
+                <div class="post-meta">
+                  <div>Опубликовано: <span id="post-date" itemprop="datePublished">—</span></div>
+                  <div>Автор: <span id="post-author" itemprop="author">SovaZone</span></div>
+                  <div>Категория: <span id="post-category">Блог</span></div>
+                </div>
+
+                <h1 class="post-title" id="post-title" itemprop="headline">Загрузка...</h1>
+
+                <div class="post-hero-frame">
+                  <img id="post-cover" class="post-cover" src="" alt="Обложка статьи" itemprop="image">
+                </div>
+
+                <div class="post-card">
+                  <div id="post-content" class="post-content post-state" itemprop="articleBody">Загружаем статью...</div>
+                </div>
+              </div>
+
+              <aside class="post-sidebar">
+                <section class="side-panel" aria-labelledby="share-title">
+                  <h2 class="side-title" id="share-title">Поделиться</h2>
+                  <div class="share-stack">
+                    <a class="share-btn" id="share-telegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
+                    <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+                    <a class="share-btn" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <button class="share-btn" id="share-copy" type="button">Скопировать ссылку</button>
+                  </div>
+                </section>
+
+                <section class="side-panel" aria-labelledby="featured-title">
+                  <h2 class="side-title" id="featured-title">Избранные статьи</h2>
+                  <div class="side-list">
+                    <a class="side-card" href="https://sovazone.com/articles/how-to-choose-instagram-username.html">
+                      <span class="side-kicker">Instagram</span>
+                      <span class="side-card-title">Как выбрать никнейм для Instagram</span>
+                      <span class="side-card-desc">Практические принципы выбора короткого, сильного и запоминающегося username.</span>
+                    </a>
+
+                    <a class="side-card" href="https://sovazone.com/articles/instagram-account-security.html">
+                      <span class="side-kicker">Безопасность</span>
+                      <span class="side-card-title">Безопасность аккаунта Instagram</span>
+                      <span class="side-card-desc">Что стоит проверить заранее, чтобы не потерять доступ к своему профилю.</span>
+                    </a>
+
+                    <a class="side-card" href="https://sovazone.com/articles/unblock-instagram-account.html">
+                      <span class="side-kicker">Разблокировка</span>
+                      <span class="side-card-title">Как разблокировать аккаунт Instagram</span>
+                      <span class="side-card-desc">Базовая последовательность действий, если профиль столкнулся с ограничением.</span>
+                    </a>
+
+                    <a class="side-card" href="https://sovazone.com/articles/meta-subscription-eligibility.html">
+                      <span class="side-kicker">Meta</span>
+                      <span class="side-card-title">Подписка Meta: требования</span>
+                      <span class="side-card-desc">Кому подходит подписка, на что влияет и что важно учитывать перед подачей.</span>
+                    </a>
+
+                    <a class="side-card" href="https://sovazone.com/articles/why-instagram-accounts-get-banned.html">
+                      <span class="side-kicker">Ограничения</span>
+                      <span class="side-card-title">Почему блокируют аккаунты Instagram</span>
+                      <span class="side-card-desc">Главные причины ограничений и что обычно приводит аккаунт к бану.</span>
+                    </a>
+                  </div>
+                </section>
+
+                <section class="side-panel" aria-labelledby="latest-title">
+                  <h2 class="side-title" id="latest-title">Последние статьи</h2>
+                  <div class="side-list" id="latest-posts">
+                    <a class="side-card" href="/blog.html">
+                      <span class="side-kicker">Блог</span>
+                      <span class="side-card-title">Публикации скоро появятся</span>
+                      <span class="side-card-desc">Когда материалов станет больше, этот блок будет заполняться автоматически.</span>
+                    </a>
+                  </div>
+                </section>
+              </aside>
             </div>
-
-            <h1 class="post-title" id="post-title" itemprop="headline">Загрузка...</h1>
-
-            <img id="post-cover" class="post-cover" src="" alt="Обложка статьи" itemprop="image">
-
-            <div class="post-card">
-              <div id="post-content" class="post-content post-state" itemprop="articleBody">Загружаем статью...</div>
-            </div>
-
-            <section class="share-block" aria-labelledby="share-title">
-              <h2 class="block-title" id="share-title">Поделиться</h2>
-              <div class="share-buttons">
-                <a class="share-btn" id="share-telegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
-                <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-                <a class="share-btn" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
-                <button class="share-btn" id="share-copy" type="button">Скопировать ссылку</button>
-              </div>
-            </section>
-
-            <section class="related-block" aria-labelledby="related-title">
-              <h2 class="block-title" id="related-title">Избранные статьи</h2>
-              <div class="cards-grid">
-                <a class="mini-card" href="https://sovazone.com/articles/how-to-choose-instagram-username.html">
-                  <div class="mini-card-kicker">Instagram</div>
-                  <div class="mini-card-title">Как выбрать никнейм для Instagram</div>
-                  <div class="mini-card-desc">Практические принципы выбора короткого, сильного и запоминающегося username.</div>
-                </a>
-
-                <a class="mini-card" href="https://sovazone.com/articles/instagram-account-security.html">
-                  <div class="mini-card-kicker">Безопасность</div>
-                  <div class="mini-card-title">Безопасность аккаунта Instagram</div>
-                  <div class="mini-card-desc">Что стоит проверить заранее, чтобы не потерять доступ к своему профилю.</div>
-                </a>
-
-                <a class="mini-card" href="https://sovazone.com/articles/unblock-instagram-account.html">
-                  <div class="mini-card-kicker">Разблокировка</div>
-                  <div class="mini-card-title">Как разблокировать аккаунт Instagram</div>
-                  <div class="mini-card-desc">Базовая последовательность действий, если профиль столкнулся с ограничением.</div>
-                </a>
-
-                <a class="mini-card" href="https://sovazone.com/articles/meta-subscription-eligibility.html">
-                  <div class="mini-card-kicker">Meta</div>
-                  <div class="mini-card-title">Подписка Meta: требования</div>
-                  <div class="mini-card-desc">Кому подходит подписка, на что влияет и что важно учитывать перед подачей.</div>
-                </a>
-
-                <a class="mini-card" href="https://sovazone.com/articles/why-instagram-accounts-get-banned.html">
-                  <div class="mini-card-kicker">Ограничения</div>
-                  <div class="mini-card-title">Почему блокируют аккаунты Instagram</div>
-                  <div class="mini-card-desc">Главные причины ограничений и что обычно приводит аккаунт к бану.</div>
-                </a>
-              </div>
-            </section>
-
-            <section class="latest-block" aria-labelledby="latest-title">
-              <h2 class="block-title" id="latest-title">Последние статьи</h2>
-              <div class="cards-grid" id="latest-posts">
-                <a class="mini-card" href="/blog.html">
-                  <div class="mini-card-kicker">Блог</div>
-                  <div class="mini-card-title">Публикации скоро появятся</div>
-                  <div class="mini-card-desc">Когда в блоге станет больше материалов, этот блок будет показывать последние посты автоматически.</div>
-                </a>
-              </div>
-            </section>
           </article>
         </section>
       </div>
@@ -686,10 +810,10 @@
         }
 
         container.innerHTML = latest.map(post => `
-          <a class="mini-card" href="/post.html?slug=${encodeURIComponent(post.slug)}">
-            <div class="mini-card-kicker">${post.category || "Блог"}</div>
-            <div class="mini-card-title">${post.title || "Без названия"}</div>
-            <div class="mini-card-desc">${post.description || "Новая публикация блога SovaZone."}</div>
+          <a class="side-card" href="/post.html?slug=${encodeURIComponent(post.slug)}">
+            <span class="side-kicker">${post.category || "Блог"}</span>
+            <span class="side-card-title">${post.title || "Без названия"}</span>
+            <span class="side-card-desc">${post.description || "Новая публикация блога SovaZone."}</span>
           </a>
         `).join("");
       } catch (e) {}
@@ -727,6 +851,8 @@
           coverEl.src = meta.cover;
           coverEl.alt = title;
           coverEl.style.display = "block";
+        } else {
+          document.querySelector(".post-hero-frame").style.display = "none";
         }
 
         contentEl.classList.remove("post-state");
@@ -739,6 +865,7 @@
         document.getElementById("post-title").textContent = "Статья не найдена";
         contentEl.classList.add("post-state");
         contentEl.textContent = "Пост не загрузился ни с сайта, ни из GitHub CDN. Проверь путь к markdown-файлу, наличие файла в репозитории и завершение деплоя.";
+        document.querySelector(".post-hero-frame").style.display = "none";
         initShareButtons("SovaZone");
       }
     }
