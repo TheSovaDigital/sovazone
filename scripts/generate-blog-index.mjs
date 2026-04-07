@@ -6,9 +6,7 @@ const OUTPUT_FILE = path.join(BLOG_DIR, "index.json");
 
 function parseFrontmatter(raw) {
   const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-  if (!match) {
-    return {};
-  }
+  if (!match) return {};
 
   const frontmatter = match[1];
   const meta = {};
