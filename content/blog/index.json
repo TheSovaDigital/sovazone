@@ -1,10 +1,92 @@
 [
   {
-    "title": "Тестовый пост",
-    "slug": "test-post",
+    "title": "Новости Instagram: что изменилось в 2026 году и чего ждать до конца года",
+    "slug": "instagram-updates-2026",
     "date": "2026-04-07",
-    "description": "Это тестовый пост для проверки связки блога и Decap CMS.",
+    "description": "\"Актуальные изменения Instagram в 2026 году: алгоритмы,",
     "category": "Новости",
-    "author": "SovaZone"
+    "author": "SovaZone",
+    "cover": "/image/blog/instagram-updates-2026.png"
+  },
+  {
+    "title": "Новости Telegram 2026: новые функции и развитие платформы",
+    "slug": "telegram-novosti-2026",
+    "date": "2026-04-07",
+    "description": ">",
+    "category": "Новости",
+    "author": "SovaZone",
+    "cover": "/image/blog/telegram-novosti-2026.png"
+  },
+  {
+    "title": "TikTok: что изменилось в 2026 году и чего ждать до конца года",
+    "slug": "tiktok-updates-2026",
+    "date": "2026-04-06",
+    "description": "\"Актуальные изменения TikTok в 2026 году: новые алгоритмы,",
+    "category": "Новости",
+    "author": "SovaZone",
+    "cover": "/image/blog/tiktok-updates-2026.png"
+  },
+  {
+    "title": "YouTube: что изменилось в 2026 году и чего ждать до конца года",
+    "slug": "youtube-updates-2026",
+    "date": "2026-04-06",
+    "description": "\"Актуальные изменения YouTube в 2026 году: алгоритмы рекомендаций,",
+    "category": "Новости",
+    "author": "SovaZone",
+    "cover": "/image/blog/youtube-updates-2026.png"
+  },
+  {
+    "title": "Зачем нужна синяя галочка в социальных сетях (верификация)",
+    "slug": "zachem-nuzhna-sinyaya-galochka-verifikaciya",
+    "date": "2026-04-05",
+    "description": ">",
+    "category": "Статьи",
+    "author": "SovaZone",
+    "cover": "/image/blog/zachem-nuzhna-sinyaya-galochka-verifikaciya.png"
+  },
+  {
+    "title": "Теневой бан — миф или правда: как это работает в Instagram, TikTok и YouTube",
+    "slug": "tenevoy-ban-mif-ili-pravda",
+    "date": "2026-04-04",
+    "description": ">",
+    "category": "Статьи",
+    "author": "SovaZone",
+    "cover": "/image/blog/tenevoy-ban-mif-ili-pravda.png"
+  },
+  {
+    "title": "Как получить никнейм, если аккаунт заброшен: реальные способы и условия",
+    "slug": "kak-poluchit-nik-esli-akkaunt-zabroshen",
+    "date": "2026-04-03",
+    "description": ">",
+    "category": "Статьи",
+    "author": "SovaZone",
+    "cover": "/image/blog/kak-poluchit-nik-esli-akkaunt-zabroshen.png"
+  },
+  {
+    "title": "Основные проблемы с безопасностью в социальных сетях",
+    "slug": "social-media-security-problems",
+    "date": "2026-04-02",
+    "description": "\"Основные угрозы безопасности в социальных сетях: взлом аккаунта,",
+    "category": "Статьи",
+    "author": "SovaZone",
+    "cover": "/image/blog/social-media-security-problems.png"
+  },
+  {
+    "title": "Что такое никнейм: для чего он нужен и как используется",
+    "slug": "what-is-username-nickname",
+    "date": "2026-04-02",
+    "description": ">",
+    "category": "Статьи",
+    "author": "SovaZone",
+    "cover": "/image/blog/what-is-username-nickname.png"
+  },
+  {
+    "title": "Мы запустили сайт SovaZone — новую площадку нашего проекта",
+    "slug": "sovazone-website-launch",
+    "date": "2026-04-01",
+    "description": ">",
+    "category": "Новости",
+    "author": "SovaZone",
+    "cover": "/image/blog/sovazone-website-launch.png"
   }
 ]
