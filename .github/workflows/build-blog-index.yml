@@ -1,0 +1,36 @@
+name: Build blog index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/blog/*.md"
+      - "scripts/generate-blog-index.mjs"
+      - ".github/workflows/build-blog-index.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate blog index
+        run: node scripts/generate-blog-index.mjs
+
+      - name: Commit updated index.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update content/blog/index.json"
+          file_pattern: content/blog/index.json
