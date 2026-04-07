@@ -52,21 +52,22 @@
     }
 
     .blog-page::before {
-      top: 10px;
-      left: -180px;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(128, 45, 106, 0.18) 0%, rgba(128, 45, 106, 0) 72%);
-      filter: blur(28px);
-    }
-
-    .blog-page::after {
-      top: 110px;
-      right: -200px;
+      top: 100px;
+      right: -220px;
       width: 520px;
       height: 520px;
       background: radial-gradient(circle, rgba(34, 58, 154, 0.14) 0%, rgba(34, 58, 154, 0) 74%);
       filter: blur(30px);
+    }
+
+    .blog-page::after {
+      bottom: -140px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(128, 45, 106, 0.10) 0%, rgba(128, 45, 106, 0) 72%);
+      filter: blur(36px);
     }
 
     .blog-shell {
@@ -76,16 +77,6 @@
       margin: 0 auto;
     }
 
-    .blog-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 360px;
-      gap: 24px;
-      align-items: stretch;
-      margin-bottom: 26px;
-    }
-
-    .blog-hero-main,
-    .blog-hero-side,
     .blog-filter-wrap,
     .blog-featured,
     .blog-grid-card,
@@ -99,20 +90,18 @@
       filter: none !important;
     }
 
-    .blog-hero-main,
-    .blog-hero-side {
+    .blog-filter-wrap,
+    .blog-featured,
+    .blog-grid-card,
+    .blog-side-panel {
       position: relative;
       overflow: hidden;
-      border-radius: 30px;
-      padding: 32px 30px;
     }
 
-    .blog-hero-main::before,
-    .blog-hero-side::before,
+    .blog-filter-wrap::before,
     .blog-featured::before,
     .blog-grid-card::before,
-    .blog-side-panel::before,
-    .blog-filter-wrap::before {
+    .blog-side-panel::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -120,12 +109,10 @@
       background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 42%);
     }
 
-    .blog-hero-main > *,
-    .blog-hero-side > *,
+    .blog-filter-wrap > *,
     .blog-featured > *,
     .blog-grid-card > *,
-    .blog-side-panel > *,
-    .blog-filter-wrap > * {
+    .blog-side-panel > * {
       position: relative;
       z-index: 1;
     }
@@ -146,28 +133,16 @@
       opacity: 0.92;
     }
 
-    .blog-kicker {
-      display: inline-flex;
-      align-items: center;
-      min-height: 32px;
-      padding: 0 12px;
-      border-radius: 999px;
-      margin-bottom: 18px;
-      font-size: 12px;
-      line-height: 1;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.88);
-      background: rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.08);
+    .blog-title-block {
+      margin-bottom: 20px;
     }
 
     .blog-title {
-      margin: 0 0 14px;
-      max-width: 780px;
-      font-size: clamp(34px, 5vw, 68px);
-      line-height: 0.97;
-      letter-spacing: -0.04em;
+      margin: 0 0 10px;
+      max-width: 760px;
+      font-size: clamp(36px, 5vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
       text-wrap: balance;
     }
 
@@ -176,78 +151,13 @@
       margin: 0;
       font-size: 18px;
       line-height: 1.75;
-      color: rgba(255,255,255,0.85);
-    }
-
-    .blog-side-title {
-      margin: 0 0 16px;
-      font-size: 19px;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: #fff;
-    }
-
-    .blog-side-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .blog-side-link {
-      display: block;
-      padding: 15px 16px 14px;
-      border-radius: 18px;
-      text-decoration: none;
-      color: inherit;
-      background: rgba(255,255,255,0.022);
-      border: 1px solid rgba(255,255,255,0.055);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      box-shadow: none !important;
-      filter: none !important;
-    }
-
-    .blog-side-link:hover,
-    .blog-grid-card:hover,
-    .blog-featured:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.13);
-      background: rgba(255,255,255,0.036);
-    }
-
-    .blog-side-link-kicker,
-    .blog-card-kicker {
-      display: inline-block;
-      margin: 0 0 8px;
-      font-size: 11px;
-      line-height: 1.4;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.56;
-    }
-
-    .blog-side-link-title,
-    .blog-card-title {
-      display: block;
-      color: #fff;
-      line-height: 1.38;
-    }
-
-    .blog-side-link-title {
-      font-size: 15px;
-    }
-
-    .blog-side-link-desc {
-      display: block;
-      margin-top: 7px;
-      font-size: 13px;
-      line-height: 1.55;
-      opacity: 0.72;
+      color: rgba(255,255,255,0.84);
     }
 
     .blog-filter-wrap {
       position: relative;
       border-radius: 24px;
-      padding: 16px;
+      padding: 14px;
       margin-bottom: 24px;
     }
 
@@ -262,7 +172,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.03);
       color: #fff;
-      padding: 10px 14px;
+      padding: 9px 16px;
       min-height: 42px;
       border-radius: 999px;
       cursor: pointer;
@@ -295,8 +205,6 @@
     }
 
     .blog-featured {
-      position: relative;
-      overflow: hidden;
       display: grid;
       grid-template-columns: 320px minmax(0, 1fr);
       gap: 22px;
@@ -305,6 +213,14 @@
       margin-bottom: 22px;
       text-decoration: none;
       color: inherit;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .blog-featured:hover,
+    .blog-grid-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.036);
     }
 
     .blog-featured-cover {
@@ -358,8 +274,6 @@
     }
 
     .blog-grid-card {
-      position: relative;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       border-radius: 28px;
@@ -386,6 +300,16 @@
       min-height: 100%;
     }
 
+    .blog-card-kicker {
+      display: inline-block;
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.56;
+    }
+
     .blog-card-meta {
       display: flex;
       flex-wrap: wrap;
@@ -400,6 +324,7 @@
       font-size: 22px;
       line-height: 1.18;
       letter-spacing: -0.02em;
+      color: #fff;
     }
 
     .blog-card-desc {
@@ -425,16 +350,72 @@
     }
 
     .blog-side-panel {
-      position: relative;
-      overflow: hidden;
       border-radius: 24px;
       padding: 20px;
+    }
+
+    .blog-side-title {
+      margin: 0 0 16px;
+      font-size: 19px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .blog-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .blog-side-link {
+      display: block;
+      padding: 15px 16px 14px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255,255,255,0.022);
+      border: 1px solid rgba(255,255,255,0.055);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .blog-side-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.036);
+    }
+
+    .blog-side-link-kicker {
+      display: inline-block;
+      margin: 0 0 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.56;
+    }
+
+    .blog-side-link-title {
+      display: block;
+      color: #fff;
+      line-height: 1.38;
+      font-size: 15px;
+    }
+
+    .blog-side-link-desc {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
+      line-height: 1.55;
+      opacity: 0.72;
     }
 
     .blog-side-panel-text {
       margin: 0;
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.72;
       color: rgba(255,255,255,0.76);
     }
 
@@ -452,15 +433,7 @@
       display: none;
     }
 
-    .blog-pagination-note {
-      margin-top: 22px;
-      font-size: 13px;
-      line-height: 1.6;
-      opacity: 0.58;
-    }
-
     @media (max-width: 1160px) {
-      .blog-hero,
       .blog-content-grid {
         grid-template-columns: 1fr;
       }
@@ -486,11 +459,9 @@
       }
 
       .blog-title {
-        font-size: clamp(32px, 11vw, 48px);
+        font-size: clamp(34px, 10vw, 52px);
       }
 
-      .blog-hero-main,
-      .blog-hero-side,
       .blog-filter-wrap,
       .blog-side-panel,
       .blog-state {
@@ -535,40 +506,15 @@
       <div class="container">
         <section class="section">
           <div class="blog-shell">
-            <div class="blog-hero">
-              <div class="blog-hero-main">
-                <div class="blog-breadcrumb">
-                  <a href="/index.html">Главная</a> / <span>Блог</span>
-                </div>
-                <div class="blog-kicker">SovaZone Editorial</div>
-                <h1 class="blog-title">Блог SovaZone</h1>
-                <p class="blog-lead">
-                  Материалы о никнеймах, социальных сетях, безопасности аккаунтов, верификации, цифровых проектах и практических нюансах работы с платформами.
-                </p>
-              </div>
+            <div class="blog-breadcrumb">
+              <a href="/index.html">Главная</a> / <span>Блог</span>
+            </div>
 
-              <div class="blog-hero-side">
-                <h2 class="blog-side-title">Что внутри</h2>
-                <div class="blog-side-list">
-                  <a class="blog-side-link" href="/services/custom-username.html">
-                    <span class="blog-side-link-kicker">Услуги</span>
-                    <span class="blog-side-link-title">Никнейм под заказ</span>
-                    <span class="blog-side-link-desc">Если нужный username занят, проверим ситуацию и оценим реальные перспективы.</span>
-                  </a>
-
-                  <a class="blog-side-link" href="/usernames.html">
-                    <span class="blog-side-link-kicker">Каталог</span>
-                    <span class="blog-side-link-title">Доступные никнеймы</span>
-                    <span class="blog-side-link-desc">Каталог коротких и сильных username для аккаунтов, брендов и проектов.</span>
-                  </a>
-
-                  <a class="blog-side-link" href="/services.html">
-                    <span class="blog-side-link-kicker">Разделы</span>
-                    <span class="blog-side-link-title">Все услуги SovaZone</span>
-                    <span class="blog-side-link-desc">Услуги, связанные с аккаунтами, никнеймами, безопасностью и цифровыми задачами.</span>
-                  </a>
-                </div>
-              </div>
+            <div class="blog-title-block">
+              <h1 class="blog-title">Блог SovaZone</h1>
+              <p class="blog-lead">
+                Статьи, новости и кейсы о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.
+              </p>
             </div>
 
             <div class="blog-filter-wrap">
@@ -597,10 +543,16 @@
                 </a>
 
                 <div class="blog-grid" id="blog-grid"></div>
-                <div class="blog-pagination-note">Новые публикации в блоге появляются по мере обновления материалов через CMS.</div>
               </div>
 
               <aside class="blog-sidebar">
+                <section class="blog-side-panel">
+                  <h2 class="blog-side-title">О блоге</h2>
+                  <p class="blog-side-panel-text">
+                    В этом разделе публикуются материалы о никнеймах, социальных сетях, безопасности аккаунтов, верификации и практических нюансах работы с цифровыми платформами. Контент собран так, чтобы им было удобно пользоваться на практике.
+                  </p>
+                </section>
+
                 <section class="blog-side-panel">
                   <h2 class="blog-side-title">Избранные материалы</h2>
                   <div class="blog-side-list">
@@ -625,33 +577,26 @@
                 </section>
 
                 <section class="blog-side-panel">
-                  <h2 class="blog-side-title">Навигация по проекту</h2>
+                  <h2 class="blog-side-title">Услуги</h2>
                   <div class="blog-side-list">
-                    <a class="blog-side-link" href="/projects.html">
-                      <span class="blog-side-link-kicker">Проекты</span>
-                      <span class="blog-side-link-title">Реальные кейсы и направления</span>
-                      <span class="blog-side-link-desc">Примеры проектов, решений и практической работы SovaZone.</span>
+                    <a class="blog-side-link" href="/services/custom-username.html">
+                      <span class="blog-side-link-kicker">Никнеймы</span>
+                      <span class="blog-side-link-title">Никнейм под заказ</span>
+                      <span class="blog-side-link-desc">Проверка перспектив и работа по занятым username, если ситуация подходит по критериям.</span>
                     </a>
 
-                    <a class="blog-side-link" href="/about.html">
-                      <span class="blog-side-link-kicker">О проекте</span>
-                      <span class="blog-side-link-title">О проекте SovaZone</span>
-                      <span class="blog-side-link-desc">О направлениях работы, логике проекта и ключевых принципах взаимодействия.</span>
+                    <a class="blog-side-link" href="/services/account-help.html">
+                      <span class="blog-side-link-kicker">Аккаунты</span>
+                      <span class="blog-side-link-title">Помощь с аккаунтом</span>
+                      <span class="blog-side-link-desc">Разбор ситуаций, связанных с ограничениями, доступом, безопасностью и рабочими вопросами.</span>
                     </a>
 
-                    <a class="blog-side-link" href="/contacts.html">
-                      <span class="blog-side-link-kicker">Связь</span>
-                      <span class="blog-side-link-title">Контакты и способы обращения</span>
-                      <span class="blog-side-link-desc">Рабочие контакты и каналы связи для консультации и запросов.</span>
+                    <a class="blog-side-link" href="/services.html">
+                      <span class="blog-side-link-kicker">Разделы</span>
+                      <span class="blog-side-link-title">Все услуги SovaZone</span>
+                      <span class="blog-side-link-desc">Короткий переход ко всем направлениям проекта, связанным с аккаунтами, никнеймами и цифровыми задачами.</span>
                     </a>
                   </div>
-                </section>
-
-                <section class="blog-side-panel">
-                  <h2 class="blog-side-title">О блоге</h2>
-                  <p class="blog-side-panel-text">
-                    Здесь публикуются статьи, новости и кейсы о никнеймах, аккаунтах, безопасности, верификации и цифровых инструментах. Контент структурирован так, чтобы его можно было быстро читать и использовать на практике.
-                  </p>
                 </section>
               </aside>
             </div>
