@@ -11,10 +11,11 @@ public_folder: "/image/blog"
 publish_mode: editorial_workflow
 
 collections:
-  - name: "blog"
+ - name: "blog"
     label: "Блог"
     folder: "content/blog"
     create: true
+    identifier_field: "slug"
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
@@ -22,7 +23,13 @@ collections:
     fields:
       - { label: "Заголовок", name: "title", widget: "string" }
 
-      - { label: "Slug", name: "slug", widget: "string" }
+      - {
+          label: "Слуг",
+          name: "slug",
+          widget: "string",
+          required: true,
+          hint: "Только латиница, цифры и дефисы. Например: instagram-updates-2026"
+        }
 
       - {
           label: "Дата",
@@ -32,17 +39,8 @@ collections:
           time_format: false
         }
 
-      - label: "Категория"
-        name: "category"
-        widget: "select"
-        options:
-          - Статьи
-          - Новости
-          - Кейсы
-        default: Статьи
-
       - {
-          label: "Краткое описание",
+          label: "Короткое описание",
           name: "description",
           widget: "text",
           required: false
@@ -56,11 +54,11 @@ collections:
         }
 
       - {
-          label: "Автор",
-          name: "author",
-          widget: "string",
-          required: false,
-          default: "SovaZone"
+          label: "Категория",
+          name: "category",
+          widget: "select",
+          options: ["Статьи", "Новости", "Кейсы"],
+          default: "Статьи"
         }
 
       - {
