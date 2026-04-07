@@ -8,8 +8,8 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
   <title>Статья — SovaZone</title>
-  <meta name="description" content="Статья блога SovaZone. Новости, кейсы, обновления и живой контент по никнеймам, digital-проектам и аккаунтам.">
-  <meta name="keywords" content="SovaZone блог, блог SovaZone, новости SovaZone, кейсы аккаунтов, никнеймы, digital-проекты, помощь с аккаунтами">
+  <meta name="description" content="Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.">
+  <meta name="keywords" content="SovaZone блог, статья SovaZone, никнеймы, социальные сети, безопасность аккаунтов, верификация, Instagram, TikTok, YouTube, Telegram">
   <link rel="canonical" href="https://sovazone.com/post.html">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -22,7 +22,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="SovaZone">
   <meta property="og:title" content="Статья — SovaZone">
-  <meta property="og:description" content="Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.">
+  <meta property="og:description" content="Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.">
   <meta property="og:url" content="https://sovazone.com/post.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
@@ -32,7 +32,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Статья — SovaZone">
-  <meta name="twitter:description" content="Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.">
+  <meta name="twitter:description" content="Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
 
   <link rel="stylesheet" href="/styles.css">
@@ -47,29 +47,26 @@
     .post-page::after {
       content: "";
       position: absolute;
-      inset: auto;
       pointer-events: none;
       z-index: 0;
     }
 
     .post-page::before {
-      top: 18px;
+      top: 0;
       left: -180px;
       width: 420px;
       height: 420px;
-      background: radial-gradient(circle, rgba(111, 31, 94, 0.20) 0%, rgba(111, 31, 94, 0.00) 70%);
-      filter: blur(24px);
-      opacity: 0.9;
+      background: radial-gradient(circle, rgba(128, 45, 106, 0.18) 0%, rgba(128, 45, 106, 0) 72%);
+      filter: blur(28px);
     }
 
     .post-page::after {
-      top: 70px;
-      right: -180px;
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle, rgba(25, 48, 130, 0.18) 0%, rgba(25, 48, 130, 0.00) 72%);
-      filter: blur(28px);
-      opacity: 0.9;
+      top: 120px;
+      right: -190px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(34, 58, 154, 0.14) 0%, rgba(34, 58, 154, 0) 74%);
+      filter: blur(30px);
     }
 
     .post-shell {
@@ -79,8 +76,66 @@
       margin: 0 auto;
     }
 
+    .post-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .post-main,
+    .post-sidebar {
+      min-width: 0;
+    }
+
+    .post-top,
+    .post-hero,
+    .post-card,
+    .post-side-panel,
+    .post-state {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
+        linear-gradient(135deg, rgba(35, 39, 74, 0.18), rgba(0,0,0,0));
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .post-top,
+    .post-hero,
+    .post-card,
+    .post-side-panel {
+      border-radius: 30px;
+    }
+
+    .post-top::before,
+    .post-hero::before,
+    .post-card::before,
+    .post-side-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 42%);
+    }
+
+    .post-top > *,
+    .post-hero > *,
+    .post-card > *,
+    .post-side-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .post-top {
+      padding: 28px 30px;
+      margin-bottom: 20px;
+    }
+
     .post-breadcrumb {
-      margin: 0 0 20px;
+      margin: 0 0 16px;
       font-size: 14px;
       line-height: 1.5;
       opacity: 0.72;
@@ -95,102 +150,70 @@
       opacity: 0.92;
     }
 
-    .post-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 820px) 320px;
-      gap: 34px;
-      align-items: start;
-    }
-
-    .post-main {
-      min-width: 0;
-    }
-
     .post-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 18px;
+      gap: 10px 14px;
       margin: 0 0 18px;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.5;
-      opacity: 0.78;
+      opacity: 0.74;
+    }
+
+    .post-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      margin: 0 0 16px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .post-title {
-      margin: 0 0 22px;
-      font-size: clamp(36px, 4.6vw, 62px);
-      line-height: 0.98;
+      margin: 0;
+      max-width: 940px;
+      font-size: clamp(34px, 4.8vw, 64px);
+      line-height: 0.97;
       letter-spacing: -0.04em;
-      max-width: 900px;
+      color: #fff;
       text-wrap: balance;
     }
 
-    .post-hero-frame {
-      position: relative;
-      max-width: 720px;
-      margin: 0 0 28px;
+    .post-hero {
       padding: 10px;
-      border-radius: 28px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.01)),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
-    }
-
-    .post-hero-frame::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(115deg, rgba(199, 155, 76, 0.10), rgba(255,255,255,0.00) 42%, rgba(58, 74, 180, 0.10));
-      pointer-events: none;
+      margin-bottom: 20px;
     }
 
     .post-cover {
       display: none;
       width: 100%;
-      max-width: 700px;
-      height: 220px;
+      height: 360px;
       object-fit: cover;
       object-position: center;
-      border-radius: 20px;
-      position: relative;
-      z-index: 1;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
       box-shadow: none !important;
       filter: none !important;
-      background: none !important;
     }
 
     .post-card {
-      position: relative;
-      max-width: 760px;
       padding: 34px 34px 30px;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
-        linear-gradient(120deg, rgba(31, 36, 70, 0.28), rgba(0,0,0,0));
-      border: 1px solid rgba(255,255,255,0.07);
-      overflow: hidden;
-    }
-
-    .post-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.00) 42%),
-        radial-gradient(circle at top right, rgba(190, 144, 69, 0.07), transparent 34%);
-      pointer-events: none;
     }
 
     .post-content {
-      position: relative;
-      z-index: 1;
       font-size: 17px;
       line-height: 1.86;
       color: rgba(255,255,255,0.95);
     }
 
+    .post-content h1,
     .post-content h2,
     .post-content h3,
     .post-content h4 {
@@ -198,6 +221,11 @@
       line-height: 1.12;
       letter-spacing: -0.025em;
       color: #ffffff;
+      text-wrap: balance;
+    }
+
+    .post-content h1 {
+      font-size: clamp(28px, 3vw, 40px);
     }
 
     .post-content h2 {
@@ -219,7 +247,7 @@
     .post-content ul,
     .post-content ol {
       margin: 0 0 18px;
-      padding-left: 22px;
+      padding-left: 24px;
     }
 
     .post-content li {
@@ -228,10 +256,15 @@
 
     .post-content strong {
       color: #ffffff;
+      font-weight: 700;
+    }
+
+    .post-content em {
+      color: rgba(255,255,255,0.84);
     }
 
     .post-content a {
-      color: inherit;
+      color: #ffffff;
       text-decoration: underline;
       text-underline-offset: 3px;
       word-break: break-word;
@@ -248,28 +281,27 @@
     .post-content hr {
       border: 0;
       border-top: 1px solid rgba(255,255,255,0.08);
-      margin: 36px 0;
+      margin: 34px 0;
     }
 
     .post-content img {
       display: block;
-      width: 100%;
-      max-width: 620px;
-      height: 250px;
+      width: min(100%, 560px);
+      height: 240px;
       object-fit: cover;
       object-position: center;
-      margin: 28px auto;
-      border-radius: 20px;
+      margin: 26px auto;
+      border-radius: 18px;
       box-shadow: none !important;
       filter: none !important;
-      background: none !important;
+      background: rgba(255,255,255,0.03);
     }
 
     .post-content img + em,
     .post-content p > em:only-child {
       display: block;
+      width: min(100%, 560px);
       margin: -8px auto 20px;
-      max-width: 620px;
       font-size: 14px;
       line-height: 1.5;
       opacity: 0.66;
@@ -285,109 +317,62 @@
       gap: 18px;
     }
 
-    .side-panel {
-      position: relative;
-      padding: 20px 20px 18px;
-      border-radius: 22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)),
-        linear-gradient(135deg, rgba(39, 38, 73, 0.18), rgba(0,0,0,0));
-      border: 1px solid rgba(255,255,255,0.07);
-      overflow: hidden;
+    .post-side-panel {
+      padding: 20px;
     }
 
-    .side-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.00) 40%);
-      pointer-events: none;
-    }
-
-    .side-panel > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .side-title {
+    .post-side-title {
       margin: 0 0 14px;
-      font-size: 17px;
-      line-height: 1.2;
+      font-size: 18px;
+      line-height: 1.18;
       letter-spacing: -0.02em;
-      color: #ffffff;
+      color: #fff;
     }
 
-    .share-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .share-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 0 15px;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #ffffff;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      box-shadow: none !important;
-      filter: none !important;
-    }
-
-    .share-btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-    }
-
-    .side-list {
+    .post-side-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .side-card {
+    .post-side-link {
       display: block;
       padding: 14px 14px 13px;
-      border-radius: 16px;
+      border-radius: 18px;
       text-decoration: none;
       color: inherit;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.022);
       border: 1px solid rgba(255,255,255,0.055);
       transition: transform .18s ease, border-color .18s ease, background .18s ease;
       box-shadow: none !important;
       filter: none !important;
     }
 
-    .side-card:hover {
+    .post-side-link:hover,
+    .post-share-btn:hover {
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.04);
     }
 
-    .side-kicker {
-      display: block;
+    .post-side-link-kicker {
+      display: inline-block;
       margin: 0 0 8px;
       font-size: 11px;
       line-height: 1.4;
-      text-transform: uppercase;
       letter-spacing: 0.1em;
-      opacity: 0.55;
+      text-transform: uppercase;
+      opacity: 0.56;
     }
 
-    .side-card-title {
+    .post-side-link-title {
       display: block;
       font-size: 15px;
       line-height: 1.45;
-      color: #ffffff;
+      color: #fff;
     }
 
-    .side-card-desc {
+    .post-side-link-desc {
       display: block;
       margin-top: 7px;
       font-size: 13px;
@@ -395,10 +380,36 @@
       opacity: 0.74;
     }
 
+    .post-share {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .post-share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      font: inherit;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
     .post-state {
-      font-size: 17px;
+      padding: 24px;
+      border-radius: 28px;
+      font-size: 16px;
       line-height: 1.75;
-      opacity: 0.86;
+      color: rgba(255,255,255,0.82);
     }
 
     @media (max-width: 1160px) {
@@ -410,50 +421,48 @@
         position: static;
         top: auto;
       }
-
-      .post-main,
-      .post-card,
-      .post-title,
-      .post-meta,
-      .post-breadcrumb,
-      .post-hero-frame {
-        max-width: 100%;
-      }
-
-      .post-cover,
-      .post-content img {
-        max-width: 100%;
-      }
     }
 
     @media (max-width: 900px) {
-      .post-title {
-        font-size: clamp(30px, 8vw, 42px);
+      .post-top,
+      .post-hero,
+      .post-card,
+      .post-side-panel,
+      .post-state {
+        border-radius: 24px;
+      }
+
+      .post-top {
+        padding: 24px 18px;
       }
 
       .post-card {
         padding: 24px 18px 22px;
-        border-radius: 22px;
+      }
+
+      .post-title {
+        font-size: clamp(30px, 8vw, 44px);
       }
 
       .post-cover {
-        height: 210px;
+        height: 220px;
         border-radius: 18px;
-      }
-
-      .post-hero-frame {
-        padding: 8px;
-        border-radius: 22px;
       }
 
       .post-content {
         font-size: 16px;
-        line-height: 1.76;
+        line-height: 1.78;
       }
 
       .post-content img {
-        height: 210px;
-        border-radius: 18px;
+        width: 100%;
+        height: 220px;
+        border-radius: 16px;
+      }
+
+      .post-content img + em,
+      .post-content p > em:only-child {
+        width: 100%;
       }
     }
   </style>
@@ -490,7 +499,7 @@
     "@context":"https://schema.org",
     "@type":"Article",
     "headline":"Статья — SovaZone",
-    "description":"Статья блога SovaZone. Новости, инструкции и кейсы по аккаунтам и никнеймам.",
+    "description":"Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.",
     "image":["https://sovazone.com/og-image.png"],
     "mainEntityOfPage":"https://sovazone.com/post.html",
     "author":{
@@ -519,21 +528,24 @@
       <div class="container">
         <section class="section">
           <article class="post-shell" itemscope itemtype="https://schema.org/Article">
-            <div class="post-breadcrumb">
-              <a href="/index.html">Главная</a> / <a href="/blog.html">Блог</a> / <span id="post-breadcrumb-current">Статья</span>
-            </div>
-
             <div class="post-grid">
               <div class="post-main">
-                <div class="post-meta">
-                  <div>Опубликовано: <span id="post-date" itemprop="datePublished">—</span></div>
-                  <div>Автор: <span id="post-author" itemprop="author">SovaZone</span></div>
-                  <div>Категория: <span id="post-category">Блог</span></div>
+                <div class="post-top">
+                  <div class="post-breadcrumb">
+                    <a href="/index.html">Главная</a> / <a href="/blog.html">Блог</a> / <span id="post-breadcrumb-current">Статья</span>
+                  </div>
+
+                  <div class="post-meta">
+                    <span id="post-date">Без даты</span>
+                    <span id="post-author">SovaZone</span>
+                    <span id="post-category">Статьи</span>
+                  </div>
+
+                  <div class="post-kicker" id="post-kicker">Материал блога</div>
+                  <h1 class="post-title" id="post-title" itemprop="headline">Загрузка...</h1>
                 </div>
 
-                <h1 class="post-title" id="post-title" itemprop="headline">Загрузка...</h1>
-
-                <div class="post-hero-frame">
+                <div class="post-hero" id="post-hero" hidden>
                   <img id="post-cover" class="post-cover" src="" alt="Обложка статьи" itemprop="image">
                 </div>
 
@@ -543,58 +555,69 @@
               </div>
 
               <aside class="post-sidebar">
-                <section class="side-panel" aria-labelledby="share-title">
-                  <h2 class="side-title" id="share-title">Поделиться</h2>
-                  <div class="share-stack">
-                    <a class="share-btn" id="share-telegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
-                    <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-                    <a class="share-btn" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
-                    <button class="share-btn" id="share-copy" type="button">Скопировать ссылку</button>
+                <section class="post-side-panel">
+                  <h2 class="post-side-title">Поделиться</h2>
+                  <div class="post-share">
+                    <a class="post-share-btn" id="share-telegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
+                    <a class="post-share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+                    <a class="post-share-btn" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <button class="post-share-btn" id="share-copy" type="button">Скопировать ссылку</button>
                   </div>
                 </section>
 
-                <section class="side-panel" aria-labelledby="featured-title">
-                  <h2 class="side-title" id="featured-title">Избранные статьи</h2>
-                  <div class="side-list">
-                    <a class="side-card" href="https://sovazone.com/articles/how-to-choose-instagram-username.html">
-                      <span class="side-kicker">Instagram</span>
-                      <span class="side-card-title">Как выбрать никнейм для Instagram</span>
-                      <span class="side-card-desc">Практические принципы выбора короткого, сильного и запоминающегося username.</span>
+                <section class="post-side-panel">
+                  <h2 class="post-side-title">Избранные материалы</h2>
+                  <div class="post-side-list">
+                    <a class="post-side-link" href="/articles/how-to-choose-instagram-username.html">
+                      <span class="post-side-link-kicker">Instagram</span>
+                      <span class="post-side-link-title">Как выбрать никнейм для Instagram</span>
+                      <span class="post-side-link-desc">Практические принципы выбора короткого и сильного username.</span>
                     </a>
 
-                    <a class="side-card" href="https://sovazone.com/articles/instagram-account-security.html">
-                      <span class="side-kicker">Безопасность</span>
-                      <span class="side-card-title">Безопасность аккаунта Instagram</span>
-                      <span class="side-card-desc">Что стоит проверить заранее, чтобы не потерять доступ к своему профилю.</span>
+                    <a class="post-side-link" href="/articles/instagram-account-security.html">
+                      <span class="post-side-link-kicker">Безопасность</span>
+                      <span class="post-side-link-title">Безопасность аккаунта Instagram</span>
+                      <span class="post-side-link-desc">Что важно проверить заранее, чтобы не потерять доступ к профилю.</span>
                     </a>
 
-                    <a class="side-card" href="https://sovazone.com/articles/unblock-instagram-account.html">
-                      <span class="side-kicker">Разблокировка</span>
-                      <span class="side-card-title">Как разблокировать аккаунт Instagram</span>
-                      <span class="side-card-desc">Базовая последовательность действий, если профиль столкнулся с ограничением.</span>
-                    </a>
-
-                    <a class="side-card" href="https://sovazone.com/articles/meta-subscription-eligibility.html">
-                      <span class="side-kicker">Meta</span>
-                      <span class="side-card-title">Подписка Meta: требования</span>
-                      <span class="side-card-desc">Кому подходит подписка, на что влияет и что важно учитывать перед подачей.</span>
-                    </a>
-
-                    <a class="side-card" href="https://sovazone.com/articles/why-instagram-accounts-get-banned.html">
-                      <span class="side-kicker">Ограничения</span>
-                      <span class="side-card-title">Почему блокируют аккаунты Instagram</span>
-                      <span class="side-card-desc">Главные причины ограничений и что обычно приводит аккаунт к бану.</span>
+                    <a class="post-side-link" href="/articles/unblock-instagram-account.html">
+                      <span class="post-side-link-kicker">Разблокировка</span>
+                      <span class="post-side-link-title">Как разблокировать аккаунт Instagram</span>
+                      <span class="post-side-link-desc">Базовая логика действий, если профиль столкнулся с ограничениями.</span>
                     </a>
                   </div>
                 </section>
 
-                <section class="side-panel" aria-labelledby="latest-title">
-                  <h2 class="side-title" id="latest-title">Последние статьи</h2>
-                  <div class="side-list" id="latest-posts">
-                    <a class="side-card" href="/blog.html">
-                      <span class="side-kicker">Блог</span>
-                      <span class="side-card-title">Публикации скоро появятся</span>
-                      <span class="side-card-desc">Когда материалов станет больше, этот блок будет заполняться автоматически.</span>
+                <section class="post-side-panel">
+                  <h2 class="post-side-title">Последние статьи</h2>
+                  <div class="post-side-list" id="latest-posts">
+                    <a class="post-side-link" href="/blog.html">
+                      <span class="post-side-link-kicker">Блог</span>
+                      <span class="post-side-link-title">Публикации загружаются</span>
+                      <span class="post-side-link-desc">После загрузки статьи здесь появятся свежие материалы блога.</span>
+                    </a>
+                  </div>
+                </section>
+
+                <section class="post-side-panel">
+                  <h2 class="post-side-title">По теме проекта</h2>
+                  <div class="post-side-list">
+                    <a class="post-side-link" href="/services/custom-username.html">
+                      <span class="post-side-link-kicker">Услуги</span>
+                      <span class="post-side-link-title">Никнейм под заказ</span>
+                      <span class="post-side-link-desc">Если нужный username занят, проверим ситуацию и оценим реальные перспективы.</span>
+                    </a>
+
+                    <a class="post-side-link" href="/usernames.html">
+                      <span class="post-side-link-kicker">Каталог</span>
+                      <span class="post-side-link-title">Доступные никнеймы</span>
+                      <span class="post-side-link-desc">Подборка коротких и сильных username для аккаунтов и проектов.</span>
+                    </a>
+
+                    <a class="post-side-link" href="/contacts.html">
+                      <span class="post-side-link-kicker">Связь</span>
+                      <span class="post-side-link-title">Связаться с нами</span>
+                      <span class="post-side-link-desc">Контакты и рабочие каналы связи для консультаций и запросов.</span>
                     </a>
                   </div>
                 </section>
@@ -623,9 +646,10 @@
     }
 
     function formatDate(value) {
-      if (!value) return "—";
+      if (!value) return "Без даты";
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return value;
+
       return date.toLocaleDateString("ru-RU", {
         day: "numeric",
         month: "long",
@@ -720,7 +744,7 @@
 
       document.title = title;
       setMeta('meta[name="description"]', description);
-      setMeta('meta[name="keywords"]', meta.keywords || "SovaZone блог, блог SovaZone, новости SovaZone, кейсы аккаунтов, никнеймы, digital-проекты, помощь с аккаунтами");
+      setMeta('meta[name="keywords"]', meta.keywords || "SovaZone блог, статья SovaZone, никнеймы, социальные сети, безопасность аккаунтов, верификация");
       setLink('link[rel="canonical"]', canonical);
 
       setMeta('meta[property="og:title"]', title);
@@ -795,25 +819,20 @@
 
       try {
         const posts = await fetchBlogIndex();
-
-        if (!Array.isArray(posts) || !posts.length) {
-          return;
-        }
+        if (!Array.isArray(posts) || !posts.length) return;
 
         const latest = posts
           .filter(post => post && post.slug && post.slug !== currentSlug)
           .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
           .slice(0, 4);
 
-        if (!latest.length) {
-          return;
-        }
+        if (!latest.length) return;
 
         container.innerHTML = latest.map(post => `
-          <a class="side-card" href="/post.html?slug=${encodeURIComponent(post.slug)}">
-            <span class="side-kicker">${post.category || "Блог"}</span>
-            <span class="side-card-title">${post.title || "Без названия"}</span>
-            <span class="side-card-desc">${post.description || "Новая публикация блога SovaZone."}</span>
+          <a class="post-side-link" href="/post.html?slug=${encodeURIComponent(post.slug)}">
+            <span class="post-side-link-kicker">${post.category || "Статьи"}</span>
+            <span class="post-side-link-title">${post.title || "Без названия"}</span>
+            <span class="post-side-link-desc">${post.description || "Новая публикация блога SovaZone."}</span>
           </a>
         `).join("");
       } catch (e) {}
@@ -838,21 +857,25 @@
         const title = meta.title || "Статья";
         const formattedDate = formatDate(meta.date || "");
         const author = meta.author || "SovaZone";
-        const category = meta.category || "Блог";
+        const category = meta.category || "Статьи";
 
         document.getElementById("post-title").textContent = title;
         document.getElementById("post-breadcrumb-current").textContent = title;
         document.getElementById("post-date").textContent = formattedDate;
         document.getElementById("post-author").textContent = author;
         document.getElementById("post-category").textContent = category;
+        document.getElementById("post-kicker").textContent = category;
+
+        const hero = document.getElementById("post-hero");
+        const coverEl = document.getElementById("post-cover");
 
         if (meta.cover) {
-          const coverEl = document.getElementById("post-cover");
           coverEl.src = meta.cover;
           coverEl.alt = title;
           coverEl.style.display = "block";
+          hero.hidden = false;
         } else {
-          document.querySelector(".post-hero-frame").style.display = "none";
+          hero.hidden = true;
         }
 
         contentEl.classList.remove("post-state");
@@ -863,9 +886,10 @@
         renderLatestPosts(slug);
       } catch (error) {
         document.getElementById("post-title").textContent = "Статья не найдена";
+        document.getElementById("post-kicker").textContent = "Ошибка";
         contentEl.classList.add("post-state");
-        contentEl.textContent = "Пост не загрузился ни с сайта, ни из GitHub CDN. Проверь путь к markdown-файлу, наличие файла в репозитории и завершение деплоя.";
-        document.querySelector(".post-hero-frame").style.display = "none";
+        contentEl.textContent = "Пост не загрузился. Проверь путь к markdown-файлу, наличие файла в репозитории и завершение деплоя.";
+        document.getElementById("post-hero").hidden = true;
         initShareButtons("SovaZone");
       }
     }
