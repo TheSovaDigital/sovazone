@@ -52,21 +52,22 @@
     }
 
     .post-page::before {
-      top: 0;
-      left: -180px;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(128, 45, 106, 0.18) 0%, rgba(128, 45, 106, 0) 72%);
-      filter: blur(28px);
-    }
-
-    .post-page::after {
       top: 120px;
-      right: -190px;
+      right: -180px;
       width: 500px;
       height: 500px;
       background: radial-gradient(circle, rgba(34, 58, 154, 0.14) 0%, rgba(34, 58, 154, 0) 74%);
       filter: blur(30px);
+    }
+
+    .post-page::after {
+      bottom: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 820px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(128, 45, 106, 0.10) 0%, rgba(128, 45, 106, 0) 72%);
+      filter: blur(34px);
     }
 
     .post-shell {
@@ -92,7 +93,8 @@
     .post-hero,
     .post-card,
     .post-side-panel,
-    .post-state {
+    .post-state,
+    .post-share-panel {
       position: relative;
       overflow: hidden;
       background:
@@ -106,14 +108,16 @@
     .post-top,
     .post-hero,
     .post-card,
-    .post-side-panel {
+    .post-side-panel,
+    .post-share-panel {
       border-radius: 30px;
     }
 
     .post-top::before,
     .post-hero::before,
     .post-card::before,
-    .post-side-panel::before {
+    .post-side-panel::before,
+    .post-share-panel::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -124,18 +128,19 @@
     .post-top > *,
     .post-hero > *,
     .post-card > *,
-    .post-side-panel > * {
+    .post-side-panel > *,
+    .post-share-panel > * {
       position: relative;
       z-index: 1;
     }
 
     .post-top {
-      padding: 28px 30px;
-      margin-bottom: 20px;
+      padding: 26px 30px 24px;
+      margin-bottom: 18px;
     }
 
     .post-breadcrumb {
-      margin: 0 0 16px;
+      margin: 0 0 14px;
       font-size: 14px;
       line-height: 1.5;
       opacity: 0.72;
@@ -154,7 +159,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px 14px;
-      margin: 0 0 18px;
+      margin: 0 0 14px;
       font-size: 13px;
       line-height: 1.5;
       opacity: 0.74;
@@ -163,11 +168,11 @@
     .post-kicker {
       display: inline-flex;
       align-items: center;
-      min-height: 32px;
-      padding: 0 12px;
+      min-height: 30px;
+      padding: 0 11px;
       border-radius: 999px;
-      margin: 0 0 16px;
-      font-size: 12px;
+      margin: 0 0 14px;
+      font-size: 11px;
       line-height: 1;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -177,81 +182,87 @@
     }
 
     .post-title {
-      margin: 0;
-      max-width: 940px;
-      font-size: clamp(34px, 4.8vw, 64px);
-      line-height: 0.97;
-      letter-spacing: -0.04em;
+      margin: 0 0 14px;
+      max-width: 880px;
+      font-size: clamp(28px, 3.4vw, 48px);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
       color: #fff;
       text-wrap: balance;
     }
 
+    .post-excerpt {
+      margin: 0;
+      max-width: 860px;
+      font-size: 16px;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.80);
+    }
+
     .post-hero {
       padding: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .post-cover {
       display: none;
       width: 100%;
-      height: 360px;
+      height: 300px;
       object-fit: cover;
       object-position: center;
       border-radius: 22px;
       background: rgba(255,255,255,0.03);
-      box-shadow: none !important;
-      filter: none !important;
     }
 
     .post-card {
-      padding: 34px 34px 30px;
+      padding: 28px 30px 26px;
     }
 
     .post-content {
-      font-size: 17px;
-      line-height: 1.86;
-      color: rgba(255,255,255,0.95);
+      font-size: 15px;
+      line-height: 1.82;
+      color: rgba(255,255,255,0.94);
     }
 
     .post-content h1,
     .post-content h2,
     .post-content h3,
     .post-content h4 {
-      margin: 36px 0 14px;
-      line-height: 1.12;
-      letter-spacing: -0.025em;
+      margin: 30px 0 12px;
+      line-height: 1.14;
+      letter-spacing: -0.022em;
       color: #ffffff;
       text-wrap: balance;
     }
 
     .post-content h1 {
-      font-size: clamp(28px, 3vw, 40px);
+      font-size: clamp(24px, 2.6vw, 34px);
     }
 
     .post-content h2 {
-      font-size: clamp(25px, 2.8vw, 34px);
+      font-size: clamp(22px, 2.3vw, 30px);
     }
 
     .post-content h3 {
-      font-size: clamp(21px, 2.2vw, 28px);
+      font-size: clamp(19px, 2vw, 24px);
     }
 
     .post-content h4 {
-      font-size: clamp(18px, 2vw, 22px);
+      font-size: clamp(17px, 1.8vw, 20px);
     }
 
     .post-content p {
-      margin: 0 0 18px;
+      margin: 0 0 16px;
     }
 
     .post-content ul,
     .post-content ol {
-      margin: 0 0 18px;
-      padding-left: 24px;
+      margin: 0 0 16px;
+      padding-left: 22px;
     }
 
     .post-content li {
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
     .post-content strong {
@@ -271,8 +282,8 @@
     }
 
     .post-content blockquote {
-      margin: 28px 0;
-      padding: 18px 22px;
+      margin: 24px 0;
+      padding: 16px 20px;
       border-left: 2px solid rgba(201, 156, 85, 0.38);
       background: rgba(255,255,255,0.02);
       border-radius: 0 16px 16px 0;
@@ -281,32 +292,76 @@
     .post-content hr {
       border: 0;
       border-top: 1px solid rgba(255,255,255,0.08);
-      margin: 34px 0;
+      margin: 28px 0;
     }
 
     .post-content img {
       display: block;
-      width: min(100%, 560px);
-      height: 240px;
+      width: min(100%, 520px);
+      height: 220px;
       object-fit: cover;
       object-position: center;
-      margin: 26px auto;
+      margin: 22px auto;
       border-radius: 18px;
+      background: rgba(255,255,255,0.03);
       box-shadow: none !important;
       filter: none !important;
-      background: rgba(255,255,255,0.03);
     }
 
     .post-content img + em,
     .post-content p > em:only-child {
       display: block;
-      width: min(100%, 560px);
-      margin: -8px auto 20px;
-      font-size: 14px;
+      width: min(100%, 520px);
+      margin: -6px auto 18px;
+      font-size: 13px;
       line-height: 1.5;
       opacity: 0.66;
       font-style: normal;
       text-align: center;
+    }
+
+    .post-share-panel {
+      margin-top: 18px;
+      padding: 20px;
+    }
+
+    .post-share-title {
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .post-share {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .post-share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      font: inherit;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .post-share-btn:hover,
+    .post-side-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
     }
 
     .post-sidebar {
@@ -348,13 +403,6 @@
       filter: none !important;
     }
 
-    .post-side-link:hover,
-    .post-share-btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.04);
-    }
-
     .post-side-link-kicker {
       display: inline-block;
       margin: 0 0 8px;
@@ -378,30 +426,6 @@
       font-size: 13px;
       line-height: 1.55;
       opacity: 0.74;
-    }
-
-    .post-share {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .post-share-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 0 14px;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #fff;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      cursor: pointer;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      font: inherit;
-      box-shadow: none !important;
-      filter: none !important;
     }
 
     .post-state {
@@ -428,20 +452,25 @@
       .post-hero,
       .post-card,
       .post-side-panel,
-      .post-state {
+      .post-state,
+      .post-share-panel {
         border-radius: 24px;
       }
 
       .post-top {
-        padding: 24px 18px;
+        padding: 22px 18px 20px;
       }
 
       .post-card {
-        padding: 24px 18px 22px;
+        padding: 22px 18px 20px;
       }
 
       .post-title {
-        font-size: clamp(30px, 8vw, 44px);
+        font-size: clamp(26px, 7vw, 38px);
+      }
+
+      .post-excerpt {
+        font-size: 15px;
       }
 
       .post-cover {
@@ -450,13 +479,13 @@
       }
 
       .post-content {
-        font-size: 16px;
-        line-height: 1.78;
+        font-size: 14px;
+        line-height: 1.74;
       }
 
       .post-content img {
         width: 100%;
-        height: 220px;
+        height: 210px;
         border-radius: 16px;
       }
 
@@ -543,6 +572,7 @@
 
                   <div class="post-kicker" id="post-kicker">Материал блога</div>
                   <h1 class="post-title" id="post-title" itemprop="headline">Загрузка...</h1>
+                  <p class="post-excerpt" id="post-excerpt">Короткое описание статьи загружается...</p>
                 </div>
 
                 <div class="post-hero" id="post-hero" hidden>
@@ -552,19 +582,18 @@
                 <div class="post-card">
                   <div id="post-content" class="post-content post-state" itemprop="articleBody">Загружаем статью...</div>
                 </div>
-              </div>
 
-              <aside class="post-sidebar">
-                <section class="post-side-panel">
-                  <h2 class="post-side-title">Поделиться</h2>
+                <div class="post-share-panel">
+                  <h2 class="post-share-title">Поделиться</h2>
                   <div class="post-share">
                     <a class="post-share-btn" id="share-telegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
                     <a class="post-share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-                    <a class="post-share-btn" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
                     <button class="post-share-btn" id="share-copy" type="button">Скопировать ссылку</button>
                   </div>
-                </section>
+                </div>
+              </div>
 
+              <aside class="post-sidebar">
                 <section class="post-side-panel">
                   <h2 class="post-side-title">Избранные материалы</h2>
                   <div class="post-side-list">
@@ -796,7 +825,6 @@
 
       document.getElementById("share-telegram").href = "https://t.me/share/url?url=" + encodedUrl + "&text=" + encodedTitle;
       document.getElementById("share-twitter").href = "https://twitter.com/intent/tweet?url=" + encodedUrl + "&text=" + encodedTitle;
-      document.getElementById("share-facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
 
       document.getElementById("share-copy").addEventListener("click", async function() {
         try {
@@ -844,6 +872,7 @@
 
       if (!slug) {
         document.getElementById("post-title").textContent = "Статья не найдена";
+        document.getElementById("post-excerpt").textContent = "В ссылке не передан slug статьи.";
         contentEl.textContent = "В ссылке не передан slug статьи.";
         return;
       }
@@ -858,6 +887,7 @@
         const formattedDate = formatDate(meta.date || "");
         const author = meta.author || "SovaZone";
         const category = meta.category || "Статьи";
+        const excerpt = meta.description || "Материал блога SovaZone.";
 
         document.getElementById("post-title").textContent = title;
         document.getElementById("post-breadcrumb-current").textContent = title;
@@ -865,6 +895,7 @@
         document.getElementById("post-author").textContent = author;
         document.getElementById("post-category").textContent = category;
         document.getElementById("post-kicker").textContent = category;
+        document.getElementById("post-excerpt").textContent = excerpt;
 
         const hero = document.getElementById("post-hero");
         const coverEl = document.getElementById("post-cover");
@@ -887,6 +918,7 @@
       } catch (error) {
         document.getElementById("post-title").textContent = "Статья не найдена";
         document.getElementById("post-kicker").textContent = "Ошибка";
+        document.getElementById("post-excerpt").textContent = "Пост не загрузился.";
         contentEl.classList.add("post-state");
         contentEl.textContent = "Пост не загрузился. Проверь путь к markdown-файлу, наличие файла в репозитории и завершение деплоя.";
         document.getElementById("post-hero").hidden = true;
