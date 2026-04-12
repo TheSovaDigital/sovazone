@@ -77,6 +77,13 @@
       margin-bottom:8px;
     }
 
+    .hero-content h1{
+      font-size:clamp(30px, 2.45vw, 42px);
+      line-height:1.02;
+      letter-spacing:-0.04em;
+      white-space:nowrap;
+    }
+
     .section-usernames-showcase{
       margin-top:24px;
     }
@@ -247,34 +254,6 @@
       color:#fff;
     }
 
-    .usernames-footer{
-      margin-top:16px;
-      display:flex;
-      justify-content:flex-start;
-    }
-
-    .link-more{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      min-height:42px;
-      padding:0 16px;
-      border-radius:14px;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.028);
-      width:max-content;
-      transition:border-color .18s ease, background .18s ease, transform .18s ease;
-    }
-
-    .link-more:hover{
-      border-color:rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      transform:translateY(-1px);
-      color:#fff;
-    }
-
     .steps-grid{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
@@ -288,6 +267,14 @@
       background:rgba(255,255,255,.02);
     }
 
+    .step-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      min-height:34px;
+    }
+
     .step-num{
       display:inline-flex;
       align-items:center;
@@ -295,15 +282,15 @@
       width:34px;
       height:34px;
       border-radius:999px;
-      margin-bottom:12px;
       border:1px solid rgba(217,179,140,.24);
       color:#d9b38c;
       font-size:13px;
       font-weight:700;
+      flex:0 0 34px;
     }
 
     .step h3{
-      margin:0 0 8px;
+      margin:0;
       font-size:18px;
       line-height:1.18;
       color:#fff;
@@ -360,7 +347,8 @@
     .project-card{
       display:flex;
       flex-direction:column;
-      min-height:100%;
+      justify-content:space-between;
+      min-height:232px;
       padding:16px;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.06);
@@ -380,6 +368,29 @@
       font-size:14px;
       line-height:1.72;
       color:rgba(255,255,255,.72);
+    }
+
+    .project-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:14px;
+      text-decoration:none;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.028);
+      width:100%;
+      font-weight:700;
+      transition:border-color .18s ease, background .18s ease, transform .18s ease;
+    }
+
+    .project-link:hover{
+      border-color:rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      transform:translateY(-1px);
+      color:#fff;
     }
 
     .about-title{
@@ -420,6 +431,10 @@
     }
 
     @media (max-width:1240px){
+      .hero-content h1{
+        white-space:normal;
+      }
+
       .username-grid.username-grid-refined{
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
@@ -438,6 +453,10 @@
     }
 
     @media (max-width:680px){
+      .hero-content h1{
+        white-space:normal;
+      }
+
       .username-grid.username-grid-refined,
       .steps-grid{
         grid-template-columns:1fr;
@@ -497,12 +516,7 @@
         <section class="hero hero-split">
           <div class="hero-side">
             <div class="hero-badge-wrap"><div class="hero-badge hero-badge-static">SovaZone Digital Studio</div></div>
-            <div class="hero-logo-card"><img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio"></div>
-            <div class="hero-side-actions">
-              <a class="btn btn-primary btn-full" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать</a>
-              <a class="btn btn-secondary btn-full" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
-            </div>
-          </div>
+            <div class="hero-logo-card"><img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio"></div></div>
 
           <div class="hero-content">
             <h1>Запуск личного бренда и новых digital-проектов</h1>
@@ -578,41 +592,96 @@
               </div>
               <a class="username-buy" href="username/tryd.html">Подробнее</a>
             </article>
-          </div>
 
-          <div class="usernames-footer">
-            <a class="link-more" href="usernames.html">Открыть каталог никнеймов →</a>
+            <article class="username-card" itemscope itemtype="https://schema.org/Product">
+              <div class="username-badge"></div>
+              <div class="username-card-top">
+                <div class="username-title-row">
+                  <span class="platform-icon" aria-hidden="true"></span>
+                  <a class="username-name-link" href="username/podlets.html"><div class="username-name" itemprop="name">@PODLETS</div></a>
+                </div>
+                <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
+                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+              </div>
+              <a class="username-buy" href="username/podlets.html">Подробнее</a>
+            </article>
+
+            <article class="username-card" itemscope itemtype="https://schema.org/Product">
+              <div class="username-badge"></div>
+              <div class="username-card-top">
+                <div class="username-title-row">
+                  <span class="platform-icon" aria-hidden="true"></span>
+                  <a class="username-name-link" href="username/koketka.html"><div class="username-name" itemprop="name">@KOKETKA</div></a>
+                </div>
+                <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
+                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+              </div>
+              <a class="username-buy" href="username/koketka.html">Подробнее</a>
+            </article>
+
+            <article class="username-card" itemscope itemtype="https://schema.org/Product">
+              <div class="username-badge"></div>
+              <div class="username-card-top">
+                <div class="username-title-row">
+                  <span class="platform-icon" aria-hidden="true"></span>
+                  <a class="username-name-link" href="username/deluks.html"><div class="username-name" itemprop="name">@DELUKS</div></a>
+                </div>
+                <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
+                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+              </div>
+              <a class="username-buy" href="username/deluks.html">Подробнее</a>
+            </article>
+
+            <article class="username-card" itemscope itemtype="https://schema.org/Product">
+              <div class="username-badge"></div>
+              <div class="username-card-top">
+                <div class="username-title-row">
+                  <span class="platform-icon" aria-hidden="true"></span>
+                  <a class="username-name-link" href="username/keyed.html"><div class="username-name" itemprop="name">@KEYED</div></a>
+                </div>
+                <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
+                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+              </div>
+              <a class="username-buy" href="username/keyed.html">Подробнее</a>
+            </article>
           </div>
         </section>
 
         <section class="section">
           <div class="section-head">
             <h2>Как мы работаем</h2>
-            <p class="lead">Путь от первого сообщения до запуска построен без лишнего шума: сначала уточнение задачи, затем подбор решения и только после этого переход к сделке или услуге.</p>
           </div>
 
           <div class="steps-grid">
             <article class="step">
-              <div class="step-num">01</div>
-              <h3>Вы изучаете варианты</h3>
+              <div class="step-head">
+                <div class="step-num">01</div>
+                <h3>Вы изучаете варианты</h3>
+              </div>
               <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
             </article>
 
             <article class="step">
-              <div class="step-num">02</div>
-              <h3>Пишете в Telegram</h3>
+              <div class="step-head">
+                <div class="step-num">02</div>
+                <h3>Пишете в Telegram</h3>
+              </div>
               <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
             </article>
 
             <article class="step">
-              <div class="step-num">03</div>
-              <h3>Мы подбираем решение</h3>
+              <div class="step-head">
+                <div class="step-num">03</div>
+                <h3>Мы подбираем решение</h3>
+              </div>
               <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
             </article>
 
             <article class="step">
-              <div class="step-num">04</div>
-              <h3>Переходим к запуску</h3>
+              <div class="step-head">
+                <div class="step-num">04</div>
+                <h3>Переходим к запуску</h3>
+              </div>
               <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
             </article>
           </div>
@@ -623,26 +692,26 @@
             <section class="home-projects">
               <div class="section-head">
                 <h2>Проекты и материалы</h2>
-                <p class="lead">Основные направления экосистемы SovaZone: магазин, блог и информационные материалы по безопасности и работе с аккаунтами.</p>
+                <p class="lead">Основные направления экосистемы SovaZone: магазин, площадка по продаже никнеймов и блог с полезными материалами.</p>
               </div>
 
               <div class="projects-grid">
                 <article class="project-card">
                   <h3>SovaDS</h3>
                   <p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p>
-                  <a class="link-more" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту →</a>
+                  <a class="project-link" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту</a>
                 </article>
 
                 <article class="project-card">
-                  <h3>Информационная поддержка</h3>
-                  <p>Материалы по безопасности, техническим вопросам и сопровождению аккаунтов для тех, кому важно сохранить и защитить профиль.</p>
-                  <a class="link-more" href="articles.html">Открыть материалы →</a>
+                  <h3>SovaUsername</h3>
+                  <p>Направление, связанное с продажей username и размещением объявлений о продаже никнеймов внутри экосистемы SovaZone.</p>
+                  <a class="project-link" href="sell.html">Как продать</a>
                 </article>
 
                 <article class="project-card">
                   <h3>Блог и статьи</h3>
                   <p>Авторские статьи, новости и кейсы по теме социальных сетей, брендинга, username и digital-среды.</p>
-                  <a class="link-more" href="blog.html">Открыть раздел →</a>
+                  <a class="project-link" href="blog.html">Открыть раздел</a>
                 </article>
               </div>
             </section>
