@@ -536,6 +536,35 @@
     }
   </style>
 
+
+  <style>
+    .username-fab{
+      width:56px;
+      min-width:56px;
+      height:56px;
+      min-height:56px;
+      padding:0 !important;
+      border-radius:999px;
+    }
+    .username-fab svg{
+      display:block;
+      width:22px;
+      height:22px;
+    }
+    @media (max-width:640px){
+      .username-fab{
+        width:48px;
+        min-width:48px;
+        height:48px;
+        min-height:48px;
+      }
+      .username-fab svg{
+        width:20px;
+        height:20px;
+      }
+    }
+  </style>
+
 </head>
 <body>
   <div class="site-shell">
@@ -947,6 +976,10 @@
   </div>
   <script src="/script.js"></script>
 
-  <a class="username-fab" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
+  <a class="username-fab" href="https://t.me/SovaDS" target="_blank" rel="noopener" aria-label="Написать в Telegram" title="Написать в Telegram">
+  <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="currentColor">
+    <path d="M21.94 4.68a1.3 1.3 0 0 0-1.52-.19L3.38 12.27c-.62.28-.58 1.17.05 1.4l4.11 1.47 1.57 5.06c.2.66 1.04.82 1.47.3l2.3-2.79 4.51 3.31c.53.39 1.28.09 1.41-.55L22.02 5.9a1.3 1.3 0 0 0-.08-1.22ZM9.74 14.52l8.31-6.29-6.64 7.37a.75.75 0 0 0-.17.37l-.63 3.55-.86-2.78Z"/>
+  </svg>
+</a>
 </body>
 </html>
