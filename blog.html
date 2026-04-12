@@ -43,31 +43,17 @@
       overflow: hidden;
     }
 
-    .blog-page::before,
-    .blog-page::after {
+    .blog-page::before {
       content: "";
       position: absolute;
       pointer-events: none;
       z-index: 0;
-    }
-
-    .blog-page::before {
       top: 100px;
       right: -220px;
       width: 520px;
       height: 520px;
       background: radial-gradient(circle, rgba(34, 58, 154, 0.14) 0%, rgba(34, 58, 154, 0) 74%);
       filter: blur(30px);
-    }
-
-    .blog-page::after {
-      bottom: -140px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(128, 45, 106, 0.10) 0%, rgba(128, 45, 106, 0) 72%);
-      filter: blur(36px);
     }
 
     .blog-shell {
@@ -115,22 +101,6 @@
     .blog-side-panel > * {
       position: relative;
       z-index: 1;
-    }
-
-    .blog-breadcrumb {
-      margin: 0 0 16px;
-      font-size: 14px;
-      line-height: 1.5;
-      opacity: 0.72;
-    }
-
-    .blog-breadcrumb a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .blog-breadcrumb a:hover {
-      opacity: 0.92;
     }
 
     .blog-title-block {
@@ -232,14 +202,20 @@
       background: rgba(255,255,255,0.03);
     }
 
-    .blog-featured-meta {
+    .blog-featured-body {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px 14px;
-      margin-bottom: 14px;
-      font-size: 13px;
-      line-height: 1.5;
-      opacity: 0.74;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .blog-featured-kicker {
+      display: inline-block;
+      margin: 0 0 14px;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.56;
     }
 
     .blog-featured-title {
@@ -262,6 +238,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      margin-top: auto;
       font-size: 15px;
       line-height: 1.4;
       color: rgba(255,255,255,0.92);
@@ -310,15 +287,6 @@
       opacity: 0.56;
     }
 
-    .blog-card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 14px;
-      font-size: 13px;
-      line-height: 1.5;
-      opacity: 0.72;
-    }
-
     .blog-card-title {
       margin: 0;
       font-size: 22px;
@@ -332,6 +300,7 @@
       font-size: 15px;
       line-height: 1.68;
       color: rgba(255,255,255,0.8);
+      min-height: 76px;
     }
 
     .blog-card-cta {
@@ -476,6 +445,10 @@
       .blog-grid-cover {
         border-radius: 24px 24px 0 0;
       }
+
+      .blog-card-desc {
+        min-height: auto;
+      }
     }
   </style>
 
@@ -506,10 +479,6 @@
       <div class="container">
         <section class="section">
           <div class="blog-shell">
-            <div class="blog-breadcrumb">
-              <a href="/index.html">Главная</a> / <span>Блог</span>
-            </div>
-
             <div class="blog-title-block">
               <h1 class="blog-title">Блог SovaZone</h1>
               <p class="blog-lead">
@@ -533,9 +502,9 @@
             <div class="blog-content-grid" id="blog-content-grid" hidden>
               <div class="blog-main">
                 <a class="blog-featured" id="blog-featured" href="/blog.html" hidden>
-                  <img class="blog-featured-cover" id="blog-featured-cover" src="" alt="">
+                  <img class="blog-featured-cover" id="blog-featured-cover" src="" alt="" loading="lazy" decoding="async">
                   <div class="blog-featured-body">
-                    <div class="blog-featured-meta" id="blog-featured-meta"></div>
+                    <div class="blog-featured-kicker" id="blog-featured-kicker"></div>
                     <h2 class="blog-featured-title" id="blog-featured-title"></h2>
                     <p class="blog-featured-desc" id="blog-featured-desc"></p>
                     <div class="blog-featured-cta">Читать статью</div>
@@ -626,16 +595,13 @@
         .replace(/'/g, "&#39;");
     }
 
-    function formatDate(value) {
-      if (!value) return "Без даты";
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return value;
+    function cleanText(value, fallback = "") {
+      const cleaned = String(value || "")
+        .replace(/^["'«]+/, "")
+        .replace(/^>\s*$/, "")
+        .trim();
 
-      return date.toLocaleDateString("ru-RU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      });
+      return cleaned || fallback;
     }
 
     async function fetchJsonWithFallback(paths) {
@@ -659,20 +625,24 @@
       ]);
     }
 
+    function normalizePost(post) {
+      return {
+        slug: post.slug || "",
+        title: cleanText(post.title, "Без названия"),
+        description: cleanText(post.description, "Новая публикация блога SovaZone."),
+        category: cleanText(post.category, "Статьи"),
+        cover: cleanText(post.cover, "/og-image.png"),
+        date: post.date || "",
+        author: cleanText(post.author, "SovaZone")
+      };
+    }
+
     function sortPosts(posts) {
       return [...posts].sort((a, b) => {
         const dateA = new Date(a.date || 0).getTime();
         const dateB = new Date(b.date || 0).getTime();
         return dateB - dateA;
       });
-    }
-
-    function buildMeta(post) {
-      return [
-        escapeHtml(formatDate(post.date || "")),
-        escapeHtml(post.category || "Статьи"),
-        escapeHtml(post.author || "SovaZone")
-      ].map(item => "<span>" + item + "</span>").join("");
     }
 
     function buildPostUrl(slug) {
@@ -682,7 +652,7 @@
     function renderFeatured(post) {
       const node = document.getElementById("blog-featured");
       const cover = document.getElementById("blog-featured-cover");
-      const meta = document.getElementById("blog-featured-meta");
+      const kicker = document.getElementById("blog-featured-kicker");
       const title = document.getElementById("blog-featured-title");
       const desc = document.getElementById("blog-featured-desc");
 
@@ -693,11 +663,9 @@
 
       node.hidden = false;
       node.href = buildPostUrl(post.slug);
-
       cover.src = post.cover || "/og-image.png";
       cover.alt = post.title || "Обложка публикации";
-
-      meta.innerHTML = buildMeta(post);
+      kicker.textContent = post.category || "Статьи";
       title.textContent = post.title || "Без названия";
       desc.textContent = post.description || "Новая публикация блога SovaZone.";
     }
@@ -719,10 +687,9 @@
 
         return `
           <a class="blog-grid-card" href="${url}">
-            <img class="blog-grid-cover" src="${cover}" alt="${title}">
+            <img class="blog-grid-cover" src="${cover}" alt="${title}" loading="lazy" decoding="async">
             <div class="blog-grid-body">
               <div class="blog-card-kicker">${kicker}</div>
-              <div class="blog-card-meta">${buildMeta(post)}</div>
               <h3 class="blog-card-title">${title}</h3>
               <p class="blog-card-desc">${desc}</p>
               <div class="blog-card-cta">Читать статью</div>
@@ -785,7 +752,7 @@
           return;
         }
 
-        allPosts = posts;
+        allPosts = posts.map(normalizePost);
         renderBlog();
       } catch (e) {
         setState("error");
