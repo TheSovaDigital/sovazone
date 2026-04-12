@@ -430,6 +430,65 @@
     }
   </style>
 
+
+  <style>
+    .username-bottom-cta{
+      margin-top:18px !important;
+      width:100%;
+      max-width:100%;
+    }
+    .username-custom-cta{
+      width:100%;
+      margin:0 !important;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 18px !important;
+      border-radius:18px !important;
+      border:1px solid rgba(255,255,255,.07);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)) !important;
+      box-shadow:none !important;
+    }
+    .username-custom-cta-text{
+      font-size:14px !important;
+      line-height:1.5 !important;
+      color:rgba(255,255,255,.8);
+    }
+    .username-custom-cta-text strong{
+      margin-bottom:2px !important;
+      font-size:16px !important;
+      line-height:1.2 !important;
+    }
+    .username-custom-btn{
+      min-height:40px !important;
+      padding:0 16px !important;
+      border-radius:14px !important;
+      border:none !important;
+      background:linear-gradient(90deg, #f3b25d, #ee9d74, #c98bcf) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+      white-space:nowrap;
+    }
+    .username-fab{
+      background:linear-gradient(90deg, #8fa7ff, #8797ea, #8f87d8) !important;
+      color:#fff !important;
+      box-shadow:0 12px 28px rgba(0,0,0,.18) !important;
+      font-weight:600 !important;
+      border:none !important;
+    }
+    .username-fab:hover{
+      filter:brightness(1.03);
+      color:#fff !important;
+    }
+    @media (max-width:980px){
+      .username-custom-cta{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
+
 </head>
 <body>
   <div class="site-shell">
@@ -827,7 +886,18 @@
 </div>
         </section>
       </div>
-</main>
+
+          <section class="username-bottom-cta">
+            <div class="username-custom-cta">
+              <div class="username-custom-cta-text">
+                <strong>Не нашли подходящий username?</strong>
+                Подберём вариант под ваш бюджет, стиль и задачу проекта.
+              </div>
+              <a class="btn btn-primary username-custom-btn" href="https://t.me/SovaDS" target="_blank" rel="noopener">Подобрать username</a>
+            </div>
+          </section>
+
+    </main>
     <div id="footer-placeholder"></div>
   </div>
   <script src="/script.js"></script>
