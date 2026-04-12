@@ -29,11 +29,11 @@
 
   <style>
     :root {
-      --line: rgba(255, 255, 255, 0.08);
+      --line: rgba(255,255,255,0.08);
       --text: #f5f7ff;
-      --muted: rgba(230, 235, 255, 0.72);
-      --muted-2: rgba(230, 235, 255, 0.56);
-      --shadow: 0 14px 40px rgba(0, 0, 0, 0.26);
+      --muted: rgba(230,235,255,0.72);
+      --muted-2: rgba(230,235,255,0.56);
+      --shadow: 0 14px 40px rgba(0,0,0,0.26);
       --radius-xl: 28px;
       --content-width: 1380px;
     }
@@ -47,7 +47,7 @@
       color: var(--text);
       background:
         radial-gradient(circle at 0% 16%, rgba(126, 18, 72, 0.28), transparent 32%),
-        radial-gradient(circle at 100% 18%, rgba(17, 38, 135, 0.2), transparent 26%),
+        radial-gradient(circle at 100% 18%, rgba(17, 38, 135, 0.20), transparent 26%),
         linear-gradient(180deg, #02020a 0%, #050512 30%, #050614 100%);
       min-height: 100vh;
     }
@@ -64,7 +64,7 @@
     .page-wrap {
       width: min(var(--content-width), calc(100% - 40px));
       margin: 0 auto;
-      padding: 34px 0 80px;
+      padding: 26px 0 80px;
     }
 
     .post-layout {
@@ -75,7 +75,7 @@
     }
 
     .glass-card {
-      background: linear-gradient(180deg, rgba(15, 18, 42, 0.88), rgba(8, 10, 27, 0.94));
+      background: linear-gradient(180deg, rgba(15, 18, 42, 0.90), rgba(8, 10, 27, 0.96));
       border: 1px solid var(--line);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
@@ -85,16 +85,15 @@
 
     .post-main { min-width: 0; }
 
-    .post-hero {
-      padding: 28px 30px 26px;
-      margin-bottom: 18px;
+    .post-card {
+      padding: 24px 28px 28px;
     }
 
     .breadcrumb {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin: 0 0 18px;
+      margin: 0 0 14px;
       font-size: 14px;
       line-height: 1.5;
       color: var(--muted-2);
@@ -105,8 +104,8 @@
     .meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      margin: 0 0 18px;
+      gap: 14px;
+      margin: 0 0 16px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.45;
@@ -115,48 +114,46 @@
     .meta-item {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .meta-label { color: var(--muted-2); }
 
     .post-title {
       margin: 0;
-      font-size: clamp(30px, 4vw, 56px);
-      line-height: 1.02;
-      letter-spacing: -0.035em;
-      max-width: 960px;
+      font-size: clamp(24px, 2.2vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 900px;
     }
 
     .post-excerpt {
-      margin: 18px 0 0;
-      max-width: 860px;
-      font-size: 18px;
-      line-height: 1.72;
+      margin: 14px 0 18px;
+      max-width: 820px;
+      font-size: 16px;
+      line-height: 1.7;
       color: var(--muted);
     }
 
     .post-cover {
       overflow: hidden;
-      margin-bottom: 18px;
-      border-radius: 26px;
+      margin: 0 0 22px;
+      border-radius: 22px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.02);
     }
 
     .post-cover img {
       width: 100%;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16 / 8.5;
       object-fit: cover;
-      max-height: 430px;
+      max-height: 360px;
     }
 
-    .post-body-card { padding: 30px; }
-
     .post-content {
-      font-size: 17px;
-      line-height: 1.82;
-      color: rgba(241, 243, 255, 0.9);
+      font-size: 16px;
+      line-height: 1.78;
+      color: rgba(241,243,255,0.9);
       word-wrap: break-word;
     }
 
@@ -168,48 +165,49 @@
     .post-content h4 {
       color: #ffffff;
       letter-spacing: -0.03em;
-      margin: 34px 0 14px;
-      line-height: 1.18;
+      margin: 28px 0 12px;
+      line-height: 1.22;
     }
 
-    .post-content h2 { font-size: clamp(25px, 2.2vw, 34px); }
-    .post-content h3 { font-size: clamp(21px, 1.8vw, 28px); }
-    .post-content h4 { font-size: 20px; }
-    .post-content p { margin: 0 0 16px; }
+    .post-content h2 { font-size: clamp(22px, 1.8vw, 30px); }
+    .post-content h3 { font-size: clamp(19px, 1.5vw, 24px); }
+    .post-content h4 { font-size: 18px; }
+
+    .post-content p { margin: 0 0 15px; }
 
     .post-content ul,
     .post-content ol {
-      margin: 0 0 18px;
-      padding-left: 24px;
+      margin: 0 0 16px;
+      padding-left: 22px;
     }
 
-    .post-content li + li { margin-top: 8px; }
+    .post-content li + li { margin-top: 7px; }
 
     .post-content blockquote {
-      margin: 26px 0;
-      padding: 18px 20px;
+      margin: 22px 0;
+      padding: 16px 18px;
       border-left: 3px solid rgba(154, 124, 255, 0.8);
-      border-radius: 0 18px 18px 0;
-      background: rgba(255, 255, 255, 0.028);
-      color: rgba(244, 246, 255, 0.94);
+      border-radius: 0 16px 16px 0;
+      background: rgba(255,255,255,0.028);
+      color: rgba(244,246,255,0.94);
     }
 
     .post-content a {
       color: #c8d8ff;
       text-decoration: underline;
-      text-decoration-color: rgba(200, 216, 255, 0.45);
+      text-decoration-color: rgba(200,216,255,0.45);
       text-underline-offset: 3px;
     }
 
     .post-content hr {
       border: 0;
       border-top: 1px solid var(--line);
-      margin: 26px 0;
+      margin: 24px 0;
     }
 
     .post-content img {
-      margin: 20px auto;
-      border-radius: 20px;
+      margin: 18px auto;
+      border-radius: 18px;
       border: 1px solid var(--line);
     }
 
@@ -219,8 +217,8 @@
       gap: 12px;
       align-items: center;
       justify-content: space-between;
-      margin-top: 34px;
-      padding-top: 22px;
+      margin-top: 28px;
+      padding-top: 20px;
       border-top: 1px solid var(--line);
     }
 
@@ -233,7 +231,7 @@
     .tag-chip {
       padding: 9px 13px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.03);
       color: var(--muted);
       font-size: 13px;
@@ -260,10 +258,10 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 42px;
-      padding: 0 16px;
+      min-height: 40px;
+      padding: 0 15px;
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.03);
       color: #ffffff;
       transition: 0.22s ease;
@@ -303,7 +301,7 @@
     .aside-list { display: grid; gap: 12px; }
 
     .aside-item {
-      padding: 14px 14px 15px;
+      padding: 14px;
       border-radius: 18px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.018);
@@ -362,14 +360,8 @@
       gap: 10px;
     }
 
-    .service-btn {
-      min-height: 40px;
-      padding-inline: 14px;
-      font-size: 14px;
-    }
-
     .empty-state {
-      padding: 40px 28px;
+      padding: 32px 24px;
       text-align: center;
       color: var(--muted);
     }
@@ -405,26 +397,21 @@
     @media (max-width: 860px) {
       .page-wrap {
         width: min(100% - 24px, var(--content-width));
-        padding-top: 22px;
+        padding-top: 20px;
       }
 
-      .post-hero,
-      .post-body-card { padding: 22px 18px; }
+      .post-card { padding: 20px 18px 22px; }
 
-      .post-title { font-size: clamp(28px, 7vw, 42px); }
+      .post-title { font-size: clamp(22px, 7vw, 34px); }
 
-      .post-excerpt {
-        font-size: 16px;
-        line-height: 1.65;
-      }
-
+      .post-excerpt,
       .post-content {
-        font-size: 16px;
-        line-height: 1.76;
+        font-size: 15px;
+        line-height: 1.72;
       }
 
       .post-aside { grid-template-columns: 1fr; }
-      .post-cover img { max-height: 320px; }
+      .post-cover img { max-height: 270px; }
     }
 
     @media (max-width: 560px) {
@@ -432,18 +419,14 @@
       .meta-row { font-size: 13px; }
 
       .post-title {
-        font-size: 29px;
-        line-height: 1.06;
+        font-size: 24px;
+        line-height: 1.14;
       }
-
-      .post-cover { border-radius: 22px; }
 
       .post-cover img {
         aspect-ratio: 16 / 10;
-        max-height: 260px;
+        max-height: 230px;
       }
-
-      .post-end { align-items: flex-start; }
     }
   </style>
 
@@ -479,8 +462,8 @@
     <main class="page-wrap">
       <div class="post-layout">
         <section class="post-main">
-          <article class="post-hero glass-card">
-            <nav class="breadcrumb" id="breadcrumb" aria-label="Навигационная цепочка">
+          <article class="post-card glass-card" itemscope itemtype="https://schema.org/Article">
+            <nav class="breadcrumb" aria-label="Навигационная цепочка">
               <a href="/">Главная</a>
               <span>/</span>
               <a href="/blog.html">Блог</a>
@@ -492,17 +475,13 @@
               <span class="loader">Загружаю публикацию</span>
             </div>
 
-            <h1 class="post-title" id="post-title">Публикация SovaZone</h1>
+            <h1 class="post-title" id="post-title" itemprop="headline">Публикация SovaZone</h1>
             <p class="post-excerpt" id="post-excerpt"></p>
-          </article>
 
-          <div class="post-cover glass-card" id="post-cover" hidden>
-            <img id="post-cover-image" src="" alt="" loading="eager" />
-          </div>
+            <div class="post-cover" id="post-cover" hidden>
+              <img id="post-cover-image" src="" alt="" loading="eager" itemprop="image" />
+            </div>
 
-          <article class="post-body-card glass-card" itemscope itemtype="https://schema.org/Article">
-            <meta itemprop="publisher" content="SovaZone" />
-            <meta itemprop="mainEntityOfPage" content="https://sovazone.com/post.html" />
             <div class="post-content" id="post-content" itemprop="articleBody">
               <div class="empty-state">
                 <span class="loader">Подготавливаю содержимое</span>
@@ -522,12 +501,12 @@
         </section>
 
         <aside class="post-aside">
-          <section class="aside-card" id="featured-card">
+          <section class="aside-card">
             <h2 class="aside-title">Избранные материалы</h2>
             <div class="aside-list" id="featured-list"></div>
           </section>
 
-          <section class="aside-card" id="latest-card">
+          <section class="aside-card">
             <h2 class="aside-title">Последние статьи</h2>
             <div class="aside-list" id="latest-list"></div>
           </section>
