@@ -38,6 +38,10 @@
   <link rel="stylesheet" href="/styles.css">
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     .post-page { position: relative; overflow: hidden; }
 
     .post-page::before,
@@ -203,8 +207,13 @@
     .post-content h3 { font-size: clamp(20px, 2vw, 26px); }
     .post-content h4 { font-size: clamp(18px, 1.8vw, 22px); }
     .post-content p { margin: 0 0 18px; }
+
     .post-content ul,
-    .post-content ol { margin: 0 0 18px; padding-left: 24px; }
+    .post-content ol {
+      margin: 0 0 18px;
+      padding-left: 24px;
+    }
+
     .post-content li { margin-bottom: 8px; }
     .post-content strong { color: #ffffff; font-weight: 700; }
     .post-content a { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; word-break: break-word; }
@@ -334,19 +343,6 @@
       padding: 20px;
     }
 
-    .post-side-panel--accent {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, rgba(132, 36, 93, 0.34), rgba(74, 22, 66, 0.18) 56%, rgba(0,0,0,0) 100%);
-      border-color: rgba(214, 103, 167, 0.16);
-    }
-
-    .post-side-panel--accent::before {
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0) 42%),
-        radial-gradient(circle at top right, rgba(228, 110, 180, 0.12), rgba(228, 110, 180, 0) 48%);
-    }
-
     .post-side-title {
       margin: 0 0 14px;
       font-size: 18px;
@@ -409,6 +405,48 @@
       color: rgba(255,255,255,0.82);
     }
 
+    .scroll-top-btn {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 60;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(13, 17, 38, 0.92);
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease, border-color .2s ease, background .2s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .scroll-top-btn:hover {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(18, 24, 52, 0.96);
+      transform: translateY(-2px);
+    }
+
+    .scroll-top-btn.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .scroll-top-btn svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
     @media (max-width: 1160px) {
       .post-grid { grid-template-columns: 1fr; }
       .post-sidebar { position: static; top: auto; }
@@ -417,6 +455,7 @@
     @media (max-width: 900px) {
       .post-article,
       .post-side-panel { border-radius: 24px; }
+
       .post-article { padding: 24px 18px 22px; }
       .post-title { font-size: clamp(24px, 6.6vw, 34px); }
       .post-cover { height: 220px; max-height: 220px; border-radius: 18px; }
@@ -425,6 +464,13 @@
       .post-content img + em,
       .post-content p > em:only-child { width: 100%; }
       .post-bottom { align-items: flex-start; }
+
+      .scroll-top-btn {
+        right: 16px;
+        bottom: 16px;
+        width: 44px;
+        height: 44px;
+      }
     }
   </style>
 
@@ -541,7 +587,7 @@
                   </div>
                 </section>
 
-                <section class="post-side-panel post-side-panel--accent">
+                <section class="post-side-panel">
                   <h2 class="post-side-title">Услуги</h2>
                   <div class="post-side-list">
                     <a class="post-side-link" href="/services/custom-username.html">
@@ -567,6 +613,13 @@
         </section>
       </div>
     </main>
+
+    <button class="scroll-top-btn" id="scroll-top-btn" type="button" aria-label="Наверх">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5"></path>
+        <path d="m5 12 7-7 7 7"></path>
+      </svg>
+    </button>
 
     <div id="footer-placeholder"></div>
   </div>
@@ -786,6 +839,26 @@
       } catch (e) {}
     }
 
+    function initScrollTopButton() {
+      const btn = document.getElementById("scroll-top-btn");
+      if (!btn) return;
+
+      const toggle = () => {
+        if (window.scrollY > 500) {
+          btn.classList.add("is-visible");
+        } else {
+          btn.classList.remove("is-visible");
+        }
+      };
+
+      window.addEventListener("scroll", toggle, { passive: true });
+      toggle();
+
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
     async function loadPost() {
       const slug = getSlug();
       const contentEl = document.getElementById("post-content");
@@ -850,6 +923,7 @@
       }
     }
 
+    initScrollTopButton();
     loadPost();
   </script>
 </body>
