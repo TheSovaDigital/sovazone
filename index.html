@@ -6,81 +6,62 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
   <title>SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка</title>
-  <meta name="description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
+  <meta name="description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, выбрать формат старта, получить консультацию и digital-поддержку.">
   <link rel="canonical" href="https://sovazone.com/">
+
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
   <meta property="og:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
-  <meta property="og:description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
+  <meta property="og:description" content="Никнеймы для Instagram, запуск профиля, подбор username, консультации и digital-поддержка от SovaZone.">
   <meta property="og:url" content="https://sovazone.com/">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
-  <meta name="twitter:description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
+  <meta name="twitter:description" content="Никнеймы для Instagram, запуск профиля, подбор username, консультации и digital-поддержка от SovaZone.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+
   <link rel="stylesheet" href="/styles.css">
+
   <style>
-    .section-how,
-    .section-projects,
-    .section-why {
-      position: relative;
-    }
-
-    .section-how .section-head,
-    .section-projects .section-head,
-    .section-why .section-head {
-      margin-bottom: 18px;
-    }
-
-    .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      padding: 7px 12px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      color: rgba(255,255,255,.72);
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .section-note {
-      max-width: 760px;
-      color: rgba(255,255,255,.72);
+    .section.section-usernames-showcase + .section {
+      margin-top: 10px;
     }
 
     .steps-grid {
-      align-items: stretch;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step-card,
+    .project-card,
+    .trust-card {
+      height: 100%;
     }
 
     .step-card {
-      min-height: 100%;
-      border: 1px solid rgba(255,255,255,.07);
-      background: linear-gradient(180deg, rgba(17,20,34,.76), rgba(10,12,24,.88));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
-    }
-
-    .step-card p,
-    .project-card p,
-    .trust-card p {
-      text-wrap: pretty;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 210px;
     }
 
     .step-headline {
+      display: flex;
       align-items: flex-start;
       gap: 14px;
       margin-bottom: 14px;
@@ -88,24 +69,26 @@
 
     .step-number {
       flex: 0 0 auto;
-      min-width: 34px;
-      height: 34px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border: 1px solid rgba(255,255,255,.08);
-      font-size: 12px;
-      letter-spacing: .08em;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      padding-top: 5px;
     }
 
-    .step-card h3,
-    .project-card h3 {
-      line-height: 1.15;
+    .step-headline h3 {
+      margin: 0;
+      line-height: 1.08;
+      max-width: 14ch;
     }
 
-    .project-showcase {
+    .section-bottom-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .projects-grid-refined {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
@@ -115,30 +98,33 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 100%;
-      border: 1px solid rgba(255,255,255,.07);
-      background: linear-gradient(180deg, rgba(16,18,32,.84), rgba(9,11,22,.94));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      min-height: 236px;
     }
 
+    .project-card h3 {
+      margin-bottom: 12px;
+    }
+
+    .project-card p {
+      margin-bottom: 18px;
+    }
+
+    .project-card .btn,
+    .project-card a.btn,
     .project-card a {
-      margin-top: 18px;
-      font-weight: 600;
+      margin-top: auto;
+      align-self: flex-start;
     }
 
     .trust-card {
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,.08);
-      background:
-        radial-gradient(circle at top right, rgba(108,92,231,.10), transparent 34%),
-        radial-gradient(circle at bottom left, rgba(90,132,255,.08), transparent 28%),
-        linear-gradient(180deg, rgba(16,18,31,.92), rgba(10,12,24,.98));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
     }
 
-    .trust-content {
-      align-items: center;
-      gap: 28px;
+    .trust-content-refined {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
     }
 
     .trust-copy h2 {
@@ -149,18 +135,68 @@
       margin-top: 12px;
     }
 
-    .trust-actions {
-      min-width: min(100%, 320px);
+    .trust-points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
     }
 
-    .trust-actions .btn {
+    .trust-point {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 14px 15px;
+      background: rgba(255,255,255,0.015);
+    }
+
+    .trust-point strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .trust-point span {
+      display: block;
+      font-size: 14px;
+      line-height: 1.55;
+      opacity: 0.86;
+    }
+
+    .trust-actions-refined {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .trust-actions-refined .btn {
       width: 100%;
       justify-content: center;
     }
 
-    @media (max-width: 1080px) {
-      .project-showcase {
+    @media (max-width: 1100px) {
+      .steps-grid,
+      .projects-grid-refined {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .trust-content-refined {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .steps-grid,
+      .projects-grid-refined,
+      .trust-points {
+        grid-template-columns: 1fr;
+      }
+
+      .step-card,
+      .project-card {
+        min-height: unset;
       }
     }
   </style>
@@ -177,13 +213,11 @@
         "url": "https://sovazone.com/",
         "logo": "https://sovazone.com/logo.png",
         "image": "https://sovazone.com/og-image.png",
-        "sameAs": ["https://t.me/SovaDigital","https://t.me/SovaDS","https://sovads.ru/"],
-        "contactPoint": [{
-          "@type": "ContactPoint",
-          "contactType": "customer support",
-          "url": "https://t.me/SovaDS",
-          "availableLanguage": ["Russian", "English"]
-        }],
+        "sameAs": [
+          "https://t.me/SovaDigital",
+          "https://t.me/SovaDS",
+          "https://sovads.ru/"
+        ],
         "description": "SovaZone — digital studio и проект по продаже никнеймов, подбору username, запуску профилей и digital-поддержке."
       },
       {
@@ -192,16 +226,25 @@
         "url": "https://sovazone.com/",
         "name": "SovaZone",
         "inLanguage": "ru-RU",
-        "publisher": {"@id": "https://sovazone.com/#organization"}
+        "publisher": {
+          "@id": "https://sovazone.com/#organization"
+        }
       },
       {
         "@type": "WebPage",
         "@id": "https://sovazone.com/#webpage",
         "url": "https://sovazone.com/",
         "name": "SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка",
-        "isPartOf": {"@id": "https://sovazone.com/#website"},
-        "about": {"@id": "https://sovazone.com/#organization"},
-        "primaryImageOfPage": {"@type": "ImageObject","url": "https://sovazone.com/og-image.png"},
+        "isPartOf": {
+          "@id": "https://sovazone.com/#website"
+        },
+        "about": {
+          "@id": "https://sovazone.com/#organization"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://sovazone.com/og-image.png"
+        },
         "description": "SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы и выбрать формат старта.",
         "inLanguage": "ru-RU"
       }
@@ -212,24 +255,34 @@
 <body>
   <div class="site-shell">
     <div id="header-placeholder"></div>
+
     <main class="page-content">
       <div class="container">
         <section class="hero hero-split">
           <div class="hero-side">
-            <div class="hero-badge-wrap"><div class="hero-badge hero-badge-static">SovaZone Digital Studio</div></div>
-            <div class="hero-logo-card"><img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio"></div>
+            <div class="hero-badge-wrap">
+              <div class="hero-badge hero-badge-static">SovaZone Digital Studio</div>
+            </div>
+
+            <div class="hero-logo-card">
+              <img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio">
+            </div>
+
             <div class="hero-side-actions">
               <a class="btn btn-primary btn-full" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать</a>
               <a class="btn btn-secondary btn-full" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
             </div>
           </div>
+
           <div class="hero-content">
             <h1>Запуск личного бренда и новых digital-проектов</h1>
+
             <div class="hero-text-block">
               <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетях, запустить профиль или новый проект, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
               <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, перенос никнейма, консультации, помощь с аккаунтами, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
-              <p>Мы помогаем выбрать основу для старта: имя пользователя (юзернейм), формат профиля, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
+              <p>Мы помогаем выбрать основу для старта: имя пользователя, формат профиля, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
             </div>
+
             <div class="hero-mini-points">
               <a href="usernames.html" class="mini-point">Купить ник</a>
               <a href="sell.html" class="mini-point">Продать ник</a>
@@ -244,6 +297,7 @@
             <h2>Популярные никнеймы для Instagram</h2>
             <a class="btn btn-secondary section-head-btn" href="usernames.html">Смотреть каталог</a>
           </div>
+
           <div class="username-grid">
             <article class="username-card">
               <div class="username-card-top">
@@ -262,6 +316,7 @@
               </div>
               <a class="btn btn-primary username-buy" href="username/m4d.html">Купить</a>
             </article>
+
             <article class="username-card">
               <div class="username-card-top">
                 <div class="username-title-row">
@@ -279,6 +334,7 @@
               </div>
               <a class="btn btn-primary username-buy" href="username/o05.html">Купить</a>
             </article>
+
             <article class="username-card">
               <div class="username-card-top">
                 <div class="username-title-row">
@@ -296,6 +352,7 @@
               </div>
               <a class="btn btn-primary username-buy" href="username/krot.html">Купить</a>
             </article>
+
             <article class="username-card">
               <div class="username-card-top">
                 <div class="username-title-row">
@@ -313,6 +370,7 @@
               </div>
               <a class="btn btn-primary username-buy" href="username/tryd.html">Купить</a>
             </article>
+
             <article class="username-card">
               <div class="username-card-top">
                 <div class="username-title-row">
@@ -330,6 +388,7 @@
               </div>
               <a class="btn btn-primary username-buy" href="username/podlets.html">Купить</a>
             </article>
+
             <article class="username-card">
               <div class="username-card-top">
                 <div class="username-title-row">
@@ -347,6 +406,7 @@
               </div>
               <a class="btn btn-primary username-buy" href="username/koketka.html">Купить</a>
             </article>
+
             <article class="username-card">
               <div class="username-card-top">
                 <div class="username-title-row">
@@ -364,6 +424,7 @@
               </div>
               <a class="btn btn-primary username-buy" href="username/deluks.html">Купить</a>
             </article>
+
             <article class="username-card">
               <div class="username-card-top">
                 <div class="username-title-row">
@@ -384,85 +445,108 @@
           </div>
         </section>
 
-        <section class="section section-how">
+        <section class="section">
           <div class="section-head">
-            <div class="section-kicker">Старт без лишнего шума</div>
             <h2>Как мы работаем</h2>
-            <p class="section-note">Нижнюю часть собрала компактнее и чище: без лишних блоков, с ровной логикой движения от выбора никнейма до запуска.</p>
           </div>
+
           <div class="steps-grid">
             <div class="card step-card">
               <div class="step-headline">
                 <div class="step-number">01</div>
-                <h3>Вы изучаете варианты</h3>
+                <h3>Вы изучаете возможности</h3>
               </div>
-              <p>Смотрите доступные никнеймы, каталог, статьи и направления экосистемы, чтобы понять, какой формат старта вам подходит.</p>
+              <p>Смотрите каталог никнеймов, доступные форматы запуска и основные направления работы.</p>
             </div>
+
             <div class="card step-card">
               <div class="step-headline">
                 <div class="step-number">02</div>
-                <h3>Пишете нам в Telegram</h3>
+                <h3>Пишете нам</h3>
               </div>
-              <p>Обсуждаем задачу, желаемый username, платформу, сроки и детали. Без перегруженных форм и лишних шагов.</p>
+              <p>Основной формат связи — через Telegram, где обсуждаются детали, задача и желаемый результат.</p>
             </div>
+
             <div class="card step-card">
               <div class="step-headline">
                 <div class="step-number">03</div>
-                <h3>Подбираем решение</h3>
+                <h3>Мы подбираем решение</h3>
               </div>
-              <p>Предлагаем оптимальный вариант: готовый никнейм, индивидуальный поиск, сопровождение по аккаунту или нужное направление запуска.</p>
+              <p>Определяем подходящий никнейм, формат услуги и оптимальный сценарий запуска аккаунта или проекта.</p>
             </div>
+
             <div class="card step-card">
               <div class="step-headline">
                 <div class="step-number">04</div>
-                <h3>Переходим к запуску</h3>
+                <h3>Запускаем старт</h3>
               </div>
-              <p>После согласования двигаемся дальше: оформление сделки, подготовка проекта или подключение дополнительной поддержки.</p>
+              <p>После согласования переходим к покупке, сопровождению или подключению нужной услуги без лишней перегрузки страницы.</p>
             </div>
           </div>
         </section>
 
-        <section class="section section-projects">
+        <section class="section section-bottom-stack">
           <div class="section-head">
-            <div class="section-kicker">Экосистема SovaZone</div>
             <h2>Проекты</h2>
-            <p class="lead section-note">Ключевые направления, которые логично продолжают главный экран и не перегружают нижнюю часть страницы.</p>
+            <p class="lead">Основные направления экосистемы SovaZone с коротким и понятным переходом в нужный раздел.</p>
           </div>
-          <div class="project-showcase">
+
+          <div class="projects-grid-refined">
             <article class="card project-card">
               <div>
                 <h3>SovaDS</h3>
-                <p>Онлайн магазин никнеймов с готовыми вариантами для быстрого старта, покупки и выбора usernames под разные задачи.</p>
+                <p>Онлайн магазин никнеймов с готовыми вариантами для быстрого старта, подбора аккаунта и покупки username без долгого поиска.</p>
               </div>
-              <a href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту →</a>
+              <a class="btn btn-secondary" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту</a>
             </article>
+
             <article class="card project-card">
               <div>
                 <h3>SovaUsername</h3>
-                <p>Направление, связанное с продажей никнеймов и размещением предложений, где пользователи могут публиковать свои usernames.</p>
+                <p>Отдельное направление, связанное с продажей username и размещением объявлений о продаже никнеймов внутри экосистемы.</p>
               </div>
-              <a href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал →</a>
+              <a class="btn btn-secondary" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал</a>
             </article>
+
             <article class="card project-card">
               <div>
                 <h3>Блог и статьи</h3>
-                <p>Полезные материалы по социальным сетям, безопасности аккаунтов, никнеймам, брендингу и digital-среде без визуального мусора.</p>
+                <p>Полезные материалы, разборы, новости и статьи по темам социальных сетей, брендинга, безопасности аккаунтов и digital-среды.</p>
               </div>
-              <a href="blog.html">Открыть раздел →</a>
+              <a class="btn btn-secondary" href="blog.html">Открыть раздел</a>
             </article>
           </div>
         </section>
 
-        <section class="section section-why">
+        <section class="section">
           <div class="card trust-card">
-            <div class="trust-content">
+            <div class="trust-content-refined">
               <div class="trust-copy">
-                <div class="section-kicker">Почему выбирают SovaZone</div>
-                <h2>Основа для аккуратного digital-старта</h2>
-                <p>SovaZone фокусируется на том, что действительно важно в начале: сильный username, понятная точка входа, грамотный формат запуска и решение технических вопросов без лишней суеты.</p>
-                <p>Основная связь идёт через Telegram. Сначала обсуждаются детали и задача, затем подбирается оптимальный путь, и только после этого принимается финальное решение по запуску или сделке.</p>
+                <h2>Почему SovaZone</h2>
+                <p>Мы фокусируемся на том, что действительно важно на старте: имя пользователя, понятный маршрут запуска, технические детали и аккуратный выбор формата без визуального перегруза и лишних блоков.</p>
+                <p>Основной формат работы — личный контакт через Telegram. Перед продажей или подключением услуги обсуждаются детали, после чего подбирается наиболее подходящее решение под задачу, нишу и формат проекта.</p>
+
+                <div class="trust-points">
+                  <div class="trust-point">
+                    <strong>Понятный старт</strong>
+                    <span>Без лишней путаницы: каталог, связь, согласование и запуск в понятной последовательности.</span>
+                  </div>
+                  <div class="trust-point">
+                    <strong>Фокус на username</strong>
+                    <span>Никнейм рассматривается как основа для личного бренда, проекта или нового аккаунта.</span>
+                  </div>
+                  <div class="trust-point">
+                    <strong>Личный контакт</strong>
+                    <span>Обсуждение задачи напрямую в Telegram без перегруженных анкет и лишних промежуточных шагов.</span>
+                  </div>
+                  <div class="trust-point">
+                    <strong>Аккуратная подача</strong>
+                    <span>Минималистичная структура страницы с упором на полезные переходы и чистую визуальную логику.</span>
+                  </div>
+                </div>
               </div>
-              <div class="trust-actions">
+
+              <div class="trust-actions-refined">
                 <a class="btn btn-primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать</a>
                 <a class="btn btn-secondary" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Telegram канал SovaDigital</a>
                 <a class="btn btn-secondary" href="info.html">Подробнее о студии</a>
@@ -472,8 +556,10 @@
         </section>
       </div>
     </main>
+
     <div id="footer-placeholder"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
