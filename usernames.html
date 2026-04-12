@@ -41,50 +41,46 @@
   </script>
 
   <style>
-    .username-title-row{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .username-name-link{
-      color:inherit;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-    }
-    .username-name-link:hover .username-name{
-      opacity:.92;
+          opacity:.92;
     }
     .username-price{color:inherit;font-weight:700;letter-spacing:.01em;}
     .username-buy{min-height:31px !important;padding:0 12px !important;border-radius:11px !important;font-size:13px !important;line-height:1 !important;}
   
-    .username-grid{
-      display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr));
-      gap:14px;
-    }
-    @media (max-width: 1280px){
-      .username-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
-    }
-    @media (max-width: 1024px){
-      .username-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
-    }
-    @media (max-width: 760px){
-      .username-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-    }
+    .username-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+    @media (max-width: 1180px){.username-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+    @media (max-width: 520px){.username-grid{grid-template-columns:1fr;}}
     @media (max-width: 520px){
       .username-grid{grid-template-columns:1fr;}
     }
 
   
+          min-width:0;
+      max-width:100%;
+      font-size:clamp(20px, 1.65vw, 28px) !important;
+      line-height:1.05 !important;
+      letter-spacing:-0.03em !important;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+    }
+
+  
     .username-title-row{
-      align-items:flex-start !important;
-      gap:8px !important;
+      display:flex;
+      align-items:center !important;
+      gap:10px !important;
       min-width:0;
     }
     .username-title-row .platform-icon{
-      flex:0 0 auto;
-      margin-top:3px;
+      flex:0 0 20px;
+      width:20px;
+      height:20px;
+      margin-top:0;
+      color:transparent !important;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      font-size:20px !important;
+      line-height:1;
     }
     .username-name-link{
       min-width:0;
@@ -95,11 +91,12 @@
     .username-name{
       min-width:0;
       max-width:100%;
-      font-size:clamp(20px, 1.65vw, 28px) !important;
-      line-height:1.05 !important;
-      letter-spacing:-0.03em !important;
-      overflow-wrap:anywhere;
-      word-break:break-word;
+      font-size:clamp(18px, 1.5vw, 28px) !important;
+      line-height:1.02 !important;
+      letter-spacing:-0.028em !important;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
 
   </style>
