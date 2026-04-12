@@ -55,12 +55,8 @@
     .username-name-link:hover .username-name{
       opacity:.92;
     }
-    .username-price{
-      color:#d9b56b;
-      font-weight:700;
-      letter-spacing:.01em;
-    }
-    .username-buy{min-height:36px !important;padding:0 14px !important;border-radius:12px !important;font-size:14px !important;line-height:1.1 !important;}
+    .username-price{color:inherit;font-weight:700;letter-spacing:.01em;}
+    .username-buy{min-height:31px !important;padding:0 12px !important;border-radius:11px !important;font-size:13px !important;line-height:1 !important;}
   
     .username-grid{
       display:grid;
@@ -78,6 +74,32 @@
     }
     @media (max-width: 520px){
       .username-grid{grid-template-columns:1fr;}
+    }
+
+  
+    .username-title-row{
+      align-items:flex-start !important;
+      gap:8px !important;
+      min-width:0;
+    }
+    .username-title-row .platform-icon{
+      flex:0 0 auto;
+      margin-top:3px;
+    }
+    .username-name-link{
+      min-width:0;
+      max-width:100%;
+      display:block;
+      flex:1 1 auto;
+    }
+    .username-name{
+      min-width:0;
+      max-width:100%;
+      font-size:clamp(20px, 1.65vw, 28px) !important;
+      line-height:1.05 !important;
+      letter-spacing:-0.03em !important;
+      overflow-wrap:anywhere;
+      word-break:break-word;
     }
 
   </style>
