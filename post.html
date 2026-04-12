@@ -38,10 +38,7 @@
   <link rel="stylesheet" href="/styles.css">
 
   <style>
-    .post-page {
-      position: relative;
-      overflow: hidden;
-    }
+    .post-page { position: relative; overflow: hidden; }
 
     .post-page::before,
     .post-page::after {
@@ -96,9 +93,9 @@
         linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
         linear-gradient(135deg, rgba(35, 39, 74, 0.18), rgba(0,0,0,0));
       border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 30px;
       box-shadow: none !important;
       filter: none !important;
-      border-radius: 30px;
     }
 
     .post-article::before,
@@ -116,9 +113,7 @@
       z-index: 1;
     }
 
-    .post-article {
-      padding: 28px 30px 30px;
-    }
+    .post-article { padding: 28px 30px 30px; }
 
     .post-breadcrumb {
       margin: 0 0 18px;
@@ -158,9 +153,7 @@
       gap: 6px;
     }
 
-    .post-meta-label {
-      opacity: 0.55;
-    }
+    .post-meta-label { opacity: 0.55; }
 
     .post-excerpt {
       display: none;
@@ -205,47 +198,16 @@
       text-wrap: balance;
     }
 
-    .post-content h1 {
-      display: none;
-    }
-
-    .post-content h2 {
-      font-size: clamp(24px, 2.3vw, 32px);
-    }
-
-    .post-content h3 {
-      font-size: clamp(20px, 2vw, 26px);
-    }
-
-    .post-content h4 {
-      font-size: clamp(18px, 1.8vw, 22px);
-    }
-
-    .post-content p {
-      margin: 0 0 18px;
-    }
-
+    .post-content h1 { display: none; }
+    .post-content h2 { font-size: clamp(24px, 2.3vw, 32px); }
+    .post-content h3 { font-size: clamp(20px, 2vw, 26px); }
+    .post-content h4 { font-size: clamp(18px, 1.8vw, 22px); }
+    .post-content p { margin: 0 0 18px; }
     .post-content ul,
-    .post-content ol {
-      margin: 0 0 18px;
-      padding-left: 24px;
-    }
-
-    .post-content li {
-      margin-bottom: 8px;
-    }
-
-    .post-content strong {
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    .post-content a {
-      color: #ffffff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      word-break: break-word;
-    }
+    .post-content ol { margin: 0 0 18px; padding-left: 24px; }
+    .post-content li { margin-bottom: 8px; }
+    .post-content strong { color: #ffffff; font-weight: 700; }
+    .post-content a { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; word-break: break-word; }
 
     .post-content blockquote {
       margin: 28px 0;
@@ -360,7 +322,8 @@
 
     .post-sidebar {
       position: sticky;
-      top: 94px;
+      top: 20px;
+      margin-top: 0;
       display: flex;
       flex-direction: column;
       gap: 18px;
@@ -369,6 +332,19 @@
 
     .post-side-panel {
       padding: 20px;
+    }
+
+    .post-side-panel--accent {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(132, 36, 93, 0.34), rgba(74, 22, 66, 0.18) 56%, rgba(0,0,0,0) 100%);
+      border-color: rgba(214, 103, 167, 0.16);
+    }
+
+    .post-side-panel--accent::before {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0) 42%),
+        radial-gradient(circle at top right, rgba(228, 110, 180, 0.12), rgba(228, 110, 180, 0) 48%);
     }
 
     .post-side-title {
@@ -439,7 +415,8 @@
     }
 
     @media (max-width: 900px) {
-      .post-article, .post-side-panel { border-radius: 24px; }
+      .post-article,
+      .post-side-panel { border-radius: 24px; }
       .post-article { padding: 24px 18px 22px; }
       .post-title { font-size: clamp(24px, 6.6vw, 34px); }
       .post-cover { height: 220px; max-height: 220px; border-radius: 18px; }
@@ -564,7 +541,7 @@
                   </div>
                 </section>
 
-                <section class="post-side-panel">
+                <section class="post-side-panel post-side-panel--accent">
                   <h2 class="post-side-title">Услуги</h2>
                   <div class="post-side-list">
                     <a class="post-side-link" href="/services/custom-username.html">
