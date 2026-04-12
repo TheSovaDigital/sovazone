@@ -80,6 +80,7 @@
       flex-direction:column;
       gap:12px;
       width:min(290px, 100%);
+      flex:0 0 290px;
     }
     .hero-badge-wrap{
       margin-bottom:0;
@@ -123,7 +124,7 @@
     }
     .hero-actions-row{
       display:grid;
-      grid-template-columns:minmax(220px, 1.1fr) repeat(3, minmax(150px, 1fr));
+      grid-template-columns:minmax(220px, 1.12fr) repeat(3, minmax(150px, 1fr));
       gap:10px;
       align-items:stretch;
       margin-top:20px;
@@ -131,7 +132,8 @@
     .hero-actions-row .btn,
     .hero-actions-row .mini-point{
       min-height:48px;
-      display:inline-flex;
+      height:48px;
+      display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
@@ -140,6 +142,8 @@
       box-sizing:border-box;
       padding:0 16px;
       line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
     }
     .hero-side-actions{
       display:none;
@@ -283,6 +287,7 @@
     .username-grid-refined .username-buy{
       width:100%;
       min-height:32px;
+      height:32px;
       border-radius:11px;
       border:none;
       background:linear-gradient(90deg,#8c52ff,#ff6d6d);
@@ -291,10 +296,11 @@
       font-weight:600;
       line-height:1;
       text-decoration:none;
-      display:inline-flex;
+      display:flex;
       align-items:center;
       justify-content:center;
       transition:filter .18s ease, transform .18s ease;
+      white-space:nowrap;
     }
     .username-grid-refined .username-buy:hover{
       filter:brightness(1.04);
@@ -319,12 +325,13 @@
         linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
         linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
       border:1px solid rgba(255,255,255,.07);
+      min-height:100%;
       height:100%;
+      box-sizing:border-box;
     }
     .home-projects{
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
       gap:16px;
     }
     .home-about{
@@ -357,16 +364,18 @@
       gap:12px;
       margin-bottom:0;
       align-items:stretch;
+      grid-auto-rows:1fr;
     }
     .project-card{
-      display:grid;
-      grid-template-rows:auto 1fr 44px;
+      display:flex;
+      flex-direction:column;
       min-height:188px;
       padding:16px;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.06);
       background:rgba(255,255,255,.02);
       gap:12px;
+      box-sizing:border-box;
     }
     .project-card h3{
       margin:0 0 8px;
@@ -380,6 +389,7 @@
       font-size:14px;
       line-height:1.6;
       color:rgba(255,255,255,.72);
+      flex:1 1 auto;
     }
     .project-link{
       display:flex;
@@ -388,7 +398,8 @@
       text-align:center;
       height:44px;
       min-height:44px;
-      padding:0 12px;
+      max-height:44px;
+      padding:0 10px;
       border-radius:14px;
       text-decoration:none;
       color:#fff;
@@ -396,11 +407,14 @@
       background:rgba(255,255,255,.032);
       width:100%;
       font-weight:700;
-      font-size:13px;
-      line-height:1.05;
+      font-size:12px;
+      line-height:1;
       white-space:nowrap;
       overflow:hidden;
+      text-overflow:ellipsis;
       box-sizing:border-box;
+      margin-top:auto;
+      flex:0 0 44px;
       transition:border-color .18s ease, background .18s ease, transform .18s ease;
     }
     .project-link:hover{
@@ -412,6 +426,9 @@
 
     .work-inline{
       margin-top:0;
+      flex:1 1 auto;
+      display:flex;
+      flex-direction:column;
     }
     .work-inline-title{
       margin:0 0 12px;
@@ -421,6 +438,7 @@
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
       gap:12px;
+      align-items:stretch;
     }
     .step{
       padding:14px;
@@ -428,6 +446,7 @@
       border:1px solid rgba(255,255,255,.06);
       background:rgba(255,255,255,.02);
       min-height:128px;
+      box-sizing:border-box;
     }
     .step-head{
       display:flex;
@@ -492,6 +511,8 @@
       margin-top:auto;
       box-sizing:border-box;
       line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
       transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .about-btn:hover{
@@ -520,8 +541,8 @@
       .projects-work-wrap{
         grid-template-columns:1fr;
       }
-      .project-card{
-        grid-template-rows:auto 1fr 44px;
+      .project-link{
+        font-size:13px;
       }
     }
 
