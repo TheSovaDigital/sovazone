@@ -75,13 +75,87 @@
 
     .hero.hero-split{
       margin-bottom:8px;
+      align-items:flex-start;
+      gap:24px;
+    }
+
+    .hero-side{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .hero-badge-wrap{
+      margin-bottom:0;
+    }
+
+    .hero-badge.hero-badge-static{
+      min-height:0;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:13px;
+      line-height:1;
+      font-weight:600;
+      letter-spacing:.02em;
+      background:rgba(255,255,255,.025);
+      border:1px solid rgba(217,179,140,.16);
+      box-shadow:none;
+    }
+
+    .hero-logo-card{
+      overflow:hidden;
+    }
+
+    .hero-side-actions{
+      margin-top:0;
+      width:100%;
+    }
+
+    .hero-side-actions .btn{
+      min-height:48px;
+      border-radius:16px;
+      font-weight:700;
+      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
+      border:none;
+      box-shadow:0 14px 32px rgba(0,0,0,.20);
+    }
+
+    .hero-side-actions .btn:hover{
+      filter:brightness(1.03);
+      transform:translateY(-1px);
+    }
+
+    .hero-content{
+      min-width:0;
     }
 
     .hero-content h1{
-      font-size:clamp(30px, 2.45vw, 42px);
-      line-height:1.02;
+      margin:0 0 12px;
+      font-size:clamp(26px, 2vw, 36px);
+      line-height:1.03;
       letter-spacing:-0.04em;
       white-space:nowrap;
+      max-width:100%;
+    }
+
+    .hero-text-block{
+      max-width:100%;
+    }
+
+    .hero-mini-points{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:10px;
+      align-items:stretch;
+    }
+
+    .hero-mini-points .mini-point{
+      min-height:48px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
     }
 
     .section-usernames-showcase{
@@ -108,13 +182,16 @@
       position:relative;
       overflow:hidden;
       border-radius:24px;
-      padding:16px;
-      min-height:182px;
+      padding:14px;
+      min-height:152px;
       background:
         linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
         linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
       border:1px solid rgba(255,255,255,.06);
       transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
     .username-grid-refined .username-card:hover{
@@ -126,28 +203,13 @@
       box-shadow:0 16px 34px rgba(0,0,0,.20);
     }
 
-    .username-grid-refined .username-badge{
-      position:absolute;
-      top:12px;
-      right:12px;
-      width:18px;
-      height:18px;
-      font-size:0;
-    }
-
-    .username-grid-refined .username-badge::before{
-      content:"🔥";
-      font-size:14px;
-      line-height:1;
-    }
-
     .username-grid-refined .username-card-top{
       display:grid;
       grid-template-columns:minmax(0,1fr) auto;
-      grid-template-areas:"title title" "link price";
-      gap:8px 10px;
+      grid-template-areas:"title price" "link link";
+      gap:6px 10px;
       align-items:center;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
 
     .username-grid-refined .username-title-row{
@@ -162,30 +224,17 @@
       width:18px;
       height:18px;
       flex:0 0 18px;
-      display:inline-block;
-      position:relative;
-      background:rgba(255,255,255,.08);
-      border-radius:5px;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      opacity:.9;
     }
 
-    .username-grid-refined .platform-icon::before{
-      content:"";
-      position:absolute;
-      inset:3px;
-      border:1.6px solid #fff;
-      border-radius:4px;
-    }
-
-    .username-grid-refined .platform-icon::after{
-      content:"";
-      position:absolute;
-      width:3px;
-      height:3px;
-      border-radius:50%;
-      background:#fff;
-      top:4px;
-      right:4px;
+    .username-grid-refined .platform-icon svg{
+      width:18px;
+      height:18px;
+      display:block;
     }
 
     .username-grid-refined .username-name-link{
@@ -197,8 +246,8 @@
     }
 
     .username-grid-refined .username-name{
-      font-size:clamp(16px, 1.25vw, 23px);
-      line-height:1.04;
+      font-size:clamp(16px, 1.15vw, 22px);
+      line-height:1.02;
       letter-spacing:-.024em;
       color:#fff;
       white-space:nowrap;
@@ -212,8 +261,8 @@
       min-width:0;
       display:block;
       font-size:13px;
-      line-height:1.3;
-      color:rgba(255,255,255,.72);
+      line-height:1.25;
+      color:rgba(255,255,255,.68);
       text-decoration:none;
       white-space:nowrap;
       overflow:hidden;
@@ -223,7 +272,7 @@
     .username-grid-refined .username-price{
       grid-area:price;
       font-size:15px;
-      line-height:1.2;
+      line-height:1.1;
       color:#fff;
       font-weight:700;
       white-space:nowrap;
@@ -238,7 +287,7 @@
       background:linear-gradient(90deg,#8c52ff,#ff6d6d);
       color:#fff;
       font-size:15px;
-      font-weight:500;
+      font-weight:600;
       line-height:1;
       letter-spacing:0;
       text-decoration:none;
@@ -338,6 +387,14 @@
       z-index:1;
     }
 
+    .home-projects .section-head{
+      margin-bottom:14px;
+    }
+
+    .home-projects .section-head h2{
+      margin:0;
+    }
+
     .projects-grid{
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
@@ -348,7 +405,7 @@
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      min-height:232px;
+      min-height:216px;
       padding:16px;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.06);
@@ -374,6 +431,7 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      text-align:center;
       min-height:42px;
       padding:0 16px;
       border-radius:14px;
@@ -383,6 +441,7 @@
       background:rgba(255,255,255,.028);
       width:100%;
       font-weight:700;
+      line-height:1.1;
       transition:border-color .18s ease, background .18s ease, transform .18s ease;
     }
 
@@ -452,6 +511,12 @@
       }
     }
 
+    @media (max-width:900px){
+      .hero-mini-points{
+        grid-template-columns:1fr;
+      }
+    }
+
     @media (max-width:680px){
       .hero-content h1{
         white-space:normal;
@@ -515,8 +580,16 @@
       <div class="container">
         <section class="hero hero-split">
           <div class="hero-side">
-            <div class="hero-badge-wrap"><div class="hero-badge hero-badge-static">SovaZone Digital Studio</div></div>
-            <div class="hero-logo-card"><img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio"></div></div>
+            <div class="hero-badge-wrap">
+              <div class="hero-badge hero-badge-static">SovaZone Digital Studio</div>
+            </div>
+            <div class="hero-logo-card">
+              <img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio">
+            </div>
+            <div class="hero-side-actions">
+              <a class="btn btn-primary btn-full" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
+            </div>
+          </div>
 
           <div class="hero-content">
             <h1>Запуск личного бренда и новых digital-проектов</h1>
@@ -529,7 +602,6 @@
               <a href="usernames.html" class="mini-point">Купить ник</a>
               <a href="sell.html" class="mini-point">Продать ник</a>
               <a href="services.html" class="mini-point">Ник под заказ</a>
-              <a href="services.html" class="mini-point">Услуги</a>
             </div>
           </div>
         </section>
@@ -542,105 +614,145 @@
 
           <div class="username-grid username-grid-refined">
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/m4d.html"><div class="username-name" itemprop="name">@M4D</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">4250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
               </div>
               <a class="username-buy" href="username/m4d.html">Подробнее</a>
             </article>
 
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/o05.html"><div class="username-name" itemprop="name">@o05</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
               </div>
               <a class="username-buy" href="username/o05.html">Подробнее</a>
             </article>
 
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/krot.html"><div class="username-name" itemprop="name">@KROT</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2000$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
               </div>
               <a class="username-buy" href="username/krot.html">Подробнее</a>
             </article>
 
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/tryd.html"><div class="username-name" itemprop="name">@TRYD</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
               </div>
               <a class="username-buy" href="username/tryd.html">Подробнее</a>
             </article>
 
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/podlets.html"><div class="username-name" itemprop="name">@PODLETS</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
               </div>
               <a class="username-buy" href="username/podlets.html">Подробнее</a>
             </article>
 
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/koketka.html"><div class="username-name" itemprop="name">@KOKETKA</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
               </div>
               <a class="username-buy" href="username/koketka.html">Подробнее</a>
             </article>
 
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/deluks.html"><div class="username-name" itemprop="name">@DELUKS</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
               </div>
               <a class="username-buy" href="username/deluks.html">Подробнее</a>
             </article>
 
             <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-badge"></div>
               <div class="username-card-top">
                 <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"></span>
+                  <span class="platform-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                    </svg>
+                  </span>
                   <a class="username-name-link" href="username/keyed.html"><div class="username-name" itemprop="name">@KEYED</div></a>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
                 <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
               </div>
               <a class="username-buy" href="username/keyed.html">Подробнее</a>
             </article>
@@ -692,20 +804,19 @@
             <section class="home-projects">
               <div class="section-head">
                 <h2>Проекты и материалы</h2>
-                <p class="lead">Основные направления экосистемы SovaZone: магазин, площадка по продаже никнеймов и блог с полезными материалами.</p>
               </div>
 
               <div class="projects-grid">
                 <article class="project-card">
                   <h3>SovaDS</h3>
                   <p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p>
-                  <a class="project-link" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту</a>
+                  <a class="project-link" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн Магазин</a>
                 </article>
 
                 <article class="project-card">
                   <h3>SovaUsername</h3>
                   <p>Направление, связанное с продажей username и размещением объявлений о продаже никнеймов внутри экосистемы SovaZone.</p>
-                  <a class="project-link" href="sell.html">Как продать</a>
+                  <a class="project-link" href="sell.html">Подробней</a>
                 </article>
 
                 <article class="project-card">
@@ -718,8 +829,9 @@
 
             <aside class="home-about">
               <h2 class="about-title">Почему SovaZone</h2>
-              <p class="about-text">Мы фокусируемся на том, что действительно важно на старте: имя пользователя, оформление, технические моменты и запуск профиля или проекта без лишнего шума.</p>
-              <p class="about-text">Основной формат работы — личный контакт через Telegram. Перед продажей или оказанием услуги обсуждаются детали, подбирается решение и только после этого принимается финальное решение.</p>
+              <p class="about-text">За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
+              <p class="about-text">За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
+              <p class="about-text">Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
               <a class="about-btn" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
             </aside>
           </div>
