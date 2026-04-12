@@ -38,563 +38,168 @@
   <link rel="stylesheet" href="/styles.css">
 
   <style>
-    .home-page{
-      position:relative;
-      overflow:hidden;
-    }
-    .home-page::before,
-    .home-page::after{
-      content:"";
-      position:absolute;
-      pointer-events:none;
-      z-index:0;
-    }
-    .home-page::before{
-      top:24px;
-      left:-220px;
-      width:440px;
-      height:440px;
-      background:radial-gradient(circle, rgba(128,45,106,.14) 0%, rgba(128,45,106,0) 74%);
-      filter:blur(28px);
-    }
-    .home-page::after{
-      top:110px;
-      right:-240px;
-      width:560px;
-      height:560px;
-      background:radial-gradient(circle, rgba(34,58,154,.12) 0%, rgba(34,58,154,0) 76%);
-      filter:blur(34px);
-    }
+    .home-page{position:relative;overflow:hidden;}
+    .home-page::before,.home-page::after{content:"";position:absolute;pointer-events:none;z-index:0;}
+    .home-page::before{top:30px;left:-180px;width:420px;height:420px;background:radial-gradient(circle, rgba(128,45,106,.16) 0%, rgba(128,45,106,0) 72%);filter:blur(28px);}
+    .home-page::after{top:120px;right:-220px;width:520px;height:520px;background:radial-gradient(circle, rgba(34,58,154,.14) 0%, rgba(34,58,154,0) 74%);filter:blur(34px);}
 
-    .home-shell{
-      position:relative;
-      z-index:1;
-      max-width:1360px;
-      margin:0 auto;
-    }
+    .home-shell{position:relative;z-index:1;max-width:1360px;margin:0 auto;}
 
-    .home-hero{
-      position:relative;
-      min-height:360px;
-      padding:52px 46px 34px;
-      overflow:hidden;
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-
-    .home-hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(90deg, rgba(8,10,20,.94) 0%, rgba(8,10,20,.88) 34%, rgba(8,10,20,.56) 56%, rgba(8,10,20,.16) 78%, rgba(8,10,20,0) 100%),
-        radial-gradient(circle at 18% 20%, rgba(255,255,255,.04), transparent 42%);
-      z-index:0;
-      pointer-events:none;
-    }
-
-    .home-hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-image:url('/logo.png');
-      background-repeat:no-repeat;
-      background-position:right -30px center;
-      background-size:620px auto;
-      opacity:.30;
-      filter:saturate(.9) brightness(.9);
-      z-index:0;
-      pointer-events:none;
-      mix-blend-mode:screen;
-    }
-
-    .hero-inner{
-      position:relative;
-      z-index:1;
-      max-width:720px;
-    }
-
-    .hero-kicker{
-      display:inline-flex;
-      align-items:center;
-      min-height:30px;
-      padding:0 12px;
-      border-radius:999px;
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:#d9b38c;
-      background:rgba(255,255,255,.024);
-      border:1px solid rgba(217,179,140,.18);
-      margin-bottom:16px;
-    }
-
-    .hero-title{
-      margin:0 0 14px;
-      font-size:clamp(24px, 2.15vw, 33px);
-      line-height:1.02;
-      letter-spacing:-.045em;
-      color:#fff;
-      white-space:nowrap;
-      max-width:900px;
-    }
-
-    .hero-subtitle{
-      margin:0 0 12px;
-      font-size:18px;
-      line-height:1.68;
-      color:rgba(255,255,255,.86);
-      max-width:700px;
-    }
-
-    .hero-text{
-      margin:0;
-      font-size:15px;
-      line-height:1.76;
-      color:rgba(255,255,255,.72);
-      max-width:740px;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:24px;
-    }
-
-    .hero-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:46px;
-      padding:0 18px;
-      border-radius:14px;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.028);
-      transition:transform .18s ease, border-color .18s ease, background .18s ease;
-      font-weight:700;
-    }
-
-    .hero-btn:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,.14);
-      background:rgba(255,255,255,.042);
-      color:#fff;
-    }
-
-    .hero-btn--primary{
-      border:none;
-      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
-      box-shadow:0 14px 32px rgba(0,0,0,.20);
-    }
-
-    .flat-section{
-      margin-top:28px;
-    }
-
-    .flat-section-head{
-      margin-bottom:16px;
-    }
-
-    .flat-section-title{
-      margin:0 0 8px;
-      font-size:clamp(24px, 2vw, 30px);
-      line-height:1.06;
-      letter-spacing:-.03em;
-      color:#fff;
-    }
-
-    .flat-section-lead{
-      margin:0;
-      max-width:760px;
-      font-size:15px;
-      line-height:1.72;
-      color:rgba(255,255,255,.72);
-    }
-
-    .home-usernames-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:16px;
-    }
-
-    .username-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:24px;
-      padding:16px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
-        linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
-      border:1px solid rgba(255,255,255,.06);
-      transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
-      min-height:182px;
-    }
-
-    .username-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(255,255,255,.14);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.042), rgba(255,255,255,.02)),
-        linear-gradient(135deg, rgba(35,39,74,.16), rgba(0,0,0,0));
-      box-shadow:0 16px 34px rgba(0,0,0,.20);
-    }
-
-    .username-badge{
-      position:absolute;
-      top:12px;
-      right:12px;
-      width:18px;
-      height:18px;
-      font-size:0;
-    }
-    .username-badge::before{
-      content:"🔥";
-      font-size:14px;
-      line-height:1;
-    }
-
-    .username-card-top{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      grid-template-areas:"title title" "link price";
-      gap:8px 10px;
-      align-items:center;
-      margin-bottom:14px;
-    }
-
-    .username-title-row{
-      grid-area:title;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      min-width:0;
-    }
-
-    .platform-icon{
-      width:18px;
-      height:18px;
-      flex:0 0 18px;
-      display:inline-block;
-      position:relative;
-      background:rgba(255,255,255,.08);
-      border-radius:5px;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
-    }
-    .platform-icon::before{
-      content:"";
-      position:absolute;
-      inset:3px;
-      border:1.6px solid #fff;
-      border-radius:4px;
-    }
-    .platform-icon::after{
-      content:"";
-      position:absolute;
-      width:3px;
-      height:3px;
-      border-radius:50%;
-      background:#fff;
-      top:4px;
-      right:4px;
-    }
-
-    .username-name-link{
-      display:block;
-      min-width:0;
-      text-decoration:none;
-      color:inherit;
-      flex:1 1 auto;
-    }
-
-    .username-name{
-      font-size:clamp(16px, 1.25vw, 23px);
-      line-height:1.04;
-      letter-spacing:-.024em;
-      color:#fff;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      font-weight:800;
-    }
-
-    .username-link{
-      grid-area:link;
-      min-width:0;
-      display:block;
-      font-size:13px;
-      line-height:1.3;
-      color:rgba(255,255,255,.72);
-      text-decoration:none;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .username-price{
-      grid-area:price;
-      font-size:15px;
-      line-height:1.2;
-      color:#fff;
-      font-weight:700;
-      white-space:nowrap;
-      text-align:right;
-    }
-
-    .username-buy{
-      width:100%;
-      min-height:34px;
-      border-radius:12px;
-      border:none;
-      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
-      color:#fff;
-      font-size:15px;
-      font-weight:500;
-      line-height:1;
-      letter-spacing:0;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      transition:filter .18s ease, transform .18s ease;
-    }
-
-    .username-buy:hover{
-      filter:brightness(1.04);
-      transform:translateY(-1px);
-      color:#fff;
-    }
-
-    .usernames-footer{
-      margin-top:16px;
-      display:flex;
-      justify-content:flex-start;
-    }
-
-    .link-more{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      min-height:42px;
-      padding:0 16px;
-      border-radius:14px;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.028);
-      width:max-content;
-    }
-
-    .link-more:hover{
-      border-color:rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      color:#fff;
-    }
-
-    .steps-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
-    }
-
-    .step{
-      padding:16px 16px 14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
-    }
-
-    .step-num{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:34px;
-      height:34px;
-      border-radius:999px;
-      margin-bottom:12px;
-      border:1px solid rgba(217,179,140,.24);
-      color:#d9b38c;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .step h3{
-      margin:0 0 8px;
-      font-size:18px;
-      line-height:1.18;
-      color:#fff;
-      letter-spacing:-.02em;
-    }
-
-    .step p{
-      margin:0;
-      font-size:14px;
-      line-height:1.68;
-      color:rgba(255,255,255,.72);
-    }
-
-    .home-lower{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 360px;
-      gap:18px;
-      margin-top:28px;
-    }
-
-    .home-projects,
-    .home-about{
-      position:relative;
-      overflow:hidden;
-      border-radius:24px;
-      padding:24px;
+    .home-panel,.home-usernames,.home-steps,.home-projects,.home-about{
+      position:relative;overflow:hidden;
       background:
         linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
         linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
       border:1px solid rgba(255,255,255,.07);
+      box-shadow:none !important;filter:none !important;
     }
-
-    .home-projects::before,
-    .home-about::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
+    .home-panel::before,.home-usernames::before,.home-steps::before,.home-projects::before,.home-about::before{
+      content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
     }
+    .home-panel > *,.home-usernames > *,.home-steps > *,.home-projects > *,.home-about > *{position:relative;z-index:1;}
 
-    .home-projects > *,
-    .home-about > *{
-      position:relative;
-      z-index:1;
-    }
+    .home-section{margin-top:18px;}
 
-    .projects-grid{
+    .home-hero{
       display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
+      grid-template-columns:340px minmax(0,1fr);
+      gap:24px;
+      align-items:stretch;
+      margin-bottom:18px;
     }
-
-    .project-card{
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
-      padding:16px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
+    .home-logo-card{
+      border-radius:28px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:312px;
     }
-
-    .project-card h3{
-      margin:0 0 8px;
-      font-size:20px;
-      line-height:1.14;
-      letter-spacing:-.02em;
-      color:#fff;
+    .home-logo-kicker{
+      display:inline-flex;align-items:center;gap:10px;width:max-content;min-height:30px;padding:0 12px;border-radius:999px;
+      font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#d9b38c;background:rgba(255,255,255,.025);border:1px solid rgba(217,179,140,.18);
     }
-
-    .project-card p{
-      margin:0 0 14px;
-      font-size:14px;
-      line-height:1.72;
-      color:rgba(255,255,255,.72);
+    .home-logo-frame{
+      margin:18px 0 16px;display:flex;align-items:center;justify-content:center;min-height:188px;padding:18px;
+      border-radius:24px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
     }
+    .home-logo-frame img{max-width:100%;max-height:138px;width:auto;height:auto;display:block;}
+    .home-logo-actions{display:flex;flex-wrap:wrap;gap:12px;}
 
-    .about-title{
-      margin:0 0 12px;
-      font-size:clamp(22px, 2vw, 30px);
-      line-height:1.08;
-      letter-spacing:-.03em;
-      color:#fff;
+    .home-btn{
+      display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:14px;
+      text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);
+      transition:transform .18s ease,border-color .18s ease,background .18s ease;white-space:nowrap;font-weight:700;
     }
+    .home-btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.045);color:#fff;}
+    .home-btn--primary{border:none;background:linear-gradient(90deg,#8c52ff,#ff6d6d);box-shadow:0 14px 32px rgba(0,0,0,.22);}
 
-    .about-text{
-      margin:0 0 14px;
-      font-size:15px;
-      line-height:1.78;
-      color:rgba(255,255,255,.74);
+    .home-copy{
+      border-radius:30px;padding:30px 32px;min-height:312px;display:flex;flex-direction:column;justify-content:space-between;
     }
+    .home-copy-top{max-width:860px;}
+    .home-title{margin:0 0 14px;font-size:clamp(24px, 2.35vw, 34px);line-height:1.02;letter-spacing:-.045em;color:#fff;white-space:nowrap;}
+    .home-lead{margin:0;font-size:16px;line-height:1.8;color:rgba(255,255,255,.78);max-width:860px;}
 
+    .home-pill-row{
+      display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:12px;margin-top:22px;
+    }
+    .home-pill{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px;padding:0 18px;border-radius:18px;
+      text-decoration:none;color:#fff;background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.07);
+      transition:transform .18s ease,border-color .18s ease,background .18s ease;
+    }
+    .home-pill:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;}
+    .home-pill-title{font-size:15px;font-weight:700;letter-spacing:-.01em;}
+    .home-pill-arrow{opacity:.62;font-size:18px;line-height:1;}
+
+    .section-head{margin-bottom:16px;}
+    .section-title{margin:0 0 8px;font-size:clamp(24px, 2vw, 30px);line-height:1.06;letter-spacing:-.03em;color:#fff;}
+    .section-lead{margin:0;max-width:760px;font-size:15px;line-height:1.72;color:rgba(255,255,255,.72);}
+
+    .home-usernames{border-radius:24px;padding:22px;}
+    .home-usernames-grid{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:16px;}
+    .username-card{
+      position:relative;overflow:hidden;border-radius:24px;padding:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)), linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
+      border:1px solid rgba(255,255,255,.06);transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;min-height:182px;
+    }
+    .username-card:hover{
+      transform:translateY(-4px);border-color:rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.042), rgba(255,255,255,.02)), linear-gradient(135deg, rgba(35,39,74,.16), rgba(0,0,0,0));
+      box-shadow:0 16px 34px rgba(0,0,0,.20);
+    }
+    .username-badge{position:absolute;top:12px;right:12px;width:18px;height:18px;font-size:0;}
+    .username-badge::before{content:"🔥";font-size:14px;line-height:1;}
+    .username-card-top{
+      display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title title" "link price";gap:8px 10px;align-items:center;margin-bottom:14px;
+    }
+    .username-title-row{grid-area:title;display:flex;align-items:center;gap:8px;min-width:0;}
+    .platform-icon{
+      width:18px;height:18px;flex:0 0 18px;display:inline-block;position:relative;background:rgba(255,255,255,.08);border-radius:5px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+    }
+    .platform-icon::before{content:"";position:absolute;inset:3px;border:1.6px solid #fff;border-radius:4px;}
+    .platform-icon::after{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;top:4px;right:4px;}
+    .username-name-link{display:block;min-width:0;text-decoration:none;color:inherit;flex:1 1 auto;}
+    .username-name{font-size:clamp(16px, 1.25vw, 23px);line-height:1.04;letter-spacing:-.024em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;}
+    .username-link{grid-area:link;min-width:0;display:block;font-size:13px;line-height:1.3;color:rgba(255,255,255,.72);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .username-price{grid-area:price;font-size:15px;line-height:1.2;color:#fff;font-weight:700;white-space:nowrap;text-align:right;}
+    .username-buy{
+      width:100%;min-height:34px;border-radius:12px;border:none;background:linear-gradient(90deg,#8c52ff,#ff6d6d);
+      color:#fff;font-size:15px;font-weight:500;line-height:1;letter-spacing:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+      transition:filter .18s ease,transform .18s ease;
+    }
+    .username-buy:hover{filter:brightness(1.04);transform:translateY(-1px);color:#fff;}
+    .usernames-footer{margin-top:16px;display:flex;justify-content:flex-start;}
+    .link-more{
+      display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:14px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.028);width:max-content;
+    }
+    .link-more:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;}
+
+    .home-steps{border-radius:24px;padding:24px;}
+    .steps-grid{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:14px;}
+    .step{padding:16px 16px 14px;border-radius:18px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);}
+    .step-num{
+      display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;margin-bottom:12px;border:1px solid rgba(217,179,140,.24);color:#d9b38c;font-size:13px;font-weight:700;
+    }
+    .step h3{margin:0 0 8px;font-size:18px;line-height:1.18;color:#fff;letter-spacing:-.02em;}
+    .step p{margin:0;font-size:14px;line-height:1.68;color:rgba(255,255,255,.72);}
+
+    .home-lower{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;margin-top:18px;}
+    .home-projects,.home-about{
+      position:relative;overflow:hidden;border-radius:24px;padding:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
+      border:1px solid rgba(255,255,255,.07);
+    }
+    .home-projects::before,.home-about::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);}
+    .home-projects > *,.home-about > *{position:relative;z-index:1;}
+    .projects-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px;}
+    .project-card{display:flex;flex-direction:column;min-height:100%;padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);}
+    .project-card h3{margin:0 0 8px;font-size:20px;line-height:1.14;letter-spacing:-.02em;color:#fff;}
+    .project-card p{margin:0 0 14px;font-size:14px;line-height:1.72;color:rgba(255,255,255,.72);}
+    .about-title{margin:0 0 12px;font-size:clamp(22px, 2vw, 30px);line-height:1.08;letter-spacing:-.03em;color:#fff;}
+    .about-text{margin:0 0 14px;font-size:15px;line-height:1.78;color:rgba(255,255,255,.74);}
     .about-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:46px;
-      padding:0 20px;
-      border-radius:14px;
-      text-decoration:none;
-      color:#fff;
-      border:none;
-      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
-      box-shadow:0 14px 32px rgba(0,0,0,.22);
-      font-weight:700;
+      display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:14px;text-decoration:none;color:#fff;border:none;background:linear-gradient(90deg,#8c52ff,#ff6d6d);box-shadow:0 14px 32px rgba(0,0,0,.22);font-weight:700;
     }
-
-    .about-btn:hover{
-      transform:translateY(-2px);
-      color:#fff;
-    }
+    .about-btn:hover{transform:translateY(-2px);color:#fff;}
 
     @media (max-width:1240px){
-      .hero-title{
-        white-space:normal;
-      }
-      .home-usernames-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .steps-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .projects-grid{
-        grid-template-columns:1fr;
-      }
-      .home-lower{
-        grid-template-columns:1fr;
-      }
+      .home-title{white-space:normal;}
+      .home-pill-row{grid-template-columns:repeat(2, minmax(0,1fr));}
+      .home-usernames-grid{grid-template-columns:repeat(2, minmax(0,1fr));}
+      .steps-grid{grid-template-columns:repeat(2, minmax(0,1fr));}
+      .projects-grid{grid-template-columns:1fr;}
+      .home-lower{grid-template-columns:1fr;}
     }
-
     @media (max-width:980px){
-      .home-hero{
-        padding:38px 26px 28px;
-      }
-      .home-hero::after{
-        background-size:360px auto;
-        background-position:right -36px center;
-        opacity:.2;
-      }
-      .hero-title{
-        white-space:normal;
-      }
-      .hero-actions{
-        max-width:100%;
-      }
+      .home-hero{grid-template-columns:1fr;}
+      .home-logo-card,.home-copy{min-height:auto;}
+      .home-title{white-space:normal;}
     }
-
     @media (max-width:680px){
-      .home-hero,
-      .home-projects,
-      .home-about{
-        padding:20px 18px;
-        border-radius:24px;
-      }
-      .hero-title{
-        font-size:30px;
-      }
-      .hero-subtitle{
-        font-size:16px;
-        line-height:1.6;
-      }
-      .hero-text{
-        font-size:14px;
-        line-height:1.68;
-      }
-      .hero-actions{
-        display:grid;
-        grid-template-columns:1fr;
-      }
-      .home-usernames-grid,
-      .steps-grid{
-        grid-template-columns:1fr;
-      }
+      .home-copy,.home-logo-card,.home-usernames,.home-steps,.home-projects,.home-about{padding:20px 18px;border-radius:24px;}
+      .home-title{font-size:30px;}
+      .home-lead{font-size:16px;line-height:1.68;}
+      .home-pill-row{grid-template-columns:1fr;}
+      .home-usernames-grid,.steps-grid{grid-template-columns:1fr;}
+      .home-logo-actions{flex-direction:column;}
+      .home-btn{width:100%;}
     }
   </style>
 
@@ -642,25 +247,40 @@
         <section class="section">
           <div class="home-shell">
 
-            <section class="home-hero">
-              <div class="hero-inner">
-                <div class="hero-kicker">SovaZone Digital Studio</div>
-                <h1 class="hero-title">Никнеймы и запуск digital-проектов</h1>
-                <p class="hero-subtitle">Подбираем username, сопровождаем запуск профиля и решаем ключевые технические вопросы старта.</p>
-                <p class="hero-text">Продажа никнеймов, ник под заказ, перенос username, помощь с аккаунтами, верификация профиля и консультации по запуску.</p>
-
-                <div class="hero-actions">
-                  <a href="/usernames.html" class="hero-btn hero-btn--primary">Купить ник</a>
-                  <a href="/sell.html" class="hero-btn">Продать ник</a>
-                  <a href="/services/custom-username.html" class="hero-btn">Ник под заказ</a>
+            <div class="home-hero">
+              <section class="home-panel home-logo-card">
+                <div>
+                  <div class="home-logo-kicker">SovaZone Digital Studio</div>
+                  <div class="home-logo-frame">
+                    <img src="/logo.png" alt="SovaZone">
+                  </div>
                 </div>
-              </div>
-            </section>
 
-            <section class="flat-section">
-              <div class="flat-section-head">
-                <h2 class="flat-section-title">Популярные никнеймы</h2>
-                <p class="flat-section-lead">Часть актуальных вариантов из каталога. Визуально и по логике карточки совпадают с отдельной страницей никнеймов.</p>
+                <div class="home-logo-actions">
+                  <a class="home-btn home-btn--primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать</a>
+                  <a class="home-btn" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
+                </div>
+              </section>
+
+              <section class="home-panel home-copy">
+                <div class="home-copy-top">
+                  <h1 class="home-title">Никнеймы и запуск digital-проектов</h1>
+                  <p class="home-lead">Мы помогаем подобрать никнейм, запустить профиль или новый проект, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
+                </div>
+
+                <div class="home-pill-row">
+                  <a class="home-pill" href="/usernames.html"><span class="home-pill-title">Купить ник</span><span class="home-pill-arrow">→</span></a>
+                  <a class="home-pill" href="/sell.html"><span class="home-pill-title">Продать ник</span><span class="home-pill-arrow">→</span></a>
+                  <a class="home-pill" href="/services/custom-username.html"><span class="home-pill-title">Ник под заказ</span><span class="home-pill-arrow">→</span></a>
+                  <a class="home-pill" href="/services.html"><span class="home-pill-title">Услуги</span><span class="home-pill-arrow">→</span></a>
+                </div>
+              </section>
+            </div>
+
+            <section class="home-section home-usernames">
+              <div class="section-head">
+                <h2 class="section-title">Популярные никнеймы</h2>
+                <p class="section-lead">Часть актуальных вариантов из каталога. Визуально и по логике карточки совпадают с отдельной страницей никнеймов.</p>
               </div>
 
               <div class="home-usernames-grid">
@@ -722,10 +342,10 @@
               </div>
             </section>
 
-            <section class="flat-section">
-              <div class="flat-section-head">
-                <h2 class="flat-section-title">Как мы работаем</h2>
-                <p class="flat-section-lead">Путь от первого сообщения до запуска построен без лишнего шума: сначала уточнение задачи, затем подбор решения и только после этого переход к сделке или услуге.</p>
+            <section class="home-section home-steps">
+              <div class="section-head">
+                <h2 class="section-title">Как мы работаем</h2>
+                <p class="section-lead">Путь от первого сообщения до запуска построен без лишнего шума: сначала уточнение задачи, затем подбор решения и только после этого переход к сделке или услуге.</p>
               </div>
 
               <div class="steps-grid">
@@ -754,11 +374,9 @@
 
             <div class="home-lower">
               <section class="home-projects">
-                <div class="flat-section-head">
-                  <div>
-                    <h2 class="flat-section-title">Проекты и материалы</h2>
-                    <p class="flat-section-lead">Основные направления экосистемы SovaZone: магазин, блог и информационные материалы по безопасности и работе с аккаунтами.</p>
-                  </div>
+                <div class="section-head">
+                  <h2 class="section-title">Проекты и материалы</h2>
+                  <p class="section-lead">Основные направления экосистемы SovaZone: магазин, блог и информационные материалы по безопасности и работе с аккаунтами.</p>
                 </div>
 
                 <div class="projects-grid">
@@ -767,11 +385,13 @@
                     <p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p>
                     <a class="link-more" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту →</a>
                   </article>
+
                   <article class="project-card">
                     <h3>Информационная поддержка</h3>
                     <p>Материалы по безопасности, техническим вопросам и сопровождению аккаунтов для тех, кому важно сохранить и защитить профиль.</p>
                     <a class="link-more" href="/articles.html">Открыть материалы →</a>
                   </article>
+
                   <article class="project-card">
                     <h3>Блог и статьи</h3>
                     <p>Авторские статьи, новости и кейсы по теме социальных сетей, брендинга, username и digital-среды.</p>
