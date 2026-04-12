@@ -173,6 +173,137 @@
     ]
   }
   </script>
+
+  <style>
+    .home-hero{
+      display:grid;
+      grid-template-columns:320px minmax(0,1fr);
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .home-logo-card,
+    .home-copy,
+    .home-usernames,
+    .home-steps,
+    .home-projects,
+    .home-about{
+      border-radius:24px !important;
+    }
+
+    .home-logo-card{
+      min-height:284px !important;
+      padding:22px !important;
+    }
+
+    .home-copy{
+      min-height:284px !important;
+      padding:26px 28px !important;
+    }
+
+    .home-title{
+      font-size:clamp(23px, 2.2vw, 31px) !important;
+      line-height:1.02 !important;
+      white-space:nowrap !important;
+      margin-bottom:12px !important;
+    }
+
+    .home-lead{
+      font-size:17px !important;
+      line-height:1.68 !important;
+      max-width:720px !important;
+      margin-bottom:12px !important;
+    }
+
+    .home-text{
+      font-size:14px !important;
+      line-height:1.72 !important;
+      max-width:760px !important;
+    }
+
+    .home-pill-row{
+      gap:10px !important;
+      margin-top:18px !important;
+    }
+
+    .home-pill{
+      min-height:52px !important;
+      border-radius:16px !important;
+      padding:0 16px !important;
+    }
+
+    .home-section{
+      margin-top:16px !important;
+    }
+
+    .home-usernames{
+      padding:22px !important;
+    }
+
+    .home-section-head{
+      margin-bottom:14px !important;
+    }
+
+    .home-section-title{
+      font-size:clamp(22px, 2vw, 28px) !important;
+    }
+
+    .home-section-lead{
+      font-size:14px !important;
+      line-height:1.68 !important;
+      max-width:700px !important;
+    }
+
+    .home-projects-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px !important;
+    }
+
+    .home-project-card{
+      border-radius:18px !important;
+      padding:16px !important;
+    }
+
+    .home-step{
+      border-radius:18px !important;
+    }
+
+    .home-about p:first-of-type{
+      margin-top:2px;
+    }
+
+    @media (max-width:1240px){
+      .home-title{
+        white-space:normal !important;
+      }
+    }
+
+    @media (max-width:980px){
+      .home-hero{
+        grid-template-columns:1fr !important;
+      }
+      .home-logo-card,
+      .home-copy{
+        min-height:auto !important;
+      }
+    }
+
+    @media (max-width:680px){
+      .home-copy{
+        padding:22px 18px !important;
+      }
+      .home-title{
+        font-size:28px !important;
+      }
+      .home-lead{
+        font-size:16px !important;
+      }
+      .home-pill-row{
+        grid-template-columns:1fr !important;
+      }
+    }
+  </style>
+
 </head>
 <body>
   <div class="site-shell">
@@ -199,8 +330,8 @@
               <section class="home-panel home-copy">
                 <div class="home-copy-top">
                   <h1 class="home-title">Никнеймы и запуск digital-проектов</h1>
-                  <p class="home-lead">Помогаем подобрать username, запустить профиль или новый проект, решить важные технические вопросы и выбрать подходящий формат старта.</p>
-                  <p class="home-text">Основные направления работы — продажа никнеймов, ник под заказ, перенос username, помощь с аккаунтами, верификация профиля, консультации и сопровождение запуска в социальных сетях.</p>
+                  <p class="home-lead">Подбираем username, помогаем запустить профиль или новый проект и сопровождаем ключевые технические вопросы старта.</p>
+                  <p class="home-text">Продажа никнеймов, ник под заказ, перенос username, помощь с аккаунтами, верификация профиля и консультации по запуску.</p>
                 </div>
 
                 <div class="home-pill-row">
@@ -210,35 +341,7 @@
                 </div>
               </section>
             </div>
-
-            <section class="home-section home-quick-links">
-              <div class="home-section-head">
-                <div>
-                  <h2 class="home-section-title">Быстрый старт</h2>
-                  <p class="home-section-lead">Три основные точки входа для тех, кто хочет быстро перейти к нужному сценарию без лишних шагов.</p>
-                </div>
-              </div>
-
-              <div class="home-projects-grid">
-                <article class="home-project-card">
-                  <h3>Каталог никнеймов</h3>
-                  <p>Готовые красивые username с ценами, отдельными страницами и быстрым переходом к покупке.</p>
-                  <a class="home-link-more" href="/usernames.html">Открыть каталог →</a>
-                </article>
-                <article class="home-project-card">
-                  <h3>Продажа username</h3>
-                  <p>Если у вас есть красивый или короткий ник, можно перейти к странице продажи и изучить базовые условия.</p>
-                  <a class="home-link-more" href="/sell.html">Перейти к продаже →</a>
-                </article>
-                <article class="home-project-card">
-                  <h3>Связь и запуск</h3>
-                  <p>Если нужен индивидуальный сценарий, подбор ника или решение по аккаунту, удобнее сразу написать в основной Telegram.</p>
-                  <a class="home-link-more" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать →</a>
-                </article>
-              </div>
-            </section>
-
-            <section class="home-section home-usernames">
+<section class="home-section home-usernames">
               <div class="home-section-head">
                 <div>
                   <h2 class="home-section-title">Популярные никнеймы</h2>
