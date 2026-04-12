@@ -41,7 +41,6 @@
       position:relative;
       overflow:hidden;
     }
-
     .home-page::before,
     .home-page::after{
       content:"";
@@ -49,16 +48,14 @@
       pointer-events:none;
       z-index:0;
     }
-
     .home-page::before{
       top:20px;
       left:-220px;
       width:440px;
       height:440px;
-      background:radial-gradient(circle, rgba(128,45,106,.12) 0%, rgba(128,45,106,0) 74%);
+      background:radial-gradient(circle, rgba(128,45,106,.11) 0%, rgba(128,45,106,0) 74%);
       filter:blur(28px);
     }
-
     .home-page::after{
       top:120px;
       right:-240px;
@@ -67,72 +64,56 @@
       background:radial-gradient(circle, rgba(34,58,154,.10) 0%, rgba(34,58,154,0) 76%);
       filter:blur(34px);
     }
-
     .page-content > .container{
       position:relative;
       z-index:1;
     }
 
     .hero.hero-split{
-      margin-bottom:8px;
+      margin-bottom:22px;
       align-items:flex-start;
       gap:24px;
     }
-
     .hero-side{
       display:flex;
       flex-direction:column;
       gap:12px;
+      width:min(290px, 100%);
     }
-
     .hero-badge-wrap{
       margin-bottom:0;
     }
-
     .hero-badge.hero-badge-static{
       min-height:0;
-      padding:10px 16px;
+      padding:9px 16px;
       border-radius:999px;
-      font-size:13px;
+      font-size:12px;
       line-height:1;
       font-weight:600;
       letter-spacing:.02em;
-      background:rgba(255,255,255,.025);
-      border:1px solid rgba(217,179,140,.16);
+      background:rgba(255,255,255,.022);
+      border:1px solid rgba(217,179,140,.14);
       box-shadow:none;
     }
-
     .hero-logo-card{
       overflow:hidden;
+      aspect-ratio:1 / 1;
     }
-
-    .hero-side-actions{
-      margin-top:0;
+    .hero-logo{
       width:100%;
-    }
-
-    .hero-side-actions .btn{
-      min-height:48px;
-      border-radius:16px;
-      font-weight:700;
-      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
-      border:none;
-      box-shadow:0 14px 32px rgba(0,0,0,.20);
-    }
-
-    .hero-side-actions .btn:hover{
-      filter:brightness(1.03);
-      transform:translateY(-1px);
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     .hero-content{
       min-width:0;
+      flex:1 1 auto;
     }
-
     .hero-content h1{
       margin:0 0 12px;
-      font-size:clamp(26px, 2vw, 36px);
-      line-height:1.03;
+      font-size:clamp(24px, 1.72vw, 32px);
+      line-height:1.04;
       letter-spacing:-0.04em;
       white-space:nowrap;
       max-width:100%;
@@ -142,32 +123,58 @@
       max-width:100%;
     }
 
-    .hero-mini-points{
-      margin-top:20px;
+    .hero-actions-row{
       display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
+      grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(160px, 1fr));
       gap:10px;
       align-items:stretch;
+      margin-top:20px;
     }
-
-    .hero-mini-points .mini-point{
+    .hero-actions-row .btn,
+    .hero-actions-row .mini-point{
       min-height:48px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       text-align:center;
+      border-radius:14px;
+      width:100%;
+      box-sizing:border-box;
+    }
+    .hero-side-actions{
+      display:none;
+    }
+    .hero-actions-row .btn-telegram{
+      color:#fff;
+      background:linear-gradient(90deg,#833ab4 0%, #c13584 35%, #e1306c 68%, #f77737 100%);
+      border:none;
+      box-shadow:0 14px 30px rgba(0,0,0,.18);
+      text-decoration:none;
+      font-weight:700;
+    }
+    .hero-actions-row .btn-telegram:hover{
+      color:#fff;
+      filter:brightness(1.03);
+      transform:translateY(-1px);
+    }
+
+    .section-head h2,
+    .section-head-inline h2,
+    .home-projects .section-head h2,
+    .about-title{
+      font-size:clamp(24px, 1.72vw, 32px);
+      line-height:1.06;
+      letter-spacing:-0.035em;
     }
 
     .section-usernames-showcase{
       margin-top:24px;
     }
-
     .section-usernames-showcase .section-head-inline{
       align-items:flex-end;
       gap:14px;
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
-
     .section-usernames-showcase .section-head-inline h2{
       margin:0;
     }
@@ -175,15 +182,14 @@
     .username-grid.username-grid-refined{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:16px;
+      gap:14px;
     }
-
     .username-grid-refined .username-card{
       position:relative;
       overflow:hidden;
-      border-radius:24px;
-      padding:14px;
-      min-height:152px;
+      border-radius:20px;
+      padding:13px 13px 12px;
+      min-height:126px;
       background:
         linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
         linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
@@ -193,50 +199,41 @@
       flex-direction:column;
       justify-content:space-between;
     }
-
     .username-grid-refined .username-card:hover{
-      transform:translateY(-4px);
+      transform:translateY(-3px);
       border-color:rgba(255,255,255,.14);
       background:
         linear-gradient(180deg, rgba(255,255,255,.042), rgba(255,255,255,.02)),
         linear-gradient(135deg, rgba(35,39,74,.16), rgba(0,0,0,0));
       box-shadow:0 16px 34px rgba(0,0,0,.20);
     }
-
     .username-grid-refined .username-card-top{
       display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      grid-template-areas:"title price" "link link";
-      gap:6px 10px;
-      align-items:center;
-      margin-bottom:12px;
+      grid-template-columns:minmax(0,1fr);
+      gap:5px;
+      margin-bottom:10px;
     }
-
     .username-grid-refined .username-title-row{
-      grid-area:title;
       display:flex;
       align-items:center;
       gap:8px;
       min-width:0;
     }
-
     .username-grid-refined .platform-icon{
-      width:18px;
-      height:18px;
-      flex:0 0 18px;
+      width:16px;
+      height:16px;
+      flex:0 0 16px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       color:#fff;
       opacity:.9;
     }
-
     .username-grid-refined .platform-icon svg{
-      width:18px;
-      height:18px;
+      width:16px;
+      height:16px;
       display:block;
     }
-
     .username-grid-refined .username-name-link{
       display:block;
       min-width:0;
@@ -244,9 +241,8 @@
       color:inherit;
       flex:1 1 auto;
     }
-
     .username-grid-refined .username-name{
-      font-size:clamp(16px, 1.15vw, 22px);
+      font-size:clamp(15px, 1.05vw, 21px);
       line-height:1.02;
       letter-spacing:-.024em;
       color:#fff;
@@ -255,123 +251,74 @@
       text-overflow:ellipsis;
       font-weight:800;
     }
-
+    .username-grid-refined .username-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      min-width:0;
+    }
     .username-grid-refined .username-link{
-      grid-area:link;
       min-width:0;
       display:block;
-      font-size:13px;
+      font-size:12px;
       line-height:1.25;
       color:rgba(255,255,255,.68);
       text-decoration:none;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      flex:1 1 auto;
     }
-
     .username-grid-refined .username-price{
-      grid-area:price;
-      font-size:15px;
+      font-size:14px;
       line-height:1.1;
       color:#fff;
       font-weight:700;
       white-space:nowrap;
       text-align:right;
+      flex:0 0 auto;
     }
-
     .username-grid-refined .username-buy{
       width:100%;
-      min-height:34px;
-      border-radius:12px;
+      min-height:32px;
+      border-radius:11px;
       border:none;
       background:linear-gradient(90deg,#8c52ff,#ff6d6d);
       color:#fff;
-      font-size:15px;
+      font-size:14px;
       font-weight:600;
       line-height:1;
-      letter-spacing:0;
       text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       transition:filter .18s ease, transform .18s ease;
     }
-
     .username-grid-refined .username-buy:hover{
       filter:brightness(1.04);
       transform:translateY(-1px);
       color:#fff;
     }
 
-    .steps-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
-    }
-
-    .step{
-      padding:16px 16px 14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
-    }
-
-    .step-head{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:12px;
-      min-height:34px;
-    }
-
-    .step-num{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:34px;
-      height:34px;
-      border-radius:999px;
-      border:1px solid rgba(217,179,140,.24);
-      color:#d9b38c;
-      font-size:13px;
-      font-weight:700;
-      flex:0 0 34px;
-    }
-
-    .step h3{
-      margin:0;
-      font-size:18px;
-      line-height:1.18;
-      color:#fff;
-      letter-spacing:-.02em;
-    }
-
-    .step p{
-      margin:0;
-      font-size:14px;
-      line-height:1.68;
-      color:rgba(255,255,255,.72);
-    }
-
-    .home-lower{
+    .projects-work-wrap{
       display:grid;
       grid-template-columns:minmax(0,1fr) 360px;
       gap:18px;
-      margin-top:28px;
+      margin-top:26px;
+      align-items:start;
     }
-
     .home-projects,
     .home-about{
       position:relative;
       overflow:hidden;
       border-radius:24px;
-      padding:24px;
+      padding:22px;
       background:
         linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
         linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
       border:1px solid rgba(255,255,255,.07);
     }
-
     .home-projects::before,
     .home-about::before{
       content:"";
@@ -380,17 +327,14 @@
       pointer-events:none;
       background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
     }
-
     .home-projects > *,
     .home-about > *{
       position:relative;
       z-index:1;
     }
-
     .home-projects .section-head{
       margin-bottom:14px;
     }
-
     .home-projects .section-head h2{
       margin:0;
     }
@@ -399,41 +343,38 @@
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
       gap:12px;
+      margin-bottom:12px;
     }
-
     .project-card{
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      min-height:216px;
+      min-height:188px;
       padding:16px;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.06);
       background:rgba(255,255,255,.02);
     }
-
     .project-card h3{
       margin:0 0 8px;
-      font-size:20px;
+      font-size:18px;
       line-height:1.14;
       letter-spacing:-.02em;
       color:#fff;
     }
-
     .project-card p{
-      margin:0 0 14px;
+      margin:0 0 12px;
       font-size:14px;
-      line-height:1.72;
+      line-height:1.62;
       color:rgba(255,255,255,.72);
     }
-
     .project-link{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       text-align:center;
-      min-height:42px;
-      padding:0 16px;
+      min-height:40px;
+      padding:0 14px;
       border-radius:14px;
       text-decoration:none;
       color:#fff;
@@ -444,7 +385,6 @@
       line-height:1.1;
       transition:border-color .18s ease, background .18s ease, transform .18s ease;
     }
-
     .project-link:hover{
       border-color:rgba(255,255,255,.14);
       background:rgba(255,255,255,.04);
@@ -452,40 +392,90 @@
       color:#fff;
     }
 
-    .about-title{
+    .work-inline{
+      margin-top:0;
+    }
+    .work-inline-title{
       margin:0 0 12px;
-      font-size:clamp(22px, 2vw, 30px);
-      line-height:1.08;
-      letter-spacing:-.03em;
+      font-size:clamp(24px, 1.72vw, 32px);
+      line-height:1.06;
+      letter-spacing:-0.035em;
       color:#fff;
     }
-
-    .about-text{
-      margin:0 0 14px;
-      font-size:15px;
-      line-height:1.78;
-      color:rgba(255,255,255,.74);
+    .steps-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+    }
+    .step{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.02);
+      min-height:128px;
+    }
+    .step-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      min-height:30px;
+    }
+    .step-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      border:1px solid rgba(217,179,140,.24);
+      color:#d9b38c;
+      font-size:12px;
+      font-weight:700;
+      flex:0 0 28px;
+    }
+    .step h3{
+      margin:0;
+      font-size:16px;
+      line-height:1.16;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+    .step p{
+      margin:0;
+      font-size:13px;
+      line-height:1.58;
+      color:rgba(255,255,255,.72);
     }
 
+    .about-title{
+      margin:0 0 12px;
+      color:#fff;
+    }
+    .about-text{
+      margin:0 0 12px;
+      font-size:14px;
+      line-height:1.72;
+      color:rgba(255,255,255,.74);
+    }
     .about-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:46px;
-      padding:0 20px;
+      min-height:42px;
+      padding:0 18px;
       border-radius:14px;
       text-decoration:none;
       color:#fff;
-      border:none;
-      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
-      box-shadow:0 14px 32px rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.028);
       font-weight:700;
-      transition:transform .18s ease, filter .18s ease;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
-
     .about-btn:hover{
-      transform:translateY(-2px);
-      filter:brightness(1.03);
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.04);
+      border-color:rgba(255,255,255,.14);
       color:#fff;
     }
 
@@ -493,26 +483,32 @@
       .hero-content h1{
         white-space:normal;
       }
-
+      .hero-actions-row{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
       .username-grid.username-grid-refined{
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
-
-      .steps-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-
       .projects-grid{
         grid-template-columns:1fr;
       }
-
-      .home-lower{
+      .steps-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .projects-work-wrap{
         grid-template-columns:1fr;
       }
     }
 
-    @media (max-width:900px){
-      .hero-mini-points{
+    @media (max-width:860px){
+      .hero.hero-split{
+        flex-direction:column;
+      }
+      .hero-side{
+        width:100%;
+        max-width:320px;
+      }
+      .hero-actions-row{
         grid-template-columns:1fr;
       }
     }
@@ -521,15 +517,13 @@
       .hero-content h1{
         white-space:normal;
       }
-
       .username-grid.username-grid-refined,
       .steps-grid{
         grid-template-columns:1fr;
       }
-
       .home-projects,
       .home-about{
-        padding:20px 18px;
+        padding:18px;
       }
     }
   </style>
@@ -586,9 +580,6 @@
             <div class="hero-logo-card">
               <img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio">
             </div>
-            <div class="hero-side-actions">
-              <a class="btn btn-primary btn-full" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
-            </div>
           </div>
 
           <div class="hero-content">
@@ -598,7 +589,9 @@
               <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, перенос никнейма, консультации, помощь с аккаунтами, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
               <p>Мы помогаем выбрать основу для старта: имя пользователя, формат профиля, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
             </div>
-            <div class="hero-mini-points">
+
+            <div class="hero-actions-row">
+              <a class="btn btn-telegram" href="contacts.html">Связаться</a>
               <a href="usernames.html" class="mini-point">Купить ник</a>
               <a href="sell.html" class="mini-point">Продать ник</a>
               <a href="services.html" class="mini-point">Ник под заказ</a>
@@ -618,15 +611,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/m4d.html"><div class="username-name" itemprop="name">@M4D</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">4250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">4250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/m4d.html">Подробнее</a>
             </article>
@@ -636,15 +631,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/o05.html"><div class="username-name" itemprop="name">@o05</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/o05.html">Подробнее</a>
             </article>
@@ -654,15 +651,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/krot.html"><div class="username-name" itemprop="name">@KROT</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2000$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2000$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/krot.html">Подробнее</a>
             </article>
@@ -672,15 +671,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/tryd.html"><div class="username-name" itemprop="name">@TRYD</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/tryd.html">Подробнее</a>
             </article>
@@ -690,15 +691,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/podlets.html"><div class="username-name" itemprop="name">@PODLETS</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/podlets.html">Подробнее</a>
             </article>
@@ -708,15 +711,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/koketka.html"><div class="username-name" itemprop="name">@KOKETKA</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/koketka.html">Подробнее</a>
             </article>
@@ -726,15 +731,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/deluks.html"><div class="username-name" itemprop="name">@DELUKS</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/deluks.html">Подробнее</a>
             </article>
@@ -744,15 +751,17 @@
                 <div class="username-title-row">
                   <span class="platform-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
+                      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle>
+                      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
                     </svg>
                   </span>
                   <a class="username-name-link" href="username/keyed.html"><div class="username-name" itemprop="name">@KEYED</div></a>
                 </div>
-                <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
+                <div class="username-meta">
+                  <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
+                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                </div>
               </div>
               <a class="username-buy" href="username/keyed.html">Подробнее</a>
             </article>
@@ -760,47 +769,7 @@
         </section>
 
         <section class="section">
-          <div class="section-head">
-            <h2>Как мы работаем</h2>
-          </div>
-
-          <div class="steps-grid">
-            <article class="step">
-              <div class="step-head">
-                <div class="step-num">01</div>
-                <h3>Вы изучаете варианты</h3>
-              </div>
-              <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
-            </article>
-
-            <article class="step">
-              <div class="step-head">
-                <div class="step-num">02</div>
-                <h3>Пишете в Telegram</h3>
-              </div>
-              <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
-            </article>
-
-            <article class="step">
-              <div class="step-head">
-                <div class="step-num">03</div>
-                <h3>Мы подбираем решение</h3>
-              </div>
-              <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
-            </article>
-
-            <article class="step">
-              <div class="step-head">
-                <div class="step-num">04</div>
-                <h3>Переходим к запуску</h3>
-              </div>
-              <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="home-lower">
+          <div class="projects-work-wrap">
             <section class="home-projects">
               <div class="section-head">
                 <h2>Проекты и материалы</h2>
@@ -808,22 +777,65 @@
 
               <div class="projects-grid">
                 <article class="project-card">
-                  <h3>SovaDS</h3>
-                  <p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p>
+                  <div>
+                    <h3>SovaDS</h3>
+                    <p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p>
+                  </div>
                   <a class="project-link" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн Магазин</a>
                 </article>
 
                 <article class="project-card">
-                  <h3>SovaUsername</h3>
-                  <p>Направление, связанное с продажей username и размещением объявлений о продаже никнеймов внутри экосистемы SovaZone.</p>
+                  <div>
+                    <h3>SovaUsername</h3>
+                    <p>Направление, связанное с продажей username и размещением объявлений о продаже никнеймов внутри экосистемы SovaZone.</p>
+                  </div>
                   <a class="project-link" href="sell.html">Подробней</a>
                 </article>
 
                 <article class="project-card">
-                  <h3>Блог и статьи</h3>
-                  <p>Авторские статьи, новости и кейсы по теме социальных сетей, брендинга, username и digital-среды.</p>
+                  <div>
+                    <h3>Блог и статьи</h3>
+                    <p>Авторские статьи, новости и кейсы по теме социальных сетей, брендинга, username и digital-среды.</p>
+                  </div>
                   <a class="project-link" href="blog.html">Открыть раздел</a>
                 </article>
+              </div>
+
+              <div class="work-inline">
+                <h2 class="work-inline-title">Как мы работаем</h2>
+                <div class="steps-grid">
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">01</div>
+                      <h3>Вы изучаете варианты</h3>
+                    </div>
+                    <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
+                  </article>
+
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">02</div>
+                      <h3>Пишете в Telegram</h3>
+                    </div>
+                    <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
+                  </article>
+
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">03</div>
+                      <h3>Мы подбираем решение</h3>
+                    </div>
+                    <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
+                  </article>
+
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">04</div>
+                      <h3>Переходим к запуску</h3>
+                    </div>
+                    <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
+                  </article>
+                </div>
               </div>
             </section>
 
@@ -832,7 +844,7 @@
               <p class="about-text">За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
               <p class="about-text">За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
               <p class="about-text">Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
-              <a class="about-btn" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
+              <a class="about-btn" href="contacts.html">Перейти к контактам</a>
             </aside>
           </div>
         </section>
