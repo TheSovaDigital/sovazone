@@ -59,12 +59,12 @@
     .contacts-card p{margin:0 0 12px;color:var(--doc-muted);font-size:16px;line-height:1.78;}
     .contacts-card p:last-child{margin-bottom:0;}
     .contacts-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px;}
-    .contacts-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;width:100%;padding:0 18px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:#fff;font-size:15px;font-weight:700;text-decoration:none;transition:.18s ease;text-align:center;}
+    .contacts-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;width:100%;padding:0 18px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:#fff;font-size:15px;font-weight:700;text-decoration:none;transition:.18s ease;text-align:center;white-space:nowrap;}
     .contacts-btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.05);}
     .contacts-btn--primary{border:none;background:linear-gradient(90deg,#8c52ff,#ff6d6d);}
     .contacts-btn--ghost{color:var(--doc-link);}
     .contacts-links{display:grid;gap:10px;margin-top:8px;}
-    .contacts-link-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+    .contacts-link-row{display:grid;grid-template-columns:minmax(0,1fr) 156px;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);}
     .contacts-link-row:last-child{border-bottom:0;padding-bottom:0;}
     .contacts-link-meta{min-width:0;}
     .contacts-link-label{display:block;font-size:13px;color:#9ea0b9;margin-bottom:4px;letter-spacing:.02em;}
@@ -81,7 +81,13 @@
     .doc-page a{color:var(--doc-link);text-decoration:none;}
     .doc-page a:hover{color:#fff;}
     @media (max-width:900px){.contacts-premium-grid{grid-template-columns:1fr;}}
-    @media (max-width:760px){.doc-page .doc-wrap{padding-bottom:48px;}.doc-page .doc-hero h1{font-size:40px;}.doc-page .doc-lead{font-size:16px;}.contacts-link-row{flex-direction:column;}.contacts-actions{grid-template-columns:1fr;}}
+    @media (max-width:760px){
+      .doc-page .doc-wrap{padding-bottom:48px;}
+      .doc-page .doc-hero h1{font-size:40px;}
+      .doc-page .doc-lead{font-size:16px;}
+      .contacts-link-row{grid-template-columns:1fr;}
+      .contacts-actions{grid-template-columns:1fr;}
+    }
   </style>
 
   <script type="application/ld+json">
@@ -189,6 +195,7 @@
 
               <div class="contacts-actions">
                 <a class="contacts-btn contacts-btn--primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
+                <a class="contacts-btn contacts-btn--ghost" href="/how-to-buy.html">Как купить</a>
               </div>
 
               <div class="contacts-mini-note">
@@ -207,21 +214,17 @@
                       <a href="https://t.me/SovaDigital" target="_blank" rel="noopener">SovaDigital</a>
                     </div>
                   </div>
-                  <div class="contacts-actions" style="max-width:220px; margin-top:0;">
-                    <a class="contacts-btn" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал</a>
-                  </div>
+                  <a class="contacts-btn" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал</a>
                 </div>
 
                 <div class="contacts-link-row">
                   <div class="contacts-link-meta">
-                    <span class="contacts-link-label">Площадка для продажи username</span>
+                    <span class="contacts-link-label">Площадка для продажи</span>
                     <div class="contacts-link-value">
                       <a href="https://t.me/SovaUsername" target="_blank" rel="noopener">SovaUsername</a>
                     </div>
                   </div>
-                  <div class="contacts-actions" style="max-width:220px; margin-top:0;">
-                    <a class="contacts-btn" href="https://t.me/SovaUsername" target="_blank" rel="noopener">Перейти в канал</a>
-                  </div>
+                  <a class="contacts-btn" href="https://t.me/SovaUsername" target="_blank" rel="noopener">Перейти в канал</a>
                 </div>
 
                 <div class="contacts-link-row">
@@ -231,9 +234,7 @@
                       <a href="https://sovads.ru/" target="_blank" rel="noopener">sovads.ru</a>
                     </div>
                   </div>
-                  <div class="contacts-actions" style="max-width:220px; margin-top:0;">
-                    <a class="contacts-btn" href="https://sovads.ru/" target="_blank" rel="noopener">Открыть магазин</a>
-                  </div>
+                  <a class="contacts-btn" href="https://sovads.ru/" target="_blank" rel="noopener">Открыть магазин</a>
                 </div>
               </div>
             </section>
