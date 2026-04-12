@@ -51,11 +51,7 @@
     .doc-page .doc-kicker::before{content:"";width:36px;height:1px;background:linear-gradient(90deg, rgba(217,179,140,.95), rgba(217,179,140,0));box-shadow:0 0 14px rgba(217,179,140,.22);}
     .doc-page .doc-hero h1{margin:0 0 14px;font-size:clamp(34px,5vw,60px);line-height:1.02;letter-spacing:-.04em;color:var(--doc-text);max-width:820px;}
     .doc-page .doc-lead{margin:0;max-width:860px;color:var(--doc-muted);font-size:18px;line-height:1.72;}
-    .doc-page .doc-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 12px;}
-    .doc-page .doc-chip{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--doc-line);color:var(--doc-muted);font-size:14px;background:rgba(255,255,255,.02);}
-    .doc-page .doc-chip a{color:var(--doc-link);}
     .contacts-premium-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-bottom:24px;align-items:stretch;}
-    .contacts-premium-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:18px;align-items:stretch;}
     .contacts-card{position:relative;overflow:hidden;padding:22px 22px 20px;border:1px solid var(--doc-line);background:var(--doc-panel);border-radius:18px;backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,.02);}
     .contacts-card--accent{border-color:var(--doc-line-strong);box-shadow:inset 0 0 0 1px rgba(217,179,140,.05);}
     .contacts-card--cut{border-top-right-radius:28px;border-bottom-left-radius:28px;}
@@ -77,15 +73,14 @@
     .contacts-mini-note{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(217,179,140,.22);color:var(--doc-muted);font-size:14px;line-height:1.7;}
     .contacts-top-card{display:flex;flex-direction:column;min-height:100%;}
     .contacts-top-card .contacts-actions{margin-top:auto;padding-top:16px;}
-    .contacts-top-copy{margin-top:2px;}
     .doc-related{margin-top:42px;padding-top:22px;border-top:1px solid var(--doc-line);}
     .doc-related h3{margin:0 0 14px;font-size:18px;letter-spacing:.02em;color:#fff;}
     .doc-related-grid{display:flex;flex-wrap:wrap;gap:10px 16px;}
-    .doc-related-grid a{color:var(--doc-link);font-size:15px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:4px;}
+    .doc-related-grid a{color:var(--doc-link);font-size:15px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:4px;text-decoration:none;}
     .doc-related-grid a:hover{color:#fff;border-bottom-color:rgba(217,179,140,.45);}
     .doc-page a{color:var(--doc-link);text-decoration:none;}
     .doc-page a:hover{color:#fff;}
-    @media (max-width:900px){.contacts-premium-grid,.contacts-premium-grid-3{grid-template-columns:1fr;}}
+    @media (max-width:900px){.contacts-premium-grid{grid-template-columns:1fr;}}
     @media (max-width:760px){.doc-page .doc-wrap{padding-bottom:48px;}.doc-page .doc-hero h1{font-size:40px;}.doc-page .doc-lead{font-size:16px;}.contacts-link-row{flex-direction:column;}.contacts-actions{grid-template-columns:1fr;}}
   </style>
 
@@ -177,17 +172,7 @@
           <section class="doc-hero">
             <div class="doc-kicker">SovaZone / Контакты</div>
             <h1>Контакты</h1>
-            <p class="doc-lead">
-              Основные ссылки и каналы связи проекта SovaZone. Если вопрос связан с покупкой username,
-              техническими деталями или услугами, используй основной контакт — так обсуждение проходит быстрее и точнее.
-            </p>
-
-            <div class="doc-meta">
-              <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Основной Telegram</a></span>
-              <span class="doc-chip"><a href="/how-to-buy.html">Как купить</a></span>
-              <span class="doc-chip"><a href="/sell.html">Как продать</a></span>
-              <span class="doc-chip"><a href="/faq.html">FAQ</a></span>
-            </div>
+            <p class="doc-lead">Основные ссылки и каналы связи проекта SovaZone.</p>
           </section>
 
           <div class="contacts-premium-grid">
@@ -204,7 +189,6 @@
 
               <div class="contacts-actions">
                 <a class="contacts-btn contacts-btn--primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
-                <a class="contacts-btn contacts-btn--ghost" href="/how-to-buy.html">Как купить</a>
               </div>
 
               <div class="contacts-mini-note">
@@ -213,96 +197,44 @@
             </section>
 
             <section class="contacts-card contacts-top-card">
-              <h2>Как лучше писать</h2>
-              <p>
-                Чтобы обсуждение шло быстрее и без лишних уточнений, лучше сразу дать короткий и понятный контекст обращения.
-              </p>
+              <h2>Площадки и ссылки</h2>
 
-              <div class="contacts-top-copy">
-                <p>
-                  Если тебя интересует конкретный username, лучше сразу отправить его название или ссылку на нужную страницу.
-                  Если нужен подбор, можно коротко обозначить бюджет, стиль и желаемый формат. Если вопрос касается продажи
-                  собственного ника, сначала открой страницу <a href="/sell.html">Как продать</a>, а затем переходи к обсуждению деталей.
-                </p>
-              </div>
-
-              <div class="contacts-actions">
-                <a class="contacts-btn contacts-btn--ghost" href="/sell.html">Как продать</a>
-                <a class="contacts-btn contacts-btn--ghost" href="/client-terms.html">Условия для клиентов</a>
-              </div>
-            </section>
-          </div>
-
-          <section class="contacts-card contacts-card--accent">
-            <h2>Площадки и ссылки</h2>
-
-            <div class="contacts-links">
-              <div class="contacts-link-row">
-                <div class="contacts-link-meta">
-                  <span class="contacts-link-label">Контент и обновления</span>
-                  <div class="contacts-link-value">
-                    <a href="https://t.me/SovaDigital" target="_blank" rel="noopener">SovaDigital</a>
+              <div class="contacts-links">
+                <div class="contacts-link-row">
+                  <div class="contacts-link-meta">
+                    <span class="contacts-link-label">Контент и обновления</span>
+                    <div class="contacts-link-value">
+                      <a href="https://t.me/SovaDigital" target="_blank" rel="noopener">SovaDigital</a>
+                    </div>
+                  </div>
+                  <div class="contacts-actions" style="max-width:220px; margin-top:0;">
+                    <a class="contacts-btn" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал</a>
                   </div>
                 </div>
-                <div class="contacts-actions" style="max-width:220px; margin-top:0;">
-                  <a class="contacts-btn" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал</a>
-                </div>
-              </div>
 
-              <div class="contacts-link-row">
-                <div class="contacts-link-meta">
-                  <span class="contacts-link-label">Площадка для продажи username</span>
-                  <div class="contacts-link-value">
-                    <a href="https://t.me/SovaUsername" target="_blank" rel="noopener">SovaUsername</a>
+                <div class="contacts-link-row">
+                  <div class="contacts-link-meta">
+                    <span class="contacts-link-label">Площадка для продажи username</span>
+                    <div class="contacts-link-value">
+                      <a href="https://t.me/SovaUsername" target="_blank" rel="noopener">SovaUsername</a>
+                    </div>
+                  </div>
+                  <div class="contacts-actions" style="max-width:220px; margin-top:0;">
+                    <a class="contacts-btn" href="https://t.me/SovaUsername" target="_blank" rel="noopener">Перейти в канал</a>
                   </div>
                 </div>
-                <div class="contacts-actions" style="max-width:220px; margin-top:0;">
-                  <a class="contacts-btn" href="https://t.me/SovaUsername" target="_blank" rel="noopener">Перейти в канал</a>
-                </div>
-              </div>
 
-              <div class="contacts-link-row">
-                <div class="contacts-link-meta">
-                  <span class="contacts-link-label">Онлайн магазин</span>
-                  <div class="contacts-link-value">
-                    <a href="https://sovads.ru/" target="_blank" rel="noopener">sovads.ru</a>
+                <div class="contacts-link-row">
+                  <div class="contacts-link-meta">
+                    <span class="contacts-link-label">Онлайн магазин</span>
+                    <div class="contacts-link-value">
+                      <a href="https://sovads.ru/" target="_blank" rel="noopener">sovads.ru</a>
+                    </div>
+                  </div>
+                  <div class="contacts-actions" style="max-width:220px; margin-top:0;">
+                    <a class="contacts-btn" href="https://sovads.ru/" target="_blank" rel="noopener">Открыть магазин</a>
                   </div>
                 </div>
-                <div class="contacts-actions" style="max-width:220px; margin-top:0;">
-                  <a class="contacts-btn" href="https://sovads.ru/" target="_blank" rel="noopener">Открыть магазин</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div class="contacts-premium-grid-3">
-            <section class="contacts-card">
-              <h2>Покупка username</h2>
-              <p>
-                Если тебя интересует конкретный ник, сначала лучше открыть страницу покупки и затем перейти к обсуждению деталей.
-              </p>
-              <div class="contacts-actions" style="grid-template-columns:1fr;">
-                <a class="contacts-btn" href="/how-to-buy.html">Открыть “Как купить”</a>
-              </div>
-            </section>
-
-            <section class="contacts-card">
-              <h2>Продажа username</h2>
-              <p>
-                Если ты хочешь разместить объявление о продаже ника, используй страницу “Как продать” и площадку SovaUsername.
-              </p>
-              <div class="contacts-actions" style="grid-template-columns:1fr;">
-                <a class="contacts-btn" href="/sell.html">Открыть “Как продать”</a>
-              </div>
-            </section>
-
-            <section class="contacts-card">
-              <h2>Частые вопросы</h2>
-              <p>
-                Для типовых вопросов по сделке, передаче, рискам и сопровождению удобнее сначала посмотреть FAQ.
-              </p>
-              <div class="contacts-actions" style="grid-template-columns:1fr;">
-                <a class="contacts-btn" href="/faq.html">Открыть FAQ</a>
               </div>
             </section>
           </div>
