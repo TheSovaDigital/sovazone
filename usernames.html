@@ -293,6 +293,98 @@
       .username-fab{right:12px; bottom:12px; min-height:44px; padding:0 15px; font-size:14px;}
     }
 
+
+    .username-title-row{
+      display:grid !important;
+      grid-template-columns:20px minmax(0,1fr) auto;
+      align-items:center !important;
+      gap:10px !important;
+      min-width:0;
+    }
+    .username-title-row .platform-icon{
+      display:inline-flex !important;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 20px;
+      width:20px;
+      height:20px;
+      margin-top:0;
+      color:transparent !important;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      font-size:20px !important;
+      line-height:1;
+      opacity:1 !important;
+    }
+    .username-name-link{
+      min-width:0;
+      max-width:100%;
+      display:block;
+      flex:1 1 auto;
+      text-decoration:none;
+      color:inherit;
+    }
+    .username-name{
+      min-width:0;
+      max-width:100%;
+      font-size:clamp(14px, 1.2vw, 22px) !important;
+      line-height:1.02 !important;
+      letter-spacing:-0.024em !important;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .username-badge{
+      min-height:22px;
+      padding:0 8px;
+      font-size:0;
+      letter-spacing:0;
+      gap:0;
+    }
+    .username-badge::before{
+      content:"🔥";
+      font-size:13px;
+      line-height:1;
+    }
+    .username-price{
+      display:flex !important;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      color:inherit;
+      font-weight:700;
+      letter-spacing:.01em;
+      white-space:nowrap;
+    }
+    .username-link{
+      font-size:13px !important;
+      line-height:1.4 !important;
+      color:rgba(255,255,255,.72) !important;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      display:block;
+      min-width:0;
+      flex:1 1 auto;
+    }
+    .username-price .username-link{
+      order:1;
+    }
+    .username-price [itemprop="price"],
+    .username-price .username-price-value{
+      order:2;
+      flex:0 0 auto;
+    }
+    .username-buy{
+      min-height:31px !important;
+      padding:0 12px !important;
+      border-radius:11px !important;
+      font-size:14.3px !important;
+      line-height:1 !important;
+      letter-spacing:.01em;
+    }
+
 </style>
 
 
@@ -329,7 +421,7 @@
         <section class="section page-hero">
           <div class="section-head"><h1>Короткие и красивые никнеймы для Instagram</h1><p class="lead">Короткие и красивые никнеймы для Instagram: каталог username с ценами, отдельными страницами и быстрым переходом к покупке.</p></div>
           <div class="username-grid">
-<article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge">Популярный</div>
+<article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge"></div>
       <div class="username-card-top">
         <div class="username-title-row">
           <span class="platform-icon" aria-hidden="true">
@@ -344,8 +436,8 @@
         <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">4250$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/m4d.html">Купить</a>
-    </article><article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge">Популярный</div>
+      <a class="btn btn-primary username-buy" href="username/m4d.html">Подробнее</a>
+    </article><article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge"></div>
       <div class="username-card-top">
         <div class="username-title-row">
           <span class="platform-icon" aria-hidden="true">
@@ -360,8 +452,8 @@
         <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2500$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/o05.html">Купить</a>
-    </article><article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge">Популярный</div>
+      <a class="btn btn-primary username-buy" href="username/o05.html">Подробнее</a>
+    </article><article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge"></div>
       <div class="username-card-top">
         <div class="username-title-row">
           <span class="platform-icon" aria-hidden="true">
@@ -376,8 +468,8 @@
         <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2000$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/krot.html">Купить</a>
-    </article><article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge">Популярный</div>
+      <a class="btn btn-primary username-buy" href="username/krot.html">Подробнее</a>
+    </article><article class="username-card" itemscope itemtype="https://schema.org/Product"><div class="username-badge"></div>
       <div class="username-card-top">
         <div class="username-title-row">
           <span class="platform-icon" aria-hidden="true">
@@ -392,7 +484,7 @@
         <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1250$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/tryd.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/tryd.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -408,7 +500,7 @@
         <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/podlets.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/podlets.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -424,7 +516,7 @@
         <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/koketka.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/koketka.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -440,7 +532,7 @@
         <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/deluks.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/deluks.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -456,7 +548,7 @@
         <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/keyed.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/keyed.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -472,7 +564,7 @@
         <a class="username-link" href="https://www.instagram.com/cennik" target="_blank" rel="noopener">instagram.com/cennik</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/cennik.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/cennik.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -488,7 +580,7 @@
         <a class="username-link" href="https://www.instagram.com/prinzip" target="_blank" rel="noopener">instagram.com/prinzip</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/prinzip.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/prinzip.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -504,7 +596,7 @@
         <a class="username-link" href="https://www.instagram.com/shtopor" target="_blank" rel="noopener">instagram.com/shtopor</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/shtopor.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/shtopor.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -520,7 +612,7 @@
         <a class="username-link" href="https://www.instagram.com/geval" target="_blank" rel="noopener">instagram.com/geval</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/geval.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/geval.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -536,7 +628,7 @@
         <a class="username-link" href="https://www.instagram.com/fulsome" target="_blank" rel="noopener">instagram.com/fulsome</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/fulsome.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/fulsome.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -552,7 +644,7 @@
         <a class="username-link" href="https://www.instagram.com/inneren" target="_blank" rel="noopener">instagram.com/inneren</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/inneren.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/inneren.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -568,7 +660,7 @@
         <a class="username-link" href="https://www.instagram.com/nietzsche" target="_blank" rel="noopener">instagram.com/nietzsche</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/nietzsche.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/nietzsche.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -584,7 +676,7 @@
         <a class="username-link" href="https://www.instagram.com/hatten" target="_blank" rel="noopener">instagram.com/hatten</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">650$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/hatten.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/hatten.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -600,7 +692,7 @@
         <a class="username-link" href="https://www.instagram.com/affright" target="_blank" rel="noopener">instagram.com/affright</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">400$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/affright.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/affright.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -616,7 +708,7 @@
         <a class="username-link" href="https://www.instagram.com/meines" target="_blank" rel="noopener">instagram.com/meines</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">400$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/meines.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/meines.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -632,7 +724,7 @@
         <a class="username-link" href="https://www.instagram.com/sledopyt" target="_blank" rel="noopener">instagram.com/sledopyt</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">400$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/sledopyt.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/sledopyt.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -648,7 +740,7 @@
         <a class="username-link" href="https://www.instagram.com/pricheska" target="_blank" rel="noopener">instagram.com/pricheska</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">400$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/pricheska.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/pricheska.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -664,7 +756,7 @@
         <a class="username-link" href="https://www.instagram.com/tekstura" target="_blank" rel="noopener">instagram.com/tekstura</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">400$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/tekstura.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/tekstura.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -680,7 +772,7 @@
         <a class="username-link" href="https://www.instagram.com/gourds" target="_blank" rel="noopener">instagram.com/gourds</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">400$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/gourds.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/gourds.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -696,7 +788,7 @@
         <a class="username-link" href="https://www.instagram.com/prankersha" target="_blank" rel="noopener">instagram.com/prankersha</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">250$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/prankersha.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/prankersha.html">Подробнее</a>
     </article><article class="username-card" itemscope itemtype="https://schema.org/Product">
       <div class="username-card-top">
         <div class="username-title-row">
@@ -712,7 +804,7 @@
         <a class="username-link" href="https://www.instagram.com/dressirovka" target="_blank" rel="noopener">instagram.com/dressirovka</a>
         <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">250$</div>
       </div>
-      <a class="btn btn-primary username-buy" href="username/dressirovka.html">Купить</a>
+      <a class="btn btn-primary username-buy" href="username/dressirovka.html">Подробнее</a>
     </article>
 </div>
         </section>
