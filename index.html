@@ -6,64 +6,127 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <title>SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка</title>
-  <meta name="description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
+
+  <title>SovaZone Digital Studio — запуск личного бренда и digital-проектов</title>
+  <meta name="description" content="SovaZone Digital Studio: никнеймы, запуск профиля, ник под заказ, помощь с аккаунтами, верификация, технические вопросы и старт digital-проектов.">
+  <meta name="keywords" content="SovaZone, никнеймы, username, ник под заказ, купить ник, продать ник, помощь с аккаунтом, верификация профиля, запуск личного бренда">
   <link rel="canonical" href="https://sovazone.com/">
+
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
-  <meta property="og:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
-  <meta property="og:description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
+  <meta property="og:title" content="SovaZone Digital Studio — запуск личного бренда и digital-проектов">
+  <meta property="og:description" content="Никнеймы, запуск профиля, ник под заказ, помощь с аккаунтами, верификация и сопровождение digital-проектов.">
   <meta property="og:url" content="https://sovazone.com/">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
-  <meta name="twitter:description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
+  <meta name="twitter:title" content="SovaZone Digital Studio — запуск личного бренда и digital-проектов">
+  <meta name="twitter:description" content="Никнеймы, запуск профиля, ник под заказ, помощь с аккаунтами, верификация и сопровождение digital-проектов.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+
   <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    .home-page{position:relative;overflow:hidden}
+    .home-page::before,.home-page::after{content:"";position:absolute;pointer-events:none;z-index:0}
+    .home-page::before{top:32px;left:-180px;width:420px;height:420px;background:radial-gradient(circle, rgba(128,45,106,.16) 0%, rgba(128,45,106,0) 72%);filter:blur(26px)}
+    .home-page::after{top:120px;right:-210px;width:520px;height:520px;background:radial-gradient(circle, rgba(34,58,154,.14) 0%, rgba(34,58,154,0) 74%);filter:blur(30px)}
+    .home-shell{position:relative;z-index:1;max-width:1360px;margin:0 auto}
+    .home-panel,.home-usernames,.home-steps,.home-projects,.home-about{position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));border:1px solid rgba(255,255,255,.07);box-shadow:none!important;filter:none!important}
+    .home-panel::before,.home-usernames::before,.home-steps::before,.home-projects::before,.home-about::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%)}
+    .home-panel > *,.home-usernames > *,.home-steps > *,.home-projects > *,.home-about > *{position:relative;z-index:1}
+
+    .home-hero{display:grid;grid-template-columns:340px minmax(0,1fr);gap:24px;align-items:stretch;margin-bottom:18px}
+    .home-logo-card{border-radius:28px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:320px}
+    .home-logo-kicker{display:inline-flex;align-items:center;gap:10px;width:max-content;min-height:30px;padding:0 12px;border-radius:999px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#d9b38c;background:rgba(255,255,255,.025);border:1px solid rgba(217,179,140,.18)}
+    .home-logo-frame{margin:18px 0 16px;display:flex;align-items:center;justify-content:center;min-height:190px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));padding:18px}
+    .home-logo-frame img{max-width:100%;max-height:138px;width:auto;height:auto;display:block}
+    .home-logo-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+    .home-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:14px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);transition:transform .18s ease,border-color .18s ease,background .18s ease;white-space:nowrap;font-weight:700}
+    .home-btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.045);color:#fff}
+    .home-btn--primary{border:none;background:linear-gradient(90deg,#8c52ff,#ff6d6d);box-shadow:0 14px 32px rgba(0,0,0,.22)}
+
+    .home-copy{border-radius:30px;padding:30px 32px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
+    .home-copy-top{max-width:860px}
+    .home-title{margin:0 0 14px;font-size:clamp(28px, 3vw, 40px);line-height:1.02;letter-spacing:-.045em;color:#fff;white-space:nowrap}
+    .home-lead{margin:0 0 14px;font-size:18px;line-height:1.72;color:rgba(255,255,255,.86);max-width:820px}
+    .home-text{margin:0;font-size:15px;line-height:1.8;color:rgba(255,255,255,.72);max-width:860px}
+
+    .home-pill-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+    .home-pill{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px;padding:0 18px;border-radius:18px;text-decoration:none;color:#fff;background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.07);transition:transform .18s ease,border-color .18s ease,background .18s ease}
+    .home-pill:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff}
+    .home-pill-title{font-size:15px;font-weight:700;letter-spacing:-.01em}
+    .home-pill-arrow{opacity:.62;font-size:18px;line-height:1}
+
+    .home-section{margin-top:18px}
+    .home-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:16px}
+    .home-section-title{margin:0;font-size:clamp(24px,2.2vw,32px);line-height:1.06;letter-spacing:-.03em;color:#fff}
+    .home-section-lead{margin:0;max-width:760px;font-size:15px;line-height:1.72;color:rgba(255,255,255,.72)}
+
+    .home-usernames{border-radius:28px;padding:24px}
+    .home-usernames-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .username-card{position:relative;overflow:hidden;border-radius:24px;padding:16px;background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.06);transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;min-height:182px}
+    .username-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.14);background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));box-shadow:0 16px 34px rgba(0,0,0,.20)}
+    .username-badge{position:absolute;top:12px;right:12px;width:18px;height:18px;font-size:0}
+    .username-badge::before{content:"🔥";font-size:14px;line-height:1}
+    .username-card-top{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title title" "link price";gap:8px 10px;align-items:center;margin-bottom:14px}
+    .username-title-row{grid-area:title;display:flex;align-items:center;gap:8px;min-width:0}
+    .platform-icon{width:18px;height:18px;flex:0 0 18px;display:inline-block;position:relative;background:rgba(255,255,255,.08);border-radius:5px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+    .platform-icon::before{content:"";position:absolute;inset:3px;border:1.6px solid #fff;border-radius:4px}
+    .platform-icon::after{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;top:4px;right:4px}
+    .username-name-link{display:block;min-width:0;text-decoration:none;color:inherit;flex:1 1 auto}
+    .username-name{font-size:clamp(16px,1.25vw,23px);line-height:1.04;letter-spacing:-.024em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800}
+    .username-link{grid-area:link;min-width:0;display:block;font-size:13px;line-height:1.3;color:rgba(255,255,255,.72);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .username-price{grid-area:price;font-size:15px;line-height:1.2;color:#fff;font-weight:700;white-space:nowrap;text-align:right}
+    .username-buy{width:100%;min-height:34px;border-radius:12px;border:none;background:linear-gradient(90deg,#8c52ff,#ff6d6d);color:#fff;font-size:15px;font-weight:500;line-height:1;letter-spacing:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:filter .18s ease,transform .18s ease}
+    .username-buy:hover{filter:brightness(1.04);transform:translateY(-1px);color:#fff}
+    .home-usernames-footer{margin-top:16px;display:flex;justify-content:flex-start}
+    .home-link-more{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:14px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.028)}
+    .home-link-more:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff}
+
+    .home-steps{border-radius:28px;padding:24px}
+    .home-steps-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .home-step{padding:16px 16px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+    .home-step-num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;margin-bottom:12px;border:1px solid rgba(217,179,140,.24);color:#d9b38c;font-size:13px;font-weight:700}
+    .home-step h3{margin:0 0 8px;font-size:18px;line-height:1.18;color:#fff;letter-spacing:-.02em}
+    .home-step p{margin:0;font-size:14px;line-height:1.68;color:rgba(255,255,255,.72)}
+
+    .home-lower{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;margin-top:18px}
+    .home-projects{border-radius:28px;padding:24px}
+    .home-projects-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .home-project-card{display:flex;flex-direction:column;min-height:100%;padding:18px;border-radius:20px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+    .home-project-card h3{margin:0 0 8px;font-size:20px;line-height:1.14;letter-spacing:-.02em;color:#fff}
+    .home-project-card p{margin:0 0 14px;font-size:14px;line-height:1.72;color:rgba(255,255,255,.72)}
+    .home-project-card .home-link-more{margin-top:auto;width:max-content}
+    .home-about{border-radius:28px;padding:24px}
+    .home-about h2{margin:0 0 12px;font-size:clamp(22px,2vw,30px);line-height:1.08;letter-spacing:-.03em;color:#fff}
+    .home-about p{margin:0 0 14px;font-size:15px;line-height:1.78;color:rgba(255,255,255,.74)}
+    .home-about p:last-child{margin-bottom:0}
+
+    @media (max-width:1240px){.home-title{white-space:normal}.home-usernames-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-steps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-projects-grid{grid-template-columns:1fr}.home-lower{grid-template-columns:1fr}}
+    @media (max-width:980px){.home-hero{grid-template-columns:1fr}.home-logo-card,.home-copy{min-height:auto}.home-pill-row{grid-template-columns:1fr}}
+    @media (max-width:680px){.home-copy{padding:24px 18px}.home-logo-card,.home-usernames,.home-steps,.home-projects,.home-about{padding:20px 18px;border-radius:24px}.home-usernames-grid,.home-steps-grid{grid-template-columns:1fr}.home-title{font-size:34px}.home-lead{font-size:16px;line-height:1.65}.home-logo-actions{flex-direction:column}.home-btn{width:100%}}
+  </style>
+
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://sovazone.com/#organization",
-        "name": "SovaZone",
-        "alternateName": "SovaZone Digital Studio",
-        "url": "https://sovazone.com/",
-        "logo": "https://sovazone.com/logo.png",
-        "image": "https://sovazone.com/og-image.png",
-        "sameAs": ["https://t.me/SovaDigital","https://t.me/SovaDS","https://sovads.ru/"],
-        "description": "SovaZone — digital studio и проект по продаже никнеймов, подбору username, запуску профилей и digital-поддержке."
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://sovazone.com/#website",
-        "url": "https://sovazone.com/",
-        "name": "SovaZone",
-        "inLanguage": "ru-RU",
-        "publisher": {"@id": "https://sovazone.com/#organization"}
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://sovazone.com/#webpage",
-        "url": "https://sovazone.com/",
-        "name": "SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка",
-        "isPartOf": {"@id": "https://sovazone.com/#website"},
-        "about": {"@id": "https://sovazone.com/#organization"},
-        "primaryImageOfPage": {"@type": "ImageObject","url": "https://sovazone.com/og-image.png"},
-        "description": "SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы и выбрать формат старта.",
-        "inLanguage": "ru-RU"
-      }
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"Organization","@id":"https://sovazone.com/#organization","name":"SovaZone","alternateName":"SovaZone Digital Studio","url":"https://sovazone.com/","logo":{"@type":"ImageObject","url":"https://sovazone.com/logo.png"},"sameAs":["https://t.me/SovaDigital","https://t.me/SovaDS","https://sovads.ru/"]},
+      {"@type":"WebSite","@id":"https://sovazone.com/#website","url":"https://sovazone.com/","name":"SovaZone","publisher":{"@id":"https://sovazone.com/#organization"},"inLanguage":"ru-RU"},
+      {"@type":"WebPage","@id":"https://sovazone.com/#webpage","url":"https://sovazone.com/","name":"SovaZone Digital Studio — запуск личного бренда и digital-проектов","description":"Никнеймы, запуск профиля, ник под заказ, помощь с аккаунтами, верификация и сопровождение digital-проектов.","isPartOf":{"@id":"https://sovazone.com/#website"},"about":{"@id":"https://sovazone.com/#organization"},"inLanguage":"ru-RU"}
     ]
   }
   </script>
@@ -71,227 +134,136 @@
 <body>
   <div class="site-shell">
     <div id="header-placeholder"></div>
-    <main class="page-content">
+
+    <main class="page-content home-page">
       <div class="container">
-        <section class="hero hero-split">
-          <div class="hero-side">
-            <div class="hero-badge-wrap"><div class="hero-badge hero-badge-static">SovaZone Digital Studio</div></div>
-            <div class="hero-logo-card"><img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio"></div>
-            <div class="hero-side-actions">
-              <a class="btn btn-primary btn-full" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать</a>
-              <a class="btn btn-secondary btn-full" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
+        <section class="section">
+          <div class="home-shell">
+
+            <div class="home-hero">
+              <section class="home-panel home-logo-card">
+                <div>
+                  <div class="home-logo-kicker">SovaZone Digital Studio</div>
+                  <div class="home-logo-frame">
+                    <img src="/logo.png" alt="SovaZone">
+                  </div>
+                </div>
+                <div class="home-logo-actions">
+                  <a class="home-btn home-btn--primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать</a>
+                </div>
+              </section>
+
+              <section class="home-panel home-copy">
+                <div class="home-copy-top">
+                  <h1 class="home-title">Запуск личного бренда и новых digital-проектов</h1>
+                  <p class="home-lead">Мы помогаем подобрать никнейм, запустить профиль или новый проект, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
+                  <p class="home-text">Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, перенос никнейма, консультации, помощь с аккаунтами, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
+                </div>
+                <div class="home-pill-row">
+                  <a class="home-pill" href="/usernames.html"><span class="home-pill-title">Купить ник</span><span class="home-pill-arrow">→</span></a>
+                  <a class="home-pill" href="/sell.html"><span class="home-pill-title">Продать ник</span><span class="home-pill-arrow">→</span></a>
+                  <a class="home-pill" href="/services/custom-username.html"><span class="home-pill-title">Ник под заказ</span><span class="home-pill-arrow">→</span></a>
+                </div>
+              </section>
             </div>
-          </div>
-          <div class="hero-content">
-            <h1>Запуск личного бренда и новых digital-проектов</h1>
-            <div class="hero-text-block">
-              <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетях, запустить профиль или новый проект, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
-              <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, перенос никнейма, консультации, помощь с аккаунтами, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
-              <p>Мы помогаем выбрать основу для старта: имя пользователя (юзернейм), формат профиля, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
-            </div>
-            <div class="hero-mini-points">
-              <a href="usernames.html" class="mini-point">Купить ник</a>
-              <a href="sell.html" class="mini-point">Продать ник</a>
-              <a href="services.html" class="mini-point">Ник под заказ</a>
-              <a href="services.html" class="mini-point">Услуги</a>
-            </div>
-          </div>
-        </section>
 
-        <section class="section section-usernames-showcase">
-          <div class="section-head section-head-inline">
-            <h2>Популярные никнеймы для Instagram</h2>
-            <a class="btn btn-secondary section-head-btn" href="usernames.html">Смотреть каталог</a>
-          </div>
-          <div class="username-grid">
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@M4D</div>
+            <section class="home-section home-usernames">
+              <div class="home-section-head">
+                <div>
+                  <h2 class="home-section-title">Популярные никнеймы</h2>
+                  <p class="home-section-lead">Готовые варианты из каталога для быстрого старта. Карточки оформлены так же, как на странице каталога, чтобы переход был визуально цельным.</p>
                 </div>
-                <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
-                <div class="username-price">Price - 4250$</div>
               </div>
-              <a class="btn btn-primary username-buy" href="username/m4d.html">Купить</a>
-            </article>
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@o05</div>
-                </div>
-                <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
-                <div class="username-price">Price - 2500$</div>
-              </div>
-              <a class="btn btn-primary username-buy" href="username/o05.html">Купить</a>
-            </article>
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@KROT</div>
-                </div>
-                <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
-                <div class="username-price">Price - 2000$</div>
-              </div>
-              <a class="btn btn-primary username-buy" href="username/krot.html">Купить</a>
-            </article>
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@TRYD</div>
-                </div>
-                <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
-                <div class="username-price">Price - 1250$</div>
-              </div>
-              <a class="btn btn-primary username-buy" href="username/tryd.html">Купить</a>
-            </article>
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@PODLETS</div>
-                </div>
-                <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
-                <div class="username-price">Price - 1500$</div>
-              </div>
-              <a class="btn btn-primary username-buy" href="username/podlets.html">Купить</a>
-            </article>
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@KOKETKA</div>
-                </div>
-                <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
-                <div class="username-price">Price - 1500$</div>
-              </div>
-              <a class="btn btn-primary username-buy" href="username/koketka.html">Купить</a>
-            </article>
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@DELUKS</div>
-                </div>
-                <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
-                <div class="username-price">Price - 1500$</div>
-              </div>
-              <a class="btn btn-primary username-buy" href="username/deluks.html">Купить</a>
-            </article>
-            <article class="username-card">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
-                      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
-                      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"></circle>
-                    </svg>
-                  </span>
-                  <div class="username-name">@KEYED</div>
-                </div>
-                <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
-                <div class="username-price">Price - 1500$</div>
-              </div>
-              <a class="btn btn-primary username-buy" href="username/keyed.html">Купить</a>
-            </article>
-          </div>
-        </section>
 
-        <section class="section">
-          <div class="section-head"><h2>Услуги</h2></div>
-          <div class="grid grid-4">
-            <article class="card service-card"><h3>Продажа никнеймов</h3><p>Готовые варианты usernames для Instagram и других социальных сетей с возможностью быстрого старта.</p><a href="usernames.html">Подробнее →</a></article>
-            <article class="card service-card"><h3>Никнейм под заказ</h3><p>Подбор ника под бренд, личный профиль, медийный проект или конкретную задачу клиента.</p><a href="services.html">Подробнее →</a></article>
-            <article class="card service-card"><h3>Верификация</h3><p>Консультации и сопровождение по вопросам верификации профиля там, где это актуально по формату задачи.</p><a href="services.html">Подробнее →</a></article>
-            <article class="card service-card"><h3>Помощь с аккаунтом</h3><p>Восстановление после взлома, консультации, техническая помощь и решение сложных вопросов по аккаунтам.</p><a href="services.html">Подробнее →</a></article>
-          </div>
-        </section>
+              <div class="home-usernames-grid">
+                <article class="username-card" itemscope itemtype="https://schema.org/Product">
+                  <div class="username-badge"></div>
+                  <div class="username-card-top">
+                    <div class="username-title-row"><span class="platform-icon" aria-hidden="true"></span><a class="username-name-link" href="/username/m4d.html"><div class="username-name" itemprop="name">@M4D</div></a></div>
+                    <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
+                    <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">4250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                  </div>
+                  <a class="username-buy" href="/username/m4d.html">Подробнее</a>
+                </article>
+                <article class="username-card" itemscope itemtype="https://schema.org/Product">
+                  <div class="username-badge"></div>
+                  <div class="username-card-top">
+                    <div class="username-title-row"><span class="platform-icon" aria-hidden="true"></span><a class="username-name-link" href="/username/o05.html"><div class="username-name" itemprop="name">@o05</div></a></div>
+                    <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
+                    <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                  </div>
+                  <a class="username-buy" href="/username/o05.html">Подробнее</a>
+                </article>
+                <article class="username-card" itemscope itemtype="https://schema.org/Product">
+                  <div class="username-badge"></div>
+                  <div class="username-card-top">
+                    <div class="username-title-row"><span class="platform-icon" aria-hidden="true"></span><a class="username-name-link" href="/username/krot.html"><div class="username-name" itemprop="name">@KROT</div></a></div>
+                    <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
+                    <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2000$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                  </div>
+                  <a class="username-buy" href="/username/krot.html">Подробнее</a>
+                </article>
+                <article class="username-card" itemscope itemtype="https://schema.org/Product">
+                  <div class="username-badge"></div>
+                  <div class="username-card-top">
+                    <div class="username-title-row"><span class="platform-icon" aria-hidden="true"></span><a class="username-name-link" href="/username/tryd.html"><div class="username-name" itemprop="name">@TRYD</div></a></div>
+                    <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
+                    <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
+                  </div>
+                  <a class="username-buy" href="/username/tryd.html">Подробнее</a>
+                </article>
+              </div>
 
-        <section class="section">
-          <div class="section-head"><h2>Как мы работаем</h2></div>
-          <div class="steps-grid">
-            <div class="card step-card"><div class="step-headline"><div class="step-number">01</div><h3>Вы изучаете возможности</h3></div><p>Смотрите услуги, популярные никнеймы и доступные варианты запуска.</p></div>
-            <div class="card step-card"><div class="step-headline"><div class="step-number">02</div><h3>Пишете нам</h3></div><p>Основной формат связи — через Telegram, где обсуждаются детали, задачи и подходящий путь старта.</p></div>
-            <div class="card step-card"><div class="step-headline"><div class="step-number">03</div><h3>Мы подбираем решение</h3></div><p>Определяем подходящий никнейм, формат услуги и оптимальный сценарий запуска аккаунта или проекта.</p></div>
-            <div class="card step-card"><div class="step-headline"><div class="step-number">04</div><h3>Запускаем старт</h3></div><p>После согласования переходим к продаже, сопровождению или подключению дополнительной услуги.</p></div>
-          </div>
-        </section>
+              <div class="home-usernames-footer">
+                <a class="home-link-more" href="/usernames.html">Открыть каталог никнеймов →</a>
+              </div>
+            </section>
 
-        <section class="section">
-          <div class="section-head"><h2>Проекты</h2><p class="lead">Основные направления и проекты экосистемы SovaZone.</p></div>
-          <div class="grid grid-3">
-            <article class="card project-card"><h3>SovaDS</h3><p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с готовыми предложениями.</p><a href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту →</a></article>
-            <article class="card project-card"><h3>SovaUsername</h3><p>Площадка для продажи никнеймов, где пользователи могут размещать объявления о продаже своих usernames.</p><a href="https://t.me/SovaDigital" target="_blank" rel="noopener">Открыть канал →</a></article>
-            <article class="card project-card"><h3>Блог и статьи</h3><p>Авторские материалы, полезные статьи, новости и кейсы по теме социальных сетей, брендинга и digital-среды.</p><a href="blog.html">Открыть раздел →</a></article>
-          </div>
-        </section>
+            <section class="home-section home-steps">
+              <div class="home-section-head">
+                <div>
+                  <h2 class="home-section-title">Как мы работаем</h2>
+                  <p class="home-section-lead">Путь от первого сообщения до запуска построен без лишнего шума: сначала уточнение задачи, затем подбор решения и только после этого переход к сделке или услуге.</p>
+                </div>
+              </div>
+              <div class="home-steps-grid">
+                <article class="home-step"><div class="home-step-num">01</div><h3>Вы изучаете варианты</h3><p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p></article>
+                <article class="home-step"><div class="home-step-num">02</div><h3>Пишете в Telegram</h3><p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p></article>
+                <article class="home-step"><div class="home-step-num">03</div><h3>Мы подбираем решение</h3><p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p></article>
+                <article class="home-step"><div class="home-step-num">04</div><h3>Переходим к запуску</h3><p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p></article>
+              </div>
+            </section>
 
-        <section class="section">
-          <div class="card trust-card">
-            <div class="trust-content">
-              <div>
+            <div class="home-lower">
+              <section class="home-projects">
+                <div class="home-section-head">
+                  <div>
+                    <h2 class="home-section-title">Проекты и материалы</h2>
+                    <p class="home-section-lead">Основные направления экосистемы SovaZone: магазин, блог и информационные материалы по безопасности и работе с аккаунтами.</p>
+                  </div>
+                </div>
+                <div class="home-projects-grid">
+                  <article class="home-project-card"><h3>SovaDS</h3><p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p><a class="home-link-more" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту →</a></article>
+                  <article class="home-project-card"><h3>Информационная поддержка</h3><p>Материалы по безопасности, техническим вопросам и сопровождению аккаунтов для тех, кому важно сохранить и защитить профиль.</p><a class="home-link-more" href="/articles.html">Открыть материалы →</a></article>
+                  <article class="home-project-card"><h3>Блог и статьи</h3><p>Авторские статьи, новости и кейсы по теме социальных сетей, брендинга, username и digital-среды.</p><a class="home-link-more" href="/blog.html">Открыть раздел →</a></article>
+                </div>
+              </section>
+
+              <aside class="home-about">
                 <h2>Почему SovaZone</h2>
-                <p>Мы работаем с русскоязычной аудиторией по всему миру и фокусируемся на том, что действительно важно на старте: имя пользователя, оформление, верификация, технические моменты и запуск профиля или проекта без лишнего шума.</p>
+                <p>Мы работаем с русскоязычной аудиторией по всему миру и фокусируемся на том, что действительно важно на старте: имя пользователя, оформление, технические моменты и запуск профиля или проекта без лишнего шума.</p>
                 <p>Основной формат работы — личный контакт через Telegram. Перед продажей или оказанием услуги обсуждаются детали, подбирается решение и только после этого принимается финальное решение.</p>
-              </div>
-              <div class="trust-actions">
-                <a class="btn btn-primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать</a>
-                <a class="btn btn-secondary" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Telegram канал SovaDigital</a>
-                <a class="btn btn-secondary" href="info.html">Подробнее о студии</a>
-              </div>
+                <a class="home-btn home-btn--primary" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
+              </aside>
             </div>
+
           </div>
         </section>
       </div>
     </main>
+
     <div id="footer-placeholder"></div>
   </div>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
