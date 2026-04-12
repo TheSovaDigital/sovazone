@@ -50,20 +50,20 @@
       z-index:0;
     }
     .home-page::before{
-      top:28px;
-      left:-180px;
-      width:420px;
-      height:420px;
-      background:radial-gradient(circle, rgba(128,45,106,.16) 0%, rgba(128,45,106,0) 72%);
-      filter:blur(26px);
+      top:24px;
+      left:-220px;
+      width:440px;
+      height:440px;
+      background:radial-gradient(circle, rgba(128,45,106,.14) 0%, rgba(128,45,106,0) 74%);
+      filter:blur(28px);
     }
     .home-page::after{
-      top:120px;
-      right:-210px;
-      width:520px;
-      height:520px;
-      background:radial-gradient(circle, rgba(34,58,154,.14) 0%, rgba(34,58,154,0) 74%);
-      filter:blur(30px);
+      top:110px;
+      right:-240px;
+      width:560px;
+      height:560px;
+      background:radial-gradient(circle, rgba(34,58,154,.12) 0%, rgba(34,58,154,0) 76%);
+      filter:blur(34px);
     }
 
     .home-shell{
@@ -73,111 +73,69 @@
       margin:0 auto;
     }
 
-    .home-panel,
-    .home-usernames,
-    .home-steps,
-    .home-projects,
-    .home-about{
+    .home-hero{
       position:relative;
+      min-height:360px;
+      padding:52px 46px 34px;
       overflow:hidden;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
-        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
-      border:1px solid rgba(255,255,255,.07);
-      box-shadow:none !important;
-      filter:none !important;
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
 
-    .home-panel::before,
-    .home-usernames::before,
-    .home-steps::before,
-    .home-projects::before,
-    .home-about::before{
+    .home-hero::before{
       content:"";
       position:absolute;
       inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
-    }
-
-    .home-panel > *,
-    .home-usernames > *,
-    .home-steps > *,
-    .home-projects > *,
-    .home-about > *{
-      position:relative;
-      z-index:1;
-    }
-
-    .home-section{
-      margin-top:18px;
-    }
-
-    .hero-new{
-      position:relative;
-      overflow:hidden;
-      border-radius:28px;
-      padding:56px 48px;
       background:
-        radial-gradient(circle at 15% 10%, rgba(120,60,255,0.12), transparent 50%),
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
-        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
-      border:1px solid rgba(255,255,255,.07);
-      min-height:340px;
-    }
-
-    .hero-new::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
-      z-index:1;
-    }
-
-    .hero-new-bg{
-      position:absolute;
-      inset:0;
-      background-image:
-        linear-gradient(90deg, rgba(8,10,20,0.96) 0%, rgba(8,10,20,0.88) 34%, rgba(8,10,20,0.55) 58%, rgba(8,10,20,0.18) 74%, rgba(8,10,20,0.04) 100%),
-        url('/logo.png');
-      background-repeat:no-repeat;
-      background-position:left top, right 36px center;
-      background-size:auto, 560px auto;
-      opacity:1;
-      pointer-events:none;
+        linear-gradient(90deg, rgba(8,10,20,.94) 0%, rgba(8,10,20,.88) 34%, rgba(8,10,20,.56) 56%, rgba(8,10,20,.16) 78%, rgba(8,10,20,0) 100%),
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,.04), transparent 42%);
       z-index:0;
+      pointer-events:none;
     }
 
-    .hero-new-content{
+    .home-hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:url('/logo.png');
+      background-repeat:no-repeat;
+      background-position:right -30px center;
+      background-size:620px auto;
+      opacity:.30;
+      filter:saturate(.9) brightness(.9);
+      z-index:0;
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+
+    .hero-inner{
       position:relative;
-      z-index:2;
-      max-width:760px;
+      z-index:1;
+      max-width:720px;
     }
 
     .hero-kicker{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      min-height:32px;
+      min-height:30px;
       padding:0 12px;
       border-radius:999px;
       font-size:12px;
       letter-spacing:.14em;
       text-transform:uppercase;
       color:#d9b38c;
-      background:rgba(255,255,255,.025);
+      background:rgba(255,255,255,.024);
       border:1px solid rgba(217,179,140,.18);
       margin-bottom:16px;
     }
 
     .hero-title{
       margin:0 0 14px;
-      font-size:clamp(24px, 2.2vw, 34px);
+      font-size:clamp(24px, 2.15vw, 33px);
       line-height:1.02;
       letter-spacing:-.045em;
       color:#fff;
       white-space:nowrap;
+      max-width:900px;
     }
 
     .hero-subtitle{
@@ -185,82 +143,74 @@
       font-size:18px;
       line-height:1.68;
       color:rgba(255,255,255,.86);
-      max-width:720px;
+      max-width:700px;
     }
 
     .hero-text{
       margin:0;
       font-size:15px;
-      line-height:1.78;
+      line-height:1.76;
       color:rgba(255,255,255,.72);
-      max-width:760px;
+      max-width:740px;
     }
 
     .hero-actions{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
+      display:flex;
+      flex-wrap:wrap;
       gap:12px;
       margin-top:24px;
-      max-width:760px;
     }
 
     .hero-btn{
-      display:flex;
+      display:inline-flex;
       align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      min-height:54px;
+      justify-content:center;
+      min-height:46px;
       padding:0 18px;
-      border-radius:18px;
+      border-radius:14px;
       text-decoration:none;
       color:#fff;
+      border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.028);
-      border:1px solid rgba(255,255,255,.07);
       transition:transform .18s ease, border-color .18s ease, background .18s ease;
       font-weight:700;
-      letter-spacing:-.01em;
     }
 
     .hero-btn:hover{
       transform:translateY(-2px);
       border-color:rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
+      background:rgba(255,255,255,.042);
       color:#fff;
     }
 
-    .hero-btn-arrow{
-      opacity:.62;
-      font-size:18px;
-      line-height:1;
+    .hero-btn--primary{
+      border:none;
+      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
+      box-shadow:0 14px 32px rgba(0,0,0,.20);
     }
 
-    .home-section-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:18px;
+    .flat-section{
+      margin-top:28px;
+    }
+
+    .flat-section-head{
       margin-bottom:16px;
     }
 
-    .home-section-title{
-      margin:0;
-      font-size:clamp(24px, 2.2vw, 32px);
+    .flat-section-title{
+      margin:0 0 8px;
+      font-size:clamp(24px, 2vw, 30px);
       line-height:1.06;
       letter-spacing:-.03em;
       color:#fff;
     }
 
-    .home-section-lead{
+    .flat-section-lead{
       margin:0;
       max-width:760px;
       font-size:15px;
       line-height:1.72;
       color:rgba(255,255,255,.72);
-    }
-
-    .home-usernames{
-      border-radius:24px;
-      padding:22px;
     }
 
     .home-usernames-grid{
@@ -274,7 +224,9 @@
       overflow:hidden;
       border-radius:24px;
       padding:16px;
-      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
+        linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
       border:1px solid rgba(255,255,255,.06);
       transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
       min-height:182px;
@@ -283,7 +235,9 @@
     .username-card:hover{
       transform:translateY(-4px);
       border-color:rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.042), rgba(255,255,255,.02)),
+        linear-gradient(135deg, rgba(35,39,74,.16), rgba(0,0,0,0));
       box-shadow:0 16px 34px rgba(0,0,0,.20);
     }
 
@@ -304,9 +258,7 @@
     .username-card-top{
       display:grid;
       grid-template-columns:minmax(0,1fr) auto;
-      grid-template-areas:
-        "title title"
-        "link price";
+      grid-template-areas:"title title" "link price";
       gap:8px 10px;
       align-items:center;
       margin-bottom:14px;
@@ -414,13 +366,13 @@
       color:#fff;
     }
 
-    .home-usernames-footer{
+    .usernames-footer{
       margin-top:16px;
       display:flex;
       justify-content:flex-start;
     }
 
-    .home-link-more{
+    .link-more{
       display:inline-flex;
       align-items:center;
       gap:8px;
@@ -434,31 +386,26 @@
       width:max-content;
     }
 
-    .home-link-more:hover{
+    .link-more:hover{
       border-color:rgba(255,255,255,.14);
       background:rgba(255,255,255,.04);
       color:#fff;
     }
 
-    .home-steps{
-      border-radius:24px;
-      padding:24px;
-    }
-
-    .home-steps-grid{
+    .steps-grid{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
       gap:14px;
     }
 
-    .home-step{
+    .step{
       padding:16px 16px 14px;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.06);
       background:rgba(255,255,255,.02);
     }
 
-    .home-step-num{
+    .step-num{
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -472,7 +419,7 @@
       font-weight:700;
     }
 
-    .home-step h3{
+    .step h3{
       margin:0 0 8px;
       font-size:18px;
       line-height:1.18;
@@ -480,7 +427,7 @@
       letter-spacing:-.02em;
     }
 
-    .home-step p{
+    .step p{
       margin:0;
       font-size:14px;
       line-height:1.68;
@@ -491,21 +438,43 @@
       display:grid;
       grid-template-columns:minmax(0,1fr) 360px;
       gap:18px;
-      margin-top:18px;
+      margin-top:28px;
     }
 
-    .home-projects{
+    .home-projects,
+    .home-about{
+      position:relative;
+      overflow:hidden;
       border-radius:24px;
       padding:24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
+        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
+      border:1px solid rgba(255,255,255,.07);
     }
 
-    .home-projects-grid{
+    .home-projects::before,
+    .home-about::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
+    }
+
+    .home-projects > *,
+    .home-about > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .projects-grid{
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
       gap:12px;
     }
 
-    .home-project-card{
+    .project-card{
       display:flex;
       flex-direction:column;
       min-height:100%;
@@ -515,7 +484,7 @@
       background:rgba(255,255,255,.02);
     }
 
-    .home-project-card h3{
+    .project-card h3{
       margin:0 0 8px;
       font-size:20px;
       line-height:1.14;
@@ -523,19 +492,14 @@
       color:#fff;
     }
 
-    .home-project-card p{
+    .project-card p{
       margin:0 0 14px;
       font-size:14px;
       line-height:1.72;
       color:rgba(255,255,255,.72);
     }
 
-    .home-about{
-      border-radius:24px;
-      padding:24px;
-    }
-
-    .home-about h2{
+    .about-title{
       margin:0 0 12px;
       font-size:clamp(22px, 2vw, 30px);
       line-height:1.08;
@@ -543,18 +507,14 @@
       color:#fff;
     }
 
-    .home-about p{
+    .about-text{
       margin:0 0 14px;
       font-size:15px;
       line-height:1.78;
       color:rgba(255,255,255,.74);
     }
 
-    .home-about p:last-child{
-      margin-bottom:0;
-    }
-
-    .home-btn-primary-inline{
+    .about-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -568,7 +528,8 @@
       box-shadow:0 14px 32px rgba(0,0,0,.22);
       font-weight:700;
     }
-    .home-btn-primary-inline:hover{
+
+    .about-btn:hover{
       transform:translateY(-2px);
       color:#fff;
     }
@@ -580,10 +541,10 @@
       .home-usernames-grid{
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
-      .home-steps-grid{
+      .steps-grid{
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
-      .home-projects-grid{
+      .projects-grid{
         grid-template-columns:1fr;
       }
       .home-lower{
@@ -592,26 +553,24 @@
     }
 
     @media (max-width:980px){
-      .hero-new{
-        padding:38px 26px;
+      .home-hero{
+        padding:38px 26px 28px;
       }
-      .hero-new-bg{
-        background-size:auto, 360px auto;
-        background-position:left top, right -24px center;
+      .home-hero::after{
+        background-size:360px auto;
+        background-position:right -36px center;
+        opacity:.2;
       }
       .hero-title{
         white-space:normal;
       }
       .hero-actions{
-        grid-template-columns:1fr;
         max-width:100%;
       }
     }
 
     @media (max-width:680px){
-      .hero-new,
-      .home-usernames,
-      .home-steps,
+      .home-hero,
       .home-projects,
       .home-about{
         padding:20px 18px;
@@ -628,8 +587,12 @@
         font-size:14px;
         line-height:1.68;
       }
+      .hero-actions{
+        display:grid;
+        grid-template-columns:1fr;
+      }
       .home-usernames-grid,
-      .home-steps-grid{
+      .steps-grid{
         grid-template-columns:1fr;
       }
     }
@@ -679,37 +642,25 @@
         <section class="section">
           <div class="home-shell">
 
-            <section class="hero-new">
-              <div class="hero-new-bg"></div>
-              <div class="hero-new-content">
+            <section class="home-hero">
+              <div class="hero-inner">
                 <div class="hero-kicker">SovaZone Digital Studio</div>
                 <h1 class="hero-title">Никнеймы и запуск digital-проектов</h1>
                 <p class="hero-subtitle">Подбираем username, сопровождаем запуск профиля и решаем ключевые технические вопросы старта.</p>
                 <p class="hero-text">Продажа никнеймов, ник под заказ, перенос username, помощь с аккаунтами, верификация профиля и консультации по запуску.</p>
 
                 <div class="hero-actions">
-                  <a href="/usernames.html" class="hero-btn">
-                    <span>Купить ник</span>
-                    <span class="hero-btn-arrow">→</span>
-                  </a>
-                  <a href="/sell.html" class="hero-btn">
-                    <span>Продать ник</span>
-                    <span class="hero-btn-arrow">→</span>
-                  </a>
-                  <a href="/services/custom-username.html" class="hero-btn">
-                    <span>Ник под заказ</span>
-                    <span class="hero-btn-arrow">→</span>
-                  </a>
+                  <a href="/usernames.html" class="hero-btn hero-btn--primary">Купить ник</a>
+                  <a href="/sell.html" class="hero-btn">Продать ник</a>
+                  <a href="/services/custom-username.html" class="hero-btn">Ник под заказ</a>
                 </div>
               </div>
             </section>
 
-            <section class="home-section home-usernames">
-              <div class="home-section-head">
-                <div>
-                  <h2 class="home-section-title">Популярные никнеймы</h2>
-                  <p class="home-section-lead">Часть актуальных вариантов из каталога. Визуально и по логике карточки совпадают с отдельной страницей никнеймов.</p>
-                </div>
+            <section class="flat-section">
+              <div class="flat-section-head">
+                <h2 class="flat-section-title">Популярные никнеймы</h2>
+                <p class="flat-section-lead">Часть актуальных вариантов из каталога. Визуально и по логике карточки совпадают с отдельной страницей никнеймов.</p>
               </div>
 
               <div class="home-usernames-grid">
@@ -766,37 +717,35 @@
                 </article>
               </div>
 
-              <div class="home-usernames-footer">
-                <a class="home-link-more" href="/usernames.html">Открыть каталог никнеймов →</a>
+              <div class="usernames-footer">
+                <a class="link-more" href="/usernames.html">Открыть каталог никнеймов →</a>
               </div>
             </section>
 
-            <section class="home-section home-steps">
-              <div class="home-section-head">
-                <div>
-                  <h2 class="home-section-title">Как мы работаем</h2>
-                  <p class="home-section-lead">Путь от первого сообщения до запуска построен без лишнего шума: сначала уточнение задачи, затем подбор решения и только после этого переход к сделке или услуге.</p>
-                </div>
+            <section class="flat-section">
+              <div class="flat-section-head">
+                <h2 class="flat-section-title">Как мы работаем</h2>
+                <p class="flat-section-lead">Путь от первого сообщения до запуска построен без лишнего шума: сначала уточнение задачи, затем подбор решения и только после этого переход к сделке или услуге.</p>
               </div>
 
-              <div class="home-steps-grid">
-                <article class="home-step">
-                  <div class="home-step-num">01</div>
+              <div class="steps-grid">
+                <article class="step">
+                  <div class="step-num">01</div>
                   <h3>Вы изучаете варианты</h3>
                   <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
                 </article>
-                <article class="home-step">
-                  <div class="home-step-num">02</div>
+                <article class="step">
+                  <div class="step-num">02</div>
                   <h3>Пишете в Telegram</h3>
                   <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
                 </article>
-                <article class="home-step">
-                  <div class="home-step-num">03</div>
+                <article class="step">
+                  <div class="step-num">03</div>
                   <h3>Мы подбираем решение</h3>
                   <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
                 </article>
-                <article class="home-step">
-                  <div class="home-step-num">04</div>
+                <article class="step">
+                  <div class="step-num">04</div>
                   <h3>Переходим к запуску</h3>
                   <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
                 </article>
@@ -805,37 +754,37 @@
 
             <div class="home-lower">
               <section class="home-projects">
-                <div class="home-section-head">
+                <div class="flat-section-head">
                   <div>
-                    <h2 class="home-section-title">Проекты и материалы</h2>
-                    <p class="home-section-lead">Основные направления экосистемы SovaZone: магазин, блог и информационные материалы по безопасности и работе с аккаунтами.</p>
+                    <h2 class="flat-section-title">Проекты и материалы</h2>
+                    <p class="flat-section-lead">Основные направления экосистемы SovaZone: магазин, блог и информационные материалы по безопасности и работе с аккаунтами.</p>
                   </div>
                 </div>
 
-                <div class="home-projects-grid">
-                  <article class="home-project-card">
+                <div class="projects-grid">
+                  <article class="project-card">
                     <h3>SovaDS</h3>
                     <p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p>
-                    <a class="home-link-more" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту →</a>
+                    <a class="link-more" href="https://sovads.ru/" target="_blank" rel="noopener">Перейти к проекту →</a>
                   </article>
-                  <article class="home-project-card">
+                  <article class="project-card">
                     <h3>Информационная поддержка</h3>
                     <p>Материалы по безопасности, техническим вопросам и сопровождению аккаунтов для тех, кому важно сохранить и защитить профиль.</p>
-                    <a class="home-link-more" href="/articles.html">Открыть материалы →</a>
+                    <a class="link-more" href="/articles.html">Открыть материалы →</a>
                   </article>
-                  <article class="home-project-card">
+                  <article class="project-card">
                     <h3>Блог и статьи</h3>
                     <p>Авторские статьи, новости и кейсы по теме социальных сетей, брендинга, username и digital-среды.</p>
-                    <a class="home-link-more" href="/blog.html">Открыть раздел →</a>
+                    <a class="link-more" href="/blog.html">Открыть раздел →</a>
                   </article>
                 </div>
               </section>
 
               <aside class="home-about">
-                <h2>Почему SovaZone</h2>
-                <p>Мы фокусируемся на том, что действительно важно на старте: имя пользователя, оформление, технические моменты и запуск профиля или проекта без лишнего шума.</p>
-                <p>Основной формат работы — личный контакт через Telegram. Перед продажей или оказанием услуги обсуждаются детали, подбирается решение и только после этого принимается финальное решение.</p>
-                <a class="home-btn-primary-inline" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
+                <h2 class="about-title">Почему SovaZone</h2>
+                <p class="about-text">Мы фокусируемся на том, что действительно важно на старте: имя пользователя, оформление, технические моменты и запуск профиля или проекта без лишнего шума.</p>
+                <p class="about-text">Основной формат работы — личный контакт через Telegram. Перед продажей или оказанием услуги обсуждаются детали, подбирается решение и только после этого принимается финальное решение.</p>
+                <a class="about-btn" href="https://t.me/SovaDS" target="_blank" rel="noopener">Написать в Telegram</a>
               </aside>
             </div>
 
