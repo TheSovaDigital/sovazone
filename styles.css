@@ -232,8 +232,7 @@
 
 
 /* =========================================================
-   SOVAZONE HEADER CLEAN RESET
-   unique classes to avoid old conflicts
+   SOVAZONE HEADER CLEAN COMPACT MENU
    ========================================================= */
 
 html,
@@ -379,43 +378,45 @@ body.sz-lock {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 36px;
-  height: 36px;
-  flex: 0 0 36px;
-  gap: 4px;
-  margin-left: 6px;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  gap: 5px;
+  margin-left: 4px;
   padding: 0;
   border: none;
   background: transparent;
   cursor: pointer;
+  opacity: .88;
+  transition: opacity .15s ease;
+}
+
+.sz-header__burger:hover {
+  opacity: 1;
 }
 
 .sz-header__burger span {
   display: block;
-  width: 18px;
-  height: 2px;
+  width: 16px;
+  height: 1.8px;
   border-radius: 999px;
   background: #fff;
   transition: transform .15s ease, opacity .15s ease;
 }
 
 .sz-header__burger[aria-expanded="true"] span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
+  transform: translateY(3.4px) rotate(45deg);
 }
 
 .sz-header__burger[aria-expanded="true"] span:nth-child(2) {
-  opacity: 0;
-}
-
-.sz-header__burger[aria-expanded="true"] span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
+  transform: translateY(-3.4px) rotate(-45deg);
 }
 
 .sz-overlay {
   position: fixed;
   inset: 56px 0 0 0;
   z-index: 89;
-  background: rgba(5, 6, 14, .28);
+  background: rgba(5, 6, 14, .20);
   opacity: 0;
   transition: opacity .15s ease;
 }
@@ -428,10 +429,10 @@ body.sz-lock {
   position: fixed;
   top: 56px;
   right: 0;
-  width: min(360px, 100vw);
+  width: min(320px, 100vw);
   height: calc(100vh - 56px);
   z-index: 90;
-  padding: 18px 18px 24px;
+  padding: 16px 18px 18px;
   border-left: 1px solid rgba(255,255,255,.06);
   background: rgba(10, 11, 22, .985);
   box-shadow: none;
@@ -449,13 +450,13 @@ body.sz-lock {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 18px;
-  padding-bottom: 14px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 
 .sz-side__title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -.02em;
@@ -463,16 +464,16 @@ body.sz-lock {
 
 .sz-side__body {
   display: grid;
-  gap: 18px;
+  gap: 16px;
 }
 
 .sz-side__group {
   display: grid;
-  gap: 10px;
+  gap: 6px;
 }
 
 .sz-side__group-title {
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.2;
   font-weight: 800;
   letter-spacing: .12em;
@@ -486,27 +487,26 @@ body.sz-lock {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  min-height: 44px;
-  padding: 0 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.06);
-  background: rgba(255,255,255,.02);
-  color: #f3f4fb;
+  min-height: 32px;
+  padding: 5px 0;
+  border: none;
+  background: transparent;
+  color: #eef0fb;
   font-size: 15px;
-  line-height: 1.2;
-  transition: background .15s ease, border-color .15s ease;
+  line-height: 1.25;
+  transition: color .15s ease, opacity .15s ease;
 }
 
 .sz-side__link:hover {
-  background: rgba(255,255,255,.04);
-  border-color: rgba(255,255,255,.1);
+  color: #fff;
+  opacity: 1;
 }
 
 .sz-side__ext {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
-  opacity: .86;
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  opacity: .82;
 }
 
 /* Hide old experimental header leftovers completely */
@@ -545,6 +545,10 @@ body.sz-lock {
   .sz-header__burger {
     margin-left: auto;
   }
+
+  .sz-side {
+    width: min(320px, 100vw);
+  }
 }
 
 @media (max-width: 760px) {
@@ -577,7 +581,7 @@ body.sz-lock {
     top: 54px;
     width: 100vw;
     height: calc(100vh - 54px);
-    padding: 16px 16px 22px;
+    padding: 14px 16px 18px;
     border-left: none;
   }
 }
