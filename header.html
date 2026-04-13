@@ -2,15 +2,13 @@
   <div class="container site-header__inner">
     <a class="site-header__brand" href="/index.html" aria-label="SovaZone — главная">
       <span class="site-header__brand-wrap">
-        <span class="site-header__brand-logo-box" aria-hidden="true">
-          <img
-            class="site-header__brand-logo"
-            src="/image/sovazone-owl-logo.svg"
-            alt=""
-            loading="eager"
-            decoding="async"
-          />
-        </span>
+        <img
+          class="site-header__brand-logo"
+          src="/image/sovazone-owl-logo.svg"
+          alt=""
+          loading="eager"
+          decoding="async"
+        />
         <span class="site-header__brand-text">SovaZone</span>
       </span>
     </a>
@@ -34,6 +32,46 @@
         </svg>
       </a>
     </nav>
+
+    <button
+      class="site-header__burger"
+      type="button"
+      aria-label="Открыть дополнительное меню"
+      aria-expanded="false"
+      aria-controls="site-side-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="site-side-menu__backdrop" id="site-side-menu-backdrop" hidden></div>
+
+  <aside class="site-side-menu" id="site-side-menu" aria-hidden="true">
+    <div class="site-side-menu__header">
+      <div class="site-side-menu__title">Меню</div>
+    </div>
+
+    <div class="site-side-menu__body">
+      <div class="site-side-menu__group">
+        <div class="site-side-menu__group-title">Разделы</div>
+        <a class="site-side-menu__link" href="/projects.html">Проекты</a>
+        <a class="site-side-menu__link" href="/articles.html">Статьи</a>
+      </div>
+
+      <div class="site-side-menu__group">
+        <div class="site-side-menu__group-title">Информация</div>
+        <a class="site-side-menu__link" href="/about.html">О проекте</a>
+        <a class="site-side-menu__link" href="/how-to-buy.html">Как купить</a>
+        <a class="site-side-menu__link" href="/sell.html">Как продать</a>
+        <a class="site-side-menu__link" href="/contacts.html">Контакты</a>
+        <a class="site-side-menu__link" href="/guarantees.html">Гарантии</a>
+        <a class="site-side-menu__link" href="/faq.html">FAQ</a>
+      </div>
+    </div>
+  </aside>
+</header>
 
     <button
       class="site-header__burger"
