@@ -233,7 +233,7 @@
 
 /* =========================
    SOVAZONE HEADER TUNING
-   56px header / 40px logo / gradient brand text
+   56px header / 40px logo / stretched gradient without white
    ========================= */
 
 .site-header{
@@ -295,12 +295,11 @@
 
 .site-header__brand-text{
   display:inline-block;
-  font-size:28px;
+  font-size:26px;
   font-weight:900;
   letter-spacing:-.035em;
   line-height:1;
-  color:#fff;
-  background:linear-gradient(90deg,#f5f7ff 0%, #8ea2ff 28%, #b47cff 56%, #ff7bc2 100%);
+  background:linear-gradient(90deg,#7f8cff 0%, #9a7cff 34%, #c56bff 68%, #ff69bf 100%);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -365,7 +364,7 @@
   }
 
   .site-header__brand-text{
-    font-size:24px;
+    font-size:23px;
   }
 
   .site-header__burger{
