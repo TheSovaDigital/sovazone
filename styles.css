@@ -231,27 +231,58 @@
 }
 
 
-/* ===== BRAND ICON FOR SOVAZONE ===== */
+/* =========================
+   SOVAZONE IMAGE LOGO
+   ========================= */
 
 .site-header__brand-wrap{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
 
-.site-header__brand-icon{
+.site-header__brand-logo-box{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:34px;
-  height:34px;
-  border-radius:10px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
+  width:40px;
+  height:40px;
+  flex:0 0 40px;
+}
+
+.site-header__brand-logo{
+  display:block;
+  width:40px;
+  height:40px;
+  object-fit:contain;
 }
 
 .site-header__brand-text{
+  display:inline-block;
   font-size:28px;
   font-weight:900;
   letter-spacing:-.03em;
+  color:#fff;
+  line-height:1;
+}
+
+@media (max-width: 980px){
+  .site-header__brand-wrap{
+    gap:10px;
+  }
+
+  .site-header__brand-logo-box{
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+  }
+
+  .site-header__brand-logo{
+    width:34px;
+    height:34px;
+  }
+
+  .site-header__brand-text{
+    font-size:24px;
+  }
 }
