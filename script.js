@@ -45,7 +45,7 @@
         if (!side.classList.contains("is-open")) {
           overlay.hidden = true;
         }
-      }, 160);
+      }, 140);
     }
 
     burger.addEventListener("click", function () {
