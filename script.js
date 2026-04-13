@@ -2,6 +2,7 @@
   async function inject(id, path) {
     const el = document.getElementById(id);
     if (!el) return;
+
     try {
       const res = await fetch(path, { cache: "no-cache" });
       if (!res.ok) return;
@@ -12,65 +13,64 @@
   }
 
   function initHeader() {
-    const header = document.querySelector(".site-header");
+    const header = document.querySelector(".sz-header");
     if (!header) return;
 
-    const burger = document.getElementById("burgerBtn");
-    const closeBtn = document.getElementById("closeMenuBtn");
-    const sideMenu = document.getElementById("site-side-menu");
-    const backdrop = document.getElementById("site-side-menu-backdrop");
-    const links = sideMenu.querySelectorAll("a");
+    const burger = header.querySelector(".sz-header__burger");
+    const side = header.querySelector(".sz-side");
+    const overlay = header.querySelector(".sz-overlay");
+    const links = header.querySelectorAll(".sz-side__link");
 
-    if (!burger || !sideMenu || !backdrop) return;
+    if (!burger || !side || !overlay) return;
 
-    function toggleMenu(forceClose = false) {
-      const isOpen = forceClose ? true : burger.getAttribute("aria-expanded") === "true";
-      
-      const newState = !isOpen;
-      
-      // Атрибуты и видимость
-      burger.setAttribute("aria-expanded", newState);
-      sideMenu.setAttribute("aria-hidden", !newState);
-      sideMenu.classList.toggle("is-open", newState);
-      
-      // Работа с бэкдропом (фоном)
-      backdrop.hidden = !newState;
-      setTimeout(() => backdrop.classList.toggle("is-visible", newState), 10);
-
-      // Блокировка скролла (чтобы не прыгало)
-      if (newState) {
-        document.body.style.overflow = "hidden";
-        document.documentElement.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
-      }
+    function openMenu() {
+      side.classList.add("is-open");
+      overlay.hidden = false;
+      requestAnimationFrame(() => overlay.classList.add("is-visible"));
+      burger.setAttribute("aria-expanded", "true");
+      side.setAttribute("aria-hidden", "false");
+      document.documentElement.classList.add("sz-lock");
+      document.body.classList.add("sz-lock");
     }
 
-    // Слушатели событий
-    burger.addEventListener("click", () => toggleMenu());
-    if (closeBtn) closeBtn.addEventListener("click", () => toggleMenu(true));
-    backdrop.addEventListener("click", () => toggleMenu(true));
+    function closeMenu() {
+      side.classList.remove("is-open");
+      overlay.classList.remove("is-visible");
+      burger.setAttribute("aria-expanded", "false");
+      side.setAttribute("aria-hidden", "true");
+      document.documentElement.classList.remove("sz-lock");
+      document.body.classList.remove("sz-lock");
 
-    // Закрытие при клике на любую ссылку
-    links.forEach(link => {
-      link.addEventListener("click", () => toggleMenu(true));
+      window.setTimeout(() => {
+        if (!side.classList.contains("is-open")) {
+          overlay.hidden = true;
+        }
+      }, 160);
+    }
+
+    burger.addEventListener("click", function () {
+      if (side.classList.contains("is-open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
-    // Закрытие по ESC
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && burger.getAttribute("aria-expanded") === "true") {
-        toggleMenu(true);
+    overlay.addEventListener("click", closeMenu);
+
+    links.forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && side.classList.contains("is-open")) {
+        closeMenu();
       }
     });
   }
 
-  // Загружаем компоненты и инициализируем
   Promise.all([
     inject("header-placeholder", "/header.html"),
     inject("footer-placeholder", "/footer.html")
-  ]).then(() => {
-    // Небольшая задержка, чтобы DOM успел обновиться после вставки HTML
-    setTimeout(initHeader, 50);
-  });
+  ]).then(initHeader);
 })();
