@@ -2,7 +2,6 @@
   async function inject(id, path) {
     const el = document.getElementById(id);
     if (!el) return;
-
     try {
       const res = await fetch(path, { cache: "no-cache" });
       if (!res.ok) return;
@@ -16,61 +15,62 @@
     const header = document.querySelector(".site-header");
     if (!header) return;
 
-    const burger = header.querySelector(".site-header__burger");
-    const sideMenu = header.querySelector(".site-side-menu");
-    const backdrop = header.querySelector(".site-side-menu__backdrop");
-    const links = header.querySelectorAll(".site-side-menu__link");
+    const burger = document.getElementById("burgerBtn");
+    const closeBtn = document.getElementById("closeMenuBtn");
+    const sideMenu = document.getElementById("site-side-menu");
+    const backdrop = document.getElementById("site-side-menu-backdrop");
+    const links = sideMenu.querySelectorAll("a");
 
     if (!burger || !sideMenu || !backdrop) return;
 
-    function openMenu() {
-      sideMenu.classList.add("is-open");
-      backdrop.hidden = false;
-      requestAnimationFrame(() => backdrop.classList.add("is-visible"));
-      burger.setAttribute("aria-expanded", "true");
-      sideMenu.setAttribute("aria-hidden", "false");
-      document.documentElement.classList.add("side-menu-open");
-      document.body.classList.add("side-menu-open");
-    }
+    function toggleMenu(forceClose = false) {
+      const isOpen = forceClose ? true : burger.getAttribute("aria-expanded") === "true";
+      
+      const newState = !isOpen;
+      
+      // Атрибуты и видимость
+      burger.setAttribute("aria-expanded", newState);
+      sideMenu.setAttribute("aria-hidden", !newState);
+      sideMenu.classList.toggle("is-open", newState);
+      
+      // Работа с бэкдропом (фоном)
+      backdrop.hidden = !newState;
+      setTimeout(() => backdrop.classList.toggle("is-visible", newState), 10);
 
-    function closeMenu() {
-      sideMenu.classList.remove("is-open");
-      backdrop.classList.remove("is-visible");
-      burger.setAttribute("aria-expanded", "false");
-      sideMenu.setAttribute("aria-hidden", "true");
-      document.documentElement.classList.remove("side-menu-open");
-      document.body.classList.remove("side-menu-open");
-
-      window.setTimeout(() => {
-        if (!sideMenu.classList.contains("is-open")) {
-          backdrop.hidden = true;
-        }
-      }, 180);
-    }
-
-    burger.addEventListener("click", function () {
-      if (sideMenu.classList.contains("is-open")) {
-        closeMenu();
+      // Блокировка скролла (чтобы не прыгало)
+      if (newState) {
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
       } else {
-        openMenu();
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
       }
+    }
+
+    // Слушатели событий
+    burger.addEventListener("click", () => toggleMenu());
+    if (closeBtn) closeBtn.addEventListener("click", () => toggleMenu(true));
+    backdrop.addEventListener("click", () => toggleMenu(true));
+
+    // Закрытие при клике на любую ссылку
+    links.forEach(link => {
+      link.addEventListener("click", () => toggleMenu(true));
     });
 
-    backdrop.addEventListener("click", closeMenu);
-
-    links.forEach(function (link) {
-      link.addEventListener("click", closeMenu);
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && sideMenu.classList.contains("is-open")) {
-        closeMenu();
+    // Закрытие по ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && burger.getAttribute("aria-expanded") === "true") {
+        toggleMenu(true);
       }
     });
   }
 
+  // Загружаем компоненты и инициализируем
   Promise.all([
     inject("header-placeholder", "/header.html"),
     inject("footer-placeholder", "/footer.html")
-  ]).then(initHeader);
+  ]).then(() => {
+    // Небольшая задержка, чтобы DOM успел обновиться после вставки HTML
+    setTimeout(initHeader, 50);
+  });
 })();
