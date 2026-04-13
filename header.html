@@ -1,6 +1,5 @@
 <header class="site-header">
   <div class="container site-header__inner">
-
     <a class="site-header__brand" href="/index.html" aria-label="SovaZone — главная">
       <span class="site-header__brand-wrap">
         <span class="site-header__brand-logo-box" aria-hidden="true">
@@ -20,38 +19,51 @@
       <a class="site-header__link" href="/index.html">Главная</a>
       <a class="site-header__link" href="/services.html">Услуги</a>
       <a class="site-header__link" href="/usernames.html">Никнеймы</a>
-      <a class="site-header__link" href="/projects.html">Проекты</a>
-      <a class="site-header__link" href="/articles.html">Статьи</a>
       <a class="site-header__link" href="/blog.html">Блог</a>
-
-      <div class="site-header__dropdown">
-        <button
-          class="site-header__dropdown-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-haspopup="true"
-        >
-          Информация
-          <span class="site-header__caret" aria-hidden="true">▾</span>
-        </button>
-
-        <div class="site-header__dropdown-menu" role="menu">
-          <a class="site-header__dropdown-link" href="/about.html" role="menuitem">О проекте</a>
-          <a class="site-header__dropdown-link" href="/how-to-buy.html" role="menuitem">Как купить</a>
-          <a class="site-header__dropdown-link" href="/sell.html" role="menuitem">Как продать</a>
-          <a class="site-header__dropdown-link" href="/contacts.html" role="menuitem">Контакты</a>
-          <a class="site-header__dropdown-link" href="/guarantees.html" role="menuitem">Гарантии</a>
-          <a class="site-header__dropdown-link" href="/faq.html" role="menuitem">FAQ</a>
-        </div>
-      </div>
-
       <a class="site-header__link site-header__link--accent" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
     </nav>
 
-    <button class="site-header__burger" type="button" aria-label="Открыть меню" aria-expanded="false">
+    <div class="site-header__lang site-header__lang--future" aria-hidden="true">
+      <span class="site-header__lang-item is-active">RU</span>
+      <span class="site-header__lang-sep">/</span>
+      <span class="site-header__lang-item">EN</span>
+    </div>
+
+    <button class="site-header__burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-header-more-menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
+  </div>
+
+  <div class="site-header__more-menu" id="site-header-more-menu">
+    <div class="container site-header__more-inner">
+      <div class="site-header__more-group site-header__more-group--primary">
+        <div class="site-header__more-title">Основное</div>
+        <a class="site-header__more-link" href="/index.html">Главная</a>
+        <a class="site-header__more-link" href="/services.html">Услуги</a>
+        <a class="site-header__more-link" href="/usernames.html">Никнеймы</a>
+        <a class="site-header__more-link" href="/blog.html">Блог</a>
+        <a class="site-header__more-link" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
+      </div>
+
+      <div class="site-header__more-group">
+        <div class="site-header__more-title">Разделы</div>
+        <a class="site-header__more-link" href="/projects.html">Проекты</a>
+        <a class="site-header__more-link" href="/articles.html">Статьи</a>
+      </div>
+
+      <div class="site-header__more-group">
+        <div class="site-header__more-title">Информация</div>
+        <a class="site-header__more-link" href="/about.html">О проекте</a>
+        <a class="site-header__more-link" href="/how-to-buy.html">Как купить</a>
+        <a class="site-header__more-link" href="/sell.html">Как продать</a>
+        <a class="site-header__more-link" href="/contacts.html">Контакты</a>
+        <a class="site-header__more-link" href="/guarantees.html">Гарантии</a>
+        <a class="site-header__more-link" href="/faq.html">FAQ</a>
+        <a class="site-header__more-link" href="/privacy.html">Политика конфиденциальности</a>
+        <a class="site-header__more-link" href="/client-terms.html">Условия для клиентов</a>
+      </div>
+    </div>
   </div>
 </header>
