@@ -295,3 +295,47 @@ svg {
   overflow-x: hidden;
 }
 
+/* === GLOBAL LAYOUT FIX === */
+
+/* страница никогда не шире экрана */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* главный контейнер */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+/* hero-блок с совой */
+.hero,
+.hero__inner,
+.hero__image,
+.hero img {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* защита от элементов шире экрана */
+section,
+header,
+main,
+footer {
+  max-width: 100%;
+}
+
+/* меню */
+.site-side-menu {
+  width: 380px;
+  max-width: 100vw;
+}
+
