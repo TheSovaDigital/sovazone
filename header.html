@@ -1,54 +1,86 @@
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a class="site-header__brand" href="/index.html" aria-label="SovaZone — главная">
-      <span class="site-header__brand-wrap">
-        <img class="site-header__brand-logo" src="/image/sovazone-owl-logo.svg" alt="" loading="eager" decoding="async" />
-        <!-- Добавил класс-модификатор для градиента -->
-        <span class="site-header__brand-text instagram-gradient">SovaZone</span>
-      </span>
+<header class="sz-header">
+  <div class="container sz-header__inner">
+    <a class="sz-header__brand" href="/index.html" aria-label="SovaZone — главная">
+      <img
+        class="sz-header__logo"
+        src="/image/sovazone-owl-logo.svg"
+        alt=""
+        loading="eager"
+        decoding="async"
+      />
+      <span class="sz-header__brand-text">SovaZone</span>
     </a>
 
-    <nav class="site-header__nav" aria-label="Основная навигация">
-      <a class="site-header__link" href="/index.html">Главная</a>
-      <a class="site-header__link" href="/services.html">Услуги</a>
-      <a class="site-header__link" href="/usernames.html">Никнеймы</a>
-      <a class="site-header__link" href="/blog.html">Блог</a>
-      <a class="site-header__store-link" href="https://sovads.ru/" target="_blank" rel="noopener">
+    <nav class="sz-header__nav" aria-label="Основная навигация">
+      <a class="sz-header__link" href="/index.html">Главная</a>
+      <a class="sz-header__link" href="/services.html">Услуги</a>
+      <a class="sz-header__link" href="/usernames.html">Никнеймы</a>
+      <a class="sz-header__link" href="/blog.html">Блог</a>
+      <a
+        class="sz-header__store"
+        href="https://sovads.ru/"
+        target="_blank"
+        rel="noopener"
+      >
         <span>Онлайн магазин</span>
-        <svg class="site-header__external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-          <path d="M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round""")/>>
-          <path d="M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round""")/>>
+        <svg class="sz-header__ext" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+          <path d="M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
         </svg>
       </a>
     </nav>
 
-    <button class="site-header__burger" id="burgerBtn" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-side-menu">
+    <button
+      class="sz-header__burger"
+      type="button"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+      aria-controls="sz-side-menu"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
   </div>
 
-  <div class="site-side-menu__backdrop" id="site-side-menu-backdrop" hidden></div>
+  <div class="sz-overlay" id="sz-overlay" hidden></div>
 
-  <aside class="site-side-menu" id="site-side-menu" aria-hidden="true">
-    <div class="site-side-menu__header">
-      <div class="site-side-menu__title">Меню</div>
-      <!-- Кнопку закрытия можно добавить сюда, если нужно -->
+  <aside class="sz-side" id="sz-side-menu" aria-hidden="true">
+    <div class="sz-side__head">
+      <div class="sz-side__title">Меню</div>
     </div>
-    <div class="site-side-menu__body">
-      <!-- Группы меню оставляем как есть, стили поправим в CSS -->
-      <div class="site-side-menu__group">
-        <div class="site-side-menu__group-title">Основное</div>
-        <a class="site-side-menu__link" href="/index.html">Главная</a>
-        <a class="site-side-menu__link" href="/services.html">Услуги</a>
-        <a class="site-side-menu__link" href="/usernames.html">Никнеймы</a>
-        <a class="site-side-menu__link" href="/blog.html">Блог</a>
-        <a class="site-side-menu__link" href="https://sovads.ru/" target="_blank" rel="noopener">
+
+    <div class="sz-side__body">
+      <div class="sz-side__group">
+        <div class="sz-side__group-title">Основное</div>
+        <a class="sz-side__link" href="/index.html">Главная</a>
+        <a class="sz-side__link" href="/services.html">Услуги</a>
+        <a class="sz-side__link" href="/usernames.html">Никнеймы</a>
+        <a class="sz-side__link" href="/blog.html">Блог</a>
+        <a class="sz-side__link" href="https://sovads.ru/" target="_blank" rel="noopener">
           <span>Онлайн магазин</span>
+          <svg class="sz-side__ext" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <path d="M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
         </a>
       </div>
-      <!-- Другие группы... -->
+
+      <div class="sz-side__group">
+        <div class="sz-side__group-title">Разделы</div>
+        <a class="sz-side__link" href="/projects.html">Проекты</a>
+        <a class="sz-side__link" href="/articles.html">Статьи</a>
+      </div>
+
+      <div class="sz-side__group">
+        <div class="sz-side__group-title">Информация</div>
+        <a class="sz-side__link" href="/about.html">О проекте</a>
+        <a class="sz-side__link" href="/how-to-buy.html">Как купить</a>
+        <a class="sz-side__link" href="/sell.html">Как продать</a>
+        <a class="sz-side__link" href="/contacts.html">Контакты</a>
+        <a class="sz-side__link" href="/guarantees.html">Гарантии</a>
+        <a class="sz-side__link" href="/faq.html">FAQ</a>
+      </div>
     </div>
   </aside>
 </header>
