@@ -17,34 +17,54 @@
     if (!header) return;
 
     const burger = header.querySelector(".site-header__burger");
-    const moreMenu = header.querySelector(".site-header__more-menu");
+    const sideMenu = header.querySelector(".site-side-menu");
+    const backdrop = header.querySelector(".site-side-menu__backdrop");
+    const closeBtn = header.querySelector(".site-side-menu__close");
+    const menuLinks = header.querySelectorAll(".site-side-menu__link");
 
-    if (!burger || !moreMenu) return;
+    if (!burger || !sideMenu || !backdrop || !closeBtn) return;
 
-    burger.addEventListener("click", function (e) {
-      e.stopPropagation();
-      const opened = moreMenu.classList.toggle("is-open");
-      burger.classList.toggle("is-open", opened);
-      burger.setAttribute("aria-expanded", String(opened));
-    });
+    function openMenu() {
+      sideMenu.classList.add("is-open");
+      backdrop.hidden = false;
+      requestAnimationFrame(() => backdrop.classList.add("is-visible"));
+      burger.setAttribute("aria-expanded", "true");
+      sideMenu.setAttribute("aria-hidden", "false");
+      document.body.classList.add("side-menu-open");
+    }
 
-    moreMenu.addEventListener("click", function (e) {
-      e.stopPropagation();
-    });
+    function closeMenu() {
+      sideMenu.classList.remove("is-open");
+      backdrop.classList.remove("is-visible");
+      burger.setAttribute("aria-expanded", "false");
+      sideMenu.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("side-menu-open");
 
-    document.addEventListener("click", function (e) {
-      if (!header.contains(e.target)) {
-        moreMenu.classList.remove("is-open");
-        burger.classList.remove("is-open");
-        burger.setAttribute("aria-expanded", "false");
+      window.setTimeout(() => {
+        if (!sideMenu.classList.contains("is-open")) {
+          backdrop.hidden = true;
+        }
+      }, 220);
+    }
+
+    burger.addEventListener("click", function () {
+      if (sideMenu.classList.contains("is-open")) {
+        closeMenu();
+      } else {
+        openMenu();
       }
     });
 
+    closeBtn.addEventListener("click", closeMenu);
+    backdrop.addEventListener("click", closeMenu);
+
+    menuLinks.forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        moreMenu.classList.remove("is-open");
-        burger.classList.remove("is-open");
-        burger.setAttribute("aria-expanded", "false");
+      if (e.key === "Escape" && sideMenu.classList.contains("is-open")) {
+        closeMenu();
       }
     });
   }
