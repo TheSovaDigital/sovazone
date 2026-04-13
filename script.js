@@ -45,7 +45,7 @@
         if (!sideMenu.classList.contains("is-open")) {
           backdrop.hidden = true;
         }
-      }, 220);
+      }, 180);
     }
 
     burger.addEventListener("click", function () {
