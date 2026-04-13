@@ -232,75 +232,14 @@
 
 
 /* =========================
-   SOVAZONE HEADER IMAGE LOGO
+   SVG LOGO SUPPORT
+   File name updated to: sovazone-owl-logo.svg
    ========================= */
 
-.site-header__brand{
-  display:flex;
-  align-items:center;
-  flex:0 0 auto;
-  color:#fff;
-}
-
-.site-header__brand-wrap{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-}
-
-.site-header__brand-logo-box{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:32px;
-  height:32px;
-  flex:0 0 32px;
-  overflow:hidden;
-}
-
 .site-header__brand-logo{
-  display:block;
   width:32px !important;
   height:32px !important;
-  max-width:32px !important;
-  max-height:32px !important;
-  min-width:32px;
-  min-height:32px;
   object-fit:contain;
-  flex:0 0 32px;
+  display:block;
 }
 
-.site-header__brand-text{
-  display:inline-block;
-  font-size:28px;
-  font-weight:900;
-  letter-spacing:-.03em;
-  line-height:1;
-  color:#fff;
-}
-
-@media (max-width: 980px){
-  .site-header__brand-wrap{
-    gap:10px;
-  }
-
-  .site-header__brand-logo-box{
-    width:28px;
-    height:28px;
-    flex:0 0 28px;
-  }
-
-  .site-header__brand-logo{
-    width:28px !important;
-    height:28px !important;
-    max-width:28px !important;
-    max-height:28px !important;
-    min-width:28px;
-    min-height:28px;
-    flex:0 0 28px;
-  }
-
-  .site-header__brand-text{
-    font-size:24px;
-  }
-}
