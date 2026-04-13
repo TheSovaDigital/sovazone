@@ -17,33 +17,36 @@
     if (!header) return;
 
     const burger = header.querySelector(".site-header__burger");
-    const nav = header.querySelector(".site-header__nav");
-    const dropdown = header.querySelector(".site-header__dropdown");
-    const toggle = header.querySelector(".site-header__dropdown-toggle");
+    const moreMenu = header.querySelector(".site-header__more-menu");
 
-    if (burger && nav) {
-      burger.addEventListener("click", function () {
-        const opened = nav.classList.toggle("is-open");
-        burger.setAttribute("aria-expanded", String(opened));
-      });
-    }
+    if (!burger || !moreMenu) return;
 
-    if (dropdown && toggle) {
-      toggle.addEventListener("click", function (e) {
-        if (window.innerWidth <= 980) {
-          e.preventDefault();
-        }
-        const opened = dropdown.classList.toggle("is-open");
-        toggle.setAttribute("aria-expanded", String(opened));
-      });
+    burger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const opened = moreMenu.classList.toggle("is-open");
+      burger.classList.toggle("is-open", opened);
+      burger.setAttribute("aria-expanded", String(opened));
+    });
 
-      document.addEventListener("click", function (e) {
-        if (!dropdown.contains(e.target)) {
-          dropdown.classList.remove("is-open");
-          toggle.setAttribute("aria-expanded", "false");
-        }
-      });
-    }
+    moreMenu.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!header.contains(e.target)) {
+        moreMenu.classList.remove("is-open");
+        burger.classList.remove("is-open");
+        burger.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        moreMenu.classList.remove("is-open");
+        burger.classList.remove("is-open");
+        burger.setAttribute("aria-expanded", "false");
+      }
+    });
   }
 
   Promise.all([
