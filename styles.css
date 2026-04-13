@@ -232,24 +232,25 @@
 
 
 /* =========================
-   SOVAZONE HEADER TUNING
-   56px header / 40px logo / stretched gradient without white
+   HEADER FINAL STRUCTURE
+   compact main nav + desktop/mobile burger
+   hidden future RU/EN slot
    ========================= */
 
 .site-header{
   position:sticky;
   top:0;
   z-index:50;
-  background:rgba(7,7,18,.82);
+  background:rgba(7,7,18,.84);
   backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .site-header__inner{
-  display:flex;
+  display:grid;
+  grid-template-columns:auto 1fr auto auto;
   align-items:center;
-  justify-content:space-between;
-  gap:20px;
+  gap:18px;
   min-height:56px;
 }
 
@@ -299,7 +300,7 @@
   font-weight:900;
   letter-spacing:-.035em;
   line-height:1;
-  background:linear-gradient(90deg,#7f8cff 0%, #9a7cff 34%, #c56bff 68%, #ff69bf 100%);
+  background:linear-gradient(90deg,#7f8cff 0%, #977bff 32%, #c66dff 68%, #ff69bf 100%);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -308,26 +309,35 @@
 .site-header__nav{
   display:flex;
   align-items:center;
+  justify-content:flex-end;
   gap:18px;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
+  min-width:0;
 }
 
-.site-header__link,
-.site-header__dropdown-toggle{
+.site-header__link{
   color:#d8d8e7;
   font-size:15px;
   line-height:1;
-  background:none;
-  border:none;
-  padding:0;
-  cursor:pointer;
-  font-family:inherit;
+  white-space:nowrap;
+}
+
+.site-header__link--accent{
+  color:#fff;
+}
+
+.site-header__link:hover{
+  color:#fff;
+}
+
+.site-header__lang--future{
+  display:none;
 }
 
 .site-header__burger{
-  display:none;
-  width:40px;
-  height:40px;
+  display:inline-flex;
+  width:36px;
+  height:36px;
   padding:0;
   background:none;
   border:none;
@@ -336,11 +346,105 @@
   align-items:center;
   justify-content:center;
   gap:5px;
+  flex:0 0 36px;
+}
+
+.site-header__burger span{
+  display:block;
+  width:18px;
+  height:2px;
+  border-radius:999px;
+  background:#fff;
+  transition:transform .2s ease, opacity .2s ease;
+}
+
+.site-header__burger.is-open span:nth-child(1){
+  transform:translateY(7px) rotate(45deg);
+}
+
+.site-header__burger.is-open span:nth-child(2){
+  opacity:0;
+}
+
+.site-header__burger.is-open span:nth-child(3){
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+.site-header__more-menu{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  background:linear-gradient(180deg,rgba(15,16,28,.98),rgba(8,9,17,.98));
+  border-bottom:1px solid rgba(255,255,255,.07);
+  box-shadow:0 22px 50px rgba(0,0,0,.34);
+}
+
+.site-header__more-menu.is-open{
+  display:block;
+}
+
+.site-header__more-inner{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+  padding:18px 0 22px;
+}
+
+.site-header__more-group{
+  display:grid;
+  gap:8px;
+  align-content:start;
+}
+
+.site-header__more-group--primary{
+  display:none;
+}
+
+.site-header__more-title{
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#8f92a8;
+  margin-bottom:4px;
+}
+
+.site-header__more-link{
+  display:block;
+  color:#e4e5f0;
+  font-size:14px;
+  line-height:1.4;
+  padding:6px 0;
+}
+
+.site-header__more-link:hover{
+  color:#fff;
+}
+
+@media (max-width: 1180px){
+  .site-header__nav{
+    gap:16px;
+  }
+
+  .site-header__link{
+    font-size:14px;
+  }
+
+  .site-header__brand-text{
+    font-size:25px;
+  }
 }
 
 @media (max-width: 980px){
   .site-header__inner{
+    grid-template-columns:auto 1fr auto;
     min-height:56px;
+    gap:14px;
+  }
+
+  .site-header__nav{
+    display:none;
   }
 
   .site-header__brand-wrap{
@@ -364,30 +468,22 @@
   }
 
   .site-header__brand-text{
-    font-size:23px;
+    font-size:24px;
   }
 
   .site-header__burger{
-    display:flex;
-    width:36px;
-    height:36px;
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
   }
 
-  .site-header__nav{
-    position:absolute;
-    top:100%;
-    left:0;
-    right:0;
-    display:none;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:14px;
-    padding:18px 20px 22px;
-    background:linear-gradient(180deg,rgba(13,14,24,.98),rgba(8,9,17,.98));
-    border-bottom:1px solid rgba(255,255,255,.06);
+  .site-header__more-inner{
+    grid-template-columns:1fr;
+    gap:20px;
+    padding:16px 0 20px;
   }
 
-  .site-header__nav.is-open{
-    display:flex;
+  .site-header__more-group--primary{
+    display:grid;
   }
 }
