@@ -587,3 +587,163 @@ body.sz-lock {
     border-left: none;
   }
 }
+
+
+/* =========================================================
+   HEADER MENU VISUAL POLISH ONLY
+   instagram / apple style field hover, no rounded hover, no glows
+   structure and logic unchanged
+   ========================================================= */
+
+/* remove any residual decorative shadows/glows */
+.sz-header,
+.sz-header *,
+.site-header,
+.site-header *{
+  box-shadow:none !important;
+  text-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+}
+
+/* brand stays compact and clean */
+.sz-header__brand-text{
+  font-size:21px !important;
+  font-weight:900 !important;
+  letter-spacing:-0.03em !important;
+  background:linear-gradient(90deg,#833AB4 0%,#C13584 36%,#E1306C 66%,#F77737 100%) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+}
+
+/* top navigation becomes cleaner and more premium */
+.sz-header__nav{
+  gap:4px !important;
+}
+
+.sz-header__link{
+  min-height:36px !important;
+  padding:0 12px !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:#ffffff !important;
+  font-size:14px !important;
+  font-weight:600 !important;
+  letter-spacing:-0.01em !important;
+  transition:background .16s ease,color .16s ease !important;
+}
+
+.sz-header__link:hover{
+  background:rgba(255,255,255,.055) !important;
+  color:#ffffff !important;
+}
+
+/* kill any underline / underline pseudo effects if present */
+.sz-header__link::before,
+.sz-header__link::after{
+  display:none !important;
+  content:none !important;
+}
+
+/* shop button kept subtle, cleaner and square-ish */
+.sz-header__store{
+  min-height:36px !important;
+  padding:0 14px !important;
+  border-radius:0 !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  background:rgba(255,255,255,.03) !important;
+  color:#ffffff !important;
+  font-size:14px !important;
+  font-weight:700 !important;
+  transition:background .16s ease,border-color .16s ease,color .16s ease !important;
+}
+
+.sz-header__store:hover{
+  background:rgba(255,255,255,.07) !important;
+  border-color:rgba(255,255,255,.12) !important;
+  color:#ffffff !important;
+}
+
+/* burger: no border, no circle, no pill, just clean lines */
+.sz-header__burger{
+  width:34px !important;
+  height:34px !important;
+  margin-left:8px !important;
+  padding:0 !important;
+  border:none !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  opacity:1 !important;
+}
+
+.sz-header__burger:hover{
+  border:none !important;
+  background:rgba(255,255,255,.04) !important;
+  border-radius:0 !important;
+}
+
+.sz-header__burger span{
+  width:17px !important;
+  height:2px !important;
+  background:#ffffff !important;
+}
+
+/* side panel stays clean */
+.sz-side{
+  border-left:1px solid rgba(255,255,255,.06) !important;
+  background:rgba(10,11,22,.99) !important;
+}
+
+.sz-side__head{
+  padding-bottom:12px !important;
+  margin-bottom:12px !important;
+}
+
+.sz-side__title{
+  font-size:16px !important;
+  font-weight:800 !important;
+  color:#ffffff !important;
+}
+
+/* menu links inside panel use field highlight like instagram/apple, no rounding */
+.sz-side__group{
+  gap:2px !important;
+}
+
+.sz-side__group-title{
+  margin-bottom:6px !important;
+}
+
+.sz-side__link{
+  min-height:34px !important;
+  padding:6px 8px !important;
+  border-radius:0 !important;
+  color:#ffffff !important;
+  background:transparent !important;
+  transition:background .16s ease,color .16s ease !important;
+}
+
+.sz-side__link:hover{
+  background:rgba(255,255,255,.055) !important;
+  color:#ffffff !important;
+}
+
+@media (max-width:1180px){
+  .sz-header__nav{ gap:2px !important; }
+  .sz-header__link{ padding:0 10px !important; }
+  .sz-header__store{ padding:0 12px !important; }
+}
+
+@media (max-width:900px){
+  .sz-side__group--primary{
+    gap:2px !important;
+  }
+  .sz-side__link{
+    padding:7px 0 !important;
+  }
+  .sz-side__link:hover{
+    background:rgba(255,255,255,.05) !important;
+  }
+}
+
