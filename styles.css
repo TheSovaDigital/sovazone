@@ -572,7 +572,7 @@ body.sz-lock {
 }
 
 /* =========================================================
-   CLEAN FOOTER REDESIGN V3
+   CLEAN FOOTER REDESIGN V4
    ========================================================= */
 
 .site-footer{
@@ -587,8 +587,8 @@ body.sz-lock {
 
 .site-footer__top{
   display:grid;
-  grid-template-columns:minmax(300px, 420px) minmax(0, 1fr);
-  gap:56px;
+  grid-template-columns:minmax(280px, 360px) minmax(0, 1fr);
+  gap:64px;
   align-items:start;
 }
 
@@ -610,7 +610,7 @@ body.sz-lock {
 
 .site-footer__text{
   margin:0;
-  max-width:420px;
+  max-width:340px;
   color:#a8aec2;
   font-size:15px;
   line-height:1.72;
@@ -648,8 +648,8 @@ body.sz-lock {
 
 .site-footer__nav-grid{
   display:grid;
-  grid-template-columns:repeat(3, minmax(150px, 1fr));
-  gap:36px;
+  grid-template-columns:repeat(3, minmax(140px, 1fr));
+  gap:48px;
   align-items:start;
 }
 
@@ -673,6 +673,7 @@ body.sz-lock {
   font-size:15px;
   line-height:1.35;
   transition:color .16s ease;
+  word-break:break-word;
 }
 
 .site-footer__col a:hover{
@@ -712,6 +713,10 @@ body.sz-lock {
   .site-footer__top{
     grid-template-columns:1fr;
     gap:34px;
+  }
+
+  .site-footer__text{
+    max-width:620px;
   }
 
   .site-footer__nav-grid{
