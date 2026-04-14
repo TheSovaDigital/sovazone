@@ -1,87 +1,913 @@
-<footer class="svf-footer">
-  <div class="container svf-footer__inner">
-    <div class="svf-footer__main">
-      <div class="svf-footer__intro">
-        <div class="svf-footer__brand">SovaZone</div>
-        <p class="svf-footer__text">
-          Digital-экосистема для никнеймов, запуска профиля, консультаций,
-          помощи с аккаунтами и сопутствующих направлений.
-        </p>
+:root{--bg:#070712;--card:#0c0d16;--line:rgba(255,255,255,.08);--line2:rgba(198,134,80,.24);--text:#f4f4f7;--muted:#b8b8c7;--a:#8c52ff;--b:#ff6d6d;--shadow:0 16px 42px rgba(0,0,0,.28);--r:22px;--c:1120px}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:radial-gradient(1200px 700px at 0% 0%, rgba(110,23,45,.22), transparent 55%),radial-gradient(1200px 700px at 100% 0%, rgba(36,28,112,.22), transparent 55%),linear-gradient(180deg,#070712 0%,#05050d 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}.container{width:min(var(--c),calc(100% - 40px));margin:0 auto}.page-content{padding:18px 0 54px}.section{padding:18px 0}.section-head{margin-bottom:16px}.section-head h1,.section-head h2{margin:0 0 10px;font-size:clamp(28px,3.2vw,42px);line-height:1.06}.lead,.hero-lead{margin:0;color:var(--muted);font-size:15px;line-height:1.65}.card,.username-hero-card,.username-story-card,.cta-panel{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r)}.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 18px;border-radius:15px;border:1px solid var(--line);font-weight:700;background:#11131f;color:#fff}.btn-primary{background:linear-gradient(90deg,var(--a),var(--b));border-color:transparent}.btn-secondary{background:rgba(255,255,255,.03)}.btn-full{width:100%}.hero{display:grid;gap:24px;align-items:start}.hero-split{grid-template-columns:300px minmax(0,1fr)}.hero-badge{width:100%;text-align:center;padding:13px 15px;border-radius:18px;border:1px solid rgba(198,134,80,.38);background:linear-gradient(180deg,rgba(198,134,80,.12),rgba(255,255,255,.03));color:#ead7c7;font-weight:600}.hero-logo-card{padding:14px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));margin:10px 0 12px}.hero-side-actions{display:grid;gap:10px}.hero-content h1{margin:0 0 18px;font-size:clamp(32px,4.1vw,50px);line-height:1.03;letter-spacing:-.04em}.hero-text-block p{margin:0 0 16px;color:var(--muted);font-size:15px;line-height:1.655}.hero-mini-points{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}.mini-point{display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:0 10px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#e8e8f3}.section-head-inline{display:flex;align-items:center;justify-content:space-between;gap:16px}.username-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.username-card{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:16px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));box-shadow:var(--shadow)}.username-card-top{display:grid;gap:10px}.username-title-row{display:flex;align-items:center;gap:12px}.platform-icon{display:inline-flex;width:22px;height:22px;flex:0 0 22px;color:#fff;opacity:.92}.username-name{font-size:clamp(22px,2.2vw,30px);font-weight:900;line-height:1;letter-spacing:-.02em}.username-link{color:#b7b7c9;font-size:13px;line-height:1.4}.username-price{font-weight:800;font-size:16px}.username-buy{width:100%}.service-card,.project-card,.step-card{padding:18px}.service-card h3,.project-card h3{margin:0 0 12px;font-size:20px;line-height:1.14}.service-card p,.project-card p,.step-card p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}.service-card a,.project-card a{display:inline-block;margin-top:14px;font-weight:700;font-size:14px}.steps-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.step-headline{display:flex;align-items:center;gap:12px;margin-bottom:14px}.step-number{font-size:15px;font-weight:800;color:#d6d6ea}.step-headline h3{margin:0;font-size:19px;line-height:1.14}.trust-card{padding:18px}.trust-content{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:center}.trust-content h2{margin:0 0 14px;font-size:34px;line-height:1.06}.trust-content p{margin:0 0 14px;color:var(--muted);font-size:15px;line-height:1.655}.trust-actions{display:grid;gap:12px}.breadcrumbs{display:flex;flex-wrap:wrap;gap:8px;color:#a8a8bc;font-size:13px;margin-bottom:14px}.breadcrumbs a{color:#c9c9da}.username-top-wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.88fr);gap:18px}.username-hero-card{padding:20px;border-color:var(--line2)}.username-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:13px;color:#d6d6e7;margin-bottom:14px}.username-hero-card h1{margin:0 0 12px;font-size:clamp(36px,4.5vw,58px);line-height:.96;letter-spacing:-.05em}.username-subline{display:flex;flex-wrap:wrap;gap:8px 10px;color:#c6c6d4;font-size:14px;margin-bottom:14px}.info-chip{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:13px;color:#e5e5f1}.username-story-card{padding:20px;display:grid;gap:12px}.username-story-card h2{margin:0;font-size:24px;line-height:1.1}.username-story-card p{margin:0;color:var(--muted);font-size:15px;line-height:1.78}.username-story-card strong{color:#fff}.cta-panel{padding:20px;display:grid;gap:10px;align-content:start}.cta-panel h3{margin:0 0 6px;font-size:24px;line-height:1.1}.cta-panel p{margin:0 0 8px;color:var(--muted);line-height:1.68;font-size:15px}.username-cta-buttons{display:grid;gap:10px;margin-top:6px}.username-mini-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:6px}.meta-box{border:1px solid var(--line);border-radius:14px;padding:11px;background:rgba(255,255,255,.025)}.meta-label{font-size:12px;color:#a9a9bd;margin-bottom:6px}.meta-value{font-size:14px;font-weight:700}@media (max-width:1100px){.username-grid,.grid-4,.steps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-split,.trust-content,.username-top-wrap{grid-template-columns:1fr}}@media (max-width:720px){.container{width:min(var(--c),calc(100% - 24px))}.page-content{padding:18px 0 56px}.hero-mini-points,.username-grid,.grid-3,.grid-2,.steps-grid{grid-template-columns:1fr}.section-head-inline{flex-direction:column;align-items:flex-start}.username-hero-card,.username-story-card,.cta-panel,.service-card,.project-card,.step-card{padding:18px}.trust-content h2,.section-head h2,.section-head h1{font-size:30px}.username-hero-card h1{font-size:42px}}
 
-        <div class="svf-footer__socials" aria-label="Социальные сети SovaZone">
-          <a class="svf-footer__social" href="https://t.me/SovaDigital" target="_blank" rel="noopener" aria-label="Telegram">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21.2 4.8 17.9 20c-.2 1-.8 1.2-1.6.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3l-11.5 7.2-5-1.6c-1.1-.3-1.1-1 .2-1.5L19.2 3c.9-.3 1.7.2 1.4 1.8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a class="svf-footer__social" href="https://x.com/SovaDigital" target="_blank" rel="noopener" aria-label="X">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 4h3.9l4.2 5.5L16.7 4H20l-6.5 7.4L20 20h-3.9l-4.5-5.9L6.5 20H4l7-8L4 4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a class="svf-footer__social" href="https://www.youtube.com/@SovaZone" target="_blank" rel="noopener" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="3.2" y="6.2" width="17.6" height="11.6" rx="3.2" stroke="currentColor" stroke-width="1.7"/>
-              <path d="m10 9.3 5.3 2.7L10 14.7V9.3Z" fill="currentColor"/>
-            </svg>
-          </a>
-          <a class="svf-footer__social" href="https://instagram.com/SovaZones" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="4" y="4" width="16" height="16" rx="4.5" stroke="currentColor" stroke-width="1.7"/>
-              <circle cx="12" cy="12" r="3.7" stroke="currentColor" stroke-width="1.7"/>
-              <circle cx="17.15" cy="6.85" r="1.1" fill="currentColor"/>
-            </svg>
-          </a>
-          <a class="svf-footer__social" href="https://www.tiktok.com/@SovaZone" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M14 4c.4 2.1 1.7 3.6 4 4v2.8c-1.5 0-2.8-.4-4-1.2V15a5 5 0 1 1-5-5h.6v2.8H9a2.2 2.2 0 1 0 2.2 2.2V4H14Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a class="svf-footer__social" href="https://vk.com/SovaZone" target="_blank" rel="noopener" aria-label="VK">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M5 7.5c.3 4.9 3 8.5 7.5 8.5h.3v-3.1c1.8.2 3.2 1.5 3.8 3.1H20c-.8-2.9-2.7-4.6-3.9-5.3 1.2-.8 2.8-2.6 3.2-5H16c-.6 2-2 3.9-3.2 4.1V7.5h-3.3v3.7c-1.3-.3-3-2.3-3-5.7H5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
+.profile-link-box a{word-break:break-word;font-size:13px;line-height:1.45}
 
-      <div class="svf-footer__menus">
-        <nav class="svf-footer__col" aria-label="Навигация">
-          <div class="svf-footer__title">Навигация</div>
-          <a href="/index.html">Главная</a>
-          <a href="/services.html">Услуги</a>
-          <a href="/usernames.html">Никнеймы</a>
-          <a href="/projects.html">Проекты</a>
-          <a href="/articles.html">Статьи</a>
-          <a href="/blog.html">Блог</a>
-        </nav>
 
-        <nav class="svf-footer__col" aria-label="Информация">
-          <div class="svf-footer__title">Информация</div>
-          <a href="/about.html">О проекте</a>
-          <a href="/how-to-buy.html">Как купить</a>
-          <a href="/sell.html">Как продать</a>
-          <a href="/contacts.html">Контакты</a>
-          <a href="/guarantees.html">Гарантии</a>
-          <a href="/faq.html">FAQ</a>
-        </nav>
+/* =========================
+   HEADER / FOOTER
+   ========================= */
 
-        <div class="svf-footer__col" aria-label="Ссылки">
-          <div class="svf-footer__title">Ссылки</div>
-          <a href="https://t.me/SovaDigital" target="_blank" rel="noopener">SovaDigital</a>
-          <a href="https://t.me/SovaDS" target="_blank" rel="noopener">SovaUsername</a>
-          <a href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
-        </div>
-      </div>
-    </div>
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(7,7,18,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
 
-    <div class="svf-footer__bottom">
-      <div class="svf-footer__copyright">© 2026 SovaZone</div>
-      <div class="svf-footer__legal">
-        <a href="/privacy.html">Политика конфиденциальности</a>
-        <span class="svf-footer__dot">•</span>
-        <a href="/client-terms.html">Условия для клиентов</a>
-      </div>
-    </div>
-  </div>
-</footer>
+.site-header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  min-height:78px;
+}
+
+.site-header__brand{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-.03em;
+  color:#fff;
+  flex:0 0 auto;
+}
+
+.site-header__nav{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.site-header__link,
+.site-header__dropdown-toggle{
+  color:#d8d8e7;
+  font-size:15px;
+  line-height:1;
+  background:none;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  font-family:inherit;
+}
+
+.site-header__link:hover,
+.site-header__dropdown-toggle:hover,
+.site-header__dropdown-link:hover{
+  color:#fff;
+}
+
+.site-header__link--accent{
+  color:#fff;
+}
+
+.site-header__dropdown{
+  position:relative;
+}
+
+.site-header__dropdown-toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.site-header__caret{
+  font-size:12px;
+  opacity:.85;
+}
+
+.site-header__dropdown-menu{
+  position:absolute;
+  top:calc(100% + 14px);
+  left:0;
+  min-width:210px;
+  display:none;
+  padding:10px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg,rgba(18,19,31,.98),rgba(10,11,20,.98));
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+
+.site-header__dropdown:hover .site-header__dropdown-menu,
+.site-header__dropdown.is-open .site-header__dropdown-menu{
+  display:grid;
+  gap:2px;
+}
+
+.site-header__dropdown-link{
+  display:block;
+  padding:10px 12px;
+  border-radius:12px;
+  color:#d8d8e7;
+  font-size:14px;
+  line-height:1.35;
+}
+
+.site-header__dropdown-link:hover{
+  background:rgba(255,255,255,.05);
+}
+
+.site-header__burger{
+  display:none;
+  width:44px;
+  height:44px;
+  padding:0;
+  background:none;
+  border:none;
+  cursor:pointer;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+.site-header__burger span{
+  display:block;
+  width:22px;
+  height:2px;
+  border-radius:999px;
+  background:#fff;
+}
+
+/* footer */
+
+.site-footer{
+  margin-top:54px;
+  border-top:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.02);
+}
+
+.site-footer__inner{
+  display:grid;
+  grid-template-columns:1.2fr 1.8fr;
+  gap:28px;
+  padding:30px 0 36px;
+}
+
+.site-footer__brand{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-.03em;
+  margin-bottom:10px;
+}
+
+.site-footer__text{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.75;
+}
+
+.site-footer__cols{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+
+.site-footer__title{
+  margin-bottom:10px;
+  font-size:15px;
+  font-weight:800;
+  color:#fff;
+}
+
+.site-footer__col{
+  display:grid;
+  gap:9px;
+}
+
+.site-footer__col a{
+  color:#d0d0df;
+  font-size:14px;
+  line-height:1.45;
+}
+
+.site-footer__col a:hover{
+  color:#fff;
+}
+
+@media (max-width: 980px){
+  .site-header__burger{
+    display:flex;
+  }
+
+  .site-header__nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    display:none;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+    padding:18px 20px 22px;
+    background:linear-gradient(180deg,rgba(13,14,24,.98),rgba(8,9,17,.98));
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+
+  .site-header__nav.is-open{
+    display:flex;
+  }
+
+  .site-header__dropdown{
+    width:100%;
+  }
+
+  .site-header__dropdown-menu{
+    position:static;
+    margin-top:10px;
+    width:100%;
+  }
+
+  .site-footer__inner{
+    grid-template-columns:1fr;
+  }
+
+  .site-footer__cols{
+    grid-template-columns:1fr;
+  }
+}
+
+/* =========================================================
+   CLEAN FINAL HEADER SYSTEM
+   single stable block for current sz-* header structure
+   no glows / no heavy effects / no layered overrides
+   ========================================================= */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+html.sz-lock,
+body.sz-lock {
+  overflow: hidden;
+}
+
+.sz-header,
+.sz-header * {
+  box-sizing: border-box;
+  box-shadow: none;
+  text-shadow: none;
+  filter: none;
+  backdrop-filter: none;
+}
+
+.sz-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(10, 10, 12, 0.98);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sz-header .container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.sz-header__inner {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.sz-header__brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.sz-header__brand-text {
+  display: inline-block;
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #f77737 0%, #e1306c 45%, #c13584 72%, #833ab4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sz-header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sz-header__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #f4f4f5;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.sz-header__link:hover {
+  background: rgba(255, 255, 255, 0.055);
+  color: #ffffff;
+}
+
+.sz-header__store {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.025);
+  color: #f5f5f5;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.sz-header__store:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.11);
+  color: #ffffff;
+}
+
+.sz-header__ext {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  opacity: 0.88;
+}
+
+.sz-header__burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  margin-left: 8px;
+  padding: 0;
+  gap: 4px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.sz-header__burger:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sz-header__burger span {
+  display: block;
+  width: 17px;
+  height: 2px;
+  border-radius: 999px;
+  background: #ffffff;
+  transition: transform 0.16s ease, opacity 0.16s ease;
+}
+
+.sz-header__burger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.sz-header__burger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.sz-header__burger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.sz-overlay {
+  position: fixed;
+  inset: 56px 0 0 0;
+  z-index: 89;
+  background: rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+.sz-overlay.is-visible {
+  opacity: 1;
+}
+
+.sz-side {
+  position: fixed;
+  top: 56px;
+  right: 0;
+  width: min(320px, 100vw);
+  height: calc(100vh - 56px);
+  z-index: 90;
+  padding: 16px 18px 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(14, 14, 17, 0.99);
+  transform: translateX(100%);
+  transition: transform 0.16s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sz-side.is-open {
+  transform: translateX(0);
+}
+
+.sz-side__head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sz-side__title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.sz-side__body {
+  display: grid;
+  gap: 14px;
+}
+
+.sz-side__group {
+  display: grid;
+  gap: 2px;
+}
+
+.sz-side__group-title {
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sz-side__group--primary {
+  display: none;
+}
+
+.sz-side__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #f4f4f5;
+  font-size: 15px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.sz-side__link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.sz-side__ext {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  opacity: 0.82;
+}
+
+@media (max-width: 1180px) {
+  .sz-header__nav {
+    gap: 2px;
+  }
+
+  .sz-header__link {
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .sz-header__store {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 900px) {
+  .sz-header__nav {
+    display: none;
+  }
+
+  .sz-header__burger {
+    margin-left: auto;
+  }
+
+  .sz-side__group--primary {
+    display: grid;
+    gap: 2px;
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .sz-side__link {
+    padding: 7px 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .sz-header .container {
+    width: min(1120px, calc(100% - 24px));
+  }
+
+  .sz-header__inner {
+    min-height: 54px;
+  }
+
+  .sz-header__brand-text {
+    font-size: 20px;
+  }
+
+  .sz-overlay {
+    inset: 54px 0 0 0;
+  }
+
+  .sz-side {
+    top: 54px;
+    width: 100vw;
+    height: calc(100vh - 54px);
+    padding: 14px 16px 18px;
+    border-left: none;
+  }
+}
+
+/* =========================================================
+   SOVAZONE FOOTER FINAL CLEAN SYSTEM V7
+   premium composition / cleaner icons / aligned layout
+   ========================================================= */
+
+.svf-footer{
+  margin-top:64px;
+  border-top:1px solid rgba(255,255,255,.06);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.012) 0%, rgba(255,255,255,0) 100%);
+}
+
+.svf-footer,
+.svf-footer *{
+  box-sizing:border-box;
+  box-shadow:none;
+  text-shadow:none;
+  filter:none;
+}
+
+.svf-footer__inner{
+  padding:42px 0 22px;
+}
+
+.svf-footer__main{
+  display:grid;
+  grid-template-columns:minmax(280px, 360px) minmax(0, 1fr);
+  gap:84px;
+  align-items:start;
+}
+
+.svf-footer__intro{
+  min-width:0;
+}
+
+.svf-footer__brand{
+  margin:0 0 16px;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-0.03em;
+  line-height:1;
+  background:linear-gradient(90deg,#f77737 0%,#e1306c 45%,#c13584 72%,#833ab4 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.svf-footer__text{
+  margin:0;
+  max-width:340px;
+  color:#a7adbf;
+  font-size:15px;
+  line-height:1.78;
+}
+
+.svf-footer__socials{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:26px;
+}
+
+.svf-footer__social{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  color:#f0f1f6;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.02);
+  transition:color .16s ease,border-color .16s ease,background .16s ease,transform .16s ease;
+}
+
+.svf-footer__social:hover{
+  color:#ffffff;
+  border-color:rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05);
+  transform:translateY(-1px);
+}
+
+.svf-footer__social svg{
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+.svf-footer__menus{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(140px, 170px));
+  justify-content:end;
+  gap:56px;
+  width:100%;
+}
+
+.svf-footer__col{
+  display:grid;
+  align-content:start;
+  gap:12px;
+  min-width:0;
+}
+
+.svf-footer__title{
+  margin:0 0 4px;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.2;
+  color:#ffffff;
+}
+
+.svf-footer__col a{
+  color:#d4d8e6;
+  font-size:15px;
+  line-height:1.35;
+  text-decoration:none;
+  transition:color .16s ease, opacity .16s ease;
+}
+
+.svf-footer__col a:hover{
+  color:#ffffff;
+}
+
+.svf-footer__bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-top:34px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+.svf-footer__copyright{
+  color:#8d93a8;
+  font-size:13px;
+  line-height:1.4;
+  white-space:nowrap;
+}
+
+.svf-footer__legal{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:10px;
+  min-width:0;
+  color:#8d93a8;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.svf-footer__legal a{
+  color:#a8aec2;
+  white-space:nowrap;
+  text-decoration:none;
+  transition:color .16s ease;
+}
+
+.svf-footer__legal a:hover{
+  color:#ffffff;
+}
+
+.svf-footer__dot{
+  color:#71778d;
+}
+
+@media (max-width:1180px){
+  .svf-footer__main{
+    grid-template-columns:1fr;
+    gap:38px;
+  }
+
+  .svf-footer__text{
+    max-width:620px;
+  }
+
+  .svf-footer__menus{
+    grid-template-columns:repeat(3, minmax(140px, 1fr));
+    justify-content:start;
+    gap:28px;
+  }
+}
+
+@media (max-width:860px){
+  .svf-footer__menus{
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+
+  .svf-footer__bottom{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .svf-footer__legal{
+    justify-content:flex-start;
+  }
+}
+
+@media (max-width:620px){
+  .svf-footer__inner{
+    padding:32px 0 18px;
+  }
+
+  .svf-footer__brand{
+    font-size:21px;
+  }
+
+  .svf-footer__text{
+    font-size:14px;
+    line-height:1.7;
+  }
+
+  .svf-footer__menus{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+
+  .svf-footer__social{
+    width:38px;
+    height:38px;
+  }
+
+  .svf-footer__col a{
+    font-size:14px;
+  }
+
+  .svf-footer__copyright,
+  .svf-footer__legal{
+    font-size:12px;
+  }
+}
+
+/* =========================================================
+   FOOTER PREMIUM TWEAKS
+   whiter icons, bigger icon presence, softer rounding,
+   less blue links/background, stronger bottom line
+   ========================================================= */
+
+.svf-footer{
+  background: linear-gradient(180deg, rgba(255,255,255,.01) 0%, rgba(255,255,255,0) 100%) !important;
+}
+
+.svf-footer__text{
+  color:#b8bcc8 !important;
+}
+
+.svf-footer__socials{
+  gap:12px !important;
+}
+
+.svf-footer__social{
+  width:44px !important;
+  height:44px !important;
+  border-radius:8px !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  color:#ffffff !important;
+  background:rgba(255,255,255,.025) !important;
+}
+
+.svf-footer__social:hover{
+  color:#ffffff !important;
+  border-color:rgba(255,255,255,.16) !important;
+  background:rgba(255,255,255,.055) !important;
+}
+
+.svf-footer__social svg{
+  width:20px !important;
+  height:20px !important;
+}
+
+/* make icons read fuller/whiter */
+.svf-footer__social svg *{
+  stroke:currentColor !important;
+}
+
+/* exceptions that should keep filled details */
+.svf-footer__social[aria-label="YouTube"] svg path:last-child,
+.svf-footer__social[aria-label="Instagram"] svg circle:last-child{
+  fill:currentColor !important;
+}
+
+.svf-footer__title{
+  color:#ffffff !important;
+}
+
+.svf-footer__col a{
+  color:#e1e4ec !important;
+}
+
+.svf-footer__col a:hover{
+  color:#ffffff !important;
+}
+
+.svf-footer__bottom{
+  position:relative !important;
+  border-top:none !important;
+  padding-top:20px !important;
+}
+
+.svf-footer__bottom::before{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  top:0 !important;
+  height:1px !important;
+  background:rgba(255,255,255,.06) !important;
+}
+
+.svf-footer__copyright{
+  color:#ffffff !important;
+}
+
+.svf-footer__legal{
+  color:#a0a6ba !important;
+}
+
+.svf-footer__legal a{
+  color:#d6dae7 !important;
+}
+
+.svf-footer__legal a:hover{
+  color:#ffffff !important;
+}
+
+.svf-footer__dot{
+  color:#7d8398 !important;
+}
+
+@media (max-width:620px){
+  .svf-footer__social{
+    width:40px !important;
+    height:40px !important;
+  }
+  .svf-footer__social svg{
+    width:18px !important;
+    height:18px !important;
+  }
+}
