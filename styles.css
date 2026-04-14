@@ -572,35 +572,45 @@ body.sz-lock {
 }
 
 /* =========================================================
-   CLEAN FOOTER REDESIGN V5
+   SOVAZONE FOOTER FINAL CLEAN SYSTEM V7
+   premium composition / cleaner icons / aligned layout
    ========================================================= */
 
-.site-footer{
-  margin-top:48px;
+.svf-footer{
+  margin-top:64px;
   border-top:1px solid rgba(255,255,255,.06);
-  background:transparent;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.012) 0%, rgba(255,255,255,0) 100%);
 }
 
-.site-footer__inner{
-  padding:36px 0 22px;
+.svf-footer,
+.svf-footer *{
+  box-sizing:border-box;
+  box-shadow:none;
+  text-shadow:none;
+  filter:none;
 }
 
-.site-footer__top{
+.svf-footer__inner{
+  padding:42px 0 22px;
+}
+
+.svf-footer__main{
   display:grid;
   grid-template-columns:minmax(280px, 360px) minmax(0, 1fr);
-  gap:64px;
+  gap:84px;
   align-items:start;
 }
 
-.site-footer__brand-block{
+.svf-footer__intro{
   min-width:0;
 }
 
-.site-footer__brand{
-  margin:0 0 14px;
-  font-size:22px;
+.svf-footer__brand{
+  margin:0 0 16px;
+  font-size:25px;
   font-weight:900;
-  letter-spacing:-.03em;
+  letter-spacing:-0.03em;
   line-height:1;
   background:linear-gradient(90deg,#f77737 0%,#e1306c 45%,#c13584 72%,#833ab4 100%);
   -webkit-background-clip:text;
@@ -608,197 +618,188 @@ body.sz-lock {
   -webkit-text-fill-color:transparent;
 }
 
-.site-footer__text{
+.svf-footer__text{
   margin:0;
   max-width:340px;
-  color:#a8aec2;
+  color:#a7adbf;
   font-size:15px;
-  line-height:1.72;
+  line-height:1.78;
 }
 
-.site-footer__socials{
+.svf-footer__socials{
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
-  margin-top:22px;
+  gap:12px;
+  margin-top:26px;
 }
 
-.site-footer__social{
+.svf-footer__social{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:38px;
-  height:38px;
+  width:42px;
+  height:42px;
+  color:#f0f1f6;
   border:1px solid rgba(255,255,255,.08);
-  color:#f3f4f8;
-  transition:color .16s ease, border-color .16s ease, background .16s ease, transform .16s ease;
+  background:rgba(255,255,255,.02);
+  transition:color .16s ease,border-color .16s ease,background .16s ease,transform .16s ease;
 }
 
-.site-footer__social:hover{
+.svf-footer__social:hover{
   color:#ffffff;
   border-color:rgba(255,255,255,.14);
-  background:rgba(255,255,255,.04);
+  background:rgba(255,255,255,.05);
   transform:translateY(-1px);
 }
 
-.site-footer__social svg{
+.svf-footer__social svg{
   width:18px;
   height:18px;
   display:block;
 }
 
-.site-footer__nav-wrap{
-  display:flex;
-  justify-content:flex-end;
-  width:100%;
-  min-width:0;
-}
-
-.site-footer__nav-grid{
+.svf-footer__menus{
   display:grid;
-  grid-template-columns:repeat(3, 160px);
-  gap:42px;
-  align-items:start;
+  grid-template-columns:repeat(3, minmax(140px, 170px));
   justify-content:end;
+  gap:56px;
+  width:100%;
 }
 
-.site-footer__col{
+.svf-footer__col{
   display:grid;
-  gap:10px;
-  min-width:0;
   align-content:start;
+  gap:12px;
+  min-width:0;
 }
 
-.site-footer__title{
-  margin:0 0 6px;
+.svf-footer__title{
+  margin:0 0 4px;
   font-size:14px;
   font-weight:800;
   line-height:1.2;
   color:#ffffff;
 }
 
-.site-footer__col a{
-  color:#d0d4e2;
+.svf-footer__col a{
+  color:#d4d8e6;
   font-size:15px;
   line-height:1.35;
-  transition:color .16s ease;
-  word-break:break-word;
+  text-decoration:none;
+  transition:color .16s ease, opacity .16s ease;
 }
 
-.site-footer__col a:hover{
+.svf-footer__col a:hover{
   color:#ffffff;
 }
 
-.site-footer__bottom{
+.svf-footer__bottom{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:20px;
-  margin-top:28px;
+  gap:24px;
+  margin-top:34px;
   padding-top:18px;
   border-top:1px solid rgba(255,255,255,.05);
 }
 
-.site-footer__copyright{
-  color:#8f95aa;
+.svf-footer__copyright{
+  color:#8d93a8;
   font-size:13px;
   line-height:1.4;
   white-space:nowrap;
 }
 
-.site-footer__legal{
+.svf-footer__legal{
   display:flex;
   align-items:center;
   justify-content:flex-end;
   flex-wrap:wrap;
   gap:10px;
-  color:#8f95aa;
+  min-width:0;
+  color:#8d93a8;
   font-size:13px;
   line-height:1.4;
-  min-width:0;
 }
 
-.site-footer__legal a{
+.svf-footer__legal a{
   color:#a8aec2;
-  transition:color .16s ease;
   white-space:nowrap;
+  text-decoration:none;
+  transition:color .16s ease;
 }
 
-.site-footer__legal a:hover{
+.svf-footer__legal a:hover{
   color:#ffffff;
 }
 
-.site-footer__dot{
-  color:#73798e;
+.svf-footer__dot{
+  color:#71778d;
 }
 
-@media (max-width: 1180px){
-  .site-footer__top{
+@media (max-width:1180px){
+  .svf-footer__main{
     grid-template-columns:1fr;
-    gap:34px;
+    gap:38px;
   }
 
-  .site-footer__text{
+  .svf-footer__text{
     max-width:620px;
   }
 
-  .site-footer__nav-wrap{
-    justify-content:flex-start;
-  }
-
-  .site-footer__nav-grid{
+  .svf-footer__menus{
     grid-template-columns:repeat(3, minmax(140px, 1fr));
-    gap:26px;
-    width:100%;
+    justify-content:start;
+    gap:28px;
   }
 }
 
-@media (max-width: 860px){
-  .site-footer__nav-grid{
+@media (max-width:860px){
+  .svf-footer__menus{
     grid-template-columns:1fr 1fr;
     gap:24px;
   }
 
-  .site-footer__bottom{
+  .svf-footer__bottom{
     flex-direction:column;
     align-items:flex-start;
   }
 
-  .site-footer__legal{
+  .svf-footer__legal{
     justify-content:flex-start;
   }
 }
 
-@media (max-width: 620px){
-  .site-footer__inner{
-    padding:28px 0 18px;
+@media (max-width:620px){
+  .svf-footer__inner{
+    padding:32px 0 18px;
   }
 
-  .site-footer__brand{
-    font-size:20px;
+  .svf-footer__brand{
+    font-size:21px;
   }
 
-  .site-footer__text{
+  .svf-footer__text{
     font-size:14px;
-    line-height:1.68;
+    line-height:1.7;
   }
 
-  .site-footer__nav-grid{
+  .svf-footer__menus{
     grid-template-columns:1fr;
-    gap:20px;
+    gap:22px;
   }
 
-  .site-footer__social{
-    width:36px;
-    height:36px;
+  .svf-footer__social{
+    width:38px;
+    height:38px;
   }
 
-  .site-footer__col a{
+  .svf-footer__col a{
     font-size:14px;
   }
 
-  .site-footer__copyright,
-  .site-footer__legal{
+  .svf-footer__copyright,
+  .svf-footer__legal{
     font-size:12px;
   }
 }
