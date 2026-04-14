@@ -474,14 +474,13 @@ body.sz-lock {
 
 /* =========================================================
    SOVAZONE FOOTER FINAL SYSTEM
-   graphite-black palette, softer instagram gradient, no blue cast
+   deeper graphite background + softer instagram magenta gradient
    ========================================================= */
 
 .svf-footer{
   margin-top:64px;
-  border-top:1px solid rgba(255,255,255,.06);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.006) 0%, rgba(255,255,255,0) 100%);
+  border-top:1px solid rgba(255,255,255,.055);
+  background:#0b0b0d;
 }
 
 .svf-footer,
@@ -513,7 +512,14 @@ body.sz-lock {
   font-weight:900;
   letter-spacing:-0.03em;
   line-height:1;
-  background:linear-gradient(90deg,#ffb06b 0%, #ff7d6b 26%, #f55f8f 58%, #cf5b8f 100%);
+  background:linear-gradient(
+    90deg,
+    #8a3ab9 0%,
+    #b73e9d 28%,
+    #d64b8c 56%,
+    #f05b7e 82%,
+    #f77737 100%
+  );
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -522,7 +528,7 @@ body.sz-lock {
 .svf-footer__text{
   margin:0;
   max-width:360px;
-  color:#c0c3cb;
+  color:#c4c7d0;
   font-size:15px;
   line-height:1.78;
 }
@@ -550,7 +556,7 @@ body.sz-lock {
 .svf-footer__social:hover{
   color:#ffffff;
   border-color:rgba(255,255,255,.17);
-  background:rgba(255,255,255,.05);
+  background:rgba(255,255,255,.055);
   transform:translateY(-1px);
 }
 
@@ -558,19 +564,6 @@ body.sz-lock {
   width:20px;
   height:20px;
   display:block;
-}
-
-.svf-footer__social svg *{
-  stroke:currentColor;
-}
-
-.svf-footer__social[aria-label="Telegram"] svg path,
-.svf-footer__social[aria-label="X"] svg path,
-.svf-footer__social[aria-label="YouTube"] svg path,
-.svf-footer__social[aria-label="Instagram"] svg path,
-.svf-footer__social[aria-label="TikTok"] svg path,
-.svf-footer__social[aria-label="VK"] svg path{
-  fill:currentColor;
 }
 
 .svf-footer__menus{
@@ -597,7 +590,7 @@ body.sz-lock {
 }
 
 .svf-footer__col a{
-  color:#e6e7eb;
+  color:#e7e8ee;
   font-size:15px;
   line-height:1.35;
   text-decoration:none;
@@ -626,7 +619,7 @@ body.sz-lock {
   width:100vw;
   transform:translateX(-50%);
   height:1px;
-  background:rgba(255,255,255,.052);
+  background:rgba(255,255,255,.05);
   pointer-events:none;
 }
 
@@ -644,13 +637,13 @@ body.sz-lock {
   flex-wrap:wrap;
   gap:10px;
   min-width:0;
-  color:#9c9faa;
+  color:#9a9eaa;
   font-size:13px;
   line-height:1.4;
 }
 
 .svf-footer__legal a{
-  color:#d8dbe2;
+  color:#d9dbe3;
   white-space:nowrap;
   text-decoration:none;
   transition:color .16s ease;
@@ -661,7 +654,7 @@ body.sz-lock {
 }
 
 .svf-footer__dot{
-  color:#7f838f;
+  color:#7f8390;
 }
 
 @media (max-width:1180px){
@@ -764,5 +757,3 @@ body.sz-lock {
     justify-content:center;
   }
 }
-
-
