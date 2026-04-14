@@ -233,7 +233,7 @@
 
 /* =========================================================
    SOVAZONE HEADER CLEAN FINAL
-   unique classes to avoid old conflicts
+   design only, structure preserved, no shadows/orbs/glows
    ========================================================= */
 
 html,
@@ -288,33 +288,18 @@ body.sz-lock {
 .sz-header__brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   flex: 0 0 auto;
   min-width: 0;
 }
 
-.sz-header__logo {
-  display: block;
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px;
-  min-height: 28px;
-  max-width: 28px !important;
-  max-height: 28px !important;
-  object-fit: contain;
-  flex: 0 0 28px;
-  filter: none !important;
-  box-shadow: none !important;
-}
-
 .sz-header__brand-text {
   display: inline-block;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 900;
   letter-spacing: -.03em;
   line-height: 1;
   white-space: nowrap;
-  background: linear-gradient(90deg, #833AB4 0%, #C13584 34%, #E1306C 62%, #F77737 100%);
+  background: linear-gradient(90deg, #833AB4 0%, #C13584 36%, #E1306C 66%, #F77737 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -324,7 +309,7 @@ body.sz-lock {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 18px;
+  gap: 10px;
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -332,30 +317,34 @@ body.sz-lock {
 .sz-header__link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 34px;
+  padding: 0 10px;
+  border-radius: 999px;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  transition: color .15s ease;
+  transition: color .15s ease, background .15s ease;
 }
 
 .sz-header__link:hover {
   color: #ff4fa3;
+  background: rgba(255,255,255,.03);
 }
 
 .sz-header__store {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 36px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,.08);
   background: rgba(255,255,255,.03);
   color: #ffffff;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
@@ -370,9 +359,9 @@ body.sz-lock {
 }
 
 .sz-header__ext {
-  width: 15px;
-  height: 15px;
-  flex: 0 0 15px;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
   opacity: .88;
 }
 
@@ -388,14 +377,16 @@ body.sz-lock {
   margin-left: 4px;
   padding: 0;
   border: none;
-  background: transparent;
+  background: rgba(255,255,255,.02);
+  border-radius: 999px;
   cursor: pointer;
-  opacity: .92;
-  transition: opacity .15s ease;
+  opacity: .96;
+  transition: background .15s ease, opacity .15s ease;
 }
 
 .sz-header__burger:hover {
   opacity: 1;
+  background: rgba(255,255,255,.05);
 }
 
 .sz-header__burger span {
@@ -423,7 +414,7 @@ body.sz-lock {
   position: fixed;
   inset: 56px 0 0 0;
   z-index: 89;
-  background: rgba(5, 6, 14, .20);
+  background: rgba(5, 6, 14, .16);
   opacity: 0;
   transition: opacity .15s ease;
 }
@@ -489,7 +480,6 @@ body.sz-lock {
   margin-bottom: 2px;
 }
 
-/* hidden on desktop, visible on mobile */
 .sz-side__group--primary {
   display: none;
 }
@@ -521,7 +511,6 @@ body.sz-lock {
   opacity: .82;
 }
 
-/* Hide old experimental header leftovers completely */
 .site-header,
 .site-header__burger,
 .site-side-menu,
@@ -535,7 +524,7 @@ body.sz-lock {
 
 @media (max-width: 1180px) {
   .sz-header__nav {
-    gap: 14px;
+    gap: 8px;
   }
 
   .sz-header__link,
@@ -543,9 +532,13 @@ body.sz-lock {
     font-size: 14px;
   }
 
+  .sz-header__link {
+    padding: 0 9px;
+  }
+
   .sz-header__store {
     min-height: 34px;
-    padding: 0 12px;
+    padding: 0 11px;
   }
 }
 
@@ -580,17 +573,8 @@ body.sz-lock {
     min-height: 54px;
   }
 
-  .sz-header__logo {
-    width: 26px !important;
-    height: 26px !important;
-    min-width: 26px;
-    min-height: 26px;
-    max-width: 26px !important;
-    max-height: 26px !important;
-  }
-
   .sz-header__brand-text {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .sz-overlay {
