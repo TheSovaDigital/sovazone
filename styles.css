@@ -474,14 +474,14 @@ body.sz-lock {
 
 /* =========================================================
    SOVAZONE FOOTER FINAL SYSTEM
-   clean, graphite, no blue cast, mobile rows preserved
+   graphite-black palette, softer instagram gradient, no blue cast
    ========================================================= */
 
 .svf-footer{
   margin-top:64px;
   border-top:1px solid rgba(255,255,255,.06);
   background:
-    linear-gradient(180deg, rgba(255,255,255,.008) 0%, rgba(255,255,255,0) 100%);
+    linear-gradient(180deg, rgba(255,255,255,.006) 0%, rgba(255,255,255,0) 100%);
 }
 
 .svf-footer,
@@ -513,7 +513,7 @@ body.sz-lock {
   font-weight:900;
   letter-spacing:-0.03em;
   line-height:1;
-  background:linear-gradient(90deg,#f77737 0%,#e1306c 45%,#c13584 72%,#833ab4 100%);
+  background:linear-gradient(90deg,#ffb06b 0%, #ff7d6b 26%, #f55f8f 58%, #cf5b8f 100%);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -522,7 +522,7 @@ body.sz-lock {
 .svf-footer__text{
   margin:0;
   max-width:360px;
-  color:#bcc1cc;
+  color:#c0c3cb;
   font-size:15px;
   line-height:1.78;
 }
@@ -543,13 +543,13 @@ body.sz-lock {
   color:#ffffff;
   border:1px solid rgba(255,255,255,.10);
   border-radius:8px;
-  background:rgba(255,255,255,.02);
+  background:rgba(255,255,255,.022);
   transition:color .16s ease,border-color .16s ease,background .16s ease,transform .16s ease;
 }
 
 .svf-footer__social:hover{
   color:#ffffff;
-  border-color:rgba(255,255,255,.16);
+  border-color:rgba(255,255,255,.17);
   background:rgba(255,255,255,.05);
   transform:translateY(-1px);
 }
@@ -597,7 +597,7 @@ body.sz-lock {
 }
 
 .svf-footer__col a{
-  color:#e5e7ee;
+  color:#e6e7eb;
   font-size:15px;
   line-height:1.35;
   text-decoration:none;
@@ -626,7 +626,7 @@ body.sz-lock {
   width:100vw;
   transform:translateX(-50%);
   height:1px;
-  background:rgba(255,255,255,.055);
+  background:rgba(255,255,255,.052);
   pointer-events:none;
 }
 
@@ -644,13 +644,13 @@ body.sz-lock {
   flex-wrap:wrap;
   gap:10px;
   min-width:0;
-  color:#97a0b6;
+  color:#9c9faa;
   font-size:13px;
   line-height:1.4;
 }
 
 .svf-footer__legal a{
-  color:#d8ddea;
+  color:#d8dbe2;
   white-space:nowrap;
   text-decoration:none;
   transition:color .16s ease;
@@ -661,7 +661,7 @@ body.sz-lock {
 }
 
 .svf-footer__dot{
-  color:#798197;
+  color:#7f838f;
 }
 
 @media (max-width:1180px){
@@ -731,7 +731,6 @@ body.sz-lock {
     height:18px;
   }
 
-  /* keep sections in row layout like desktop */
   .svf-footer__menus{
     grid-template-columns:repeat(3, minmax(92px, 1fr));
     justify-content:stretch;
@@ -765,3 +764,5 @@ body.sz-lock {
     justify-content:center;
   }
 }
+
+
