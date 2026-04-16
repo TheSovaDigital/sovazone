@@ -62,7 +62,7 @@
       right:-240px;
       width:560px;
       height:560px;
-      background:radial-gradient(circle, rgba(34,58,154,.10) 0%, rgba(34,58,154,0) 76%);
+      background:radial-gradient(circle, rgba(124,58,36,.08) 0%, rgba(124,58,36,0) 76%);
       filter:blur(34px);
     }
     .page-content > .container{
@@ -73,14 +73,14 @@
     .hero.hero-split{
       margin-bottom:24px;
       align-items:flex-start;
-      gap:24px;
+      gap:20px;
     }
     .hero-side{
       display:flex;
       flex-direction:column;
       gap:12px;
-      width:min(290px, 100%);
-      flex:0 0 290px;
+      width:min(276px, 100%);
+      flex:0 0 276px;
     }
     .hero-badge-wrap{
       margin-bottom:0;
@@ -116,15 +116,16 @@
       font-size:clamp(24px, 1.72vw, 32px);
       line-height:1.04;
       letter-spacing:-0.04em;
-      white-space:nowrap;
+      white-space:normal;
       max-width:100%;
+      text-wrap:balance;
     }
     .hero-text-block{
       max-width:100%;
     }
     .hero-actions-row{
       display:grid;
-      grid-template-columns:minmax(220px, 1.12fr) repeat(3, minmax(150px, 1fr));
+      grid-template-columns:repeat(4, minmax(0, 1fr));
       gap:10px;
       align-items:stretch;
       margin-top:20px;
@@ -132,7 +133,7 @@
     .hero-actions-row .btn,
     .hero-actions-row .mini-point{
       min-height:48px;
-      height:48px;
+      height:auto;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -140,10 +141,11 @@
       border-radius:14px;
       width:100%;
       box-sizing:border-box;
-      padding:0 16px;
-      line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
+      padding:12px 14px;
+      line-height:1.18;
+      white-space:normal;
+      overflow:visible;
+      text-wrap:balance;
     }
     .hero-side-actions{
       display:none;
@@ -396,10 +398,8 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      height:44px;
       min-height:44px;
-      max-height:44px;
-      padding:0 10px;
+      padding:10px 12px;
       border-radius:14px;
       text-decoration:none;
       color:#fff;
@@ -408,13 +408,14 @@
       width:100%;
       font-weight:700;
       font-size:12px;
-      line-height:1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      line-height:1.15;
+      white-space:normal;
+      overflow:visible;
+      text-overflow:clip;
       box-sizing:border-box;
       margin-top:auto;
-      flex:0 0 44px;
+      flex:0 0 auto;
+      text-wrap:balance;
       transition:border-color .18s ease, background .18s ease, transform .18s ease;
     }
     .project-link:hover{
@@ -498,8 +499,8 @@
       justify-content:center;
       text-align:center;
       min-height:46px;
-      height:46px;
-      padding:0 18px;
+      height:auto;
+      padding:12px 18px;
       border-radius:14px;
       text-decoration:none;
       color:#fff;
@@ -510,9 +511,10 @@
       width:100%;
       margin-top:auto;
       box-sizing:border-box;
-      line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
+      line-height:1.14;
+      white-space:normal;
+      overflow:visible;
+      text-wrap:balance;
       transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .about-btn:hover{
@@ -555,7 +557,7 @@
         max-width:320px;
       }
       .hero-actions-row{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(2, minmax(0,1fr));
       }
     }
 
@@ -563,6 +565,7 @@
       .hero-content h1{
         white-space:normal;
       }
+      .hero-actions-row,
       .username-grid.username-grid-refined,
       .steps-grid{
         grid-template-columns:1fr;
