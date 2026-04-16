@@ -101,8 +101,13 @@
     .doc-related-grid{display:flex;flex-wrap:wrap;gap:10px 16px;}
     .doc-related-grid a{color:var(--doc-link);font-size:15px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:4px;text-decoration:none;}
     .doc-related-grid a:hover{color:#fff;border-bottom-color:rgba(217,179,140,.45);}
-    .doc-page a{color:var(--doc-link);text-decoration:none;}
-    .doc-page a:hover{color:#fff;}
+    .doc-related-grid a,
+    .contacts-link-value a{
+      color:var(--doc-link);
+      text-decoration:none;
+    }
+    .doc-related-grid a:hover,
+    .contacts-link-value a:hover{color:#fff;}
 
     @media (max-width:900px){.contacts-premium-grid{grid-template-columns:1fr;}}
     @media (max-width:760px){
