@@ -474,7 +474,7 @@ body.sz-lock {
 
 /* =========================================================
    SOVAZONE FOOTER FINAL SYSTEM
-   meta-like soft bright gradient + corrected mobile bottom order
+   deeper graphite background + Meta-like bright soft multicolor gradient
    ========================================================= */
 
 .svf-footer{
@@ -514,21 +514,23 @@ body.sz-lock {
   line-height:1;
   background:linear-gradient(
     90deg,
-    #f58529 0%,
-    #f56040 18%,
-    #fd1d1d 38%,
-    #e1306c 58%,
-    #c13584 76%,
-    #833ab4 100%
+    #0866ff 0%,
+    #5b5cf0 18%,
+    #8b5cf6 34%,
+    #d946ef 52%,
+    #ff4d8d 70%,
+    #ff6a45 86%,
+    #ffb01f 100%
   );
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
+  color:transparent;
 }
 
 .svf-footer__text{
   margin:0;
-  max-width:360px;
+  max-width:420px;
   color:#c4c7d0;
   font-size:15px;
   line-height:1.78;
@@ -707,8 +709,9 @@ body.sz-lock {
   .svf-footer__text{
     margin-left:auto;
     margin-right:auto;
-    font-size:14px;
-    line-height:1.7;
+    max-width:340px;
+    font-size:13px;
+    line-height:1.62;
   }
 
   .svf-footer__socials{
@@ -748,8 +751,9 @@ body.sz-lock {
     align-items:center;
   }
 
-  .svf-footer__copyright,
-  .svf-footer__legal{
+  .svf-footer__legal,
+  .svf-footer__copyright{
+    width:100%;
     font-size:12px;
     text-align:center;
   }
