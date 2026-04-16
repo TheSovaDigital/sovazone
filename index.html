@@ -41,7 +41,7 @@
     .home-page{
       position:relative;
       overflow:hidden;
-      padding-top:18px;
+      padding-top:24px;
     }
     .home-page::before,
     .home-page::after{
@@ -51,20 +51,20 @@
       z-index:0;
     }
     .home-page::before{
-      top:40px;
+      top:18px;
       left:-220px;
-      width:440px;
-      height:440px;
-      background:radial-gradient(circle, rgba(128,45,106,.11) 0%, rgba(128,45,106,0) 74%);
-      filter:blur(28px);
+      width:520px;
+      height:520px;
+      background:radial-gradient(circle, rgba(128,45,106,.12) 0%, rgba(128,45,106,0) 74%);
+      filter:blur(30px);
     }
     .home-page::after{
-      top:150px;
-      right:-240px;
-      width:560px;
-      height:560px;
-      background:radial-gradient(circle, rgba(124,58,36,.08) 0%, rgba(124,58,36,0) 76%);
-      filter:blur(34px);
+      top:90px;
+      right:-260px;
+      width:620px;
+      height:620px;
+      background:radial-gradient(circle, rgba(124,58,36,.09) 0%, rgba(124,58,36,0) 76%);
+      filter:blur(38px);
     }
     .page-content > .container{
       position:relative;
@@ -73,33 +73,21 @@
 
     .hero.hero-split{
       display:grid;
-      grid-template-columns:minmax(0, 1.22fr) 300px;
-      gap:22px;
-      align-items:stretch;
-      margin-top:8px;
-      margin-bottom:28px;
+      grid-template-columns:minmax(0, 1.08fr) minmax(320px, 430px);
+      gap:34px;
+      align-items:center;
+      margin:0 0 34px;
+      padding-top:6px;
+    }
+    .hero-side{
+      display:none;
     }
     .hero-content{
       min-width:0;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-      padding:26px 28px 24px;
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:26px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
-        linear-gradient(135deg, rgba(35,39,74,.16), rgba(0,0,0,0));
-      box-shadow:0 18px 42px rgba(0,0,0,.22);
-    }
-    .hero-side{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      min-width:0;
+      max-width:760px;
     }
     .hero-badge-wrap{
-      margin:0;
+      margin:0 0 18px;
     }
     .hero-badge.hero-badge-static{
       display:inline-flex;
@@ -113,28 +101,33 @@
       font-weight:700;
       letter-spacing:.02em;
       color:#ead7c7;
-      background:rgba(255,255,255,.025);
+      background:rgba(255,255,255,.022);
       border:1px solid rgba(217,179,140,.16);
       box-shadow:none;
-      width:auto;
     }
     .hero-content h1{
-      margin:0;
-      font-size:clamp(28px, 2.2vw, 42px);
-      line-height:1.02;
-      letter-spacing:-0.045em;
+      margin:0 0 16px;
+      font-size:clamp(34px, 4.2vw, 58px);
+      line-height:.98;
+      letter-spacing:-.05em;
       white-space:normal;
-      max-width:900px;
+      max-width:720px;
       text-wrap:balance;
     }
     .hero-text-block{
-      max-width:100%;
+      max-width:720px;
+    }
+    .hero-lead{
+      margin:0 0 14px;
+      color:#d7d9e3;
+      font-size:17px;
+      line-height:1.72;
     }
     .hero-text-block p{
       margin:0 0 14px;
-      color:rgba(255,255,255,.76);
+      color:rgba(255,255,255,.74);
       font-size:15px;
-      line-height:1.68;
+      line-height:1.74;
     }
     .hero-text-block p:last-child{
       margin-bottom:0;
@@ -142,10 +135,11 @@
 
     .hero-actions-row{
       display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
+      grid-template-columns:minmax(190px, 1.1fr) repeat(3, minmax(140px, 1fr));
       gap:10px;
       align-items:stretch;
-      margin-top:auto;
+      margin-top:24px;
+      max-width:760px;
     }
     .hero-actions-row .btn,
     .hero-actions-row .mini-point{
@@ -158,7 +152,7 @@
       width:100%;
       box-sizing:border-box;
       padding:12px 14px;
-      line-height:1.15;
+      line-height:1.14;
       white-space:normal;
       text-wrap:balance;
       overflow:visible;
@@ -177,28 +171,61 @@
       transform:translateY(-1px);
     }
 
-    .hero-logo-card{
-      overflow:hidden;
-      border-radius:26px;
-      border:1px solid rgba(255,255,255,.07);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.016)),
-        linear-gradient(135deg, rgba(35,39,74,.16), rgba(0,0,0,0));
-      box-shadow:0 18px 42px rgba(0,0,0,.20);
-      min-height:100%;
+    .hero-visual{
+      position:relative;
+      min-height:520px;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:18px;
+    }
+    .hero-visual::before{
+      content:"";
+      position:absolute;
+      inset:10% 8% 12% 8%;
+      border-radius:36px;
+      background:
+        radial-gradient(circle at 32% 58%, rgba(59,186,206,.13) 0%, rgba(59,186,206,0) 24%),
+        radial-gradient(circle at 69% 44%, rgba(247,148,39,.18) 0%, rgba(247,148,39,0) 28%),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 66%);
+      filter:blur(10px);
+      pointer-events:none;
+    }
+    .hero-visual::after{
+      content:"";
+      position:absolute;
+      inset:6% 4%;
+      border-radius:40px;
+      border:1px solid rgba(255,255,255,.05);
+      background:linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .hero-logo-shell{
+      position:relative;
+      width:min(100%, 430px);
+      aspect-ratio:1 / 1.08;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-logo-shell::before{
+      content:"";
+      position:absolute;
+      inset:12% 10% 8%;
+      border-radius:36px;
+      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.035) 0%, rgba(255,255,255,0) 70%);
+      filter:blur(4px);
+      pointer-events:none;
     }
     .hero-logo{
+      position:relative;
       width:100%;
-      height:auto;
-      max-height:100%;
+      height:100%;
       object-fit:contain;
       display:block;
+      filter:drop-shadow(0 24px 44px rgba(0,0,0,.26));
     }
 
+    .hero-logo-card,
     .hero-side-actions{
       display:none;
     }
@@ -214,7 +241,7 @@
     }
 
     .section-usernames-showcase{
-      margin-top:24px;
+      margin-top:10px;
     }
     .section-usernames-showcase .section-head-inline{
       align-items:flex-end;
@@ -437,8 +464,10 @@
       align-items:center;
       justify-content:center;
       text-align:center;
+      height:44px;
       min-height:44px;
-      padding:10px 12px;
+      max-height:44px;
+      padding:0 10px;
       border-radius:14px;
       text-decoration:none;
       color:#fff;
@@ -447,13 +476,13 @@
       width:100%;
       font-weight:700;
       font-size:12px;
-      line-height:1.15;
-      white-space:normal;
-      text-overflow:clip;
+      line-height:1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
       box-sizing:border-box;
       margin-top:auto;
-      flex:0 0 auto;
-      text-wrap:balance;
+      flex:0 0 44px;
       transition:border-color .18s ease, background .18s ease, transform .18s ease;
     }
     .project-link:hover{
@@ -537,7 +566,8 @@
       justify-content:center;
       text-align:center;
       min-height:46px;
-      padding:12px 18px;
+      height:46px;
+      padding:0 18px;
       border-radius:14px;
       text-decoration:none;
       color:#fff;
@@ -548,10 +578,9 @@
       width:100%;
       margin-top:auto;
       box-sizing:border-box;
-      line-height:1.14;
-      white-space:normal;
-      overflow:visible;
-      text-wrap:balance;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
       transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .about-btn:hover{
@@ -564,15 +593,14 @@
     @media (max-width:1240px){
       .hero.hero-split{
         grid-template-columns:1fr;
+        gap:22px;
       }
-      .hero-side{
+      .hero-visual{
+        min-height:420px;
         order:-1;
-        display:grid;
-        grid-template-columns:220px minmax(0,1fr);
-        align-items:stretch;
       }
-      .hero-badge-wrap{
-        grid-column:1 / -1;
+      .hero-logo-shell{
+        width:min(100%, 360px);
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -595,11 +623,8 @@
     }
 
     @media (max-width:860px){
-      .hero-side{
-        grid-template-columns:1fr;
-      }
-      .hero-logo-card{
-        max-width:320px;
+      .hero.hero-split{
+        gap:18px;
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -608,30 +633,32 @@
 
     @media (max-width:680px){
       .home-page{
-        padding-top:10px;
+        padding-top:12px;
       }
       .hero.hero-split{
-        gap:16px;
-      }
-      .hero-content{
-        padding:20px 18px 18px;
-        border-radius:20px;
+        gap:14px;
+        margin-bottom:26px;
       }
       .hero-content h1{
-        font-size:clamp(26px, 8vw, 34px);
+        font-size:clamp(30px, 9vw, 40px);
+      }
+      .hero-lead{
+        font-size:16px;
       }
       .hero-actions-row,
       .username-grid.username-grid-refined,
       .steps-grid{
         grid-template-columns:1fr;
       }
+      .hero-visual{
+        min-height:320px;
+      }
+      .hero-logo-shell{
+        width:min(100%, 290px);
+      }
       .home-projects,
       .home-about{
         padding:18px;
-      }
-      .hero-logo-card{
-        padding:14px;
-        border-radius:20px;
       }
     }
   </style>
@@ -681,17 +708,13 @@
     <main class="page-content home-page">
       <div class="container">
         <section class="hero hero-split">
-          <div class="hero-side">
+          <div class="hero-content">
             <div class="hero-badge-wrap">
               <div class="hero-badge hero-badge-static">SovaZone Digital Studio</div>
             </div>
-            <div class="hero-logo-card">
-              <img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio">
-            </div>
-          </div>
 
-          <div class="hero-content">
             <h1>Запуск личного бренда и новых digital-проектов</h1>
+
             <div class="hero-text-block">
               <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетях, запустить профиль или новый проект, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
               <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, перенос никнейма, консультации, помощь с аккаунтами, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
@@ -703,6 +726,12 @@
               <a href="usernames.html" class="mini-point">Купить ник</a>
               <a href="sell.html" class="mini-point">Продать ник</a>
               <a href="services.html" class="mini-point">Ник под заказ</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-logo-shell">
+              <img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio">
             </div>
           </div>
         </section>
