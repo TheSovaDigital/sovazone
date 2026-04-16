@@ -72,7 +72,7 @@
     }
     .doc-page .doc-hero h1{
       margin:0 0 14px;
-      font-size: clamp(34px, 5vw, 62px);
+      font-size: clamp(32px, 4.2vw, 52px);
       line-height: 1.02;
       letter-spacing:-.04em;
       color: var(--doc-text);
@@ -239,14 +239,24 @@
       border-bottom:1px solid rgba(255,255,255,.08);
       padding-bottom:4px;
     }
-    .doc-page a{
+    .doc-page .doc-chip a,
+    .doc-page .doc-toc a,
+    .doc-page .doc-links a,
+    .doc-page .doc-related-grid a,
+    .doc-page .doc-section a,
+    .doc-page .faq-item a{
       color: var(--doc-link);
       text-decoration:none;
     }
-    .doc-page a:hover{ color:#fff; }
+    .doc-page .doc-chip a:hover,
+    .doc-page .doc-toc a:hover,
+    .doc-page .doc-links a:hover,
+    .doc-page .doc-related-grid a:hover,
+    .doc-page .doc-section a:hover,
+    .doc-page .faq-item a:hover{ color:#fff; }
     @media (max-width: 760px){
       .doc-page .doc-wrap{ padding-bottom:48px; }
-      .doc-page .doc-hero h1{ font-size: 40px; }
+      .doc-page .doc-hero h1{ font-size: 34px; }
       .doc-page .doc-lead{ font-size:16px; }
       .doc-page .doc-links{ grid-template-columns: 1fr; }
     }
