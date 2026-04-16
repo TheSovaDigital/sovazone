@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
-  <title>Проекты | SovaZone</title>
-  <meta name="description" content="Проекты SovaZone: SovaDS магазин никнеймов, площадка продажи ников и раздел авторских статей про безопасность аккаунтов, разблокировки и защиту данных.">
-  <link rel="canonical" href="https://sovazone.com/projects.html">
+  <title>Статьи | SovaZone</title>
+  <meta name="description" content="Авторские статьи SovaZone про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.">
+  <link rel="canonical" href="https://sovazone.com/articles.html">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -21,9 +21,9 @@
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
-  <meta property="og:title" content="Проекты | SovaZone">
-  <meta property="og:description" content="SovaDS магазин никнеймов, площадка продажи ников и авторские статьи про безопасность аккаунтов и социальные сети.">
-  <meta property="og:url" content="https://sovazone.com/projects.html">
+  <meta property="og:title" content="Статьи | SovaZone">
+  <meta property="og:description" content="Авторские статьи про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.">
+  <meta property="og:url" content="https://sovazone.com/articles.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -32,31 +32,31 @@
   <meta property="og:image:alt" content="SovaZone">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Проекты | SovaZone">
-  <meta name="twitter:description" content="SovaDS магазин никнеймов, площадка продажи ников и авторские статьи про безопасность аккаунтов и социальные сети.">
+  <meta name="twitter:title" content="Статьи | SovaZone">
+  <meta name="twitter:description" content="Авторские статьи про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
   <meta name="twitter:image:alt" content="SovaZone">
 
   <style>
-    .projects-page{
+    .articles-page{
       --doc-line: rgba(255,255,255,.08);
       --doc-text:#f3f3f8;
       --doc-muted:#b6b6c8;
       --doc-accent:#d9b38c;
       --doc-link:#dcdcff;
     }
-    .projects-page .doc-wrap{
+    .articles-page .doc-wrap{
       max-width:1120px;
       margin:0 auto;
       padding:10px 0 74px;
     }
-    .projects-page .doc-hero{
+    .articles-page .doc-hero{
       position:relative;
       padding:8px 0 28px;
       margin-bottom:26px;
       border-bottom:1px solid var(--doc-line);
     }
-    .projects-page .doc-breadcrumbs{
+    .articles-page .doc-breadcrumbs{
       display:inline-flex;
       align-items:center;
       flex-wrap:wrap;
@@ -67,34 +67,34 @@
       text-transform:uppercase;
       color:var(--doc-accent);
     }
-    .projects-page .doc-breadcrumbs::before{
+    .articles-page .doc-breadcrumbs::before{
       content:"";
       width:34px;
       height:1px;
       background:linear-gradient(90deg, rgba(217,179,140,.9), rgba(217,179,140,0));
       flex:0 0 auto;
     }
-    .projects-page .doc-breadcrumbs a,
-    .projects-page .doc-breadcrumbs span{
+    .articles-page .doc-breadcrumbs a,
+    .articles-page .doc-breadcrumbs span{
       color:var(--doc-accent);
       text-decoration:none;
     }
-    .projects-page .doc-breadcrumbs-sep{
+    .articles-page .doc-breadcrumbs-sep{
       opacity:.68;
       margin:0 -2px;
     }
-    .projects-page .doc-breadcrumbs a:hover{
+    .articles-page .doc-breadcrumbs a:hover{
       color:#f1d2b3;
     }
-    .projects-page .doc-hero h1{
+    .articles-page .doc-hero h1{
       margin:0 0 12px;
       font-size:clamp(32px,4.2vw,52px);
       line-height:1.02;
       letter-spacing:-.04em;
       color:var(--doc-text);
-      max-width:860px;
+      max-width:900px;
     }
-    .projects-page .doc-lead{
+    .articles-page .doc-lead{
       margin:0;
       max-width:920px;
       color:var(--doc-muted);
@@ -102,12 +102,12 @@
       line-height:1.72;
     }
 
-    .projects-page .projects-grid{
+    .articles-page .articles-grid{
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:22px;
     }
-    .projects-page .project-card{
+    .articles-page .article-card{
       position:relative;
       display:flex;
       flex-direction:column;
@@ -121,7 +121,7 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
       overflow:hidden;
     }
-    .projects-page .project-card::before{
+    .articles-page .article-card::before{
       content:"";
       position:absolute;
       inset:0 auto auto 0;
@@ -130,26 +130,22 @@
       background:linear-gradient(90deg, rgba(236,72,153,.32), rgba(249,115,22,.22), rgba(255,255,255,0));
       pointer-events:none;
     }
-    .projects-page .project-card h2{
+    .articles-page .article-card h2{
       margin:0 0 12px;
-      font-size:26px;
-      line-height:1.08;
+      font-size:24px;
+      line-height:1.1;
       letter-spacing:-.03em;
       color:#fff;
       max-width:95%;
     }
-    .projects-page .project-card p{
-      margin:0 0 16px;
+    .articles-page .article-card p{
+      margin:0 0 18px;
       color:var(--doc-muted);
       font-size:14px;
       line-height:1.6;
+      flex:1;
     }
-    .projects-page .project-actions{
-      display:grid;
-      gap:10px;
-      margin-top:auto;
-    }
-    .projects-page .project-btn{
+    .articles-page .article-btn{
       display:inline-flex;
       align-items:center;
       justify-content:space-between;
@@ -165,20 +161,20 @@
       font-weight:700;
       transition:.18s ease;
     }
-    .projects-page .project-btn::after{
+    .articles-page .article-btn::after{
       content:"↗";
       color:rgba(255,255,255,.72);
       font-size:15px;
       line-height:1;
     }
-    .projects-page .project-btn:hover{
+    .articles-page .article-btn:hover{
       transform:translateY(-1px);
       border-color:rgba(217,179,140,.28);
       background:rgba(255,255,255,.045);
       color:#fff;
     }
 
-    .projects-page .doc-meta{
+    .articles-page .doc-meta{
       margin-top:34px;
       padding-top:22px;
       border-top:1px solid rgba(255,255,255,.06);
@@ -187,7 +183,7 @@
       gap:10px 12px;
       justify-content:center;
     }
-    .projects-page .doc-chip{
+    .articles-page .doc-chip{
       display:inline-flex;
       align-items:center;
       min-height:34px;
@@ -198,40 +194,40 @@
       font-size:14px;
       background:rgba(255,255,255,.02);
     }
-    .projects-page .doc-chip a,
-    .projects-page a{
+    .articles-page .doc-chip a,
+    .articles-page a{
       color:var(--doc-link);
       text-decoration:none;
     }
-    .projects-page .doc-chip a:hover,
-    .projects-page a:hover{
+    .articles-page .doc-chip a:hover,
+    .articles-page a:hover{
       color:#fff;
     }
 
     @media (max-width:980px){
-      .projects-page .projects-grid{
+      .articles-page .articles-grid{
         grid-template-columns:1fr;
       }
     }
     @media (max-width:760px){
-      .projects-page .doc-wrap{
+      .articles-page .doc-wrap{
         padding-bottom:48px;
       }
-      .projects-page .doc-hero{
+      .articles-page .doc-hero{
         padding:2px 0 24px;
         margin-bottom:22px;
       }
-      .projects-page .doc-hero h1{
+      .articles-page .doc-hero h1{
         font-size:34px;
       }
-      .projects-page .doc-lead{
+      .articles-page .doc-lead{
         font-size:16px;
       }
-      .projects-page .project-card{
+      .articles-page .article-card{
         padding:22px 18px 18px;
         border-radius:18px;
       }
-      .projects-page .project-card h2{
+      .articles-page .article-card h2{
         font-size:22px;
       }
     }
@@ -247,10 +243,7 @@
         "name":"SovaZone",
         "alternateName":"SovaZone Digital Studio",
         "url":"https://sovazone.com/",
-        "logo":{
-          "@type":"ImageObject",
-          "url":"https://sovazone.com/logo.png"
-        },
+        "logo":{"@type":"ImageObject","url":"https://sovazone.com/logo.png"},
         "image":"https://sovazone.com/og-image.png",
         "sameAs":[
           "https://t.me/SovaDigital",
@@ -269,10 +262,10 @@
       },
       {
         "@type":"CollectionPage",
-        "@id":"https://sovazone.com/projects.html#webpage",
-        "url":"https://sovazone.com/projects.html",
-        "name":"Проекты | SovaZone",
-        "description":"Проекты SovaZone: SovaDS магазин никнеймов, площадка продажи ников и раздел авторских статей про безопасность аккаунтов, разблокировки и защиту данных.",
+        "@id":"https://sovazone.com/articles.html#webpage",
+        "url":"https://sovazone.com/articles.html",
+        "name":"Статьи | SovaZone",
+        "description":"Авторские статьи SovaZone про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.",
         "inLanguage":"ru-RU",
         "isPartOf":{"@id":"https://sovazone.com/#website"},
         "about":{"@id":"https://sovazone.com/#organization"},
@@ -282,7 +275,7 @@
         "@type":"BreadcrumbList",
         "itemListElement":[
           {"@type":"ListItem","position":1,"name":"Главная","item":"https://sovazone.com/"},
-          {"@type":"ListItem","position":2,"name":"Проекты","item":"https://sovazone.com/projects.html"}
+          {"@type":"ListItem","position":2,"name":"Статьи","item":"https://sovazone.com/articles.html"}
         ]
       }
     ]
@@ -290,7 +283,7 @@
   </script>
 </head>
 <body>
-  <div class="site-shell projects-page">
+  <div class="site-shell articles-page">
     <div id="header-placeholder"></div>
 
     <main class="page-content">
@@ -298,44 +291,61 @@
         <div class="doc-wrap">
 
           <section class="doc-hero">
-<h1>Проекты</h1>
+<h1>Статьи</h1>
             <p class="doc-lead">
-              Основные проекты SovaZone: магазин никнеймов, площадка продажи username и раздел авторских статей про безопасность аккаунтов, разблокировки и защиту данных.
+              Авторские статьи про безопасность аккаунтов, разблокировки, верификацию, Meta Verified,
+              защиту данных, Telegram, TikTok, Instagram и выбор никнейма.
             </p>
           </section>
 
-          <section class="projects-grid" aria-label="Список проектов">
+          <section class="articles-grid" aria-label="Список статей">
 
-            <article class="project-card">
-              <h2>SovaDS — магазин никнеймов</h2>
-              <p>
-                Основной проект экосистемы SovaZone. Онлайн магазин красивых и коротких username для Instagram и других социальных сетей. Включает магазин, каталог никнеймов внутри сайта и Telegram-канал SovaDigital.
-              </p>
-              <div class="project-actions">
-                <a class="project-btn" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
-                <a class="project-btn" href="/usernames.html">Каталог никнеймов</a>
-                <a class="project-btn" href="https://t.me/SovaDigital" target="_blank" rel="noopener">Telegram канал</a>
-              </div>
+            <article class="article-card">
+              <h2>Безопасность Instagram аккаунта</h2>
+              <p>Практическая статья про защиту Instagram аккаунта. На этой базе можно так же обезопасить и другие социальные сети.</p>
+              <a class="article-btn" href="/articles/instagram-account-security.html">Открыть статью</a>
             </article>
 
-            <article class="project-card">
-              <h2>Площадка продажи никнеймов</h2>
-              <p>
-                Отдельное направление для публикации и продажи username. Используется как площадка для размещения предложений и коммуникации по продаже ников через Telegram.
-              </p>
-              <div class="project-actions">
-                <a class="project-btn" href="https://t.me/SovaUsername" target="_blank" rel="noopener">Перейти в Telegram</a>
-              </div>
+            <article class="article-card">
+              <h2>Взлом Telegram: как вернуть аккаунт</h2>
+              <p>Разбор способов восстановления доступа к Telegram аккаунту после взлома и потери контроля.</p>
+              <a class="article-btn" href="/articles/telegram-account-hacked-recovery.html">Открыть статью</a>
             </article>
 
-            <article class="project-card">
-              <h2>Статьи и безопасность аккаунтов</h2>
-              <p>
-                Раздел авторских технических и информационных статей про безопасность, разблокировки аккаунтов и другие важные моменты, связанные с соцсетями и защитой аккаунтов, включая email, номер телефона и двухфакторную аутентификацию.
-              </p>
-              <div class="project-actions">
-                <a class="project-btn" href="/articles.html">Перейти к статьям</a>
-              </div>
+            <article class="article-card">
+              <h2>Как разблокировать Instagram аккаунт</h2>
+              <p>Основные способы разблокировки заблокированного Instagram аккаунта и разбор типовых ситуаций.</p>
+              <a class="article-btn" href="/articles/unblock-instagram-account.html">Открыть статью</a>
+            </article>
+
+            <article class="article-card">
+              <h2>Как отправить запрос на верификацию Instagram</h2>
+              <p>Пошаговый разбор подачи запроса на настоящую галочку в Instagram и базовые условия для этого.</p>
+              <a class="article-btn" href="/articles/instagram-verification-request.html">Открыть статью</a>
+            </article>
+
+            <article class="article-card">
+              <h2>Как сделать, чтобы появилась Meta подписка</h2>
+              <p>Что влияет на появление возможности Meta Verified и на что стоит обратить внимание в аккаунте.</p>
+              <a class="article-btn" href="/articles/meta-subscription-eligibility.html">Открыть статью</a>
+            </article>
+
+            <article class="article-card">
+              <h2>Почему блокируют аккаунты в Instagram</h2>
+              <p>Разбор основных причин блокировок Instagram аккаунтов: жалобы, нарушения, подозрительная активность и другие факторы.</p>
+              <a class="article-btn" href="/articles/why-instagram-accounts-get-banned.html">Открыть статью</a>
+            </article>
+
+            <article class="article-card">
+              <h2>Почему блокируют аккаунты в TikTok</h2>
+              <p>Типовые причины блокировок и ограничений TikTok аккаунтов: нарушения правил, жалобы и алгоритмические триггеры.</p>
+              <a class="article-btn" href="/articles/why-tiktok-accounts-get-banned.html">Открыть статью</a>
+            </article>
+
+            <article class="article-card">
+              <h2>Как выбрать хороший никнейм для Instagram</h2>
+              <p>Коротко и по делу о том, как выбрать сильный username для Instagram: длина, читаемость, уникальность и бренд.</p>
+              <a class="article-btn" href="/articles/how-to-choose-instagram-username.html">Открыть статью</a>
             </article>
 
           </section>
