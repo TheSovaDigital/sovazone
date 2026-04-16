@@ -90,7 +90,7 @@
     }
     .service-page .doc-hero h1{
       margin:0 0 14px;
-      font-size: clamp(36px, 5vw, 64px);
+      font-size: clamp(32px, 4.2vw, 52px);
       line-height:1.02;
       letter-spacing:-.04em;
       color: var(--doc-text);
@@ -281,12 +281,14 @@
       background: rgba(255,255,255,.02);
     }
     .service-page .doc-chip a,
-    .service-page a{
-      color: var(--doc-link);
+    .service-page .service-btn,
+    .service-page .service-btn--primary{
       text-decoration:none;
     }
-    .service-page .doc-chip a:hover,
-    .service-page a:hover{
+    .service-page .doc-chip a{
+      color: var(--doc-link);
+    }
+    .service-page .doc-chip a:hover{
       color:#fff;
     }
     @media (max-width: 940px){
