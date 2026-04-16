@@ -514,13 +514,12 @@ body.sz-lock {
   line-height:1;
   background:linear-gradient(
     90deg,
-    #0866ff 0%,
-    #5b5cf0 18%,
-    #8b5cf6 34%,
-    #d946ef 52%,
-    #ff4d8d 70%,
-    #ff6a45 86%,
-    #ffb01f 100%
+    #f59e0b 0%,
+    #f97316 18%,
+    #ef4444 38%,
+    #ec4899 58%,
+    #d946ef 78%,
+    #a855f7 100%
   );
   -webkit-background-clip:text;
   background-clip:text;
