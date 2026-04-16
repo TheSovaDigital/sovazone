@@ -474,7 +474,7 @@ body.sz-lock {
 
 /* =========================================================
    SOVAZONE FOOTER FINAL SYSTEM
-   deeper graphite background + softer instagram magenta gradient
+   meta-like soft bright gradient + corrected mobile bottom order
    ========================================================= */
 
 .svf-footer{
@@ -510,15 +510,16 @@ body.sz-lock {
   margin:0 0 16px;
   font-size:25px;
   font-weight:900;
-  letter-spacing:-0.03em;
+  letter-spacing:-.03em;
   line-height:1;
   background:linear-gradient(
     90deg,
-    #8a3ab9 0%,
-    #b73e9d 28%,
-    #d64b8c 56%,
-    #f05b7e 82%,
-    #f77737 100%
+    #f58529 0%,
+    #f56040 18%,
+    #fd1d1d 38%,
+    #e1306c 58%,
+    #c13584 76%,
+    #833ab4 100%
   );
   -webkit-background-clip:text;
   background-clip:text;
@@ -754,6 +755,11 @@ body.sz-lock {
   }
 
   .svf-footer__legal{
+    order:1;
     justify-content:center;
+  }
+
+  .svf-footer__copyright{
+    order:2;
   }
 }
