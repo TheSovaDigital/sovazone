@@ -605,7 +605,7 @@
       border-radius:18px;
       padding:16px 16px 14px;
       min-height:150px;
-      background:linear-gradient(180deg, rgba(20,20,24,.92), rgba(11,11,14,.96));
+      background:linear-gradient(180deg, rgba(20,20,24,.96), rgba(11,11,14,.98));
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
@@ -659,14 +659,37 @@
       transform:translateY(-1px);
     }
 
+    .projects-work-wrap{
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    .home-projects{
+      gap:18px;
+      padding:22px;
+    }
     .home-about{
-      justify-content:flex-start;
-      gap:0;
+      display:block;
+      min-height:auto;
+      height:auto;
+      padding:20px 22px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(20,20,24,.88), rgba(11,11,14,.94));
+      border:1px solid rgba(255,255,255,.06);
     }
-    .home-about .about-title{
-      margin-top:4px;
+    .home-about::before{
+      display:none;
     }
-    .home-about .about-btn{
+    .about-title{
+      margin:0 0 10px;
+      color:#fff;
+    }
+    .about-text{
+      margin:0 0 10px;
+      font-size:14px;
+      line-height:1.68;
+      color:rgba(255,255,255,.74);
+    }
+    .about-btn{
       display:flex;
       align-items:center;
       justify-content:center;
@@ -689,7 +712,7 @@
       overflow:hidden;
       transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
-    .home-about .about-btn:hover{
+    .about-btn:hover{
       transform:translateY(-1px);
       background:rgba(255,255,255,.04);
       border-color:rgba(255,255,255,.14);
@@ -716,11 +739,11 @@
       position:relative;
       overflow:hidden;
       border-radius:16px;
-      background:linear-gradient(180deg, rgba(20,20,24,.92), rgba(11,11,14,.96));
+      background:linear-gradient(180deg, rgba(20,20,24,.96), rgba(11,11,14,.98));
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
-      min-height:246px;
+      min-height:248px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .latest-article-card:hover{
@@ -746,13 +769,6 @@
       gap:10px;
       padding:12px 13px 13px;
       flex:1 1 auto;
-    }
-    .latest-article-kicker{
-      font-size:11px;
-      line-height:1.2;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#a7acba;
     }
     .latest-article-title{
       color:#fff;
@@ -1103,7 +1119,6 @@
             <article class="latest-article-card">
               <div class="latest-article-image-wrap"></div>
               <div class="latest-article-body">
-                <div class="latest-article-kicker">Блог</div>
                 <h3 class="latest-article-title">Загрузка последних материалов…</h3>
                 <p class="latest-article-desc">Подбираем свежие публикации именно из раздела блога SovaZone.</p>
               </div>
@@ -1121,114 +1136,106 @@
       const grid = document.getElementById('latest-articles-grid');
       if (!grid) return;
 
-      const fallback = [
-        {
-          href: '/blog.html',
-          title: 'Последние публикации блога SovaZone',
-          desc: 'Открыть блог и посмотреть свежие статьи, новости и кейсы.',
-          image: '/og-image.png'
-        },
-        {
-          href: '/blog.html',
-          title: 'Материалы о никнеймах и digital-задачах',
-          desc: 'Публикации по username, социальным сетям и практическим вопросам.',
-          image: '/og-image.png'
-        },
-        {
-          href: '/blog.html',
-          title: 'Новые кейсы и обновления',
-          desc: 'Свежие материалы из раздела блога SovaZone.',
-          image: '/og-image.png'
-        },
-        {
-          href: '/blog.html',
-          title: 'Блог SovaZone',
-          desc: 'Все публикации блога в одном разделе.',
-          image: '/og-image.png'
-        }
-      ];
-
-      function normalizeText(text) {
-        return (text || '').replace(/\s+/g, ' ').trim();
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
       }
 
-      function normalizeHref(href) {
-        if (!href) return '';
-        if (href.startsWith('http')) return '';
-        return href.startsWith('/') ? href : '/' + href.replace(/^\.\//, '');
+      function normalizePost(post) {
+        return {
+          slug: post.slug || '',
+          title: (post.title || 'Без названия').trim(),
+          description: (post.description || '').trim(),
+          cover: (post.cover || '/og-image.png').trim(),
+          date: post.date || ''
+        };
       }
 
-      function getImage(card) {
-        const img = card.querySelector('img');
-        if (img && img.getAttribute('src')) return img.getAttribute('src');
-
-        const bgEl = card.querySelector('[style*="background-image"]');
-        if (bgEl) {
-          const style = bgEl.getAttribute('style') || '';
-          const match = style.match(/url\((['"]?)(.*?)\1\)/i);
-          if (match && match[2]) return match[2];
-        }
-        return '/og-image.png';
+      function sortPosts(posts) {
+        return [...posts].sort((a, b) => {
+          const dateA = new Date(a.date || 0).getTime();
+          const dateB = new Date(b.date || 0).getTime();
+          return dateB - dateA;
+        });
       }
 
-      function render(items) {
-        grid.innerHTML = items.map(item => `
+      function truncateText(text, maxLength) {
+        const clean = String(text || '').replace(/\s+/g, ' ').trim();
+        if (clean.length <= maxLength) return clean;
+        return clean.slice(0, maxLength).trimEnd() + '…';
+      }
+
+      function buildPostUrl(slug) {
+        return '/post.html?slug=' + encodeURIComponent(slug || '');
+      }
+
+      function render(posts) {
+        const items = posts.slice(0, 4);
+        grid.innerHTML = items.map(post => {
+          const title = escapeHtml(post.title);
+          const desc = escapeHtml(truncateText(post.description || 'Открыть материал из блога SovaZone.', 190));
+          const cover = escapeHtml(post.cover || '/og-image.png');
+          const href = escapeHtml(buildPostUrl(post.slug));
+          return `
+            <article class="latest-article-card">
+              <div class="latest-article-image-wrap">
+                <img class="latest-article-image" src="${cover}" alt="${title}">
+              </div>
+              <div class="latest-article-body">
+                <h3 class="latest-article-title">${title}</h3>
+                <p class="latest-article-desc">${desc}</p>
+                <a class="latest-article-link" href="${href}">Открыть статью</a>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      function renderFallback() {
+        grid.innerHTML = `
           <article class="latest-article-card">
-            <div class="latest-article-image-wrap">
-              <img class="latest-article-image" src="${item.image || '/og-image.png'}" alt="${item.title}">
-            </div>
+            <div class="latest-article-image-wrap"></div>
             <div class="latest-article-body">
-              <div class="latest-article-kicker">Блог</div>
-              <h3 class="latest-article-title">${item.title}</h3>
-              <p class="latest-article-desc">${item.desc}</p>
-              <a class="latest-article-link" href="${item.href}">Открыть статью</a>
+              <h3 class="latest-article-title">Не удалось загрузить блог</h3>
+              <p class="latest-article-desc">Открой раздел блога SovaZone, чтобы посмотреть последние публикации.</p>
+              <a class="latest-article-link" href="/blog.html">Открыть блог</a>
             </div>
           </article>
-        `).join('');
+        `;
       }
 
-      fetch('/blog.html', { credentials: 'same-origin' })
-        .then(r => r.ok ? r.text() : Promise.reject(new Error('blog fetch failed')))
-        .then(htmlText => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(htmlText, 'text/html');
+      async function fetchJsonWithFallback(paths) {
+        for (const url of paths) {
+          try {
+            const response = await fetch(url, { cache: 'no-store' });
+            if (response.ok) return await response.json();
+          } catch (e) {}
+        }
+        throw new Error('BLOG_INDEX_NOT_FOUND');
+      }
 
-          const cards = Array.from(
-            doc.querySelectorAll('article, .blog-card, .post-card, .blog-item, .post-item')
-          );
+      (async function init() {
+        try {
+          const cacheBust = Date.now();
+          const posts = await fetchJsonWithFallback([
+            '/content/blog/index.json?v=' + cacheBust,
+            'https://cdn.jsdelivr.net/gh/TheSovaDigital/sovazone@main/content/blog/index.json?v=' + cacheBust,
+            'https://raw.githubusercontent.com/TheSovaDigital/sovazone/main/content/blog/index.json?v=' + cacheBust
+          ]);
 
-          const seen = new Set();
-          const items = [];
+          const normalized = sortPosts((Array.isArray(posts) ? posts : []).map(normalizePost))
+            .filter(post => post.slug && post.title);
 
-          for (const card of cards) {
-            const link = card.querySelector('a[href$=".html"], a[href*=".html#"], a[href*=".html?"]') || card.querySelector('a[href]');
-            if (!link) continue;
-
-            const href = normalizeHref(link.getAttribute('href') || '');
-            if (!href || href === '/blog.html' || seen.has(href)) continue;
-
-            const titleEl = card.querySelector('h2, h3, .post-title, .blog-title, .card-title') || link;
-            const descEl = card.querySelector('p, .post-excerpt, .blog-excerpt, .card-text');
-
-            const title = normalizeText(titleEl.textContent);
-            const desc = normalizeText(descEl ? descEl.textContent : '');
-
-            if (!title || title.length < 4) continue;
-
-            seen.add(href);
-            items.push({
-              href,
-              title,
-              desc: desc || 'Открыть материал из блога SovaZone.',
-              image: getImage(card)
-            });
-
-            if (items.length === 4) break;
-          }
-
-          render(items.length ? items : fallback);
-        })
-        .catch(() => render(fallback));
+          if (!normalized.length) throw new Error('BLOG_EMPTY');
+          render(normalized);
+        } catch (e) {
+          renderFallback();
+        }
+      })();
     })();
   </script>
   <script src="script.js"></script>
