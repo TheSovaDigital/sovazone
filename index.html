@@ -115,6 +115,8 @@
       object-position:center;
       display:block;
       border-radius:26px;
+      transform:scale(1.12);
+      transform-origin:center;
     }
     .hero-content{
       min-width:0;
@@ -317,6 +319,181 @@
       color:#fff;
     }
 
+    .section-services-compact{
+      margin-top:22px;
+    }
+    .section-services-compact .section-head-inline{
+      align-items:flex-end;
+      gap:14px;
+      margin-bottom:14px;
+    }
+    .section-services-compact .section-head-inline h2{
+      margin:0;
+    }
+    .services-compact-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:14px;
+    }
+    .service-compact-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:20px;
+      padding:16px 16px 14px;
+      min-height:156px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
+        linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
+      border:1px solid rgba(255,255,255,.06);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:12px;
+      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .service-compact-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,255,255,.14);
+      box-shadow:0 16px 34px rgba(0,0,0,.20);
+    }
+    .service-compact-card h3{
+      margin:0 0 8px;
+      font-size:20px;
+      line-height:1.08;
+      letter-spacing:-.03em;
+      color:#fff;
+    }
+    .service-compact-card p{
+      margin:0;
+      font-size:13px;
+      line-height:1.58;
+      color:rgba(255,255,255,.72);
+    }
+    .service-compact-link{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      min-height:36px;
+      height:36px;
+      padding:0 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.032);
+      border:1px solid rgba(255,255,255,.09);
+      color:#fff;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:700;
+      line-height:1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      transition:border-color .18s ease, background .18s ease, transform .18s ease;
+    }
+    .service-compact-link:hover{
+      color:#fff;
+      background:rgba(255,255,255,.04);
+      border-color:rgba(255,255,255,.14);
+      transform:translateY(-1px);
+    }
+
+    .latest-articles{
+      margin-top:28px;
+    }
+    .latest-articles .section-head-inline{
+      align-items:flex-end;
+      gap:14px;
+      margin-bottom:14px;
+    }
+    .latest-articles .section-head-inline h2{
+      margin:0;
+    }
+    .latest-articles-grid{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:14px;
+    }
+    .latest-article-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      padding:14px 14px 12px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
+        linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
+      border:1px solid rgba(255,255,255,.06);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:138px;
+      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .latest-article-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,255,255,.14);
+      box-shadow:0 16px 34px rgba(0,0,0,.20);
+    }
+    .latest-article-kicker{
+      font-size:11px;
+      line-height:1.2;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#a7acba;
+    }
+    .latest-article-title{
+      color:#fff;
+      font-size:16px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+      font-weight:800;
+      margin:0;
+    }
+    .latest-article-desc{
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+      line-height:1.55;
+      margin:0;
+      flex:1 1 auto;
+    }
+    .latest-article-link{
+      display:inline-flex;
+      align-items:center;
+      min-height:30px;
+      color:#fff;
+      font-size:12px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .latest-article-link:hover{
+      color:#fff;
+      opacity:.92;
+    }
+
+    @media (max-width:1240px){
+      .services-compact-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .latest-articles-grid{
+        grid-template-columns:repeat(3, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:860px){
+      .services-compact-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .latest-articles-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:680px){
+      .services-compact-grid,
+      .latest-articles-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
     .projects-work-wrap{
       display:grid;
       grid-template-columns:minmax(0,1fr) 360px;
@@ -405,11 +582,11 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      height:44px;
-      min-height:44px;
-      max-height:44px;
-      padding:0 10px;
-      border-radius:14px;
+      min-height:40px;
+      height:40px;
+      max-height:40px;
+      padding:0 12px;
+      border-radius:12px;
       text-decoration:none;
       color:#fff;
       border:1px solid rgba(255,255,255,.09);
@@ -423,7 +600,7 @@
       text-overflow:ellipsis;
       box-sizing:border-box;
       margin-top:auto;
-      flex:0 0 44px;
+      flex:0 0 40px;
       transition:border-color .18s ease, background .18s ease, transform .18s ease;
     }
     .project-link:hover{
@@ -506,15 +683,15 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      min-height:46px;
-      height:46px;
-      padding:0 18px;
-      border-radius:14px;
+      min-height:42px;
+      height:42px;
+      padding:0 16px;
+      border-radius:0;
       text-decoration:none;
       color:#fff;
-      border:1px solid rgba(255,255,255,.09);
-      background:linear-gradient(90deg, rgba(131,58,180,.18) 0%, rgba(193,53,132,.16) 38%, rgba(225,48,108,.14) 68%, rgba(247,119,55,.14) 100%);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+      box-shadow:none;
       font-weight:700;
       width:100%;
       margin-top:auto;
@@ -526,7 +703,7 @@
     }
     .about-btn:hover{
       transform:translateY(-1px);
-      background:linear-gradient(90deg, rgba(131,58,180,.24) 0%, rgba(193,53,132,.22) 38%, rgba(225,48,108,.20) 68%, rgba(247,119,55,.20) 100%);
+      background:rgba(255,255,255,.04);
       border-color:rgba(255,255,255,.14);
       color:#fff;
     }
@@ -775,6 +952,47 @@
           </div>
         </section>
 
+        <section class="section section-services-compact">
+          <div class="section-head section-head-inline">
+            <h2>Услуги</h2>
+            <a class="btn btn-secondary section-head-btn" href="services.html">Все услуги</a>
+          </div>
+
+          <div class="services-compact-grid">
+            <article class="service-compact-card">
+              <div>
+                <h3>Верификация</h3>
+                <p>Сопровождение и консультации по вопросам подтверждения профиля и подготовки к подаче запроса.</p>
+              </div>
+              <a class="service-compact-link" href="services/verification.html">Подробнее</a>
+            </article>
+
+            <article class="service-compact-card">
+              <div>
+                <h3>Разблокировка</h3>
+                <p>Помощь в сложных ситуациях с ограничениями, доступом к аккаунту и восстановлением рабочего статуса.</p>
+              </div>
+              <a class="service-compact-link" href="services/account-help.html">Подробнее</a>
+            </article>
+
+            <article class="service-compact-card">
+              <div>
+                <h3>Восстановление</h3>
+                <p>Пошаговая помощь после взлома, утраты доступа и других критичных ситуаций с аккаунтом.</p>
+              </div>
+              <a class="service-compact-link" href="services/recovery-after-hack.html">Подробнее</a>
+            </article>
+
+            <article class="service-compact-card">
+              <div>
+                <h3>Консультации</h3>
+                <p>Разбор запроса, оценка сценариев старта и подбор решения под конкретную задачу без воды.</p>
+              </div>
+              <a class="service-compact-link" href="services/consultation.html">Подробнее</a>
+            </article>
+          </div>
+        </section>
+
         <section class="section">
           <div class="projects-work-wrap">
             <section class="home-projects">
@@ -855,12 +1073,102 @@
             </aside>
           </div>
         </section>
+        <section class="section latest-articles">
+          <div class="section-head section-head-inline">
+            <h2>Последние статьи из блога</h2>
+            <a class="btn btn-secondary section-head-btn" href="blog.html">Открыть блог</a>
+          </div>
+
+          <div class="latest-articles-grid" id="latest-articles-grid">
+            <article class="latest-article-card">
+              <div class="latest-article-kicker">Блог</div>
+              <h3 class="latest-article-title">Загрузка последних материалов…</h3>
+              <p class="latest-article-desc">Подбираем свежие публикации из блога SovaZone.</p>
+            </article>
+          </div>
+        </section>
       </div>
     </main>
 
     <div id="footer-placeholder"></div>
   </div>
 
+  <script>
+    (function () {
+      const grid = document.getElementById('latest-articles-grid');
+      if (!grid) return;
+
+      const fallback = [
+        { href: '/instagram-account-security.html', title: 'Безопасность Instagram аккаунта', desc: 'Что стоит проверить, чтобы снизить риск взлома и потери доступа.' },
+        { href: '/telegram-account-hacked-recovery.html', title: 'Восстановление Telegram после взлома', desc: 'Базовая логика действий при компрометации аккаунта и потере доступа.' },
+        { href: '/unblock-instagram-account.html', title: 'Как разблокировать Instagram аккаунт', desc: 'Что делать, если профиль получил ограничения или был заблокирован.' },
+        { href: '/how-to-choose-instagram-username.html', title: 'Как выбрать никнейм для Instagram', desc: 'Как подойти к выбору username для бренда, проекта или личного профиля.' },
+        { href: '/why-instagram-accounts-get-banned.html', title: 'Почему Instagram аккаунты получают блокировки', desc: 'Кратко о типичных причинах ограничений и спорных ситуаций.' }
+      ];
+
+      function render(items) {
+        grid.innerHTML = items.map(item => `
+          <article class="latest-article-card">
+            <div class="latest-article-kicker">Блог</div>
+            <h3 class="latest-article-title">${item.title}</h3>
+            <p class="latest-article-desc">${item.desc}</p>
+            <a class="latest-article-link" href="${item.href}">Открыть статью</a>
+          </article>
+        `).join('');
+      }
+
+      function normalizeText(text) {
+        return (text || '').replace(/\s+/g, ' ').trim();
+      }
+
+      fetch('/blog.html', { credentials: 'same-origin' })
+        .then(r => r.ok ? r.text() : Promise.reject(new Error('blog fetch failed')))
+        .then(htmlText => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(htmlText, 'text/html');
+
+          const cards = Array.from(
+            doc.querySelectorAll('article, .blog-card, .post-card, .article-card, .blog-item, .post-item')
+          );
+
+          const seen = new Set();
+          const items = [];
+
+          for (const card of cards) {
+            const link = card.querySelector('a[href$=".html"], a[href*=".html#"], a[href*=".html?"]') || card.querySelector('a[href]');
+            if (!link) continue;
+
+            const href = link.getAttribute('href') || '';
+            if (!href || href === 'blog.html' || href === '/blog.html' || href.startsWith('http')) continue;
+
+            const cleanHref = href.startsWith('/') ? href : '/' + href.replace(/^\.\//, '');
+            if (seen.has(cleanHref)) continue;
+
+            const titleEl =
+              card.querySelector('h2, h3, .post-title, .blog-title, .article-title') || link;
+            const descEl =
+              card.querySelector('p, .post-excerpt, .blog-excerpt, .article-excerpt, .card-text');
+
+            const title = normalizeText(titleEl.textContent);
+            const desc = normalizeText(descEl ? descEl.textContent : '');
+
+            if (!title || title.length < 4) continue;
+
+            seen.add(cleanHref);
+            items.push({
+              href: cleanHref,
+              title,
+              desc: desc || 'Открыть материал из блога SovaZone.'
+            });
+
+            if (items.length === 5) break;
+          }
+
+          render(items.length ? items : fallback);
+        })
+        .catch(() => render(fallback));
+    })();
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
