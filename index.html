@@ -319,7 +319,7 @@
 
     .projects-work-wrap{
       display:grid;
-      grid-template-columns:minmax(0,1fr) 340px;
+      grid-template-columns:minmax(0,1fr) 360px;
       gap:18px;
       margin-top:26px;
       align-items:stretch;
@@ -341,7 +341,6 @@
     .home-projects{
       display:flex;
       flex-direction:column;
-      justify-content:center;
       gap:16px;
     }
     .home-about{
@@ -493,13 +492,13 @@
     }
 
     .about-title{
-      margin:0 0 10px;
+      margin:0 0 12px;
       color:#fff;
     }
     .about-text{
-      margin:0 0 10px;
+      margin:0 0 12px;
       font-size:14px;
-      line-height:1.68;
+      line-height:1.72;
       color:rgba(255,255,255,.74);
     }
     .about-btn{
@@ -507,18 +506,18 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      min-height:42px;
-      height:42px;
-      padding:0 16px;
-      border-radius:0;
+      min-height:46px;
+      height:46px;
+      padding:0 18px;
+      border-radius:14px;
       text-decoration:none;
       color:#fff;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.02);
-      box-shadow:none;
+      border:1px solid rgba(255,255,255,.09);
+      background:linear-gradient(90deg, rgba(131,58,180,.18) 0%, rgba(193,53,132,.16) 38%, rgba(225,48,108,.14) 68%, rgba(247,119,55,.14) 100%);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
       font-weight:700;
       width:100%;
-      margin-top:6px;
+      margin-top:auto;
       box-sizing:border-box;
       line-height:1.1;
       white-space:nowrap;
@@ -527,7 +526,7 @@
     }
     .about-btn:hover{
       transform:translateY(-1px);
-      background:rgba(255,255,255,.04);
+      background:linear-gradient(90deg, rgba(131,58,180,.24) 0%, rgba(193,53,132,.22) 38%, rgba(225,48,108,.20) 68%, rgba(247,119,55,.20) 100%);
       border-color:rgba(255,255,255,.14);
       color:#fff;
     }
@@ -569,6 +568,21 @@
       }
     }
 
+    @media (max-width:680px){
+      .hero-content h1{
+        white-space:normal;
+      }
+      .username-grid.username-grid-refined,
+      .steps-grid{
+        grid-template-columns:1fr;
+      }
+      .home-projects,
+      .home-about{
+        padding:18px;
+      }
+    }
+
+
     .section-services-compact{
       margin-top:22px;
     }
@@ -588,12 +602,10 @@
     .service-compact-card{
       position:relative;
       overflow:hidden;
-      border-radius:20px;
+      border-radius:18px;
       padding:16px 16px 14px;
-      min-height:156px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
-        linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
+      min-height:150px;
+      background:linear-gradient(180deg, rgba(20,20,24,.92), rgba(11,11,14,.96));
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
@@ -603,8 +615,8 @@
     }
     .service-compact-card:hover{
       transform:translateY(-3px);
-      border-color:rgba(255,255,255,.14);
-      box-shadow:0 16px 34px rgba(0,0,0,.20);
+      border-color:rgba(255,255,255,.12);
+      box-shadow:0 14px 28px rgba(0,0,0,.22);
     }
     .service-compact-card h3{
       margin:0 0 8px;
@@ -616,8 +628,8 @@
     .service-compact-card p{
       margin:0;
       font-size:13px;
-      line-height:1.58;
-      color:rgba(255,255,255,.72);
+      line-height:1.56;
+      color:rgba(255,255,255,.70);
     }
     .service-compact-link{
       display:flex;
@@ -627,9 +639,9 @@
       min-height:36px;
       height:36px;
       padding:0 12px;
-      border-radius:12px;
-      background:rgba(255,255,255,.032);
-      border:1px solid rgba(255,255,255,.09);
+      border-radius:10px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
       color:#fff;
       text-decoration:none;
       font-size:12px;
@@ -642,9 +654,46 @@
     }
     .service-compact-link:hover{
       color:#fff;
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.13);
+      transform:translateY(-1px);
+    }
+
+    .home-about{
+      justify-content:flex-start;
+      gap:0;
+    }
+    .home-about .about-title{
+      margin-top:4px;
+    }
+    .home-about .about-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      min-height:42px;
+      height:42px;
+      padding:0 16px;
+      border-radius:0;
+      text-decoration:none;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+      box-shadow:none;
+      font-weight:700;
+      width:100%;
+      margin-top:8px;
+      box-sizing:border-box;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .home-about .about-btn:hover{
+      transform:translateY(-1px);
       background:rgba(255,255,255,.04);
       border-color:rgba(255,255,255,.14);
-      transform:translateY(-1px);
+      color:#fff;
     }
 
     .latest-articles{
@@ -666,20 +715,18 @@
     .latest-article-card{
       position:relative;
       overflow:hidden;
-      border-radius:18px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
-        linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(20,20,24,.92), rgba(11,11,14,.96));
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
-      min-height:260px;
+      min-height:246px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .latest-article-card:hover{
       transform:translateY(-3px);
-      border-color:rgba(255,255,255,.14);
-      box-shadow:0 16px 34px rgba(0,0,0,.20);
+      border-color:rgba(255,255,255,.12);
+      box-shadow:0 14px 28px rgba(0,0,0,.22);
     }
     .latest-article-image-wrap{
       aspect-ratio:16 / 9;
@@ -697,7 +744,7 @@
       display:flex;
       flex-direction:column;
       gap:10px;
-      padding:13px 14px 14px;
+      padding:12px 13px 13px;
       flex:1 1 auto;
     }
     .latest-article-kicker{
@@ -709,7 +756,7 @@
     }
     .latest-article-title{
       color:#fff;
-      font-size:16px;
+      font-size:15px;
       line-height:1.22;
       letter-spacing:-.02em;
       font-weight:800;
@@ -725,7 +772,7 @@
     .latest-article-link{
       display:inline-flex;
       align-items:center;
-      min-height:30px;
+      min-height:28px;
       color:#fff;
       font-size:12px;
       font-weight:700;
@@ -749,20 +796,6 @@
       .services-compact-grid,
       .latest-articles-grid{
         grid-template-columns:1fr;
-      }
-    }
-
-    @media (max-width:680px){
-      .hero-content h1{
-        white-space:normal;
-      }
-      .username-grid.username-grid-refined,
-      .steps-grid{
-        grid-template-columns:1fr;
-      }
-      .home-projects,
-      .home-about{
-        padding:18px;
       }
     }
   </style>
@@ -1039,7 +1072,17 @@
                   </article>
                 </div>
               </div>
+
+              <aside class="home-about">
+                <h2 class="about-title">Почему SovaZone</h2>
+                <p class="about-text">За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
+                <p class="about-text">За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
+                <p class="about-text">Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
+                <a class="about-btn" href="contacts.html">Перейти к контактам</a>
+              </aside>
             </section>
+          </div>
+        </section>
 
             <aside class="home-about">
               <h2 class="about-title">Почему SovaZone</h2>
@@ -1062,7 +1105,7 @@
               <div class="latest-article-body">
                 <div class="latest-article-kicker">Блог</div>
                 <h3 class="latest-article-title">Загрузка последних материалов…</h3>
-                <p class="latest-article-desc">Подбираем свежие публикации из блога SovaZone.</p>
+                <p class="latest-article-desc">Подбираем свежие публикации именно из раздела блога SovaZone.</p>
               </div>
             </article>
           </div>
@@ -1080,28 +1123,28 @@
 
       const fallback = [
         {
-          href: '/instagram-account-security.html',
-          title: 'Безопасность Instagram аккаунта',
-          desc: 'Что стоит проверить, чтобы снизить риск взлома и потери доступа.',
-          image: '/image/account-security.jpg'
+          href: '/blog.html',
+          title: 'Последние публикации блога SovaZone',
+          desc: 'Открыть блог и посмотреть свежие статьи, новости и кейсы.',
+          image: '/og-image.png'
         },
         {
-          href: '/telegram-account-hacked-recovery.html',
-          title: 'Восстановление Telegram после взлома',
-          desc: 'Базовая логика действий при компрометации аккаунта и потере доступа.',
-          image: '/image/recovery_telegram_web.jpg'
+          href: '/blog.html',
+          title: 'Материалы о никнеймах и digital-задачах',
+          desc: 'Публикации по username, социальным сетям и практическим вопросам.',
+          image: '/og-image.png'
         },
         {
-          href: '/unblock-instagram-account.html',
-          title: 'Как разблокировать Instagram аккаунт',
-          desc: 'Что делать, если профиль получил ограничения или был заблокирован.',
-          image: '/image/unblock-instagram-account.jpg'
+          href: '/blog.html',
+          title: 'Новые кейсы и обновления',
+          desc: 'Свежие материалы из раздела блога SovaZone.',
+          image: '/og-image.png'
         },
         {
-          href: '/how-to-choose-instagram-username.html',
-          title: 'Как выбрать никнейм для Instagram',
-          desc: 'Как подойти к выбору username для бренда, проекта или личного профиля.',
-          image: '/image/usernameclaim.png'
+          href: '/blog.html',
+          title: 'Блог SovaZone',
+          desc: 'Все публикации блога в одном разделе.',
+          image: '/og-image.png'
         }
       ];
 
@@ -1151,7 +1194,7 @@
           const doc = parser.parseFromString(htmlText, 'text/html');
 
           const cards = Array.from(
-            doc.querySelectorAll('article, .blog-card, .post-card, .article-card, .blog-item, .post-item')
+            doc.querySelectorAll('article, .blog-card, .post-card, .blog-item, .post-item')
           );
 
           const seen = new Set();
@@ -1164,8 +1207,8 @@
             const href = normalizeHref(link.getAttribute('href') || '');
             if (!href || href === '/blog.html' || seen.has(href)) continue;
 
-            const titleEl = card.querySelector('h2, h3, .post-title, .blog-title, .article-title') || link;
-            const descEl = card.querySelector('p, .post-excerpt, .blog-excerpt, .article-excerpt, .card-text');
+            const titleEl = card.querySelector('h2, h3, .post-title, .blog-title, .card-title') || link;
+            const descEl = card.querySelector('p, .post-excerpt, .blog-excerpt, .card-text');
 
             const title = normalizeText(titleEl.textContent);
             const desc = normalizeText(descEl ? descEl.textContent : '');
