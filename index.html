@@ -115,8 +115,6 @@
       object-position:center;
       display:block;
       border-radius:26px;
-      transform:scale(1.12);
-      transform-origin:center;
     }
     .hero-content{
       min-width:0;
@@ -319,6 +317,258 @@
       color:#fff;
     }
 
+    .projects-work-wrap{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 340px;
+      gap:18px;
+      margin-top:26px;
+      align-items:stretch;
+    }
+    .home-projects,
+    .home-about{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      padding:22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
+        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
+      border:1px solid rgba(255,255,255,.07);
+      min-height:100%;
+      height:100%;
+      box-sizing:border-box;
+    }
+    .home-projects{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:16px;
+    }
+    .home-about{
+      display:flex;
+      flex-direction:column;
+    }
+    .home-projects::before,
+    .home-about::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
+    }
+    .home-projects > *,
+    .home-about > *{
+      position:relative;
+      z-index:1;
+    }
+    .home-projects .section-head{
+      margin-bottom:0;
+    }
+    .home-projects .section-head h2{
+      margin:0;
+    }
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      margin-bottom:0;
+      align-items:stretch;
+      grid-auto-rows:1fr;
+    }
+    .project-card{
+      display:flex;
+      flex-direction:column;
+      min-height:188px;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.02);
+      gap:12px;
+      box-sizing:border-box;
+    }
+    .project-card h3{
+      margin:0 0 8px;
+      font-size:18px;
+      line-height:1.14;
+      letter-spacing:-.02em;
+      color:#fff;
+    }
+    .project-card p{
+      margin:0;
+      font-size:14px;
+      line-height:1.6;
+      color:rgba(255,255,255,.72);
+      flex:1 1 auto;
+    }
+    .project-link{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      height:44px;
+      min-height:44px;
+      max-height:44px;
+      padding:0 10px;
+      border-radius:14px;
+      text-decoration:none;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.032);
+      width:100%;
+      font-weight:700;
+      font-size:12px;
+      line-height:1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      box-sizing:border-box;
+      margin-top:auto;
+      flex:0 0 44px;
+      transition:border-color .18s ease, background .18s ease, transform .18s ease;
+    }
+    .project-link:hover{
+      border-color:rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      transform:translateY(-1px);
+      color:#fff;
+    }
+
+    .work-inline{
+      margin-top:0;
+      flex:1 1 auto;
+      display:flex;
+      flex-direction:column;
+    }
+    .work-inline-title{
+      margin:0 0 12px;
+      color:#fff;
+    }
+    .steps-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+      align-items:stretch;
+    }
+    .step{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.02);
+      min-height:128px;
+      box-sizing:border-box;
+    }
+    .step-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      min-height:30px;
+    }
+    .step-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      border:1px solid rgba(217,179,140,.24);
+      color:#d9b38c;
+      font-size:12px;
+      font-weight:700;
+      flex:0 0 28px;
+    }
+    .step h3{
+      margin:0;
+      font-size:16px;
+      line-height:1.16;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+    .step p{
+      margin:0;
+      font-size:13px;
+      line-height:1.58;
+      color:rgba(255,255,255,.72);
+    }
+
+    .about-title{
+      margin:0 0 10px;
+      color:#fff;
+    }
+    .about-text{
+      margin:0 0 10px;
+      font-size:14px;
+      line-height:1.68;
+      color:rgba(255,255,255,.74);
+    }
+    .about-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      min-height:42px;
+      height:42px;
+      padding:0 16px;
+      border-radius:0;
+      text-decoration:none;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+      box-shadow:none;
+      font-weight:700;
+      width:100%;
+      margin-top:6px;
+      box-sizing:border-box;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .about-btn:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.04);
+      border-color:rgba(255,255,255,.14);
+      color:#fff;
+    }
+
+    @media (max-width:1240px){
+      .hero-content h1{
+        white-space:normal;
+      }
+      .hero-actions-row{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .username-grid.username-grid-refined{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .projects-grid{
+        grid-template-columns:1fr;
+      }
+      .steps-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .projects-work-wrap{
+        grid-template-columns:1fr;
+      }
+      .project-link{
+        font-size:13px;
+      }
+    }
+
+    @media (max-width:860px){
+      .hero.hero-split{
+        flex-direction:column;
+      }
+      .hero-side{
+        width:100%;
+        max-width:320px;
+      }
+      .hero-actions-row{
+        grid-template-columns:1fr;
+      }
+    }
+
     .section-services-compact{
       margin-top:22px;
     }
@@ -410,28 +660,45 @@
     }
     .latest-articles-grid{
       display:grid;
-      grid-template-columns:repeat(5, minmax(0,1fr));
+      grid-template-columns:repeat(4, minmax(0,1fr));
       gap:14px;
     }
     .latest-article-card{
       position:relative;
       overflow:hidden;
       border-radius:18px;
-      padding:14px 14px 12px;
       background:
         linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
         linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
-      gap:10px;
-      min-height:138px;
+      min-height:260px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .latest-article-card:hover{
       transform:translateY(-3px);
       border-color:rgba(255,255,255,.14);
       box-shadow:0 16px 34px rgba(0,0,0,.20);
+    }
+    .latest-article-image-wrap{
+      aspect-ratio:16 / 9;
+      overflow:hidden;
+      background:rgba(255,255,255,.03);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .latest-article-image{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .latest-article-body{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:13px 14px 14px;
+      flex:1 1 auto;
     }
     .latest-article-kicker{
       font-size:11px;
@@ -443,7 +710,7 @@
     .latest-article-title{
       color:#fff;
       font-size:16px;
-      line-height:1.2;
+      line-height:1.22;
       letter-spacing:-.02em;
       font-weight:800;
       margin:0;
@@ -474,15 +741,6 @@
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
       .latest-articles-grid{
-        grid-template-columns:repeat(3, minmax(0,1fr));
-      }
-    }
-
-    @media (max-width:860px){
-      .services-compact-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .latest-articles-grid{
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
     }
@@ -490,257 +748,6 @@
     @media (max-width:680px){
       .services-compact-grid,
       .latest-articles-grid{
-        grid-template-columns:1fr;
-      }
-    }
-
-    .projects-work-wrap{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 360px;
-      gap:18px;
-      margin-top:26px;
-      align-items:stretch;
-    }
-    .home-projects,
-    .home-about{
-      position:relative;
-      overflow:hidden;
-      border-radius:24px;
-      padding:22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
-        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
-      border:1px solid rgba(255,255,255,.07);
-      min-height:100%;
-      height:100%;
-      box-sizing:border-box;
-    }
-    .home-projects{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
-    .home-about{
-      display:flex;
-      flex-direction:column;
-    }
-    .home-projects::before,
-    .home-about::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
-    }
-    .home-projects > *,
-    .home-about > *{
-      position:relative;
-      z-index:1;
-    }
-    .home-projects .section-head{
-      margin-bottom:0;
-    }
-    .home-projects .section-head h2{
-      margin:0;
-    }
-
-    .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
-      margin-bottom:0;
-      align-items:stretch;
-      grid-auto-rows:1fr;
-    }
-    .project-card{
-      display:flex;
-      flex-direction:column;
-      min-height:188px;
-      padding:16px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
-      gap:12px;
-      box-sizing:border-box;
-    }
-    .project-card h3{
-      margin:0 0 8px;
-      font-size:18px;
-      line-height:1.14;
-      letter-spacing:-.02em;
-      color:#fff;
-    }
-    .project-card p{
-      margin:0;
-      font-size:14px;
-      line-height:1.6;
-      color:rgba(255,255,255,.72);
-      flex:1 1 auto;
-    }
-    .project-link{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      min-height:40px;
-      height:40px;
-      max-height:40px;
-      padding:0 12px;
-      border-radius:12px;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.09);
-      background:rgba(255,255,255,.032);
-      width:100%;
-      font-weight:700;
-      font-size:12px;
-      line-height:1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      box-sizing:border-box;
-      margin-top:auto;
-      flex:0 0 40px;
-      transition:border-color .18s ease, background .18s ease, transform .18s ease;
-    }
-    .project-link:hover{
-      border-color:rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      transform:translateY(-1px);
-      color:#fff;
-    }
-
-    .work-inline{
-      margin-top:0;
-      flex:1 1 auto;
-      display:flex;
-      flex-direction:column;
-    }
-    .work-inline-title{
-      margin:0 0 12px;
-      color:#fff;
-    }
-    .steps-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:12px;
-      align-items:stretch;
-    }
-    .step{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
-      min-height:128px;
-      box-sizing:border-box;
-    }
-    .step-head{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-      min-height:30px;
-    }
-    .step-num{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:28px;
-      height:28px;
-      border-radius:999px;
-      border:1px solid rgba(217,179,140,.24);
-      color:#d9b38c;
-      font-size:12px;
-      font-weight:700;
-      flex:0 0 28px;
-    }
-    .step h3{
-      margin:0;
-      font-size:16px;
-      line-height:1.16;
-      color:#fff;
-      letter-spacing:-.02em;
-    }
-    .step p{
-      margin:0;
-      font-size:13px;
-      line-height:1.58;
-      color:rgba(255,255,255,.72);
-    }
-
-    .about-title{
-      margin:0 0 12px;
-      color:#fff;
-    }
-    .about-text{
-      margin:0 0 12px;
-      font-size:14px;
-      line-height:1.72;
-      color:rgba(255,255,255,.74);
-    }
-    .about-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      min-height:42px;
-      height:42px;
-      padding:0 16px;
-      border-radius:0;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.02);
-      box-shadow:none;
-      font-weight:700;
-      width:100%;
-      margin-top:auto;
-      box-sizing:border-box;
-      line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
-    }
-    .about-btn:hover{
-      transform:translateY(-1px);
-      background:rgba(255,255,255,.04);
-      border-color:rgba(255,255,255,.14);
-      color:#fff;
-    }
-
-    @media (max-width:1240px){
-      .hero-content h1{
-        white-space:normal;
-      }
-      .hero-actions-row{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .username-grid.username-grid-refined{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .projects-grid{
-        grid-template-columns:1fr;
-      }
-      .steps-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .projects-work-wrap{
-        grid-template-columns:1fr;
-      }
-      .project-link{
-        font-size:13px;
-      }
-    }
-
-    @media (max-width:860px){
-      .hero.hero-split{
-        flex-direction:column;
-      }
-      .hero-side{
-        width:100%;
-        max-width:320px;
-      }
-      .hero-actions-row{
         grid-template-columns:1fr;
       }
     }
@@ -996,36 +1003,6 @@
         <section class="section">
           <div class="projects-work-wrap">
             <section class="home-projects">
-              <div class="section-head">
-                <h2>Проекты и материалы</h2>
-              </div>
-
-              <div class="projects-grid">
-                <article class="project-card">
-                  <div>
-                    <h3>SovaDS</h3>
-                    <p>Онлайн магазин никнеймов и одно из ключевых направлений экосистемы SovaZone с полным ассортиментом и актуальными предложениями.</p>
-                  </div>
-                  <a class="project-link" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн Магазин</a>
-                </article>
-
-                <article class="project-card">
-                  <div>
-                    <h3>SovaUsername</h3>
-                    <p>Направление, связанное с продажей username и размещением объявлений о продаже никнеймов внутри экосистемы SovaZone.</p>
-                  </div>
-                  <a class="project-link" href="sell.html">Подробней</a>
-                </article>
-
-                <article class="project-card">
-                  <div>
-                    <h3>Блог и статьи</h3>
-                    <p>Авторские статьи, новости и кейсы по теме социальных сетей, брендинга, username и digital-среды.</p>
-                  </div>
-                  <a class="project-link" href="blog.html">Открыть раздел</a>
-                </article>
-              </div>
-
               <div class="work-inline">
                 <h2 class="work-inline-title">Как мы работаем</h2>
                 <div class="steps-grid">
@@ -1081,9 +1058,12 @@
 
           <div class="latest-articles-grid" id="latest-articles-grid">
             <article class="latest-article-card">
-              <div class="latest-article-kicker">Блог</div>
-              <h3 class="latest-article-title">Загрузка последних материалов…</h3>
-              <p class="latest-article-desc">Подбираем свежие публикации из блога SovaZone.</p>
+              <div class="latest-article-image-wrap"></div>
+              <div class="latest-article-body">
+                <div class="latest-article-kicker">Блог</div>
+                <h3 class="latest-article-title">Загрузка последних материалов…</h3>
+                <p class="latest-article-desc">Подбираем свежие публикации из блога SovaZone.</p>
+              </div>
             </article>
           </div>
         </section>
@@ -1099,26 +1079,69 @@
       if (!grid) return;
 
       const fallback = [
-        { href: '/instagram-account-security.html', title: 'Безопасность Instagram аккаунта', desc: 'Что стоит проверить, чтобы снизить риск взлома и потери доступа.' },
-        { href: '/telegram-account-hacked-recovery.html', title: 'Восстановление Telegram после взлома', desc: 'Базовая логика действий при компрометации аккаунта и потере доступа.' },
-        { href: '/unblock-instagram-account.html', title: 'Как разблокировать Instagram аккаунт', desc: 'Что делать, если профиль получил ограничения или был заблокирован.' },
-        { href: '/how-to-choose-instagram-username.html', title: 'Как выбрать никнейм для Instagram', desc: 'Как подойти к выбору username для бренда, проекта или личного профиля.' },
-        { href: '/why-instagram-accounts-get-banned.html', title: 'Почему Instagram аккаунты получают блокировки', desc: 'Кратко о типичных причинах ограничений и спорных ситуаций.' }
+        {
+          href: '/instagram-account-security.html',
+          title: 'Безопасность Instagram аккаунта',
+          desc: 'Что стоит проверить, чтобы снизить риск взлома и потери доступа.',
+          image: '/image/account-security.jpg'
+        },
+        {
+          href: '/telegram-account-hacked-recovery.html',
+          title: 'Восстановление Telegram после взлома',
+          desc: 'Базовая логика действий при компрометации аккаунта и потере доступа.',
+          image: '/image/recovery_telegram_web.jpg'
+        },
+        {
+          href: '/unblock-instagram-account.html',
+          title: 'Как разблокировать Instagram аккаунт',
+          desc: 'Что делать, если профиль получил ограничения или был заблокирован.',
+          image: '/image/unblock-instagram-account.jpg'
+        },
+        {
+          href: '/how-to-choose-instagram-username.html',
+          title: 'Как выбрать никнейм для Instagram',
+          desc: 'Как подойти к выбору username для бренда, проекта или личного профиля.',
+          image: '/image/usernameclaim.png'
+        }
       ];
+
+      function normalizeText(text) {
+        return (text || '').replace(/\s+/g, ' ').trim();
+      }
+
+      function normalizeHref(href) {
+        if (!href) return '';
+        if (href.startsWith('http')) return '';
+        return href.startsWith('/') ? href : '/' + href.replace(/^\.\//, '');
+      }
+
+      function getImage(card) {
+        const img = card.querySelector('img');
+        if (img && img.getAttribute('src')) return img.getAttribute('src');
+
+        const bgEl = card.querySelector('[style*="background-image"]');
+        if (bgEl) {
+          const style = bgEl.getAttribute('style') || '';
+          const match = style.match(/url\((['"]?)(.*?)\1\)/i);
+          if (match && match[2]) return match[2];
+        }
+        return '/og-image.png';
+      }
 
       function render(items) {
         grid.innerHTML = items.map(item => `
           <article class="latest-article-card">
-            <div class="latest-article-kicker">Блог</div>
-            <h3 class="latest-article-title">${item.title}</h3>
-            <p class="latest-article-desc">${item.desc}</p>
-            <a class="latest-article-link" href="${item.href}">Открыть статью</a>
+            <div class="latest-article-image-wrap">
+              <img class="latest-article-image" src="${item.image || '/og-image.png'}" alt="${item.title}">
+            </div>
+            <div class="latest-article-body">
+              <div class="latest-article-kicker">Блог</div>
+              <h3 class="latest-article-title">${item.title}</h3>
+              <p class="latest-article-desc">${item.desc}</p>
+              <a class="latest-article-link" href="${item.href}">Открыть статью</a>
+            </div>
           </article>
         `).join('');
-      }
-
-      function normalizeText(text) {
-        return (text || '').replace(/\s+/g, ' ').trim();
       }
 
       fetch('/blog.html', { credentials: 'same-origin' })
@@ -1138,30 +1161,26 @@
             const link = card.querySelector('a[href$=".html"], a[href*=".html#"], a[href*=".html?"]') || card.querySelector('a[href]');
             if (!link) continue;
 
-            const href = link.getAttribute('href') || '';
-            if (!href || href === 'blog.html' || href === '/blog.html' || href.startsWith('http')) continue;
+            const href = normalizeHref(link.getAttribute('href') || '');
+            if (!href || href === '/blog.html' || seen.has(href)) continue;
 
-            const cleanHref = href.startsWith('/') ? href : '/' + href.replace(/^\.\//, '');
-            if (seen.has(cleanHref)) continue;
-
-            const titleEl =
-              card.querySelector('h2, h3, .post-title, .blog-title, .article-title') || link;
-            const descEl =
-              card.querySelector('p, .post-excerpt, .blog-excerpt, .article-excerpt, .card-text');
+            const titleEl = card.querySelector('h2, h3, .post-title, .blog-title, .article-title') || link;
+            const descEl = card.querySelector('p, .post-excerpt, .blog-excerpt, .article-excerpt, .card-text');
 
             const title = normalizeText(titleEl.textContent);
             const desc = normalizeText(descEl ? descEl.textContent : '');
 
             if (!title || title.length < 4) continue;
 
-            seen.add(cleanHref);
+            seen.add(href);
             items.push({
-              href: cleanHref,
+              href,
               title,
-              desc: desc || 'Открыть материал из блога SovaZone.'
+              desc: desc || 'Открыть материал из блога SovaZone.',
+              image: getImage(card)
             });
 
-            if (items.length === 5) break;
+            if (items.length === 4) break;
           }
 
           render(items.length ? items : fallback);
