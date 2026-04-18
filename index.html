@@ -583,13 +583,14 @@
     }
 
 
-    .section-head-inline .section-head-btn{
-      min-height:30px;
-      height:30px;
+    .section-head-btn{
+      min-height:34px;
+      height:34px;
       padding:0 14px;
       border-radius:0;
       font-size:12px;
       line-height:1;
+      box-shadow:none;
     }
 
     .section-services-compact{
@@ -685,7 +686,6 @@
       padding:22px;
       min-height:auto;
     }
-
     .work-inline-title{
       display:none;
     }
@@ -705,13 +705,13 @@
     .latest-article-card{
       position:relative;
       overflow:hidden;
-      border-radius:14px;
+      border-radius:16px;
       background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
       min-width:0;
-      min-height:186px;
+      min-height:192px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .latest-article-card:hover{
@@ -720,7 +720,7 @@
       box-shadow:0 14px 28px rgba(0,0,0,.22);
     }
     .latest-article-image-wrap{
-      aspect-ratio:16 / 8.4;
+      aspect-ratio:16 / 8;
       overflow:hidden;
       background:rgba(255,255,255,.03);
       border-bottom:1px solid rgba(255,255,255,.06);
@@ -734,15 +734,15 @@
     .latest-article-body{
       display:flex;
       flex-direction:column;
-      gap:7px;
-      padding:10px 11px 11px;
+      gap:8px;
+      padding:10px 12px 12px;
       flex:1 1 auto;
       min-width:0;
     }
     .latest-article-title{
       color:#fff;
       font-size:14px;
-      line-height:1.22;
+      line-height:1.24;
       letter-spacing:-.02em;
       font-weight:800;
       margin:0;
@@ -754,7 +754,7 @@
     .latest-article-desc{
       color:rgba(255,255,255,.70);
       font-size:12px;
-      line-height:1.48;
+      line-height:1.5;
       margin:0;
       flex:1 1 auto;
       display:-webkit-box;
@@ -765,7 +765,7 @@
     .latest-article-link{
       display:inline-flex;
       align-items:center;
-      min-height:24px;
+      min-height:26px;
       color:#fff;
       font-size:12px;
       font-weight:700;
@@ -779,27 +779,29 @@
     .why-sovazone-section{
       margin-top:22px;
       position:relative;
-      overflow:hidden;
-      padding:22px 0 0;
+      overflow:visible;
     }
     .why-sovazone-section::before{
       content:"";
       position:absolute;
-      inset:-10% -8% auto -8%;
+      inset:-8% -4% auto -4%;
       height:120%;
       pointer-events:none;
       background:
-        radial-gradient(circle at 16% 18%, rgba(128,45,106,.14) 0%, rgba(128,45,106,0) 32%),
-        radial-gradient(circle at 84% 26%, rgba(124,58,36,.11) 0%, rgba(124,58,36,0) 30%),
-        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
-      filter:blur(16px);
+        radial-gradient(circle at 12% 22%, rgba(128,45,106,.16) 0%, rgba(128,45,106,0) 30%),
+        radial-gradient(circle at 84% 18%, rgba(124,58,36,.12) 0%, rgba(124,58,36,0) 28%),
+        radial-gradient(circle at 50% 90%, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 42%);
+      filter:blur(18px);
+      z-index:0;
     }
     .why-sovazone-card{
       position:relative;
+      z-index:1;
       display:block;
-      padding:0;
-      border:none;
-      background:transparent;
+      padding:22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
+      border:1px solid rgba(255,255,255,.06);
     }
     .why-sovazone-head{
       display:flex;
@@ -1076,10 +1078,37 @@
           </div>
 
           <div class="services-compact-grid">
-            <article class="service-compact-card"><div><h3>Верификация</h3><p>Сопровождение и консультации по вопросам подтверждения профиля и подготовки к подаче запроса.</p></div><a class="service-compact-link" href="services/verification.html">Подробнее</a></article>
-            <article class="service-compact-card"><div><h3>Разблокировка</h3><p>Помощь в сложных ситуациях с ограничениями, доступом к аккаунту и восстановлением рабочего статуса.</p></div><a class="service-compact-link" href="services/account-help.html">Подробнее</a></article>
-            <article class="service-compact-card"><div><h3>Восстановление</h3><p>Пошаговая помощь после взлома, утраты доступа и других критичных ситуаций с аккаунтом.</p></div><a class="service-compact-link" href="services/recovery-after-hack.html">Подробнее</a></article>
-            <article class="service-compact-card"><div><h3>Консультации</h3><p>Разбор запроса, оценка сценариев старта и подбор решения под конкретную задачу без воды.</p></div><a class="service-compact-link" href="services/consultation.html">Подробнее</a></article>
+            <article class="service-compact-card">
+              <div>
+                <h3>Верификация</h3>
+                <p>Сопровождение и консультации по вопросам подтверждения профиля и подготовки к подаче запроса.</p>
+              </div>
+              <a class="service-compact-link" href="services/verification.html">Подробнее</a>
+            </article>
+
+            <article class="service-compact-card">
+              <div>
+                <h3>Разблокировка</h3>
+                <p>Помощь в сложных ситуациях с ограничениями, доступом к аккаунту и восстановлением рабочего статуса.</p>
+              </div>
+              <a class="service-compact-link" href="services/account-help.html">Подробнее</a>
+            </article>
+
+            <article class="service-compact-card">
+              <div>
+                <h3>Восстановление</h3>
+                <p>Пошаговая помощь после взлома, утраты доступа и других критичных ситуаций с аккаунтом.</p>
+              </div>
+              <a class="service-compact-link" href="services/recovery-after-hack.html">Подробнее</a>
+            </article>
+
+            <article class="service-compact-card">
+              <div>
+                <h3>Консультации</h3>
+                <p>Разбор запроса, оценка сценариев старта и подбор решения под конкретную задачу без воды.</p>
+              </div>
+              <a class="service-compact-link" href="services/consultation.html">Подробнее</a>
+            </article>
           </div>
         </section>
 
@@ -1089,10 +1118,37 @@
               <div class="work-inline">
                 <h2 class="work-inline-title">Как мы работаем</h2>
                 <div class="steps-grid">
-                  <article class="step"><div class="step-head"><div class="step-num">01</div><h3>Вы изучаете варианты</h3></div><p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p></article>
-                  <article class="step"><div class="step-head"><div class="step-num">02</div><h3>Пишете в Telegram</h3></div><p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p></article>
-                  <article class="step"><div class="step-head"><div class="step-num">03</div><h3>Мы подбираем решение</h3></div><p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p></article>
-                  <article class="step"><div class="step-head"><div class="step-num">04</div><h3>Переходим к запуску</h3></div><p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p></article>
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">01</div>
+                      <h3>Вы изучаете варианты</h3>
+                    </div>
+                    <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
+                  </article>
+
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">02</div>
+                      <h3>Пишете в Telegram</h3>
+                    </div>
+                    <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
+                  </article>
+
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">03</div>
+                      <h3>Мы подбираем решение</h3>
+                    </div>
+                    <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
+                  </article>
+
+                  <article class="step">
+                    <div class="step-head">
+                      <div class="step-num">04</div>
+                      <h3>Переходим к запуску</h3>
+                    </div>
+                    <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
+                  </article>
                 </div>
               </div>
             </section>
@@ -1138,36 +1194,126 @@
     (function () {
       const grid = document.getElementById('latest-articles-grid');
       if (!grid) return;
-      function escapeHtml(str) {return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-      function normalizePost(post) {return {slug: post.slug || '', title: (post.title || 'Без названия').trim(), description: (post.description || '').trim(), cover: (post.cover || '/og-image.png').trim(), date: post.date || ''};}
-      function sortPosts(posts) {return [...posts].sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));}
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function normalizePost(post) {
+        return {
+          slug: post.slug || '',
+          title: (post.title || 'Без названия').trim(),
+          description: (post.description || post.excerpt || post.shortDescription || '').trim(),
+          cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
+          date: post.date || ''
+        };
+      }
+
+      function sortPosts(posts) {
+        return [...posts].sort((a, b) => {
+          const dateA = new Date(a.date || 0).getTime();
+          const dateB = new Date(b.date || 0).getTime();
+          return dateB - dateA;
+        });
+      }
+
       function cleanDescription(text) {
-        let clean = String(text || '').replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘()]/g,' ').replace(/\s+/g,' ').trim();
-        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone.';
+        let clean = String(text || '')
+          .replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone';
+
         if (clean.length > 160) {
-          clean = clean.slice(0,160).trimEnd();
+          clean = clean.slice(0, 160).trimEnd();
           const lastPunct = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf('!'), clean.lastIndexOf('?'));
-          if (lastPunct >= 80) clean = clean.slice(0,lastPunct+1); else clean = clean.replace(/[,:;\-–—]+$/g,'').trimEnd() + '…';
+          if (lastPunct >= 80) {
+            clean = clean.slice(0, lastPunct + 1);
+          } else {
+            clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
+          }
         } else if (clean.length < 80) {
-          const tail = ' Открыть материал в блоге SovaZone.';
+          const tail = ' Открыть материал в блоге SovaZone';
           if ((clean + tail).length <= 160) clean += tail;
           if (!/[.!?…]$/.test(clean)) clean += '.';
         }
+
         return clean;
       }
-      function buildPostUrl(slug) {return '/post.html?slug=' + encodeURIComponent(slug || '');}
+
+      function buildPostUrl(slug) {
+        return '/post.html?slug=' + encodeURIComponent(slug || '');
+      }
+
       function render(posts) {
-        grid.innerHTML = posts.slice(0,4).map(post => {
+        const items = posts.slice(0, 4);
+        grid.innerHTML = items.map(post => {
           const title = escapeHtml(post.title);
           const desc = escapeHtml(cleanDescription(post.description));
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
-          return `<article class="latest-article-card"><div class="latest-article-image-wrap"><img class="latest-article-image" src="${cover}" alt="${title}"></div><div class="latest-article-body"><h3 class="latest-article-title">${title}</h3><p class="latest-article-desc">${desc}</p><a class="latest-article-link" href="${href}">Открыть статью</a></div></article>`;
+          return `
+            <article class="latest-article-card">
+              <div class="latest-article-image-wrap">
+                <img class="latest-article-image" src="${cover}" alt="${title}">
+              </div>
+              <div class="latest-article-body">
+                <h3 class="latest-article-title">${title}</h3>
+                <p class="latest-article-desc">${desc}</p>
+                <a class="latest-article-link" href="${href}">Открыть статью</a>
+              </div>
+            </article>
+          `;
         }).join('');
       }
-      function renderFallback() {grid.innerHTML = `<article class="latest-article-card"><div class="latest-article-image-wrap"></div><div class="latest-article-body"><h3 class="latest-article-title">Не удалось загрузить блог</h3><p class="latest-article-desc">Открой раздел блога SovaZone, чтобы посмотреть последние публикации.</p><a class="latest-article-link" href="/blog.html">Открыть блог</a></div></article>`;}
-      async function fetchJsonWithFallback(paths){for (const url of paths){try{const r=await fetch(url,{cache:'no-store'}); if(r.ok) return await r.json();}catch(e){}} throw new Error('BLOG_INDEX_NOT_FOUND');}
-      (async function init(){try{const cacheBust=Date.now(); const posts=await fetchJsonWithFallback(['/content/blog/index.json?v='+cacheBust,'https://cdn.jsdelivr.net/gh/TheSovaDigital/sovazone@main/content/blog/index.json?v='+cacheBust,'https://raw.githubusercontent.com/TheSovaDigital/sovazone/main/content/blog/index.json?v='+cacheBust]); const normalized = sortPosts((Array.isArray(posts)?posts:[]).map(normalizePost)).filter(post => post.slug && post.title); if(!normalized.length) throw new Error('BLOG_EMPTY'); render(normalized);} catch(e){renderFallback();}})();
+
+      function renderFallback() {
+        grid.innerHTML = `
+          <article class="latest-article-card">
+            <div class="latest-article-image-wrap"></div>
+            <div class="latest-article-body">
+              <h3 class="latest-article-title">Не удалось загрузить блог</h3>
+              <p class="latest-article-desc">Открой раздел блога SovaZone, чтобы посмотреть последние публикации.</p>
+              <a class="latest-article-link" href="/blog.html">Открыть блог</a>
+            </div>
+          </article>
+        `;
+      }
+
+      async function fetchJsonWithFallback(paths) {
+        for (const url of paths) {
+          try {
+            const response = await fetch(url, { cache: 'no-store' });
+            if (response.ok) return await response.json();
+          } catch (e) {}
+        }
+        throw new Error('BLOG_INDEX_NOT_FOUND');
+      }
+
+      (async function init() {
+        try {
+          const cacheBust = Date.now();
+          const posts = await fetchJsonWithFallback([
+            '/content/blog/index.json?v=' + cacheBust,
+            'https://cdn.jsdelivr.net/gh/TheSovaDigital/sovazone@main/content/blog/index.json?v=' + cacheBust,
+            'https://raw.githubusercontent.com/TheSovaDigital/sovazone/main/content/blog/index.json?v=' + cacheBust
+          ]);
+
+          const normalized = sortPosts((Array.isArray(posts) ? posts : []).map(normalizePost))
+            .filter(post => post.slug && post.title);
+
+          if (!normalized.length) throw new Error('BLOG_EMPTY');
+          render(normalized);
+        } catch (e) {
+          renderFallback();
+        }
+      })();
     })();
   </script>
   <script src="script.js"></script>
