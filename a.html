@@ -102,7 +102,7 @@
       position:relative;
       z-index:2;
       width:min(1220px, calc(100vw - 48px));
-      min-height:530px;
+      min-height:500px;
       margin:0 auto;
       display:flex;
       align-items:center;
@@ -118,21 +118,22 @@
       z-index:3;
       min-width:0;
       width:100%;
-      max-width:670px;
-      padding:34px 0 34px;
+      max-width:100%;
+      padding:28px 0 24px;
     }
     .hero-content h1{
-      margin:0;
-      max-width:13.2ch;
-      font-size:clamp(32px, 3.15vw, 48px);
+      margin:0 0 12px;
+      max-width:none;
+      width:100%;
+      font-size:clamp(22px, 2.32vw, 38px);
       line-height:1.02;
       letter-spacing:-0.045em;
-      white-space:normal;
+      white-space:nowrap;
       color:#fff;
-      text-wrap:balance;
+      text-wrap:normal;
     }
     .hero-badge-wrap{
-      margin:14px 0 16px;
+      margin:0 0 14px;
       width:auto;
       max-width:max-content;
     }
@@ -156,12 +157,12 @@
       box-shadow:none;
     }
     .hero-text-block{
-      max-width:620px;
+      max-width:560px;
     }
     .hero-text-block p{
-      margin:0 0 10px;
-      font-size:13px;
-      line-height:1.58;
+      margin:0 0 9px;
+      font-size:12px;
+      line-height:1.52;
       color:rgba(255,255,255,.74);
     }
     .hero-text-block .hero-lead{
@@ -169,11 +170,11 @@
     }
     .hero-actions-row{
       display:grid;
-      grid-template-columns:repeat(3, minmax(112px, 1fr)) minmax(160px, 1.06fr);
+      grid-template-columns:repeat(3, minmax(108px, max-content)) minmax(156px, max-content);
       gap:10px;
       align-items:stretch;
-      margin-top:18px;
-      max-width:560px;
+      margin-top:16px;
+      max-width:540px;
     }
     .hero-actions-row .btn,
     .hero-actions-row .mini-point{
@@ -220,16 +221,16 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:4%;
-      right:-5vw;
-      width:min(46vw, 760px);
-      height:92%;
+      top:12%;
+      right:2vw;
+      width:min(34vw, 520px);
+      height:72%;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
       background-size:contain;
       background-position:center right;
-      opacity:.84;
-      filter:saturate(.82) brightness(.76) contrast(1.01);
+      opacity:.76;
+      filter:saturate(.82) brightness(.74) contrast(1.01);
       mask-image:
         radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.70) 54%, transparent 78%),
         linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.90) 36%, transparent 80%),
@@ -242,10 +243,10 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:8vw;
-      top:30%;
-      width:min(24vw, 360px);
-      height:28%;
+      right:9vw;
+      top:36%;
+      width:min(16vw, 220px);
+      height:18%;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.10), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.12), transparent 20%);
@@ -623,24 +624,25 @@
     
     @media (max-width:1240px){
       .hero-content{
-        max-width:520px;
+        max-width:100%;
       }
       .hero-content h1{
-        max-width:10.8ch;
+        max-width:none;
+        font-size:clamp(20px, 2.05vw, 32px);
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
         max-width:440px;
       }
       .hero-bg::before{
-        right:-12vw;
-        width:min(76vw, 820px);
-        height:108%;
-        top:-2%;
+        right:-2vw;
+        width:min(40vw, 460px);
+        height:74%;
+        top:14%;
       }
       .hero-bg::after{
-        right:2vw;
-        width:min(42vw, 420px);
+        right:6vw;
+        width:min(18vw, 180px);
       }
       .username-grid.username-grid-refined{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -670,22 +672,23 @@
       }
       .hero-content{
         max-width:100%;
-        padding:30px 0 230px;
+        padding:24px 0 210px;
       }
       .hero-content h1{
-        max-width:10.2ch;
-        font-size:clamp(34px, 9vw, 52px);
+        max-width:none;
+        white-space:normal;
+        font-size:clamp(30px, 8vw, 44px);
       }
       .hero-actions-row{
         grid-template-columns:1fr;
         max-width:340px;
       }
       .hero-bg::before{
-        right:-18vw;
-        top:22%;
-        width:min(96vw, 720px);
-        height:76%;
-        opacity:.82;
+        right:-10vw;
+        top:24%;
+        width:min(88vw, 520px);
+        height:62%;
+        opacity:.72;
       }
       .hero-bg::after{
         right:-4vw;
