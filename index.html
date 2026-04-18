@@ -588,9 +588,16 @@
       height:34px;
       padding:0 14px;
       border-radius:0;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
       font-size:12px;
       line-height:1;
       box-shadow:none;
+    }
+    .section-head-btn:hover{
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.14);
     }
 
     .section-services-compact{
@@ -649,10 +656,10 @@
       align-items:center;
       justify-content:center;
       width:100%;
-      min-height:36px;
-      height:36px;
+      min-height:34px;
+      height:34px;
       padding:0 12px;
-      border-radius:10px;
+      border-radius:0;
       background:rgba(255,255,255,.03);
       border:1px solid rgba(255,255,255,.08);
       color:#fff;
@@ -663,6 +670,7 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
       transition:border-color .18s ease, background .18s ease, transform .18s ease;
     }
     .service-compact-link:hover{
@@ -686,6 +694,7 @@
       padding:22px;
       min-height:auto;
     }
+
     .work-inline-title{
       display:none;
     }
@@ -711,7 +720,7 @@
       display:flex;
       flex-direction:column;
       min-width:0;
-      min-height:192px;
+      min-height:188px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .latest-article-card:hover{
@@ -720,7 +729,7 @@
       box-shadow:0 14px 28px rgba(0,0,0,.22);
     }
     .latest-article-image-wrap{
-      aspect-ratio:16 / 8;
+      aspect-ratio:16 / 7.7;
       overflow:hidden;
       background:rgba(255,255,255,.03);
       border-bottom:1px solid rgba(255,255,255,.06);
@@ -765,7 +774,7 @@
     .latest-article-link{
       display:inline-flex;
       align-items:center;
-      min-height:26px;
+      min-height:24px;
       color:#fff;
       font-size:12px;
       font-weight:700;
@@ -777,31 +786,27 @@
     }
 
     .why-sovazone-section{
-      margin-top:22px;
       position:relative;
+      margin-top:22px;
       overflow:visible;
     }
     .why-sovazone-section::before{
       content:"";
       position:absolute;
-      inset:-8% -4% auto -4%;
-      height:120%;
+      inset:0;
       pointer-events:none;
       background:
-        radial-gradient(circle at 12% 22%, rgba(128,45,106,.16) 0%, rgba(128,45,106,0) 30%),
-        radial-gradient(circle at 84% 18%, rgba(124,58,36,.12) 0%, rgba(124,58,36,0) 28%),
-        radial-gradient(circle at 50% 90%, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 42%);
-      filter:blur(18px);
+        radial-gradient(circle at 12% 28%, rgba(128,45,106,.18) 0%, rgba(128,45,106,0) 28%),
+        radial-gradient(circle at 82% 22%, rgba(124,58,36,.16) 0%, rgba(124,58,36,0) 26%),
+        radial-gradient(circle at 50% 88%, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 38%);
+      filter:blur(20px);
+      opacity:.9;
       z-index:0;
     }
-    .why-sovazone-card{
+    .why-sovazone-inner{
       position:relative;
       z-index:1;
-      display:block;
-      padding:22px;
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
-      border:1px solid rgba(255,255,255,.06);
+      padding:20px 0 4px;
     }
     .why-sovazone-head{
       display:flex;
@@ -810,28 +815,30 @@
       gap:18px;
       margin-bottom:12px;
     }
-    .why-sovazone-card h2{
+    .why-sovazone-head h2{
       margin:0;
       color:#fff;
       font-size:clamp(24px, 1.72vw, 32px);
       line-height:1.06;
       letter-spacing:-0.035em;
     }
-    .why-sovazone-card p{
+    .why-sovazone-copy{
+      max-width:1040px;
+    }
+    .why-sovazone-copy p{
       margin:0 0 10px;
       font-size:14px;
       line-height:1.68;
       color:rgba(255,255,255,.74);
-      max-width:1000px;
     }
     .why-sovazone-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       text-align:center;
-      min-height:42px;
-      height:42px;
-      padding:0 18px;
+      min-height:34px;
+      height:34px;
+      padding:0 16px;
       border-radius:0;
       text-decoration:none;
       color:#fff;
@@ -840,12 +847,13 @@
       box-shadow:none;
       font-weight:700;
       width:auto;
-      min-width:240px;
+      min-width:220px;
       max-width:100%;
       box-sizing:border-box;
-      line-height:1.1;
+      line-height:1;
       white-space:nowrap;
       overflow:hidden;
+      clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
       transition:transform .18s ease, background .18s ease, border-color .18s ease;
       flex:0 0 auto;
     }
@@ -863,14 +871,17 @@
       }
     }
 
+    @media (max-width:860px){
+      .why-sovazone-head{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
     @media (max-width:680px){
       .services-compact-grid,
       .latest-articles-grid{
         grid-template-columns:1fr;
-      }
-      .why-sovazone-head{
-        flex-direction:column;
-        align-items:flex-start;
       }
       .why-sovazone-btn{
         width:100%;
@@ -1154,6 +1165,14 @@
             </section>
           </div>
         </section>
+
+            <aside class="home-about">
+              <h2 class="about-title">Почему SovaZone</h2>
+              <p class="about-text">За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
+              <p class="about-text">За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
+              <p class="about-text">Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
+              <a class="about-btn" href="contacts.html">Перейти к контактам</a>
+            </aside>
           </div>
         </section>
         <section class="section latest-articles">
@@ -1174,14 +1193,16 @@
         </section>
 
         <section class="section why-sovazone-section">
-          <div class="why-sovazone-card">
+          <div class="why-sovazone-inner">
             <div class="why-sovazone-head">
               <h2>Почему SovaZone</h2>
               <a class="why-sovazone-btn" href="contacts.html">Перейти к контактам</a>
             </div>
-            <p>За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
-            <p>За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
-            <p>Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
+            <div class="why-sovazone-copy">
+              <p>За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
+              <p>За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
+              <p>Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
+            </div>
           </div>
         </section>
       </div>
@@ -1228,7 +1249,9 @@
           .replace(/\s+/g, ' ')
           .trim();
 
-        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone';
+        if (!clean) {
+          clean = 'Открыть последнюю публикацию из блога SovaZone.';
+        }
 
         if (clean.length > 160) {
           clean = clean.slice(0, 160).trimEnd();
@@ -1239,7 +1262,7 @@
             clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
           }
         } else if (clean.length < 80) {
-          const tail = ' Открыть материал в блоге SovaZone';
+          const tail = ' Открыть материал в блоге SovaZone.';
           if ((clean + tail).length <= 160) clean += tail;
           if (!/[.!?…]$/.test(clean)) clean += '.';
         }
