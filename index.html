@@ -1113,15 +1113,6 @@
           </div>
         </section>
 
-            <aside class="home-about">
-              <h2 class="about-title">Почему SovaZone</h2>
-              <p class="about-text">За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
-              <p class="about-text">За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
-              <p class="about-text">Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
-              <a class="about-btn" href="contacts.html">Перейти к контактам</a>
-            </aside>
-          </div>
-        </section>
         <section class="section latest-articles">
           <div class="section-head section-head-inline">
             <h2>Последние статьи из блога</h2>
@@ -1168,12 +1159,51 @@
           .replace(/'/g, '&#39;');
       }
 
+      function cleanText(value, fallback) {
+        const text = String(value || '')
+          .replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        return text || fallback;
+      }
+
+      function truncateText(text, maxLength) {
+        const clean = cleanText(text, '');
+        if (!clean) return '';
+        if (clean.length <= maxLength) return clean;
+
+        let sliced = clean.slice(0, maxLength).trimEnd();
+        const lastPunct = Math.max(sliced.lastIndexOf('.'), sliced.lastIndexOf('!'), sliced.lastIndexOf('?'));
+        if (lastPunct >= 80) {
+          return sliced.slice(0, lastPunct + 1);
+        }
+        return sliced.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
+      }
+
+      function buildDescription(post, minLength, maxLength) {
+        const fallbackByCategory = {
+          'Новости': 'Свежая публикация о последних изменениях, функциях и заметных сдвигах в работе платформ и социальных сетей.',
+          'Статьи': 'Практический материал с краткими выводами и полезными ориентирами по выбранной теме.',
+          'Кейсы': 'Короткий разбор ситуации, подхода к решению и итоговых выводов по кейсу.'
+        };
+
+        let desc = truncateText(post.description, maxLength);
+        if (!desc || desc.length < minLength) {
+          desc = truncateText(
+            fallbackByCategory[post.category] || 'Краткий материал с основными тезисами и полезными деталями по теме публикации.',
+            maxLength
+          );
+        }
+        return desc;
+      }
+
       function normalizePost(post) {
         return {
           slug: post.slug || '',
-          title: (post.title || 'Без названия').trim(),
-          description: (post.description || '').trim(),
-          cover: (post.cover || '/og-image.png').trim(),
+          title: cleanText(post.title, 'Без названия'),
+          description: cleanText(post.description, ''),
+          category: cleanText(post.category, 'Статьи'),
+          cover: cleanText(post.cover, '/og-image.png'),
           date: post.date || ''
         };
       }
@@ -1186,33 +1216,6 @@
         });
       }
 
-      function cleanDescription(text) {
-        let clean = String(text || '')
-          .replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘]/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
-
-        if (!clean) {
-          clean = 'Открыть последнюю публикацию из блога SovaZone.';
-        }
-
-        if (clean.length > 160) {
-          clean = clean.slice(0, 160).trimEnd();
-          const lastPunct = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf('!'), clean.lastIndexOf('?'));
-          if (lastPunct >= 80) {
-            clean = clean.slice(0, lastPunct + 1);
-          } else {
-            clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
-          }
-        } else if (clean.length < 80) {
-          const tail = ' Открыть материал в блоге SovaZone.';
-          if ((clean + tail).length <= 160) clean += tail;
-          if (!/[.!?…]$/.test(clean)) clean += '.';
-        }
-
-        return clean;
-      }
-
       function buildPostUrl(slug) {
         return '/post.html?slug=' + encodeURIComponent(slug || '');
       }
@@ -1221,7 +1224,7 @@
         const items = posts.slice(0, 4);
         grid.innerHTML = items.map(post => {
           const title = escapeHtml(post.title);
-          const desc = escapeHtml(cleanDescription(post.description));
+          const desc = escapeHtml(buildDescription(post, 80, 160));
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
           return `
