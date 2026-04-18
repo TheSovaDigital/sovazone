@@ -624,7 +624,7 @@
     .service-compact-card{
       position:relative;
       overflow:hidden;
-      border-radius:0;
+      border-radius:20px;
       padding:16px 16px 14px;
       min-height:148px;
       background:
@@ -716,66 +716,66 @@
       position:relative;
       z-index:1;
     }
-        .home-steps-only .steps-grid{
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:12px;
+    .work-why-layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 420px;
+      gap:18px;
+      align-items:start;
     }
-    .home-steps-only .step{
-      min-height:128px;
-      padding:14px;
-    }
-    .work-inline-title{
-      display:none;
-    }
-
-    .why-sovazone-section{
+    .why-inline{
       position:relative;
-      margin-top:22px;
+      min-width:0;
+      padding:8px 0 4px;
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
     }
-    .why-sovazone-section::before{
+    .why-inline::before{
       content:"";
       position:absolute;
-      inset:0;
+      inset:-10px -16px -14px -10px;
       pointer-events:none;
       background:
-        radial-gradient(circle at 14% 24%, rgba(128,45,106,.14) 0%, rgba(128,45,106,0) 28%),
-        radial-gradient(circle at 82% 22%, rgba(124,58,36,.12) 0%, rgba(124,58,36,0) 26%),
-        radial-gradient(circle at 58% 82%, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 34%);
-      filter:blur(22px);
-      opacity:.88;
-      z-index:0;
+        radial-gradient(circle at 14% 24%, rgba(128,45,106,.18) 0%, rgba(128,45,106,0) 30%),
+        radial-gradient(circle at 82% 22%, rgba(124,58,36,.14) 0%, rgba(124,58,36,0) 28%),
+        radial-gradient(circle at 58% 82%, rgba(255,255,255,.035) 0%, rgba(255,255,255,0) 36%);
+      filter:blur(20px);
+      opacity:.9;
     }
-    .why-sovazone-inner{
+    .why-inline > *{
       position:relative;
       z-index:1;
-      padding:18px 0 6px;
     }
-    .why-sovazone-head{
+    .why-inline-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
       margin-bottom:12px;
     }
-    .why-sovazone-head h2{
+    .why-inline-head h2{
       margin:0;
       color:#fff;
       font-size:clamp(24px, 1.72vw, 32px);
       line-height:1.06;
       letter-spacing:-0.035em;
     }
-    .why-sovazone-copy{
-      max-width:1040px;
+    .why-inline-copy{
+      max-width:100%;
     }
-    .why-sovazone-copy p{
+    .why-inline-copy p{
       margin:0 0 10px;
       font-size:14px;
       line-height:1.68;
       color:rgba(255,255,255,.74);
     }
-    .why-sovazone-meta{
+    .why-inline-meta{
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
       gap:12px;
       margin-top:12px;
     }
-    .why-sovazone-stat{
+    .why-inline-stat{
       padding:12px 14px;
       background:rgba(255,255,255,.035);
       border:1px solid rgba(255,255,255,.06);
@@ -783,7 +783,7 @@
       backdrop-filter:blur(4px);
       -webkit-backdrop-filter:blur(4px);
     }
-    .why-sovazone-stat strong{
+    .why-inline-stat strong{
       display:block;
       font-size:22px;
       line-height:1;
@@ -791,18 +791,19 @@
       letter-spacing:-.03em;
       margin-bottom:6px;
     }
-    .why-sovazone-stat span{
+    .why-inline-stat span{
       display:block;
       font-size:12px;
       line-height:1.45;
       color:rgba(255,255,255,.68);
     }
-    .why-sovazone-footer{
-      margin-top:14px;
+    .why-inline-footer{
+      margin-top:auto;
+      padding-top:14px;
       display:flex;
-      justify-content:center;
+      justify-content:flex-start;
     }
-    .why-sovazone-btn{
+    .why-inline-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -820,28 +821,30 @@
       font-weight:700;
       line-height:1;
       white-space:nowrap;
+      clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
       transition:transform .18s ease, background .18s ease, border-color .18s ease;
       flex:0 0 auto;
     }
-    .why-sovazone-btn:hover{
+    .why-inline-btn:hover{
       transform:translateY(-1px);
       background:rgba(255,255,255,.04);
       border-color:rgba(255,255,255,.14);
       color:#fff;
     }
-
-    .svf-footer__social{
-      border-radius:0 !important;
-      clip-path:polygon(50% 2%, 96% 34%, 82% 98%, 18% 98%, 4% 34%);
-      background:rgba(12,12,15,.72) !important;
-      border:1px solid rgba(255,255,255,.05) !important;
-      box-shadow:none !important;
-      backdrop-filter:blur(4px);
-      -webkit-backdrop-filter:blur(4px);
+    .steps-column{
+      display:flex;
+      flex-direction:column;
     }
-    .svf-footer__social:hover{
-      background:rgba(18,18,22,.82) !important;
-      border-color:rgba(255,255,255,.08) !important;
+    .home-steps-only .steps-grid{
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    .home-steps-only .step{
+      min-height:0;
+      padding:14px;
+    }
+    .work-inline-title{
+      display:none;
     }
 
     .latest-articles{
@@ -938,7 +941,7 @@
       }
     }
     @media (max-width:860px){
-      .why-sovazone-meta{
+      .why-inline-meta{
         grid-template-columns:1fr;
       }
     }
@@ -947,13 +950,10 @@
       .latest-articles-grid{
         grid-template-columns:1fr;
       }
-      .why-sovazone-btn,
+      .why-inline-btn,
       .section-head-btn{
         min-width:0;
         width:100%;
-      }
-      .home-steps-only .steps-grid{
-        grid-template-columns:1fr;
       }
     }
   </style>
@@ -1191,47 +1191,6 @@
           </div>
         </section>
 
-        <section class="section">
-          <div class="projects-work-wrap">
-            <section class="home-steps-only">
-              <div class="work-inline">
-                <div class="steps-grid">
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">01</div>
-                      <h3>Вы изучаете варианты</h3>
-                    </div>
-                    <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
-                  </article>
-
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">02</div>
-                      <h3>Пишете в Telegram</h3>
-                    </div>
-                    <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
-                  </article>
-
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">03</div>
-                      <h3>Мы подбираем решение</h3>
-                    </div>
-                    <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
-                  </article>
-
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">04</div>
-                      <h3>Переходим к запуску</h3>
-                    </div>
-                    <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
-                  </article>
-                </div>
-              </div>
-            </section>
-          </div>
-        </section>
         <section class="section latest-articles">
           <div class="section-head section-head-inline">
             <h2>Новые статьи</h2>
@@ -1248,34 +1207,77 @@
             </article>
           </div>
         </section>
+        <section class="section">
+          <div class="projects-work-wrap">
+            <section class="home-steps-only">
+              <div class="work-why-layout">
+                <div class="why-inline">
+                  <div class="why-inline-head">
+                    <h2>Почему SovaZone</h2>
+                  </div>
+                  <div class="why-inline-copy">
+                    <p>За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
+                    <p>За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
+                    <p>Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
+                  </div>
+                  <div class="why-inline-meta">
+                    <div class="why-inline-stat">
+                      <strong>50+</strong>
+                      <span>Запущенных проектов</span>
+                    </div>
+                    <div class="why-inline-stat">
+                      <strong>300+</strong>
+                      <span>Проданных никнеймов</span>
+                    </div>
+                    <div class="why-inline-stat">
+                      <strong>1000+</strong>
+                      <span>Решённых проблем</span>
+                    </div>
+                  </div>
+                  <div class="why-inline-footer">
+                    <a class="why-inline-btn" href="contacts.html">Перейти к контактам</a>
+                  </div>
+                </div>
 
-        <section class="section why-sovazone-section">
-          <div class="why-sovazone-inner">
-            <div class="why-sovazone-head">
-              <h2>Почему SovaZone</h2>
-            </div>
-            <div class="why-sovazone-copy">
-              <p>За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
-              <p>За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
-              <p>Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
-            </div>
-            <div class="why-sovazone-meta">
-              <div class="why-sovazone-stat">
-                <strong>50+</strong>
-                <span>Запущенных проектов</span>
+                <div class="steps-column">
+                  <div class="work-inline">
+                    <div class="steps-grid">
+                      <article class="step">
+                        <div class="step-head">
+                          <div class="step-num">01</div>
+                          <h3>Вы изучаете варианты</h3>
+                        </div>
+                        <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
+                      </article>
+
+                      <article class="step">
+                        <div class="step-head">
+                          <div class="step-num">02</div>
+                          <h3>Пишете в Telegram</h3>
+                        </div>
+                        <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
+                      </article>
+
+                      <article class="step">
+                        <div class="step-head">
+                          <div class="step-num">03</div>
+                          <h3>Мы подбираем решение</h3>
+                        </div>
+                        <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
+                      </article>
+
+                      <article class="step">
+                        <div class="step-head">
+                          <div class="step-num">04</div>
+                          <h3>Переходим к запуску</h3>
+                        </div>
+                        <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
+                      </article>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="why-sovazone-stat">
-                <strong>300+</strong>
-                <span>Проданных никнеймов</span>
-              </div>
-              <div class="why-sovazone-stat">
-                <strong>1000+</strong>
-                <span>Решённых проблем</span>
-              </div>
-            </div>
-            <div class="why-sovazone-footer">
-              <a class="why-sovazone-btn" href="contacts.html">Перейти к контактам</a>
-            </div>
+            </section>
           </div>
         </section>
 
