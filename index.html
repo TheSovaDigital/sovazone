@@ -583,6 +583,15 @@
     }
 
 
+    .section-head-inline .section-head-btn{
+      min-height:30px;
+      height:30px;
+      padding:0 14px;
+      border-radius:0;
+      font-size:12px;
+      line-height:1;
+    }
+
     .section-services-compact{
       margin-top:22px;
     }
@@ -677,6 +686,10 @@
       min-height:auto;
     }
 
+    .work-inline-title{
+      display:none;
+    }
+
     .latest-articles{
       margin-top:28px;
       width:100%;
@@ -692,13 +705,13 @@
     .latest-article-card{
       position:relative;
       overflow:hidden;
-      border-radius:16px;
+      border-radius:14px;
       background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
       min-width:0;
-      min-height:196px;
+      min-height:186px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .latest-article-card:hover{
@@ -707,7 +720,7 @@
       box-shadow:0 14px 28px rgba(0,0,0,.22);
     }
     .latest-article-image-wrap{
-      aspect-ratio:16 / 8;
+      aspect-ratio:16 / 8.4;
       overflow:hidden;
       background:rgba(255,255,255,.03);
       border-bottom:1px solid rgba(255,255,255,.06);
@@ -721,15 +734,15 @@
     .latest-article-body{
       display:flex;
       flex-direction:column;
-      gap:8px;
-      padding:10px 12px 12px;
+      gap:7px;
+      padding:10px 11px 11px;
       flex:1 1 auto;
       min-width:0;
     }
     .latest-article-title{
       color:#fff;
       font-size:14px;
-      line-height:1.24;
+      line-height:1.22;
       letter-spacing:-.02em;
       font-weight:800;
       margin:0;
@@ -741,7 +754,7 @@
     .latest-article-desc{
       color:rgba(255,255,255,.70);
       font-size:12px;
-      line-height:1.5;
+      line-height:1.48;
       margin:0;
       flex:1 1 auto;
       display:-webkit-box;
@@ -752,7 +765,7 @@
     .latest-article-link{
       display:inline-flex;
       align-items:center;
-      min-height:26px;
+      min-height:24px;
       color:#fff;
       font-size:12px;
       font-weight:700;
@@ -765,16 +778,38 @@
 
     .why-sovazone-section{
       margin-top:22px;
+      position:relative;
+      overflow:hidden;
+      padding:22px 0 0;
+    }
+    .why-sovazone-section::before{
+      content:"";
+      position:absolute;
+      inset:-10% -8% auto -8%;
+      height:120%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(128,45,106,.14) 0%, rgba(128,45,106,0) 32%),
+        radial-gradient(circle at 84% 26%, rgba(124,58,36,.11) 0%, rgba(124,58,36,0) 30%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      filter:blur(16px);
     }
     .why-sovazone-card{
+      position:relative;
       display:block;
-      padding:22px;
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
-      border:1px solid rgba(255,255,255,.06);
+      padding:0;
+      border:none;
+      background:transparent;
+    }
+    .why-sovazone-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:12px;
     }
     .why-sovazone-card h2{
-      margin:0 0 12px;
+      margin:0;
       color:#fff;
       font-size:clamp(24px, 1.72vw, 32px);
       line-height:1.06;
@@ -785,6 +820,7 @@
       font-size:14px;
       line-height:1.68;
       color:rgba(255,255,255,.74);
+      max-width:1000px;
     }
     .why-sovazone-btn{
       display:inline-flex;
@@ -804,12 +840,12 @@
       width:auto;
       min-width:240px;
       max-width:100%;
-      margin-top:8px;
       box-sizing:border-box;
       line-height:1.1;
       white-space:nowrap;
       overflow:hidden;
       transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      flex:0 0 auto;
     }
     .why-sovazone-btn:hover{
       transform:translateY(-1px);
@@ -829,6 +865,10 @@
       .services-compact-grid,
       .latest-articles-grid{
         grid-template-columns:1fr;
+      }
+      .why-sovazone-head{
+        flex-direction:column;
+        align-items:flex-start;
       }
       .why-sovazone-btn{
         width:100%;
@@ -1036,37 +1076,10 @@
           </div>
 
           <div class="services-compact-grid">
-            <article class="service-compact-card">
-              <div>
-                <h3>Верификация</h3>
-                <p>Сопровождение и консультации по вопросам подтверждения профиля и подготовки к подаче запроса.</p>
-              </div>
-              <a class="service-compact-link" href="services/verification.html">Подробнее</a>
-            </article>
-
-            <article class="service-compact-card">
-              <div>
-                <h3>Разблокировка</h3>
-                <p>Помощь в сложных ситуациях с ограничениями, доступом к аккаунту и восстановлением рабочего статуса.</p>
-              </div>
-              <a class="service-compact-link" href="services/account-help.html">Подробнее</a>
-            </article>
-
-            <article class="service-compact-card">
-              <div>
-                <h3>Восстановление</h3>
-                <p>Пошаговая помощь после взлома, утраты доступа и других критичных ситуаций с аккаунтом.</p>
-              </div>
-              <a class="service-compact-link" href="services/recovery-after-hack.html">Подробнее</a>
-            </article>
-
-            <article class="service-compact-card">
-              <div>
-                <h3>Консультации</h3>
-                <p>Разбор запроса, оценка сценариев старта и подбор решения под конкретную задачу без воды.</p>
-              </div>
-              <a class="service-compact-link" href="services/consultation.html">Подробнее</a>
-            </article>
+            <article class="service-compact-card"><div><h3>Верификация</h3><p>Сопровождение и консультации по вопросам подтверждения профиля и подготовки к подаче запроса.</p></div><a class="service-compact-link" href="services/verification.html">Подробнее</a></article>
+            <article class="service-compact-card"><div><h3>Разблокировка</h3><p>Помощь в сложных ситуациях с ограничениями, доступом к аккаунту и восстановлением рабочего статуса.</p></div><a class="service-compact-link" href="services/account-help.html">Подробнее</a></article>
+            <article class="service-compact-card"><div><h3>Восстановление</h3><p>Пошаговая помощь после взлома, утраты доступа и других критичных ситуаций с аккаунтом.</p></div><a class="service-compact-link" href="services/recovery-after-hack.html">Подробнее</a></article>
+            <article class="service-compact-card"><div><h3>Консультации</h3><p>Разбор запроса, оценка сценариев старта и подбор решения под конкретную задачу без воды.</p></div><a class="service-compact-link" href="services/consultation.html">Подробнее</a></article>
           </div>
         </section>
 
@@ -1076,43 +1089,17 @@
               <div class="work-inline">
                 <h2 class="work-inline-title">Как мы работаем</h2>
                 <div class="steps-grid">
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">01</div>
-                      <h3>Вы изучаете варианты</h3>
-                    </div>
-                    <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
-                  </article>
-
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">02</div>
-                      <h3>Пишете в Telegram</h3>
-                    </div>
-                    <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
-                  </article>
-
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">03</div>
-                      <h3>Мы подбираем решение</h3>
-                    </div>
-                    <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
-                  </article>
-
-                  <article class="step">
-                    <div class="step-head">
-                      <div class="step-num">04</div>
-                      <h3>Переходим к запуску</h3>
-                    </div>
-                    <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
-                  </article>
+                  <article class="step"><div class="step-head"><div class="step-num">01</div><h3>Вы изучаете варианты</h3></div><p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p></article>
+                  <article class="step"><div class="step-head"><div class="step-num">02</div><h3>Пишете в Telegram</h3></div><p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p></article>
+                  <article class="step"><div class="step-head"><div class="step-num">03</div><h3>Мы подбираем решение</h3></div><p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p></article>
+                  <article class="step"><div class="step-head"><div class="step-num">04</div><h3>Переходим к запуску</h3></div><p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p></article>
                 </div>
               </div>
             </section>
           </div>
         </section>
-
+          </div>
+        </section>
         <section class="section latest-articles">
           <div class="section-head section-head-inline">
             <h2>Последние статьи из блога</h2>
@@ -1132,11 +1119,13 @@
 
         <section class="section why-sovazone-section">
           <div class="why-sovazone-card">
-            <h2>Почему SovaZone</h2>
+            <div class="why-sovazone-head">
+              <h2>Почему SovaZone</h2>
+              <a class="why-sovazone-btn" href="contacts.html">Перейти к контактам</a>
+            </div>
             <p>За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
             <p>За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
             <p>Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
-            <a class="why-sovazone-btn" href="contacts.html">Перейти к контактам</a>
           </div>
         </section>
       </div>
@@ -1149,140 +1138,36 @@
     (function () {
       const grid = document.getElementById('latest-articles-grid');
       if (!grid) return;
-
-      function escapeHtml(str) {
-        return String(str || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-
-      function cleanText(value, fallback) {
-        const text = String(value || '')
-          .replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘]/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
-        return text || fallback;
-      }
-
-      function truncateText(text, maxLength) {
-        const clean = cleanText(text, '');
-        if (!clean) return '';
-        if (clean.length <= maxLength) return clean;
-
-        let sliced = clean.slice(0, maxLength).trimEnd();
-        const lastPunct = Math.max(sliced.lastIndexOf('.'), sliced.lastIndexOf('!'), sliced.lastIndexOf('?'));
-        if (lastPunct >= 80) {
-          return sliced.slice(0, lastPunct + 1);
+      function escapeHtml(str) {return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+      function normalizePost(post) {return {slug: post.slug || '', title: (post.title || 'Без названия').trim(), description: (post.description || '').trim(), cover: (post.cover || '/og-image.png').trim(), date: post.date || ''};}
+      function sortPosts(posts) {return [...posts].sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));}
+      function cleanDescription(text) {
+        let clean = String(text || '').replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘()]/g,' ').replace(/\s+/g,' ').trim();
+        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone.';
+        if (clean.length > 160) {
+          clean = clean.slice(0,160).trimEnd();
+          const lastPunct = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf('!'), clean.lastIndexOf('?'));
+          if (lastPunct >= 80) clean = clean.slice(0,lastPunct+1); else clean = clean.replace(/[,:;\-–—]+$/g,'').trimEnd() + '…';
+        } else if (clean.length < 80) {
+          const tail = ' Открыть материал в блоге SovaZone.';
+          if ((clean + tail).length <= 160) clean += tail;
+          if (!/[.!?…]$/.test(clean)) clean += '.';
         }
-        return sliced.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
+        return clean;
       }
-
-      function buildDescription(post, minLength, maxLength) {
-        const fallbackByCategory = {
-          'Новости': 'Свежая публикация о последних изменениях, функциях и заметных сдвигах в работе платформ и социальных сетей.',
-          'Статьи': 'Практический материал с краткими выводами и полезными ориентирами по выбранной теме.',
-          'Кейсы': 'Короткий разбор ситуации, подхода к решению и итоговых выводов по кейсу.'
-        };
-
-        let desc = truncateText(post.description, maxLength);
-        if (!desc || desc.length < minLength) {
-          desc = truncateText(
-            fallbackByCategory[post.category] || 'Краткий материал с основными тезисами и полезными деталями по теме публикации.',
-            maxLength
-          );
-        }
-        return desc;
-      }
-
-      function normalizePost(post) {
-        return {
-          slug: post.slug || '',
-          title: cleanText(post.title, 'Без названия'),
-          description: cleanText(post.description, ''),
-          category: cleanText(post.category, 'Статьи'),
-          cover: cleanText(post.cover, '/og-image.png'),
-          date: post.date || ''
-        };
-      }
-
-      function sortPosts(posts) {
-        return [...posts].sort((a, b) => {
-          const dateA = new Date(a.date || 0).getTime();
-          const dateB = new Date(b.date || 0).getTime();
-          return dateB - dateA;
-        });
-      }
-
-      function buildPostUrl(slug) {
-        return '/post.html?slug=' + encodeURIComponent(slug || '');
-      }
-
+      function buildPostUrl(slug) {return '/post.html?slug=' + encodeURIComponent(slug || '');}
       function render(posts) {
-        const items = posts.slice(0, 4);
-        grid.innerHTML = items.map(post => {
+        grid.innerHTML = posts.slice(0,4).map(post => {
           const title = escapeHtml(post.title);
-          const desc = escapeHtml(buildDescription(post, 80, 160));
+          const desc = escapeHtml(cleanDescription(post.description));
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
-          return `
-            <article class="latest-article-card">
-              <div class="latest-article-image-wrap">
-                <img class="latest-article-image" src="${cover}" alt="${title}">
-              </div>
-              <div class="latest-article-body">
-                <h3 class="latest-article-title">${title}</h3>
-                <p class="latest-article-desc">${desc}</p>
-                <a class="latest-article-link" href="${href}">Открыть статью</a>
-              </div>
-            </article>
-          `;
+          return `<article class="latest-article-card"><div class="latest-article-image-wrap"><img class="latest-article-image" src="${cover}" alt="${title}"></div><div class="latest-article-body"><h3 class="latest-article-title">${title}</h3><p class="latest-article-desc">${desc}</p><a class="latest-article-link" href="${href}">Открыть статью</a></div></article>`;
         }).join('');
       }
-
-      function renderFallback() {
-        grid.innerHTML = `
-          <article class="latest-article-card">
-            <div class="latest-article-image-wrap"></div>
-            <div class="latest-article-body">
-              <h3 class="latest-article-title">Не удалось загрузить блог</h3>
-              <p class="latest-article-desc">Открой раздел блога SovaZone, чтобы посмотреть последние публикации.</p>
-              <a class="latest-article-link" href="/blog.html">Открыть блог</a>
-            </div>
-          </article>
-        `;
-      }
-
-      async function fetchJsonWithFallback(paths) {
-        for (const url of paths) {
-          try {
-            const response = await fetch(url, { cache: 'no-store' });
-            if (response.ok) return await response.json();
-          } catch (e) {}
-        }
-        throw new Error('BLOG_INDEX_NOT_FOUND');
-      }
-
-      (async function init() {
-        try {
-          const cacheBust = Date.now();
-          const posts = await fetchJsonWithFallback([
-            '/content/blog/index.json?v=' + cacheBust,
-            'https://cdn.jsdelivr.net/gh/TheSovaDigital/sovazone@main/content/blog/index.json?v=' + cacheBust,
-            'https://raw.githubusercontent.com/TheSovaDigital/sovazone/main/content/blog/index.json?v=' + cacheBust
-          ]);
-
-          const normalized = sortPosts((Array.isArray(posts) ? posts : []).map(normalizePost))
-            .filter(post => post.slug && post.title);
-
-          if (!normalized.length) throw new Error('BLOG_EMPTY');
-          render(normalized);
-        } catch (e) {
-          renderFallback();
-        }
-      })();
+      function renderFallback() {grid.innerHTML = `<article class="latest-article-card"><div class="latest-article-image-wrap"></div><div class="latest-article-body"><h3 class="latest-article-title">Не удалось загрузить блог</h3><p class="latest-article-desc">Открой раздел блога SovaZone, чтобы посмотреть последние публикации.</p><a class="latest-article-link" href="/blog.html">Открыть блог</a></div></article>`;}
+      async function fetchJsonWithFallback(paths){for (const url of paths){try{const r=await fetch(url,{cache:'no-store'}); if(r.ok) return await r.json();}catch(e){}} throw new Error('BLOG_INDEX_NOT_FOUND');}
+      (async function init(){try{const cacheBust=Date.now(); const posts=await fetchJsonWithFallback(['/content/blog/index.json?v='+cacheBust,'https://cdn.jsdelivr.net/gh/TheSovaDigital/sovazone@main/content/blog/index.json?v='+cacheBust,'https://raw.githubusercontent.com/TheSovaDigital/sovazone/main/content/blog/index.json?v='+cacheBust]); const normalized = sortPosts((Array.isArray(posts)?posts:[]).map(normalizePost)).filter(post => post.slug && post.title); if(!normalized.length) throw new Error('BLOG_EMPTY'); render(normalized);} catch(e){renderFallback();}})();
     })();
   </script>
   <script src="script.js"></script>
