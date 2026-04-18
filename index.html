@@ -660,10 +660,15 @@
     }
 
     .projects-work-wrap{
+      display:grid;
       grid-template-columns:1fr;
       gap:18px;
+      margin-top:26px;
+      align-items:stretch;
     }
     .home-projects{
+      display:flex;
+      flex-direction:column;
       gap:18px;
       padding:22px;
     }
@@ -690,13 +695,13 @@
       color:rgba(255,255,255,.74);
     }
     .about-btn{
-      display:flex;
+      display:inline-flex;
       align-items:center;
       justify-content:center;
       text-align:center;
       min-height:42px;
       height:42px;
-      padding:0 16px;
+      padding:0 18px;
       border-radius:0;
       text-decoration:none;
       color:#fff;
@@ -704,7 +709,9 @@
       background:rgba(255,255,255,.02);
       box-shadow:none;
       font-weight:700;
-      width:100%;
+      width:auto;
+      min-width:240px;
+      max-width:100%;
       margin-top:8px;
       box-sizing:border-box;
       line-height:1.1;
@@ -734,6 +741,7 @@
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
       gap:14px;
+      width:100%;
     }
     .latest-article-card{
       position:relative;
@@ -743,7 +751,8 @@
       border:1px solid rgba(255,255,255,.06);
       display:flex;
       flex-direction:column;
-      min-height:248px;
+      min-width:0;
+      min-height:214px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .latest-article-card:hover{
@@ -752,7 +761,7 @@
       box-shadow:0 14px 28px rgba(0,0,0,.22);
     }
     .latest-article-image-wrap{
-      aspect-ratio:16 / 9;
+      aspect-ratio:16 / 8.7;
       overflow:hidden;
       background:rgba(255,255,255,.03);
       border-bottom:1px solid rgba(255,255,255,.06);
@@ -766,14 +775,15 @@
     .latest-article-body{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:9px;
       padding:12px 13px 13px;
       flex:1 1 auto;
+      min-width:0;
     }
     .latest-article-title{
       color:#fff;
       font-size:15px;
-      line-height:1.22;
+      line-height:1.24;
       letter-spacing:-.02em;
       font-weight:800;
       margin:0;
@@ -812,6 +822,10 @@
       .services-compact-grid,
       .latest-articles-grid{
         grid-template-columns:1fr;
+      }
+      .about-btn{
+        width:100%;
+        min-width:0;
       }
     }
   </style>
@@ -1088,14 +1102,6 @@
                   </article>
                 </div>
               </div>
-
-              <aside class="home-about">
-                <h2 class="about-title">Почему SovaZone</h2>
-                <p class="about-text">За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
-                <p class="about-text">За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
-                <p class="about-text">Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
-                <a class="about-btn" href="contacts.html">Перейти к контактам</a>
-              </aside>
             </section>
           </div>
         </section>
@@ -1124,6 +1130,16 @@
               </div>
             </article>
           </div>
+        </section>
+
+        <section class="section">
+          <aside class="home-about">
+            <h2 class="about-title">Почему SovaZone</h2>
+            <p class="about-text">За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
+            <p class="about-text">За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
+            <p class="about-text">Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
+            <a class="about-btn" href="contacts.html">Перейти к контактам</a>
+          </aside>
         </section>
       </div>
     </main>
@@ -1163,10 +1179,29 @@
         });
       }
 
-      function truncateText(text, maxLength) {
-        const clean = String(text || '').replace(/\s+/g, ' ').trim();
-        if (clean.length <= maxLength) return clean;
-        return clean.slice(0, maxLength).trimEnd() + '…';
+      function cleanDescription(text) {
+        let clean = String(text || '')
+          .replace(/[<>{}\[\]_*`~]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        if (!clean) return 'Открыть последнюю публикацию из блога SovaZone.';
+
+        if (clean.length > 160) {
+          clean = clean.slice(0, 157).trimEnd();
+          const lastPunct = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf('!'), clean.lastIndexOf('?'));
+          if (lastPunct >= 80) {
+            clean = clean.slice(0, lastPunct + 1);
+          } else {
+            clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
+          }
+        }
+
+        if (clean.length < 80) {
+          if (!/[.!?…]$/.test(clean)) clean += '.';
+        }
+
+        return clean;
       }
 
       function buildPostUrl(slug) {
@@ -1177,7 +1212,7 @@
         const items = posts.slice(0, 4);
         grid.innerHTML = items.map(post => {
           const title = escapeHtml(post.title);
-          const desc = escapeHtml(truncateText(post.description || 'Открыть материал из блога SovaZone.', 190));
+          const desc = escapeHtml(cleanDescription(post.description));
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
           return `
