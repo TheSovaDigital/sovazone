@@ -104,7 +104,10 @@
       width:min(1220px, calc(100vw - 48px));
       min-height:470px;
       margin:0 auto;
-      display:block;
+      display:grid;
+      grid-template-columns:minmax(0, 690px) minmax(280px, 1fr);
+      align-items:center;
+      column-gap:24px;
     }
     .hero-side,
     .hero-logo-card,
@@ -117,8 +120,8 @@
       z-index:3;
       min-width:0;
       width:100%;
-      max-width:100%;
-      padding:34px 0 18px;
+      max-width:690px;
+      padding:32px 0 18px;
     }
     .hero-content h1{
       margin:0 0 18px;
@@ -136,7 +139,7 @@
       display:none;
     }
     .hero-text-block{
-      max-width:610px;
+      max-width:600px;
     }
     .hero-text-block p{
       margin:0 0 10px;
@@ -200,15 +203,15 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:15%;
-      right:8vw;
-      width:min(30vw, 430px);
-      height:66%;
+      top:14%;
+      left:calc(50% + 110px);
+      width:min(31vw, 430px);
+      height:68%;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
       background-size:contain;
       background-position:center center;
-      opacity:.80;
+      opacity:.82;
       filter:saturate(.82) brightness(.74) contrast(1.01);
       mask-image:
         radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.70) 54%, transparent 78%),
@@ -222,10 +225,10 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:12vw;
-      top:39%;
-      width:min(14vw, 170px);
-      height:15%;
+      left:calc(50% + 188px);
+      top:40%;
+      width:min(11vw, 150px);
+      height:13%;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.10), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.12), transparent 20%);
@@ -602,6 +605,10 @@
 
     
     @media (max-width:1240px){
+      .hero-grid{
+        grid-template-columns:minmax(0, 620px) minmax(220px, 1fr);
+        column-gap:16px;
+      }
       .hero-content{
         max-width:100%;
       }
@@ -615,14 +622,14 @@
         max-width:440px;
       }
       .hero-bg::before{
-        right:4vw;
-        width:min(34vw, 380px);
-        height:64%;
-        top:18%;
+        left:calc(50% + 92px);
+        width:min(30vw, 340px);
+        height:60%;
+        top:19%;
       }
       .hero-bg::after{
-        right:9vw;
-        width:min(12vw, 140px);
+        left:calc(50% + 150px);
+        width:min(10vw, 120px);
       }
       .username-grid.username-grid-refined{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -649,6 +656,7 @@
       .hero-grid{
         width:min(100%, calc(100vw - 32px));
         min-height:560px;
+        display:block;
       }
       .hero-content{
         max-width:100%;
@@ -664,6 +672,7 @@
         max-width:340px;
       }
       .hero-bg::before{
+        left:auto;
         right:-10vw;
         top:24%;
         width:min(88vw, 520px);
@@ -671,6 +680,7 @@
         opacity:.72;
       }
       .hero-bg::after{
+        left:auto;
         right:-4vw;
         top:36%;
         width:min(70vw, 360px);
