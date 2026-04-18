@@ -974,6 +974,51 @@
         width:100%;
       }
     }
+
+    .section-title-with-icon{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .section-title-icon{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:10px;
+      background:linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 48%, #962fbf 74%, #4f5bd5 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.24),
+        0 10px 20px rgba(0,0,0,.18);
+    }
+    .section-title-icon svg{
+      width:18px;
+      height:18px;
+      display:block;
+      fill:#fff;
+    }
+    .section-title-icon--articles svg{
+      width:17px;
+      height:17px;
+    }
+    @media (max-width:680px){
+      .section-title-with-icon{
+        gap:10px;
+      }
+      .section-title-icon{
+        width:30px;
+        height:30px;
+        flex-basis:30px;
+        border-radius:9px;
+      }
+      .section-title-icon svg{
+        width:16px;
+        height:16px;
+      }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -1049,7 +1094,7 @@
 
         <section class="section section-usernames-showcase">
           <div class="section-head section-head-inline">
-            <h2>Популярные никнеймы для Instagram</h2>
+            <h2 class="section-title-with-icon"><span class="section-title-icon section-title-icon--usernames" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.96 1.53a1.08 1.08 0 1 1 0 2.16 1.08 1.08 0 0 1 0-2.16ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z"/></svg></span><span>Популярные никнеймы для Instagram</span></h2>
             <a class="btn btn-secondary section-head-btn" href="usernames.html">Смотреть каталог</a>
           </div>
 
@@ -1170,7 +1215,7 @@
 
         <section class="section section-services-compact">
           <div class="section-head section-head-inline">
-            <h2>Услуги</h2>
+            <h2 class="section-title-with-icon"><span class="section-title-icon section-title-icon--services" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.5 3a1 1 0 0 1 1 1v2.1a6.98 6.98 0 0 1 2.98 1.24l1.49-1.49a1 1 0 1 1 1.41 1.41l-1.49 1.49A6.98 6.98 0 0 1 17.1 11.5H20a1 1 0 1 1 0 2h-2.9a6.98 6.98 0 0 1-1.24 2.98l1.49 1.49a1 1 0 0 1-1.41 1.41l-1.49-1.49A6.98 6.98 0 0 1 11.5 19.1V22a1 1 0 1 1-2 0v-2.9a6.98 6.98 0 0 1-2.98-1.24l-1.49 1.49a1 1 0 1 1-1.41-1.41l1.49-1.49A6.98 6.98 0 0 1 3.9 13.5H1a1 1 0 1 1 0-2h2.9a6.98 6.98 0 0 1 1.24-2.98L3.65 7.03a1 1 0 0 1 1.41-1.41l1.49 1.49A6.98 6.98 0 0 1 9.5 5.9V4a1 1 0 0 1 1-1Zm0 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg></span><span>Услуги</span></h2>
             <a class="btn btn-secondary section-head-btn" href="services.html">Все услуги</a>
           </div>
 
@@ -1211,7 +1256,7 @@
 
         <section class="section latest-articles">
           <div class="section-head section-head-inline">
-            <h2>Новые статьи</h2>
+            <h2 class="section-title-with-icon"><span class="section-title-icon section-title-icon--articles" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h11.5A2.5 2.5 0 0 1 19 5.5V20a1 1 0 0 1-1.62.78L14 18.15l-3.38 2.63A1 1 0 0 1 9 20V5.5A2.5 2.5 0 0 1 11.5 3H5a1 1 0 1 0 0 2h11.5a.5.5 0 0 1 .5.5v12.45l-2.38-1.85a1 1 0 0 0-1.24 0L11 17.95V5.5A2.5 2.5 0 0 0 8.5 3Zm7 4h3a1 1 0 1 1 0 2h-3a1 1 0 1 1 0-2Zm0 4h3a1 1 0 1 1 0 2h-3a1 1 0 1 1 0-2Z"/></svg></span><span>Новые статьи</span></h2>
             <a class="btn btn-secondary section-head-btn" href="blog.html">Открыть блог</a>
           </div>
 
