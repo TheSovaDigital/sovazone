@@ -1,1639 +1,190 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#0b0b0f">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-
-  <title>SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка</title>
-  <meta name="description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
-  <meta name="keywords" content="SovaZone, никнеймы, username, купить никнейм, продать ник, ник под заказ, Instagram username, помощь с аккаунтом, запуск личного бренда, digital studio">
-  <link rel="canonical" href="https://sovazone.com/">
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <meta property="og:locale" content="ru_RU">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="SovaZone">
-  <meta property="og:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
-  <meta property="og:description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы, выбрать формат старта и получить digital-поддержку.">
-  <meta property="og:url" content="https://sovazone.com/">
-  <meta property="og:image" content="https://sovazone.com/og-image.png">
-  <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка">
-  <meta name="twitter:description" content="SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы и получить digital-поддержку.">
-  <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
-
-  <link rel="stylesheet" href="/styles.css">
-
-  <style>
-    .home-page{
-      position:relative;
-      overflow:hidden;
-      padding-top:30px;
-    }
-    .home-page::before,
-    .home-page::after{
-      content:"";
-      position:absolute;
-      pointer-events:none;
-      z-index:0;
-    }
-    .home-page::before{
-      top:20px;
-      left:-220px;
-      width:440px;
-      height:440px;
-      background:radial-gradient(circle, rgba(128,45,106,.11) 0%, rgba(128,45,106,0) 74%);
-      filter:blur(28px);
-    }
-    .home-page::after{
-      top:120px;
-      right:-240px;
-      width:560px;
-      height:560px;
-      background:radial-gradient(circle, rgba(34,58,154,.10) 0%, rgba(34,58,154,0) 76%);
-      filter:blur(34px);
-    }
-    .page-content > .container{
-      position:relative;
-      z-index:1;
-    }
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SovaZone - Digital Ecosystem</title>
     
-    .hero.hero-split{
-      position:relative;
-      margin-bottom:0;
-      min-height:452px;
-      padding:10px 0 0;
-      overflow:hidden;
-      isolation:isolate;
-      border:none;
-      border-radius:0;
-      background:transparent;
-      box-shadow:none;
-      display:block;
-    }
-    .hero.hero-split::before{
-      display:none;
-    }
-    .hero-grid{
-      position:relative;
-      z-index:2;
-      width:100%;
-      min-height:426px;
-      display:block;
-    }
-    .hero-bg{
-      position:absolute;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-    }
-    .hero-bg::before{
-      content:"";
-      position:absolute;
-      top:-7%;
-      right:18px;
-      width:min(54vw, 760px);
-      height:118%;
-      background-image:url('/image/hero-owl-soft.webp');
-      background-repeat:no-repeat;
-      background-size:124% auto;
-      background-position:right center;
-      opacity:.84;
-      filter:saturate(.82) brightness(.74) contrast(1.01);
-      mask-image:
-        radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.72) 54%, transparent 79%),
-        linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.92) 40%, transparent 82%),
-        linear-gradient(to bottom, rgba(0,0,0,.90) 0%, rgba(0,0,0,.98) 16%, rgba(0,0,0,.94) 74%, transparent 100%);
-      -webkit-mask-image:
-        radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.72) 54%, transparent 79%),
-        linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.92) 40%, transparent 82%),
-        linear-gradient(to bottom, rgba(0,0,0,.90) 0%, rgba(0,0,0,.98) 16%, rgba(0,0,0,.94) 74%, transparent 100%);
-    }
-    .hero-bg::after{
-      content:"";
-      position:absolute;
-      right:114px;
-      top:39%;
-      width:min(19vw, 296px);
-      height:21%;
-      background:
-        radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
-        radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
-      filter:blur(14px);
-      opacity:.09;
-      mix-blend-mode:screen;
-    }
-    .hero-bottom-fade{
-      display:none;
-    }
-    .hero-side,
-    .hero-logo-card,
-    .hero-logo,
-    .hero-side-actions,
-    .hero-badge-wrap,
-    .hero-badge.hero-badge-static{
-      display:none;
-    }
-    .hero-content{
-      position:relative;
-      z-index:3;
-      min-width:0;
-      width:100%;
-      max-width:none;
-      padding:0;
-      overflow:visible;
-    }
-    .hero-content h1{
-      margin:0 0 14px;
-      width:max-content;
-      max-width:none;
-      display:inline-block;
-      overflow:visible;
-      padding-bottom:.24em;
-      font-size:clamp(26px, 2.02vw, 36px);
-      line-height:1.06;
-      letter-spacing:-0.042em;
-      white-space:nowrap;
-      text-wrap:normal;
-      position:relative;
-      z-index:4;
-      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 26%, #ff5ca8 64%, #f77737 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      -webkit-text-fill-color:transparent;
-    }
-    .hero-text-block{
-      max-width:700px;
-    }
-    .hero-text-block p{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.655;
-    }
-    .hero-text-block .hero-lead{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.65;
-    }
-    .hero-actions-row{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(108px, max-content)) minmax(156px, max-content);
-      gap:10px;
-      align-items:stretch;
-      margin-top:8px;
-      max-width:540px;
-    }
-    .hero-actions-row .btn,
-    .hero-actions-row .mini-point{
-      min-height:36px;
-      height:36px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      width:100%;
-      box-sizing:border-box;
-      padding:0 14px;
-      line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-decoration:none;
-      font-size:13px;
-    }
-    .hero-actions-row .mini-point{
-      border-radius:0;
-      transition:background .22s ease, border-color .22s ease, color .22s ease, transform .22s ease, box-shadow .22s ease;
-    }
-    .hero-actions-row .mini-point:hover{
-      background:rgba(255,255,255,.075);
-      border-color:rgba(255,255,255,.20);
-      color:#fff;
-      transform:translateY(-1px);
-      box-shadow:0 10px 20px rgba(0,0,0,.14);
-    }
-    .hero-actions-row .btn-telegram{
-      border-radius:0;
-      color:#fff;
-      background:linear-gradient(90deg,#833ab4 0%, #c13584 38%, #e1306c 68%, #f77737 100%);
-      border:none;
-      box-shadow:0 12px 24px rgba(0,0,0,.16);
-      text-decoration:none;
-      font-weight:700;
-    }
-    .hero-actions-row .btn-telegram:hover{
-      color:#fff;
-      filter:brightness(1.03);
-      transform:translateY(-1px);
-    }
+    <!-- Мета-теги из оригинала -->
+    <meta property="og:title" content="SovaZone">
+    <meta property="og:description" content="Digital Ecosystem">
+    <meta property="og:image" content="https://sovazone.com">
+    
+    <!-- Подключение шрифта Montserrat (как на главной) -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <style>
+        /* Общие исправления для всей страницы */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0b0c10;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-    .section-usernames-showcase{
-      margin-top:24px;
-    }
-    .section-usernames-showcase .section-head-inline{
-      align-items:flex-end;
-      gap:14px;
-      margin-bottom:14px;
-    }
-    .section-usernames-showcase .section-head-inline h2{
-      margin:0;
-    }
+        /* 1. ИСПРАВЛЕННЫЙ ХЕРО БЛОК (ВОЗДУШНОСТЬ) */
+        #home {
+            height: 100vh; /* Строго на весь экран */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* УВЕЛИЧЕННАЯ СОВА */
+            background: url('https://sovazone.com') no-repeat center 35%;
+            background-size: 550px; 
+            text-align: center;
+        }
 
-    @media (max-width:1240px){
-      .hero.hero-split{
-        min-height:404px;
-      }
-      .hero-grid{
-        min-height:378px;
-        display:block;
-      }
-      .hero-content{
-        max-width:none;
-      }
-      .hero-content h1{
-        font-size:clamp(24px, 1.86vw, 32px);
-      }
-      .hero-text-block{
-        max-width:680px;
-      }
-      .hero-text-block p{
-        margin:0 0 14px;
-      }
-      .hero-actions-row{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-        max-width:440px;
-      }
-      .hero-bg::before{
-        right:10px;
-        width:min(53vw, 690px);
-        height:118%;
-        top:-7%;
-        background-size:124% auto;
-      }
-      .hero-bg::after{
-        right:78px;
-        width:min(18vw, 252px);
-      }
-    }
+        /* Текст в херо блоке (цвета как на главной) */
+        .hero-title {
+            margin-top: 380px; /* Смещаем под сову */
+            z-index: 10;
+        }
 
-    @media (max-width:860px){
-      .hero.hero-split{
-        min-height:612px;
-        padding:12px 0 6px;
-      }
-      .hero-grid{
-        width:100%;
-        min-height:560px;
-        display:block;
-      }
-      .hero-content{
-        max-width:100%;
-        padding:0 0 174px;
-      }
-      .hero-content h1{
-        max-width:none;
-        width:auto;
-        display:block;
-        white-space:normal;
-        font-size:clamp(30px, 8vw, 44px);
-        line-height:1.06;
-      }
-      .hero-text-block p{
-        font-size:15px;
-        line-height:1.655;
-        color:var(--muted);
-      }
-      .hero-actions-row{
-        grid-template-columns:1fr;
-        max-width:340px;
-      }
-      .hero-bg::before{
-        right:-12vw;
-        top:18%;
-        width:min(138vw, 946px);
-        height:90%;
-        opacity:.74;
-        background-size:124% auto;
-      }
-      .hero-bg::after{
-        right:0;
-        top:36%;
-        width:min(88vw, 470px);
-        height:32%;
-      }
-    }
+        .hero-title h1 {
+            font-weight: 900;
+            font-size: 4.5rem;
+            letter-spacing: 12px;
+            color: #ff9d00; /* Тот самый оранжевый */
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(255, 157, 0, 0.4);
+            line-height: 1;
+        }
 
-    @media (max-width:680px){
-      .hero-content h1{
-        white-space:normal;
-      }
-    }
+        .hero-title p {
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: #ffffff;
+            opacity: 0.8;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
 
-.section-head h2,
-    .section-head-inline h2,
-    .home-projects .section-head h2,
-    .about-title,
-    .work-inline-title{
-      font-size:clamp(24px, 1.72vw, 32px);
-      line-height:1.06;
-      letter-spacing:-0.035em;
-    }
+        /* 2. БЛОК С НИКАМИ */
+        #nicknames {
+            padding: 80px 0;
+            background: #0b0c10;
+            border-top: 1px solid rgba(255, 157, 0, 0.2);
+            text-align: center;
+        }
 
-    .section-usernames-showcase{
-      margin-top:24px;
-    }
-    .section-usernames-showcase .section-head-inline{
-      align-items:flex-end;
-      gap:14px;
-      margin-bottom:14px;
-    }
-    .section-usernames-showcase .section-head-inline h2{
-      margin:0;
-    }
+        .nick-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .username-grid.username-grid-refined{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
-    }
-    .username-grid-refined .username-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:20px;
-      padding:13px 13px 12px;
-      min-height:126px;
-      background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
-      border:1px solid rgba(255,255,255,.06);
-      transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-    .username-grid-refined .username-card:hover{
-      transform:translateY(-3px);
-      border-color:rgba(255,255,255,.12);
-      background:linear-gradient(180deg, rgba(24,24,29,.98), rgba(13,13,16,1));
-      box-shadow:0 16px 34px rgba(0,0,0,.20);
-    }
-    .username-grid-refined .username-card-top{
-      display:grid;
-      grid-template-columns:minmax(0,1fr);
-      gap:5px;
-      margin-bottom:10px;
-    }
-    .username-grid-refined .username-title-row{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      min-width:0;
-    }
-    .username-grid-refined .platform-icon{
-      width:16px;
-      height:16px;
-      flex:0 0 16px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      opacity:.9;
-    }
-    .username-grid-refined .platform-icon svg{
-      width:16px;
-      height:16px;
-      display:block;
-    }
-    .username-grid-refined .username-name-link{
-      display:block;
-      min-width:0;
-      text-decoration:none;
-      color:inherit;
-      flex:1 1 auto;
-    }
-    .username-grid-refined .username-name{
-      font-size:clamp(15px, 1.05vw, 21px);
-      line-height:1.02;
-      letter-spacing:-.024em;
-      color:#fff;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      font-weight:800;
-    }
-    .username-grid-refined .username-meta{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      min-width:0;
-    }
-    .username-grid-refined .username-link{
-      min-width:0;
-      display:block;
-      font-size:12px;
-      line-height:1.25;
-      color:rgba(255,255,255,.68);
-      text-decoration:none;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      flex:1 1 auto;
-    }
-    .username-grid-refined .username-price{
-      font-size:14px;
-      line-height:1.1;
-      color:#fff;
-      font-weight:700;
-      white-space:nowrap;
-      text-align:right;
-      flex:0 0 auto;
-    }
-    .username-grid-refined .username-buy{
-      width:100%;
-      min-height:32px;
-      height:32px;
-      border-radius:11px;
-      border:none;
-      background:linear-gradient(90deg,#8c52ff,#ff6d6d);
-      color:#fff;
-      font-size:14px;
-      font-weight:600;
-      line-height:1;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:filter .18s ease, transform .18s ease;
-      white-space:nowrap;
-    }
-    .username-grid-refined .username-buy:hover{
-      filter:brightness(1.04);
-      transform:translateY(-1px);
-      color:#fff;
-    }
+        .nick-item {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #45a29e; /* Бирюзовый акцент */
+            transition: 0.3s ease;
+        }
 
-    .projects-work-wrap{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 360px;
-      gap:18px;
-      margin-top:26px;
-      align-items:stretch;
-    }
-    .home-projects,
-    .home-about{
-      position:relative;
-      overflow:hidden;
-      border-radius:24px;
-      padding:22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
-        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
-      border:1px solid rgba(255,255,255,.07);
-      min-height:100%;
-      height:100%;
-      box-sizing:border-box;
-    }
-    .home-projects{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
-    .home-about{
-      display:flex;
-      flex-direction:column;
-    }
-    .home-projects::before,
-    .home-about::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
-    }
-    .home-projects > *,
-    .home-about > *{
-      position:relative;
-      z-index:1;
-    }
-    .home-projects .section-head{
-      margin-bottom:0;
-    }
-    .home-projects .section-head h2{
-      margin:0;
-    }
+        .nick-item:hover {
+            color: #ff9d00;
+            transform: scale(1.1);
+        }
 
-    .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
-      margin-bottom:0;
-      align-items:stretch;
-      grid-auto-rows:1fr;
-    }
-    .project-card{
-      display:flex;
-      flex-direction:column;
-      min-height:188px;
-      padding:16px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
-      gap:12px;
-      box-sizing:border-box;
-    }
-    .project-card h3{
-      margin:0 0 8px;
-      font-size:18px;
-      line-height:1.14;
-      letter-spacing:-.02em;
-      color:#fff;
-    }
-    .project-card p{
-      margin:0;
-      font-size:14px;
-      line-height:1.6;
-      color:rgba(255,255,255,.72);
-      flex:1 1 auto;
-    }
-    .project-link{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      height:44px;
-      min-height:44px;
-      max-height:44px;
-      padding:0 10px;
-      border-radius:14px;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.09);
-      background:rgba(255,255,255,.032);
-      width:100%;
-      font-weight:700;
-      font-size:12px;
-      line-height:1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      box-sizing:border-box;
-      margin-top:auto;
-      flex:0 0 44px;
-      transition:border-color .18s ease, background .18s ease, transform .18s ease;
-    }
-    .project-link:hover{
-      border-color:rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      transform:translateY(-1px);
-      color:#fff;
-    }
+        /* 3. СЕКЦИЯ УСЛУГ (ИСПРАВЛЕННАЯ) */
+        #services {
+            padding: 100px 5%;
+            background: #1f2833;
+        }
 
-    .work-inline{
-      margin-top:0;
-      flex:1 1 auto;
-      display:flex;
-      flex-direction:column;
-    }
-    .work-inline-title{
-      margin:0 0 12px;
-      color:#fff;
-    }
-    .steps-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:12px;
-      align-items:stretch;
-    }
-    .step{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
-      min-height:128px;
-      box-sizing:border-box;
-    }
-    .step-head{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-      min-height:30px;
-    }
-    .step-num{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:28px;
-      height:28px;
-      border-radius:999px;
-      border:1px solid rgba(217,179,140,.24);
-      color:#d9b38c;
-      font-size:12px;
-      font-weight:700;
-      flex:0 0 28px;
-    }
-    .step h3{
-      margin:0;
-      font-size:16px;
-      line-height:1.16;
-      color:#fff;
-      letter-spacing:-.02em;
-    }
-    .step p{
-      margin:0;
-      font-size:13px;
-      line-height:1.58;
-      color:rgba(255,255,255,.72);
-    }
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #ff9d00;
+            margin-bottom: 50px;
+        }
 
-    .about-title{
-      margin:0 0 12px;
-      color:#fff;
-    }
-    .about-text{
-      margin:0 0 12px;
-      font-size:14px;
-      line-height:1.72;
-      color:rgba(255,255,255,.74);
-    }
-    .about-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      min-height:46px;
-      height:46px;
-      padding:0 18px;
-      border-radius:14px;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.09);
-      background:linear-gradient(90deg, rgba(131,58,180,.18) 0%, rgba(193,53,132,.16) 38%, rgba(225,48,108,.14) 68%, rgba(247,119,55,.14) 100%);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
-      font-weight:700;
-      width:100%;
-      margin-top:auto;
-      box-sizing:border-box;
-      line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
-    }
-    .about-btn:hover{
-      transform:translateY(-1px);
-      background:linear-gradient(90deg, rgba(131,58,180,.24) 0%, rgba(193,53,132,.22) 38%, rgba(225,48,108,.20) 68%, rgba(247,119,55,.20) 100%);
-      border-color:rgba(255,255,255,.14);
-      color:#fff;
-    }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-    @media (max-width:1240px){
-      .hero-content h1{
-        white-space:normal;
-      }
-      .hero-actions-row{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .username-grid.username-grid-refined{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .projects-grid{
-        grid-template-columns:1fr;
-      }
-      .steps-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .projects-work-wrap{
-        grid-template-columns:1fr;
-      }
-      .project-link{
-        font-size:13px;
-      }
-    }
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(69, 162, 158, 0.2);
+            transition: 0.3s;
+        }
 
-    @media (max-width:860px){
-      .hero.hero-split{
-        flex-direction:column;
-      }
-      .hero-side{
-        width:100%;
-        max-width:320px;
-      }
-      .hero-actions-row{
-        grid-template-columns:1fr;
-      }
-    }
+        .service-card:hover {
+            border-color: #ff9d00;
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-    @media (max-width:680px){
-      .hero-content h1{
-        white-space:normal;
-      }
-      .username-grid.username-grid-refined,
-      .steps-grid{
-        grid-template-columns:1fr;
-      }
-      .home-projects,
-      .home-about{
-        padding:18px;
-      }
-    }
+        .service-card h3 {
+            color: #45a29e;
+            margin-bottom: 15px;
+        }
 
-
-    .section-head-btn{
-      min-height:34px;
-      height:34px;
-      padding:0 20px;
-      min-width:148px;
-      border-radius:0;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-      font-size:12px;
-      line-height:1;
-      box-shadow:none;
-      white-space:nowrap;
-    }
-    .section-head-btn:hover{
-      background:rgba(255,255,255,.05);
-      border-color:rgba(255,255,255,.14);
-    }
-
-    .section-services-compact{
-      margin-top:22px;
-    }
-    .section-services-compact .section-head-inline,
-    .latest-articles .section-head-inline{
-      align-items:flex-end;
-      gap:14px;
-      margin-bottom:14px;
-    }
-    .section-services-compact .section-head-inline h2,
-    .latest-articles .section-head-inline h2{
-      margin:0;
-    }
-
-    .services-compact-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
-    }
-    .service-compact-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:20px;
-      padding:16px 16px 14px;
-      min-height:148px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012)),
-        linear-gradient(135deg, rgba(35,39,74,.14), rgba(0,0,0,0));
-      border:1px solid rgba(255,255,255,.06);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:12px;
-      transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
-    }
-    .service-compact-card:hover{
-      transform:translateY(-3px);
-      border-color:rgba(255,255,255,.14);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.042), rgba(255,255,255,.02)),
-        linear-gradient(135deg, rgba(35,39,74,.16), rgba(0,0,0,0));
-      box-shadow:0 16px 34px rgba(0,0,0,.20);
-    }
-    .service-compact-card h3{
-      margin:0 0 8px;
-      font-size:20px;
-      line-height:1.08;
-      letter-spacing:-.03em;
-      color:#fff;
-    }
-    .service-compact-card p{
-      margin:0;
-      font-size:13px;
-      line-height:1.56;
-      color:rgba(255,255,255,.70);
-    }
-    .service-compact-link{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:100%;
-      min-height:34px;
-      height:34px;
-      padding:0 16px;
-      border-radius:0;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff;
-      text-decoration:none;
-      font-size:12px;
-      font-weight:700;
-      line-height:1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
-      transition:border-color .18s ease, background .18s ease, transform .18s ease;
-    }
-    .service-compact-link:hover{
-      color:#fff;
-      background:rgba(255,255,255,.05);
-      border-color:rgba(255,255,255,.13);
-      transform:translateY(-1px);
-    }
-
-    .projects-work-wrap{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:18px;
-      margin-top:26px;
-      align-items:stretch;
-    }
-    .home-steps-only{
-      position:relative;
-      overflow:hidden;
-      border-radius:24px;
-      padding:22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
-        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
-      border:1px solid rgba(255,255,255,.07);
-      box-sizing:border-box;
-    }
-    .home-steps-only::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
-    }
-    .home-steps-only > *{
-      position:relative;
-      z-index:1;
-    }
-    .work-why-layout{
-      display:grid;
-      grid-template-columns:minmax(0, 1fr) 420px;
-      gap:18px;
-      align-items:start;
-    }
-    .why-inline{
-      position:relative;
-      min-width:0;
-      padding:8px 0 4px;
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
-    }
-    .why-inline::before{
-      content:"";
-      position:absolute;
-      inset:-10px -16px -14px -10px;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 14% 24%, rgba(128,45,106,.18) 0%, rgba(128,45,106,0) 30%),
-        radial-gradient(circle at 82% 22%, rgba(124,58,36,.14) 0%, rgba(124,58,36,0) 28%),
-        radial-gradient(circle at 58% 82%, rgba(255,255,255,.035) 0%, rgba(255,255,255,0) 36%);
-      filter:blur(20px);
-      opacity:.9;
-    }
-    .why-inline > *{
-      position:relative;
-      z-index:1;
-    }
-    .why-inline-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      margin-bottom:12px;
-    }
-    .why-inline-head h2{
-      margin:0;
-      color:#fff;
-      font-size:clamp(24px, 1.72vw, 32px);
-      line-height:1.06;
-      letter-spacing:-0.035em;
-    }
-    .why-inline-copy{
-      max-width:100%;
-    }
-    .why-inline-copy p{
-      margin:0 0 10px;
-      font-size:14px;
-      line-height:1.68;
-      color:rgba(255,255,255,.74);
-    }
-    .why-inline-meta{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:22px;
-      margin-top:18px;
-      align-items:start;
-    }
-    .why-inline-stat{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
-      text-align:center;
-      min-height:0;
-      padding:0;
-      background:none;
-      border:none;
-      border-radius:0;
-      box-shadow:none;
-      backdrop-filter:none;
-      -webkit-backdrop-filter:none;
-      opacity:1;
-    }
-    .why-inline-stat::before{
-      display:none;
-    }
-    .why-inline-stat strong{
-      display:block;
-      font-size:34px;
-      line-height:1;
-      color:#68f3ff;
-      letter-spacing:-.035em;
-      margin-bottom:10px;
-      text-shadow:
-        0 0 10px rgba(104, 243, 255, .22),
-        0 0 24px rgba(104, 243, 255, .10);
-    }
-    .why-inline-stat span{
-      display:block;
-      max-width:140px;
-      font-size:13px;
-      line-height:1.45;
-      color:#bff9ff;
-      text-shadow:
-        0 0 8px rgba(123, 245, 255, .10);
-    }
-    .why-inline-footer{
-      margin-top:auto;
-      padding-top:16px;
-      display:flex;
-      justify-content:center;
-    }
-    .why-inline-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      min-height:34px;
-      height:34px;
-      padding:0 20px;
-      min-width:240px;
-      border-radius:0;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.02);
-      box-shadow:none;
-      font-weight:700;
-      line-height:1;
-      white-space:nowrap;
-      clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
-      flex:0 0 auto;
-    }
-    .why-inline-btn:hover{
-      transform:translateY(-1px);
-      background:rgba(255,255,255,.04);
-      border-color:rgba(255,255,255,.14);
-      color:#fff;
-    }
-    .steps-column{
-      display:flex;
-      flex-direction:column;
-    }
-    .home-steps-only .steps-grid{
-      grid-template-columns:1fr;
-      gap:12px;
-    }
-    .home-steps-only .step{
-      min-height:0;
-      padding:14px;
-    }
-    .work-inline-title{
-      display:none;
-    }
-
-    .latest-articles{
-      margin-top:28px;
-      max-width:100%;
-    }
-    .latest-articles-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
-      max-width:100%;
-    }
-    .latest-article-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:16px;
-      background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
-      border:1px solid rgba(255,255,255,.06);
-      display:flex;
-      flex-direction:column;
-      min-width:0;
-      min-height:188px;
-      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-    }
-    .latest-article-card:hover{
-      transform:translateY(-3px);
-      border-color:rgba(255,255,255,.12);
-      box-shadow:0 14px 28px rgba(0,0,0,.22);
-    }
-    .latest-article-image-wrap{
-      aspect-ratio:16 / 7.7;
-      overflow:hidden;
-      background:rgba(255,255,255,.03);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .latest-article-image{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .latest-article-body{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      padding:10px 12px 12px;
-      flex:1 1 auto;
-      min-width:0;
-    }
-    .latest-article-title{
-      color:#fff;
-      font-size:14px;
-      line-height:1.24;
-      letter-spacing:-.02em;
-      font-weight:800;
-      margin:0;
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
-    }
-    .latest-article-desc{
-      color:rgba(255,255,255,.70);
-      font-size:12px;
-      line-height:1.5;
-      margin:0;
-      flex:1 1 auto;
-      display:-webkit-box;
-      -webkit-line-clamp:3;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
-    }
-    .latest-article-link{
-      display:inline-flex;
-      align-items:center;
-      min-height:24px;
-      color:#fff;
-      font-size:12px;
-      font-weight:700;
-      text-decoration:none;
-    }
-    .latest-article-link:hover{
-      color:#fff;
-      opacity:.92;
-    }
-
-    @media (max-width:1240px){
-      .services-compact-grid,
-      .latest-articles-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-      .work-why-layout{
-        grid-template-columns:1fr;
-      }
-    }
-    @media (max-width:860px){
-      .why-inline-meta{
-        grid-template-columns:1fr;
-      }
-    }
-    @media (max-width:680px){
-      .services-compact-grid,
-      .latest-articles-grid{
-        grid-template-columns:1fr;
-      }
-      .why-inline-btn,
-      .section-head-btn{
-        min-width:0;
-        width:100%;
-      }
-    }
-
-    .section-title-with-icon{
-      display:inline-flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .section-title-icon{
-      width:22px;
-      height:22px;
-      flex:0 0 22px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .section-title-icon svg{
-      width:22px;
-      height:22px;
-      display:block;
-      fill:#fff;
-    }
-    .section-title-icon--articles svg{
-      width:21px;
-      height:21px;
-    }
-    @media (max-width:680px){
-      .section-title-with-icon{
-        gap:10px;
-      }
-      .section-title-icon{
-        width:20px;
-        height:20px;
-        flex-basis:20px;
-      }
-      .section-title-icon svg{
-        width:20px;
-        height:20px;
-      }
-    }
-  </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://sovazone.com/#organization",
-        "name": "SovaZone",
-        "alternateName": "SovaZone Digital Studio",
-        "url": "https://sovazone.com/",
-        "logo": "https://sovazone.com/logo.png",
-        "image": "https://sovazone.com/og-image.png",
-        "sameAs": ["https://t.me/SovaDigital","https://t.me/SovaDS","https://sovads.ru/"],
-        "description": "SovaZone — digital studio и проект по продаже никнеймов, подбору username, запуску профилей и digital-поддержке."
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://sovazone.com/#website",
-        "url": "https://sovazone.com/",
-        "name": "SovaZone",
-        "inLanguage": "ru-RU",
-        "publisher": {"@id": "https://sovazone.com/#organization"}
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://sovazone.com/#webpage",
-        "url": "https://sovazone.com/",
-        "name": "SovaZone — никнеймы для Instagram, запуск профиля и digital-поддержка",
-        "isPartOf": {"@id": "https://sovazone.com/#website"},
-        "about": {"@id": "https://sovazone.com/#organization"},
-        "primaryImageOfPage": {"@type": "ImageObject","url": "https://sovazone.com/og-image.png"},
-        "description": "SovaZone помогает подобрать и купить никнейм для Instagram и других соцсетей, запустить профиль, решить технические вопросы и выбрать формат старта.",
-        "inLanguage": "ru-RU"
-      }
-    ]
-  }
-  </script>
+        /* Адаптивность для телефонов */
+        @media (max-width: 768px) {
+            #home { background-size: 300px; background-position: center 30%; }
+            .hero-title { margin-top: 220px; }
+            .hero-title h1 { font-size: 2.2rem; letter-spacing: 5px; }
+            .nick-item { font-size: 1.2rem; }
+        }
+    </style>
 </head>
 <body>
-  <div class="site-shell">
-    <div id="header-placeholder"></div>
 
-    <main class="page-content home-page">
-      <div class="container">
-        <section class="hero hero-split">
-          <div class="hero-bg" aria-hidden="true"></div>
-          <div class="hero-grid">
-            <div class="hero-content">
-              <h1>Запуск личного бренда и новых digital-проектов</h1>
-              <div class="hero-text-block">
-                <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других соц. сетей, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
-                <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
-                <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
-              </div>
+    <!-- HERO SECTION -->
+    <section id="home">
+        <div class="hero-title">
+            <h1>SOVA ZONE</h1>
+            <p>Digital Ecosystem</p>
+        </div>
+    </section>
 
-              <div class="hero-actions-row">
-                <a href="usernames.html" class="mini-point">Купить ник</a>
-                <a href="sell.html" class="mini-point">Продать ник</a>
-                <a href="services.html" class="mini-point">Ник под заказ</a>
-                <a class="btn btn-telegram" href="contacts.html">Связаться</a>
-              </div>
+    <!-- NICKNAMES SECTION -->
+    <section id="nicknames">
+        <div class="nick-container">
+            <div class="nick-item">@TheSova</div>
+            <div class="nick-item">@DigitalSova</div>
+            <div class="nick-item">@SovaAdmin</div>
+            <div class="nick-item">@NightOwl</div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services">
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Web Development</h3>
+                <p>Создание современных и быстрых сайтов с уникальным дизайном.</p>
             </div>
-          </div>
-          <div class="hero-bottom-fade"></div>
-        </section>
-
-        <section class="section section-usernames-showcase">
-          <div class="section-head section-head-inline">
-            <h2 class="section-title-with-icon"><span class="section-title-icon section-title-icon--usernames" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.96 1.53a1.08 1.08 0 1 1 0 2.16 1.08 1.08 0 0 1 0-2.16ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z"/></svg></span><span>Популярные никнеймы для Instagram</span></h2>
-            <a class="btn btn-secondary section-head-btn" href="usernames.html">Смотреть каталог</a>
-          </div>
-
-          <div class="username-grid username-grid-refined">
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/m4d.html"><div class="username-name" itemprop="name">@M4D</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/m4d" target="_blank" rel="noopener">instagram.com/m4d</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">4250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/m4d.html">Подробнее</a>
-            </article>
-
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/o05.html"><div class="username-name" itemprop="name">@o05</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/o05" target="_blank" rel="noopener">instagram.com/o05</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/o05.html">Подробнее</a>
-            </article>
-
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/krot.html"><div class="username-name" itemprop="name">@KROT</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/krot" target="_blank" rel="noopener">instagram.com/krot</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">2000$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/krot.html">Подробнее</a>
-            </article>
-
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/tryd.html"><div class="username-name" itemprop="name">@TRYD</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/tryd" target="_blank" rel="noopener">instagram.com/tryd</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1250$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/tryd.html">Подробнее</a>
-            </article>
-
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/podlets.html"><div class="username-name" itemprop="name">@PODLETS</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/podlets" target="_blank" rel="noopener">instagram.com/podlets</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/podlets.html">Подробнее</a>
-            </article>
-
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/koketka.html"><div class="username-name" itemprop="name">@KOKETKA</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/koketka" target="_blank" rel="noopener">instagram.com/koketka</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/koketka.html">Подробнее</a>
-            </article>
-
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/deluks.html"><div class="username-name" itemprop="name">@DELUKS</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/deluks" target="_blank" rel="noopener">instagram.com/deluks</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/deluks.html">Подробнее</a>
-            </article>
-
-            <article class="username-card" itemscope itemtype="https://schema.org/Product">
-              <div class="username-card-top">
-                <div class="username-title-row">
-                  <span class="platform-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle></svg></span>
-                  <a class="username-name-link" href="username/keyed.html"><div class="username-name" itemprop="name">@KEYED</div></a>
-                </div>
-                <div class="username-meta">
-                  <a class="username-link" href="https://www.instagram.com/keyed" target="_blank" rel="noopener">instagram.com/keyed</a>
-                  <div class="username-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="USD"><span itemprop="price">1500$</span><link itemprop="availability" href="https://schema.org/InStock"></div>
-                </div>
-              </div>
-              <a class="username-buy" href="username/keyed.html">Подробнее</a>
-            </article>
-          </div>
-        </section>
-
-        <section class="section section-services-compact">
-          <div class="section-head section-head-inline">
-            <h2 class="section-title-with-icon"><span class="section-title-icon section-title-icon--services" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.5 3a1 1 0 0 1 1 1v2.1a6.98 6.98 0 0 1 2.98 1.24l1.49-1.49a1 1 0 1 1 1.41 1.41l-1.49 1.49A6.98 6.98 0 0 1 17.1 11.5H20a1 1 0 1 1 0 2h-2.9a6.98 6.98 0 0 1-1.24 2.98l1.49 1.49a1 1 0 0 1-1.41 1.41l-1.49-1.49A6.98 6.98 0 0 1 11.5 19.1V22a1 1 0 1 1-2 0v-2.9a6.98 6.98 0 0 1-2.98-1.24l-1.49 1.49a1 1 0 1 1-1.41-1.41l1.49-1.49A6.98 6.98 0 0 1 3.9 13.5H1a1 1 0 1 1 0-2h2.9a6.98 6.98 0 0 1 1.24-2.98L3.65 7.03a1 1 0 0 1 1.41-1.41l1.49 1.49A6.98 6.98 0 0 1 9.5 5.9V4a1 1 0 0 1 1-1Zm0 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg></span><span>Услуги</span></h2>
-            <a class="btn btn-secondary section-head-btn" href="services.html">Все услуги</a>
-          </div>
-
-          <div class="services-compact-grid">
-            <article class="service-compact-card">
-              <div>
-                <h3>Верификация</h3>
-                <p>Сопровождение и консультации по вопросам подтверждения профиля и подготовки к подаче запроса.</p>
-              </div>
-              <a class="service-compact-link" href="services/verification.html">Подробнее</a>
-            </article>
-
-            <article class="service-compact-card">
-              <div>
-                <h3>Разблокировка</h3>
-                <p>Помощь в сложных ситуациях с ограничениями, доступом к аккаунту и восстановлением рабочего статуса.</p>
-              </div>
-              <a class="service-compact-link" href="services/account-help.html">Подробнее</a>
-            </article>
-
-            <article class="service-compact-card">
-              <div>
-                <h3>Восстановление</h3>
-                <p>Пошаговая помощь после взлома, утраты доступа и других критичных ситуаций с аккаунтом.</p>
-              </div>
-              <a class="service-compact-link" href="services/recovery-after-hack.html">Подробнее</a>
-            </article>
-
-            <article class="service-compact-card">
-              <div>
-                <h3>Консультации</h3>
-                <p>Разбор запроса, оценка сценариев старта и подбор решения под конкретную задачу без воды.</p>
-              </div>
-              <a class="service-compact-link" href="services/consultation.html">Подробнее</a>
-            </article>
-          </div>
-        </section>
-
-        <section class="section latest-articles">
-          <div class="section-head section-head-inline">
-            <h2 class="section-title-with-icon"><span class="section-title-icon section-title-icon--articles" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 18.5v-13Zm2.5-.5a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5h-11ZM8 8a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9A1 1 0 0 1 8 8Zm0 4a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm0 4a1 1 0 0 1 1-1h3.5a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Z"/></svg></span><span>Новые статьи</span></h2>
-            <a class="btn btn-secondary section-head-btn" href="blog.html">Открыть блог</a>
-          </div>
-
-          <div class="latest-articles-grid" id="latest-articles-grid">
-            <article class="latest-article-card">
-              <div class="latest-article-image-wrap"></div>
-              <div class="latest-article-body">
-                <h3 class="latest-article-title">Загрузка последних материалов…</h3>
-                <p class="latest-article-desc">Подбираем свежие публикации именно из раздела блога SovaZone.</p>
-              </div>
-            </article>
-          </div>
-        </section>
-        <section class="section">
-          <div class="projects-work-wrap">
-            <section class="home-steps-only">
-              <div class="work-why-layout">
-                <div class="why-inline">
-                  <div class="why-inline-head">
-                    <h2>Почему SovaZone</h2>
-                  </div>
-                  <div class="why-inline-copy">
-                    <p>За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
-                    <p>За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
-                    <p>Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
-                  </div>
-                  <div class="why-inline-meta">
-                    <div class="why-inline-stat">
-                      <strong>50+</strong>
-                      <span>Запущенных проектов</span>
-                    </div>
-                    <div class="why-inline-stat">
-                      <strong>300+</strong>
-                      <span>Проданных никнеймов</span>
-                    </div>
-                    <div class="why-inline-stat">
-                      <strong>1000+</strong>
-                      <span>Решённых проблем</span>
-                    </div>
-                  </div>
-                  <div class="why-inline-footer">
-                    <a class="why-inline-btn" href="contacts.html">Перейти к контактам</a>
-                  </div>
-                </div>
-
-                <div class="steps-column">
-                  <div class="work-inline">
-                    <div class="steps-grid">
-                      <article class="step">
-                        <div class="step-head">
-                          <div class="step-num">01</div>
-                          <h3>Вы изучаете варианты</h3>
-                        </div>
-                        <p>Смотрите каталог username, направления работы и подходящие форматы запуска.</p>
-                      </article>
-
-                      <article class="step">
-                        <div class="step-head">
-                          <div class="step-num">02</div>
-                          <h3>Пишете в Telegram</h3>
-                        </div>
-                        <p>Через основной контакт обсуждаются детали, задача и подходящий сценарий старта.</p>
-                      </article>
-
-                      <article class="step">
-                        <div class="step-head">
-                          <div class="step-num">03</div>
-                          <h3>Мы подбираем решение</h3>
-                        </div>
-                        <p>Определяем лучший username, формат услуги и оптимальный путь запуска без лишних шагов.</p>
-                      </article>
-
-                      <article class="step">
-                        <div class="step-head">
-                          <div class="step-num">04</div>
-                          <h3>Переходим к запуску</h3>
-                        </div>
-                        <p>После согласования деталей переходим к продаже, сопровождению или нужной услуге.</p>
-                      </article>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </section>
-
-      </div>
-    </main>
-
-    <div id="footer-placeholder"></div>
-  </div>
-
-  <script>
-    (function () {
-      const grid = document.getElementById('latest-articles-grid');
-      if (!grid) return;
-
-      function escapeHtml(str) {
-        return String(str || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-
-      function normalizePost(post) {
-        return {
-          slug: post.slug || '',
-          title: (post.title || 'Без названия').trim(),
-          description: (post.description || post.excerpt || post.shortDescription || '').trim(),
-          cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
-          date: post.date || ''
-        };
-      }
-
-      function sortPosts(posts) {
-        return [...posts].sort((a, b) => {
-          const dateA = new Date(a.date || 0).getTime();
-          const dateB = new Date(b.date || 0).getTime();
-          return dateB - dateA;
-        });
-      }
-
-      function cleanDescription(text) {
-        let clean = String(text || '')
-          .replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘]/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
-
-        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone.';
-
-        if (clean.length > 160) {
-          clean = clean.slice(0, 160).trimEnd();
-          const lastPunct = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf('!'), clean.lastIndexOf('?'));
-          if (lastPunct >= 80) {
-            clean = clean.slice(0, lastPunct + 1);
-          } else {
-            clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
-          }
-        } else if (clean.length < 80) {
-          const tail = ' Открыть материал в блоге SovaZone.';
-          if ((clean + tail).length <= 160) clean += tail;
-          if (!/[.!?…]$/.test(clean)) clean += '.';
-        }
-
-        return clean;
-      }
-
-      function buildPostUrl(slug) {
-        return '/post.html?slug=' + encodeURIComponent(slug || '');
-      }
-
-      function render(posts) {
-        const items = posts.slice(0, 4);
-        grid.innerHTML = items.map(post => {
-          const title = escapeHtml(post.title);
-          const desc = escapeHtml(cleanDescription(post.description));
-          const cover = escapeHtml(post.cover || '/og-image.png');
-          const href = escapeHtml(buildPostUrl(post.slug));
-          return `
-            <article class="latest-article-card">
-              <div class="latest-article-image-wrap">
-                <img class="latest-article-image" src="${cover}" alt="${title}">
-              </div>
-              <div class="latest-article-body">
-                <h3 class="latest-article-title">${title}</h3>
-                <p class="latest-article-desc">${desc}</p>
-                <a class="latest-article-link" href="${href}">Открыть статью</a>
-              </div>
-            </article>
-          `;
-        }).join('');
-      }
-
-      function renderFallback() {
-        grid.innerHTML = `
-          <article class="latest-article-card">
-            <div class="latest-article-image-wrap"></div>
-            <div class="latest-article-body">
-              <h3 class="latest-article-title">Не удалось загрузить блог</h3>
-              <p class="latest-article-desc">Открой раздел блога SovaZone, чтобы посмотреть последние публикации.</p>
-              <a class="latest-article-link" href="/blog.html">Открыть блог</a>
+            <div class="service-card">
+                <h3>Digital Solutions</h3>
+                <p>Автоматизация процессов и разработка сложных экосистем.</p>
             </div>
-          </article>
-        `;
-      }
+            <div class="service-card">
+                <h3>Support</h3>
+                <p>Круглосуточная техническая поддержка ваших проектов.</p>
+            </div>
+        </div>
+    </section>
 
-      async function fetchJsonWithFallback(paths) {
-        for (const url of paths) {
-          try {
-            const response = await fetch(url, { cache: 'no-store' });
-            if (response.ok) return await response.json();
-          } catch (e) {}
-        }
-        throw new Error('BLOG_INDEX_NOT_FOUND');
-      }
+    <!-- FOOTER -->
+    <footer style="padding: 40px; text-align: center; font-size: 0.9rem; opacity: 0.5;">
+        &copy; 2024 SOVA ZONE. All rights reserved.
+    </footer>
 
-      (async function init() {
-        try {
-          const cacheBust = Date.now();
-          const posts = await fetchJsonWithFallback([
-            '/content/blog/index.json?v=' + cacheBust,
-            'https://cdn.jsdelivr.net/gh/TheSovaDigital/sovazone@main/content/blog/index.json?v=' + cacheBust,
-            'https://raw.githubusercontent.com/TheSovaDigital/sovazone/main/content/blog/index.json?v=' + cacheBust
-          ]);
+    <!-- JS из вашего репозитория -->
+    <script src="https://sovazone.com"></script>
 
-          const normalized = sortPosts((Array.isArray(posts) ? posts : []).map(normalizePost))
-            .filter(post => post.slug && post.title);
-
-          if (!normalized.length) throw new Error('BLOG_EMPTY');
-          render(normalized);
-        } catch (e) {
-          renderFallback();
-        }
-      })();
-    })();
-  </script>
-  <script src="script.js"></script>
 </body>
 </html>
