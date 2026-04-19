@@ -75,7 +75,7 @@
     .hero.hero-split{
       position:relative;
       margin-bottom:0;
-      min-height:430px;
+      min-height:510px;
       padding:2px 0 0;
       overflow:hidden;
       isolation:isolate;
@@ -92,7 +92,7 @@
       position:relative;
       z-index:2;
       width:100%;
-      min-height:400px;
+      min-height:480px;
       display:block;
     }
     .hero-bg{
@@ -104,24 +104,24 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:10px;
+      top:0;
       right:18px;
-      width:min(46vw, 640px);
-      height:400px;
+      width:min(48vw, 680px);
+      height:480px;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
       background-size:contain;
-      background-position:right center;
+      background-position:right top;
       opacity:.84;
       filter:saturate(.82) brightness(.74) contrast(1.01);
     }
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:104px;
-      top:170px;
-      width:min(15vw, 210px);
-      height:64px;
+      right:110px;
+      top:206px;
+      width:min(16vw, 224px);
+      height:72px;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
@@ -249,10 +249,10 @@
 
     @media (max-width:1240px){
       .hero.hero-split{
-        min-height:392px;
+        min-height:456px;
       }
       .hero-grid{
-        min-height:362px;
+        min-height:426px;
         display:block;
       }
       .hero-content{
@@ -273,16 +273,17 @@
       }
       .hero-bg::before{
         right:10px;
-        width:min(44vw, 580px);
-        height:360px;
-        top:10px;
+        width:min(46vw, 620px);
+        height:430px;
+        top:0;
         background-size:contain;
+        background-position:right top;
       }
       .hero-bg::after{
-        right:72px;
-        top:156px;
-        width:min(14vw, 182px);
-        height:58px;
+        right:78px;
+        top:186px;
+        width:min(15vw, 194px);
+        height:64px;
       }
     }
 
