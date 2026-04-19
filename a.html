@@ -75,8 +75,8 @@
     .hero.hero-split{
       position:relative;
       margin-bottom:0;
-      min-height:424px;
-      padding:6px 0 0;
+      min-height:396px;
+      padding:4px 0 0;
       overflow:hidden;
       isolation:isolate;
       border:none;
@@ -92,7 +92,7 @@
       position:relative;
       z-index:2;
       width:100%;
-      min-height:392px;
+      min-height:364px;
       display:block;
     }
     .hero-bg{
@@ -104,10 +104,10 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:8%;
+      top:5%;
       right:18px;
-      width:min(37vw, 500px);
-      height:74%;
+      width:min(41vw, 560px);
+      height:88%;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
       background-size:contain;
@@ -118,10 +118,10 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:86px;
+      right:92px;
       top:41%;
-      width:min(12vw, 160px);
-      height:12%;
+      width:min(13vw, 176px);
+      height:13%;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
@@ -189,7 +189,7 @@
       grid-template-columns:repeat(3, minmax(108px, max-content)) minmax(156px, max-content);
       gap:10px;
       align-items:stretch;
-      margin-top:8px;
+      margin-top:6px;
       max-width:540px;
     }
     .hero-actions-row .btn,
@@ -236,12 +236,12 @@
     }
 
     .section-usernames-showcase{
-      margin-top:2px;
+      margin-top:-6px;
     }
     .section-usernames-showcase .section-head-inline{
       align-items:flex-end;
       gap:14px;
-      margin-bottom:10px;
+      margin-bottom:8px;
     }
     .section-usernames-showcase .section-head-inline h2{
       margin:0;
@@ -249,10 +249,10 @@
 
     @media (max-width:1240px){
       .hero.hero-split{
-        min-height:404px;
+        min-height:382px;
       }
       .hero-grid{
-        min-height:372px;
+        min-height:350px;
         display:block;
       }
       .hero-content{
@@ -273,25 +273,25 @@
       }
       .hero-bg::before{
         right:10px;
-        width:min(36vw, 430px);
-        height:74%;
-        top:8%;
+        width:min(40vw, 500px);
+        height:86%;
+        top:5%;
         background-size:contain;
       }
       .hero-bg::after{
-        right:56px;
-        width:min(11vw, 138px);
+        right:62px;
+        width:min(12vw, 150px);
       }
     }
 
     @media (max-width:860px){
       .hero.hero-split{
-        min-height:560px;
+        min-height:548px;
         padding:8px 0 6px;
       }
       .hero-grid{
         width:100%;
-        min-height:510px;
+        min-height:498px;
         display:block;
       }
       .hero-content{
@@ -317,17 +317,17 @@
       }
       .hero-bg::before{
         right:-4vw;
-        top:28%;
-        width:min(82vw, 560px);
-        height:56%;
+        top:24%;
+        width:min(88vw, 620px);
+        height:64%;
         opacity:.74;
         background-size:contain;
       }
       .hero-bg::after{
         right:0;
         top:42%;
-        width:min(52vw, 270px);
-        height:18%;
+        width:min(56vw, 290px);
+        height:20%;
       }
     }
 
