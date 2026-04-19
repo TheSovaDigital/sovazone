@@ -75,7 +75,7 @@
     .hero.hero-split{
       position:relative;
       margin-bottom:0;
-      min-height:530px;
+      min-height:410px;
       padding:2px 0 0;
       overflow:hidden;
       isolation:isolate;
@@ -92,7 +92,7 @@
       position:relative;
       z-index:2;
       width:100%;
-      min-height:500px;
+      min-height:380px;
       display:block;
     }
     .hero-bg{
@@ -104,10 +104,10 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:-60px;
+      top:0;
       right:-50px;
-      width:min(48vw, 680px);
-      height:480px;
+      width:min(44vw, 620px);
+      height:380px;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
       background-size:contain;
@@ -118,10 +118,10 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:130px;
-      top:176px;
-      width:min(16vw, 224px);
-      height:72px;
+      right:122px;
+      top:154px;
+      width:min(14vw, 194px);
+      height:58px;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
@@ -249,10 +249,10 @@
 
     @media (max-width:1240px){
       .hero.hero-split{
-        min-height:456px;
+        min-height:336px;
       }
       .hero-grid{
-        min-height:426px;
+        min-height:306px;
         display:block;
       }
       .hero-content{
@@ -272,18 +272,18 @@
         max-width:440px;
       }
       .hero-bg::before{
-        right:-50px;
-        width:min(46vw, 620px);
-        height:430px;
-        top:-60px;
+        right:-40px;
+        width:min(42vw, 520px);
+        height:306px;
+        top:0;
         background-size:contain;
         background-position:right top;
       }
       .hero-bg::after{
-        right:98px;
-        top:156px;
-        width:min(15vw, 194px);
-        height:64px;
+        right:88px;
+        top:126px;
+        width:min(13vw, 158px);
+        height:48px;
       }
     }
 
