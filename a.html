@@ -75,8 +75,8 @@
     .hero.hero-split{
       position:relative;
       margin-bottom:0;
-      min-height:452px;
-      padding:10px 0 0;
+      min-height:486px;
+      padding:14px 0 0;
       overflow:hidden;
       isolation:isolate;
       border:none;
@@ -92,7 +92,7 @@
       position:relative;
       z-index:2;
       width:100%;
-      min-height:426px;
+      min-height:456px;
       display:block;
     }
     .hero-bg{
@@ -104,32 +104,24 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:1%;
+      top:4%;
       right:18px;
-      width:min(48vw, 670px);
-      height:102%;
+      width:min(46vw, 620px);
+      height:92%;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
-      background-size:112% auto;
+      background-size:100% auto;
       background-position:right center;
       opacity:.84;
       filter:saturate(.82) brightness(.74) contrast(1.01);
-      mask-image:
-        radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.72) 54%, transparent 79%),
-        linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.92) 40%, transparent 82%),
-        linear-gradient(to bottom, rgba(0,0,0,.90) 0%, rgba(0,0,0,.98) 16%, rgba(0,0,0,.94) 74%, transparent 100%);
-      -webkit-mask-image:
-        radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.72) 54%, transparent 79%),
-        linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.92) 40%, transparent 82%),
-        linear-gradient(to bottom, rgba(0,0,0,.90) 0%, rgba(0,0,0,.98) 16%, rgba(0,0,0,.94) 74%, transparent 100%);
     }
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:108px;
-      top:40%;
-      width:min(17vw, 248px);
-      height:18%;
+      right:100px;
+      top:41%;
+      width:min(15vw, 214px);
+      height:16%;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
@@ -257,10 +249,10 @@
 
     @media (max-width:1240px){
       .hero.hero-split{
-        min-height:404px;
+        min-height:434px;
       }
       .hero-grid{
-        min-height:378px;
+        min-height:404px;
         display:block;
       }
       .hero-content{
@@ -281,25 +273,25 @@
       }
       .hero-bg::before{
         right:10px;
-        width:min(47vw, 610px);
-        height:104%;
-        top:0;
-        background-size:112% auto;
+        width:min(45vw, 560px);
+        height:92%;
+        top:6%;
+        background-size:100% auto;
       }
       .hero-bg::after{
-        right:74px;
-        width:min(16vw, 214px);
+        right:68px;
+        width:min(14vw, 188px);
       }
     }
 
     @media (max-width:860px){
       .hero.hero-split{
-        min-height:612px;
+        min-height:620px;
         padding:12px 0 6px;
       }
       .hero-grid{
         width:100%;
-        min-height:560px;
+        min-height:570px;
         display:block;
       }
       .hero-content{
@@ -324,18 +316,18 @@
         max-width:340px;
       }
       .hero-bg::before{
-        right:-10vw;
-        top:22%;
-        width:min(122vw, 860px);
-        height:82%;
+        right:-8vw;
+        top:24%;
+        width:min(108vw, 760px);
+        height:74%;
         opacity:.74;
-        background-size:112% auto;
+        background-size:100% auto;
       }
       .hero-bg::after{
         right:0;
-        top:38%;
-        width:min(76vw, 410px);
-        height:28%;
+        top:40%;
+        width:min(68vw, 360px);
+        height:24%;
       }
     }
 
