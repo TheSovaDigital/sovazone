@@ -75,7 +75,7 @@
     .hero.hero-split{
       position:relative;
       margin-bottom:0;
-      min-height:356px;
+      min-height:430px;
       padding:2px 0 0;
       overflow:hidden;
       isolation:isolate;
@@ -92,7 +92,7 @@
       position:relative;
       z-index:2;
       width:100%;
-      min-height:326px;
+      min-height:400px;
       display:block;
     }
     .hero-bg{
@@ -104,10 +104,10 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:6%;
+      top:10px;
       right:18px;
-      width:min(44vw, 610px);
-      height:86%;
+      width:min(46vw, 640px);
+      height:400px;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
       background-size:contain;
@@ -118,10 +118,10 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:98px;
-      top:41%;
-      width:min(14vw, 194px);
-      height:14%;
+      right:104px;
+      top:170px;
+      width:min(15vw, 210px);
+      height:64px;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
@@ -249,10 +249,10 @@
 
     @media (max-width:1240px){
       .hero.hero-split{
-        min-height:346px;
+        min-height:392px;
       }
       .hero-grid{
-        min-height:316px;
+        min-height:362px;
         display:block;
       }
       .hero-content{
@@ -273,14 +273,16 @@
       }
       .hero-bg::before{
         right:10px;
-        width:min(43vw, 560px);
-        height:84%;
-        top:6%;
+        width:min(44vw, 580px);
+        height:360px;
+        top:10px;
         background-size:contain;
       }
       .hero-bg::after{
-        right:66px;
-        width:min(13vw, 168px);
+        right:72px;
+        top:156px;
+        width:min(14vw, 182px);
+        height:58px;
       }
     }
 
