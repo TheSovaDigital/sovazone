@@ -75,8 +75,8 @@
     .hero.hero-split{
       position:relative;
       margin-bottom:0;
-      min-height:396px;
-      padding:4px 0 0;
+      min-height:356px;
+      padding:2px 0 0;
       overflow:hidden;
       isolation:isolate;
       border:none;
@@ -92,7 +92,7 @@
       position:relative;
       z-index:2;
       width:100%;
-      min-height:364px;
+      min-height:326px;
       display:block;
     }
     .hero-bg{
@@ -104,10 +104,10 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:5%;
+      top:6%;
       right:18px;
-      width:min(41vw, 560px);
-      height:88%;
+      width:min(44vw, 610px);
+      height:86%;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
       background-size:contain;
@@ -118,10 +118,10 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:92px;
+      right:98px;
       top:41%;
-      width:min(13vw, 176px);
-      height:13%;
+      width:min(14vw, 194px);
+      height:14%;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
@@ -173,13 +173,13 @@
       max-width:780px;
     }
     .hero-text-block p{
-      margin:0 0 16px;
+      margin:0 0 12px;
       color:var(--muted);
       font-size:15px;
       line-height:1.655;
     }
     .hero-text-block .hero-lead{
-      margin:0 0 16px;
+      margin:0 0 12px;
       color:var(--muted);
       font-size:15px;
       line-height:1.65;
@@ -189,7 +189,7 @@
       grid-template-columns:repeat(3, minmax(108px, max-content)) minmax(156px, max-content);
       gap:10px;
       align-items:stretch;
-      margin-top:6px;
+      margin-top:4px;
       max-width:540px;
     }
     .hero-actions-row .btn,
@@ -236,12 +236,12 @@
     }
 
     .section-usernames-showcase{
-      margin-top:-6px;
+      margin-top:-14px;
     }
     .section-usernames-showcase .section-head-inline{
       align-items:flex-end;
       gap:14px;
-      margin-bottom:8px;
+      margin-bottom:6px;
     }
     .section-usernames-showcase .section-head-inline h2{
       margin:0;
@@ -249,10 +249,10 @@
 
     @media (max-width:1240px){
       .hero.hero-split{
-        min-height:382px;
+        min-height:346px;
       }
       .hero-grid{
-        min-height:350px;
+        min-height:316px;
         display:block;
       }
       .hero-content{
@@ -273,25 +273,25 @@
       }
       .hero-bg::before{
         right:10px;
-        width:min(40vw, 500px);
-        height:86%;
-        top:5%;
+        width:min(43vw, 560px);
+        height:84%;
+        top:6%;
         background-size:contain;
       }
       .hero-bg::after{
-        right:62px;
-        width:min(12vw, 150px);
+        right:66px;
+        width:min(13vw, 168px);
       }
     }
 
     @media (max-width:860px){
       .hero.hero-split{
-        min-height:548px;
+        min-height:520px;
         padding:8px 0 6px;
       }
       .hero-grid{
         width:100%;
-        min-height:498px;
+        min-height:470px;
         display:block;
       }
       .hero-content{
@@ -318,15 +318,15 @@
       .hero-bg::before{
         right:-4vw;
         top:24%;
-        width:min(88vw, 620px);
-        height:64%;
+        width:min(94vw, 680px);
+        height:66%;
         opacity:.74;
         background-size:contain;
       }
       .hero-bg::after{
         right:0;
         top:42%;
-        width:min(56vw, 290px);
+        width:min(58vw, 300px);
         height:20%;
       }
     }
@@ -362,14 +362,14 @@
     .username-grid.username-grid-refined{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
+      gap:10px;
     }
     .username-grid-refined .username-card{
       position:relative;
       overflow:hidden;
-      border-radius:20px;
-      padding:13px 13px 12px;
-      min-height:126px;
+      border-radius:18px;
+      padding:11px 11px 10px;
+      min-height:116px;
       background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
       border:1px solid rgba(255,255,255,.06);
       transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
@@ -386,8 +386,8 @@
     .username-grid-refined .username-card-top{
       display:grid;
       grid-template-columns:minmax(0,1fr);
-      gap:5px;
-      margin-bottom:10px;
+      gap:4px;
+      margin-bottom:8px;
     }
     .username-grid-refined .username-title-row{
       display:flex;
@@ -457,9 +457,9 @@
     }
     .username-grid-refined .username-buy{
       width:100%;
-      min-height:32px;
-      height:32px;
-      border-radius:11px;
+      min-height:30px;
+      height:30px;
+      border-radius:10px;
       border:none;
       background:linear-gradient(90deg,#8c52ff,#ff6d6d);
       color:#fff;
