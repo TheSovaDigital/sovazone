@@ -40,7 +40,7 @@
   <style>
     .home-page{
       position:relative;
-      overflow:hidden;
+      overflow:visible;
       padding-top:30px;
     }
     .home-page::before,
@@ -74,10 +74,11 @@
     
     .hero.hero-split{
       position:relative;
+      z-index:2;
       margin-bottom:0;
       min-height:390px;
       padding:2px 0 0;
-      overflow:hidden;
+      overflow:visible;
       isolation:isolate;
       border:none;
       border-radius:0;
@@ -94,6 +95,7 @@
       width:100%;
       min-height:360px;
       display:block;
+      overflow:visible;
     }
     .hero-bg{
       position:absolute;
@@ -236,6 +238,8 @@
     }
 
     .section-usernames-showcase{
+      position:relative;
+      z-index:1;
       margin-top:-120px;
     }
     .section-usernames-showcase .section-head-inline{
