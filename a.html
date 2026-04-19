@@ -45,7 +45,26 @@
     }
     .home-page::before,
     .home-page::after{
-      display:none;
+      content:"";
+      position:absolute;
+      pointer-events:none;
+      z-index:0;
+    }
+    .home-page::before{
+      top:110px;
+      left:-250px;
+      width:420px;
+      height:420px;
+      background:radial-gradient(circle at 72% 46%, rgba(128,45,106,.07) 0%, rgba(128,45,106,0) 74%);
+      filter:blur(30px);
+    }
+    .home-page::after{
+      top:150px;
+      right:-280px;
+      width:520px;
+      height:520px;
+      background:radial-gradient(circle at 28% 40%, rgba(34,58,154,.07) 0%, rgba(34,58,154,0) 76%);
+      filter:blur(36px);
     }
     .page-content > .container{
       position:relative;
