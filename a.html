@@ -93,13 +93,13 @@
     .hero-grid{
       position:relative;
       z-index:2;
-      width:min(1088px, calc(100vw - 112px));
+      width:min(1120px, calc(100vw - 96px));
       min-height:390px;
       margin:0 auto;
       display:grid;
-      grid-template-columns:minmax(0, 660px) minmax(220px, 1fr);
+      grid-template-columns:minmax(0, 720px) minmax(180px, 1fr);
       align-items:center;
-      column-gap:18px;
+      column-gap:14px;
     }
     .hero-side,
     .hero-logo-card,
@@ -112,22 +112,20 @@
       z-index:3;
       min-width:0;
       width:100%;
-      max-width:660px;
+      max-width:760px;
       padding:16px 0 8px;
     }
     .hero-content h1{
       margin:0 0 14px;
       max-width:none;
       width:auto;
-      font-size:clamp(24px, 2.18vw, 38px);
+      font-size:clamp(22px, 2.04vw, 36px);
       line-height:1.02;
       letter-spacing:-0.045em;
       white-space:nowrap;
       color:#fff;
       text-wrap:normal;
-    }
-    .hero-content h1{
-      background:linear-gradient(90deg, #ffffff 0%, #f3d6ff 18%, #d76df3 44%, #ff5c97 72%, #f77737 100%);
+      background:linear-gradient(90deg, #ead7ff 0%, #c77dff 24%, #ff5ca8 62%, #f77737 100%);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
@@ -145,11 +143,11 @@
       display:none;
     }
     .hero-text-block{
-      max-width:640px;
+      max-width:768px;
     }
     .hero-text-block p{
       margin:0 0 10px;
-      font-size:13.5px;
+      font-size:14px;
       line-height:1.6;
       color:rgba(255,255,255,.74);
     }
@@ -218,8 +216,8 @@
       content:"";
       position:absolute;
       top:-2%;
-      right:max(56px, calc((100vw - 1088px) / 2));
-      width:min(44vw, 620px);
+      right:max(22px, calc((100vw - 1120px) / 2));
+      width:min(42vw, 600px);
       height:94%;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
@@ -239,9 +237,9 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:calc(max(56px, calc((100vw - 1088px) / 2)) + 96px);
+      right:calc(max(22px, calc((100vw - 1120px) / 2)) + 92px);
       top:38%;
-      width:min(18vw, 260px);
+      width:min(18vw, 250px);
       height:20%;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
@@ -613,40 +611,40 @@
     
     @media (max-width:1240px){
       .hero-grid{
-        width:min(1020px, calc(100vw - 84px));
-        grid-template-columns:minmax(0, 600px) minmax(170px, 1fr);
-        column-gap:8px;
+        width:min(1040px, calc(100vw - 72px));
+        grid-template-columns:minmax(0, 660px) minmax(130px, 1fr);
+        column-gap:10px;
       }
       .hero-content{
         max-width:100%;
       }
       .hero-content h1{
         max-width:none;
-        font-size:clamp(20px, 1.96vw, 34px);
+        font-size:clamp(20px, 1.86vw, 32px);
         white-space:nowrap;
       }
       .hero-text-block{
-        max-width:590px;
+        max-width:700px;
       }
       .hero-text-block p{
-        font-size:13px;
+        font-size:13.5px;
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
         max-width:440px;
       }
       .hero-bg::before{
-        right:max(42px, calc((100vw - 1020px) / 2));
+        right:max(18px, calc((100vw - 1040px) / 2));
         left:auto;
-        width:min(41vw, 520px);
-        height:88%;
-        top:9%;
+        width:min(40vw, 500px);
+        height:90%;
+        top:2%;
         background-size:contain;
       }
       .hero-bg::after{
-        right:calc(max(42px, calc((100vw - 1020px) / 2)) + 74px);
+        right:calc(max(18px, calc((100vw - 1040px) / 2)) + 70px);
         left:auto;
-        width:min(14vw, 170px);
+        width:min(14vw, 160px);
       }
       .username-grid.username-grid-refined{
         grid-template-columns:repeat(2, minmax(0,1fr));
