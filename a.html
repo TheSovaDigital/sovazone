@@ -126,12 +126,19 @@
       color:#fff;
       text-wrap:normal;
     }
-    .hero-content h1 .hero-grad{
-      background:linear-gradient(90deg, #833ab4 0%, #c13584 34%, #e1306c 66%, #f77737 100%);
+    .hero-content h1{
+      background:linear-gradient(90deg, #ffffff 0%, #f3d6ff 18%, #d76df3 44%, #ff5c97 72%, #f77737 100%);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
       -webkit-text-fill-color:transparent;
+    }
+    .hero-content h1 .hero-grad{
+      background:none;
+      -webkit-background-clip:border-box;
+      background-clip:border-box;
+      color:inherit;
+      -webkit-text-fill-color:inherit;
     }
     .hero-badge-wrap,
     .hero-badge.hero-badge-static{
@@ -210,13 +217,13 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:-4%;
+      top:-2%;
       right:max(56px, calc((100vw - 1088px) / 2));
-      width:min(52vw, 744px);
-      height:104%;
+      width:min(44vw, 620px);
+      height:94%;
       background-image:url('/image/hero-owl-soft.webp');
       background-repeat:no-repeat;
-      background-size:112% auto;
+      background-size:contain;
       background-position:right center;
       opacity:.84;
       filter:saturate(.80) brightness(.74) contrast(1.01);
@@ -232,10 +239,10 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:calc(max(56px, calc((100vw - 1088px) / 2)) + 86px);
-      top:34%;
-      width:min(20vw, 290px);
-      height:22%;
+      right:calc(max(56px, calc((100vw - 1088px) / 2)) + 96px);
+      top:38%;
+      width:min(18vw, 260px);
+      height:20%;
       background:
         radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
         radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
@@ -631,15 +638,15 @@
       .hero-bg::before{
         right:max(42px, calc((100vw - 1020px) / 2));
         left:auto;
-        width:min(48vw, 624px);
-        height:98%;
-        top:-1%;
-        background-size:112% auto;
+        width:min(41vw, 520px);
+        height:88%;
+        top:9%;
+        background-size:contain;
       }
       .hero-bg::after{
         right:calc(max(42px, calc((100vw - 1020px) / 2)) + 74px);
         left:auto;
-        width:min(16vw, 190px);
+        width:min(14vw, 170px);
       }
       .username-grid.username-grid-refined{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -687,19 +694,19 @@
       }
       .hero-bg::before{
         left:auto;
-        right:-14vw;
-        top:12%;
-        width:min(140vw, 980px);
-        height:90%;
+        right:-12vw;
+        top:20%;
+        width:min(124vw, 860px);
+        height:80%;
         opacity:.74;
-        background-size:112% auto;
+        background-size:contain;
       }
       .hero-bg::after{
         left:auto;
         right:0;
-        top:30%;
-        width:min(82vw, 420px);
-        height:30%;
+        top:36%;
+        width:min(76vw, 390px);
+        height:28%;
       }
     }
 
