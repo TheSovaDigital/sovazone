@@ -40,7 +40,7 @@
   <style>
     .home-page{
       position:relative;
-      overflow:visible;
+      overflow:hidden;
       padding-top:30px;
     }
     .home-page::before,
@@ -74,11 +74,10 @@
     
     .hero.hero-split{
       position:relative;
-      z-index:2;
       margin-bottom:0;
       min-height:390px;
       padding:2px 0 0;
-      overflow:visible;
+      overflow:hidden;
       isolation:isolate;
       border:none;
       border-radius:0;
@@ -95,7 +94,6 @@
       width:100%;
       min-height:360px;
       display:block;
-      overflow:visible;
     }
     .hero-bg{
       position:absolute;
@@ -106,8 +104,8 @@
     .hero-bg::before{
       content:"";
       position:absolute;
-      top:-90px;
-      right:-75px;
+      top:-80px;
+      right:-70px;
       width:min(48vw, 680px);
       height:550px;
       background-image:url('/image/hero-owl-soft.webp');
@@ -120,8 +118,8 @@
     .hero-bg::after{
       content:"";
       position:absolute;
-      right:155px;
-      top:146px;
+      right:150px;
+      top:156px;
       width:min(16vw, 224px);
       height:72px;
       background:
@@ -191,7 +189,7 @@
       grid-template-columns:repeat(3, minmax(108px, max-content)) minmax(156px, max-content);
       gap:10px;
       align-items:stretch;
-      margin-top:4px;
+      margin-top:14px;
       max-width:540px;
     }
     .hero-actions-row .btn,
@@ -238,8 +236,6 @@
     }
 
     .section-usernames-showcase{
-      position:relative;
-      z-index:1;
       margin-top:-120px;
     }
     .section-usernames-showcase .section-head-inline{
@@ -276,16 +272,16 @@
         max-width:440px;
       }
       .hero-bg::before{
-        right:-75px;
+        right:-70px;
         width:min(46vw, 620px);
         height:480px;
-        top:-90px;
+        top:-80px;
         background-size:contain;
         background-position:right top;
       }
       .hero-bg::after{
-        right:123px;
-        top:126px;
+        right:118px;
+        top:136px;
         width:min(15vw, 194px);
         height:64px;
       }
