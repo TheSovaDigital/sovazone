@@ -71,134 +71,72 @@
       z-index:1;
     }
 
-    
     .hero.hero-split{
-      position:relative;
+      margin-bottom:24px;
+      align-items:flex-start;
+      gap:24px;
+    }
+    .hero-side{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      width:min(290px, 100%);
+      flex:0 0 290px;
+    }
+    .hero-badge-wrap{
       margin-bottom:0;
-      min-height:302px;
-      padding:0;
-      overflow:hidden;
-      isolation:isolate;
-      border:none;
-      border-radius:0;
-      background:transparent;
-      box-shadow:none;
-      display:block;
     }
-    .hero.hero-split::before{
-      display:none;
-    }
-    .hero-grid{
-      position:relative;
-      z-index:2;
-      width:100%;
-      min-height:286px;
-      display:grid;
-      grid-template-columns:minmax(0, 720px) minmax(140px, 1fr);
-      align-items:center;
-      column-gap:0;
-    }
-    .hero-bg{
-      position:absolute;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-    }
-    .hero-bg::before{
-      content:"";
-      position:absolute;
-      top:-8%;
-      right:-8px;
-      width:min(47vw, 650px);
-      height:108%;
-      background-image:url('/image/hero-owl-soft.webp');
-      background-repeat:no-repeat;
-      background-size:contain;
-      background-position:right center;
-      opacity:.84;
-      filter:saturate(.82) brightness(.74) contrast(1.01);
-      mask-image:
-        radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.72) 54%, transparent 79%),
-        linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.92) 40%, transparent 82%),
-        linear-gradient(to bottom, rgba(0,0,0,.90) 0%, rgba(0,0,0,.98) 16%, rgba(0,0,0,.94) 74%, transparent 100%);
-      -webkit-mask-image:
-        radial-gradient(circle at 57% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.97) 34%, rgba(0,0,0,.72) 54%, transparent 79%),
-        linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.92) 40%, transparent 82%),
-        linear-gradient(to bottom, rgba(0,0,0,.90) 0%, rgba(0,0,0,.98) 16%, rgba(0,0,0,.94) 74%, transparent 100%);
-    }
-    .hero-bg::after{
-      content:"";
-      position:absolute;
-      right:78px;
-      top:39%;
-      width:min(15vw, 210px);
-      height:18%;
-      background:
-        radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
-        radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
-      filter:blur(14px);
-      opacity:.09;
-      mix-blend-mode:screen;
-    }
-    .hero-bottom-fade{
-      display:none;
-    }
-    .hero-side,
-    .hero-logo-card,
-    .hero-logo,
-    .hero-side-actions,
-    .hero-badge-wrap,
     .hero-badge.hero-badge-static{
-      display:none;
+      min-height:0;
+      padding:9px 16px;
+      border-radius:999px;
+      font-size:12px;
+      line-height:1;
+      font-weight:600;
+      letter-spacing:.02em;
+      background:rgba(255,255,255,.022);
+      border:1px solid rgba(217,179,140,.14);
+      box-shadow:none;
+    }
+    .hero-logo-card{
+      overflow:hidden;
+      aspect-ratio:1 / 1;
+      border-radius:26px;
+      border:none;
+      background:transparent;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+      box-shadow:none;
+    }
+    .hero-logo{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+      border-radius:26px;
     }
     .hero-content{
-      position:relative;
-      z-index:3;
       min-width:0;
-      width:100%;
-      max-width:none;
-      padding:0;
-      overflow:visible;
+      flex:1 1 auto;
     }
     .hero-content h1{
-      margin:0 0 14px;
-      width:max-content;
-      max-width:none;
-      display:inline-block;
-      overflow:visible;
-      padding-bottom:.16em;
-      font-size:clamp(26px, 2.02vw, 36px);
-      line-height:1.06;
-      letter-spacing:-0.042em;
+      margin:0 0 12px;
+      font-size:clamp(24px, 1.72vw, 32px);
+      line-height:1.04;
+      letter-spacing:-0.04em;
       white-space:nowrap;
-      text-wrap:normal;
-      position:relative;
-      z-index:4;
-      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 26%, #ff5ca8 64%, #f77737 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      -webkit-text-fill-color:transparent;
+      max-width:100%;
     }
     .hero-text-block{
-      max-width:760px;
-    }
-    .hero-text-block p{
-      margin:0 0 14px;
-      font-size:14px;
-      line-height:1.68;
-      color:rgba(255,255,255,.74);
-    }
-    .hero-text-block .hero-lead{
-      color:rgba(255,255,255,.86);
+      max-width:100%;
     }
     .hero-actions-row{
       display:grid;
-      grid-template-columns:repeat(3, minmax(108px, max-content)) minmax(156px, max-content);
+      grid-template-columns:repeat(3, minmax(150px, 1fr)) minmax(220px, 1.12fr);
       gap:10px;
       align-items:stretch;
-      margin-top:6px;
-      max-width:540px;
+      margin-top:42px;
     }
     .hero-actions-row .btn,
     .hero-actions-row .mini-point{
@@ -214,26 +152,21 @@
       line-height:1.1;
       white-space:nowrap;
       overflow:hidden;
-      text-decoration:none;
-      font-size:13px;
     }
     .hero-actions-row .mini-point{
       border-radius:0;
-      transition:background .22s ease, border-color .22s ease, color .22s ease, transform .22s ease, box-shadow .22s ease;
-    }
-    .hero-actions-row .mini-point:hover{
-      background:rgba(255,255,255,.075);
-      border-color:rgba(255,255,255,.20);
-      color:#fff;
-      transform:translateY(-1px);
-      box-shadow:0 10px 20px rgba(0,0,0,.14);
     }
     .hero-actions-row .btn-telegram{
-      border-radius:0;
+      border-radius:14px;
+    }
+    .hero-side-actions{
+      display:none;
+    }
+    .hero-actions-row .btn-telegram{
       color:#fff;
       background:linear-gradient(90deg,#833ab4 0%, #c13584 38%, #e1306c 68%, #f77737 100%);
       border:none;
-      box-shadow:0 12px 24px rgba(0,0,0,.16);
+      box-shadow:0 14px 30px rgba(0,0,0,.18);
       text-decoration:none;
       font-weight:700;
     }
@@ -243,106 +176,7 @@
       transform:translateY(-1px);
     }
 
-    .section-usernames-showcase{
-      margin-top:24px;
-    }
-    .section-usernames-showcase .section-head-inline{
-      align-items:flex-end;
-      gap:14px;
-      margin-bottom:14px;
-    }
-    .section-usernames-showcase .section-head-inline h2{
-      margin:0;
-    }
-
-    @media (max-width:1240px){
-      .hero.hero-split{
-        min-height:310px;
-      }
-      .hero-grid{
-        min-height:290px;
-        grid-template-columns:minmax(0, 660px) minmax(110px, 1fr);
-      }
-      .hero-content{
-        max-width:none;
-      }
-      .hero-content h1{
-        font-size:clamp(24px, 1.86vw, 32px);
-      }
-      .hero-text-block{
-        max-width:720px;
-      }
-      .hero-text-block p{
-        font-size:14px;
-      }
-      .hero-actions-row{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-        max-width:440px;
-      }
-      .hero-bg::before{
-        right:-8px;
-        width:min(45vw, 560px);
-        height:104%;
-        top:-6%;
-      }
-      .hero-bg::after{
-        right:48px;
-        width:min(14vw, 180px);
-      }
-    }
-
-    @media (max-width:860px){
-      .hero.hero-split{
-        min-height:520px;
-        padding:10px 0 4px;
-      }
-      .hero-grid{
-        width:100%;
-        min-height:470px;
-        display:block;
-      }
-      .hero-content{
-        max-width:100%;
-        padding:0 0 174px;
-      }
-      .hero-content h1{
-        max-width:none;
-        width:auto;
-        display:block;
-        white-space:normal;
-        font-size:clamp(30px, 8vw, 44px);
-        line-height:1.06;
-      }
-      .hero-text-block p{
-        font-size:12px;
-        line-height:1.52;
-      }
-      .hero-actions-row{
-        grid-template-columns:1fr;
-        max-width:340px;
-      }
-      .hero-bg::before{
-        right:-12vw;
-        top:18%;
-        width:min(126vw, 860px);
-        height:82%;
-        opacity:.74;
-      }
-      .hero-bg::after{
-        right:0;
-        top:36%;
-        width:min(76vw, 390px);
-        height:28%;
-      }
-    }
-
-    @media (max-width:680px){
-      .hero-content h1{
-        white-space:normal;
-      }
-    }
-
-.section-head h2,
+    .section-head h2,
     .section-head-inline h2,
     .home-projects .section-head h2,
     .about-title,
@@ -1226,25 +1060,30 @@
     <main class="page-content home-page">
       <div class="container">
         <section class="hero hero-split">
-          <div class="hero-bg" aria-hidden="true"></div>
-          <div class="hero-grid">
-            <div class="hero-content">
-              <h1>Запуск личного бренда и новых digital-проектов</h1>
-              <div class="hero-text-block">
-                <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других соц. сетей, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
-                <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
-                <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
-              </div>
-
-              <div class="hero-actions-row">
-                <a href="usernames.html" class="mini-point">Купить ник</a>
-                <a href="sell.html" class="mini-point">Продать ник</a>
-                <a href="services.html" class="mini-point">Ник под заказ</a>
-                <a class="btn btn-telegram" href="contacts.html">Связаться</a>
-              </div>
+          <div class="hero-side">
+            <div class="hero-badge-wrap">
+              <div class="hero-badge hero-badge-static">SovaZone Digital Studio</div>
+            </div>
+            <div class="hero-logo-card">
+              <img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio">
             </div>
           </div>
-          <div class="hero-bottom-fade"></div>
+
+          <div class="hero-content">
+            <h1>Запуск личного бренда и новых digital-проектов</h1>
+            <div class="hero-text-block">
+              <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других соц. сетей, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
+              <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
+              <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
+            </div>
+
+            <div class="hero-actions-row">
+              <a href="usernames.html" class="mini-point">Купить ник</a>
+              <a href="sell.html" class="mini-point">Продать ник</a>
+              <a href="services.html" class="mini-point">Ник под заказ</a>
+              <a class="btn btn-telegram" href="contacts.html">Связаться</a>
+            </div>
+          </div>
         </section>
 
         <section class="section section-usernames-showcase">
