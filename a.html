@@ -51,20 +51,20 @@
       z-index:0;
     }
     .home-page::before{
-      top:56px;
-      left:-420px;
-      width:760px;
-      height:760px;
-      background:radial-gradient(circle at 78% 50%, rgba(128,45,106,.045) 0%, rgba(128,45,106,.028) 18%, rgba(128,45,106,.012) 34%, rgba(128,45,106,0) 58%);
-      filter:blur(54px);
+      top:20px;
+      left:-220px;
+      width:440px;
+      height:440px;
+      background:radial-gradient(circle, rgba(128,45,106,.11) 0%, rgba(128,45,106,0) 74%);
+      filter:blur(28px);
     }
     .home-page::after{
-      top:34px;
-      right:-500px;
-      width:980px;
-      height:980px;
-      background:radial-gradient(circle at 24% 34%, rgba(34,58,154,.045) 0%, rgba(34,58,154,.03) 16%, rgba(34,58,154,.012) 32%, rgba(34,58,154,0) 56%);
-      filter:blur(64px);
+      top:120px;
+      right:-240px;
+      width:560px;
+      height:560px;
+      background:radial-gradient(circle, rgba(34,58,154,.10) 0%, rgba(34,58,154,0) 76%);
+      filter:blur(34px);
     }
     .page-content > .container{
       position:relative;
@@ -102,7 +102,6 @@
       inset:0;
       z-index:1;
       pointer-events:none;
-      isolation:isolate;
     }
     .hero-bg::before{
       content:"";
@@ -117,7 +116,6 @@
       background-position:right top;
       opacity:.84;
       filter:saturate(.82) brightness(.74) contrast(1.01);
-      z-index:2;
     }
     .hero-bg::after{
       content:"";
@@ -132,7 +130,6 @@
       filter:blur(14px);
       opacity:.09;
       mix-blend-mode:screen;
-      z-index:1;
     }
     .hero-bottom-fade{
       display:none;
@@ -290,14 +287,12 @@
         top:-80px;
         background-size:contain;
         background-position:right top;
-        z-index:2;
       }
       .hero-bg::after{
         right:118px;
         top:136px;
         width:min(15vw, 194px);
         height:64px;
-        z-index:1;
       }
     }
 
@@ -340,14 +335,12 @@
         height:66%;
         opacity:.74;
         background-size:contain;
-        z-index:2;
       }
       .hero-bg::after{
         right:0;
         top:42%;
         width:min(58vw, 300px);
         height:20%;
-        z-index:1;
       }
     }
 
