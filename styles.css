@@ -768,7 +768,8 @@ body.sz-lock {
 }
 
 /* =========================
-   TESTED AMBIENT CORNER GLOWS
+   REFINED AMBIENT CORNER GLOWS
+   keep the same glow-bg snippet in HTML
    ========================= */
 
 body{
@@ -777,12 +778,14 @@ body{
   overflow-x:hidden;
 }
 
+body > *:not(.glow-bg){
+  position:relative;
+  z-index:1;
+}
+
 .glow-bg{
   position:fixed;
-  top:0;
-  left:0;
-  width:100vw;
-  height:100vh;
+  inset:0;
   z-index:0;
   pointer-events:none;
   overflow:hidden;
@@ -790,49 +793,42 @@ body{
 
 .glow-blob{
   position:absolute;
-  width:600px;
-  height:600px;
+  width:760px;
+  height:760px;
   border-radius:50%;
-  filter:blur(100px);
-  opacity:.6;
+  filter:blur(165px);
+  opacity:.34;
+  transform:translateZ(0);
 }
 
 .glow-blob.pink{
-  top:-150px;
-  left:-150px;
-  background:#ff00de;
+  top:-290px;
+  left:-290px;
+  background:#6e172d;
 }
 
 .glow-blob.blue{
-  bottom:-150px;
-  right:-150px;
-  background:#00d4ff;
+  top:-290px;
+  right:-290px;
+  background:#241c70;
 }
 
-.site-header,
-.sz-header,
-.page-content,
-.svf-footer{
-  position:relative;
-  z-index:10;
-}
-
-@media (max-width:720px){
+@media (max-width:900px){
   .glow-blob{
-    width:460px;
-    height:460px;
-    filter:blur(90px);
-    opacity:.55;
+    width:560px;
+    height:560px;
+    filter:blur(130px);
+    opacity:.30;
   }
 
   .glow-blob.pink{
-    top:-170px;
-    left:-170px;
+    top:-220px;
+    left:-220px;
   }
 
   .glow-blob.blue{
-    bottom:-170px;
-    right:-170px;
+    top:-220px;
+    right:-220px;
   }
 }
 
