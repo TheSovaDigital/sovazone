@@ -768,7 +768,7 @@ body.sz-lock {
 }
 
 /* =========================
-   GOOGLE-STYLE AMBIENT CORNER GLOWS
+   AMBIENT PINK / BLUE CORNER GLOWS
    ========================= */
 
 body{
@@ -778,10 +778,7 @@ body{
 
 .glow-bg{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   z-index:-1;
   pointer-events:none;
 }
@@ -794,19 +791,19 @@ body{
   min-height:520px;
   border-radius:50%;
   filter:blur(140px);
-  opacity:.42;
+  opacity:.38;
 }
 
 .glow-blob.pink{
   top:-12vw;
   left:-12vw;
-  background:radial-gradient(circle, rgba(110,23,45,.95) 0%, rgba(110,23,45,.46) 36%, rgba(110,23,45,0) 72%);
+  background:radial-gradient(circle, rgba(255,72,181,.95) 0%, rgba(255,72,181,.42) 34%, rgba(255,72,181,0) 72%);
 }
 
 .glow-blob.blue{
   top:-12vw;
   right:-12vw;
-  background:radial-gradient(circle, rgba(36,28,112,.95) 0%, rgba(36,28,112,.46) 36%, rgba(36,28,112,0) 72%);
+  background:radial-gradient(circle, rgba(72,181,255,.95) 0%, rgba(72,181,255,.40) 34%, rgba(72,181,255,0) 72%);
 }
 
 @media (max-width:900px){
@@ -816,7 +813,7 @@ body{
     min-width:420px;
     min-height:420px;
     filter:blur(120px);
-    opacity:.38;
+    opacity:.34;
   }
 
   .glow-blob.pink{
