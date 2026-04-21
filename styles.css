@@ -768,62 +768,71 @@ body.sz-lock {
 }
 
 /* =========================
-   AMBIENT PINK / BLUE CORNER GLOWS
+   TESTED AMBIENT CORNER GLOWS
    ========================= */
 
 body{
   position:relative;
+  min-height:100vh;
   overflow-x:hidden;
 }
 
 .glow-bg{
   position:fixed;
-  inset:0;
-  z-index:-1;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  z-index:0;
   pointer-events:none;
+  overflow:hidden;
 }
 
 .glow-blob{
   position:absolute;
-  width:46vw;
-  height:46vw;
-  min-width:520px;
-  min-height:520px;
+  width:600px;
+  height:600px;
   border-radius:50%;
-  filter:blur(140px);
-  opacity:.38;
+  filter:blur(100px);
+  opacity:.6;
 }
 
 .glow-blob.pink{
-  top:-12vw;
-  left:-12vw;
-  background:radial-gradient(circle, rgba(255,72,181,.95) 0%, rgba(255,72,181,.42) 34%, rgba(255,72,181,0) 72%);
+  top:-150px;
+  left:-150px;
+  background:#ff00de;
 }
 
 .glow-blob.blue{
-  top:-12vw;
-  right:-12vw;
-  background:radial-gradient(circle, rgba(72,181,255,.95) 0%, rgba(72,181,255,.40) 34%, rgba(72,181,255,0) 72%);
+  bottom:-150px;
+  right:-150px;
+  background:#00d4ff;
 }
 
-@media (max-width:900px){
+.site-header,
+.sz-header,
+.page-content,
+.svf-footer{
+  position:relative;
+  z-index:10;
+}
+
+@media (max-width:720px){
   .glow-blob{
-    width:62vw;
-    height:62vw;
-    min-width:420px;
-    min-height:420px;
-    filter:blur(120px);
-    opacity:.34;
+    width:460px;
+    height:460px;
+    filter:blur(90px);
+    opacity:.55;
   }
 
   .glow-blob.pink{
-    top:-20vw;
-    left:-20vw;
+    top:-170px;
+    left:-170px;
   }
 
   .glow-blob.blue{
-    top:-20vw;
-    right:-20vw;
+    bottom:-170px;
+    right:-170px;
   }
 }
 
