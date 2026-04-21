@@ -768,8 +768,8 @@ body.sz-lock {
 }
 
 /* =========================
-   REFINED AMBIENT CORNER GLOWS
-   keep the same glow-bg snippet in HTML
+   VISIBLE PINK / BLUE CORNER GLOWS
+   uses the same glow-bg snippet in HTML
    ========================= */
 
 body{
@@ -793,42 +793,42 @@ body > *:not(.glow-bg){
 
 .glow-blob{
   position:absolute;
-  width:760px;
-  height:760px;
+  width:680px;
+  height:680px;
   border-radius:50%;
-  filter:blur(165px);
-  opacity:.34;
+  filter:blur(120px);
+  opacity:.58;
   transform:translateZ(0);
 }
 
 .glow-blob.pink{
-  top:-290px;
-  left:-290px;
-  background:#6e172d;
+  top:-190px;
+  left:-190px;
+  background:radial-gradient(circle, rgba(255,93,177,.95) 0%, rgba(255,93,177,.62) 28%, rgba(255,93,177,.20) 52%, rgba(255,93,177,0) 72%);
 }
 
 .glow-blob.blue{
-  top:-290px;
-  right:-290px;
-  background:#241c70;
+  top:-190px;
+  right:-190px;
+  background:radial-gradient(circle, rgba(86,182,255,.95) 0%, rgba(86,182,255,.62) 28%, rgba(86,182,255,.18) 52%, rgba(86,182,255,0) 72%);
 }
 
 @media (max-width:900px){
   .glow-blob{
-    width:560px;
-    height:560px;
-    filter:blur(130px);
-    opacity:.30;
+    width:520px;
+    height:520px;
+    filter:blur(105px);
+    opacity:.52;
   }
 
   .glow-blob.pink{
-    top:-220px;
-    left:-220px;
+    top:-170px;
+    left:-170px;
   }
 
   .glow-blob.blue{
-    top:-220px;
-    right:-220px;
+    top:-170px;
+    right:-170px;
   }
 }
 
