@@ -40,7 +40,7 @@
   <style>
     .home-page{
       position:relative;
-      overflow:hidden;
+      overflow:visible;
       padding-top:30px;
     }
     .home-page::before,
@@ -51,92 +51,141 @@
       z-index:0;
     }
     .home-page::before{
-      top:20px;
-      left:-220px;
-      width:440px;
-      height:440px;
-      background:radial-gradient(circle, rgba(128,45,106,.11) 0%, rgba(128,45,106,0) 74%);
-      filter:blur(28px);
+      display:none;
     }
     .home-page::after{
-      top:120px;
-      right:-240px;
-      width:560px;
-      height:560px;
-      background:radial-gradient(circle, rgba(34,58,154,.10) 0%, rgba(34,58,154,0) 76%);
-      filter:blur(34px);
+      display:none;
     }
     .page-content > .container{
       position:relative;
       z-index:1;
     }
 
+    
     .hero.hero-split{
-      margin-bottom:24px;
-      align-items:flex-start;
-      gap:24px;
-    }
-    .hero-side{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      width:min(290px, 100%);
-      flex:0 0 290px;
-    }
-    .hero-badge-wrap{
+      position:relative;
+      z-index:2;
       margin-bottom:0;
-    }
-    .hero-badge.hero-badge-static{
-      min-height:0;
-      padding:9px 16px;
-      border-radius:999px;
-      font-size:12px;
-      line-height:1;
-      font-weight:600;
-      letter-spacing:.02em;
-      background:rgba(255,255,255,.022);
-      border:1px solid rgba(217,179,140,.14);
-      box-shadow:none;
-    }
-    .hero-logo-card{
-      overflow:hidden;
-      aspect-ratio:1 / 1;
-      border-radius:26px;
+      min-height:390px;
+      padding:2px 0 0;
+      overflow:visible;
+      isolation:isolate;
       border:none;
+      border-radius:0;
       background:transparent;
-      backdrop-filter:none;
-      -webkit-backdrop-filter:none;
       box-shadow:none;
-    }
-    .hero-logo{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
       display:block;
-      border-radius:26px;
+    }
+    .hero.hero-split::before{
+      display:none;
+    }
+    .hero-grid{
+      position:relative;
+      z-index:2;
+      width:100%;
+      min-height:360px;
+      display:block;
+      overflow:visible;
+    }
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+    }
+    .hero-bg::before{
+      content:"";
+      position:absolute;
+      top:-80px;
+      right:-70px;
+      width:min(48vw, 680px);
+      height:550px;
+      background-image:url('/image/hero-owl-soft.webp');
+      background-repeat:no-repeat;
+      background-size:contain;
+      background-position:right top;
+      opacity:.84;
+      filter:saturate(.82) brightness(.74) contrast(1.01);
+    }
+    .hero-bg::after{
+      content:"";
+      position:absolute;
+      right:150px;
+      top:156px;
+      width:min(16vw, 224px);
+      height:72px;
+      background:
+        radial-gradient(circle at 32% 56%, rgba(120,255,255,.06), transparent 22%),
+        radial-gradient(circle at 70% 56%, rgba(255,191,74,.07), transparent 20%);
+      filter:blur(14px);
+      opacity:.09;
+      mix-blend-mode:screen;
+    }
+    .hero-bottom-fade{
+      display:none;
+    }
+    .hero-side,
+    .hero-logo-card,
+    .hero-logo,
+    .hero-side-actions,
+    .hero-badge-wrap,
+    .hero-badge.hero-badge-static{
+      display:none;
     }
     .hero-content{
+      position:relative;
+      z-index:3;
       min-width:0;
-      flex:1 1 auto;
+      width:100%;
+      max-width:none;
+      padding-top:20px;
+      overflow:visible;
     }
     .hero-content h1{
-      margin:0 0 12px;
-      font-size:clamp(24px, 1.72vw, 32px);
-      line-height:1.04;
-      letter-spacing:-0.04em;
+      margin:0 0 14px;
+      width:max-content;
+      max-width:none;
+      display:inline-block;
+      overflow:visible;
+      padding-bottom:.24em;
+      font-size:33px;
+      line-height:1.06;
+      letter-spacing:-0.042em;
       white-space:nowrap;
-      max-width:100%;
+      text-wrap:normal;
+      position:relative;
+      z-index:4;
+      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 26%, #ff5ca8 64%, #f77737 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color:transparent;
     }
     .hero-text-block{
-      max-width:100%;
+      max-width:780px;
+    }
+    .hero-text-block p{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.655;
+    }
+    .hero-text-block p:last-child{
+      margin-bottom:0;
+    }
+    .hero-text-block .hero-lead{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
     }
     .hero-actions-row{
       display:grid;
-      grid-template-columns:repeat(3, minmax(150px, 1fr)) minmax(220px, 1.12fr);
+      grid-template-columns:repeat(4, 160px);
       gap:10px;
       align-items:stretch;
-      margin-top:42px;
+      margin-top:24px;
+      max-width:670px;
     }
     .hero-actions-row .btn,
     .hero-actions-row .mini-point{
@@ -152,21 +201,26 @@
       line-height:1.1;
       white-space:nowrap;
       overflow:hidden;
+      text-decoration:none;
+      font-size:13px;
     }
     .hero-actions-row .mini-point{
       border-radius:0;
+      transition:background .22s ease, border-color .22s ease, color .22s ease, transform .22s ease, box-shadow .22s ease;
+    }
+    .hero-actions-row .mini-point:hover{
+      background:rgba(255,255,255,.075);
+      border-color:rgba(255,255,255,.20);
+      color:#fff;
+      transform:translateY(-1px);
+      box-shadow:0 10px 20px rgba(0,0,0,.14);
     }
     .hero-actions-row .btn-telegram{
-      border-radius:14px;
-    }
-    .hero-side-actions{
-      display:none;
-    }
-    .hero-actions-row .btn-telegram{
+      border-radius:0;
       color:#fff;
       background:linear-gradient(90deg,#833ab4 0%, #c13584 38%, #e1306c 68%, #f77737 100%);
       border:none;
-      box-shadow:0 14px 30px rgba(0,0,0,.18);
+      box-shadow:0 12px 24px rgba(0,0,0,.16);
       text-decoration:none;
       font-weight:700;
     }
@@ -176,7 +230,117 @@
       transform:translateY(-1px);
     }
 
-    .section-head h2,
+    .section-usernames-showcase{
+      position:relative;
+      z-index:1;
+      margin-top:-120px;
+    }
+    .section-usernames-showcase .section-head-inline{
+      align-items:flex-end;
+      gap:14px;
+      margin-bottom:6px;
+    }
+    .section-usernames-showcase .section-head-inline h2{
+      margin:0;
+    }
+
+    @media (max-width:1240px){
+      .hero.hero-split{
+        min-height:316px;
+      }
+      .hero-grid{
+        min-height:286px;
+        display:block;
+      }
+      .hero-content{
+        max-width:none;
+      }
+      .hero-content h1{
+        font-size:33px;
+      }
+      .hero-text-block{
+        max-width:740px;
+      }
+      .hero-text-block p{
+        margin:0 0 14px;
+        font-size:15px;
+      }
+      .hero-actions-row{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+        max-width:440px;
+        margin-top:24px;
+      }
+      .hero-bg::before{
+        right:-70px;
+        width:min(46vw, 620px);
+        height:480px;
+        top:-80px;
+        background-size:contain;
+        background-position:right top;
+      }
+      .hero-bg::after{
+        right:118px;
+        top:136px;
+        width:min(15vw, 194px);
+        height:64px;
+      }
+    }
+
+    @media (max-width:860px){
+      .hero.hero-split{
+        min-height:520px;
+        padding:8px 0 6px;
+      }
+      .hero-grid{
+        width:100%;
+        min-height:470px;
+        display:block;
+      }
+      .hero-content{
+        max-width:100%;
+        padding:20px 0 174px;
+      }
+      .hero-content h1{
+        max-width:none;
+        width:auto;
+        display:block;
+        white-space:normal;
+        font-size:33px;
+        line-height:1.06;
+      }
+      .hero-text-block p{
+        font-size:15px;
+        line-height:1.655;
+        color:var(--muted);
+      }
+      .hero-actions-row{
+        grid-template-columns:1fr;
+        max-width:340px;
+        margin-top:24px;
+      }
+      .hero-bg::before{
+        right:-4vw;
+        top:24%;
+        width:min(94vw, 680px);
+        height:66%;
+        opacity:.74;
+        background-size:contain;
+      }
+      .hero-bg::after{
+        right:0;
+        top:42%;
+        width:min(58vw, 300px);
+        height:20%;
+      }
+    }
+
+    @media (max-width:680px){
+      .hero-content h1{
+        white-space:normal;
+      }
+    }
+
+.section-head h2,
     .section-head-inline h2,
     .home-projects .section-head h2,
     .about-title,
@@ -201,14 +365,14 @@
     .username-grid.username-grid-refined{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
+      gap:10px;
     }
     .username-grid-refined .username-card{
       position:relative;
       overflow:hidden;
-      border-radius:20px;
-      padding:13px 13px 12px;
-      min-height:126px;
+      border-radius:18px;
+      padding:11px 11px 10px;
+      min-height:116px;
       background:linear-gradient(180deg, rgba(18,18,22,.98), rgba(11,11,14,1));
       border:1px solid rgba(255,255,255,.06);
       transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
@@ -225,8 +389,8 @@
     .username-grid-refined .username-card-top{
       display:grid;
       grid-template-columns:minmax(0,1fr);
-      gap:5px;
-      margin-bottom:10px;
+      gap:4px;
+      margin-bottom:8px;
     }
     .username-grid-refined .username-title-row{
       display:flex;
@@ -296,9 +460,9 @@
     }
     .username-grid-refined .username-buy{
       width:100%;
-      min-height:32px;
-      height:32px;
-      border-radius:11px;
+      min-height:30px;
+      height:30px;
+      border-radius:10px;
       border:none;
       background:linear-gradient(90deg,#8c52ff,#ff6d6d);
       color:#fff;
@@ -797,7 +961,7 @@
     }
     .why-inline-stat strong{
       display:block;
-      font-size:34px;
+      font-size:33px;
       line-height:1;
       color:#68f3ff;
       letter-spacing:-.035em;
@@ -1060,30 +1224,25 @@
     <main class="page-content home-page">
       <div class="container">
         <section class="hero hero-split">
-          <div class="hero-side">
-            <div class="hero-badge-wrap">
-              <div class="hero-badge hero-badge-static">SovaZone Digital Studio</div>
-            </div>
-            <div class="hero-logo-card">
-              <img class="hero-logo" src="https://sovazone.com/logo.png" alt="SovaZone Digital Studio">
+          <div class="hero-bg" aria-hidden="true"></div>
+          <div class="hero-grid">
+            <div class="hero-content">
+              <h1>Запуск личного бренда и новых digital-проектов</h1>
+              <div class="hero-text-block">
+                <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетей,<br>решить ключевые технические вопросы и выбрать подходящий формат для начала работы в соц. сетях.</p>
+                <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
+                <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
+              </div>
+
+              <div class="hero-actions-row">
+                <a href="usernames.html" class="mini-point">Купить ник</a>
+                <a href="sell.html" class="mini-point">Продать ник</a>
+                <a href="services.html" class="mini-point">Ник под заказ</a>
+                <a class="btn btn-telegram" href="contacts.html">Связаться</a>
+              </div>
             </div>
           </div>
-
-          <div class="hero-content">
-            <h1>Запуск личного бренда и новых digital-проектов</h1>
-            <div class="hero-text-block">
-              <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других соц. сетей, решить ключевые технические вопросы и выбрать подходящий формат старта в социальных сетях.</p>
-              <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
-              <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
-            </div>
-
-            <div class="hero-actions-row">
-              <a href="usernames.html" class="mini-point">Купить ник</a>
-              <a href="sell.html" class="mini-point">Продать ник</a>
-              <a href="services.html" class="mini-point">Ник под заказ</a>
-              <a class="btn btn-telegram" href="contacts.html">Связаться</a>
-            </div>
-          </div>
+          <div class="hero-bottom-fade"></div>
         </section>
 
         <section class="section section-usernames-showcase">
@@ -1273,7 +1432,7 @@
                     <h2>Почему SovaZone</h2>
                   </div>
                   <div class="why-inline-copy">
-                    <p>За плечами — около 17 лет опыта в digital-среде, работе с аккаунтами, платформами, запуском проектов и решением нестандартных задач, связанных с username и присутствием в социальных сетях.</p>
+                    <p>За плечами — около 17 лет опыта в digital-среде, запуске проектов, работе с онлайн-платформами и решении нестандартных задач, связанных с присутствием, развитием и технической стороной работы в интернете.</p>
                     <p>За это время были проданы несколько сотен никнеймов, поэтому мы хорошо понимаем, как оценивать сложность задачи, видеть сильные варианты и подбирать решения под конкретный запрос, а не по шаблону.</p>
                     <p>Мы не боимся трудных задач: спокойно разбираем нестандартные кейсы, умеем вникать в детали и ищем рабочий путь даже там, где ситуация выглядит запутанной или требует более аккуратного подхода.</p>
                   </div>
