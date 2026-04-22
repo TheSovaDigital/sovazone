@@ -161,6 +161,9 @@
       color:transparent;
       -webkit-text-fill-color:transparent;
     }
+    .hero-content h1 .hero-title-line-2{
+      display:block;
+    }
     .hero-text-block{
       max-width:780px;
     }
@@ -1181,19 +1184,20 @@
     @media (max-width:680px){
       .hero.hero-split{
         min-height:auto;
-        padding:6px 0 2px;
+        padding:4px 0 0;
       }
       .hero-grid{
         min-height:auto;
       }
       .hero-content{
-        padding:10px 0 146px;
+        padding:8px 0 126px;
       }
       .hero-content h1{
         font-size:28px;
-        line-height:1.04;
-        letter-spacing:-0.038em;
-        max-width:300px;
+        line-height:1.02;
+        letter-spacing:-0.04em;
+        max-width:320px;
+        white-space:normal;
       }
       .hero-text-block{
         max-width:100%;
@@ -1248,7 +1252,7 @@
       .section-services-compact .section-head-inline h2,
       .latest-articles .section-head-inline h2{
         min-width:0;
-        font-size:21px;
+        font-size:20px;
         line-height:1.08;
       }
       .section-usernames-showcase .section-title-with-icon span:last-child{
@@ -1256,7 +1260,7 @@
       }
       .section-usernames-showcase .section-title-with-icon span:last-child::after{
         content:"Популярные ники";
-        font-size:21px;
+        font-size:20px;
       }
 
       .section-head-btn{
@@ -1270,8 +1274,8 @@
       }
 
       .why-inline-copy p{
-        font-size:13px;
-        line-height:1.58;
+        font-size:12px;
+        line-height:1.52;
       }
       .why-inline-meta{
         grid-template-columns:repeat(3,minmax(0,1fr));
@@ -1290,6 +1294,31 @@
 
       .home-steps-only{
         padding:18px;
+      }
+      .section-usernames-showcase{
+        margin-top:8px;
+      }
+      .username-grid.username-grid-refined{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+      }
+      .username-grid-refined .username-card{
+        min-height:108px;
+        padding:10px 10px 9px;
+      }
+      .username-grid-refined .username-name{
+        font-size:14px;
+      }
+      .username-grid-refined .username-link{
+        font-size:11px;
+      }
+      .username-grid-refined .username-price{
+        font-size:12px;
+      }
+      .username-grid-refined .username-buy{
+        min-height:28px;
+        height:28px;
+        font-size:12px;
       }
       .home-steps-only .steps-grid{
         grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1341,8 +1370,8 @@
 
     @media (max-width:420px){
       .hero-content h1{
-        font-size:25px;
-        max-width:280px;
+        font-size:24px;
+        max-width:272px;
       }
       .hero-actions-row{
         grid-template-columns:1fr;
@@ -1351,6 +1380,13 @@
         min-width:124px;
         width:124px;
         flex-basis:124px;
+      }
+      .section-usernames-showcase{
+        margin-top:4px;
+      }
+      .username-grid.username-grid-refined{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:7px;
       }
       .home-steps-only .steps-grid{
         gap:8px;
@@ -1428,7 +1464,7 @@
           <div class="hero-bg" aria-hidden="true"></div>
           <div class="hero-grid">
             <div class="hero-content">
-              <h1>Запуск личного бренда и новых digital-проектов</h1>
+              <h1>Запуск личного бренда<br><span class="hero-title-line-2">и новых digital-проектов</span></h1>
               <div class="hero-text-block">
                 <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетей,<br>решить ключевые технические вопросы и выбрать подходящий формат для начала работы в соц. сетях.</p>
                 <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
