@@ -401,12 +401,23 @@
       }
       .hero-lead-more-inline{
         display:inline-flex;
+        cursor:pointer;
       }
       .hero-more-desktop{
         display:none;
       }
       .hero-more-mobile{
+        display:block;
+        margin-top:0;
+      }
+      .hero-more-mobile summary{
         display:none;
+      }
+      .hero-more-mobile:not([open]) .hero-more-mobile__content{
+        display:none;
+      }
+      .hero-more-mobile[open]{
+        margin-top:8px;
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -1996,6 +2007,17 @@
           renderFallback();
         }
       })();
+    })();
+  </script>
+  <script>
+    (function () {
+      const inlineMore = document.querySelector('.hero-lead-more-inline');
+      const mobileDetails = document.querySelector('.hero-more-mobile');
+      if (!inlineMore || !mobileDetails) return;
+
+      inlineMore.addEventListener('click', function () {
+        mobileDetails.open = !mobileDetails.open;
+      });
     })();
   </script>
   <script src="script.js"></script>
