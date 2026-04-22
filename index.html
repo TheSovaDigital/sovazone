@@ -54,7 +54,27 @@
       display:none;
     }
     .home-page::after{
-      display:none;
+      content:"";
+      position:absolute;
+      pointer-events:none;
+      z-index:0;
+      top:100px;
+      right:-220px;
+      width:520px;
+      height:520px;
+      display:block;
+      background:radial-gradient(circle, rgba(34,58,154,.14) 0%, rgba(34,58,154,0) 74%);
+      filter:blur(30px);
+    }
+
+    @media (max-width:760px){
+      .home-page::after{
+        top:100px;
+        right:-250px;
+        width:420px;
+        height:420px;
+        opacity:.9;
+      }
     }
     .page-content > .container{
       position:relative;
