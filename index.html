@@ -1987,18 +1987,7 @@
         return {
           slug: post.slug || '',
           title: (post.title || 'Без названия').trim(),
-          description: (
-            post.shortDescription ||
-            post.short_description ||
-            post.description ||
-            post.excerpt ||
-            post.summary ||
-            post.metaDescription ||
-            post.body ||
-            post.content ||
-            post.text ||
-            ''
-          ).trim(),
+          description: (post.description || post.excerpt || post.shortDescription || '').trim(),
           cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
           date: post.date || ''
         };
@@ -2014,19 +2003,24 @@
 
       function cleanDescription(text) {
         let clean = String(text || '')
-          .replace(/```[\s\S]*?```/g, ' ')
-          .replace(/#+\s+/g, ' ')
-          .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
-          .replace(/\[[^\]]*\]\([^)]*\)/g, ' ')
           .replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘]/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
 
-        if (!clean) return '';
+        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone.';
 
-        if (clean.length > 140) {
-          clean = clean.slice(0, 140).trimEnd();
-          clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
+        if (clean.length > 160) {
+          clean = clean.slice(0, 160).trimEnd();
+          const lastPunct = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf('!'), clean.lastIndexOf('?'));
+          if (lastPunct >= 80) {
+            clean = clean.slice(0, lastPunct + 1);
+          } else {
+            clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
+          }
+        } else if (clean.length < 80) {
+          const tail = ' Открыть материал в блоге SovaZone.';
+          if ((clean + tail).length <= 160) clean += tail;
+          if (!/[.!?…]$/.test(clean)) clean += '.';
         }
 
         return clean;
@@ -2040,8 +2034,7 @@
         const items = posts.slice(0, 4);
         grid.innerHTML = items.map(post => {
           const title = escapeHtml(post.title);
-          const descText = cleanDescription(post.description);
-          const descHtml = descText ? `<p class="latest-article-desc">${escapeHtml(descText)}</p>` : '';
+          const desc = escapeHtml(cleanDescription(post.description));
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
           return `
@@ -2051,7 +2044,7 @@
               </div>
               <div class="latest-article-body">
                 <h3 class="latest-article-title">${title}</h3>
-                ${descHtml}
+                <p class="latest-article-desc">${desc}</p>
                 <a class="latest-article-link" href="${href}">Открыть статью</a>
               </div>
             </article>
