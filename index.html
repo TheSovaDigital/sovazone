@@ -368,7 +368,7 @@
       }
       .hero-content{
         max-width:100%;
-        padding:8px 0 44px;
+        padding:8px 0 58px;
       }
       .hero-content h1{
         max-width:none;
@@ -436,23 +436,35 @@
         gap:10px;
       }
       .hero-bg::before{
-        right:-10vw;
-        top:55%;
+        right:-8vw;
         width:min(92vw, 560px);
-        height:34%;
-        opacity:.58;
+        opacity:.62;
         background-size:contain;
         background-position:right bottom;
       }
       .hero-bg::after{
         right:8px;
-        top:66%;
         width:min(34vw, 160px);
         height:9%;
         opacity:.07;
       }
       .section-usernames-showcase{
         margin-top:8px;
+      }
+
+      .hero.hero-split:has(.hero-lead-mobile--collapsed) .hero-bg::before{
+        top:47%;
+        height:38%;
+      }
+      .hero.hero-split:has(.hero-more-mobile[open]) .hero-bg::before{
+        top:55%;
+        height:34%;
+      }
+      .hero.hero-split:has(.hero-lead-mobile--collapsed) .hero-bg::after{
+        top:58%;
+      }
+      .hero.hero-split:has(.hero-more-mobile[open]) .hero-bg::after{
+        top:66%;
       }
     }
 
@@ -839,6 +851,11 @@
     @media (max-width:1240px){
       .hero-content h1{
         white-space:nowrap;
+        width:max-content;
+        max-width:none;
+        display:inline-block;
+        font-size:30px;
+        line-height:1.04;
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -1604,7 +1621,7 @@
               <h1>Запуск личного бренда<br><span class="hero-title-line-2">и новых digital-проектов</span></h1>
               <div class="hero-text-block">
                 <p class="hero-lead hero-lead-desktop">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетей,<br>решить ключевые технические вопросы и выбрать подходящий формат для начала работы в соц. сетях.</p>
-                <div class="hero-lead-mobile" aria-hidden="true">
+                <div class="hero-lead-mobile hero-lead-mobile--collapsed" aria-hidden="true">
                   <p class="hero-lead hero-lead-mobile-text">
                     <span class="hero-lead-line">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм,</span>
                     <span class="hero-lead-line">ТикТок и других социальных сетей, решить ключевые</span>
@@ -2025,10 +2042,13 @@
     (function () {
       const inlineMore = document.querySelector('.hero-lead-more-inline');
       const mobileDetails = document.querySelector('.hero-more-mobile');
-      if (!inlineMore || !mobileDetails) return;
+      const mobileLead = document.querySelector('.hero-lead-mobile');
+      if (!inlineMore || !mobileDetails || !mobileLead) return;
 
       function syncMoreLabel() {
-        inlineMore.textContent = mobileDetails.open ? 'Скрыть подробнее' : 'Показать подробнее';
+        const isOpen = !!mobileDetails.open;
+        inlineMore.textContent = isOpen ? 'Скрыть подробнее' : 'Показать подробнее';
+        mobileLead.classList.toggle('hero-lead-mobile--collapsed', !isOpen);
       }
 
       inlineMore.addEventListener('click', function () {
