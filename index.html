@@ -1994,6 +1994,9 @@
             post.excerpt ||
             post.summary ||
             post.metaDescription ||
+            post.body ||
+            post.content ||
+            post.text ||
             ''
           ).trim(),
           cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
@@ -2011,6 +2014,10 @@
 
       function cleanDescription(text) {
         let clean = String(text || '')
+          .replace(/```[\s\S]*?```/g, ' ')
+          .replace(/#+\s+/g, ' ')
+          .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+          .replace(/\[[^\]]*\]\([^)]*\)/g, ' ')
           .replace(/[«»"“”„‟'`<>\[\]{}*_~^|→←↔↗↘]/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
