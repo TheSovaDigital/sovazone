@@ -128,17 +128,17 @@
     }
 
     .error404-wrap{
-      min-height:calc(100vh - 140px);
+      min-height:calc(100vh - 56px - 120px);
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:center;
-      padding:30px 0 56px;
+      padding:6px 0 18px;
     }
 
     .error404-stage{
       width:min(100%, 1100px);
       text-align:center;
-      padding:28px 18px;
+      padding:8px 18px 0;
       position:relative;
     }
 
@@ -177,8 +177,7 @@
       user-select:none;
       animation:
         error404Gradient 6.5s ease-in-out infinite,
-        error404Float 5s ease-in-out infinite,
-        error404Skew 4.8s cubic-bezier(.4,0,.2,1) infinite;
+        error404Float 5.4s ease-in-out infinite;
       transform-origin:center center;
     }
 
@@ -291,42 +290,12 @@
 
     @keyframes error404Pulse{
       0%, 100%{
-        opacity:.76;
-        transform:translate(-50%,-50%) scale(1) rotate(0deg);
+        opacity:.78;
+        transform:translate(-50%,-50%) scale(1);
       }
       50%{
         opacity:1;
-        transform:translate(-50%,-50%) scale(1.08) rotate(8deg);
-      }
-    }
-
-    @keyframes error404Skew{
-      0%, 100%{
-        transform:translateY(0) skewX(0deg);
-      }
-      18%{
-        transform:translateY(-4px) skewX(-2.4deg);
-      }
-      22%{
-        transform:translateY(-4px) skewX(2deg);
-      }
-      26%{
-        transform:translateY(-4px) skewX(-1deg);
-      }
-      30%{
-        transform:translateY(-4px) skewX(0deg);
-      }
-      58%{
-        transform:translateY(0) skewX(0deg);
-      }
-      64%{
-        transform:translateY(2px) skewX(1.5deg);
-      }
-      68%{
-        transform:translateY(2px) skewX(-1deg);
-      }
-      72%{
-        transform:translateY(2px) skewX(0deg);
+        transform:translate(-50%,-50%) scale(1.06);
       }
     }
 
