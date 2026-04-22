@@ -3,6 +3,56 @@
   <url>
     <loc>https://sovazone.com/blog.html</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=instagram-updates-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=telegram-novosti-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=tiktok-updates-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=youtube-updates-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=zachem-nuzhna-sinyaya-galochka-verifikaciya</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=tenevoy-ban-mif-ili-pravda</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=kak-poluchit-nik-esli-akkaunt-zabroshen</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=social-media-security-problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=what-is-username-nickname</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://sovazone.com/post.html?slug=sovazone-website-launch</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
   </url>
 </urlset>
