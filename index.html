@@ -2007,7 +2007,7 @@
           .replace(/\s+/g, ' ')
           .trim();
 
-        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone.';
+        if (!clean) return '';
 
         if (clean.length > 160) {
           clean = clean.slice(0, 160).trimEnd();
@@ -2017,10 +2017,6 @@
           } else {
             clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
           }
-        } else if (clean.length < 80) {
-          const tail = ' Открыть материал в блоге SovaZone.';
-          if ((clean + tail).length <= 160) clean += tail;
-          if (!/[.!?…]$/.test(clean)) clean += '.';
         }
 
         return clean;
@@ -2034,7 +2030,8 @@
         const items = posts.slice(0, 4);
         grid.innerHTML = items.map(post => {
           const title = escapeHtml(post.title);
-          const desc = escapeHtml(cleanDescription(post.description));
+          const descText = cleanDescription(post.description);
+          const descHtml = descText ? `<p class="latest-article-desc">${escapeHtml(descText)}</p>` : '';
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
           return `
@@ -2044,7 +2041,7 @@
               </div>
               <div class="latest-article-body">
                 <h3 class="latest-article-title">${title}</h3>
-                <p class="latest-article-desc">${desc}</p>
+                ${descHtml}
                 <a class="latest-article-link" href="${href}">Открыть статью</a>
               </div>
             </article>
