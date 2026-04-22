@@ -74,3 +74,4 @@
     inject("footer-placeholder", "/footer.html")
   ]).then(initHeader);
 })();
+
