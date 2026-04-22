@@ -1987,7 +1987,18 @@
         return {
           slug: post.slug || '',
           title: (post.title || 'Без названия').trim(),
-          description: (post.description || post.excerpt || post.shortDescription || '').trim(),
+          description: (
+            post.shortDescription ||
+            post.short_description ||
+            post.description ||
+            post.excerpt ||
+            post.summary ||
+            post.metaDescription ||
+            post.meta_description ||
+            post.subtitle ||
+            post.shortDesc ||
+            ''
+          ).trim(),
           cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
           date: post.date || ''
         };
