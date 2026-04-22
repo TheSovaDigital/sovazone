@@ -161,6 +161,9 @@
       color:transparent;
       -webkit-text-fill-color:transparent;
     }
+    .hero-content h1 .hero-title-line-2{
+      display:block;
+    }
     .hero-text-block{
       max-width:780px;
     }
@@ -1206,7 +1209,241 @@
         height:20px;
       }
     }
-  </style>
+  
+    @media (max-width:680px){
+      .hero.hero-split{
+        min-height:auto;
+        padding:4px 0 0;
+      }
+      .hero-grid{
+        min-height:auto;
+      }
+      .hero-content{
+        padding:8px 0 126px;
+      }
+      .hero-content h1{
+        font-size:28px;
+        line-height:1.02;
+        letter-spacing:-0.04em;
+        max-width:320px;
+        white-space:normal;
+      }
+      .hero-text-block{
+        max-width:100%;
+      }
+      .hero-text-block .hero-lead,
+      .hero-text-block p{
+        font-size:13px;
+        line-height:1.56;
+      }
+      .hero-actions-row{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+        max-width:100%;
+        margin-top:18px;
+      }
+      .hero-actions-row .btn,
+      .hero-actions-row .mini-point{
+        min-height:34px;
+        height:34px;
+        padding:0 10px;
+        font-size:12px;
+      }
+      .hero-bg::before{
+        right:-12vw;
+        top:34%;
+        width:min(104vw,680px);
+        height:58%;
+        opacity:.62;
+      }
+      .hero-bg::after{
+        right:4vw;
+        top:50%;
+        width:min(52vw,240px);
+        height:15%;
+        opacity:.07;
+      }
+
+      .section-head.section-head-inline,
+      .section-services-compact .section-head-inline,
+      .latest-articles .section-head-inline{
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+      }
+      .section-title-with-icon{
+        gap:8px;
+        flex-wrap:nowrap;
+        min-width:0;
+      }
+      .section-head.section-head-inline h2,
+      .section-services-compact .section-head-inline h2,
+      .latest-articles .section-head-inline h2{
+        min-width:0;
+        font-size:20px;
+        line-height:1.08;
+      }
+      .section-usernames-showcase .section-title-with-icon span:last-child{
+        font-size:0;
+      }
+      .section-usernames-showcase .section-title-with-icon span:last-child::after{
+        content:"Популярные ники";
+        font-size:20px;
+      }
+
+      .section-head-btn{
+        min-width:132px;
+        width:132px;
+        height:34px;
+        min-height:34px;
+        padding:0 14px;
+        font-size:12px;
+        flex:0 0 132px;
+      }
+
+      .why-inline-copy p{
+        font-size:12px;
+        line-height:1.52;
+      }
+      .why-inline-meta{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:12px;
+        margin-top:14px;
+      }
+      .why-inline-stat strong{
+        font-size:26px;
+        margin-bottom:6px;
+      }
+      .why-inline-stat span{
+        max-width:none;
+        font-size:11px;
+        line-height:1.3;
+      }
+
+      .home-steps-only{
+        padding:18px;
+      }
+      .section-usernames-showcase{
+        margin-top:8px;
+      }
+      .username-grid.username-grid-refined{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+      }
+      .username-grid-refined .username-card{
+        min-height:108px;
+        padding:10px 10px 9px;
+      }
+      .username-grid-refined .username-name{
+        font-size:14px;
+      }
+      .username-grid-refined .username-link{
+        font-size:11px;
+      }
+      .username-grid-refined .username-price{
+        font-size:12px;
+      }
+      .username-grid-refined .username-buy{
+        min-height:28px;
+        height:28px;
+        font-size:12px;
+      }
+      .home-steps-only .steps-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+      }
+      .home-steps-only .step{
+        padding:12px;
+        min-height:112px;
+      }
+      .home-steps-only .step-head{
+        gap:8px;
+        margin-bottom:8px;
+        min-height:auto;
+      }
+      .home-steps-only .step-num{
+        width:24px;
+        height:24px;
+        flex-basis:24px;
+        font-size:11px;
+      }
+      .home-steps-only .step h3{
+        font-size:14px;
+        line-height:1.12;
+      }
+      .home-steps-only .step p{
+        font-size:12px;
+        line-height:1.45;
+      }
+
+      .latest-articles-grid{
+        display:grid;
+        grid-auto-flow:column;
+        grid-auto-columns:84%;
+        overflow-x:auto;
+        overscroll-behavior-x:contain;
+        scroll-snap-type:x proximity;
+        gap:12px;
+        padding-bottom:6px;
+        scrollbar-width:none;
+      }
+      .latest-articles-grid::-webkit-scrollbar{
+        display:none;
+      }
+      .latest-article-card{
+        min-height:unset;
+        scroll-snap-align:start;
+      }
+    }
+
+    @media (max-width:420px){
+      .hero-content h1{
+        font-size:24px;
+        max-width:272px;
+      }
+      .hero-actions-row{
+        grid-template-columns:1fr;
+      }
+      .section-head-btn{
+        min-width:124px;
+        width:124px;
+        flex-basis:124px;
+      }
+      .section-usernames-showcase{
+        margin-top:4px;
+      }
+      .username-grid.username-grid-refined{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:7px;
+      }
+      .home-steps-only .steps-grid{
+        gap:8px;
+      }
+      .home-steps-only .step{
+        padding:10px;
+      }
+      .home-steps-only .step h3{
+        font-size:13px;
+      }
+      .home-steps-only .step p{
+        font-size:11px;
+      }
+      .why-inline-meta{
+        gap:8px;
+      }
+      .why-inline-stat strong{
+        font-size:23px;
+      }
+      .why-inline-stat span{
+        font-size:10px;
+      }
+      .latest-articles-grid{
+        grid-auto-columns:88%;
+      }
+    }
+
+</style>
 
   <script type="application/ld+json">
   {
@@ -1256,7 +1493,7 @@
           <div class="hero-bg" aria-hidden="true"></div>
           <div class="hero-grid">
             <div class="hero-content">
-              <h1>Запуск личного бренда и новых digital-проектов</h1>
+              <h1>Запуск личного бренда<br><span class="hero-title-line-2">и новых digital-проектов</span></h1>
               <div class="hero-text-block">
                 <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетей,<br>решить ключевые технические вопросы и выбрать подходящий формат для начала работы в соц. сетях.</p>
                 <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
