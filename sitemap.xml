@@ -1,43 +1,15 @@
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a class="site-header__brand" href="/index.html">SovaZone</a>
-
-    <nav class="site-header__nav" aria-label="Основная навигация">
-      <a class="site-header__link" href="/index.html">Главная</a>
-      <a class="site-header__link" href="/services.html">Услуги</a>
-      <a class="site-header__link" href="/usernames.html">Никнеймы</a>
-      <a class="site-header__link" href="/projects.html">Проекты</a>
-      <a class="site-header__link" href="/articles.html">Статьи</a>
-      <a class="site-header__link" href="/blog.html">Блог</a>
-
-      <div class="site-header__dropdown">
-        <button
-          class="site-header__dropdown-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-haspopup="true"
-        >
-          Информация
-          <span class="site-header__caret" aria-hidden="true">▾</span>
-        </button>
-
-        <div class="site-header__dropdown-menu" role="menu">
-          <a class="site-header__dropdown-link" href="/about.html" role="menuitem">О проекте</a>
-          <a class="site-header__dropdown-link" href="/how-to-buy.html" role="menuitem">Как купить</a>
-          <a class="site-header__dropdown-link" href="/sell.html" role="menuitem">Как продать</a>
-          <a class="site-header__dropdown-link" href="/contacts.html" role="menuitem">Контакты</a>
-          <a class="site-header__dropdown-link" href="/guarantees.html" role="menuitem">Гарантии</a>
-          <a class="site-header__dropdown-link" href="/faq.html" role="menuitem">FAQ</a>
-        </div>
-      </div>
-
-      <a class="site-header__link site-header__link--accent" href="https://sovads.ru/" target="_blank" rel="noopener">Онлайн магазин</a>
-    </nav>
-
-    <button class="site-header__burger" type="button" aria-label="Открыть меню" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://sovazone.com/sitemap-pages.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://sovazone.com/sitemap-blog.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://sovazone.com/sitemap-articles.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://sovazone.com/sitemap-usernames.xml</loc>
+  </sitemap>
+</sitemapindex>
