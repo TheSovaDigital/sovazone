@@ -1556,15 +1556,14 @@
       }
 
       .latest-articles-grid{
-        display:grid;
-        grid-auto-flow:column;
-        grid-auto-columns:minmax(286px,84%);
+        display:flex;
         overflow-x:auto;
         overscroll-behavior-x:contain;
         scroll-snap-type:x proximity;
         gap:12px;
         padding:0 0 6px;
         scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
       }
       .latest-articles-grid::-webkit-scrollbar{
         display:none;
@@ -1572,6 +1571,9 @@
       .latest-article-card{
         min-height:unset;
         scroll-snap-align:start;
+        flex:0 0 calc(100% - 56px);
+        min-width:calc(100% - 56px);
+        max-width:calc(100% - 56px);
       }
     }
 
@@ -1616,8 +1618,10 @@
       .why-inline-stat span{
         font-size:10px;
       }
-      .latest-articles-grid{
-        grid-auto-columns:88%;
+      .latest-article-card{
+        flex-basis:calc(100% - 44px);
+        min-width:calc(100% - 44px);
+        max-width:calc(100% - 44px);
       }
     }
 
@@ -1983,14 +1987,26 @@
         return {
           slug: post.slug || '',
           title: (post.title || 'Без названия').trim(),
-          description: (post.shortDescription || post.description || post.excerpt || '').trim(),
+          description: (
+            post.shortDescription ||
+            post.short_description ||
+            post.description ||
+            post.excerpt ||
+            post.summary ||
+            post.metaDescription ||
+            ''
+          ).trim(),
           cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
           date: post.date || ''
         };
       }
 
       function sortPosts(posts) {
-        return Array.isArray(posts) ? [...posts] : [];
+        return [...posts].sort((a, b) => {
+          const dateA = new Date(a.date || 0).getTime();
+          const dateB = new Date(b.date || 0).getTime();
+          return dateB - dateA;
+        });
       }
 
       function cleanDescription(text) {
@@ -2017,7 +2033,8 @@
         const items = posts.slice(0, 4);
         grid.innerHTML = items.map(post => {
           const title = escapeHtml(post.title);
-          const desc = escapeHtml(cleanDescription(post.description));
+          const descText = cleanDescription(post.description);
+          const descHtml = descText ? `<p class="latest-article-desc">${escapeHtml(descText)}</p>` : '';
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
           return `
@@ -2027,7 +2044,7 @@
               </div>
               <div class="latest-article-body">
                 <h3 class="latest-article-title">${title}</h3>
-                <p class="latest-article-desc">${desc}</p>
+                ${descHtml}
                 <a class="latest-article-link" href="${href}">Открыть статью</a>
               </div>
             </article>
