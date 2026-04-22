@@ -163,8 +163,20 @@
       color:transparent;
       -webkit-text-fill-color:transparent;
     }
+    .hero-content h1 br{
+      display:none;
+    }
     .hero-content h1 .hero-title-line-2{
-      display:block;
+      display:inline;
+    }
+
+    @media (max-width:860px){
+      .hero-content h1 br{
+        display:block;
+      }
+      .hero-content h1 .hero-title-line-2{
+        display:block;
+      }
     }
     .hero-text-block{
       max-width:780px;
