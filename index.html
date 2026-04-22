@@ -185,15 +185,9 @@
     .hero-lead-line{
       display:block;
     }
-    .hero-lead-line--last{
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:12px;
-    }
     .hero-lead-more-inline{
       display:none;
-      flex:0 0 auto;
+      margin-top:6px;
       color:rgba(255,255,255,.78);
       font-size:12px;
       font-weight:600;
@@ -401,7 +395,10 @@
       }
       .hero-lead-more-inline{
         display:inline-flex;
+        align-items:center;
+        justify-content:flex-start;
         cursor:pointer;
+        margin-top:8px;
       }
       .hero-more-desktop{
         display:none;
@@ -461,11 +458,9 @@
         font-size:13.5px;
         line-height:1.48;
       }
-      .hero-lead-line--last{
-        gap:10px;
-      }
       .hero-lead-more-inline{
         font-size:11px;
+        margin-top:7px;
       }
       .hero-more-mobile summary{
         font-size:11px;
@@ -1599,7 +1594,8 @@
                   <span class="hero-lead-line">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм,</span>
                   <span class="hero-lead-line">ТикТок и других социальных сетей, решить ключевые</span>
                   <span class="hero-lead-line">технические вопросы и выбрать подходящий формат</span>
-                  <span class="hero-lead-line hero-lead-line--last"><span>для начала работы в соц. сетях.</span><span class="hero-lead-more-inline">Показать подробнее</span></span>
+                  <span class="hero-lead-line">для начала работы в соц. сетях.</span>
+                  <span class="hero-lead-more-inline">Показать подробнее</span>
                 </p>
                 <details class="hero-more-mobile">
                   <summary>Показать подробнее</summary>
@@ -2015,9 +2011,16 @@
       const mobileDetails = document.querySelector('.hero-more-mobile');
       if (!inlineMore || !mobileDetails) return;
 
+      function syncMoreLabel() {
+        inlineMore.textContent = mobileDetails.open ? 'Скрыть подробнее' : 'Показать подробнее';
+      }
+
       inlineMore.addEventListener('click', function () {
         mobileDetails.open = !mobileDetails.open;
+        syncMoreLabel();
       });
+
+      syncMoreLabel();
     })();
   </script>
   <script src="script.js"></script>
