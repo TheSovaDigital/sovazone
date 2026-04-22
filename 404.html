@@ -36,267 +36,209 @@
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
 
   <style>
-    .error404-page{
+    .error-art-page{
       position:relative;
       overflow:hidden;
       min-height:calc(100vh - 56px);
-      padding-top:18px;
+      isolation:isolate;
     }
 
-    .error404-page::before{
+    .error-art-page::before{
       content:"";
       position:absolute;
       inset:0;
       pointer-events:none;
       background:
-        radial-gradient(520px 320px at 14% 18%, rgba(110,23,45,.18), transparent 62%),
-        radial-gradient(520px 360px at 88% 20%, rgba(34,58,154,.16), transparent 62%);
-      z-index:0;
+        radial-gradient(520px 320px at 12% 14%, rgba(109,26,47,.20), transparent 62%),
+        radial-gradient(640px 420px at 88% 22%, rgba(35,58,154,.18), transparent 64%),
+        linear-gradient(180deg, rgba(255,255,255,.01), rgba(255,255,255,0));
+      z-index:-2;
     }
 
-    .error404-page::after{
+    .error-art-page::after{
       content:"";
       position:absolute;
-      right:-160px;
-      top:120px;
-      width:440px;
-      height:440px;
-      background:radial-gradient(circle, rgba(92,72,255,.16) 0%, rgba(92,72,255,0) 72%);
-      filter:blur(34px);
+      left:50%;
+      top:50%;
+      width:860px;
+      height:860px;
+      transform:translate(-50%,-50%);
       pointer-events:none;
-      z-index:0;
+      background:radial-gradient(circle, rgba(124,78,255,.09) 0%, rgba(124,78,255,0) 66%);
+      filter:blur(40px);
+      z-index:-1;
     }
 
-    .error404-shell{
-      position:relative;
-      z-index:1;
+    .error-art-shell{
       min-height:calc(100vh - 140px);
       display:flex;
       align-items:center;
-      padding:26px 0 54px;
+      justify-content:center;
+      padding:34px 0 56px;
     }
 
-    .error404-layout{
-      width:100%;
-      display:grid;
-      grid-template-columns:minmax(280px, 0.92fr) minmax(0, 1.08fr);
-      gap:28px;
-      align-items:stretch;
-    }
-
-    .error404-number-card,
-    .error404-content-card{
+    .error-art-stage{
       position:relative;
-      overflow:hidden;
-      border-radius:30px;
-      border:1px solid rgba(255,255,255,.07);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
-        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
+      width:min(100%, 1080px);
+      text-align:center;
+      padding:42px 24px 26px;
     }
 
-    .error404-number-card::before,
-    .error404-content-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
-    }
-
-    .error404-number-inner,
-    .error404-content-inner{
-      position:relative;
-      z-index:1;
-    }
-
-    .error404-number-inner{
-      min-height:100%;
-      padding:28px 24px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:28px;
-    }
-
-    .error404-kicker{
+    .error-art-kicker{
       display:inline-flex;
       align-items:center;
-      gap:10px;
+      justify-content:center;
       min-height:34px;
       padding:0 14px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.03);
-      color:#d6d6e7;
+      color:#d7d7e8;
       font-size:13px;
       line-height:1;
-      width:max-content;
-      max-width:100%;
+      letter-spacing:.02em;
+      margin-bottom:20px;
     }
 
-    .error404-number{
+    .error-art-number{
       margin:0;
-      font-size:clamp(96px, 13vw, 180px);
-      line-height:.86;
-      letter-spacing:-.08em;
+      font-size:clamp(120px, 24vw, 320px);
+      line-height:.82;
+      letter-spacing:-.10em;
       font-weight:900;
-      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 26%, #ff5ca8 64%, #f77737 100%);
+      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 28%, #ff5ca8 64%, #f77737 100%);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
       -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 10px 40px rgba(0,0,0,.18));
     }
 
-    .error404-mini{
-      color:rgba(255,255,255,.64);
-      font-size:14px;
-      line-height:1.7;
-      max-width:240px;
-    }
-
-    .error404-content-inner{
-      padding:34px 34px 30px;
-      display:flex;
-      flex-direction:column;
-      gap:22px;
-      min-height:100%;
-    }
-
-    .error404-title{
-      margin:0;
+    .error-art-title{
+      margin:16px auto 0;
+      max-width:760px;
       color:#fff;
-      font-size:clamp(34px, 4vw, 52px);
+      font-size:clamp(30px, 4.3vw, 58px);
       line-height:1.02;
       letter-spacing:-.05em;
-      max-width:620px;
+      text-wrap:balance;
     }
 
-    .error404-text{
-      display:grid;
-      gap:10px;
-      max-width:640px;
-    }
-
-    .error404-text p{
-      margin:0;
+    .error-art-text{
+      margin:16px auto 0;
+      max-width:660px;
       color:rgba(255,255,255,.74);
       font-size:15px;
-      line-height:1.74;
+      line-height:1.78;
     }
 
-    .error404-actions{
+    .error-art-actions{
       display:flex;
       flex-wrap:wrap;
+      justify-content:center;
       gap:12px;
+      margin-top:26px;
     }
 
-    .error404-actions .btn{
+    .error-art-actions .btn{
       min-height:44px;
       height:44px;
       padding:0 18px;
       white-space:nowrap;
     }
 
-    .error404-grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:12px;
-      margin-top:auto;
+    .error-art-links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin-top:22px;
     }
 
-    .error404-item{
-      display:grid;
-      gap:8px;
-      min-height:112px;
-      padding:14px 14px 13px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.02);
+    .error-art-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.025);
+      color:rgba(255,255,255,.84);
       text-decoration:none;
-      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+      font-size:14px;
+      line-height:1;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
     }
 
-    .error404-item:hover{
-      transform:translateY(-2px);
+    .error-art-link:hover{
+      transform:translateY(-1px);
       border-color:rgba(255,255,255,.13);
-      background:rgba(255,255,255,.04);
+      background:rgba(255,255,255,.05);
       color:#fff;
     }
 
-    .error404-item-title{
-      color:#fff;
-      font-size:16px;
-      line-height:1.15;
-      font-weight:800;
-      letter-spacing:-.02em;
-    }
-
-    .error404-item-desc{
-      color:rgba(255,255,255,.66);
-      font-size:13px;
-      line-height:1.5;
-    }
-
-    @media (max-width: 980px){
-      .error404-layout{
-        grid-template-columns:1fr;
-      }
-
-      .error404-number-inner{
-        min-height:unset;
-      }
+    .error-art-note{
+      margin-top:28px;
+      color:rgba(255,255,255,.48);
+      font-size:12px;
+      line-height:1.6;
+      letter-spacing:.02em;
     }
 
     @media (max-width: 760px){
-      .error404-page::after{
-        right:-220px;
-        top:110px;
-        width:380px;
-        height:380px;
-        opacity:.95;
-      }
-
-      .error404-shell{
+      .error-art-shell{
         min-height:auto;
         padding:18px 0 40px;
       }
 
-      .error404-layout{
-        gap:16px;
+      .error-art-stage{
+        padding:18px 6px 10px;
       }
 
-      .error404-number-card,
-      .error404-content-card{
-        border-radius:24px;
+      .error-art-kicker{
+        margin-bottom:16px;
       }
 
-      .error404-number-inner{
-        padding:20px 18px;
-        gap:18px;
+      .error-art-number{
+        font-size:clamp(112px, 36vw, 180px);
       }
 
-      .error404-content-inner{
-        padding:22px 18px 18px;
-        gap:16px;
-      }
-
-      .error404-title{
+      .error-art-title{
+        margin-top:12px;
         font-size:32px;
       }
 
-      .error404-text p{
+      .error-art-text{
+        margin-top:12px;
         font-size:14px;
-        line-height:1.62;
+        line-height:1.66;
       }
 
-      .error404-grid{
-        grid-template-columns:1fr;
-        gap:10px;
+      .error-art-actions{
+        flex-direction:column;
+        align-items:stretch;
+        max-width:320px;
+        margin-left:auto;
+        margin-right:auto;
       }
 
-      .error404-item{
-        min-height:0;
+      .error-art-actions .btn{
+        width:100%;
+      }
+
+      .error-art-links{
+        gap:8px;
+      }
+
+      .error-art-link{
+        font-size:13px;
+        min-height:36px;
+        padding:0 12px;
+      }
+
+      .error-art-note{
+        margin-top:22px;
       }
     }
   </style>
@@ -332,54 +274,28 @@
   <div class="site-shell">
     <div id="header-placeholder"></div>
 
-    <main class="page-content error404-page">
+    <main class="page-content error-art-page">
       <div class="container">
-        <section class="error404-shell">
-          <div class="error404-layout">
-            <section class="error404-number-card">
-              <div class="error404-number-inner">
-                <div class="error404-kicker">Ошибка навигации</div>
-                <h1 class="error404-number">404</h1>
-                <div class="error404-mini">Такой страницы сейчас нет или ссылка уже неактуальна.</div>
-              </div>
-            </section>
+        <section class="error-art-shell">
+          <div class="error-art-stage">
+            <div class="error-art-kicker">Страница не найдена</div>
+            <h1 class="error-art-number">404</h1>
+            <h2 class="error-art-title">Нужная ссылка потерялась, но SovaZone по-прежнему рядом</h2>
+            <p class="error-art-text">Похоже, адрес изменился или страница больше недоступна. Быстро вернись на главную, открой каталог никнеймов или перейди в нужный раздел через короткие ссылки ниже.</p>
 
-            <section class="error404-content-card">
-              <div class="error404-content-inner">
-                <h2 class="error404-title">Страница не найдена, но нужный раздел можно быстро открыть отсюда</h2>
+            <div class="error-art-actions">
+              <a class="btn btn-primary" href="/index.html">На главную</a>
+              <a class="btn btn-secondary" href="/contacts.html">Связаться</a>
+            </div>
 
-                <div class="error404-text">
-                  <p>Скорее всего, адрес изменился, ссылка устарела или страница была перенесена. Ниже собраны основные разделы SovaZone, чтобы не искать их вручную.</p>
-                </div>
+            <div class="error-art-links">
+              <a class="error-art-link" href="/usernames.html">Никнеймы</a>
+              <a class="error-art-link" href="/services.html">Услуги</a>
+              <a class="error-art-link" href="/blog.html">Блог</a>
+              <a class="error-art-link" href="/articles.html">Статьи</a>
+            </div>
 
-                <div class="error404-actions">
-                  <a class="btn btn-primary" href="/index.html">На главную</a>
-                  <a class="btn btn-secondary" href="/contacts.html">Связаться</a>
-                </div>
-
-                <div class="error404-grid">
-                  <a class="error404-item" href="/usernames.html">
-                    <div class="error404-item-title">Никнеймы</div>
-                    <div class="error404-item-desc">Каталог username и доступные варианты для Instagram.</div>
-                  </a>
-
-                  <a class="error404-item" href="/services.html">
-                    <div class="error404-item-title">Услуги</div>
-                    <div class="error404-item-desc">Помощь с аккаунтами, консультации и профильные решения.</div>
-                  </a>
-
-                  <a class="error404-item" href="/blog.html">
-                    <div class="error404-item-title">Блог</div>
-                    <div class="error404-item-desc">Новые публикации, обновления платформ и свежие материалы.</div>
-                  </a>
-
-                  <a class="error404-item" href="/articles.html">
-                    <div class="error404-item-title">Статьи</div>
-                    <div class="error404-item-desc">Основные материалы проекта и постоянные полезные статьи.</div>
-                  </a>
-                </div>
-              </div>
-            </section>
+            <div class="error-art-note">Если ошибка повторяется, можно просто написать нам через страницу контактов.</div>
           </div>
         </section>
       </div>
