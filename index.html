@@ -1558,12 +1558,12 @@
       .latest-articles-grid{
         display:grid;
         grid-auto-flow:column;
-        grid-auto-columns:84%;
+        grid-auto-columns:minmax(286px,84%);
         overflow-x:auto;
         overscroll-behavior-x:contain;
         scroll-snap-type:x proximity;
         gap:12px;
-        padding-bottom:6px;
+        padding:0 14px 6px 0;
         scrollbar-width:none;
       }
       .latest-articles-grid::-webkit-scrollbar{
@@ -1990,11 +1990,7 @@
       }
 
       function sortPosts(posts) {
-        return [...posts].sort((a, b) => {
-          const dateA = new Date(a.date || 0).getTime();
-          const dateB = new Date(b.date || 0).getTime();
-          return dateB - dateA;
-        });
+        return Array.isArray(posts) ? [...posts] : [];
       }
 
       function cleanDescription(text) {
@@ -2003,7 +1999,7 @@
           .replace(/\s+/g, ' ')
           .trim();
 
-        if (!clean) clean = 'Открыть последнюю публикацию из блога SovaZone.';
+        if (!clean) return 'Открыть статью в блоге SovaZone.';
 
         if (clean.length > 160) {
           clean = clean.slice(0, 160).trimEnd();
@@ -2013,10 +2009,6 @@
           } else {
             clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
           }
-        } else if (clean.length < 80) {
-          const tail = ' Открыть материал в блоге SovaZone.';
-          if ((clean + tail).length <= 160) clean += tail;
-          if (!/[.!?…]$/.test(clean)) clean += '.';
         }
 
         return clean;
