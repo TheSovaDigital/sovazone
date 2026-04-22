@@ -182,6 +182,12 @@
       font-size:15px;
       line-height:1.65;
     }
+    .hero-lead-desktop{
+      display:block;
+    }
+    .hero-lead-mobile{
+      display:none;
+    }
     .hero-lead-line{
       display:block;
     }
@@ -384,6 +390,12 @@
         margin:0 0 10px;
         max-width:100%;
       }
+      .hero-lead-desktop{
+        display:none;
+      }
+      .hero-lead-mobile{
+        display:block;
+      }
       .hero-text-block .hero-lead{
         margin:0 0 8px;
       }
@@ -399,6 +411,7 @@
         justify-content:flex-start;
         cursor:pointer;
         margin-top:8px;
+        font-size:13px;
       }
       .hero-more-desktop{
         display:none;
@@ -459,7 +472,7 @@
         line-height:1.48;
       }
       .hero-lead-more-inline{
-        font-size:11px;
+        font-size:13px;
         margin-top:7px;
       }
       .hero-more-mobile summary{
@@ -825,7 +838,7 @@
 
     @media (max-width:1240px){
       .hero-content h1{
-        white-space:normal;
+        white-space:nowrap;
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -1590,20 +1603,23 @@
             <div class="hero-content">
               <h1>Запуск личного бренда<br><span class="hero-title-line-2">и новых digital-проектов</span></h1>
               <div class="hero-text-block">
-                <p class="hero-lead">
-                  <span class="hero-lead-line">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм,</span>
-                  <span class="hero-lead-line">ТикТок и других социальных сетей, решить ключевые</span>
-                  <span class="hero-lead-line">технические вопросы и выбрать подходящий формат</span>
-                  <span class="hero-lead-line">для начала работы в соц. сетях.</span>
-                  <span class="hero-lead-more-inline">Показать подробнее</span>
-                </p>
-                <details class="hero-more-mobile">
-                  <summary>Показать подробнее</summary>
-                  <div class="hero-more-mobile__content">
-                    <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
-                    <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
-                  </div>
-                </details>
+                <p class="hero-lead hero-lead-desktop">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетей,<br>решить ключевые технические вопросы и выбрать подходящий формат для начала работы в соц. сетях.</p>
+                <div class="hero-lead-mobile" aria-hidden="true">
+                  <p class="hero-lead hero-lead-mobile-text">
+                    <span class="hero-lead-line">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм,</span>
+                    <span class="hero-lead-line">ТикТок и других социальных сетей, решить ключевые</span>
+                    <span class="hero-lead-line">технические вопросы и выбрать подходящий формат</span>
+                    <span class="hero-lead-line">для начала работы в соц. сетях.</span>
+                    <span class="hero-lead-more-inline">Показать подробнее</span>
+                  </p>
+                  <details class="hero-more-mobile">
+                    <summary>Показать подробнее</summary>
+                    <div class="hero-more-mobile__content">
+                      <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
+                      <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
+                    </div>
+                  </details>
+                </div>
                 <div class="hero-more-desktop">
                   <p>Основные направления работы — продажа никнеймов, подбор никнейма, ник под заказ, верификация профиля, консультации, помощь с разблокировкой аккаунта, восстановление после взлома и решение технических вопросов, связанных с Instagram, TikTok, YouTube, Twitter, Telegram и другими платформами.</p>
                   <p>Мы помогаем выбрать основу для старта: имя пользователя, стратегию первого запуска и подходящие сопутствующие услуги для личного бренда, медийного проекта или нового digital-направления.</p>
