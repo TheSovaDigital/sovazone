@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="robots" content="noindex,follow">
+
+  <title>404 — страница не найдена | SovaZone</title>
+  <meta name="description" content="Страница не найдена. Перейдите на главную SovaZone, в каталог никнеймов, блог или раздел услуг.">
+  <link rel="canonical" href="https://sovazone.com/404.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SovaZone">
+  <meta property="og:title" content="404 — страница не найдена | SovaZone">
+  <meta property="og:description" content="Страница не найдена. Перейдите на главную SovaZone, в каталог никнеймов, блог или раздел услуг.">
+  <meta property="og:url" content="https://sovazone.com/404.html">
+  <meta property="og:image" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="404 — страница не найдена | SovaZone">
+  <meta name="twitter:description" content="Страница не найдена. Перейдите на главную SovaZone, в каталог никнеймов, блог или раздел услуг.">
+  <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    .error-page{
+      position:relative;
+      overflow:hidden;
+      min-height:calc(100vh - 56px);
+    }
+
+    .error-page::before{
+      content:"";
+      position:absolute;
+      pointer-events:none;
+      z-index:0;
+      top:90px;
+      right:-220px;
+      width:520px;
+      height:520px;
+      background:radial-gradient(circle, rgba(34,58,154,.14) 0%, rgba(34,58,154,0) 74%);
+      filter:blur(30px);
+    }
+
+    .error-shell{
+      position:relative;
+      z-index:1;
+      min-height:calc(100vh - 140px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:34px 0 52px;
+    }
+
+    .error-card{
+      position:relative;
+      overflow:hidden;
+      width:min(100%, 980px);
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
+        linear-gradient(135deg, rgba(35,39,74,.18), rgba(0,0,0,0));
+      padding:34px;
+    }
+
+    .error-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
+    }
+
+    .error-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:minmax(240px, 300px) minmax(0, 1fr);
+      gap:28px;
+      align-items:center;
+    }
+
+    .error-code{
+      margin:0;
+      font-size:clamp(84px, 14vw, 180px);
+      line-height:.88;
+      letter-spacing:-.07em;
+      font-weight:900;
+      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 26%, #ff5ca8 64%, #f77737 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .error-label{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:#d7d7e8;
+      font-size:13px;
+      line-height:1;
+      margin-top:14px;
+    }
+
+    .error-content h1{
+      margin:0 0 12px;
+      color:#fff;
+      font-size:clamp(30px, 4vw, 48px);
+      line-height:1.04;
+      letter-spacing:-.04em;
+    }
+
+    .error-content p{
+      margin:0 0 12px;
+      color:rgba(255,255,255,.74);
+      font-size:15px;
+      line-height:1.72;
+      max-width:620px;
+    }
+
+    .error-actions{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 220px));
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .error-actions .btn{
+      min-height:44px;
+      height:44px;
+      padding:0 16px;
+      white-space:nowrap;
+    }
+
+    .error-links{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+      margin-top:28px;
+    }
+
+    .error-link-card{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:10px;
+      min-height:112px;
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.02);
+      text-decoration:none;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .error-link-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.13);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+    }
+
+    .error-link-title{
+      color:#fff;
+      font-size:16px;
+      line-height:1.18;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+
+    .error-link-desc{
+      color:rgba(255,255,255,.68);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    @media (max-width: 980px){
+      .error-grid{
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+
+      .error-code-wrap{
+        text-align:left;
+      }
+
+      .error-links{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 760px){
+      .error-page::before{
+        top:100px;
+        right:-250px;
+        width:420px;
+        height:420px;
+        opacity:.9;
+      }
+
+      .error-shell{
+        min-height:auto;
+        padding:22px 0 40px;
+      }
+
+      .error-card{
+        padding:22px 18px;
+        border-radius:24px;
+      }
+
+      .error-content h1{
+        font-size:34px;
+      }
+
+      .error-content p{
+        font-size:14px;
+        line-height:1.62;
+      }
+
+      .error-actions{
+        grid-template-columns:1fr;
+      }
+
+      .error-links{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://sovazone.com/#organization",
+        "name": "SovaZone",
+        "url": "https://sovazone.com/",
+        "logo": "https://sovazone.com/logo.png",
+        "image": "https://sovazone.com/og-image.png"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://sovazone.com/404.html#webpage",
+        "url": "https://sovazone.com/404.html",
+        "name": "404 — страница не найдена | SovaZone",
+        "description": "Страница не найдена. Перейдите на главную SovaZone, в каталог никнеймов, блог или раздел услуг.",
+        "inLanguage": "ru-RU",
+        "about": {
+          "@id": "https://sovazone.com/#organization"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-shell">
+    <div id="header-placeholder"></div>
+
+    <main class="page-content error-page">
+      <div class="container">
+        <section class="error-shell">
+          <div class="error-card">
+            <div class="error-grid">
+              <div class="error-code-wrap">
+                <p class="error-code">404</p>
+                <div class="error-label">Страница не найдена</div>
+              </div>
+
+              <div class="error-content">
+                <h1>Похоже, такой страницы больше нет</h1>
+                <p>Возможно, ссылка устарела, адрес был изменён или страница была перемещена. Ниже можно быстро перейти в основные разделы SovaZone.</p>
+                <p>Если ты искал никнеймы, услуги или материалы блога, всё это доступно по актуальным ссылкам ниже.</p>
+
+                <div class="error-actions">
+                  <a class="btn btn-primary" href="/index.html">На главную</a>
+                  <a class="btn btn-secondary" href="/contacts.html">Связаться</a>
+                </div>
+
+                <div class="error-links">
+                  <a class="error-link-card" href="/usernames.html">
+                    <div class="error-link-title">Никнеймы</div>
+                    <div class="error-link-desc">Каталог username и красивые варианты для Instagram.</div>
+                  </a>
+
+                  <a class="error-link-card" href="/services.html">
+                    <div class="error-link-title">Услуги</div>
+                    <div class="error-link-desc">Подбор, сопровождение, помощь с аккаунтами и консультации.</div>
+                  </a>
+
+                  <a class="error-link-card" href="/blog.html">
+                    <div class="error-link-title">Блог</div>
+                    <div class="error-link-desc">Новые публикации, новости платформ и полезные материалы.</div>
+                  </a>
+
+                  <a class="error-link-card" href="/articles.html">
+                    <div class="error-link-title">Статьи</div>
+                    <div class="error-link-desc">Основные материалы проекта и постоянные авторские статьи.</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
