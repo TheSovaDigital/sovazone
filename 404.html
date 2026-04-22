@@ -42,24 +42,25 @@
       min-height:calc(100vh - 56px);
       isolation:isolate;
       background:
-        radial-gradient(900px 500px at 0% 10%, rgba(105, 18, 52, .26), transparent 58%),
-        radial-gradient(800px 540px at 100% 18%, rgba(24, 56, 155, .22), transparent 58%),
-        radial-gradient(540px 340px at 50% 45%, rgba(102, 54, 170, .12), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)),
-        #060610;
+        radial-gradient(980px 560px at -4% 8%, rgba(142, 18, 72, .34), transparent 56%),
+        radial-gradient(860px 560px at 104% 16%, rgba(26, 74, 188, .30), transparent 58%),
+        radial-gradient(620px 380px at 50% 44%, rgba(162, 62, 255, .16), transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.018), rgba(255,255,255,0)),
+        linear-gradient(180deg, #05050e 0%, #03030a 100%);
     }
 
     .error404-page::before{
       content:"";
       position:absolute;
-      inset:-10%;
+      inset:-12%;
       pointer-events:none;
       background:
-        radial-gradient(circle at 28% 26%, rgba(255, 88, 155, .10), transparent 18%),
-        radial-gradient(circle at 74% 22%, rgba(113, 128, 255, .11), transparent 18%),
-        radial-gradient(circle at 60% 70%, rgba(198, 78, 255, .07), transparent 18%);
-      filter:blur(50px);
-      animation:error404Aurora 12s ease-in-out infinite alternate;
+        radial-gradient(circle at 22% 22%, rgba(255, 74, 142, .16), transparent 18%),
+        radial-gradient(circle at 78% 18%, rgba(97, 122, 255, .17), transparent 19%),
+        radial-gradient(circle at 54% 74%, rgba(214, 76, 255, .11), transparent 18%),
+        radial-gradient(circle at 40% 48%, rgba(255, 140, 90, .08), transparent 20%);
+      filter:blur(56px) saturate(1.08);
+      animation:error404Aurora 10s ease-in-out infinite alternate;
       z-index:-3;
     }
 
@@ -69,11 +70,11 @@
       inset:0;
       pointer-events:none;
       background:
-        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
       background-size:42px 42px;
-      mask-image:radial-gradient(circle at 50% 46%, rgba(0,0,0,.9), transparent 82%);
-      opacity:.18;
+      mask-image:radial-gradient(circle at 50% 46%, rgba(0,0,0,.95), transparent 80%);
+      opacity:.22;
       z-index:-2;
     }
 
@@ -82,15 +83,48 @@
       inset:auto;
       left:50%;
       top:45%;
-      width:880px;
-      height:880px;
+      width:980px;
+      height:980px;
       transform:translate(-50%,-50%);
       border-radius:50%;
-      background:radial-gradient(circle, rgba(130,86,255,.12) 0%, rgba(130,86,255,0) 66%);
-      filter:blur(44px);
-      animation:error404Pulse 6s ease-in-out infinite;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(146,92,255,.16) 0%, rgba(146,92,255,.04) 26%, rgba(146,92,255,0) 64%);
+      filter:blur(46px);
+      animation:error404Pulse 5.5s ease-in-out infinite;
       pointer-events:none;
       z-index:-1;
+    }
+
+    .error404-streaks{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      overflow:hidden;
+    }
+
+    .error404-streaks::before,
+    .error404-streaks::after{
+      content:"";
+      position:absolute;
+      width:420px;
+      height:1px;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.20), rgba(255,255,255,0));
+      opacity:.28;
+      filter:blur(.2px);
+    }
+
+    .error404-streaks::before{
+      top:32%;
+      left:10%;
+      transform:rotate(-11deg);
+    }
+
+    .error404-streaks::after{
+      top:62%;
+      right:8%;
+      transform:rotate(-11deg);
+      opacity:.18;
     }
 
     .error404-wrap{
@@ -133,21 +167,25 @@
       line-height:.82;
       letter-spacing:-.11em;
       font-weight:900;
-      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 28%, #ff5ca8 64%, #f77737 100%);
-      background-size:160% 160%;
+      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 26%, #ff5ca8 62%, #f77737 100%);
+      background-size:180% 180%;
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
       -webkit-text-fill-color:transparent;
       filter:drop-shadow(0 16px 40px rgba(0,0,0,.18));
       user-select:none;
-      animation:error404Gradient 7s ease-in-out infinite, error404Float 5s ease-in-out infinite;
+      animation:
+        error404Gradient 6.5s ease-in-out infinite,
+        error404Float 5s ease-in-out infinite,
+        error404Skew 4.8s cubic-bezier(.4,0,.2,1) infinite;
+      transform-origin:center center;
     }
 
     .error404-bubble{
       position:absolute;
-      top:136px;
-      right:8px;
+      top:126px;
+      right:-26px;
       z-index:4;
       display:inline-flex;
       align-items:center;
@@ -253,12 +291,42 @@
 
     @keyframes error404Pulse{
       0%, 100%{
-        opacity:.78;
-        transform:translate(-50%,-50%) scale(1);
+        opacity:.76;
+        transform:translate(-50%,-50%) scale(1) rotate(0deg);
       }
       50%{
         opacity:1;
-        transform:translate(-50%,-50%) scale(1.06);
+        transform:translate(-50%,-50%) scale(1.08) rotate(8deg);
+      }
+    }
+
+    @keyframes error404Skew{
+      0%, 100%{
+        transform:translateY(0) skewX(0deg);
+      }
+      18%{
+        transform:translateY(-4px) skewX(-2.4deg);
+      }
+      22%{
+        transform:translateY(-4px) skewX(2deg);
+      }
+      26%{
+        transform:translateY(-4px) skewX(-1deg);
+      }
+      30%{
+        transform:translateY(-4px) skewX(0deg);
+      }
+      58%{
+        transform:translateY(0) skewX(0deg);
+      }
+      64%{
+        transform:translateY(2px) skewX(1.5deg);
+      }
+      68%{
+        transform:translateY(2px) skewX(-1deg);
+      }
+      72%{
+        transform:translateY(2px) skewX(0deg);
       }
     }
 
@@ -281,7 +349,39 @@
     }
 
     @media (max-width: 760px){
-      .error404-wrap{
+      .error404-streaks{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      overflow:hidden;
+    }
+
+    .error404-streaks::before,
+    .error404-streaks::after{
+      content:"";
+      position:absolute;
+      width:420px;
+      height:1px;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.20), rgba(255,255,255,0));
+      opacity:.28;
+      filter:blur(.2px);
+    }
+
+    .error404-streaks::before{
+      top:32%;
+      left:10%;
+      transform:rotate(-11deg);
+    }
+
+    .error404-streaks::after{
+      top:62%;
+      right:8%;
+      transform:rotate(-11deg);
+      opacity:.18;
+    }
+
+    .error404-wrap{
         min-height:auto;
         padding:20px 0 40px;
       }
@@ -297,7 +397,7 @@
       .error404-bubble{
         position:static;
         margin:0 auto 14px;
-        transform:rotate(-4deg);
+        transform:rotate(-4deg) translateY(-2px);
       }
 
       .error404-title{
@@ -320,6 +420,11 @@
         width:620px;
         height:620px;
         top:42%;
+      }
+
+      .error404-streaks::before,
+      .error404-streaks::after{
+        width:240px;
       }
     }
   </style>
@@ -357,6 +462,7 @@
 
     <main class="page-content error404-page">
       <div class="error404-orb"></div>
+      <div class="error404-streaks"></div>
 
       <div class="container">
         <section class="error404-wrap">
