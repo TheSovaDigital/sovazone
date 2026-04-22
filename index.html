@@ -1193,6 +1193,331 @@
         height:20px;
       }
     }
+
+    @media (max-width:680px){
+      .home-page{
+        padding-top:18px;
+      }
+
+      .hero.hero-split{
+        min-height:auto;
+        padding:0;
+      }
+
+      .hero-grid{
+        min-height:auto;
+      }
+
+      .hero-content{
+        padding:6px 0 250px;
+        text-align:left;
+      }
+
+      .hero-content h1{
+        margin:0 0 14px;
+        max-width:280px;
+        font-size:29px;
+        line-height:1.02;
+        letter-spacing:-0.045em;
+      }
+
+      .hero-text-block{
+        max-width:100%;
+      }
+
+      .hero-text-block .hero-lead,
+      .hero-text-block p{
+        max-width:286px;
+        margin:0 0 10px;
+        font-size:14px;
+        line-height:1.58;
+      }
+
+      .hero-actions-row{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+        max-width:100%;
+        margin-top:18px;
+      }
+
+      .hero-actions-row .btn,
+      .hero-actions-row .mini-point{
+        min-height:38px;
+        height:38px;
+        padding:0 10px;
+        font-size:12px;
+      }
+
+      .hero-bg::before{
+        right:-14vw;
+        top:auto;
+        bottom:-4px;
+        width:min(104vw, 520px);
+        height:260px;
+        opacity:.76;
+        background-position:right bottom;
+      }
+
+      .hero-bg::after{
+        right:8vw;
+        top:auto;
+        bottom:76px;
+        width:44vw;
+        height:56px;
+        opacity:.12;
+      }
+
+      .section{
+        padding:14px 0;
+      }
+
+      .section-usernames-showcase{
+        margin-top:8px;
+      }
+
+      .section-head.section-head-inline,
+      .section-services-compact .section-head-inline,
+      .latest-articles .section-head-inline{
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+        margin-bottom:12px;
+      }
+
+      .section-head-inline h2{
+        flex:1 1 auto;
+        min-width:0;
+        margin:0;
+      }
+
+      .section-title-with-icon{
+        gap:8px;
+        flex-wrap:nowrap;
+      }
+
+      .section-title-with-icon span:last-child{
+        min-width:0;
+      }
+
+      .section-head h2,
+      .section-head-inline h2,
+      .home-projects .section-head h2,
+      .about-title,
+      .work-inline-title{
+        font-size:22px;
+        line-height:1.08;
+      }
+
+      .section-head-btn{
+        flex:0 0 auto;
+        min-width:auto;
+        width:auto;
+        padding:0 14px;
+        font-size:11px;
+      }
+
+      .username-grid.username-grid-refined,
+      .services-compact-grid{
+        grid-template-columns:1fr;
+        gap:10px;
+      }
+
+      .username-grid-refined .username-card,
+      .service-compact-card,
+      .home-steps-only{
+        border-radius:18px;
+      }
+
+      .username-grid-refined .username-card{
+        min-height:108px;
+      }
+
+      .service-compact-card{
+        min-height:0;
+        padding:15px 15px 13px;
+      }
+
+      .service-compact-card h3{
+        font-size:18px;
+        margin:0 0 6px;
+      }
+
+      .service-compact-card p{
+        font-size:13px;
+        line-height:1.55;
+      }
+
+      .latest-articles{
+        margin-top:20px;
+      }
+
+      .latest-articles-grid{
+        display:grid;
+        grid-auto-flow:column;
+        grid-auto-columns:84%;
+        grid-template-columns:none;
+        gap:12px;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding:2px 2px 10px;
+        scroll-snap-type:x proximity;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+
+      .latest-articles-grid::-webkit-scrollbar{
+        display:none;
+      }
+
+      .latest-article-card{
+        min-height:0;
+        scroll-snap-align:start;
+      }
+
+      .latest-article-image-wrap{
+        aspect-ratio:16 / 8.7;
+      }
+
+      .latest-article-body{
+        padding:10px 12px 12px;
+      }
+
+      .projects-work-wrap{
+        margin-top:18px;
+      }
+
+      .home-steps-only{
+        padding:18px;
+      }
+
+      .work-why-layout{
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+
+      .why-inline{
+        padding:0;
+      }
+
+      .why-inline-head{
+        margin-bottom:10px;
+      }
+
+      .why-inline-copy p{
+        font-size:14px;
+        line-height:1.62;
+      }
+
+      .why-inline-meta{
+        grid-template-columns:repeat(3, minmax(0,1fr));
+        gap:10px;
+        margin-top:16px;
+      }
+
+      .why-inline-stat strong{
+        font-size:28px;
+        margin-bottom:6px;
+      }
+
+      .why-inline-stat span{
+        max-width:none;
+        font-size:11px;
+        line-height:1.35;
+      }
+
+      .why-inline-footer{
+        padding-top:14px;
+      }
+
+      .why-inline-btn{
+        width:100%;
+        min-width:0;
+      }
+
+      .home-steps-only .steps-grid{
+        gap:10px;
+      }
+
+      .home-steps-only .step{
+        padding:13px;
+        min-height:0;
+      }
+
+      .step-head{
+        align-items:flex-start;
+        margin-bottom:8px;
+      }
+
+      .step h3{
+        font-size:15px;
+        line-height:1.18;
+      }
+
+      .step p{
+        font-size:13px;
+        line-height:1.5;
+      }
+    }
+
+    @media (max-width:420px){
+      .hero-content{
+        padding-bottom:236px;
+      }
+
+      .hero-content h1{
+        max-width:250px;
+        font-size:27px;
+      }
+
+      .hero-text-block .hero-lead,
+      .hero-text-block p{
+        max-width:268px;
+        font-size:13px;
+      }
+
+      .hero-actions-row{
+        grid-template-columns:1fr;
+      }
+
+      .hero-bg::before{
+        right:-18vw;
+        width:min(112vw, 500px);
+        height:230px;
+        opacity:.72;
+      }
+
+      .hero-bg::after{
+        right:10vw;
+        bottom:70px;
+        width:40vw;
+      }
+
+      .section-head h2,
+      .section-head-inline h2,
+      .home-projects .section-head h2,
+      .about-title,
+      .work-inline-title{
+        font-size:20px;
+      }
+
+      .latest-articles-grid{
+        grid-auto-columns:88%;
+      }
+
+      .why-inline-meta{
+        gap:6px;
+      }
+
+      .why-inline-stat strong{
+        font-size:24px;
+      }
+
+      .why-inline-stat span{
+        font-size:10px;
+      }
+    }
+
   </style>
 
   <script type="application/ld+json">
