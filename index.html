@@ -1563,7 +1563,7 @@
         overscroll-behavior-x:contain;
         scroll-snap-type:x proximity;
         gap:12px;
-        padding:0 14px 6px 0;
+        padding:0 0 6px;
         scrollbar-width:none;
       }
       .latest-articles-grid::-webkit-scrollbar{
@@ -1983,14 +1983,18 @@
         return {
           slug: post.slug || '',
           title: (post.title || 'Без названия').trim(),
-          description: (post.description || post.excerpt || post.shortDescription || '').trim(),
+          description: (post.shortDescription || post.description || post.excerpt || '').trim(),
           cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
           date: post.date || ''
         };
       }
 
       function sortPosts(posts) {
-        return Array.isArray(posts) ? [...posts] : [];
+        return [...posts].sort((a, b) => {
+          const dateA = new Date(a.date || 0).getTime();
+          const dateB = new Date(b.date || 0).getTime();
+          return dateB - dateA;
+        });
       }
 
       function cleanDescription(text) {
@@ -1999,16 +2003,11 @@
           .replace(/\s+/g, ' ')
           .trim();
 
-        if (!clean) return 'Открыть статью в блоге SovaZone.';
+        if (!clean) return '';
 
-        if (clean.length > 160) {
-          clean = clean.slice(0, 160).trimEnd();
-          const lastPunct = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf('!'), clean.lastIndexOf('?'));
-          if (lastPunct >= 80) {
-            clean = clean.slice(0, lastPunct + 1);
-          } else {
-            clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
-          }
+        if (clean.length > 140) {
+          clean = clean.slice(0, 140).trimEnd();
+          clean = clean.replace(/[,:;\-–—]+$/g, '').trimEnd() + '…';
         }
 
         return clean;
