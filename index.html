@@ -182,6 +182,27 @@
       font-size:15px;
       line-height:1.65;
     }
+    .hero-lead-line{
+      display:block;
+    }
+    .hero-lead-line--last{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .hero-lead-more-inline{
+      display:none;
+      flex:0 0 auto;
+      color:rgba(255,255,255,.78);
+      font-size:12px;
+      font-weight:600;
+      line-height:1.2;
+      text-decoration:underline;
+      text-decoration-color:rgba(255,255,255,.28);
+      text-underline-offset:3px;
+      white-space:nowrap;
+    }
     .hero-more-mobile{
       display:none;
     }
@@ -369,12 +390,23 @@
         margin:0 0 10px;
         max-width:100%;
       }
+      .hero-text-block .hero-lead{
+        margin:0 0 8px;
+      }
+      .hero-lead-line{
+        margin:0;
+      }
+      .hero-lead-line + .hero-lead-line{
+        margin-top:2px;
+      }
+      .hero-lead-more-inline{
+        display:inline-flex;
+      }
       .hero-more-desktop{
         display:none;
       }
       .hero-more-mobile{
-        display:block;
-        margin-top:2px;
+        display:none;
       }
       .hero-actions-row{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -417,6 +449,12 @@
         max-width:100%;
         font-size:13.5px;
         line-height:1.48;
+      }
+      .hero-lead-line--last{
+        gap:10px;
+      }
+      .hero-lead-more-inline{
+        font-size:11px;
       }
       .hero-more-mobile summary{
         font-size:11px;
@@ -1546,7 +1584,12 @@
             <div class="hero-content">
               <h1>Запуск личного бренда<br><span class="hero-title-line-2">и новых digital-проектов</span></h1>
               <div class="hero-text-block">
-                <p class="hero-lead">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм, ТикТок и других социальных сетей,<br>решить ключевые технические вопросы и выбрать подходящий формат для начала работы в соц. сетях.</p>
+                <p class="hero-lead">
+                  <span class="hero-lead-line">Мы помогаем подобрать никнейм для аккаунтов: Инстаграм,</span>
+                  <span class="hero-lead-line">ТикТок и других социальных сетей, решить ключевые</span>
+                  <span class="hero-lead-line">технические вопросы и выбрать подходящий формат для начала</span>
+                  <span class="hero-lead-line hero-lead-line--last"><span>работы в соц. сетях.</span><span class="hero-lead-more-inline">подробнее</span></span>
+                </p>
                 <details class="hero-more-mobile">
                   <summary>Показать подробнее</summary>
                   <div class="hero-more-mobile__content">
