@@ -36,11 +36,27 @@
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
 
   <style>
+    .site-shell{
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .page-content.error404-page{
+      flex:1 0 auto;
+    }
+
+    .error404-page > .container{
+      width:100%;
+    }
+
     .error404-page{
       position:relative;
       overflow:hidden;
-      min-height:calc(100vh - 56px);
+      min-height:calc(100svh - 56px);
       isolation:isolate;
+      display:flex;
+      align-items:center;
       background:
         radial-gradient(980px 560px at -4% 8%, rgba(142, 18, 72, .34), transparent 56%),
         radial-gradient(860px 560px at 104% 16%, rgba(26, 74, 188, .30), transparent 58%),
@@ -128,17 +144,17 @@
     }
 
     .error404-wrap{
-      min-height:auto;
+      min-height:clamp(520px, calc(100svh - 210px), 760px);
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:center;
-      padding:0 0 0;
+      padding:0;
     }
 
     .error404-stage{
       width:min(100%, 1100px);
       text-align:center;
-      padding:0 18px 0;
+      padding:18px 18px 28px;
       position:relative;
     }
 
@@ -166,8 +182,8 @@
 
     .error404-bubble{
       position:absolute;
-      top:126px;
-      right:-26px;
+      top:92px;
+      right:-38px;
       z-index:4;
       display:inline-flex;
       align-items:center;
@@ -187,6 +203,7 @@
         0 16px 36px rgba(0,0,0,.28),
         inset 0 1px 0 rgba(255,255,255,.05);
       white-space:nowrap;
+      animation:error404BubbleFloat 3.8s ease-in-out infinite;
     }
 
     .error404-bubble strong{
@@ -200,7 +217,7 @@
     }
 
     .error404-title{
-      margin:0 auto 0;
+      margin:4px auto 0;
       max-width:820px;
       color:#fff;
       font-size:clamp(28px, 4vw, 54px);
@@ -229,7 +246,7 @@
       min-height:48px;
       padding:0 22px;
       border:none;
-      border-radius:999px;
+      border-radius:14px;
       background:linear-gradient(90deg,#833ab4 0%,#c13584 38%,#e1306c 68%,#f77737 100%);
       color:#fff;
       font-size:14px;
@@ -317,45 +334,13 @@
     }
 
     @media (max-width: 760px){
-      .error404-streaks{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      z-index:-1;
-      overflow:hidden;
-    }
-
-    .error404-streaks::before,
-    .error404-streaks::after{
-      content:"";
-      position:absolute;
-      width:420px;
-      height:1px;
-      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.20), rgba(255,255,255,0));
-      opacity:.28;
-      filter:blur(.2px);
-    }
-
-    .error404-streaks::before{
-      top:32%;
-      left:10%;
-      transform:rotate(-11deg);
-    }
-
-    .error404-streaks::after{
-      top:62%;
-      right:8%;
-      transform:rotate(-11deg);
-      opacity:.18;
-    }
-
-    .error404-wrap{
-        min-height:auto;
-        padding:20px 0 40px;
+      .error404-wrap{
+        min-height:calc(100svh - 150px);
+        padding:0;
       }
 
       .error404-stage{
-        padding:10px 4px 10px;
+        padding:16px 4px 24px;
       }
 
       .error404-number{
@@ -364,9 +349,10 @@
 
       .error404-bubble{
         position:static;
-        margin:-4px auto 14px;
-        transform:rotate(-4deg) translateY(-2px);
-        animation:error404BubbleFloat 3.8s ease-in-out infinite;
+        margin:0 auto 14px;
+        right:auto;
+        top:auto;
+        transform:rotate(-4deg) translateY(0);
       }
 
       .error404-title{
@@ -388,13 +374,14 @@
       .error404-orb{
         width:620px;
         height:620px;
-        top:42%;
+        top:44%;
       }
 
       .error404-streaks::before,
       .error404-streaks::after{
         width:240px;
       }
+    }
     }
   </style>
 
