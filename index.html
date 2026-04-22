@@ -1259,6 +1259,7 @@
       min-width:0;
       min-height:188px;
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      cursor:pointer;
     }
     .latest-article-card:hover{
       transform:translateY(-3px);
@@ -2033,7 +2034,7 @@
           const cover = escapeHtml(post.cover || '/og-image.png');
           const href = escapeHtml(buildPostUrl(post.slug));
           return `
-            <article class="latest-article-card">
+            <article class="latest-article-card" data-href="${href}" tabindex="0" role="link" aria-label="${title}">
               <div class="latest-article-image-wrap">
                 <img class="latest-article-image" src="${cover}" alt="${title}">
               </div>
@@ -2045,6 +2046,23 @@
             </article>
           `;
         }).join('');
+
+        const cards = grid.querySelectorAll('.latest-article-card[data-href]');
+        cards.forEach(card => {
+          card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            const href = card.getAttribute('data-href');
+            if (href) window.location.href = href;
+          });
+
+          card.addEventListener('keydown', function (e) {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            if (e.target.closest('a')) return;
+            e.preventDefault();
+            const href = card.getAttribute('data-href');
+            if (href) window.location.href = href;
+          });
+        });
       }
 
       function renderFallback() {
