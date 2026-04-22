@@ -99,6 +99,8 @@
     }
 
     .error404-number{
+      position:relative;
+      z-index:1;
       margin:0;
       font-size:clamp(130px, 26vw, 340px);
       line-height:.82;
@@ -115,21 +117,26 @@
 
     .error404-bubble{
       position:absolute;
-      top:88px;
-      right:110px;
+      top:108px;
+      right:64px;
+      z-index:4;
       display:inline-flex;
       align-items:center;
-      min-height:38px;
-      padding:0 16px;
+      min-height:42px;
+      padding:0 18px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.04);
-      color:#fff;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(18, 20, 40, .86);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      color:#ffffff;
       font-size:14px;
       line-height:1;
       letter-spacing:-.01em;
-      transform:rotate(-8deg);
-      box-shadow:0 14px 34px rgba(0,0,0,.16);
+      transform:rotate(-7deg);
+      box-shadow:
+        0 16px 36px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.05);
       white-space:nowrap;
     }
 
@@ -216,7 +223,8 @@
 
     @media (max-width: 900px){
       .error404-bubble{
-        right:40px;
+        right:28px;
+        top:110px;
       }
     }
 
@@ -236,6 +244,7 @@
 
       .error404-bubble{
         position:static;
+        z-index:4;
         margin:0 auto 14px;
         transform:rotate(-4deg);
       }
