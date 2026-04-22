@@ -1177,6 +1177,364 @@
         height:20px;
       }
     }
+
+    /* =========================================================
+       HOME MOBILE REFINEMENT
+       точечное выравнивание главной страницы на мобильных
+       ========================================================= */
+    @media (max-width:860px){
+      .home-page{
+        padding-top:18px;
+      }
+
+      .home-page .section{
+        padding:14px 0;
+      }
+
+      .hero.hero-split{
+        min-height:auto;
+        padding:0;
+      }
+
+      .hero-grid{
+        min-height:auto;
+      }
+
+      .hero-content{
+        padding:6px 0 190px;
+      }
+
+      .hero-content h1{
+        margin:0 0 16px;
+        max-width:320px;
+        font-size:30px;
+        line-height:1.04;
+        letter-spacing:-0.04em;
+      }
+
+      .hero-text-block{
+        max-width:100%;
+      }
+
+      .hero-text-block .hero-lead,
+      .hero-text-block p{
+        max-width:100%;
+        font-size:14px;
+        line-height:1.62;
+      }
+
+      .hero-text-block .hero-lead{
+        margin-bottom:12px;
+      }
+
+      .hero-actions-row{
+        max-width:100%;
+        gap:10px;
+        margin-top:18px;
+      }
+
+      .hero-actions-row .btn,
+      .hero-actions-row .mini-point{
+        min-height:42px;
+        height:42px;
+        padding:0 14px;
+        font-size:13px;
+      }
+
+      .hero-bg::before{
+        right:-26vw;
+        top:auto;
+        bottom:0;
+        width:min(112vw, 700px);
+        height:300px;
+        opacity:.68;
+        background-position:right bottom;
+      }
+
+      .hero-bg::after{
+        right:-6px;
+        top:auto;
+        bottom:92px;
+        width:180px;
+        height:54px;
+        opacity:.08;
+      }
+
+      .section-usernames-showcase{
+        margin-top:8px;
+      }
+
+      .section-head.section-head-inline,
+      .section-services-compact .section-head-inline,
+      .latest-articles .section-head-inline{
+        align-items:flex-start;
+        gap:12px;
+        margin-bottom:12px;
+      }
+
+      .section-head-btn{
+        min-width:0;
+        width:100%;
+        justify-content:center;
+      }
+
+      .section-title-with-icon{
+        align-items:flex-start;
+      }
+
+      .username-grid.username-grid-refined{
+        gap:12px;
+      }
+
+      .username-grid-refined .username-card{
+        min-height:0;
+        padding:12px;
+      }
+
+      .username-grid-refined .username-card-top{
+        gap:6px;
+        margin-bottom:10px;
+      }
+
+      .username-grid-refined .username-buy{
+        min-height:34px;
+        height:34px;
+      }
+
+      .services-compact-grid{
+        gap:12px;
+      }
+
+      .service-compact-card{
+        min-height:0;
+        padding:16px;
+      }
+
+      .service-compact-card h3{
+        font-size:18px;
+      }
+
+      .service-compact-link{
+        min-height:36px;
+        height:36px;
+      }
+
+      .latest-articles{
+        margin-top:22px;
+      }
+
+      .latest-articles-grid{
+        gap:12px;
+      }
+
+      .latest-article-card{
+        min-height:0;
+      }
+
+      .latest-article-body{
+        padding:12px;
+      }
+
+      .home-steps-only{
+        padding:18px;
+        border-radius:20px;
+      }
+
+      .work-why-layout{
+        gap:16px;
+      }
+
+      .why-inline{
+        padding:0;
+      }
+
+      .why-inline-head{
+        margin-bottom:10px;
+      }
+
+      .why-inline-copy p{
+        font-size:14px;
+        line-height:1.64;
+      }
+
+      .why-inline-meta{
+        gap:14px;
+        margin-top:16px;
+      }
+
+      .why-inline-stat strong{
+        font-size:28px;
+        margin-bottom:8px;
+      }
+
+      .why-inline-stat span{
+        max-width:none;
+        font-size:13px;
+      }
+
+      .why-inline-footer{
+        padding-top:14px;
+      }
+
+      .why-inline-btn{
+        width:100%;
+        min-width:0;
+        min-height:38px;
+        height:38px;
+      }
+
+      .steps-column{
+        width:100%;
+      }
+
+      .home-steps-only .steps-grid{
+        gap:10px;
+      }
+
+      .home-steps-only .step{
+        min-height:0;
+        padding:14px;
+      }
+
+      .step-head{
+        min-height:0;
+        margin-bottom:8px;
+      }
+
+      .step h3{
+        font-size:15px;
+      }
+
+      .step p{
+        font-size:13px;
+        line-height:1.55;
+      }
+    }
+
+    @media (max-width:680px){
+      .home-page{
+        padding-top:14px;
+      }
+
+      .hero-content{
+        padding:2px 0 176px;
+      }
+
+      .hero-content h1{
+        max-width:280px;
+        font-size:27px;
+      }
+
+      .hero-text-block .hero-lead,
+      .hero-text-block p{
+        font-size:13px;
+        line-height:1.58;
+      }
+
+      .hero-actions-row .btn,
+      .hero-actions-row .mini-point{
+        min-height:40px;
+        height:40px;
+        font-size:13px;
+      }
+
+      .hero-bg::before{
+        right:-34vw;
+        width:min(122vw, 720px);
+        height:270px;
+        opacity:.62;
+      }
+
+      .hero-bg::after{
+        bottom:86px;
+        width:150px;
+      }
+
+      .section-head h2,
+      .section-head-inline h2,
+      .home-projects .section-head h2,
+      .about-title,
+      .work-inline-title,
+      .why-inline-head h2{
+        font-size:24px;
+        line-height:1.08;
+      }
+
+      .section-title-icon{
+        width:18px;
+        height:18px;
+        flex:0 0 18px;
+      }
+
+      .section-title-icon svg,
+      .section-title-icon--articles svg{
+        width:18px;
+        height:18px;
+      }
+
+      .username-grid.username-grid-refined,
+      .services-compact-grid,
+      .latest-articles-grid,
+      .why-inline-meta,
+      .steps-grid{
+        grid-template-columns:1fr;
+      }
+
+      .username-grid-refined .username-name{
+        font-size:18px;
+      }
+
+      .username-grid-refined .username-meta{
+        gap:8px;
+      }
+
+      .username-grid-refined .username-link{
+        font-size:11px;
+      }
+
+      .username-grid-refined .username-price{
+        font-size:13px;
+      }
+
+      .service-compact-card{
+        border-radius:18px;
+      }
+
+      .latest-article-title{
+        font-size:15px;
+      }
+
+      .home-steps-only{
+        padding:16px;
+      }
+
+      .step{
+        border-radius:14px;
+      }
+    }
+
+    @media (max-width:420px){
+      .hero-content{
+        padding-bottom:164px;
+      }
+
+      .hero-content h1{
+        max-width:250px;
+        font-size:25px;
+      }
+
+      .hero-bg::before{
+        right:-38vw;
+        height:240px;
+      }
+
+      .hero-bg::after{
+        bottom:76px;
+        width:126px;
+        height:46px;
+      }
+    }
+
   </style>
 
   <script type="application/ld+json">
