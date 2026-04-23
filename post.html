@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,369 +7,924 @@
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
-  <title>Articles | SovaZone</title>
-  <meta name="description" content="Авторские статьи SovaZone про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.">
-  <link rel="canonical" href="https://sovazone.com/en/articles.html">
+  <title>Статья — SovaZone</title>
+  <meta name="description" content="Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.">
+  <meta name="keywords" content="SovaZone блог, статья SovaZone, никнеймы, социальные сети, безопасность аккаунтов, верификация, Instagram, TikTok, YouTube, Telegram">
+  <link rel="canonical" href="https://sovazone.com/post.html">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/en/site.webmanifest">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="/site.webmanifest">
 
   <meta property="og:locale" content="ru_RU">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
   <meta property="og:site_name" content="SovaZone">
-  <meta property="og:title" content="Articles | SovaZone">
-  <meta property="og:description" content="Авторские статьи про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.">
-  <meta property="og:url" content="https://sovazone.com/articles.html">
+  <meta property="og:title" content="Статья — SovaZone">
+  <meta property="og:description" content="Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.">
+  <meta property="og:url" content="https://sovazone.com/post.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="SovaZone">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Articles | SovaZone">
-  <meta name="twitter:description" content="Авторские статьи про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.">
+  <meta name="twitter:title" content="Статья — SovaZone">
+  <meta name="twitter:description" content="Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
-  <meta name="twitter:image:alt" content="SovaZone">
+
+  <link rel="stylesheet" href="/styles.css">
 
   <style>
-    .articles-page{
-      --doc-line: rgba(255,255,255,.08);
-      --doc-text:#f3f3f8;
-      --doc-muted:#b6b6c8;
-      --doc-accent:#d9b38c;
-      --doc-link:#dcdcff;
-    }
-    .articles-page .doc-wrap{
-      max-width:1120px;
-      margin:0 auto;
-      padding:10px 0 74px;
-    }
-    .articles-page .doc-hero{
-      position:relative;
-      padding:8px 0 28px;
-      margin-bottom:26px;
-      border-bottom:1px solid var(--doc-line);
-    }
-    .articles-page .doc-breadcrumbs{
-      display:inline-flex;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:0 0 16px;
-      font-size:12px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:var(--doc-accent);
-    }
-    .articles-page .doc-breadcrumbs::before{
-      content:"";
-      width:34px;
-      height:1px;
-      background:linear-gradient(90deg, rgba(217,179,140,.9), rgba(217,179,140,0));
-      flex:0 0 auto;
-    }
-    .articles-page .doc-breadcrumbs a,
-    .articles-page .doc-breadcrumbs span{
-      color:var(--doc-accent);
-      text-decoration:none;
-    }
-    .articles-page .doc-breadcrumbs-sep{
-      opacity:.68;
-      margin:0 -2px;
-    }
-    .articles-page .doc-breadcrumbs a:hover{
-      color:#f1d2b3;
-    }
-    .articles-page .doc-hero h1{
-      margin:0 0 12px;
-      font-size:clamp(32px,4.2vw,52px);
-      line-height:1.02;
-      letter-spacing:-.04em;
-      color:var(--doc-text);
-      max-width:900px;
-    }
-    .articles-page .doc-lead{
-      margin:0;
-      max-width:920px;
-      color:var(--doc-muted);
-      font-size:18px;
-      line-height:1.72;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .articles-page .articles-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:22px;
+    .post-page { position: relative; overflow: hidden; }
+
+    .post-page::before,
+    .post-page::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
     }
-    .articles-page .article-card{
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
-      padding:24px 22px 22px;
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,.08);
+
+    .post-page::before {
+      top: 0;
+      left: -180px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(128, 45, 106, 0.18) 0%, rgba(128, 45, 106, 0) 72%);
+      filter: blur(28px);
+    }
+
+    .post-page::after {
+      top: 120px;
+      right: -190px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(34, 58, 154, 0.14) 0%, rgba(34, 58, 154, 0) 74%);
+      filter: blur(30px);
+    }
+
+    .post-shell {
+      position: relative;
+      z-index: 1;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .post-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .post-main,
+    .post-sidebar {
+      min-width: 0;
+    }
+
+    .post-article,
+    .post-side-panel {
+      position: relative;
+      overflow: hidden;
       background:
-        radial-gradient(120% 100% at 0% 0%, rgba(168,85,247,.08), transparent 40%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.018));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-      overflow:hidden;
-    }
-    .articles-page .article-card::before{
-      content:"";
-      position:absolute;
-      inset:0 auto auto 0;
-      width:100%;
-      height:1px;
-      background:linear-gradient(90deg, rgba(236,72,153,.32), rgba(249,115,22,.22), rgba(255,255,255,0));
-      pointer-events:none;
-    }
-    .articles-page .article-card h2{
-      margin:0 0 12px;
-      font-size:24px;
-      line-height:1.1;
-      letter-spacing:-.03em;
-      color:#fff;
-      max-width:95%;
-    }
-    .articles-page .article-card p{
-      margin:0 0 18px;
-      color:var(--doc-muted);
-      font-size:14px;
-      line-height:1.6;
-      flex:1;
-    }
-    .articles-page .article-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:space-between;
-      min-height:46px;
-      width:100%;
-      padding:0 16px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      color:#fff;
-      text-decoration:none;
-      font-size:14px;
-      font-weight:700;
-      transition:.18s ease;
-    }
-    .articles-page .article-btn::after{
-      content:"↗";
-      color:rgba(255,255,255,.72);
-      font-size:15px;
-      line-height:1;
-    }
-    .articles-page .article-btn:hover{
-      transform:translateY(-1px);
-      border-color:rgba(217,179,140,.28);
-      background:rgba(255,255,255,.045);
-      color:#fff;
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
+        linear-gradient(135deg, rgba(35, 39, 74, 0.18), rgba(0,0,0,0));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 30px;
+      box-shadow: none !important;
+      filter: none !important;
     }
 
-    .articles-page .doc-meta{
-      margin-top:34px;
-      padding-top:22px;
-      border-top:1px solid rgba(255,255,255,.06);
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 12px;
-      justify-content:center;
-    }
-    .articles-page .doc-chip{
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 14px;
-      border-radius:999px;
-      border:1px solid var(--doc-line);
-      color:var(--doc-muted);
-      font-size:14px;
-      background:rgba(255,255,255,.02);
-    }
-    .articles-page .doc-chip a,
-    .articles-page .project-btn,
-    .articles-page .article-btn{
-      color:var(--doc-link);
-      text-decoration:none;
-    }
-    .articles-page .doc-chip a:hover,
-    .articles-page .project-btn:hover,
-    .articles-page .article-btn:hover{
-      color:#fff;
+    .post-article::before,
+    .post-side-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 42%);
     }
 
-    @media (max-width:980px){
-      .articles-page .articles-grid{
-        grid-template-columns:1fr;
-      }
+    .post-article > *,
+    .post-side-panel > * {
+      position: relative;
+      z-index: 1;
     }
-    @media (max-width:760px){
-      .articles-page .doc-wrap{
-        padding-bottom:48px;
-      }
-      .articles-page .doc-hero{
-        padding:2px 0 24px;
-        margin-bottom:22px;
-      }
-      .articles-page .doc-hero h1{
-        font-size:34px;
-      }
-      .articles-page .doc-lead{
-        font-size:16px;
-      }
-      .articles-page .article-card{
-        padding:22px 18px 18px;
-        border-radius:18px;
-      }
-      .articles-page .article-card h2{
-        font-size:22px;
+
+    .post-article { padding: 28px 30px 30px; }
+
+    .post-breadcrumb {
+      margin: 0 0 18px;
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.72;
+    }
+
+    .post-breadcrumb a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .post-title {
+      margin: 0 0 14px;
+      max-width: 900px;
+      font-size: clamp(26px, 2.6vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      color: #fff;
+      text-wrap: balance;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin: 0 0 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.76);
+    }
+
+    .post-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .post-meta-label { opacity: 0.55; }
+
+    .post-excerpt {
+      display: none;
+      margin: 0 0 18px;
+      max-width: 840px;
+      font-size: 16px;
+      line-height: 1.68;
+      color: rgba(255,255,255,0.74);
+    }
+
+    .post-hero {
+      display: none;
+      margin: 0 0 20px;
+    }
+
+    .post-cover {
+      display: block;
+      width: 100%;
+      height: 300px;
+      max-height: 300px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .post-content {
+      font-size: 16px;
+      line-height: 1.84;
+      color: rgba(255,255,255,0.95);
+      min-height: 40px;
+    }
+
+    .post-content h1,
+    .post-content h2,
+    .post-content h3,
+    .post-content h4 {
+      margin: 34px 0 14px;
+      line-height: 1.14;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      text-wrap: balance;
+    }
+
+    .post-content h1 { display: none; }
+    .post-content h2 { font-size: clamp(24px, 2.3vw, 32px); }
+    .post-content h3 { font-size: clamp(20px, 2vw, 26px); }
+    .post-content h4 { font-size: clamp(18px, 1.8vw, 22px); }
+    .post-content p { margin: 0 0 18px; }
+
+    .post-content ul,
+    .post-content ol {
+      margin: 0 0 18px;
+      padding-left: 24px;
+    }
+
+    .post-content li { margin-bottom: 8px; }
+    .post-content strong { color: #ffffff; font-weight: 700; }
+    .post-content a { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; word-break: break-word; }
+
+    .post-content blockquote {
+      margin: 28px 0;
+      padding: 18px 22px;
+      border-left: 2px solid rgba(201, 156, 85, 0.38);
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 16px 16px 0;
+    }
+
+    .post-content hr {
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 34px 0;
+    }
+
+    .post-content img {
+      display: block;
+      width: min(100%, 560px);
+      height: 240px;
+      object-fit: cover;
+      object-position: center;
+      margin: 26px auto;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .post-content img + em,
+    .post-content p > em:only-child {
+      display: block;
+      width: min(100%, 560px);
+      margin: -8px auto 20px;
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.66;
+      font-style: normal;
+      text-align: center;
+    }
+
+    .post-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .post-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      line-height: 1;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .post-share {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .post-share-label {
+      font-size: 14px;
+      line-height: 1.4;
+      opacity: 0.6;
+      margin-right: 2px;
+    }
+
+    .post-share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      font: inherit;
+    }
+
+    .post-share-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .post-share-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      flex: 0 0 16px;
+    }
+
+    .post-sidebar {
+      position: sticky;
+      top: 20px;
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-self: start;
+    }
+
+    .post-side-panel {
+      padding: 20px;
+    }
+
+    .post-side-title {
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .post-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .post-side-link {
+      display: block;
+      padding: 14px 14px 13px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255,255,255,0.022);
+      border: 1px solid rgba(255,255,255,0.055);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .post-side-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .post-side-link-kicker {
+      display: inline-block;
+      margin: 0 0 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.56;
+    }
+
+    .post-side-link-title {
+      display: block;
+      font-size: 15px;
+      line-height: 1.45;
+      color: #fff;
+    }
+
+    .post-side-link-desc {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
+      line-height: 1.55;
+      opacity: 0.74;
+    }
+
+    .post-state {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .scroll-top-btn {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 60;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(13, 17, 38, 0.92);
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease, border-color .2s ease, background .2s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .scroll-top-btn:hover {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(18, 24, 52, 0.96);
+      transform: translateY(-2px);
+    }
+
+    .scroll-top-btn.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .scroll-top-btn svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    @media (max-width: 1160px) {
+      .post-grid { grid-template-columns: 1fr; }
+      .post-sidebar { position: static; top: auto; }
+    }
+
+    @media (max-width: 900px) {
+      .post-article,
+      .post-side-panel { border-radius: 24px; }
+
+      .post-article { padding: 24px 18px 22px; }
+      .post-title { font-size: clamp(24px, 6.6vw, 34px); }
+      .post-cover { height: 220px; max-height: 220px; border-radius: 18px; }
+      .post-content { font-size: 15px; line-height: 1.78; }
+      .post-content img { width: 100%; height: 220px; border-radius: 16px; }
+      .post-content img + em,
+      .post-content p > em:only-child { width: 100%; }
+      .post-bottom { align-items: flex-start; }
+
+      .scroll-top-btn {
+        right: 16px;
+        bottom: 16px;
+        width: 44px;
+        height: 44px;
       }
     }
   </style>
 
-  <script type="application/ld+json">
+  <script type="application/ld+json" id="schema-breadcrumb">
   {
     "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"Organization",
-        "@id":"https://sovazone.com/#organization",
-        "name":"SovaZone",
-        "alternateName":"SovaZone Digital Studio",
-        "url":"https://sovazone.com/",
-        "logo":{"@type":"ImageObject","url":"https://sovazone.com/logo.png"},
-        "image":"https://sovazone.com/og-image.png",
-        "sameAs":[
-          "https://t.me/SovaDigital",
-          "https://t.me/SovaDS",
-          "https://t.me/SovaUsername",
-          "https://sovads.ru/"
-        ]
-      },
-      {
-        "@type":"WebSite",
-        "@id":"https://sovazone.com/#website",
-        "url":"https://sovazone.com/",
-        "name":"SovaZone",
-        "inLanguage":"ru-RU",
-        "publisher":{"@id":"https://sovazone.com/#organization"}
-      },
-      {
-        "@type":"CollectionPage",
-        "@id":"https://sovazone.com/articles.html#webpage",
-        "url":"https://sovazone.com/articles.html",
-        "name":"Articles | SovaZone",
-        "description":"Авторские статьи SovaZone про безопасность аккаунтов, разблокировки, верификацию, Meta Verified, Telegram, TikTok, Instagram и выбор никнейма.",
-        "inLanguage":"ru-RU",
-        "isPartOf":{"@id":"https://sovazone.com/#website"},
-        "about":{"@id":"https://sovazone.com/#organization"},
-        "primaryImageOfPage":{"@type":"ImageObject","url":"https://sovazone.com/og-image.png"}
-      },
-      {
-        "@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://sovazone.com/"},
-          {"@type":"ListItem","position":2,"name":"Articles","item":"https://sovazone.com/articles.html"}
-        ]
-      }
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Главная","item":"https://sovazone.com/"},
+      {"@type":"ListItem","position":2,"name":"Блог","item":"https://sovazone.com/blog.html"},
+      {"@type":"ListItem","position":3,"name":"Статья","item":"https://sovazone.com/post.html"}
     ]
   }
   </script>
 
-  <link rel="alternate" hreflang="en" href="https://sovazone.com/en/articles.html">
-  <link rel="alternate" hreflang="ru" href="https://sovazone.com/articles.html">
-  <link rel="alternate" hreflang="x-default" href="https://sovazone.com/articles.html">
+  <script type="application/ld+json" id="schema-article">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Статья — SovaZone",
+    "description":"Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.",
+    "image":["https://sovazone.com/og-image.png"],
+    "mainEntityOfPage":"https://sovazone.com/post.html",
+    "author":{"@type":"Organization","name":"SovaZone"},
+    "publisher":{"@type":"Organization","name":"SovaZone","url":"https://sovazone.com/","logo":{"@type":"ImageObject","url":"https://sovazone.com/android-chrome-512x512.png"}},
+    "datePublished":"2026-04-07",
+    "dateModified":"2026-04-07"
+  }
+  </script>
 </head>
 <body>
-  <div class="site-shell articles-page">
+  <div class="site-shell">
     <div id="header-placeholder"></div>
 
-    <main class="page-content">
+    <main class="page-content post-page">
       <div class="container">
-        <div class="doc-wrap">
+        <section class="section">
+          <article class="post-shell" itemscope itemtype="https://schema.org/Article">
+            <div class="post-grid">
+              <div class="post-main">
+                <div class="post-article">
+                  <div class="post-breadcrumb">
+                    <a href="/index.html">Главная</a> / <a href="/blog.html">Блог</a> / <span id="post-breadcrumb-current">Статья</span>
+                  </div>
 
-          <section class="doc-hero">
-<h1>Articles</h1>
-            <p class="doc-lead">
-              Авторские статьи про безопасность аккаунтов, разблокировки, верификацию, Meta Verified,
-              защиту данных, Telegram, TikTok, Instagram и выбор никнейма.
-            </p>
-          </section>
+                  <h1 class="post-title" id="post-title" itemprop="headline">Загрузка...</h1>
 
-          <section class="articles-grid" aria-label="Список статей">
+                  <div class="post-meta">
+                    <span><span class="post-meta-label">Категория</span><strong id="post-category">Статьи</strong></span>
+                    <span><span class="post-meta-label">Опубликовано</span><strong id="post-date">Без даты</strong></span>
+                    <span><span class="post-meta-label">Автор</span><strong id="post-author">SovaZone</strong></span>
+                  </div>
 
-            <article class="article-card">
-              <h2>Безопасность Instagram аккаунта</h2>
-              <p>Практическая статья про защиту Instagram аккаунта. На этой базе можно так же обезопасить и другие социальные сети.</p>
-              <a class="article-btn" href="/articles/instagram-account-security.html">Открыть статью</a>
-            </article>
+                  <p class="post-excerpt" id="post-excerpt"></p>
 
-            <article class="article-card">
-              <h2>Взлом Telegram: как вернуть аккаунт</h2>
-              <p>Разбор способов восстановления доступа к Telegram аккаунту после взлома и потери контроля.</p>
-              <a class="article-btn" href="/articles/telegram-account-hacked-recovery.html">Открыть статью</a>
-            </article>
+                  <div class="post-hero" id="post-hero">
+                    <img id="post-cover" class="post-cover" src="" alt="Обложка статьи" itemprop="image">
+                  </div>
 
-            <article class="article-card">
-              <h2>Как разблокировать Instagram аккаунт</h2>
-              <p>Основные способы разблокировки заблокированного Instagram аккаунта и разбор типовых ситуаций.</p>
-              <a class="article-btn" href="/articles/unblock-instagram-account.html">Открыть статью</a>
-            </article>
+                  <div id="post-content" class="post-content post-state" itemprop="articleBody">Загружаем статью...</div>
 
-            <article class="article-card">
-              <h2>Как отправить запрос на верификацию Instagram</h2>
-              <p>Пошаговый разбор подачи запроса на настоящую галочку в Instagram и базовые условия для этого.</p>
-              <a class="article-btn" href="/articles/instagram-verification-request.html">Открыть статью</a>
-            </article>
+                  <div class="post-bottom">
+                    <div class="post-tags" id="post-tags"></div>
+                    <div class="post-share">
+                      <span class="post-share-label">Поделиться</span>
 
-            <article class="article-card">
-              <h2>Как сделать, чтобы появилась Meta подписка</h2>
-              <p>Что влияет на появление возможности Meta Verified и на что стоит обратить внимание в аккаунте.</p>
-              <a class="article-btn" href="/articles/meta-subscription-eligibility.html">Открыть статью</a>
-            </article>
+                      <a class="post-share-btn" id="share-telegram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Telegram">
+                        <svg class="post-share-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M21.944 4.683a1.3 1.3 0 0 0-1.516-.194L3.38 12.272c-.617.278-.582 1.167.055 1.395l4.112 1.472 1.57 5.065c.202.651 1.037.818 1.47.294l2.3-2.784 4.508 3.303c.53.388 1.282.094 1.411-.551L22.02 5.89a1.3 1.3 0 0 0-.076-1.207ZM9.74 14.52l8.306-6.29-6.637 7.366a.75.75 0 0 0-.176.377l-.632 3.55-.86-2.777z"/></svg>
+                      </a>
 
-            <article class="article-card">
-              <h2>Почему блокируют аккаунты в Instagram</h2>
-              <p>Разбор основных причин блокировок Instagram аккаунтов: жалобы, нарушения, подозрительная активность и другие факторы.</p>
-              <a class="article-btn" href="/articles/why-instagram-accounts-get-banned.html">Открыть статью</a>
-            </article>
+                      <a class="post-share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в X">
+                        <svg class="post-share-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.9 2H22l-6.77 7.74L23 22h-6.08l-4.76-6.23L6.7 22H3.58l7.24-8.28L1 2h6.24l4.3 5.67L18.9 2Zm-1.07 18h1.69L6.32 3.9H4.5L17.83 20Z"/></svg>
+                      </a>
 
-            <article class="article-card">
-              <h2>Почему блокируют аккаунты в TikTok</h2>
-              <p>Типовые причины блокировок и ограничений TikTok аккаунтов: нарушения правил, жалобы и алгоритмические триггеры.</p>
-              <a class="article-btn" href="/articles/why-tiktok-accounts-get-banned.html">Открыть статью</a>
-            </article>
+                      <button class="post-share-btn" id="share-copy" type="button" aria-label="Скопировать ссылку">
+                        <svg class="post-share-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>Скопировать ссылку</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <article class="article-card">
-              <h2>Как выбрать хороший никнейм для Instagram</h2>
-              <p>Коротко и по делу о том, как выбрать сильный username для Instagram: длина, читаемость, уникальность и бренд.</p>
-              <a class="article-btn" href="/articles/how-to-choose-instagram-username.html">Открыть статью</a>
-            </article>
+              <aside class="post-sidebar">
+                <section class="post-side-panel">
+                  <h2 class="post-side-title">Избранные материалы</h2>
+                  <div class="post-side-list">
+                    <a class="post-side-link" href="/articles/how-to-choose-instagram-username.html">
+                      <span class="post-side-link-kicker">Instagram</span>
+                      <span class="post-side-link-title">Как выбрать никнейм для Instagram</span>
+                      <span class="post-side-link-desc">Практические принципы выбора короткого и сильного username.</span>
+                    </a>
+                    <a class="post-side-link" href="/articles/instagram-account-security.html">
+                      <span class="post-side-link-kicker">Безопасность</span>
+                      <span class="post-side-link-title">Безопасность аккаунта Instagram</span>
+                      <span class="post-side-link-desc">Что важно проверить заранее, чтобы не потерять доступ к профилю.</span>
+                    </a>
+                    <a class="post-side-link" href="/articles/unblock-instagram-account.html">
+                      <span class="post-side-link-kicker">Разблокировка</span>
+                      <span class="post-side-link-title">Как разблокировать аккаунт Instagram</span>
+                      <span class="post-side-link-desc">Базовая логика действий, если профиль столкнулся с ограничениями.</span>
+                    </a>
+                  </div>
+                </section>
 
-          </section>
+                <section class="post-side-panel">
+                  <h2 class="post-side-title">Последние статьи</h2>
+                  <div class="post-side-list" id="latest-posts">
+                    <a class="post-side-link" href="/blog.html">
+                      <span class="post-side-link-kicker">Блог</span>
+                      <span class="post-side-link-title">Публикации загружаются</span>
+                      <span class="post-side-link-desc">После загрузки статьи здесь появятся свежие материалы блога.</span>
+                    </a>
+                  </div>
+                </section>
 
-          <div class="doc-meta">
-            <span class="doc-chip"><a href="/en/contacts.html">Связь</a></span>
-            <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a></span>
-            <span class="doc-chip"><a href="/en/services.html">Services</a></span>
-            <span class="doc-chip"><a href="/en/about.html">About</a></span>
-          </div>
-
-        </div>
+                <section class="post-side-panel">
+                  <h2 class="post-side-title">Услуги</h2>
+                  <div class="post-side-list">
+                    <a class="post-side-link" href="/services/custom-username.html">
+                      <span class="post-side-link-kicker">Услуги</span>
+                      <span class="post-side-link-title">Никнейм под заказ</span>
+                      <span class="post-side-link-desc">Если нужный username занят, проверим ситуацию и оценим реальные перспективы.</span>
+                    </a>
+                    <a class="post-side-link" href="/usernames.html">
+                      <span class="post-side-link-kicker">Каталог</span>
+                      <span class="post-side-link-title">Доступные никнеймы</span>
+                      <span class="post-side-link-desc">Подборка коротких и сильных username для аккаунтов и проектов.</span>
+                    </a>
+                    <a class="post-side-link" href="/contacts.html">
+                      <span class="post-side-link-kicker">Связь</span>
+                      <span class="post-side-link-title">Связаться с нами</span>
+                      <span class="post-side-link-desc">Контакты и рабочие каналы связи для консультаций и запросов.</span>
+                    </a>
+                  </div>
+                </section>
+              </aside>
+            </div>
+          </article>
+        </section>
       </div>
     </main>
+
+    <button class="scroll-top-btn" id="scroll-top-btn" type="button" aria-label="Наверх">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5"></path>
+        <path d="m5 12 7-7 7 7"></path>
+      </svg>
+    </button>
 
     <div id="footer-placeholder"></div>
   </div>
 
-  <script src="/en/script.js"></script>
+  <script src="/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+
+  <script>
+    const BLOG_REPO_OWNER = "TheSovaDigital";
+    const BLOG_REPO_NAME = "sovazone";
+    const BLOG_REPO_BRANCH = "main";
+
+    function getSlug() {
+      const params = new URLSearchParams(window.location.search);
+      return (params.get("slug") || "").trim();
+    }
+
+    function formatDate(value) {
+      if (!value) return "Без даты";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
+    }
+
+    function parseFrontmatter(text) {
+      if (!text.startsWith("---")) return { meta: {}, content: text };
+      const match = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+      if (!match) return { meta: {}, content: text };
+      let meta = {};
+      try { meta = jsyaml.load(match[1]) || {}; } catch (e) { meta = {}; }
+      return { meta: meta, content: match[2] || "" };
+    }
+
+    async function fetchTextWithFallback(paths) {
+      for (const url of paths) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (response.ok) return await response.text();
+        } catch (e) {}
+      }
+      throw new Error("NOT_FOUND");
+    }
+
+    async function fetchJsonWithFallback(paths) {
+      for (const url of paths) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (response.ok) return await response.json();
+        } catch (e) {}
+      }
+      throw new Error("NOT_FOUND");
+    }
+
+    async function fetchPostMarkdown(slug) {
+      const cacheBust = Date.now();
+      const file = encodeURIComponent(slug) + ".md";
+      return fetchTextWithFallback([
+        "/content/blog/" + file + "?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/content/blog/" + file + "?v=" + cacheBust,
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/content/blog/" + file + "?v=" + cacheBust
+      ]);
+    }
+
+    async function fetchBlogIndex() {
+      const cacheBust = Date.now();
+      return fetchJsonWithFallback([
+        "/content/blog/index.json?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/content/blog/index.json?v=" + cacheBust,
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/content/blog/index.json?v=" + cacheBust
+      ]);
+    }
+
+    function setMeta(selector, value) {
+      const node = document.querySelector(selector);
+      if (node) node.setAttribute("content", value);
+    }
+
+    function setLink(selector, value) {
+      const node = document.querySelector(selector);
+      if (node) node.setAttribute("href", value);
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function cleanText(value, fallback = "") {
+      const cleaned = String(value || "")
+        .replace(/^["']+|["']+$/g, "")
+        .replace(/^\s*>\s*$/g, "")
+        .trim();
+      return cleaned || fallback;
+    }
+
+    function shortBreadcrumbTitle(value) {
+      const clean = cleanText(value, "Статья");
+      return clean.split(":")[0].trim() || clean;
+    }
+
+    function applySeo(meta, slug) {
+      const title = meta.title ? meta.title + " — SovaZone" : "Статья — SovaZone";
+      const description = cleanText(meta.description, "Статья блога SovaZone.");
+      const canonical = "https://sovazone.com/post.html?slug=" + encodeURIComponent(slug);
+      const image = meta.cover ? "https://sovazone.com" + meta.cover : "https://sovazone.com/og-image.png";
+      const published = meta.date || "2026-04-07";
+      const modified = meta.updated || meta.date || published;
+      const authorName = meta.author || "SovaZone";
+
+      document.title = title;
+      setMeta('meta[name="description"]', description);
+      setMeta('meta[name="keywords"]', meta.keywords || "SovaZone блог, статья SovaZone, никнеймы, социальные сети, безопасность аккаунтов, верификация");
+      setLink('link[rel="canonical"]', canonical);
+
+      setMeta('meta[property="og:title"]', title);
+      setMeta('meta[property="og:description"]', description);
+      setMeta('meta[property="og:url"]', canonical);
+      setMeta('meta[property="og:image"]', image);
+      setMeta('meta[property="og:image:secure_url"]', image);
+
+      setMeta('meta[name="twitter:title"]', title);
+      setMeta('meta[name="twitter:description"]', description);
+      setMeta('meta[name="twitter:image"]', image);
+
+      document.getElementById("schema-breadcrumb").textContent = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          { "@type":"ListItem", "position":1, "name":"Главная", "item":"https://sovazone.com/" },
+          { "@type":"ListItem", "position":2, "name":"Блог", "item":"https://sovazone.com/blog.html" },
+          { "@type":"ListItem", "position":3, "name": shortBreadcrumbTitle(meta.title || "Статья"), "item": canonical }
+        ]
+      }, null, 2);
+
+      document.getElementById("schema-article").textContent = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"Article",
+        "headline": meta.title || "Статья — SovaZone",
+        "description": description,
+        "image": [image],
+        "mainEntityOfPage": canonical,
+        "author": { "@type":"Organization", "name": authorName },
+        "publisher": {
+          "@type":"Organization",
+          "name":"SovaZone",
+          "url":"https://sovazone.com/",
+          "logo": { "@type":"ImageObject", "url":"https://sovazone.com/android-chrome-512x512.png" }
+        },
+        "datePublished": published,
+        "dateModified": modified
+      }, null, 2);
+    }
+
+    function initShareButtons(title) {
+      const url = window.location.href;
+      const encodedUrl = encodeURIComponent(url);
+      const encodedTitle = encodeURIComponent(title || document.title);
+
+      document.getElementById("share-telegram").href = "https://t.me/share/url?url=" + encodedUrl + "&text=" + encodedTitle;
+      document.getElementById("share-twitter").href = "https://twitter.com/intent/tweet?url=" + encodedUrl + "&text=" + encodedTitle;
+
+      const copyButton = document.getElementById("share-copy");
+      const newButton = copyButton.cloneNode(true);
+      copyButton.parentNode.replaceChild(newButton, copyButton);
+
+      newButton.addEventListener("click", async function() {
+        const label = this.querySelector("span");
+        try {
+          await navigator.clipboard.writeText(url);
+          if (label) label.textContent = "Ссылка скопирована";
+          setTimeout(() => { if (label) label.textContent = "Скопировать ссылку"; }, 1800);
+        } catch (e) {
+          if (label) label.textContent = "Не удалось скопировать";
+          setTimeout(() => { if (label) label.textContent = "Скопировать ссылку"; }, 1800);
+        }
+      });
+    }
+
+    function renderTags(meta) {
+      const tagsWrap = document.getElementById("post-tags");
+      const tags = Array.isArray(meta.tags) ? meta.tags.filter(Boolean) : [];
+      if (!tags.length) {
+        tagsWrap.innerHTML = "";
+        return;
+      }
+      tagsWrap.innerHTML = tags.map(tag => `<span class="post-tag">${escapeHtml(tag)}</span>`).join("");
+    }
+
+    async function renderLatestPosts(currentSlug) {
+      const container = document.getElementById("latest-posts");
+      try {
+        const posts = await fetchBlogIndex();
+        if (!Array.isArray(posts) || !posts.length) return;
+        const latest = posts
+          .filter(post => post && post.slug && post.slug !== currentSlug)
+          .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+          .slice(0, 4);
+        if (!latest.length) return;
+
+        container.innerHTML = latest.map(post => {
+          const kicker = cleanText(post.category, "Статьи");
+          const title = cleanText(post.title, "Без названия");
+          const desc = cleanText(post.description, "Новая публикация блога SovaZone.");
+          return `
+            <a class="post-side-link" href="/post.html?slug=${encodeURIComponent(post.slug)}">
+              <span class="post-side-link-kicker">${escapeHtml(kicker)}</span>
+              <span class="post-side-link-title">${escapeHtml(title)}</span>
+              <span class="post-side-link-desc">${escapeHtml(desc)}</span>
+            </a>
+          `;
+        }).join("");
+      } catch (e) {}
+    }
+
+    function initScrollTopButton() {
+      const btn = document.getElementById("scroll-top-btn");
+      if (!btn) return;
+
+      const toggle = () => {
+        if (window.scrollY > 500) {
+          btn.classList.add("is-visible");
+        } else {
+          btn.classList.remove("is-visible");
+        }
+      };
+
+      window.addEventListener("scroll", toggle, { passive: true });
+      toggle();
+
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    async function loadPost() {
+      const slug = getSlug();
+      const contentEl = document.getElementById("post-content");
+
+      if (!slug) {
+        document.getElementById("post-title").textContent = "Статья не найдена";
+        contentEl.textContent = "В ссылке не передан slug статьи.";
+        return;
+      }
+
+      try {
+        const raw = await fetchPostMarkdown(slug);
+        const parsed = parseFrontmatter(raw);
+        const meta = parsed.meta || {};
+        const markdown = parsed.content || "";
+
+        const title = cleanText(meta.title, "Статья");
+        const description = cleanText(meta.description, "");
+        const formattedDate = formatDate(meta.date || "");
+        const author = cleanText(meta.author, "SovaZone");
+        const category = cleanText(meta.category, "Статьи");
+
+        document.getElementById("post-title").textContent = title;
+        document.getElementById("post-breadcrumb-current").textContent = shortBreadcrumbTitle(title);
+        document.getElementById("post-date").textContent = formattedDate;
+        document.getElementById("post-author").textContent = author;
+        document.getElementById("post-category").textContent = category;
+
+        const excerptEl = document.getElementById("post-excerpt");
+        if (description) {
+          excerptEl.textContent = description;
+          excerptEl.style.display = "block";
+        } else {
+          excerptEl.style.display = "none";
+        }
+
+        const hero = document.getElementById("post-hero");
+        const coverEl = document.getElementById("post-cover");
+        if (meta.cover) {
+          coverEl.src = meta.cover;
+          coverEl.alt = title;
+          hero.style.display = "block";
+        } else {
+          hero.style.display = "none";
+        }
+
+        contentEl.classList.remove("post-state");
+        contentEl.innerHTML = marked.parse(markdown);
+
+        renderTags(meta);
+        applySeo(meta, slug);
+        initShareButtons(title);
+        renderLatestPosts(slug);
+      } catch (error) {
+        document.getElementById("post-title").textContent = "Статья не найдена";
+        document.getElementById("post-excerpt").style.display = "none";
+        document.getElementById("post-content").classList.add("post-state");
+        document.getElementById("post-content").textContent = "Статья временно недоступна. Проверь путь к markdown-файлу и завершение деплоя.";
+        document.getElementById("post-hero").style.display = "none";
+        document.getElementById("post-tags").innerHTML = "";
+        initShareButtons("SovaZone");
+      }
+    }
+
+    initScrollTopButton();
+    loadPost();
+  </script>
 </body>
 </html>
