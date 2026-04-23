@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="telephone=no" name="format-detection"/>
+<meta content="#0b0b0f" name="theme-color"/>
+<meta content="noindex,follow" name="robots"/>
+<title>404 — Page not found | SovaZone</title>
+<meta content="Страница не найдена. Вернитесь на главную SovaZone." name="description"/>
+<link href="https://sovazone.com/404.html" rel="canonical"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<link href="/styles.css" rel="stylesheet"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="website" property="og:type"/>
+<meta content="SovaZone" property="og:site_name"/>
+<meta content="404 — страница не найдена | SovaZone" property="og:title"/>
+<meta content="Страница не найдена. Вернитесь на главную SovaZone." property="og:description"/>
+<meta content="https://sovazone.com/404.html" property="og:url"/>
+<meta content="https://sovazone.com/og-image.png" property="og:image"/>
+<meta content="https://sovazone.com/og-image.png" property="og:image:secure_url"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="404 — страница не найдена | SovaZone" name="twitter:title"/>
+<meta content="Страница не найдена. Вернитесь на главную SovaZone." name="twitter:description"/>
+<meta content="https://sovazone.com/og-twitter.png" name="twitter:image"/>
+<style>
+
+    /* remove footer top line only on 404 */
+    #footer-placeholder .svf-footer{
+      border-top:none !important;
+      margin-top:0 !important;
+    }
+
+    .error404-page{
+      position:relative;
+      overflow:hidden;
+      min-height:calc(100svh - 56px);
+      margin:0 !important;
+      padding:0 !important;
+      isolation:isolate;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(980px 560px at -4% 8%, rgba(142, 18, 72, .34), transparent 56%),
+        radial-gradient(860px 560px at 104% 16%, rgba(26, 74, 188, .30), transparent 58%),
+        radial-gradient(620px 380px at 50% 44%, rgba(162, 62, 255, .16), transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.018), rgba(255,255,255,0)),
+        linear-gradient(180deg, #05050e 0%, #03030a 100%);
+    }
+
+    .error404-page::before{
+      content:"";
+      position:absolute;
+      inset:-12%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 22% 22%, rgba(255, 74, 142, .16), transparent 18%),
+        radial-gradient(circle at 78% 18%, rgba(97, 122, 255, .17), transparent 19%),
+        radial-gradient(circle at 54% 74%, rgba(214, 76, 255, .11), transparent 18%),
+        radial-gradient(circle at 40% 48%, rgba(255, 140, 90, .08), transparent 20%);
+      filter:blur(56px) saturate(1.08);
+      animation:error404Aurora 10s ease-in-out infinite alternate;
+      z-index:-3;
+    }
+
+    .error404-page::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:radial-gradient(circle at 50% 46%, rgba(0,0,0,.95), transparent 80%);
+      opacity:.22;
+      z-index:-2;
+    }
+
+    .error404-page > .container{
+      width:100%;
+      max-width:none;
+    }
+
+    .error404-orb{
+      position:absolute;
+      left:50%;
+      top:48%;
+      width:980px;
+      height:980px;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:radial-gradient(circle at 50% 50%, rgba(146,92,255,.16) 0%, rgba(146,92,255,.04) 26%, rgba(146,92,255,0) 64%);
+      filter:blur(46px);
+      animation:error404Pulse 5.5s ease-in-out infinite;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .error404-streaks{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      overflow:hidden;
+    }
+
+    .error404-streaks::before,
+    .error404-streaks::after{
+      content:"";
+      position:absolute;
+      width:420px;
+      height:1px;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.20), rgba(255,255,255,0));
+      opacity:.28;
+      filter:blur(.2px);
+    }
+
+    .error404-streaks::before{
+      top:32%;
+      left:10%;
+      transform:rotate(-11deg);
+    }
+
+    .error404-streaks::after{
+      top:62%;
+      right:8%;
+      transform:rotate(-11deg);
+      opacity:.18;
+    }
+
+    .error404-wrap{
+      min-height:calc(100svh - 56px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      margin:0;
+    }
+
+    .error404-stage{
+      width:min(100%, 1100px);
+      text-align:center;
+      padding:0 18px;
+      position:relative;
+      margin:0 auto;
+    }
+
+    .error404-number{
+      position:relative;
+      z-index:1;
+      margin:0;
+      font-size:clamp(140px, 28vw, 360px);
+      line-height:.82;
+      letter-spacing:-.11em;
+      font-weight:900;
+      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 26%, #ff5ca8 62%, #f77737 100%);
+      background-size:180% 180%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 16px 40px rgba(0,0,0,.18));
+      user-select:none;
+      animation:error404Gradient 6.5s ease-in-out infinite, error404Float 5.4s ease-in-out infinite;
+      transform-origin:center center;
+    }
+
+    .error404-bubble{
+      position:absolute;
+      top:130px;
+      right:-22px;
+      z-index:4;
+      display:inline-flex;
+      align-items:center;
+      min-height:42px;
+      padding:0 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(14, 16, 34, .88);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      color:#fff;
+      font-size:14px;
+      line-height:1;
+      letter-spacing:-.01em;
+      transform:rotate(-8deg);
+      box-shadow:0 16px 36px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.05);
+      white-space:nowrap;
+      animation:error404Bubble 4.8s ease-in-out infinite;
+    }
+
+    .error404-bubble strong{
+      font-weight:800;
+      margin-left:6px;
+      background:linear-gradient(90deg, #f1deff 0%, #cf84ff 32%, #ff5ca8 70%, #f77737 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .error404-title{
+      margin:10px auto 0;
+      max-width:920px;
+      color:#fff;
+      font-size:clamp(28px, 4vw, 54px);
+      line-height:1.02;
+      letter-spacing:-.05em;
+      text-wrap:balance;
+    }
+
+    .error404-sub{
+      margin:16px auto 0;
+      max-width:520px;
+      color:rgba(255,255,255,.72);
+      font-size:16px;
+      line-height:1.7;
+      text-wrap:balance;
+    }
+
+    .error404-actions{
+      display:flex;
+      justify-content:center;
+      margin-top:24px;
+    }
+
+    .error404-main{
+      min-width:236px;
+      min-height:52px;
+      padding:0 24px;
+      border:none;
+      border-radius:14px;
+      background:linear-gradient(90deg,#833ab4 0%,#c13584 38%,#e1306c 68%,#f77737 100%);
+      color:#fff;
+      font-size:14px;
+      font-weight:800;
+      line-height:1;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 18px 36px rgba(0,0,0,.18);
+      transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
+    }
+
+    .error404-main:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.04);
+      color:#fff;
+      box-shadow:0 22px 42px rgba(0,0,0,.22);
+    }
+
+    @keyframes error404Gradient{
+      0%{ background-position:0% 50%; }
+      50%{ background-position:100% 50%; }
+      100%{ background-position:0% 50%; }
+    }
+
+    @keyframes error404Float{
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-8px); }
+    }
+
+    @keyframes error404Pulse{
+      0%,100%{ opacity:.78; transform:translate(-50%,-50%) scale(1); }
+      50%{ opacity:1; transform:translate(-50%,-50%) scale(1.06); }
+    }
+
+    @keyframes error404Aurora{
+      0%{ transform:translate3d(0,0,0) scale(1); }
+      50%{ transform:translate3d(1.5%,-1.5%,0) scale(1.04); }
+      100%{ transform:translate3d(-1.5%,1.5%,0) scale(1.02); }
+    }
+
+    @keyframes error404Bubble{
+      0%,100%{ transform:rotate(-8deg) translateY(0); }
+      50%{ transform:rotate(-6deg) translateY(-8px); }
+    }
+
+    @media (max-width: 980px){
+      .error404-bubble{
+        right:-6px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .error404-page,
+      .error404-wrap{
+        min-height:calc(100svh - 54px);
+      }
+
+      .error404-stage{
+        padding:0 4px;
+      }
+
+      .error404-number{
+        font-size:clamp(120px, 40vw, 190px);
+      }
+
+      .error404-bubble{
+        position:static;
+        margin:0 auto 14px;
+        transform:rotate(-4deg) translateY(-2px);
+        animation:error404BubbleMobile 4.8s ease-in-out infinite;
+      }
+
+      .error404-title{
+        margin-top:6px;
+        font-size:31px;
+      }
+
+      .error404-sub{
+        margin-top:14px;
+        font-size:14px;
+        line-height:1.62;
+      }
+
+      .error404-main{
+        width:100%;
+        max-width:320px;
+      }
+
+      .error404-orb{
+        width:620px;
+        height:620px;
+        top:42%;
+      }
+
+      .error404-streaks::before,
+      .error404-streaks::after{
+        width:240px;
+      }
+    }
+
+    @keyframes error404BubbleMobile{
+      0%,100%{ transform:rotate(-4deg) translateY(-2px); }
+      50%{ transform:rotate(-2deg) translateY(-8px); }
+    }
+  </style>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://sovazone.com/#organization",
+        "name": "SovaZone",
+        "url": "https://sovazone.com/",
+        "logo": "https://sovazone.com/logo.png",
+        "image": "https://sovazone.com/og-image.png"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://sovazone.com/404.html#webpage",
+        "url": "https://sovazone.com/404.html",
+        "name": "404 — страница не найдена | SovaZone",
+        "description": "Страница не найдена. Вернитесь на главную SovaZone.",
+        "inLanguage": "ru-RU",
+        "about": {
+          "@id": "https://sovazone.com/#organization"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<div class="site-shell">
+<div id="header-placeholder"></div>
+<main class="page-content error404-page">
+<div class="error404-orb"></div>
+<div class="error404-streaks"></div>
+<div class="container">
+<section class="error404-wrap">
+<div class="error404-stage">
+<div class="error404-bubble">even <strong>@username</strong></div>
+<h1 class="error404-number">404</h1>
+<h2 class="error404-title">Looks like this page disappeared into the shadows</h2>
+<p class="error404-sub">But the right section is still close. Head back to the homepage.</p>
+<div class="error404-actions">
+<a class="error404-main" href="/en/index.html">Back to homepage</a>
+</div>
+</div>
+</section>
+</div>
+</main>
+<div id="footer-placeholder"></div>
+</div>
+<script src="/en/script.js"></script>
+</body>
+</html>
