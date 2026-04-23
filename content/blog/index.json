@@ -81,11 +81,11 @@
     "cover": "/image/blog/what-is-username-nickname.png"
   },
   {
-    "title": "We Launched the SovaZone Website",
+    "title": "Мы запустили сайт SovaZone — новую площадку нашего проекта",
     "slug": "sovazone-website-launch",
     "date": "2026-04-01",
-    "description": "The SovaZone website is live. The project now has a structured home for usernames, services, articles, the blog, and core contact routes.",
-    "category": "News",
+    "description": "Мы запустили сайт SovaZone — единую площадку, где собрали услуги, проекты, каталог никнеймов и способы связи. Теперь вся информация о нашей деятельности доступна в одном месте.",
+    "category": "Новости",
     "author": "SovaZone",
     "cover": "/image/blog/sovazone-website-launch.png"
   }
