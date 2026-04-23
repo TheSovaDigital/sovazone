@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
+  <title>SovaZone Blog — articles, news, and cases</title>
+  <meta name="description" content="SovaZone blog: articles, news, and cases about usernames, social media, account security, verification, and digital projects.">
+  <meta name="keywords" content="SovaZone blog, social media articles, Instagram news, TikTok news, YouTube news, Telegram, usernames, verification, account security">
+  <link rel="canonical" href="https://sovazone.com/en/blog.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/en/site.webmanifest">
+
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SovaZone">
+  <meta property="og:title" content="SovaZone Blog — articles, news, and cases">
+  <meta property="og:description" content="SovaZone materials about usernames, social media, account security, verification, and digital projects.">
+  <meta property="og:url" content="https://sovazone.com/en/blog.html">
+  <meta property="og:image" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SovaZone Blog — articles, news, and cases">
+  <meta name="twitter:description" content="SovaZone materials about usernames, social media, account security, verification, and digital projects.">
+  <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    .blog-page { position: relative; overflow: hidden; }
+    .blog-page::before {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      top: 100px;
+      right: -220px;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(34, 58, 154, 0.14) 0%, rgba(34, 58, 154, 0) 74%);
+      filter: blur(30px);
+    }
+
+    .blog-shell { position: relative; z-index: 1; max-width: 1360px; margin: 0 auto; }
+
+    .blog-filter-wrap,
+    .blog-featured,
+    .blog-grid-card,
+    .blog-side-panel,
+    .blog-state {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
+        linear-gradient(135deg, rgba(35, 39, 74, 0.18), rgba(0,0,0,0));
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .blog-filter-wrap,
+    .blog-featured,
+    .blog-grid-card,
+    .blog-side-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-filter-wrap::before,
+    .blog-featured::before,
+    .blog-grid-card::before,
+    .blog-side-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 42%);
+    }
+
+    .blog-filter-wrap > *,
+    .blog-featured > *,
+    .blog-grid-card > *,
+    .blog-side-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-title-block { margin-bottom: 20px; }
+
+    .blog-title {
+      margin: 0 0 10px;
+      max-width: 760px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      text-wrap: balance;
+    }
+
+    .blog-lead {
+      max-width: 100%;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.84);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .blog-filter-wrap {
+      border-radius: 24px;
+      padding: 14px;
+      margin-bottom: 24px;
+    }
+
+    .blog-filters { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .blog-filter-btn {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: #fff;
+      padding: 9px 16px;
+      min-height: 42px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      font: inherit;
+    }
+
+    .blog-filter-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .blog-filter-btn.is-active {
+      border-color: rgba(201, 156, 85, 0.42);
+      background: linear-gradient(180deg, rgba(201, 156, 85, 0.16), rgba(201, 156, 85, 0.06));
+    }
+
+    .blog-content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .blog-main { min-width: 0; }
+
+    .blog-featured {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 22px;
+      padding: 22px;
+      border-radius: 30px;
+      margin-bottom: 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .blog-featured:hover,
+    .blog-grid-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.036);
+    }
+
+    .blog-featured-cover {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .blog-featured-body {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .blog-featured-kicker {
+      display: inline-block;
+      margin: 0 0 14px;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.56;
+    }
+
+    .blog-featured-title {
+      margin: 0 0 14px;
+      font-size: clamp(22px, 2.5vw, 30px);
+      line-height: 1.08;
+      letter-spacing: -0.028em;
+      color: #fff;
+      text-wrap: balance;
+    }
+
+    .blog-featured-desc {
+      margin: 0 0 16px;
+      font-size: 15px;
+      line-height: 1.68;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .blog-featured-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      font-size: 15px;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .blog-grid-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: 28px;
+      text-decoration: none;
+      color: inherit;
+      min-height: 100%;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .blog-grid-cover {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center;
+      background: rgba(255,255,255,0.03);
+      border-radius: 28px 28px 0 0;
+    }
+
+    .blog-grid-body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 100%;
+    }
+
+    .blog-card-kicker {
+      display: inline-block;
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.56;
+    }
+
+    .blog-card-title {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+      color: #fff;
+    }
+
+    .blog-card-desc {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.8);
+      min-height: 68px;
+    }
+
+    .blog-card-cta {
+      margin-top: auto;
+      font-size: 14px;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .blog-sidebar {
+      position: sticky;
+      top: 94px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .blog-side-panel {
+      border-radius: 24px;
+      padding: 20px;
+    }
+
+    .blog-side-title {
+      margin: 0 0 16px;
+      font-size: 19px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .blog-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .blog-side-link {
+      display: block;
+      padding: 15px 16px 14px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255,255,255,0.022);
+      border: 1px solid rgba(255,255,255,0.055);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .blog-side-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.036);
+    }
+
+    .blog-side-link-kicker {
+      display: inline-block;
+      margin: 0 0 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.56;
+    }
+
+    .blog-side-link-title {
+      display: block;
+      color: #fff;
+      line-height: 1.38;
+      font-size: 15px;
+    }
+
+    .blog-side-link-desc {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
+      line-height: 1.55;
+      opacity: 0.72;
+    }
+
+    .blog-side-panel-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.76);
+    }
+
+    .blog-state {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 24px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .blog-state[hidden] { display: none; }
+
+    @media (max-width: 1160px) {
+      .blog-content-grid { grid-template-columns: 1fr; }
+      .blog-sidebar { position: static; top: auto; }
+      .blog-lead { white-space: normal; }
+    }
+
+    @media (max-width: 900px) {
+      .blog-featured { grid-template-columns: 1fr; gap: 18px; }
+      .blog-featured-cover { height: 220px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-title { font-size: clamp(30px, 8vw, 42px); }
+      .blog-lead { font-size: 15px; line-height: 1.55; white-space: normal; }
+      .blog-filter-wrap, .blog-side-panel, .blog-state { border-radius: 24px; }
+      .blog-featured, .blog-grid-card { border-radius: 24px; }
+      .blog-grid-cover { border-radius: 24px 24px 0 0; }
+      .blog-card-desc { min-height: auto; }
+    }
+  </style>
+
+  <script type="application/ld+json" id="schema-blog">
+  {
+    "@context":"https://schema.org",
+    "@type":"Blog",
+    "name":"SovaZone Blog",
+    "url":"https://sovazone.com/en/blog.html",
+    "description":"SovaZone blog: articles, news, and cases about usernames, social media, account security, verification, and digital projects.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"SovaZone",
+      "url":"https://sovazone.com/",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://sovazone.com/android-chrome-512x512.png"
+      }
+    }
+  }
+  </script>
+
+  <link rel="alternate" hreflang="en" href="https://sovazone.com/en/blog.html">
+  <link rel="alternate" hreflang="ru" href="https://sovazone.com/blog.html">
+  <link rel="alternate" hreflang="x-default" href="https://sovazone.com/blog.html">
+</head>
+<body>
+  <div class="site-shell">
+    <div id="header-placeholder"></div>
+
+    <main class="page-content blog-page">
+      <div class="container">
+        <section class="section">
+          <div class="blog-shell">
+            <div class="blog-title-block">
+              <h1 class="blog-title">SovaZone Blog</h1>
+              <p class="blog-lead">Articles, news, and cases about usernames, social media, account security, verification, and digital projects.</p>
+            </div>
+
+            <div class="blog-filter-wrap">
+              <div class="blog-filters" id="blog-filters">
+                <button type="button" class="blog-filter-btn is-active" data-filter="all">All</button>
+                <button type="button" class="blog-filter-btn" data-filter="Articles">Articles</button>
+                <button type="button" class="blog-filter-btn" data-filter="News">News</button>
+                <button type="button" class="blog-filter-btn" data-filter="Cases">Cases</button>
+              </div>
+            </div>
+
+            <div class="blog-state" id="blog-loading">Loading posts...</div>
+            <div class="blog-state" id="blog-error" hidden>Failed to load blog posts.</div>
+            <div class="blog-state" id="blog-empty" hidden>No posts found.</div>
+
+            <div class="blog-content-grid" id="blog-content-grid" hidden>
+              <div class="blog-main">
+                <a class="blog-featured" id="blog-featured" href="/en/blog.html" hidden>
+                  <img class="blog-featured-cover" id="blog-featured-cover" src="" alt="" loading="lazy" decoding="async">
+                  <div class="blog-featured-body">
+                    <div class="blog-featured-kicker" id="blog-featured-kicker"></div>
+                    <h2 class="blog-featured-title" id="blog-featured-title"></h2>
+                    <p class="blog-featured-desc" id="blog-featured-desc"></p>
+                    <div class="blog-featured-cta">Read article</div>
+                  </div>
+                </a>
+
+                <div class="blog-grid" id="blog-grid"></div>
+              </div>
+
+              <aside class="blog-sidebar">
+                <section class="blog-side-panel">
+                  <h2 class="blog-side-title">About the blog</h2>
+                  <p class="blog-side-panel-text">
+                    This section publishes material about usernames, social media, account security, verification, and the practical nuances of working with digital platforms. The content is organized to be useful in practice.
+                  </p>
+                </section>
+
+                <section class="blog-side-panel">
+                  <h2 class="blog-side-title">Featured posts</h2>
+                  <div class="blog-side-list">
+                    <a class="blog-side-link" href="/en/articles/how-to-choose-instagram-username.html">
+                      <span class="blog-side-link-kicker">Instagram</span>
+                      <span class="blog-side-link-title">How to choose an Instagram username</span>
+                      <span class="blog-side-link-desc">Practical principles for choosing a short and strong username.</span>
+                    </a>
+
+                    <a class="blog-side-link" href="/en/articles/instagram-account-security.html">
+                      <span class="blog-side-link-kicker">Security</span>
+                      <span class="blog-side-link-title">Instagram account security</span>
+                      <span class="blog-side-link-desc">What matters most to check in advance so you do not lose access to the profile.</span>
+                    </a>
+
+                    <a class="blog-side-link" href="/en/articles/unblock-instagram-account.html">
+                      <span class="blog-side-link-kicker">Unblock</span>
+                      <span class="blog-side-link-title">How to unblock an Instagram account</span>
+                      <span class="blog-side-link-desc">Basic action logic if the profile runs into restrictions.</span>
+                    </a>
+                  </div>
+                </section>
+
+                <section class="blog-side-panel">
+                  <h2 class="blog-side-title">Services</h2>
+                  <div class="blog-side-list">
+                    <a class="blog-side-link" href="/en/services/custom-username.html">
+                      <span class="blog-side-link-kicker">Usernames</span>
+                      <span class="blog-side-link-title">Custom username</span>
+                      <span class="blog-side-link-desc">Reviewing prospects and working with occupied usernames when the situation fits the criteria.</span>
+                    </a>
+
+                    <a class="blog-side-link" href="/en/services/account-help.html">
+                      <span class="blog-side-link-kicker">Accounts</span>
+                      <span class="blog-side-link-title">Account help</span>
+                      <span class="blog-side-link-desc">A review of situations related to restrictions, access, security, and other working questions.</span>
+                    </a>
+
+                    <a class="blog-side-link" href="/en/services.html">
+                      <span class="blog-side-link-kicker">Sections</span>
+                      <span class="blog-side-link-title">All SovaZone services</span>
+                      <span class="blog-side-link-desc">A direct path to all project directions connected with accounts, usernames, and digital tasks.</span>
+                    </a>
+                  </div>
+                </section>
+              </aside>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+  </div>
+
+  <script src="/en/script.js"></script>
+  <script>
+    const BLOG_REPO_OWNER = "TheSovaDigital";
+    const BLOG_REPO_NAME = "sovazone";
+    const BLOG_REPO_BRANCH = "main";
+
+    let allPosts = [];
+    let currentFilter = "all";
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function cleanText(value, fallback = "") {
+      const cleaned = String(value || "")
+        .replace(/^["'«]+/, "")
+        .replace(/^>\s*$/, "")
+        .trim();
+      return cleaned || fallback;
+    }
+
+    function truncateText(value, maxLength = 110) {
+      const text = cleanText(value, "");
+      if (!text) return "";
+      if (text.length <= maxLength) return text;
+      return text.slice(0, maxLength).trim().replace(/[.,;:!?-]+$/g, "") + "...";
+    }
+
+    function buildExcerpt(post, maxLength = 110) {
+      const rawDescription = cleanText(post.description, "");
+      const genericDescriptions = [
+        "New SovaZone blog post.",
+        "New SovaZone blog post."
+      ];
+
+      if (rawDescription && !genericDescriptions.includes(rawDescription)) {
+        return truncateText(rawDescription, maxLength);
+      }
+
+      const fallbackByCategory = {
+        "News": "A concise overview of the key changes, updates, and practical takeaways connected with the topic.",
+        "Articles": "A practical piece with concise conclusions and useful orientation points on the selected topic.",
+        "Cases": "A short breakdown of the situation, the solution path, and the final takeaways of the case."
+      };
+
+      return truncateText(fallbackByCategory[post.category] || "A concise article with the core ideas and useful details around the topic.", maxLength);
+    }
+
+    async function fetchJsonWithFallback(paths) {
+      for (const url of paths) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (response.ok) {
+            return await response.json();
+          }
+        } catch (e) {}
+      }
+      throw new Error("BLOG_INDEX_NOT_FOUND");
+    }
+
+    async function loadBlogIndex() {
+      const cacheBust = Date.now();
+      return fetchJsonWithFallback([
+        "/en/content/blog/index.json?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/en/content/blog/index.json?v=" + cacheBust,
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/en/content/blog/index.json?v=" + cacheBust
+      ]);
+    }
+
+    function normalizePost(post) {
+      return {
+        slug: post.slug || "",
+        title: cleanText(post.title, "Untitled"),
+        description: cleanText(post.description, ""),
+        category: cleanText(post.category, "Articles"),
+        cover: cleanText(post.cover, "/og-image.png"),
+        date: post.date || "",
+        author: cleanText(post.author, "SovaZone")
+      };
+    }
+
+    function sortPosts(posts) {
+      return [...posts].sort((a, b) => {
+        const dateA = new Date(a.date || 0).getTime();
+        const dateB = new Date(b.date || 0).getTime();
+        return dateB - dateA;
+      });
+    }
+
+    function buildPostUrl(slug) {
+      return "/en/post.html?slug=" + encodeURIComponent(slug || "");
+    }
+
+    function renderFeatured(post) {
+      const node = document.getElementById("blog-featured");
+      const cover = document.getElementById("blog-featured-cover");
+      const kicker = document.getElementById("blog-featured-kicker");
+      const title = document.getElementById("blog-featured-title");
+      const desc = document.getElementById("blog-featured-desc");
+
+      if (!post) {
+        node.hidden = true;
+        return;
+      }
+
+      node.hidden = false;
+      node.href = buildPostUrl(post.slug);
+      cover.src = post.cover || "/og-image.png";
+      cover.alt = post.title || "Post cover";
+      kicker.textContent = post.category || "Articles";
+      title.textContent = post.title || "Untitled";
+      desc.textContent = buildExcerpt(post, 145);
+    }
+
+    function renderGrid(posts) {
+      const grid = document.getElementById("blog-grid");
+
+      if (!posts.length) {
+        grid.innerHTML = "";
+        return;
+      }
+
+      grid.innerHTML = posts.map(post => {
+        const cover = escapeHtml(post.cover || "/og-image.png");
+        const title = escapeHtml(post.title || "Untitled");
+        const desc = escapeHtml(buildExcerpt(post, 92));
+        const url = buildPostUrl(post.slug || "");
+        const kicker = escapeHtml(post.category || "Articles");
+
+        return `
+          <a class="blog-grid-card" href="${url}">
+            <img class="blog-grid-cover" src="${cover}" alt="${title}" loading="lazy" decoding="async">
+            <div class="blog-grid-body">
+              <div class="blog-card-kicker">${kicker}</div>
+              <h3 class="blog-card-title">${title}</h3>
+              <p class="blog-card-desc">${desc}</p>
+              <div class="blog-card-cta">Read article</div>
+            </div>
+          </a>
+        `;
+      }).join("");
+    }
+
+    function setState(state) {
+      document.getElementById("blog-loading").hidden = state !== "loading";
+      document.getElementById("blog-error").hidden = state !== "error";
+      document.getElementById("blog-empty").hidden = state !== "empty";
+      document.getElementById("blog-content-grid").hidden = state !== "ready";
+    }
+
+    function filterPosts() {
+      if (currentFilter === "all") return sortPosts(allPosts);
+      return sortPosts(allPosts.filter(post => (post.category || "").trim() === currentFilter));
+    }
+
+    function renderBlog() {
+      const posts = filterPosts();
+
+      if (!posts.length) {
+        setState("empty");
+        return;
+      }
+
+      const [featured, ...rest] = posts;
+      renderFeatured(featured);
+      renderGrid(rest.length ? rest : [featured]);
+
+      setState("ready");
+    }
+
+    function initFilters() {
+      const buttons = document.querySelectorAll(".blog-filter-btn");
+
+      buttons.forEach(button => {
+        button.addEventListener("click", () => {
+          currentFilter = button.dataset.filter || "all";
+
+          buttons.forEach(btn => btn.classList.remove("is-active"));
+          button.classList.add("is-active");
+
+          renderBlog();
+        });
+      });
+    }
+
+    async function initBlog() {
+      setState("loading");
+      initFilters();
+
+      try {
+        const posts = await loadBlogIndex();
+        if (!Array.isArray(posts) || !posts.length) {
+          setState("empty");
+          return;
+        }
+
+        allPosts = posts.map(normalizePost);
+        renderBlog();
+      } catch (e) {
+        setState("error");
+      }
+    }
+
+    initBlog();
+  </script>
+</body>
+</html>
