@@ -1,17 +1,33 @@
 <header class="sz-header">
+  <style>
+    .sz-header__lang{display:flex;align-items:center;margin-left:14px}
+    .sz-lang-toggle{
+      display:inline-flex;align-items:center;gap:2px;padding:3px;
+      border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:999px
+    }
+    .sz-lang-toggle__link,
+    .sz-lang-toggle__current{
+      min-width:42px;height:28px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;
+      border-radius:999px;font-size:12px;line-height:1;text-decoration:none;color:rgba(255,255,255,.72);
+      transition:background .18s ease,color .18s ease
+    }
+    .sz-lang-toggle__link:hover{color:#fff;background:rgba(255,255,255,.05)}
+    .sz-lang-toggle__current{color:#fff;background:rgba(255,255,255,.08);pointer-events:none;font-weight:700}
+    @media (max-width:980px){.sz-header__lang{display:none}}
+  </style>
   <div class="container sz-header__inner">
-    <a class="sz-header__brand" href="/index.html" aria-label="SovaZone — главная">
+    <a class="sz-header__brand" href="/en/index.html" aria-label="SovaZone — home">
       <span class="sz-header__brand-text">SovaZone</span>
     </a>
 
-    <nav class="sz-header__nav" aria-label="Основная навигация">
-      <a class="sz-header__link" href="/index.html">Главная</a>
-      <a class="sz-header__link" href="/services.html">Услуги</a>
-      <a class="sz-header__link" href="/usernames.html">Никнеймы</a>
-      <a class="sz-header__link" href="/blog.html">Блог</a>
+    <nav class="sz-header__nav" aria-label="Main navigation">
+      <a class="sz-header__link" href="/en/index.html">Home</a>
+      <a class="sz-header__link" href="/en/services.html">Services</a>
+      <a class="sz-header__link" href="/en/usernames.html">Usernames</a>
+      <a class="sz-header__link" href="/en/blog.html">Blog</a>
 
       <a class="sz-header__store" href="https://sovads.ru/" target="_blank" rel="noopener">
-        <span>Онлайн магазин</span>
+        <span>Online store</span>
         <svg class="sz-header__ext" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
           <path d="M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
@@ -19,10 +35,17 @@
       </a>
     </nav>
 
+    <div class="sz-header__lang" aria-label="Language switch">
+      <div class="sz-lang-toggle" role="group" aria-label="Language switch">
+        <a class="sz-lang-toggle__link" data-lang-target="ru" href="/index.html" lang="ru" hreflang="ru">RU</a>
+        <span class="sz-lang-toggle__current" data-lang-current="en" lang="en" aria-current="page">EN</span>
+      </div>
+    </div>
+
     <button
       class="sz-header__burger"
       type="button"
-      aria-label="Открыть меню"
+      aria-label="Open menu"
       aria-expanded="false"
       aria-controls="sz-side-menu"
     >
@@ -36,18 +59,18 @@
 
   <aside class="sz-side" id="sz-side-menu" aria-hidden="true">
     <div class="sz-side__head">
-      <div class="sz-side__title">Меню</div>
+      <div class="sz-side__title">Menu</div>
     </div>
 
     <div class="sz-side__body">
       <div class="sz-side__group sz-side__group--primary">
-        <div class="sz-side__group-title">Основное</div>
-        <a class="sz-side__link" href="/index.html">Главная</a>
-        <a class="sz-side__link" href="/services.html">Услуги</a>
-        <a class="sz-side__link" href="/usernames.html">Никнеймы</a>
-        <a class="sz-side__link" href="/blog.html">Блог</a>
+        <div class="sz-side__group-title">Main</div>
+        <a class="sz-side__link" href="/en/index.html">Home</a>
+        <a class="sz-side__link" href="/en/services.html">Services</a>
+        <a class="sz-side__link" href="/en/usernames.html">Usernames</a>
+        <a class="sz-side__link" href="/en/blog.html">Blog</a>
         <a class="sz-side__link" href="https://sovads.ru/" target="_blank" rel="noopener">
-          <span>Онлайн магазин</span>
+          <span>Online store</span>
           <svg class="sz-side__ext" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
             <path d="M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
@@ -56,19 +79,27 @@
       </div>
 
       <div class="sz-side__group">
-        <div class="sz-side__group-title">Разделы</div>
-        <a class="sz-side__link" href="/projects.html">Проекты</a>
-        <a class="sz-side__link" href="/articles.html">Статьи</a>
+        <div class="sz-side__group-title">Sections</div>
+        <a class="sz-side__link" href="/en/projects.html">Projects</a>
+        <a class="sz-side__link" href="/en/articles.html">Articles</a>
       </div>
 
       <div class="sz-side__group">
-        <div class="sz-side__group-title">Информация</div>
-        <a class="sz-side__link" href="/about.html">О проекте</a>
-        <a class="sz-side__link" href="/how-to-buy.html">Как купить</a>
-        <a class="sz-side__link" href="/sell.html">Как продать</a>
-        <a class="sz-side__link" href="/contacts.html">Контакты</a>
-        <a class="sz-side__link" href="/guarantees.html">Гарантии</a>
-        <a class="sz-side__link" href="/faq.html">FAQ</a>
+        <div class="sz-side__group-title">Information</div>
+        <a class="sz-side__link" href="/en/about.html">About</a>
+        <a class="sz-side__link" href="/en/how-to-buy.html">How to buy</a>
+        <a class="sz-side__link" href="/en/sell.html">How to sell</a>
+        <a class="sz-side__link" href="/en/contacts.html">Contacts</a>
+        <a class="sz-side__link" href="/en/guarantees.html">Guarantees</a>
+        <a class="sz-side__link" href="/en/faq.html">FAQ</a>
+      </div>
+
+      <div class="sz-side__group">
+        <div class="sz-side__group-title">Language</div>
+        <div class="sz-lang-toggle" role="group" aria-label="Language switch">
+          <a class="sz-lang-toggle__link sz-side__link" data-lang-target="ru" href="/index.html" lang="ru" hreflang="ru">RU</a>
+          <span class="sz-lang-toggle__current" data-lang-current="en" lang="en" aria-current="page">EN</span>
+        </div>
       </div>
     </div>
   </aside>
