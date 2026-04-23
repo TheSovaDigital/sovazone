@@ -96,7 +96,7 @@
   }
 
   Promise.all([
-    inject("header-placeholder", "/en/header.html"),
-    inject("footer-placeholder", "/en/footer.html")
+    inject("header-placeholder", "/header.html"),
+    inject("footer-placeholder", "/footer.html")
   ]).then(initHeader);
 })();
