@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <title>Политика конфиденциальности | SovaZone</title>
-  <meta name="description" content="Политика конфиденциальности проекта SovaZone с учётом аналитики, статистики, вебвизора и взаимодействия через сайт и Telegram.">
-  <link rel="canonical" href="https://sovazone.com/privacy.html">
+  <title>FAQ | SovaZone</title>
+  <meta name="description" content="Частые вопросы о покупке username, переносе ника, смене данных, гарантиях и дополнительных услугах.">
+  <link rel="canonical" href="https://sovazone.com/en/faq.html">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="manifest" href="/en/site.webmanifest">
   <link rel="stylesheet" href="/styles.css">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
-  <meta property="og:title" content="Политика конфиденциальности | SovaZone">
-  <meta property="og:description" content="Политика конфиденциальности проекта SovaZone с учётом аналитики, статистики, вебвизора и взаимодействия через сайт и Telegram.">
-  <meta property="og:url" content="https://sovazone.com/privacy.html">
+  <meta property="og:title" content="FAQ | SovaZone">
+  <meta property="og:description" content="Частые вопросы о покупке username, переносе ника, смене данных, гарантиях и дополнительных услугах.">
+  <meta property="og:url" content="https://sovazone.com/faq.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -28,8 +28,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="SovaZone">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Политика конфиденциальности | SovaZone">
-  <meta name="twitter:description" content="Политика конфиденциальности проекта SovaZone с учётом аналитики, статистики, вебвизора и взаимодействия через сайт и Telegram.">
+  <meta name="twitter:title" content="FAQ | SovaZone">
+  <meta name="twitter:description" content="Частые вопросы о покупке username, переносе ника, смене данных, гарантиях и дополнительных услугах.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
   <meta name="twitter:image:alt" content="SovaZone">
 
@@ -44,9 +44,9 @@
       --doc-link: #dcdcff;
     }
     .doc-page .doc-wrap{
-      max-width: 980px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 8px 0 70px;
+      padding: 6px 0 60px;
     }
     .doc-page .doc-hero{
       position: relative;
@@ -89,7 +89,7 @@
       margin-top:22px;
       display:flex;
       flex-wrap:wrap;
-      gap:10px 12px;
+      gap:8px 10px;
     }
     .doc-page .doc-chip{
       display:inline-flex;
@@ -106,7 +106,7 @@
     .doc-page .doc-toc{
       display:flex;
       flex-wrap:wrap;
-      gap:10px 12px;
+      gap:8px 10px;
       margin: 0 0 28px;
       padding: 0 0 10px;
       border-bottom:1px solid rgba(255,255,255,.04);
@@ -137,10 +137,10 @@
       color:#fff;
     }
     .doc-page .doc-section p{
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       color: var(--doc-muted);
-      font-size: 17px;
-      line-height: 1.82;
+      font-size: 15.5px;
+      line-height: 1.7;
     }
     .doc-page .doc-section p:last-child{ margin-bottom:0; }
     .doc-page .doc-section strong{ color:#fff; }
@@ -170,16 +170,49 @@
       box-shadow: 0 0 0 6px rgba(217,179,140,.08);
     }
     .doc-page .faq-item{
-      padding:18px 0;
       border-top:1px solid rgba(255,255,255,.05);
     }
-    .doc-page .faq-item:first-child{ border-top:0; padding-top:0; }
+    .doc-page .faq-item:first-child{ border-top:0; }
+    .doc-page .faq-item summary{
+      list-style:none;
+      cursor:pointer;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 0;
+    }
+    .doc-page .faq-item summary::-webkit-details-marker{
+      display:none;
+    }
+    .doc-page .faq-item summary::after{
+      content:"+";
+      flex:0 0 auto;
+      color:var(--doc-accent);
+      font-size:24px;
+      line-height:1;
+      transform:translateY(1px);
+      transition:transform .18s ease, opacity .18s ease;
+      opacity:.9;
+    }
+    .doc-page .faq-item[open] summary::after{
+      transform:rotate(45deg) translateY(1px);
+    }
     .doc-page .faq-q{
-      margin:0 0 10px;
-      font-size:22px;
+      margin:0;
+      font-size:20px;
       line-height:1.25;
       color:#fff;
       letter-spacing:-.02em;
+    }
+    .doc-page .faq-a{
+      padding:0 34px 18px 0;
+    }
+    .doc-page .faq-a p{
+      margin:0 0 10px;
+    }
+    .doc-page .faq-a p:last-child{
+      margin-bottom:0;
     }
     .doc-page .doc-note{
       margin-top:18px;
@@ -291,10 +324,10 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://sovazone.com/privacy.html#webpage",
-      "url": "https://sovazone.com/privacy.html",
-      "name": "Политика конфиденциальности | SovaZone",
-      "description": "Политика конфиденциальности проекта SovaZone с учётом аналитики, статистики, вебвизора и взаимодействия через сайт и Telegram.",
+      "@id": "https://sovazone.com/faq.html#webpage",
+      "url": "https://sovazone.com/faq.html",
+      "name": "FAQ | SovaZone",
+      "description": "Частые вопросы о покупке username, переносе ника, смене данных, гарантиях и дополнительных услугах.",
       "inLanguage": "ru-RU",
       "isPartOf": {
         "@id": "https://sovazone.com/#website"
@@ -313,20 +346,157 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Главная",
+          "name": "Home",
           "item": "https://sovazone.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Политика конфиденциальности",
-          "item": "https://sovazone.com/privacy.html"
+          "name": "FAQ",
+          "item": "https://sovazone.com/faq.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как происходит сделка?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "После согласования деталей вы оплачиваете товар и получаете данные от аккаунта или иной согласованный формат передачи. При крупных суммах возможна сделка при личной встрече. Страна и город обсуждаются отдельно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Какие гарантии?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Работа ведётся с 2009 года, есть профильная репутация, опыт сделок и подтверждаемые следы деятельности на тематических площадках. При необходимости может обсуждаться сделка при личной встрече."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как мне сменить данные?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "После передачи вы получаете данные для безопасного входа в аккаунт. Далее вы можете изменить данные на свои, сменить почту, привязать собственный номер и при необходимости привязать дополнительные сервисы. В зависимости от комплектации сделки вам также могут передаваться данные от актуальной и исходной почты, которые затем меняются на ваши."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как поставить ник на свой аккаунт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Перенос никнейма является отдельной платной услугой. Стоимость обсуждается индивидуально для конкретного username. Самостоятельно снимать ник со старого аккаунта и пытаться поставить его на другой аккаунт не рекомендуется из-за высокого риска потери username."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько стоит перенос никнейма?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Стоимость зависит от конкретного ника, его редкости, уровня интереса к нему и технической сложности переноса. Ориентир может находиться в диапазоне от 500 до 3000 USD и выше, если речь идёт о более сложных или ценных username."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему я не могу перенести ник самостоятельно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "На платформе Instagram username после определённых действий может быть недоступен для немедленного безопасного переноса без специальных мер и без риска его потери. Даже если формально ждать окончания периода удержания, на практике интересный ник могут перехватить другие пользователи или автоматизированные инструменты."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Есть ли другие методы, чтобы изменить ник самостоятельно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Технически пользователь может самостоятельно пытаться освободить ник и занять его на другом аккаунте, однако такие действия совершаются исключительно на свой риск. Если username представляет интерес для других участников рынка, вероятность его перехвата остаётся высокой."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Какие шансы потерять ник при самостоятельном переносе?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Короткие username, особенно редкие и популярные варианты, чаще всего относятся к категории повышенного риска. Чем короче и ценнее ник, тем выше вероятность его потери при самостоятельных действиях без сопровождения."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Я хочу купить ник",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Выберите подходящий username на сайте или в Telegram-канале SovaDigital и свяжитесь с нами для обсуждения деталей сделки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Я хочу ник, но на сайте ничего не приглянулось",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Напишите в Telegram. Возможно, в наличии есть username, которые не выставлены публично на сайте. Обычно такой формат имеет смысл, если у вас есть понятный бюджет и конкретное представление о желаемом уровне ника."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Я хочу ник, но им пользуются",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Если username активно используется владельцем, вопрос решается напрямую с владельцем аккаунта. Мы не работаем с никами, за которыми стоит активный пользователь, использующий аккаунт по назначению."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Я хочу ник, которым не пользуются",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Стоимость username под заказ зависит от сложности задачи, статуса аккаунта, редкости ника и дополнительных факторов. Редкие, короткие и популярные слова, имена или фамилии могут стоить существенно дороже базового уровня."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Насколько возможно получить заброшенный ник?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Успешность зависит от бюджета, уровня редкости ника, длительности неактивности аккаунта и реальной доступности сценария. Каждый случай рассматривается отдельно, универсальной гарантии результата не существует."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Мне нужен конкретный ник, за который я готов заплатить любую сумму",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Если аккаунт с нужным username длительное время неактивен, в отдельных случаях возможен индивидуальный разбор под заказ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Я хочу красивый и короткий ник, но не могу определиться",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В таком случае лучше обратиться за подбором. Мы можем посмотреть ваши предпочтения, примеры понравившихся username и предложить варианты, которые ближе по стилю и задаче."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Я хочу 2-значный или 3-значный ник",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Подобные запросы обсуждаются отдельно. Для таких username бюджет и условия зависят от уровня редкости, актуальной доступности и формата задачи."
+          }
         }
       ]
     }
   ]
 }
   </script>
+
+  <link rel="alternate" hreflang="en" href="https://sovazone.com/en/faq.html">
+  <link rel="alternate" hreflang="ru" href="https://sovazone.com/faq.html">
+  <link rel="alternate" hreflang="x-default" href="https://sovazone.com/faq.html">
 </head>
 <body>
   <div class="site-shell doc-page">
@@ -335,57 +505,170 @@
       <div class="container">
         <div class="doc-wrap">
           <section class="doc-hero">
-            <div class="doc-kicker">SovaZone / Политика конфиденциальности</div>
-            <h1>Политика конфиденциальности</h1>
-            <p class="doc-lead">Эта страница описывает общий порядок обращения с данными пользователей при использовании сайта SovaZone, Telegram-площадок и связанных сервисов.</p>
+            <div class="doc-kicker">SovaZone / FAQ</div>
+            <h1>FAQ</h1>
+            <p class="doc-lead">Ответы на частые вопросы о покупке username, передаче аккаунта, гарантиях и сопутствующих услугах.</p>
             <div class="doc-meta">
-              <span class="doc-chip"><a href="/contacts.html">Связь</a></span>
+              <span class="doc-chip"><a href="/en/contacts.html">Связь</a></span>
               <span class="doc-chip"><a href="https://t.me/SovaDS" target="_blank" rel="noopener">Telegram</a></span>
-              <span class="doc-chip"><a href="/usernames.html">Каталог username</a></span>
+              <span class="doc-chip"><a href="/en/usernames.html">Каталог username</a></span>
             </div>
           </section>
 
           <nav class="doc-toc" aria-label="Навигация по странице">
-            <a href="#data">Какая информация может обрабатываться</a><a href="#purpose">Для чего используется информация</a><a href="#international">Международный характер аудитории</a><a href="#security">Передача данных и безопасность</a>
+            <a href="#q1">Как происходит сделка?</a><a href="#q2">Какие гарантии?</a><a href="#q3">Как мне сменить данные?</a><a href="#q4">Как поставить ник на свой аккаунт?</a><a href="#q5">Сколько стоит перенос никнейма?</a><a href="#q6">Почему я не могу перенести ник самостоятельно?</a><a href="#q7">Есть ли другие методы, чтобы изменить ник самостоятельно?</a><a href="#q8">Какие шансы потерять ник при самостоятельном переносе?</a>
           </nav>
 
-          <section class="doc-section" id="data">
-            <h2>Какая информация может обрабатываться</h2>
-            <p>При посещении сайта, переходах по страницам, использовании форм связи, обращении в Telegram или при совершении сделки может обрабатываться техническая и контактная информация, которую пользователь добровольно предоставляет либо которая автоматически фиксируется средствами аналитики.</p><p>К такой информации могут относиться имя, username, ссылки на профиль, текст сообщения, технические данные устройства, IP-адрес, cookies, действия на сайте и иные параметры, необходимые для аналитики, безопасности и обработки обращений.</p>
-            
-            
-          </section>
-          <section class="doc-section" id="purpose">
-            <h2>Для чего используется информация</h2>
-            <p>Информация используется для ответа на запросы, обсуждения сделки, сопровождения пользователя, аналитики посещаемости сайта, улучшения структуры страниц, понимания поведения пользователей и повышения качества сервиса.</p><p>На сайте могут применяться инструменты статистики, аналитики, журналов посещения, а также функции вроде вебвизора, записи сессий, карт кликов и других сервисов анализа поведения пользователя.</p>
-            
-            
-          </section>
-          <section class="doc-section" id="international">
-            <h2>Международный характер аудитории</h2>
-            <p>Проект ориентирован на пользователей из разных стран. Используя сайт, пользователь понимает и принимает, что обработка данных может осуществляться в объёме, необходимом для работы сайта, аналитики, коммуникации и сопровождения сделки.</p><p>Если для пользователя применяются дополнительные требования его юрисдикции, он вправе отказаться от использования сайта, ограничить cookies либо прекратить взаимодействие с проектом.</p>
-            
-            
-          </section>
-          <section class="doc-section" id="security">
-            <h2>Передача данных и безопасность</h2>
-            <p>Информация не используется вне связи с целями проекта, за исключением случаев, прямо предусмотренных законом, технической необходимостью, сервисами аналитики или исполнением согласованных действий по запросу пользователя.</p><p>При этом абсолютная техническая безопасность любой интернет-коммуникации не может быть гарантирована, и пользователь осознаёт обычные риски, связанные с использованием сети Интернет.</p>
-            
-            <div class='doc-note'>Если для тебя важны условия взаимодействия при покупке username, дополнительно открой страницу <a href='/client-terms.html'>Условия для клиентов</a>.</div>
+          <details class="faq-item" id="q1">
+            <summary>
+              <h2 class="faq-q">Как происходит сделка?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>После согласования деталей вы оплачиваете товар и получаете данные от аккаунта или иной согласованный формат передачи.</p><p>При крупных суммах возможна сделка при личной встрече. Страна и город обсуждаются отдельно.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q2">
+            <summary>
+              <h2 class="faq-q">Какие гарантии?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Работа ведётся с 2009 года, есть профильная репутация, опыт сделок и подтверждаемые следы деятельности на тематических площадках.</p><p>При необходимости может обсуждаться сделка при личной встрече.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q3">
+            <summary>
+              <h2 class="faq-q">Как мне сменить данные?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>После передачи вы получаете данные для безопасного входа в аккаунт. Далее вы можете изменить данные на свои, сменить почту, привязать собственный номер и при необходимости привязать дополнительные сервисы.</p><p>В зависимости от комплектации сделки вам также могут передаваться данные от актуальной и исходной почты, которые затем меняются на ваши.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q4">
+            <summary>
+              <h2 class="faq-q">Как поставить ник на свой аккаунт?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Перенос никнейма является отдельной платной услугой. Стоимость обсуждается индивидуально для конкретного username.</p><p>Самостоятельно снимать ник со старого аккаунта и пытаться поставить его на другой аккаунт не рекомендуется из-за высокого риска потери username.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q5">
+            <summary>
+              <h2 class="faq-q">Сколько стоит перенос никнейма?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Стоимость зависит от конкретного ника, его редкости, уровня интереса к нему и технической сложности переноса.</p><p>Ориентир может находиться в диапазоне от 500 до 3000 USD и выше, если речь идёт о более сложных или ценных username.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q6">
+            <summary>
+              <h2 class="faq-q">Почему я не могу перенести ник самостоятельно?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>На платформе Instagram username после определённых действий может быть недоступен для немедленного безопасного переноса без специальных мер и без риска его потери.</p><p>Даже если формально ждать окончания периода удержания, на практике интересный ник могут перехватить другие пользователи или автоматизированные инструменты.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q7">
+            <summary>
+              <h2 class="faq-q">Есть ли другие методы, чтобы изменить ник самостоятельно?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Технически пользователь может самостоятельно пытаться освободить ник и занять его на другом аккаунте, однако такие действия совершаются исключительно на свой риск.</p><p>Если username представляет интерес для других участников рынка, вероятность его перехвата остаётся высокой.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q8">
+            <summary>
+              <h2 class="faq-q">Какие шансы потерять ник при самостоятельном переносе?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Короткие username, особенно редкие и популярные варианты, чаще всего относятся к категории повышенного риска.</p><p>Чем короче и ценнее ник, тем выше вероятность его потери при самостоятельных действиях без сопровождения.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q9">
+            <summary>
+              <h2 class="faq-q">Я хочу купить ник</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Выберите подходящий username на сайте или в Telegram-канале SovaDigital и свяжитесь с нами для обсуждения деталей сделки.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q10">
+            <summary>
+              <h2 class="faq-q">Я хочу ник, но на сайте ничего не приглянулось</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Напишите в Telegram. Возможно, в наличии есть username, которые не выставлены публично на сайте.</p><p>Обычно такой формат имеет смысл, если у вас есть понятный бюджет и конкретное представление о желаемом уровне ника.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q11">
+            <summary>
+              <h2 class="faq-q">Я хочу ник, но им пользуются</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Если username активно используется владельцем, вопрос решается напрямую с владельцем аккаунта. Мы не работаем с никами, за которыми стоит активный пользователь, использующий аккаунт по назначению.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q12">
+            <summary>
+              <h2 class="faq-q">Я хочу ник, которым не пользуются</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Стоимость username под заказ зависит от сложности задачи, статуса аккаунта, редкости ника и дополнительных факторов.</p><p>Редкие, короткие и популярные слова, имена или фамилии могут стоить существенно дороже базового уровня.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q13">
+            <summary>
+              <h2 class="faq-q">Насколько возможно получить заброшенный ник?</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Успешность зависит от бюджета, уровня редкости ника, длительности неактивности аккаунта и реальной доступности сценария.</p><p>Каждый случай рассматривается отдельно, универсальной гарантии результата не существует.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q14">
+            <summary>
+              <h2 class="faq-q">Мне нужен конкретный ник, за который я готов заплатить любую сумму</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Если аккаунт с нужным username длительное время неактивен, в отдельных случаях возможен индивидуальный разбор под заказ.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q15">
+            <summary>
+              <h2 class="faq-q">Я хочу красивый и короткий ник, но не могу определиться</h2>
+            </summary>
+            <div class="faq-a">
+              <p>В таком случае лучше обратиться за подбором. Мы можем посмотреть ваши предпочтения, примеры понравившихся username и предложить варианты, которые ближе по стилю и задаче.</p>
+            </div>
+          </details>
+          <details class="faq-item" id="q16">
+            <summary>
+              <h2 class="faq-q">Я хочу 2-значный или 3-значный ник</h2>
+            </summary>
+            <div class="faq-a">
+              <p>Подобные запросы обсуждаются отдельно. Для таких username бюджет и условия зависят от уровня редкости, актуальной доступности и формата задачи.</p>
+            </div>
+          </details>
+          <section class="doc-related">
+            <h3>Полезные переходы</h3>
+            <div class="doc-related-grid">
+              <a href="/en/how-to-buy.html">How to buy</a>
+              <a href="/en/client-terms.html">Client terms</a>
+              <a href="/en/guarantees.html">Guarantees</a>
+              <a href="/en/contacts.html">Contacts</a>
+            </div>
           </section>
 
 
           <section class="doc-related">
             <h3>Связанные страницы</h3>
             <div class="doc-related-grid">
-              <a href="/about.html">О проекте</a>
-              <a href="/how-to-buy.html">Как купить</a>
-              <a href="/sell.html">Как продать</a>
-              <a href="/guarantees.html">Гарантии</a>
-              <a href="/faq.html">FAQ</a>
-              <a href="/contacts.html">Контакты</a>
-              <a href="/privacy.html">Политика конфиденциальности</a>
-              <a href="/client-terms.html">Условия для клиентов</a>
+              <a href="/en/about.html">About</a>
+              <a href="/en/how-to-buy.html">How to buy</a>
+              <a href="/en/sell.html">How to sell</a>
+              <a href="/en/guarantees.html">Guarantees</a>
+              <a href="/en/faq.html">FAQ</a>
+              <a href="/en/contacts.html">Contacts</a>
+              <a href="/en/privacy.html">Privacy policy</a>
+              <a href="/en/client-terms.html">Client terms</a>
             </div>
           </section>
         </div>
@@ -393,6 +676,6 @@
     </main>
     <div id="footer-placeholder"></div>
   </div>
-  <script src="/script.js"></script>
+  <script src="/en/script.js"></script>
 </body>
 </html>
