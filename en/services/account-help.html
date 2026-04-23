@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#0b0b0f">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
-  <title>Verification and blue check | SovaZone</title>
-  <meta name="description" content="Account verification and blue check support for Instagram, TikTok, YouTube, X (Twitter), Telegram, and Facebook. Terms, pricing, and details are discussed case by case.">
-  <link rel="canonical" href="https://sovazone.com/en/services/verification.html">
+  <title>Account help | SovaZone</title>
+  <meta name="description" content="Help with account issues: Instagram and TikTok unblocks, username transfer, and solving difficult social-media account problems.">
+  <link rel="canonical" href="https://sovazone.com/en/services/account-help.html">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -21,9 +21,9 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
-  <meta property="og:title" content="Verification and blue check | SovaZone">
-  <meta property="og:description" content="Account verification and blue check support for Instagram, TikTok, YouTube, X (Twitter), Telegram, and Facebook. Terms, pricing, and details are discussed case by case.">
-  <meta property="og:url" content="https://sovazone.com/en/services/verification.html">
+  <meta property="og:title" content="Account help | SovaZone">
+  <meta property="og:description" content="Help with account issues: Instagram and TikTok unblocks, username transfer, and solving difficult social-media account problems.">
+  <meta property="og:url" content="https://sovazone.com/en/services/account-help.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -32,8 +32,8 @@
   <meta property="og:image:alt" content="SovaZone">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Verification and blue check | SovaZone">
-  <meta name="twitter:description" content="Account verification and blue check support for Instagram, TikTok, YouTube, X (Twitter), Telegram, and Facebook. Terms, pricing, and details are discussed case by case.">
+  <meta name="twitter:title" content="Account help | SovaZone">
+  <meta name="twitter:description" content="Help with account issues: Instagram and TikTok unblocks, username transfer, and solving difficult social-media account problems.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
   <meta name="twitter:image:alt" content="SovaZone">
 
@@ -193,6 +193,11 @@
 
     .service-page .service-grid{
       display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:22px;
+    }
+    .service-page .service-grid-3{
+      display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
       gap:22px;
     }
@@ -220,12 +225,44 @@
       pointer-events:none;
     }
     .service-page .service-card h3{
-      margin:0 0 14px;
+      margin:0 0 12px;
       font-size:21px;
       line-height:1.1;
       letter-spacing:-.03em;
       color:#fff;
       max-width:95%;
+    }
+    .service-page .service-card p{
+      margin:0 0 14px;
+      color:var(--doc-muted);
+      font-size:13.5px;
+      line-height:1.55;
+    }
+    .service-page .service-list{
+      margin:0 0 16px;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+      flex:1;
+    }
+    .service-page .service-list li{
+      position:relative;
+      padding-left:18px;
+      color:var(--doc-muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .service-page .service-list li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.66em;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:linear-gradient(180deg, rgba(217,179,140,.95), rgba(140,82,255,.95));
+      box-shadow:0 0 0 6px rgba(217,179,140,.08);
     }
     .service-page .service-meta{
       display:grid;
@@ -251,12 +288,6 @@
       font-weight:700;
       line-height:1.4;
       text-align:right;
-    }
-    .service-page .service-card p{
-      margin:0 0 16px;
-      color:var(--doc-muted);
-      font-size:13.5px;
-      line-height:1.52;
     }
 
     .service-page .doc-meta{
@@ -293,7 +324,8 @@
     }
 
     @media (max-width:980px){
-      .service-page .service-grid{
+      .service-page .service-grid,
+      .service-page .service-grid-3{
         grid-template-columns:1fr;
       }
     }
@@ -364,10 +396,10 @@
       },
       {
         "@type":"WebPage",
-        "@id":"https://sovazone.com/services/verification.html#webpage",
-        "url":"https://sovazone.com/services/verification.html",
-        "name":"Verification and blue check | SovaZone",
-        "description":"Verification аккаунта и получение синей галочки в Instagram, TikTok, YouTube, X (Twitter), Telegram и Facebook. Условия и стоимость обсуждаются по конкретному случаю.",
+        "@id":"https://sovazone.com/services/account-help.html#webpage",
+        "url":"https://sovazone.com/services/account-help.html",
+        "name":"Account help | SovaZone",
+        "description":"Account help: разблокировка Instagram и TikTok, перенос никнейма и решение проблем с аккаунтами и соц. сетями.",
         "inLanguage":"ru-RU",
         "isPartOf":{
           "@id":"https://sovazone.com/#website"
@@ -398,15 +430,15 @@
           {
             "@type":"ListItem",
             "position":3,
-            "name":"Verification",
-            "item":"https://sovazone.com/services/verification.html"
+            "name":"Account help",
+            "item":"https://sovazone.com/services/account-help.html"
           }
         ]
       },
       {
         "@type":"Service",
-        "name":"Verification аккаунта",
-        "serviceType":"Verification и получение синей галочки в социальных сетях",
+        "name":"Account help",
+        "serviceType":"Разблокировка аккаунта, перенос никнейма и решение проблем с аккаунтами в Instagram, TikTok и других соц. сетях",
         "provider":{
           "@id":"https://sovazone.com/#organization"
         },
@@ -415,15 +447,15 @@
           "@type":"ServiceChannel",
           "serviceUrl":"https://t.me/SovaDS"
         },
-        "description":"Помогаем с верификацией в Instagram, TikTok, YouTube, X (Twitter), Telegram и Facebook. Price зависит from сложности, нюансов площадки и конкретного случая."
+        "description":"Помогаем с разблокировкой Instagram и TikTok, переносом никнейма, восстановлением доступа и решением других проблем с аккаунтами и соц. сетями."
       }
     ]
   }
   </script>
 
-  <link rel="alternate" hreflang="en" href="https://sovazone.com/en/services/verification.html">
-  <link rel="alternate" hreflang="ru" href="https://sovazone.com/services/verification.html">
-  <link rel="alternate" hreflang="x-default" href="https://sovazone.com/services/verification.html">
+  <link rel="alternate" hreflang="en" href="https://sovazone.com/en/services/account-help.html">
+  <link rel="alternate" hreflang="ru" href="https://sovazone.com/services/account-help.html">
+  <link rel="alternate" hreflang="x-default" href="https://sovazone.com/services/account-help.html">
 </head>
 <body>
   <div class="site-shell service-page">
@@ -439,61 +471,31 @@
               <span class="doc-breadcrumbs-sep">/</span>
               <a href="/en/services.html">Services</a>
               <span class="doc-breadcrumbs-sep">/</span>
-              <span>Verification</span>
+              <span>Account help</span>
             </nav>
 
-            <h1>Verification and blue check</h1>
+            <h1>Account help</h1>
             <p class="doc-lead">
-              We help with verification in Instagram, TikTok, YouTube, X (Twitter), Telegram, and Facebook. Availability should be уточняется and discussed for each case individually.
+              We help with account problems in Instagram, TikTok, and other platforms: blocks, restrictions, lost access, username transfer, and other difficult situations.
             </p>
           </section>
-
-          <section class="service-note">
-            <p>
-              Timing, стоимость и итоговый формат работы обсуждаются индивидуально. Услуга доступна
-              для личностей, компаний, AI-персонажей и других форматов аккаунтов.
-            </p>
-          </section>
-
-          <section class="service-section" aria-labelledby="verification-title">
+<section class="service-section" aria-labelledby="account-help-title">
             <div class="service-section-head">
               <div class="service-section-title-wrap">
                 <span class="service-section-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 2l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 16l-5.4 2.8 1-6.1L3.2 8.4l6.1-.9L12 2z"/>
+                    <path d="M12 2a5 5 0 015 5c0 1.4-.6 2.7-1.5 3.6L21 16v4H3v-4l5.5-5.4A5 5 0 0112 2zm0 3a2 2 0 100 4 2 2 0 000-4z"/>
                   </svg>
                 </span>
-                <h2 class="service-section-title" id="verification-title">Verification formats</h2>
+                <h2 class="service-section-title" id="account-help-title">Core directions</h2>
               </div>
               <a class="service-section-ask" href="https://t.me/SovaDS" target="_blank" rel="noopener">Ask a question</a>
             </div>
 
-            <div class="service-grid">
+            <div class="service-grid-3">
               <article class="service-card">
-                <h3>Verification в Instagram</h3>
-                <p>Blue check support for personal brands, companies, and other account formats.</p>
-                <div class="service-meta">
-                  <div class="service-meta-row">
-                    <span class="service-meta-label">Price</span>
-                    <span class="service-meta-value">from 2000$</span>
-                  </div>
-                </div>
-              </article>
-
-              <article class="service-card">
-                <h3>Verification в Facebook</h3>
-                <p>Support with verification and blue check access for profiles, pages, and connected projects.</p>
-                <div class="service-meta">
-                  <div class="service-meta-row">
-                    <span class="service-meta-label">Price</span>
-                    <span class="service-meta-value">from 2000$</span>
-                  </div>
-                </div>
-              </article>
-
-              <article class="service-card">
-                <h3>Verification в TikTok</h3>
-                <p>Guidance around TikTok account verification based on current platform conditions.</p>
+                <h3>Instagram unblocking</h3>
+                <p>Help after account blocks, feature restrictions, and access issues.</p>
                 <div class="service-meta">
                   <div class="service-meta-row">
                     <span class="service-meta-label">Price</span>
@@ -503,8 +505,8 @@
               </article>
 
               <article class="service-card">
-                <h3>Verification в YouTube</h3>
-                <p>Preparation and support for the verification badge and channel confirmation on YouTube.</p>
+                <h3>TikTok unblocking</h3>
+                <p>Work with blocks, visibility restrictions, account removal, and other platform issues.</p>
                 <div class="service-meta">
                   <div class="service-meta-row">
                     <span class="service-meta-label">Price</span>
@@ -514,8 +516,8 @@
               </article>
 
               <article class="service-card">
-                <h3>Verification в Telegram</h3>
-                <p>Support with verification for Telegram channels, projects, public personalities, and brands.</p>
+                <h3>Other issues</h3>
+                <p>Other account issues or problems across social platforms: access, restrictions, errors, and malfunctions.</p>
                 <div class="service-meta">
                   <div class="service-meta-row">
                     <span class="service-meta-label">Price</span>
@@ -523,23 +525,79 @@
                   </div>
                 </div>
               </article>
+            </div>
+          </section>
+
+          <section class="service-section" aria-labelledby="reasons-title">
+            <div class="service-section-head">
+              <div class="service-section-title-wrap">
+                <span class="service-section-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14h-2v-2h2v2zm1.7-7.2l-.9.9c-.7.7-.8 1-.8 2.3h-2v-.5c0-1.1.1-1.9 1-2.8l1.2-1.2a1.8 1.8 0 10-3.1-1.2H8a4 4 0 117 2.5z"/>
+                  </svg>
+                </span>
+                <h2 class="service-section-title" id="reasons-title">What can cause restrictions or blocks</h2>
+              </div>
+              
+            </div>
+
+            <div class="service-grid">
+              <article class="service-card">
+                <ul class="service-list">
+                  <li>Suspicious activity</li>
+                  <li>User reports</li>
+                  <li>Platform policy violations</li>
+                  <li>Use of bots and automation</li>
+                </ul>
+              </article>
 
               <article class="service-card">
-                <h3>Verification в X (Twitter)</h3>
-                <p>Support for obtaining the blue check and the required status in X (Twitter).</p>
-                <div class="service-meta">
-                  <div class="service-meta-row">
-                    <span class="service-meta-label">Price</span>
-                    <span class="service-meta-value">from 200$</span>
-                  </div>
-                </div>
+                <ul class="service-list">
+                  <li>Mass actions and spam-like behavior</li>
+                  <li>Advertising or payment issues</li>
+                  <li>Suspicion of account compromise</li>
+                  <li>System or algorithm errors</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="service-section" aria-labelledby="transfer-title">
+            <div class="service-section-head">
+              <div class="service-section-title-wrap">
+                <span class="service-section-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M4 12l6-6v4h10v4H10v4l-6-6z"/>
+                  </svg>
+                </span>
+                <h2 class="service-section-title" id="transfer-title">Username transfer</h2>
+              </div>
+              
+            </div>
+
+            <div class="service-grid">
+              <article class="service-card">
+                <h3>Help with username transfer</h3>
+                <p>
+                  If the task is related not only to a block but also to moving a username between accounts, this can also be discussed within this section.
+                </p>
+              </article>
+
+              <article class="service-card">
+                <h3>What affects the transfer possibility</h3>
+                <ul class="service-list">
+                  <li>Current account status</li>
+                  <li>Username type and level of demand</li>
+                  <li>Platform and its restrictions</li>
+                  <li>Overall case complexity</li>
+                </ul>
               </article>
             </div>
           </section>
 
           <section class="service-note">
             <p>
-              Цена зависит from сложности кейса, нюансов площадки, типа аккаунта и текущего состояния профиля.
+              Timing, стоимость и возможность решения всегда обсуждаются индивидуально.
             </p>
           </section>
 
