@@ -8,7 +8,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
   <title>SovaZone Blog — articles, news, and cases</title>
-  <meta name="description" content="SovaZone blog: articles, news, and cases about usernames, social media, account security, verification, and digital projects.">
+  <meta name="description" content="SovaZone blog: articles, news, and cases about usernames, social platforms, account security, verification, and digital projects.">
   <meta name="keywords" content="SovaZone blog, social media articles, Instagram news, TikTok news, YouTube news, Telegram, usernames, verification, account security">
   <link rel="canonical" href="https://sovazone.com/en/blog.html">
 
@@ -22,7 +22,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SovaZone">
   <meta property="og:title" content="SovaZone Blog — articles, news, and cases">
-  <meta property="og:description" content="SovaZone materials about usernames, social media, account security, verification, and digital projects.">
+  <meta property="og:description" content="SovaZone blog: articles, news, and cases about usernames, social platforms, account security, verification, and digital projects.">
   <meta property="og:url" content="https://sovazone.com/en/blog.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
@@ -32,7 +32,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SovaZone Blog — articles, news, and cases">
-  <meta name="twitter:description" content="SovaZone materials about usernames, social media, account security, verification, and digital projects.">
+  <meta name="twitter:description" content="SovaZone blog: articles, news, and cases about usernames, social platforms, account security, verification, and digital projects.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
 
   <link rel="stylesheet" href="/styles.css">
@@ -405,8 +405,8 @@
     "@context":"https://schema.org",
     "@type":"Blog",
     "name":"SovaZone Blog",
-    "url":"https://sovazone.com/en/blog.html",
-    "description":"SovaZone blog: articles, news, and cases about usernames, social media, account security, verification, and digital projects.",
+    "url":"https://sovazone.com/blog.html",
+    "description":"SovaZone Blog: articles, news, and case-style materials about usernames, social platforms, account security, verification, and digital projects.",
     "publisher":{
       "@type":"Organization",
       "name":"SovaZone",
@@ -433,7 +433,7 @@
           <div class="blog-shell">
             <div class="blog-title-block">
               <h1 class="blog-title">SovaZone Blog</h1>
-              <p class="blog-lead">Articles, news, and cases about usernames, social media, account security, verification, and digital projects.</p>
+              <p class="blog-lead">Articles, news, and case-style materials about usernames, social platforms, account security, verification, and digital projects.</p>
             </div>
 
             <div class="blog-filter-wrap">
@@ -446,7 +446,7 @@
             </div>
 
             <div class="blog-state" id="blog-loading">Loading posts...</div>
-            <div class="blog-state" id="blog-error" hidden>Failed to load blog posts.</div>
+            <div class="blog-state" id="blog-error" hidden>Could not load blog posts.</div>
             <div class="blog-state" id="blog-empty" hidden>No posts found.</div>
 
             <div class="blog-content-grid" id="blog-content-grid" hidden>
@@ -468,7 +468,7 @@
                 <section class="blog-side-panel">
                   <h2 class="blog-side-title">About the blog</h2>
                   <p class="blog-side-panel-text">
-                    This section publishes material about usernames, social media, account security, verification, and the practical nuances of working with digital platforms. The content is organized to be useful in practice.
+                    This section publishes material about usernames, social platforms, account security, verification, and practical details of working with digital platforms. The content is structured to be useful in practice.
                   </p>
                 </section>
 
@@ -501,19 +501,19 @@
                     <a class="blog-side-link" href="/en/services/custom-username.html">
                       <span class="blog-side-link-kicker">Usernames</span>
                       <span class="blog-side-link-title">Custom username</span>
-                      <span class="blog-side-link-desc">Reviewing prospects and working with occupied usernames when the situation fits the criteria.</span>
+                      <span class="blog-side-link-desc">Checking the viability of a request and working with occupied usernames when the situation fits the criteria.</span>
                     </a>
 
                     <a class="blog-side-link" href="/en/services/account-help.html">
                       <span class="blog-side-link-kicker">Accounts</span>
                       <span class="blog-side-link-title">Account help</span>
-                      <span class="blog-side-link-desc">A review of situations related to restrictions, access, security, and other working questions.</span>
+                      <span class="blog-side-link-desc">Review of situations related to restrictions, access, security, and operational account issues.</span>
                     </a>
 
                     <a class="blog-side-link" href="/en/services.html">
                       <span class="blog-side-link-kicker">Sections</span>
                       <span class="blog-side-link-title">All SovaZone services</span>
-                      <span class="blog-side-link-desc">A direct path to all project directions connected with accounts, usernames, and digital tasks.</span>
+                      <span class="blog-side-link-desc">A quick way to explore all project directions related to accounts, usernames, and digital tasks.</span>
                     </a>
                   </div>
                 </section>
@@ -563,8 +563,8 @@
     function buildExcerpt(post, maxLength = 110) {
       const rawDescription = cleanText(post.description, "");
       const genericDescriptions = [
-        "New SovaZone blog post.",
-        "New SovaZone blog post."
+        "A new SovaZone blog post.",
+        "A new SovaZone blog post"
       ];
 
       if (rawDescription && !genericDescriptions.includes(rawDescription)) {
@@ -572,12 +572,12 @@
       }
 
       const fallbackByCategory = {
-        "News": "A concise overview of the key changes, updates, and practical takeaways connected with the topic.",
-        "Articles": "A practical piece with concise conclusions and useful orientation points on the selected topic.",
-        "Cases": "A short breakdown of the situation, the solution path, and the final takeaways of the case."
+        "News": "A concise overview of key changes, updates, and practical takeaways from the topic.",
+        "Articles": "A practical piece with concise conclusions and useful takeaways on the selected topic.",
+        "Cases": "A short breakdown of the situation, the approach to solving it, and the resulting conclusions."
       };
 
-      return truncateText(fallbackByCategory[post.category] || "A concise article with the core ideas and useful details around the topic.", maxLength);
+      return truncateText(fallbackByCategory[post.category] || "A concise piece with the main points and useful details on the topic.", maxLength);
     }
 
     async function fetchJsonWithFallback(paths) {

@@ -8,8 +8,8 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
   <title>Post — SovaZone</title>
-  <meta name="description" content="SovaZone blog post about usernames, social media, account security, verification, and digital projects.">
-  <meta name="keywords" content="SovaZone blog, SovaZone post, usernames, social media, account security, verification, Instagram, TikTok, YouTube, Telegram">
+  <meta name="description" content="SovaZone blog post about usernames, social platforms, account security, verification, and digital projects.">
+  <meta name="keywords" content="SovaZone blog, SovaZone post, usernames, social platforms, account security, verification, Instagram, TikTok, YouTube, Telegram">
   <link rel="canonical" href="https://sovazone.com/en/post.html">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -22,7 +22,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="SovaZone">
   <meta property="og:title" content="Post — SovaZone">
-  <meta property="og:description" content="SovaZone blog post about usernames, social media, account security, verification, and digital projects.">
+  <meta property="og:description" content="SovaZone blog post about usernames, social platforms, account security, verification, and digital projects.">
   <meta property="og:url" content="https://sovazone.com/en/post.html">
   <meta property="og:image" content="https://sovazone.com/og-image.png">
   <meta property="og:image:secure_url" content="https://sovazone.com/og-image.png">
@@ -32,7 +32,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Post — SovaZone">
-  <meta name="twitter:description" content="SovaZone blog post about usernames, social media, account security, verification, and digital projects.">
+  <meta name="twitter:description" content="SovaZone blog post about usernames, social platforms, account security, verification, and digital projects.">
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
 
   <link rel="stylesheet" href="/styles.css">
@@ -479,9 +479,9 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://sovazone.com/"},
-      {"@type":"ListItem","position":2,"name":"Blog","item":"https://sovazone.com/blog.html"},
-      {"@type":"ListItem","position":3,"name":"Post","item":"https://sovazone.com/en/post.html"}
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://sovazone.com/en/index.html"},
+      {"@type":"ListItem","position":2,"name":"Blog","item":"https://sovazone.com/en/blog.html"},
+      {"@type":"ListItem","position":3,"name":"Post","item":"https://sovazone.com/post.html"}
     ]
   }
   </script>
@@ -491,11 +491,11 @@
     "@context":"https://schema.org",
     "@type":"Article",
     "headline":"Post — SovaZone",
-    "description":"SovaZone blog post about usernames, social media, account security, verification, and digital projects.",
+    "description":"SovaZone blog post about usernames, social platforms, account security, verification, and digital projects.",
     "image":["https://sovazone.com/og-image.png"],
-    "mainEntityOfPage":"https://sovazone.com/en/post.html",
+    "mainEntityOfPage":"https://sovazone.com/post.html",
     "author":{"@type":"Organization","name":"SovaZone"},
-    "publisher":{"@type":"Organization","name":"SovaZone","url":"https://sovazone.com/","logo":{"@type":"ImageObject","url":"https://sovazone.com/android-chrome-512x512.png"}},
+    "publisher":{"@type":"Organization","name":"SovaZone","url":"https://sovazone.com/en/index.html","logo":{"@type":"ImageObject","url":"https://sovazone.com/android-chrome-512x512.png"}},
     "datePublished":"2026-04-07",
     "dateModified":"2026-04-07"
   }
@@ -586,7 +586,7 @@
                     <a class="post-side-link" href="/en/blog.html">
                       <span class="post-side-link-kicker">Blog</span>
                       <span class="post-side-link-title">Posts are loading</span>
-                      <span class="post-side-link-desc">Fresh blog materials will appear here after the post is loaded.</span>
+                      <span class="post-side-link-desc">Once the post is loaded, newer blog materials will appear here.</span>
                     </a>
                   </div>
                 </section>
@@ -597,17 +597,17 @@
                     <a class="post-side-link" href="/en/services/custom-username.html">
                       <span class="post-side-link-kicker">Services</span>
                       <span class="post-side-link-title">Custom username</span>
-                      <span class="post-side-link-desc">If the needed username is already taken, we can review the situation and estimate the real prospects.</span>
+                      <span class="post-side-link-desc">If the username you want is occupied, we can review the situation and assess the real chances.</span>
                     </a>
                     <a class="post-side-link" href="/en/usernames.html">
                       <span class="post-side-link-kicker">Catalog</span>
                       <span class="post-side-link-title">Available usernames</span>
-                      <span class="post-side-link-desc">A selection of short and strong usernames for accounts and projects.</span>
+                      <span class="post-side-link-desc">A curated selection of short and strong usernames for accounts and projects.</span>
                     </a>
                     <a class="post-side-link" href="/en/contacts.html">
                       <span class="post-side-link-kicker">Contact</span>
                       <span class="post-side-link-title">Contact us</span>
-                      <span class="post-side-link-desc">Contacts and active communication channels for consulting and requests.</span>
+                      <span class="post-side-link-desc">Contact details and working channels for consulting and requests.</span>
                     </a>
                   </div>
                 </section>
@@ -646,7 +646,7 @@
       if (!value) return "No date";
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return value;
-      return date.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      return date.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
     }
 
     function parseFrontmatter(text) {
@@ -740,7 +740,7 @@
 
       document.title = title;
       setMeta('meta[name="description"]', description);
-      setMeta('meta[name="keywords"]', meta.keywords || "SovaZone blog, post, usernames, social media, account security, verification");
+      setMeta('meta[name="keywords"]', meta.keywords || "SovaZone blog, SovaZone post, usernames, social platforms, account security, verification");
       setLink('link[rel="canonical"]', canonical);
 
       setMeta('meta[property="og:title"]', title);
@@ -757,8 +757,8 @@
         "@context":"https://schema.org",
         "@type":"BreadcrumbList",
         "itemListElement":[
-          { "@type":"ListItem", "position":1, "name":"Home", "item":"https://sovazone.com/" },
-          { "@type":"ListItem", "position":2, "name":"Blog", "item":"https://sovazone.com/blog.html" },
+          { "@type":"ListItem", "position":1, "name":"Home", "item":"https://sovazone.com/en/index.html" },
+          { "@type":"ListItem", "position":2, "name":"Blog", "item":"https://sovazone.com/en/blog.html" },
           { "@type":"ListItem", "position":3, "name": shortBreadcrumbTitle(meta.title || "Post"), "item": canonical }
         ]
       }, null, 2);
@@ -774,7 +774,7 @@
         "publisher": {
           "@type":"Organization",
           "name":"SovaZone",
-          "url":"https://sovazone.com/",
+          "url":"https://sovazone.com/en/index.html",
           "logo": { "@type":"ImageObject", "url":"https://sovazone.com/android-chrome-512x512.png" }
         },
         "datePublished": published,
@@ -801,7 +801,7 @@
           if (label) label.textContent = "Link copied";
           setTimeout(() => { if (label) label.textContent = "Copy link"; }, 1800);
         } catch (e) {
-          if (label) label.textContent = "Copy failed";
+          if (label) label.textContent = "Could not copy";
           setTimeout(() => { if (label) label.textContent = "Copy link"; }, 1800);
         }
       });
@@ -831,9 +831,9 @@
         container.innerHTML = latest.map(post => {
           const kicker = cleanText(post.category, "Articles");
           const title = cleanText(post.title, "Untitled");
-          const desc = cleanText(post.description, "New SovaZone blog post.");
+          const desc = cleanText(post.description, "A new SovaZone blog post.");
           return `
-            <a class="post-side-link" href="/post.html?slug=${encodeURIComponent(post.slug)}">
+            <a class="post-side-link" href="/en/post.html?slug=${encodeURIComponent(post.slug)}">
               <span class="post-side-link-kicker">${escapeHtml(kicker)}</span>
               <span class="post-side-link-title">${escapeHtml(title)}</span>
               <span class="post-side-link-desc">${escapeHtml(desc)}</span>
@@ -920,7 +920,7 @@
         document.getElementById("post-title").textContent = "Post not found";
         document.getElementById("post-excerpt").style.display = "none";
         document.getElementById("post-content").classList.add("post-state");
-        document.getElementById("post-content").textContent = "The post is temporarily unavailable. Check the markdown path and deployment status.";
+        document.getElementById("post-content").textContent = "The post is temporarily unavailable. Check the markdown path and make sure the deployment has finished.";
         document.getElementById("post-hero").style.display = "none";
         document.getElementById("post-tags").innerHTML = "";
         initShareButtons("SovaZone");
