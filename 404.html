@@ -37,6 +37,22 @@
 
   <style>
 
+    /* page-specific footer spacing for 404 */
+    #footer-placeholder .svf-footer{
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    #footer-placeholder .svf-footer__inner{
+      padding-top:40px !important;
+    }
+
+    @media (max-width: 760px){
+      #footer-placeholder .svf-footer__inner{
+        padding-top:28px !important;
+      }
+    }
+
+
     /* critical fix: remove global page-content/footer gap on 404 */
     .page-content.error404-page{
       padding:0 !important;
