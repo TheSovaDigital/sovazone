@@ -36,6 +36,23 @@
   <meta name="twitter:image" content="https://sovazone.com/og-twitter.png">
 
   <style>
+
+    /* critical fix: remove global page-content/footer gap on 404 */
+    .page-content.error404-page{
+      padding:0 !important;
+      margin:0 !important;
+    }
+
+    .error404-page + #footer-placeholder,
+    #footer-placeholder{
+      margin-top:0 !important;
+    }
+
+    #footer-placeholder .svf-footer,
+    .svf-footer{
+      margin-top:0 !important;
+    }
+
     .site-shell{
       min-height:100svh;
       display:flex;
