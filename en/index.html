@@ -1657,6 +1657,36 @@
         max-width:100%;
       }
     }
+
+    @media (max-width:860px){
+      .hero-content h1{
+        width:100%;
+        max-width:100%;
+        overflow:visible;
+        padding-right:.18em;
+        box-sizing:border-box;
+        font-size:clamp(25px, 6.1vw, 33px);
+        line-height:1.06;
+      }
+      .hero-content h1 br{
+        display:none !important;
+      }
+      .hero-content h1 .hero-title-line-1,
+      .hero-content h1 .hero-title-line-2{
+        display:block;
+        white-space:nowrap;
+        overflow:visible;
+        max-width:100%;
+        padding-right:.06em;
+        box-sizing:border-box;
+      }
+    }
+
+    @media (max-width:420px){
+      .hero-content h1{
+        font-size:clamp(24px, 6.05vw, 26px);
+      }
+    }
 </style>
 
   <script type="application/ld+json">
