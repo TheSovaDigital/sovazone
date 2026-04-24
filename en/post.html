@@ -683,8 +683,8 @@
       const file = encodeURIComponent(slug) + ".md";
       return fetchTextWithFallback([
         "/en/content/blog/" + file + "?v=" + cacheBust,
-        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/en/content/blog/" + file + "?v=" + cacheBust,
-        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/en/content/blog/" + file + "?v=" + cacheBust
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/en/content/blog/" + file + "?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/en/content/blog/" + file + "?v=" + cacheBust
       ]);
     }
 
@@ -692,8 +692,8 @@
       const cacheBust = Date.now();
       return fetchJsonWithFallback([
         "/en/content/blog/index.json?v=" + cacheBust,
-        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/en/content/blog/index.json?v=" + cacheBust,
-        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/en/content/blog/index.json?v=" + cacheBust
+        "https://raw.githubusercontent.com/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "/" + BLOG_REPO_BRANCH + "/en/content/blog/index.json?v=" + cacheBust,
+        "https://cdn.jsdelivr.net/gh/" + BLOG_REPO_OWNER + "/" + BLOG_REPO_NAME + "@" + BLOG_REPO_BRANCH + "/en/content/blog/index.json?v=" + cacheBust
       ]);
     }
 
