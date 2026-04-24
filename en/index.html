@@ -195,22 +195,15 @@
     }
 
     @media (max-width:860px){
-      .hero-content h1{
-        width:100%;
-        max-width:100%;
-        display:block;
-        font-size:clamp(26.5px, 7vw, 30px);
-        line-height:1.06;
-        letter-spacing:-0.07em;
-        white-space:nowrap;
-        overflow:visible;
-      }
       .hero-content h1 br{
-        display:block;
+        display:none;
       }
       .hero-content h1 .hero-title-line-1,
       .hero-content h1 .hero-title-line-2{
         display:block;
+        white-space:nowrap;
+        max-width:100%;
+        overflow:visible;
       }
     }
     .hero-text-block{
@@ -1594,8 +1587,8 @@
 
     @media (max-width:420px){
       .hero-content h1{
-        font-size:24px;
-        max-width:272px;
+        font-size:clamp(25px, 6.7vw, 28px);
+        max-width:100%;
       }
       .hero-actions-row{
         grid-template-columns:1fr;
@@ -1640,6 +1633,30 @@
       }
     }
 
+
+    @media (max-width:860px){
+      .hero-content h1{
+        width:100%;
+        max-width:100%;
+        overflow:visible;
+      }
+      .hero-content h1 br{
+        display:none !important;
+      }
+      .hero-content h1 .hero-title-line-1,
+      .hero-content h1 .hero-title-line-2{
+        display:block;
+        white-space:nowrap;
+        overflow:visible;
+      }
+    }
+
+    @media (max-width:420px){
+      .hero-content h1{
+        font-size:clamp(25px, 6.7vw, 28px);
+        max-width:100%;
+      }
+    }
 </style>
 
   <script type="application/ld+json">
@@ -1690,7 +1707,7 @@
           <div class="hero-bg" aria-hidden="true"></div>
           <div class="hero-grid">
             <div class="hero-content">
-              <h1><span class="hero-title-line-1">Launch your personal brand</span> <br><span class="hero-title-line-2">and new digital projects</span></h1>
+              <h1><span class="hero-title-line-1">Launch your personal brand</span><br><span class="hero-title-line-2">and new digital projects</span></h1>
               <div class="hero-text-block">
                 <p class="hero-lead hero-lead-desktop">We help you choose a stronger username for Instagram, TikTok, and other social platforms,<br>solve key technical issues, and define the right starting format for your digital presence.</p>
                 <div class="hero-lead-mobile hero-lead-mobile--collapsed" aria-hidden="true">
