@@ -1469,7 +1469,7 @@
         font-size:0;
       }
       .section-usernames-showcase .section-title-with-icon span:last-child::after{
-        content:"Популярные ники";
+        content:"Popular usernames";
         font-size:20px;
       }
 
@@ -2084,7 +2084,7 @@
       }
 
       function buildPostUrl(slug) {
-        return '/post.html?slug=' + encodeURIComponent(slug || '');
+        return '/en/post.html?slug=' + encodeURIComponent(slug || '');
       }
 
       function render(posts) {
@@ -2134,7 +2134,7 @@
             <div class="latest-article-body">
               <h3 class="latest-article-title">Could not load the blog</h3>
               <p class="latest-article-desc">Open the SovaZone blog section to view the latest published posts.</p>
-              <a class="latest-article-link" href="/blog.html">Open blog</a>
+              <a class="latest-article-link" href="/en/blog.html">Open blog</a>
             </div>
           </article>
         `;
@@ -2154,7 +2154,7 @@
         try {
           const cacheBust = Date.now();
           const posts = await fetchJsonWithFallback([
-            '/content/blog/index.json?v=' + cacheBust,
+            '/en/content/blog/index.json?v=' + cacheBust,
             'https://cdn.jsdelivr.net/gh/TheSovaDigital/sovazone@main/content/blog/index.json?v=' + cacheBust,
             'https://raw.githubusercontent.com/TheSovaDigital/sovazone/main/content/blog/index.json?v=' + cacheBust
           ]);
