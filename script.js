@@ -40,7 +40,39 @@
     });
   }
 
-  initAnalytics();
+  function scheduleAnalytics() {
+    if (window.__sovaAnalyticsScheduled) return;
+    window.__sovaAnalyticsScheduled = true;
+
+    var started = false;
+    var fallbackDelay = 12000;
+    var events = ["pointerdown", "keydown", "scroll", "touchstart", "mousemove"];
+
+    function runWhenIdle() {
+      if (started) return;
+      started = true;
+      events.forEach(function (eventName) {
+        window.removeEventListener(eventName, runWhenIdle, true);
+      });
+
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(initAnalytics, { timeout: 3000 });
+      } else {
+        window.setTimeout(initAnalytics, 800);
+      }
+    }
+
+    events.forEach(function (eventName) {
+      window.addEventListener(eventName, runWhenIdle, { once: true, passive: true, capture: true });
+    });
+
+    function setFallback() {
+      window.setTimeout(runWhenIdle, fallbackDelay);
+    }
+
+    if (document.readyState === "complete") setFallback();
+    else window.addEventListener("load", setFallback, { once: true });
+  }
 
   function buildCounterpartPath(targetLang) {
     var path = window.location.pathname || "/";
@@ -141,5 +173,8 @@
   Promise.all([
     inject("header-placeholder", "/header.html"),
     inject("footer-placeholder", "/footer.html")
-  ]).then(initHeader);
+  ]).then(function () {
+    initHeader();
+    scheduleAnalytics();
+  });
 })();
