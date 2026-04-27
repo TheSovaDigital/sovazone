@@ -1,4 +1,47 @@
 (function () {
+  function initAnalytics() {
+    if (window.__sovaAnalyticsLoaded) return;
+    window.__sovaAnalyticsLoaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", "G-EWEJZZM70H");
+
+    if (!document.querySelector('script[src="https://www.googletagmanager.com/gtag/js?id=G-EWEJZZM70H"]')) {
+      var ga = document.createElement("script");
+      ga.async = true;
+      ga.src = "https://www.googletagmanager.com/gtag/js?id=G-EWEJZZM70H";
+      document.head.appendChild(ga);
+    }
+
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) return;
+      }
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=108775687", "ym");
+
+    window.ym(108775687, "init", {
+      ssr: true,
+      webvisor: true,
+      clickmap: true,
+      ecommerce: "dataLayer",
+      referrer: document.referrer,
+      url: location.href,
+      accurateTrackBounce: true,
+      trackLinks: true
+    });
+  }
+
+  initAnalytics();
+
   function buildCounterpartPath(targetLang) {
     var path = window.location.pathname || "/";
     var search = window.location.search || "";
