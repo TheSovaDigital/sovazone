@@ -105,7 +105,7 @@ author: SovaZone
 
 Посмотреть доступные никнеймы:
 
-https://sovazone.com/usernames.html
+https://sovazone.com/usernames
 
 ---
 

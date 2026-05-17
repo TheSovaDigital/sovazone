@@ -84,7 +84,7 @@ author: SovaZone
 но аккаунт выглядит неактивным,
 можно воспользоваться услугой:
 
-👉 **[Никнейм под заказ](https://sovazone.com/services/custom-username.html)**
+👉 **[Никнейм под заказ](https://sovazone.com/services/custom-username)**
 
 Это отдельное направление работы,
 которое предполагает предварительную проверку аккаунта
@@ -106,7 +106,7 @@ author: SovaZone
 
 На сайте представлен каталог коротких и редких никнеймов:
 
-👉 **[Посмотреть каталог никнеймов](https://sovazone.com/usernames.html)**
+👉 **[Посмотреть каталог никнеймов](https://sovazone.com/usernames)**
 
 Там можно найти:
 
@@ -144,5 +144,5 @@ author: SovaZone
 
 В случае соответствия требованиям
 можно воспользоваться услугой
-👉 **[Ник под заказ](https://sovazone.com/services/custom-username.html)**
+👉 **[Ник под заказ](https://sovazone.com/services/custom-username)**
 и попробовать получить желаемый username.

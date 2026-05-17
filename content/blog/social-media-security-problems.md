@@ -69,7 +69,7 @@ author: SovaZone
 Если аккаунт используется для бизнеса или личного бренда, блокировка может привести к серьёзным потерям.
 
 Подробнее о причинах блокировок можно прочитать здесь:  
-https://sovazone.com/articles/why-instagram-accounts-get-banned.html
+https://sovazone.com/articles/why-instagram-accounts-get-banned
 
 ---
 

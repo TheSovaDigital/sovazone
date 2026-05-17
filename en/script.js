@@ -80,12 +80,12 @@
     var hash = window.location.hash || "";
 
     function normalizeRoot(p) {
-      if (!p || p === "/") return "/index.html";
+      if (!p || p === "/") return "/";
       return p;
     }
 
     if (targetLang === "en") {
-      if (path === "/" || path === "/index.html") return "/en/index.html" + search + hash;
+      if (path === "/" || path === "/index.html") return "/en/" + search + hash;
       if (path.indexOf("/en/") === 0) return path + search + hash;
       return "/en" + normalizeRoot(path) + search + hash;
     }

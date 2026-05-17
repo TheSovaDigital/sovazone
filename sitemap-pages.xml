@@ -6,97 +6,97 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/usernames.html</loc>
+    <loc>https://sovazone.com/usernames</loc>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/services.html</loc>
+    <loc>https://sovazone.com/services</loc>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/projects.html</loc>
+    <loc>https://sovazone.com/projects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/articles.html</loc>
+    <loc>https://sovazone.com/articles</loc>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/blog.html</loc>
+    <loc>https://sovazone.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/about.html</loc>
+    <loc>https://sovazone.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/how-to-buy.html</loc>
+    <loc>https://sovazone.com/how-to-buy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/sell.html</loc>
+    <loc>https://sovazone.com/sell</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/contacts.html</loc>
+    <loc>https://sovazone.com/contacts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/guarantees.html</loc>
+    <loc>https://sovazone.com/guarantees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/faq.html</loc>
+    <loc>https://sovazone.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/privacy.html</loc>
+    <loc>https://sovazone.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/client-terms.html</loc>
+    <loc>https://sovazone.com/client-terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/services/verification.html</loc>
+    <loc>https://sovazone.com/services/verification</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/services/account-help.html</loc>
+    <loc>https://sovazone.com/services/account-help</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/services/recovery-after-hack.html</loc>
+    <loc>https://sovazone.com/services/recovery-after-hack</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://sovazone.com/services/consultation.html</loc>
+    <loc>https://sovazone.com/services/consultation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
 <url>
-  <loc>https://sovazone.com/services/custom-username.html</loc>
+  <loc>https://sovazone.com/services/custom-username</loc>
   <changefreq>monthly</changefreq>
   <priority>0.65</priority>
 </url>
 <url>
-  <loc>https://sovazone.com/services/username-sale.html</loc>
+  <loc>https://sovazone.com/services/username-sale</loc>
   <changefreq>monthly</changefreq>
   <priority>0.65</priority>
 </url>
