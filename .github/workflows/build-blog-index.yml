@@ -1,4 +1,4 @@
-name: Build blog index
+name: Build blog index and RSS feeds
 
 on:
   push:
@@ -6,7 +6,11 @@ on:
       - main
     paths:
       - "content/blog/*.md"
+      - "en/content/blog/*.md"
+      - "articles/*.html"
+      - "en/articles/*.html"
       - "scripts/generate-blog-index.mjs"
+      - "scripts/generate-feeds.mjs"
       - ".github/workflows/build-blog-index.yml"
   workflow_dispatch:
 
@@ -26,11 +30,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Generate blog index
+      - name: Generate blog indexes
         run: node scripts/generate-blog-index.mjs
 
-      - name: Commit updated index.json
+      - name: Generate RSS feeds
+        run: node scripts/generate-feeds.mjs
+
+      - name: Commit updated indexes and RSS feeds
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-update content/blog/index.json"
-          file_pattern: content/blog/index.json
+          commit_message: "Auto-update blog indexes and RSS feeds"
+          file_pattern: content/blog/index.json en/content/blog/index.json feed.xml rss.xml blog-feed.xml articles-feed.xml en/feed.xml en/rss.xml en/blog-feed.xml en/articles-feed.xml
