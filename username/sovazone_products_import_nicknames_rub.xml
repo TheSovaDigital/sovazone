@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='utf-8'?>
+<yml_catalog date="2026-05-17 20:51">
+  <shop>
+    <name>SovaZone</name>
+    <company>SovaZone</company>
+    <url>https://sovazone.com/</url>
+    <currencies>
+      <currency id="RUB" rate="1" />
+    </currencies>
+    <categories>
+      <category id="1">Никнеймы</category>
+    </categories>
+    <offers>
+      <offer id="sovazone-m4d" available="true">
+        <price>340574</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @M4D</name>
+        <description>@M4D — короткий и дерзкий никнейм с визуальной отсылкой к слову MAD. Такой ник хорошо подходит для профиля с сильным характером, личного бренда, медиа-аккаунта или digital-проекта, где важны запоминаемость, энергия и жёсткая подача. @M4D легко считывается, выглядит компактно в шапке профиля и подходит для тёмного, технологичного или провокационного визуального стиля.</description>
+        <url>https://sovazone.com/username/m4d</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2781182/2a0000019e0289436a64c2e2438860db9bf5/orig</picture>
+      </offer>
+      <offer id="sovazone-o05" available="true">
+        <price>200338</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @o05</name>
+        <description>@o05 — минималистичный короткий юзернейм в формате буква + цифры. Ник выглядит чисто, современно и аккуратно, поэтому хорошо подходит для личного бренда, закрытого проекта, медиа-аккаунта или профиля с премиальной лаконичной подачей. @o05 легко использовать в визуале, на карточках, в шапке профиля и в коротких ссылках.</description>
+        <url>https://sovazone.com/username/o05</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/1521147/2a0000019e03286c723d9203b01b10a8ce45/orig</picture>
+      </offer>
+      <offer id="sovazone-krot" available="true">
+        <price>160270</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @KROT</name>
+        <description>@KROT — короткий ник с плотным, жёстким и запоминающимся звучанием. Ассоциируется с underground-эстетикой, скрытой силой, глубиной и нестандартным характером. Подходит для тематического профиля, медиа-проекта, личного бренда, dark-визуала или аккаунта, которому нужен короткий ник без лишних символов и случайных добавок.</description>
+        <url>https://sovazone.com/username/krot</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2899371/2a0000019e0327d2120e854a7fbd19546d78/orig</picture>
+      </offer>
+      <offer id="sovazone-tryd" available="true">
+        <price>100169</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @TRYD</name>
+        <description>@TRYD — лаконичный никнейм с сильным, загадочным и современным звучанием. Подходит для креативного проекта, личного бренда, медиа-аккаунта, digital-направления или профиля с тёмной премиальной эстетикой. @TRYD выглядит коротко, чисто и уверенно, поэтому может хорошо работать как основа для визуального образа и запоминающегося имени.</description>
+        <url>https://sovazone.com/username/tryd</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2701203/2a0000019e0326375d021b876f57c3dcff1d/orig</picture>
+      </offer>
+      <offer id="sovazone-podlets" available="true">
+        <price>120202</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @PODLETS</name>
+        <description>@PODLETS — дерзкий и характерный никнейм с провокационным звучанием. Подходит для развлекательного проекта, короткого видео-контента, личного аккаунта, блога, юмористической подачи или смелого digital-образа. @PODLETS легко запоминается, выделяется среди нейтральных имён и может использоваться для профиля с яркой индивидуальностью.</description>
+        <url>https://sovazone.com/username/podlets</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2701203/2a0000019e03258f3e73333bf25732e06d72/orig</picture>
+      </offer>
+      <offer id="sovazone-koketka" available="true">
+        <price>120202</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @KOKETKA</name>
+        <description>@KOKETKA — красивый женственный никнейм с ярким, кокетливым и легко считываемым звучанием. Подходит для beauty, fashion, lifestyle-блога, личного бренда, эстетичного профиля или проекта с мягкой, стильной и привлекательной визуальной подачей. @KOKETKA выглядит понятно, запоминается быстро и может стать сильной частью образа аккаунта.</description>
+        <url>https://sovazone.com/username/koketka</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000019e0324cac238c11607007c80e513/orig</picture>
+      </offer>
+      <offer id="sovazone-deluks" available="true">
+        <price>120202</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @DELUKS</name>
+        <description>@DELUKS — премиальный никнейм с ассоциацией статуса, luxury-стиля, дорогого визуала и уверенной подачи. Подходит для бренда, блога, магазина, beauty-проекта, lifestyle-направления или эстетичного digital-профиля. @DELUKS выглядит как самостоятельное имя, хорошо считывается и подходит для проекта, которому нужен эффект дорогого и собранного аккаунта.</description>
+        <url>https://sovazone.com/username/deluks</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/1424222/2a0000019e0323dd15cddb407ae84a976764/orig</picture>
+      </offer>
+      <offer id="sovazone-keyed" available="true">
+        <price>120202</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @KEYED</name>
+        <description>@KEYED — стильный юзернейм с ассоциацией ключа, доступа, закрытого статуса и контроля. Подходит для digital-проекта, личного бренда, закрытого сообщества, технологичной тематики или концептуального профиля. @KEYED звучит современно, выглядит аккуратно и может хорошо работать для аккаунта с идеей доступа, защиты, приватности или эксклюзивности.</description>
+        <url>https://sovazone.com/username/keyed</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/944742/2a0000019e0322516b8ff2cf62b750877007/orig</picture>
+      </offer>
+      <offer id="sovazone-cennik" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Cennik</name>
+        <description>@Cennik — никнейм с коммерческой ассоциацией: цена, каталог, ценность, выбор и понятная структура. Подходит для магазина, сервиса, каталога, страницы с товарами, digital-проекта или профиля, где важна связь с подбором, прайсом и предложениями. @Cennik выглядит необычно, но при этом легко читается и хорошо подходит для коммерческого визуала.</description>
+        <url>https://sovazone.com/username/cennik</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/1644120/2a0000019e0321593b5776c0329faa67bef8/orig</picture>
+      </offer>
+      <offer id="sovazone-prinzip" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Prinzip</name>
+        <description>@Prinzip — сильный никнейм с ассоциацией принципов, структуры, порядка и уверенной позиции. Подходит для экспертного блога, личного бренда, мужского профиля, делового проекта или аккаунта с серьёзной подачей. @Prinzip звучит строго и запоминающеся, хорошо смотрится как имя для профиля, где важны характер, правила и узнаваемость.</description>
+        <url>https://sovazone.com/username/prinzip</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/5514775/2a0000019e0320e4c917a7c9c7db74ccc5ec/orig</picture>
+      </offer>
+      <offer id="sovazone-shtopor" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Shtopor</name>
+        <description>@Shtopor — необычный ник с яркой ассоциацией и живым запоминающимся звучанием. Подходит для тематического профиля, бара, винной тематики, юмористического аккаунта, личного блога или нестандартного проекта. @Shtopor легко выделяется за счёт конкретного образа и может хорошо работать для аккаунта с характером, атмосферой и узнаваемой подачей.</description>
+        <url>https://sovazone.com/username/shtopor</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2790747/2a0000019e03200a7ab1ae421050cb7c6794/orig</picture>
+      </offer>
+      <offer id="sovazone-geval" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Geval</name>
+        <description>@Geval — короткий и сильный никнейм с премиальным звучанием и строгим визуальным видом. Подходит для личного бренда, digital-проекта, блога, медиа-аккаунта или профиля с уверенной подачей. @Geval выглядит лаконично, не перегружен символами и хорошо подходит для оформления аккуратного, современного и запоминающегося аккаунта.</description>
+        <url>https://sovazone.com/username/geval</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/1424222/2a0000019e031f3ed1bdf3566fed58f85bb1/orig</picture>
+      </offer>
+      <offer id="sovazone-fulsome" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Fulsome</name>
+        <description>@Fulsome — звучный юзернейм с ощущением полноты, насыщенности, выразительности и дорогого визуального стиля. Подходит для lifestyle-блога, бренда, визуального проекта, эстетичного профиля или аккаунта с богатой, глубокой и атмосферной подачей. @Fulsome выглядит цельно, красиво читается и может работать как сильное имя для проекта.</description>
+        <url>https://sovazone.com/username/fulsome</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/19253181/2a0000019e031e638b7820a32fbef74daef6/orig</picture>
+      </offer>
+      <offer id="sovazone-inneren" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Inneren</name>
+        <description>@Inneren — глубокий и эстетичный никнейм с ассоциацией внутреннего мира, смысла, личной истории и спокойной премиальной подачи. Подходит для авторского проекта, психологической темы, медиа-профиля, личного блога или аккаунта с интеллектуальным и визуально собранным образом. @Inneren звучит мягко, необычно и запоминающеся.</description>
+        <url>https://sovazone.com/username/inneren</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2790747/2a0000019e031d8e9e25990fb17ae1099f07/orig</picture>
+      </offer>
+      <offer id="sovazone-nietzsche" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Nietzsche</name>
+        <description>@Nietzsche — узнаваемый никнейм с философским, интеллектуальным и глубоким звучанием. Подходит для книжного проекта, авторского блога, образовательной страницы, медиа-аккаунта или профиля с сильной идеей. @Nietzsche сразу создаёт ассоциацию с мыслью, характером и содержательной подачей, поэтому хорошо подходит для серьёзного визуального образа.</description>
+        <url>https://sovazone.com/username/nietzsche</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2899371/2a0000019e031c9e1929ccc483afbe55836e/orig</picture>
+      </offer>
+      <offer id="sovazone-hatten" available="true">
+        <price>52088</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Hatten</name>
+        <description>@Hatten — стильный и сдержанный ник с модной премиальной ассоциацией. Подходит для fashion-тематики, мужского стиля, личного бренда, эстетичного аккаунта или проекта с аккуратной визуальной подачей. @Hatten звучит спокойно и статусно, легко читается и может использоваться как лаконичное имя для современного профиля.</description>
+        <url>https://sovazone.com/username/hatten</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2760763/2a0000019e031bab7fc0f2b12517e9d7cbd4/orig</picture>
+      </offer>
+      <offer id="sovazone-affright" available="true">
+        <price>32054</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Affright</name>
+        <description>@Affright — выразительный юзернейм с мрачной, сильной и загадочной атмосферой. Подходит для dark aesthetic, игрового проекта, творческого аккаунта, тематического блога или необычного визуального образа. @Affright создаёт ощущение напряжения, тайны и силы, поэтому хорошо работает для профиля с тёмной стилистикой.</description>
+        <url>https://sovazone.com/username/affright</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/5632604/2a0000019e031ae9614cf1e97fd3f64302b2/orig</picture>
+      </offer>
+      <offer id="sovazone-meines" available="true">
+        <price>32054</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Meines</name>
+        <description>@Meines — красивый никнейм с ассоциацией личного, ценного и принадлежащего владельцу. Подходит для личного бренда, закрытого профиля, блога, премиальной digital-подачи или проекта с индивидуальным характером. @Meines звучит мягко, эстетично и достаточно необычно, чтобы выделяться среди стандартных имён.</description>
+        <url>https://sovazone.com/username/meines</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/17712810/2a0000019e03191a2bfec4f7b1b545f07db4/orig</picture>
+      </offer>
+      <offer id="sovazone-sledopyt" available="true">
+        <price>32054</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Sledopyt</name>
+        <description>@Sledopyt — запоминающийся ник с ассоциацией поиска, пути, следа и движения. Подходит для travel-блога, outdoor-тематики, личного проекта, мужского аккаунта, истории о развитии или профиля с приключенческой визуальной подачей. @Sledopyt звучит понятно и образно, поэтому легко связывается с идеей маршрута и поиска.</description>
+        <url>https://sovazone.com/username/sledopyt</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/1644120/2a0000019e03182dbe9512553ea101f3542b/orig</picture>
+      </offer>
+      <offer id="sovazone-pricheska" available="true">
+        <price>32054</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Pricheska</name>
+        <description>@Pricheska — понятный тематический никнейм для beauty-сферы, волос, причёсок, ухода и визуала, связанного с образом. Подходит для мастера по волосам, салона, стилиста, блога про красоту или проекта с женской аудиторией. @Pricheska легко считывается, содержит прямую ассоциацию с услугой и хорошо подходит для профильного аккаунта.</description>
+        <url>https://sovazone.com/username/pricheska</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/17791271/2a0000019e03173faa8b6d485c2bc7f5d7f9/orig</picture>
+      </offer>
+      <offer id="sovazone-tekstura" available="true">
+        <price>32054</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Tekstura</name>
+        <description>@Tekstura — эстетичный никнейм с ассоциацией фактуры, стиля, деталей, визуального слоя и тактильности. Подходит для дизайна, beauty, fashion, фото, интерьера, визуального контента, творческого проекта или аккаунта с акцентом на аккуратную подачу. @Tekstura звучит современно и хорошо работает для визуальных направлений.</description>
+        <url>https://sovazone.com/username/tekstura</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/11530991/2a0000019e03164f7957f9521c1641d9d494/orig</picture>
+      </offer>
+      <offer id="sovazone-gourds" available="true">
+        <price>32054</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Gourds</name>
+        <description>@Gourds — редкий и необычный юзернейм с природным, декоративным и визуальным звучанием. Подходит для lifestyle-проекта, декора, сезонного контента, творческого профиля, нестандартного бренда или аккаунта с необычной эстетикой. @Gourds выделяется за счёт редкого слова и может использоваться как запоминающееся имя для проекта.</description>
+        <url>https://sovazone.com/username/gourds</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/1644120/2a0000019e0315db860a4b7f43f73e833a71/orig</picture>
+      </offer>
+      <offer id="sovazone-prankersha" available="true">
+        <price>20034</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Prankersha</name>
+        <description>@Prankersha — яркий и весёлый никнейм с дерзким развлекательным характером. Подходит для юмора, пранков, короткого видео-контента, личного аккаунта, блога или проекта с живой и эмоциональной подачей. @Prankersha легко запоминается, звучит энергично и сразу задаёт настроение профиля.</description>
+        <url>https://sovazone.com/username/prankersha</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/2760763/2a0000019e031529d6274f13ecdf1157a03c/orig</picture>
+      </offer>
+      <offer id="sovazone-dressirovka" available="true">
+        <price>20034</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <name>Никнейм — @Dressirovka</name>
+        <description>@Dressirovka — тематический никнейм про дрессировку, животных, обучение, поведение и дисциплину. Подходит для кинолога, pet-блога, эксперта по животным, обучающего проекта или аккаунта с практическим контентом. @Dressirovka понятно передаёт направление профиля и хорошо работает для тематической страницы.</description>
+        <url>https://sovazone.com/username/dressirovka</url>
+        <picture>https://avatars.mds.yandex.net/get-sprav-products/1643978/2a0000019e03133d4aab56d1aa0847710337/orig</picture>
+      </offer>
+    </offers>
+  </shop>
+</yml_catalog>
