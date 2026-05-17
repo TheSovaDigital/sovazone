@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://sovazone.com/sitemap.xml
+Sitemap: https://sovazone.com/en/sitemap.xml
