@@ -1,123 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://sovazone.com/username/m4d</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-m4d.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/o05</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-o05.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/krot</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-krot.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/tryd</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-tryd.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/podlets</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-podlets.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/koketka</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-koketka.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/deluks</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-deluks.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/keyed</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-keyed.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/cennik</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-cennik.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/prinzip</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-prinzip.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/shtopor</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-shtopor.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/geval</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-geval.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/fulsome</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-fulsome.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/inneren</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-inneren.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/nietzsche</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-nietzsche.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/hatten</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-hatten.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/affright</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-affright.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/meines</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-meines.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/sledopyt</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-sledopyt.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/pricheska</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-pricheska.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/tekstura</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-tekstura.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/gourds</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-gourds.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/prankersha</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-prankersha.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://sovazone.com/username/dressirovka</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sovazone.com/image/usernames/SovaZone-username-dressirovka.webp</image:loc>
+    </image:image>
   </url>
 </urlset>
