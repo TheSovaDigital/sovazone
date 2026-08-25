@@ -10,7 +10,7 @@
     <atom:link href="https://sovazone.com/blog-feed.xml" rel="self" type="application/rss+xml" />
     <description>RSS-лента блога SovaZone: новости, статьи и публикации о digital identity, аккаунтах и социальных сетях.</description>
     <language>ru</language>
-    <lastBuildDate>Tue, 25 Aug 2026 06:31:37 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 06:34:25 GMT</lastBuildDate>
     <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
     <image>
       <url>https://sovazone.com/logo.png</url>
@@ -331,13 +331,13 @@
       <media:content url="https://sovazone.com/image/blog/short-instagram-usernames-3-4-characters.png" medium="image" />
     </item>
     <item>
-      <title>Короткие никнеймы Instagram: 3–4 символа и редкие username</title>
+      <title>Как оценить никнейм перед продажей: стоимость username</title>
       <link>https://sovazone.com/post?slug=how-to-value-username-before-selling</link>
       <guid isPermaLink="true">https://sovazone.com/post?slug=how-to-value-username-before-selling</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 GMT</pubDate>
       <dc:creator>SovaZone</dc:creator>
       <category>Статьи</category>
-      <description><![CDATA[Почему короткие никнеймы Instagram из 3–4 символов считаются]]></description>
+      <description><![CDATA[Как определить стоимость username перед продажей. 8 факторов оценки никнейма: длина, слово, читаемость, редкость, спрос и коммерческий потенциал.]]></description>
       <content:encoded><![CDATA[<h1>Как оценить никнейм перед продажей</h1>
 <p>Один из самых частых вопросов владельца редкого username — «сколько стоит мой ник?».</p>
 <p>Универсального калькулятора не существует. Стоимость определяется рынком, а внешне похожие никнеймы могут иметь совершенно разный спрос.</p>
@@ -522,8 +522,8 @@
 <li>сопоставимые предложения.</li>
 </ul>
 <p>Если вы планируете продать никнейм, начните с анализа этих факторов и сравнения с похожими именами. Это поможет избежать как сильного занижения, так и нереалистично высокой оценки.</p>]]></content:encoded>
-      <enclosure url="https://sovazone.com/image/blog/chatgpt-image-25-авг.-2026-г.-10_10_16-3-.png" type="image/png" length="0" />
-      <media:content url="https://sovazone.com/image/blog/chatgpt-image-25-авг.-2026-г.-10_10_16-3-.png" medium="image" />
+      <enclosure url="https://sovazone.com/image/blog/how-to-value-username-before-selling.png" type="image/png" length="0" />
+      <media:content url="https://sovazone.com/image/blog/how-to-value-username-before-selling.png" medium="image" />
     </item>
     <item>
       <title>Редкие и OG username: что это такое и какие ники ценятся</title>
