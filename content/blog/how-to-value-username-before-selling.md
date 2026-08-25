@@ -1,10 +1,11 @@
 ---
-title: "Короткие никнеймы Instagram: 3–4 символа и редкие username"
+title: "Как оценить никнейм перед продажей: стоимость username"
 slug: how-to-value-username-before-selling
 date: 2026-08-22
-description: Почему короткие никнеймы Instagram из 3–4 символов считаются
-  редкими. Разбираем 3L и 4L username, их виды, ценность и критерии выбора.
-cover: /image/blog/chatgpt-image-25-авг.-2026-г.-10_10_16-3-.png
+description: "Как определить стоимость username перед продажей. 8 факторов
+  оценки никнейма: длина, слово, читаемость, редкость, спрос и коммерческий
+  потенциал."
+cover: /image/blog/how-to-value-username-before-selling.png
 category: Статьи
 author: SovaZone
 ---
