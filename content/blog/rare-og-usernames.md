@@ -1,7 +1,7 @@
 ---
 title: "Редкие и OG username: что это такое и какие ники ценятся"
 slug: rare-og-usernames
-date: 2026-08-25
+date: 2026-08-20
 description: >+
   Что такое OG username, rare и premium username. Какие никнеймы считаются
   редкими, чем отличаются 3L, 4L, словарные и брендовые имена.
