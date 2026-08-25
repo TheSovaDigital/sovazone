@@ -3,7 +3,7 @@ title: "Короткие никнеймы Instagram: 3–4 символа и р�
 slug: short-instagram-usernames-3-4-characters
 date: 2026-08-24
 description: Почему короткие никнеймы Instagram из 3–4 символов считаются
-  редкими. Разбираем 3L и 4L username, их виды, ценность и критерии выбора.
+  редкими. Разбираем 3L и 4L username, их виды, ценность и критерии выбора
 cover: /image/blog/short-instagram-usernames-3-4-characters.png
 category: Статьи
 author: SovaZone
