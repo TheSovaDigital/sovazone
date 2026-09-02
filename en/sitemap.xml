@@ -516,4 +516,10 @@
       <image:loc>https://sovazone.com/image/usernames/SovaZone-username-andalusia.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://sovazone.com/en/cookie-policy</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+  </url>
 </urlset>
