@@ -221,6 +221,16 @@ export default async function handler(req,res){
     parsed.username=username;
     parsed.platform=platform;
     if(parsed.priceMin>parsed.priceMax){const x=parsed.priceMin;parsed.priceMin=parsed.priceMax;parsed.priceMax=x;}
+
+    // Hard floors from SovaZone owner calibration. TikTok applies the agreed 70–80% discount.
+    const cleanLength=username.length;
+    const floor=platform==='instagram'
+      ? (cleanLength===2?15000:cleanLength===3?1000:cleanLength===4?100:0)
+      : (cleanLength===2?3000:cleanLength===3?200:cleanLength===4?20:0);
+    if(floor){
+      parsed.priceMin=Math.max(Number(parsed.priceMin)||0,floor);
+      parsed.priceMax=Math.max(Number(parsed.priceMax)||0,parsed.priceMin);
+    }
     return res.status(200).json(parsed);
   }catch(e){
     console.error('username-value error',e);
