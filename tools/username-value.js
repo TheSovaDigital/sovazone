@@ -52,7 +52,7 @@
       '</div>'+
       '<div class="uv-reasons">'+reasons.map(function(r){return reasonCard(r.title,r.text)}).join('')+'</div>'+
       '<p class="uv-result-note">'+escapeHtml(data.disclaimer||t('Оценка является ориентировочной и не гарантирует цену реальной сделки.','This is an indicative estimate and does not guarantee an actual transaction price.'))+'</p>'+
-      '<div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="/sell">'+t('Продать username','Sell a username')+'</a><a class="uv-btn" href="/usernames">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
+      '<div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="/sell">'+t('Продать через SovaUsername','Sell via SovaUsername')+'</a><a class="uv-btn" href="/usernames">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
     result.classList.add('is-visible');
   }
   form.addEventListener('submit', async function(e){
