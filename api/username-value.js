@@ -170,6 +170,16 @@ function languageRules(lang){
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
+
+  const origin=String(req.headers.origin||'');
+  const allowedOrigins=new Set(['https://sovazone.com','https://www.sovazone.com']);
+  if(allowedOrigins.has(origin)){
+    res.setHeader('Access-Control-Allow-Origin',origin);
+    res.setHeader('Vary','Origin');
+  }
+  res.setHeader('Access-Control-Allow-Methods','POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers','Content-Type');
+  if(req.method==='OPTIONS') return res.status(204).end();
   if(req.method!=='POST') return res.status(405).json({error:'Method not allowed'});
   if(rateLimited(req)) return res.status(429).json({error:'Слишком много оценок. Попробуйте позже.'});
   if(!process.env.OPENAI_API_KEY) return res.status(503).json({error:'Сервис оценки ещё не подключён.'});
