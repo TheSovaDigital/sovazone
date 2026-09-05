@@ -42,12 +42,30 @@
   function escapeHtml(s){
     return String(s||'').replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];});
   }
+  function qualityLabel(score){
+    score=Number(score||0);
+    if(score>=80) return t('Высокое качество','High quality');
+    if(score>=55) return t('Хорошее качество','Good quality');
+    if(score>=30) return t('Среднее качество','Average quality');
+    return t('Низкое качество','Low quality');
+  }
+  function liquidityLabel(data){
+    if(data.liquidityLabel) return data.liquidityLabel;
+    var v=String(data.liquidity||'low');
+    if(v==='high') return t('Высокая ликвидность','High liquidity');
+    if(v==='medium') return t('Средняя ликвидность','Medium liquidity');
+    return t('Низкая ликвидность','Low liquidity');
+  }
   function render(data){
     var reasons = Array.isArray(data.factors) ? data.factors.slice(0,3) : [];
     while(reasons.length<3) reasons.push({title:t('Фактор','Factor'),text:t('Учтён в общей оценке.','Included in the overall estimate.')});
+    var meta = [];
+    if(data.category) meta.push(escapeHtml(data.category));
+    if(typeof data.qualityScore !== 'undefined') meta.push(escapeHtml(qualityLabel(data.qualityScore))+' · '+Math.round(Number(data.qualityScore)||0)+'/100');
+    if(data.liquidity) meta.push(escapeHtml(liquidityLabel(data)));
     result.innerHTML =
       '<div class="uv-result-top">'+
-        '<div><div class="uv-result-label">'+t('Username','Username')+'</div><div class="uv-result-handle">@'+escapeHtml(data.username)+'</div><div class="uv-confidence">'+escapeHtml(data.category||'')+'</div></div>'+
+        '<div><div class="uv-result-label">'+t('Username','Username')+'</div><div class="uv-result-handle">@'+escapeHtml(data.username)+'</div><div class="uv-confidence">'+meta.join(' · ')+'</div></div>'+
         '<div><div class="uv-result-label">'+t('Ориентировочная стоимость','Estimated value')+'</div><div class="uv-price">'+range(data.priceMin,data.priceMax)+'</div></div>'+
       '</div>'+
       '<div class="uv-reasons">'+reasons.map(function(r){return reasonCard(r.title,r.text)}).join('')+'</div>'+
@@ -65,7 +83,7 @@
     if(now-lastRun<1800){ showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.')); return; }
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
     try{
-      var res=await fetch('https://sovazone.vercel.app/api/username-value/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
+      var res=await fetch('/api/username-value',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
       var data=await res.json().catch(function(){return {}});
       if(!res.ok) throw new Error(data.error||t('Не удалось выполнить оценку.','Could not complete the estimate.'));
       render(data);
