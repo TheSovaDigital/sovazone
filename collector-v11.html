@@ -4,25 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>SovaUsername Collector v11</title>
+  <title>SovaUsername Collector v12</title>
   <style>
     :root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0b0b0f;color:#f4f4f5}
-    *{box-sizing:border-box} body{margin:0;background:#0b0b0f} .wrap{max-width:980px;margin:0 auto;padding:32px 18px 60px}
-    h1{font-size:28px;margin:0 0 8px} .sub{color:#a1a1aa;margin:0 0 26px;line-height:1.5}
-    .card{background:#121218;border:1px solid #26262e;border-radius:14px;padding:18px;margin:0 0 16px}
+    *{box-sizing:border-box}body{margin:0;background:#0b0b0f}.wrap{max-width:1040px;margin:0 auto;padding:32px 18px 60px}
+    h1{font-size:28px;margin:0 0 8px}.sub{color:#a1a1aa;margin:0 0 26px;line-height:1.5}.card{background:#121218;border:1px solid #26262e;border-radius:14px;padding:18px;margin:0 0 16px}
     .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.grid2{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
-    label{display:block;font-size:12px;color:#a1a1aa;margin:0 0 6px} input,select,button{width:100%;border-radius:10px;border:1px solid #30303a;background:#0d0d12;color:#fff;padding:11px 12px;font:inherit}
-    button{cursor:pointer;background:#20202a;font-weight:650} button:hover{background:#292934} button.primary{background:linear-gradient(90deg,#833ab4,#e1306c,#f77737);border:0}.danger{background:#2b171b!important;border-color:#5d252d!important}.good{color:#86efac}.bad{color:#fca5a5}.muted{color:#a1a1aa}
-    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.stat{background:#0d0d12;border:1px solid #26262e;border-radius:10px;padding:12px}.stat b{display:block;font-size:22px;margin-top:4px}.stat span{font-size:11px;color:#a1a1aa}
-    pre{white-space:pre-wrap;word-break:break-word;background:#09090c;border:1px solid #24242b;border-radius:10px;padding:14px;min-height:130px;max-height:460px;overflow:auto;font-size:12px;line-height:1.45}
-    .row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.small{font-size:12px}.statusline{margin-top:12px;font-size:13px}.hidden{display:none}
-    @media(max-width:760px){.grid,.stats,.grid2{grid-template-columns:1fr 1fr}.grid2>div:first-child{grid-column:1/-1}} @media(max-width:460px){.grid,.stats,.grid2{grid-template-columns:1fr}}
+    label{display:block;font-size:12px;color:#a1a1aa;margin:0 0 6px}input,select,button{width:100%;border-radius:10px;border:1px solid #30303a;background:#0d0d12;color:#fff;padding:11px 12px;font:inherit}
+    button{cursor:pointer;background:#20202a;font-weight:650}button:hover{background:#292934}button:disabled{opacity:.55;cursor:not-allowed}button.primary{background:linear-gradient(90deg,#833ab4,#e1306c,#f77737);border:0}.danger{background:#2b171b!important;border-color:#5d252d!important}
+    .good{color:#86efac}.bad{color:#fca5a5}.muted{color:#a1a1aa}.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}.stat{background:#0d0d12;border:1px solid #26262e;border-radius:10px;padding:12px}.stat b{display:block;font-size:22px;margin-top:4px}.stat span{font-size:11px;color:#a1a1aa}
+    pre{white-space:pre-wrap;word-break:break-word;background:#09090c;border:1px solid #24242b;border-radius:10px;padding:14px;min-height:130px;max-height:420px;overflow:auto;font-size:12px;line-height:1.45}.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.small{font-size:12px}.statusline{margin-top:12px;font-size:13px}
+    table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #26262e}th{color:#a1a1aa;font-weight:600}a{color:#c084fc;text-decoration:none}
+    @media(max-width:760px){.grid,.stats,.grid2{grid-template-columns:1fr 1fr}.grid2>div:first-child{grid-column:1/-1}}@media(max-width:460px){.grid,.stats,.grid2{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>SovaUsername Collector v11</h1>
-  <p class="sub">Панель управления массовым сбором Telegram username sales. Ключ остаётся только в памяти этой вкладки браузера и отправляется напрямую в ваш Vercel API.</p>
+  <h1>SovaUsername Collector v12</h1>
+  <p class="sub">v12 читает checkpoint напрямую из origin Blob без CDN-кеша и останавливает серию, если offset перестал расти.</p>
 
   <section class="card">
     <div class="grid2">
@@ -30,7 +29,7 @@
       <div><label for="limit">NFT за batch</label><select id="limit"><option>20</option><option selected>30</option><option>40</option><option>50</option></select></div>
       <div><label for="conc">Concurrency</label><select id="conc"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div>
     </div>
-    <div class="statusline muted" id="keynote">Ключ не сохраняется в localStorage и не попадает в GitHub.</div>
+    <div class="statusline muted">Ключ живёт только в памяти этой вкладки и не сохраняется.</div>
   </section>
 
   <section class="card">
@@ -46,7 +45,13 @@
       <div class="stat"><span>NFT обработано</span><b id="nfts">—</b></div>
       <div class="stat"><span>Продаж с ценой</span><b id="sold">—</b></div>
       <div class="stat"><span>Ошибок Fragment</span><b id="errors">—</b></div>
+      <div class="stat"><span>Следующий offset</span><b id="offset">—</b></div>
     </div>
+  </section>
+
+  <section class="card">
+    <div class="row"><strong>Примеры продаж из последнего batch</strong><span class="small muted" id="sampleNote">—</span></div>
+    <div style="overflow:auto;margin-top:10px"><table><thead><tr><th>Username</th><th>TON</th><th>Дата</th><th>Fragment</th></tr></thead><tbody id="samples"><tr><td colspan="4" class="muted">Пока нет данных.</td></tr></tbody></table></div>
   </section>
 
   <section class="card">
@@ -56,89 +61,93 @@
 </div>
 <script>
 (() => {
-  const $ = id => document.getElementById(id);
-  const API = '/api/telegram-sales-batch-v11';
-  let stopRequested = false;
-  let running = false;
+  const $=id=>document.getElementById(id);
+  const API='/api/telegram-sales-batch-v12';
+  let stopRequested=false,running=false,lastOffset=null;
 
-  function key(){ return $('key').value.trim(); }
-  function params(){ return `limit=${encodeURIComponent($('limit').value)}&concurrency=${encodeURIComponent($('conc').value)}&retries=1`; }
-  function setState(text, cls=''){ $('runState').className = 'statusline '+cls; $('runState').textContent = text; }
-  function render(data){
-    $('out').textContent = JSON.stringify(data,null,2);
-    $('when').textContent = new Date().toLocaleString();
-    const cp = data?.checkpoint || data?.batch?.checkpoint || data?.result?.checkpoint || data;
-    const source = data?.checkpoint || cp;
-    if(source){
-      if(source.batches_total != null) $('batches').textContent = source.batches_total;
-      if(source.nft_items_total != null) $('nfts').textContent = source.nft_items_total;
-      if(source.sold_with_price_total != null) $('sold').textContent = source.sold_with_price_total;
-      if(source.fragment_errors_total != null) $('errors').textContent = source.fragment_errors_total;
+  function key(){return $('key').value.trim()}
+  function params(){return `limit=${encodeURIComponent($('limit').value)}&concurrency=${encodeURIComponent($('conc').value)}&retries=1`}
+  function setState(text,cls=''){$('runState').className='statusline '+cls;$('runState').textContent=text}
+  function checkpointOf(data){return data?.checkpoint || data?.batch?.checkpoint || null}
+  function renderSamples(data){
+    const rows=Array.isArray(data?.sold_sample)?data.sold_sample:[];
+    $('samples').innerHTML='';
+    if(!rows.length){$('samples').innerHTML='<tr><td colspan="4" class="muted">В последнем ответе нет sample.</td></tr>';$('sampleNote').textContent='0';return}
+    $('sampleNote').textContent=`${rows.length} строк`;
+    for(const r of rows){
+      const tr=document.createElement('tr');
+      const u=r.username||'—', p=r.fragment?.sale_price_ton??'—', d=r.fragment?.purchased_at||r.fragment?.purchased_text||'—', url=r.source_url||'#';
+      tr.innerHTML=`<td>@${u}</td><td>${p}</td><td>${d}</td><td><a target="_blank" rel="noopener" href="${url}">открыть</a></td>`;
+      $('samples').appendChild(tr);
     }
+  }
+  function render(data){
+    $('out').textContent=JSON.stringify(data,null,2);$('when').textContent=new Date().toLocaleString();
+    const cp=checkpointOf(data) || data?.checkpoint;
+    if(cp){
+      if(cp.batches_total!=null)$('batches').textContent=cp.batches_total;
+      if(cp.nft_items_total!=null)$('nfts').textContent=cp.nft_items_total;
+      if(cp.sold_with_price_total!=null)$('sold').textContent=cp.sold_with_price_total;
+      if(cp.fragment_errors_total!=null)$('errors').textContent=cp.fragment_errors_total;
+      $('offset').textContent=cp.next_offset??(cp.complete?'DONE':'—');
+      lastOffset=cp.next_offset;
+    }
+    renderSamples(data);
   }
   async function callStatus(){
     setState('Проверяю status…','muted');
-    const r = await fetch(`${API}?mode=status`,{cache:'no-store'});
-    const data = await r.json().catch(()=>({error:`HTTP ${r.status}`}));
-    render(data);
-    if(!r.ok || !data.ok) throw new Error(data.error || `HTTP ${r.status}`);
-    setState(data.checkpoint?.complete ? 'Сбор уже завершён.' : 'Status OK.','good');
-    return data;
+    const r=await fetch(`${API}?mode=status&t=${Date.now()}`,{cache:'no-store'});
+    const data=await r.json().catch(()=>({error:`HTTP ${r.status}`}));render(data);
+    if(!r.ok||!data.ok)throw new Error(data.error||`HTTP ${r.status}`);
+    setState(data.checkpoint?.complete?'Сбор уже завершён.':'Status v12 OK.','good');return data;
   }
-  async function runOne(){
-    if(!key()) throw new Error('Сначала вставьте SOVA_COLLECTOR_KEY.');
-    const r = await fetch(`${API}?mode=run&${params()}`,{
-      method:'GET',cache:'no-store',headers:{Authorization:`Bearer ${key()}`}
-    });
-    const data = await r.json().catch(()=>({error:`HTTP ${r.status}`}));
-    render(data);
-    if(!r.ok || !data.ok) throw new Error(data.error || `HTTP ${r.status}`);
+  async function runOne(expectedOffset){
+    if(!key())throw new Error('Сначала вставьте SOVA_COLLECTOR_KEY.');
+    const before=expectedOffset;
+    const r=await fetch(`${API}?mode=run&${params()}&t=${Date.now()}`,{method:'GET',cache:'no-store',headers:{Authorization:`Bearer ${key()}`}});
+    const data=await r.json().catch(()=>({error:`HTTP ${r.status}`}));render(data);
+    if(!r.ok||!data.ok)throw new Error(data.error||`HTTP ${r.status}`);
+    const cp=checkpointOf(data), batch=data?.batch;
+    if(before!=null && batch?.offset!=null && Number(batch.offset)!==Number(before)) throw new Error(`Защита остановила серию: ожидался offset ${before}, сервер обработал ${batch.offset}.`);
+    if(!cp?.complete && before!=null && cp?.next_offset!=null && Number(cp.next_offset)<=Number(before)) throw new Error(`Защита остановила серию: offset не вырос (${before} → ${cp.next_offset}).`);
     return data;
   }
   async function runMany(count){
-    if(running) return;
-    running = true; stopRequested = false;
-    toggleRunning(true);
+    if(running)return;running=true;stopRequested=false;toggleRunning(true);
     try{
-      for(let i=1;i<=count && !stopRequested;i++){
-        setState(`Batch ${i}/${count}: выполняется…`,'muted');
-        const d = await runOne();
-        const cp = d.checkpoint || d;
-        if(cp?.complete || d?.complete){ setState('Collection crawl завершён.','good'); break; }
-        setState(`Batch ${i}/${count}: сохранён. Следующий offset ${cp?.next_offset ?? d?.next_offset ?? '…'}`,'good');
-        await new Promise(r=>setTimeout(r,900));
+      const st=await callStatus();let expected=st.checkpoint?.next_offset??null;
+      for(let i=1;i<=count&&!stopRequested;i++){
+        setState(`Batch ${i}/${count}: выполняется с offset ${expected??'…'}…`,'muted');
+        const d=await runOne(expected), cp=checkpointOf(d);
+        if(cp?.complete||d?.complete){setState('Collection crawl завершён.','good');break}
+        expected=cp?.next_offset??null;
+        setState(`Batch ${i}/${count}: сохранён. Следующий offset ${expected}`,'good');
+        await new Promise(r=>setTimeout(r,500));
       }
-    }catch(e){ setState(`Ошибка: ${e.message}`,'bad'); }
-    finally{ running=false; toggleRunning(false); }
+    }catch(e){setState(`Ошибка: ${e.message}`,'bad')}
+    finally{running=false;toggleRunning(false)}
   }
   async function runContinuous(){
-    if(running){ stopRequested=true; setState('Останавливаю после текущего batch…','muted'); return; }
-    if(!key()){ setState('Сначала вставьте SOVA_COLLECTOR_KEY.','bad'); return; }
-    running=true; stopRequested=false; toggleRunning(true);
-    let i=0;
+    if(running){stopRequested=true;setState('Останавливаю после текущего batch…','muted');return}
+    if(!key()){setState('Сначала вставьте SOVA_COLLECTOR_KEY.','bad');return}
+    running=true;stopRequested=false;toggleRunning(true);let i=0;
     try{
+      const st=await callStatus();let expected=st.checkpoint?.next_offset??null;
       while(!stopRequested){
-        i++;
-        setState(`Непрерывный сбор: batch ${i} выполняется…`,'muted');
-        const d=await runOne();
-        const cp=d.checkpoint || d;
-        if(cp?.complete || d?.complete){ setState('Collection crawl завершён.','good'); break; }
-        setState(`Непрерывный сбор: ${i} batch'ей за эту сессию. Следующий offset ${cp?.next_offset ?? d?.next_offset ?? '…'}`,'good');
-        await new Promise(r=>setTimeout(r,1200));
+        i++;setState(`Непрерывный сбор: batch ${i}, offset ${expected??'…'}…`,'muted');
+        const d=await runOne(expected),cp=checkpointOf(d);
+        if(cp?.complete||d?.complete){setState('Collection crawl завершён.','good');break}
+        expected=cp?.next_offset??null;
+        setState(`Непрерывный сбор: ${i} batch'ей за сессию. Следующий offset ${expected}`,'good');
+        await new Promise(r=>setTimeout(r,700));
       }
-      if(stopRequested) setState(`Остановлено после ${i} batch'ей.`,'muted');
-    }catch(e){ setState(`Ошибка: ${e.message}`,'bad'); }
-    finally{ running=false; stopRequested=false; toggleRunning(false); }
+      if(stopRequested)setState(`Остановлено после ${i} batch'ей.`,'muted');
+    }catch(e){setState(`Ошибка: ${e.message}`,'bad')}
+    finally{running=false;stopRequested=false;toggleRunning(false)}
   }
-  function toggleRunning(on){
-    $('oneBtn').disabled=on; $('tenBtn').disabled=on; $('statusBtn').disabled=on;
-    $('autoBtn').textContent=on?'Остановить после batch':'Непрерывный сбор';
-    $('autoBtn').classList.toggle('danger',on);
-  }
+  function toggleRunning(on){$('oneBtn').disabled=on;$('tenBtn').disabled=on;$('statusBtn').disabled=on;$('autoBtn').textContent=on?'Остановить после batch':'Непрерывный сбор';$('autoBtn').classList.toggle('danger',on)}
   $('statusBtn').onclick=()=>callStatus().catch(e=>setState(`Ошибка: ${e.message}`,'bad'));
-  $('oneBtn').onclick=()=>runMany(1);
-  $('tenBtn').onclick=()=>runMany(10);
-  $('autoBtn').onclick=()=>runContinuous();
+  $('oneBtn').onclick=()=>runMany(1);$('tenBtn').onclick=()=>runMany(10);$('autoBtn').onclick=()=>runContinuous();
   callStatus().catch(e=>setState(`Status недоступен: ${e.message}`,'bad'));
 })();
 </script>
