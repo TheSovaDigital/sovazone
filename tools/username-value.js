@@ -10,8 +10,8 @@
   var result=root.querySelector('.uv-result');
   var error=root.querySelector('.uv-error');
   var lastRun=0;
-  var CACHE_VERSION='instagram-v3.1';
-  var API_ENDPOINT='https://sovazone.vercel.app/api/username-value-v22/';
+  var CACHE_VERSION='instagram-v3.2';
+  var API_ENDPOINT='https://sovazone.vercel.app/api/username-value/';
 
   function t(ru,en){return lang==='en'?en:ru;}
   function cleanUsername(v){
@@ -65,7 +65,7 @@
       var data=await res.json().catch(function(){return {};});
       if(!res.ok)throw new Error(data.error||t('Не удалось выполнить оценку.','Could not complete the estimate.'));
       writeCache(username,data);render(data);
-    }catch(err){showError(err.message||t('Ошибка. Попробуйте ещё раз.','Error. Please try again.'));}
+    }catch(err){showError(err&&err.message?err.message:t('Ошибка. Попробуйте ещё раз.','Error. Please try again.'));}
     finally{setLoading(false);}
   });
 })();
