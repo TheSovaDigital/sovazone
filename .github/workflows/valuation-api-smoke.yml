@@ -12,6 +12,21 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
+
+      - name: Check v3.1 module syntax and import
+        shell: bash
+        run: |
+          set +e
+          echo '=== node version ==='
+          node --version
+          echo '=== node --check v24 ==='
+          node --check api/username-value-v24.js
+          echo "check_exit=$?"
+          echo '=== dynamic import v24 ==='
+          node -e "import('./api/username-value-v24.js').then(m=>console.log('import ok',typeof m.default)).catch(e=>{console.error(e);process.exitCode=1})"
+          echo "import_exit=$?"
+
       - name: Check public API routes
         shell: bash
         run: |
