@@ -1,0 +1,115 @@
+name: SovaUsername Collector 100k
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sovausername-collector
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      API_URL: https://sovazone-git-main-thesovadigitals-projects.vercel.app/api/telegram-sales-batch-v13
+      TARGET_SALES: "100000"
+      LIMIT: "30"
+      CONCURRENCY: "3"
+      MAX_RUN_SECONDS: "18000"
+      COLLECTOR_KEY: ${{ secrets.SOVA_COLLECTOR_KEY }}
+
+    steps:
+      - name: Validate collector secret
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${COLLECTOR_KEY:-}" ]; then
+            echo "Missing GitHub Actions secret SOVA_COLLECTOR_KEY"
+            exit 1
+          fi
+
+      - name: Continue collection from Blob checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          started_at=$(date +%s)
+          batch_no=0
+
+          while true; do
+            now=$(date +%s)
+            elapsed=$((now - started_at))
+            if [ "$elapsed" -ge "$MAX_RUN_SECONDS" ]; then
+              echo "Time budget reached after ${elapsed}s. Next scheduled/manual run will resume from Blob checkpoint."
+              exit 0
+            fi
+
+            status=$(curl -fsS --retry 3 --retry-all-errors --connect-timeout 15 --max-time 60 \
+              "${API_URL}?mode=status")
+
+            sold=$(jq -r '.checkpoint.sold_with_price_total // 0' <<<"$status")
+            offset=$(jq -r '.checkpoint.next_offset // 0' <<<"$status")
+            complete=$(jq -r '.checkpoint.complete // false' <<<"$status")
+
+            echo "Checkpoint: offset=${offset}, sold=${sold}, complete=${complete}"
+
+            if [ "$complete" = "true" ]; then
+              echo "Collection enumeration is complete."
+              exit 0
+            fi
+
+            if [ "$sold" -ge "$TARGET_SALES" ]; then
+              echo "Target reached: ${sold} sales with price (target ${TARGET_SALES})."
+              exit 0
+            fi
+
+            response=$(curl -fsS --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
+              -H "Authorization: Bearer ${COLLECTOR_KEY}" \
+              "${API_URL}?mode=run&limit=${LIMIT}&concurrency=${CONCURRENCY}&retries=1")
+
+            ok=$(jq -r '.ok // false' <<<"$response")
+            if [ "$ok" != "true" ]; then
+              echo "$response"
+              echo "Collector returned ok=false"
+              exit 1
+            fi
+
+            next_offset=$(jq -r '.checkpoint.next_offset // 0' <<<"$response")
+            new_sold=$(jq -r '.checkpoint.sold_with_price_total // 0' <<<"$response")
+            fragment_errors=$(jq -r '.batch.fragment_errors // 0' <<<"$response")
+            complete=$(jq -r '.checkpoint.complete // false' <<<"$response")
+
+            if [ "$next_offset" -le "$offset" ] && [ "$complete" != "true" ]; then
+              echo "$response"
+              echo "Safety stop: offset did not increase (${offset} -> ${next_offset})."
+              exit 1
+            fi
+
+            if [ "$fragment_errors" -gt 0 ]; then
+              echo "$response"
+              echo "Safety stop: Fragment errors detected in the latest batch (${fragment_errors})."
+              exit 1
+            fi
+
+            batch_no=$((batch_no + 1))
+            if [ $((batch_no % 25)) -eq 0 ]; then
+              echo "Progress: workflow batches=${batch_no}, offset=${next_offset}, sold=${new_sold}"
+            fi
+
+            if [ "$complete" = "true" ]; then
+              echo "Collection enumeration completed at offset ${next_offset}."
+              exit 0
+            fi
+
+            if [ "$new_sold" -ge "$TARGET_SALES" ]; then
+              echo "Target reached: ${new_sold} sales with price."
+              exit 0
+            fi
+
+            sleep 1
+          done
