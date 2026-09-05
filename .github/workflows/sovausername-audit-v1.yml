@@ -1,0 +1,70 @@
+name: SovaUsername Dataset Audit v1
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/sovausername-audit-v1.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sovausername-dataset-audit-v1
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      AUDIT_API_URL: https://sovazone-git-main-thesovadigitals-projects.vercel.app/api/telegram-sales-audit-v1
+      SOVA_COLLECTOR_KEY: ${{ secrets.SOVA_COLLECTOR_KEY }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      START_OFFSET: '0'
+      END_OFFSET: '25350'
+      LIMIT: '30'
+      CONCURRENCY: '2'
+      OUT_DIR: audit-output
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${SOVA_COLLECTOR_KEY:-}" || { echo 'Missing SOVA_COLLECTOR_KEY'; exit 1; }
+          test -n "${VERCEL_AUTOMATION_BYPASS_SECRET:-}" || { echo 'Missing VERCEL_AUTOMATION_BYPASS_SECRET'; exit 1; }
+
+      - name: Wait for Vercel deployment
+        run: sleep 45
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install audit dependencies
+        run: python -m pip install --disable-pip-version-check requests wordfreq transliterate
+
+      - name: Re-scan and audit first 25,350 NFT
+        run: python scripts/audit_telegram_sales.py
+
+      - name: Add report to job summary
+        if: always()
+        shell: bash
+        run: |
+          if [ -f audit-output/audit-report.md ]; then
+            cat audit-output/audit-report.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload audit dataset and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sovausername-audit-v1
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 30
