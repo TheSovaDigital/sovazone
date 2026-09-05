@@ -40,7 +40,7 @@
     return '<div class="uv-reason"><strong>'+escapeHtml(title)+'</strong><span>'+escapeHtml(text)+'</span></div>';
   }
   function escapeHtml(s){
-    return String(s||'').replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];});
+    return String(s||'').replace(/[&<>'\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];});
   }
   function qualityLabel(score){
     score=Number(score||0);
@@ -84,7 +84,7 @@
     if(now-lastRun<1800){ showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.')); return; }
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
     try{
-      var res=await fetch('/api/username-value',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
+      var res=await fetch('https://sovazone.vercel.app/api/username-value/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
       var data=await res.json().catch(function(){return {}});
       if(!res.ok) throw new Error(data.error||t('Не удалось выполнить оценку.','Could not complete the estimate.'));
       render(data);
