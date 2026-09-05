@@ -12,7 +12,7 @@
   var error = root.querySelector('.uv-error');
   var lastRun = 0;
   var CACHE_VERSION = 'instagram-v3.1';
-  var API_ENDPOINT = 'https://sovazone.vercel.app/api/username-value-v23';
+  var API_ENDPOINT = 'https://sovazone.vercel.app/api/username-value-v22/';
 
   function t(ru,en){ return lang === 'en' ? en : ru; }
   function cleanUsername(v){
