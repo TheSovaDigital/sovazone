@@ -11,7 +11,7 @@
   var result = root.querySelector('.uv-result');
   var error = root.querySelector('.uv-error');
   var lastRun = 0;
-  var CACHE_VERSION = 'instagram-v2.3';
+  var CACHE_VERSION = 'instagram-v2.4';
 
   function t(ru,en){ return lang === 'en' ? en : ru; }
   function cleanUsername(v){
@@ -106,7 +106,7 @@
     if(now-lastRun<1800){ showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.')); return; }
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
     try{
-      var res=await fetch('https://sovazone.vercel.app/api/username-value-v23/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
+      var res=await fetch('https://sovazone.vercel.app/api/username-value-v24/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
       var data=await res.json().catch(function(){return {}});
       if(!res.ok) throw new Error(data.error||t('Не удалось выполнить оценку.','Could not complete the estimate.'));
       writeCache(username,data);
