@@ -1,0 +1,33 @@
+name: API health debug
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/api-health-debug.yml'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel deployment
+        run: sleep 45
+      - name: Check production API routes
+        shell: bash
+        run: |
+          set +e
+          for path in username-value-v22 username-value-v23 username-value-v24; do
+            echo "===== $path ====="
+            curl -sS --max-time 45 -D /tmp/headers -o /tmp/body \
+              -X POST "https://sovazone.vercel.app/api/$path" \
+              -H 'Content-Type: application/json' \
+              -H 'Origin: https://sovazone.com' \
+              --data '{"username":"volk","platform":"instagram","lang":"ru","website":""}'
+            code=$?
+            echo "curl_exit=$code"
+            cat /tmp/headers || true
+            echo "--- body ---"
+            head -c 3000 /tmp/body || true
+            echo
+          done
