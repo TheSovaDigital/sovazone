@@ -2,11 +2,6 @@ name: SovaUsername Collector 100k
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/sovausername-collector.yml"
   schedule:
     - cron: "17 */6 * * *"
 
@@ -22,20 +17,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
-      API_URL: https://www.sovazone.com/api/telegram-sales-batch-v13
+      API_URL: https://sovazone-git-main-thesovadigitals-projects.vercel.app/api/telegram-sales-batch-v13
       TARGET_SALES: "100000"
       LIMIT: "30"
       CONCURRENCY: "3"
       MAX_RUN_SECONDS: "18000"
       COLLECTOR_KEY: ${{ secrets.SOVA_COLLECTOR_KEY }}
+      VERCEL_BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
 
     steps:
-      - name: Validate collector secret
+      - name: Validate collector secrets
         shell: bash
         run: |
           set -euo pipefail
           if [ -z "${COLLECTOR_KEY:-}" ]; then
             echo "Missing GitHub Actions secret SOVA_COLLECTOR_KEY"
+            exit 1
+          fi
+          if [ -z "${VERCEL_BYPASS:-}" ]; then
+            echo "Missing GitHub Actions secret VERCEL_AUTOMATION_BYPASS_SECRET"
             exit 1
           fi
 
@@ -52,7 +52,9 @@ jobs:
             shift 2
             local code
             code=$(curl -sS -L --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
-              -H "Accept: application/json" "$@" -o "$outfile" -w '%{http_code}' "$url")
+              -H "Accept: application/json" \
+              -H "x-vercel-protection-bypass: ${VERCEL_BYPASS}" \
+              "$@" -o "$outfile" -w '%{http_code}' "$url")
 
             if [ "$code" != "200" ]; then
               echo "HTTP ${code} from ${url}"
