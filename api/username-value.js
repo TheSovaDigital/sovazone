@@ -203,7 +203,7 @@ function numericScore3(lower){
   if(s.descending)score+=3.5;
   if(s.pairPrefix||s.pairSuffix)score+=1;
   if(s.allSame&&['1','7','0'].includes(chars[0]))score+=3;
-  const culture={404:4,007:1,666:2.5,100:2,999:0.5,888:0.4,200:1.2,911:0.7,420:0.3};
+  const culture={'404':4,'007':1,'666':2.5,'100':2,'999':0.5,'888':0.4,'200':1.2,'911':0.7,'420':0.3};
   if(Object.prototype.hasOwnProperty.call(culture,lower))score+=culture[lower];
   return score;
 }
