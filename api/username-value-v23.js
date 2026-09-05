@@ -30,7 +30,10 @@ function tuneLetterDemand(payload,username,lang){
 
   payload.priceMin=round250(payload.priceMin*pairWeight);
   payload.priceMax=round250(payload.priceMax*pairWeight);
-  payload.priceMin=Math.max(1000,payload.priceMin);
+
+  // SovaZone rule: any clean 3-character Instagram username has a hard resale floor of $1,500.
+  // Letter/digit quality changes the upper range and quality score, but never pushes a clean 3-char below this floor.
+  payload.priceMin=Math.max(1500,payload.priceMin);
   payload.priceMax=Math.max(payload.priceMin,payload.priceMax);
 
   let scoreShift=0;
