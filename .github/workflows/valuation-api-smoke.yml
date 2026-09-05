@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          for ROUTE in username-value-v22 username-value-v24 username-value; do
+          for ROUTE in username-value-health username-value-v22 username-value-v24 username-value; do
             API="https://sovazone.vercel.app/api/${ROUTE}/"
             echo "=== ${ROUTE} OPTIONS ==="
             curl -sS -D - -o /tmp/options.txt -X OPTIONS "$API" \
