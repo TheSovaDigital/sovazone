@@ -1,0 +1,39 @@
+name: Valuation frontend cache bump
+
+on:
+  push:
+    paths:
+      - '.github/workflows/valuation-cache-bump.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - name: Bump valuation script version
+        shell: bash
+        run: |
+          set -e
+          files=(
+            tools/instagram-username-value.html
+            tools/tiktok-username-value.html
+            en/tools/instagram-username-value.html
+            en/tools/tiktok-username-value.html
+          )
+          for f in "${files[@]}"; do
+            sed -Ei 's#username-value\.js\?v=[0-9]+#username-value.js?v=7#g' "$f"
+          done
+          git config user.name 'SovaDigital'
+          git config user.email 'thesovaz@gmail.com'
+          git add "${files[@]}"
+          if git diff --cached --quiet; then
+            echo 'Nothing to change'
+            exit 0
+          fi
+          git commit -m 'Bump valuation frontend cache to v7'
+          git push origin HEAD:main
