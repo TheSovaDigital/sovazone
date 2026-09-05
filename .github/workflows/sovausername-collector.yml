@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
-      API_URL: https://sovazone-git-main-thesovadigitals-projects.vercel.app/api/telegram-sales-batch-v13
+      API_URL: https://www.sovazone.com/api/telegram-sales-batch-v13
       TARGET_SALES: "100000"
       LIMIT: "30"
       CONCURRENCY: "3"
@@ -41,6 +41,29 @@ jobs:
           started_at=$(date +%s)
           batch_no=0
 
+          fetch_json() {
+            local url="$1"
+            local outfile="$2"
+            shift 2
+            local code
+            code=$(curl -sS -L --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
+              -H "Accept: application/json" "$@" -o "$outfile" -w '%{http_code}' "$url")
+
+            if [ "$code" != "200" ]; then
+              echo "HTTP ${code} from ${url}"
+              head -c 1200 "$outfile" || true
+              echo
+              return 1
+            fi
+
+            if ! jq -e . "$outfile" >/dev/null 2>&1; then
+              echo "Expected JSON but received a non-JSON response from ${url}:"
+              head -c 1200 "$outfile" || true
+              echo
+              return 1
+            fi
+          }
+
           while true; do
             now=$(date +%s)
             elapsed=$((now - started_at))
@@ -49,12 +72,13 @@ jobs:
               exit 0
             fi
 
-            status=$(curl -fsS --retry 3 --retry-all-errors --connect-timeout 15 --max-time 60 \
-              "${API_URL}?mode=status")
+            status_file=$(mktemp)
+            fetch_json "${API_URL}?mode=status" "$status_file"
 
-            sold=$(jq -r '.checkpoint.sold_with_price_total // 0' <<<"$status")
-            offset=$(jq -r '.checkpoint.next_offset // 0' <<<"$status")
-            complete=$(jq -r '.checkpoint.complete // false' <<<"$status")
+            sold=$(jq -r '.checkpoint.sold_with_price_total // 0' "$status_file")
+            offset=$(jq -r '.checkpoint.next_offset // 0' "$status_file")
+            complete=$(jq -r '.checkpoint.complete // false' "$status_file")
+            rm -f "$status_file"
 
             echo "Checkpoint: offset=${offset}, sold=${sold}, complete=${complete}"
 
@@ -68,35 +92,40 @@ jobs:
               exit 0
             fi
 
-            response=$(curl -fsS --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
-              -H "Authorization: Bearer ${COLLECTOR_KEY}" \
-              "${API_URL}?mode=run&limit=${LIMIT}&concurrency=${CONCURRENCY}&retries=1")
+            response_file=$(mktemp)
+            fetch_json "${API_URL}?mode=run&limit=${LIMIT}&concurrency=${CONCURRENCY}&retries=1" "$response_file" \
+              -H "Authorization: Bearer ${COLLECTOR_KEY}"
 
-            ok=$(jq -r '.ok // false' <<<"$response")
+            ok=$(jq -r '.ok // false' "$response_file")
             if [ "$ok" != "true" ]; then
-              echo "$response"
+              cat "$response_file"
+              rm -f "$response_file"
               echo "Collector returned ok=false"
               exit 1
             fi
 
-            next_offset=$(jq -r '.checkpoint.next_offset // 0' <<<"$response")
-            new_sold=$(jq -r '.checkpoint.sold_with_price_total // 0' <<<"$response")
-            fragment_errors=$(jq -r '.batch.fragment_errors // 0' <<<"$response")
-            complete=$(jq -r '.checkpoint.complete // false' <<<"$response")
+            next_offset=$(jq -r '.checkpoint.next_offset // 0' "$response_file")
+            new_sold=$(jq -r '.checkpoint.sold_with_price_total // 0' "$response_file")
+            fragment_errors=$(jq -r '.batch.fragment_errors // 0' "$response_file")
+            complete=$(jq -r '.checkpoint.complete // false' "$response_file")
 
             if [ "$next_offset" -le "$offset" ] && [ "$complete" != "true" ]; then
-              echo "$response"
+              cat "$response_file"
+              rm -f "$response_file"
               echo "Safety stop: offset did not increase (${offset} -> ${next_offset})."
               exit 1
             fi
 
             if [ "$fragment_errors" -gt 0 ]; then
-              echo "$response"
+              cat "$response_file"
+              rm -f "$response_file"
               echo "Safety stop: Fragment errors detected in the latest batch (${fragment_errors})."
               exit 1
             fi
 
+            rm -f "$response_file"
             batch_no=$((batch_no + 1))
+
             if [ $((batch_no % 25)) -eq 0 ]; then
               echo "Progress: workflow batches=${batch_no}, offset=${next_offset}, sold=${new_sold}"
             fi
