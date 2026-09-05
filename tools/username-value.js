@@ -11,7 +11,7 @@
   var result = root.querySelector('.uv-result');
   var error = root.querySelector('.uv-error');
   var lastRun = 0;
-  var CACHE_VERSION = 'instagram-v3.0';
+  var CACHE_VERSION = 'instagram-v3.1';
 
   function t(ru,en){ return lang === 'en' ? en : ru; }
   function cleanUsername(v){
