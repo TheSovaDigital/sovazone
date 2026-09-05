@@ -11,6 +11,7 @@
   var result = root.querySelector('.uv-result');
   var error = root.querySelector('.uv-error');
   var lastRun = 0;
+  var CACHE_VERSION = 'instagram-v2.1';
 
   function t(ru,en){ return lang === 'en' ? en : ru; }
   function cleanUsername(v){
@@ -55,6 +56,23 @@
     if(v==='medium') return t('Средняя ликвидность','Medium liquidity');
     return t('Низкая ликвидность','Low liquidity');
   }
+  function cacheKey(username){
+    return ['sova-valuation',CACHE_VERSION,platform,lang,String(username||'').toLowerCase()].join(':');
+  }
+  function readCache(username){
+    try{
+      var raw=localStorage.getItem(cacheKey(username));
+      if(!raw) return null;
+      var data=JSON.parse(raw);
+      if(!data || data.engineVersion!==CACHE_VERSION) return null;
+      return data;
+    }catch(e){ return null; }
+  }
+  function writeCache(username,data){
+    try{
+      if(data && data.engineVersion===CACHE_VERSION) localStorage.setItem(cacheKey(username),JSON.stringify(data));
+    }catch(e){}
+  }
   function render(data){
     var reasons = Array.isArray(data.factors) ? data.factors.slice(0,3) : [];
     var sellHref = lang === 'en' ? '/en/sell' : '/sell';
@@ -80,6 +98,10 @@
     if(!username){ showError(t('Введите username.','Enter a username.')); return; }
     if(username.length>30){ showError(t('Username слишком длинный.','Username is too long.')); return; }
     if(!/^[a-zA-Z0-9._]+$/.test(username)){ showError(t('Используйте латинские буквы, цифры, точку или _.','Use Latin letters, numbers, a dot, or _.')); return; }
+
+    var cached=readCache(username);
+    if(cached){ render(cached); return; }
+
     var now=Date.now();
     if(now-lastRun<1800){ showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.')); return; }
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
@@ -87,6 +109,7 @@
       var res=await fetch('https://sovazone.vercel.app/api/username-value/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
       var data=await res.json().catch(function(){return {}});
       if(!res.ok) throw new Error(data.error||t('Не удалось выполнить оценку.','Could not complete the estimate.'));
+      writeCache(username,data);
       render(data);
     }catch(err){showError(err.message||t('Ошибка. Попробуйте ещё раз.','Error. Please try again.'));}
     finally{setLoading(false);}
