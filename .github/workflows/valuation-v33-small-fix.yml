@@ -1,0 +1,85 @@
+name: Valuation v3.3 small fix
+
+on:
+  push:
+    paths:
+      - '.github/workflows/valuation-v33-small-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Apply minimal valuation fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('api/username-value.js')
+          s = p.read_text()
+          replacements = [
+              ('__sovaValuationBucketsV32', '__sovaValuationBucketsV33'),
+              ('__sovaValuationCacheV32', '__sovaValuationCacheV33'),
+              ("const ENGINE_VERSION = 'instagram-v3.2';", "const ENGINE_VERSION = 'instagram-v3.3';"),
+              ('if(s.pairPrefix||s.pairSuffix)score+=1;', 'if(!s.allSame&&(s.pairPrefix||s.pairSuffix))score+=1;'),
+          ]
+          for old, new in replacements:
+              if old not in s:
+                  raise SystemExit(f'missing backend target: {old}')
+              s = s.replace(old, new, 1)
+
+          old = """    base.priceMin=niceRound((Number(base.priceMin)||0)*0.25);\n    base.priceMax=base.openEnded?base.priceMin:niceRound((Number(base.priceMax)||0)*0.25);\n    base.openEnded=false;base.platform='tiktok';\n    parsed=base;"""
+          new = """    base.priceMin=niceRound((Number(base.priceMin)||0)*0.25);\n    base.priceMax=base.openEnded?base.priceMin:niceRound((Number(base.priceMax)||0)*0.25);\n    base.openEnded=false;base.platform='tiktok';\n    const len=[...username.toLowerCase()].length;\n    if(len<=4&&Array.isArray(base.factors)&&base.factors.length){\n      const floor=niceRound(shortFloor(len)*0.25);\n      base.factors[0]={title:lang==='en'?'Short-handle scarcity':'Редкость короткого ника',text:lang==='en'?`A ${len}-character TikTok username retains a scarcity reference from about $${floor.toLocaleString('en-US')} after the TikTok market adjustment.`:`TikTok username длиной ${len} символа сохраняет ориентир редкости примерно от $${floor.toLocaleString('en-US')} после поправки на рынок TikTok.`};\n    }\n    parsed=base;"""
+          if old not in s:
+              raise SystemExit('missing TikTok block target')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          p = Path('tools/username-value.js')
+          s = p.read_text()
+          old = "var CACHE_VERSION='instagram-v3.2';"
+          new = "var CACHE_VERSION='instagram-v3.3';"
+          if old not in s:
+              raise SystemExit('missing frontend cache target')
+          p.write_text(s.replace(old, new, 1))
+
+          htmls = [
+              Path('tools/instagram-username-value.html'),
+              Path('tools/tiktok-username-value.html'),
+              Path('en/tools/instagram-username-value.html'),
+              Path('en/tools/tiktok-username-value.html'),
+          ]
+          changed = 0
+          for hp in htmls:
+              if not hp.exists():
+                  continue
+              hs = hp.read_text()
+              if '/tools/username-value.js?v=7' in hs:
+                  hp.write_text(hs.replace('/tools/username-value.js?v=7','/tools/username-value.js?v=8'))
+                  changed += 1
+          if changed == 0:
+              raise SystemExit('no HTML cache-bust target found')
+          PY
+
+      - name: Validate before commit
+        run: |
+          node --check api/username-value.js
+          node -e "import('./api/username-value.js').then(m=>{if(typeof m.default!=='function')process.exit(1);console.log('backend import ok')}).catch(e=>{console.error(e);process.exit(1)})"
+          node --check tools/username-value.js
+          grep -q "instagram-v3.3" api/username-value.js
+          grep -q "!s.allSame&&(s.pairPrefix||s.pairSuffix)" api/username-value.js
+          grep -q "TikTok username длиной" api/username-value.js
+          grep -q "instagram-v3.3" tools/username-value.js
+
+      - name: Commit minimal fix
+        run: |
+          git config user.name "SovaDigital"
+          git config user.email "thesovaz@gmail.com"
+          git add api/username-value.js tools/username-value.js tools/instagram-username-value.html tools/tiktok-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html
+          git commit -m "Fix 555 scoring and TikTok scarcity text"
+          git push origin HEAD:main
