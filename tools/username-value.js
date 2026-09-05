@@ -12,6 +12,7 @@
   var error = root.querySelector('.uv-error');
   var lastRun = 0;
   var CACHE_VERSION = 'instagram-v3.1';
+  var JSONP_ENDPOINT = 'https://sovazone.vercel.app/api/username-value-v23';
 
   function t(ru,en){ return lang === 'en' ? en : ru; }
   function cleanUsername(v){
@@ -94,6 +95,47 @@
       '<div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="'+sellHref+'">'+t('Продать через SovaUsername','Sell via SovaUsername')+'</a><a class="uv-btn" href="'+catalogHref+'">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
     result.classList.add('is-visible');
   }
+
+  function requestViaJsonp(username){
+    return new Promise(function(resolve,reject){
+      var callback='__sovaValuationCb'+Date.now()+Math.floor(Math.random()*1000000);
+      var script=document.createElement('script');
+      var done=false;
+      var timer=setTimeout(function(){ finish(new Error(t('Сервис оценки не ответил вовремя.','Valuation service timed out.'))); },35000);
+
+      function cleanup(){
+        clearTimeout(timer);
+        try{ delete window[callback]; }catch(e){ window[callback]=undefined; }
+        if(script.parentNode) script.parentNode.removeChild(script);
+      }
+      function finish(err,data){
+        if(done) return;
+        done=true;
+        cleanup();
+        if(err) reject(err); else resolve(data);
+      }
+
+      window[callback]=function(data){
+        if(!data || Number(data.__httpStatus||200)>=400){
+          finish(new Error((data&&data.error)||t('Не удалось выполнить оценку.','Could not complete the estimate.')));
+          return;
+        }
+        try{ delete data.__httpStatus; }catch(e){}
+        finish(null,data);
+      };
+
+      script.async=true;
+      script.onerror=function(){ finish(new Error(t('Не удалось подключиться к сервису оценки.','Could not connect to valuation service.'))); };
+      script.src=JSONP_ENDPOINT+
+        '?username='+encodeURIComponent(username)+
+        '&platform='+encodeURIComponent(platform)+
+        '&lang='+encodeURIComponent(lang)+
+        '&callback='+encodeURIComponent(callback)+
+        '&_='+Date.now();
+      document.head.appendChild(script);
+    });
+  }
+
   form.addEventListener('submit', async function(e){
     e.preventDefault();hideError();
     var username=cleanUsername(input.value);
@@ -108,12 +150,10 @@
     if(now-lastRun<1800){ showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.')); return; }
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
     try{
-      var res=await fetch('https://sovazone.vercel.app/api/username-value-v23',{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
-      var data=await res.json().catch(function(){return {}});
-      if(!res.ok) throw new Error(data.error||t('Не удалось выполнить оценку.','Could not complete the estimate.'));
+      var data=await requestViaJsonp(username);
       writeCache(username,data);
       render(data);
-    }catch(err){showError(err.message||t('Ошибка. Попробуйте ещё раз.','Error. Please try again.'));}
-    finally{setLoading(false);}
+    }catch(err){ showError(err.message||t('Ошибка. Попробуйте ещё раз.','Error. Please try again.')); }
+    finally{ setLoading(false); }
   });
 })();
