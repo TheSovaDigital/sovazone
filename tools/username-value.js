@@ -11,7 +11,7 @@
   var result = root.querySelector('.uv-result');
   var error = root.querySelector('.uv-error');
   var lastRun = 0;
-  var CACHE_VERSION = 'instagram-v2.6';
+  var CACHE_VERSION = 'instagram-v3.0';
 
   function t(ru,en){ return lang === 'en' ? en : ru; }
   function cleanUsername(v){
@@ -24,8 +24,10 @@
     n = Number(n || 0);
     return '$' + Math.round(n).toLocaleString('en-US');
   }
-  function range(min,max){
-    min=Number(min||0);max=Number(max||0);
+  function priceText(data){
+    if(data && data.specialCase === 'global_brand') return t('Особый случай','Special case');
+    var min=Number((data&&data.priceMin)||0), max=Number((data&&data.priceMax)||0);
+    if(data && data.openEnded) return money(min) + '+';
     if(min===max) return '≈ ' + money(min);
     return money(min) + '–' + money(max);
   }
@@ -85,7 +87,7 @@
     result.innerHTML =
       '<div class="uv-result-top">'+
         '<div><div class="uv-result-label">'+t('Username','Username')+'</div><div class="uv-result-handle">@'+escapeHtml(data.username)+'</div><div class="uv-confidence">'+meta.join(' · ')+'</div></div>'+
-        '<div><div class="uv-result-label">'+t('Ориентировочная стоимость','Estimated value')+'</div><div class="uv-price">'+range(data.priceMin,data.priceMax)+'</div></div>'+
+        '<div><div class="uv-result-label">'+t('Ориентировочная стоимость','Estimated value')+'</div><div class="uv-price">'+priceText(data)+'</div></div>'+
       '</div>'+
       '<div class="uv-reasons">'+reasons.map(function(r){return reasonCard(r.title,r.text)}).join('')+'</div>'+
       '<p class="uv-result-note">'+escapeHtml(data.disclaimer||t('Оценка является ориентировочной и не гарантирует цену реальной сделки.','This is an indicative estimate and does not guarantee an actual transaction price.'))+'</p>'+
@@ -106,7 +108,7 @@
     if(now-lastRun<1800){ showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.')); return; }
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
     try{
-      var res=await fetch('https://sovazone.vercel.app/api/username-value-v26/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
+      var res=await fetch('https://sovazone.vercel.app/api/username-value-v30/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})});
       var data=await res.json().catch(function(){return {}});
       if(!res.ok) throw new Error(data.error||t('Не удалось выполнить оценку.','Could not complete the estimate.'));
       writeCache(username,data);
