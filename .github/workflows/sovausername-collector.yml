@@ -2,11 +2,6 @@ name: SovaUsername Collector 100k
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/sovausername-collector.yml"
   schedule:
     - cron: "17 */6 * * *"
 
