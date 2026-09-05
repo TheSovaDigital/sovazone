@@ -1,14 +1,69 @@
 import baseHandler from './username-value-v24.js';
 
-// Transport-only wrapper for browsers that are flaky on cross-origin JSON preflight.
-// The valuation engine itself remains in username-value-v24.js (v3.1).
+function validCallback(value){
+  return /^[A-Za-z_$][A-Za-z0-9_$.]{0,100}$/.test(String(value||''));
+}
+
+async function runBase(req){
+  let statusCode=200;
+  let payload;
+  let ended=false;
+  const headers={};
+  const shadow={
+    setHeader(name,value){ headers[name]=value; },
+    status(code){ statusCode=code; return shadow; },
+    json(value){ payload=value; ended=true; return shadow; },
+    end(){ ended=true; return shadow; }
+  };
+  await baseHandler(req,shadow);
+  return {statusCode,payload,ended,headers};
+}
+
 export default async function handler(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers','Content-Type');
-  res.setHeader('Cache-Control','no-store');
+  res.setHeader('Cache-Control','no-store, max-age=0');
+  res.setHeader('X-Content-Type-Options','nosniff');
 
   if(req.method==='OPTIONS') return res.status(204).end();
+
+  // JSONP GET is used as a Safari-safe transport. Script tags are not subject
+  // to fetch/XHR CORS checks, while the valuation logic still runs in v24.
+  if(req.method==='GET'){
+    const q=req.query||{};
+    const callback=String(q.callback||'');
+    if(!validCallback(callback)){
+      res.setHeader('Content-Type','application/javascript; charset=utf-8');
+      return res.status(400).end('/* invalid callback */');
+    }
+
+    const proxyReq=Object.create(req);
+    proxyReq.method='POST';
+    proxyReq.body={
+      username:String(q.username||''),
+      platform:String(q.platform||'instagram'),
+      lang:String(q.lang||'ru'),
+      website:''
+    };
+    proxyReq.headers={...(req.headers||{}),origin:''};
+
+    let result;
+    try{
+      result=await runBase(proxyReq);
+    }catch(e){
+      result={statusCode:500,payload:{error:'Could not complete the estimate.'}};
+    }
+
+    const out=result.payload && typeof result.payload==='object'
+      ? {...result.payload,__httpStatus:result.statusCode}
+      : {error:'Empty valuation response',__httpStatus:result.statusCode||500};
+
+    res.setHeader('Content-Type','application/javascript; charset=utf-8');
+    return res.status(200).end(`${callback}(${JSON.stringify(out)});`);
+  }
+
+  if(req.method!=='POST') return res.status(405).json({error:'Method not allowed'});
 
   if(typeof req.body==='string'){
     try{ req.body=JSON.parse(req.body); }
