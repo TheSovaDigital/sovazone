@@ -29,7 +29,6 @@ function parseFragmentSale(html) {
     /Sale\s*Price[\s\S]{0,1400}?class=["'][^"']*(?:tm-value|table-cell-value)[^"']*icon-ton[^"']*["'][^>]*>\s*([\d.,]+)\s*</i,
     /Sale\s*Price[\s\S]{0,1400}?class=["'][^"']*icon-ton[^"']*(?:tm-value|table-cell-value)[^"']*["'][^>]*>\s*([\d.,]+)\s*</i,
   ];
-
   let salePriceTon = null;
   for (const re of pricePatterns) {
     const m = html.match(re);
@@ -38,7 +37,6 @@ function parseFragmentSale(html) {
     if (Number.isFinite(n)) salePriceTon = n;
     break;
   }
-
   let purchasedText = null;
   let purchasedAt = null;
   const timeMatch = html.match(/Purchased\s+on\s*<time\b[^>]*\bdatetime=["']([^"']+)["'][^>]*>([\s\S]*?)<\/time>/i);
@@ -62,7 +60,6 @@ function parseFragmentSale(html) {
 async function fragmentPage(username, retries = 5) {
   const url = `https://fragment.com/username/${encodeURIComponent(username)}`;
   let lastError = null;
-
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 15000);
@@ -86,12 +83,7 @@ async function fragmentPage(username, retries = 5) {
         error.retryable = r.status === 429 || r.status >= 500;
         throw error;
       }
-      return {
-        http_status: r.status,
-        attempts: attempt + 1,
-        source_url: url,
-        ...parseFragmentSale(html),
-      };
+      return { http_status: r.status, attempts: attempt + 1, source_url: url, ...parseFragmentSale(html) };
     } catch (e) {
       clearTimeout(timer);
       lastError = e;
@@ -134,18 +126,12 @@ async function readJsonl(pathname) {
 }
 
 async function writeJson(pathname, value) {
-  return put(pathname, JSON.stringify(value, null, 2), {
-    access: 'private', allowOverwrite: true, addRandomSuffix: false,
-    contentType: 'application/json; charset=utf-8',
-  });
+  return put(pathname, JSON.stringify(value, null, 2), { access: 'private', allowOverwrite: true, addRandomSuffix: false, contentType: 'application/json; charset=utf-8' });
 }
 
 async function writeJsonl(pathname, rows) {
   const body = rows.map(row => JSON.stringify(row)).join('\n') + (rows.length ? '\n' : '');
-  return put(pathname, body, {
-    access: 'private', allowOverwrite: true, addRandomSuffix: false,
-    contentType: 'application/x-ndjson; charset=utf-8',
-  });
+  return put(pathname, body, { access: 'private', allowOverwrite: true, addRandomSuffix: false, contentType: 'application/x-ndjson; charset=utf-8' });
 }
 
 function authorized(req) {
@@ -155,21 +141,32 @@ function authorized(req) {
 
 export default async function handler(req, res) {
   if (!authorized(req)) return send(res, 401, { ok: false, error: 'Unauthorized' });
-
   const offset = clampInt(req.query?.offset, 0, 100000000, -1);
   if (offset < 0) return send(res, 400, { ok: false, error: 'offset is required' });
   const concurrency = clampInt(req.query?.concurrency, 1, 2, 1);
   const retries = clampInt(req.query?.retries, 1, 6, 5);
-  const batchPath = `${ROOT}/batches/offset-${String(offset).padStart(9, '0')}.jsonl`;
-  const errorPath = `${ROOT}/errors/offset-${String(offset).padStart(9, '0')}.jsonl`;
+  const padded = String(offset).padStart(9, '0');
+  const batchPath = `${ROOT}/batches/offset-${padded}.jsonl`;
+  const errorPath = `${ROOT}/errors/offset-${padded}.jsonl`;
 
   try {
     const rows = await readJsonl(batchPath);
     if (!rows) return send(res, 404, { ok: false, error: 'batch_not_found', offset, batchPath });
 
-    const targets = rows.filter(row => row?.username && row?.error);
+    const errorRows = (await readJsonl(errorPath)) || [];
+    const embeddedErrors = rows.filter(row => row?.username && row?.error);
+    const sourceTargets = errorRows.length ? errorRows : embeddedErrors;
+    const dedup = new Map();
+    for (const row of sourceTargets) if (row?.username) dedup.set(row.username.toLowerCase(), row);
+    const targets = [...dedup.values()];
+
     if (!targets.length) {
-      return send(res, 200, { ok: true, mode: 'repair_fragment_errors', offset, targets: 0, repaired: 0, unresolved: 0 });
+      const checkpoint = await readJson(CHECKPOINT_PATH);
+      return send(res, 200, {
+        ok: true, mode: 'repair_fragment_errors', offset, targets: 0, repaired: 0,
+        unresolved: Number(checkpoint?.fragment_errors_total || 0), sold_added: 0, dates_added: 0,
+        reason: 'no_error_rows_found', checkpoint,
+      });
     }
 
     const checkedAt = new Date().toISOString();
@@ -182,10 +179,19 @@ export default async function handler(req, res) {
     let repaired = 0;
     let soldAdded = 0;
     let datesAdded = 0;
-    for (const row of rows) {
-      if (!row?.username || !row?.error) continue;
-      const fragment = byUser.get(row.username.toLowerCase());
+    const rowIndex = new Map(rows.filter(r => r?.username).map((r, i) => [r.username.toLowerCase(), i]));
+
+    for (const target of targets) {
+      const key = target.username.toLowerCase();
+      const fragment = byUser.get(key);
       if (!fragment) continue;
+      let idx = rowIndex.get(key);
+      if (idx == null) {
+        rows.push({ ...target });
+        idx = rows.length - 1;
+        rowIndex.set(key, idx);
+      }
+      const row = rows[idx];
       delete row.error;
       row.source = 'fragment_individual_page';
       row.source_url = fragment.source_url;
@@ -203,9 +209,9 @@ export default async function handler(req, res) {
       if (fragment.sold && fragment.sale_price_ton != null && fragment.purchased_at) datesAdded += 1;
     }
 
-    const unresolvedRows = rows.filter(row => row?.username && row?.error);
+    const unresolvedTargets = targets.filter(t => !byUser.has(t.username.toLowerCase()));
     await writeJsonl(batchPath, rows);
-    await writeJsonl(errorPath, unresolvedRows);
+    await writeJsonl(errorPath, unresolvedTargets);
 
     const checkpoint = await readJson(CHECKPOINT_PATH);
     if (checkpoint && repaired > 0) {
@@ -213,28 +219,14 @@ export default async function handler(req, res) {
       checkpoint.sold_with_price_total = Number(checkpoint.sold_with_price_total || 0) + soldAdded;
       checkpoint.sale_dates_total = Number(checkpoint.sale_dates_total || 0) + datesAdded;
       checkpoint.updated_at = new Date().toISOString();
-      checkpoint.last_error_repair = {
-        offset,
-        repaired,
-        unresolved: unresolvedRows.length,
-        sold_added: soldAdded,
-        dates_added: datesAdded,
-        repaired_at: checkpoint.updated_at,
-      };
+      checkpoint.last_error_repair = { offset, repaired, unresolved: unresolvedTargets.length, sold_added: soldAdded, dates_added: datesAdded, repaired_at: checkpoint.updated_at };
       await writeJson(CHECKPOINT_PATH, checkpoint);
     }
 
     return send(res, 200, {
-      ok: true,
-      mode: 'repair_fragment_errors',
-      offset,
-      targets: targets.length,
-      repaired,
-      unresolved: unresolvedRows.length,
-      sold_added: soldAdded,
-      dates_added: datesAdded,
-      failures: fixed.filter(x => x?.error),
-      checkpoint,
+      ok: true, mode: 'repair_fragment_errors', offset, targets: targets.length,
+      repaired, unresolved: unresolvedTargets.length, sold_added: soldAdded, dates_added: datesAdded,
+      failures: fixed.filter(x => x?.error), checkpoint,
     });
   } catch (e) {
     return send(res, 500, { ok: false, mode: 'repair_fragment_errors', offset, error: String(e?.message || e) });
