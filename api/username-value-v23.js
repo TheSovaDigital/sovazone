@@ -1,98 +1,19 @@
-import v22Handler from './username-value-v22.js';
+import baseHandler from './username-value-v24.js';
 
-const ENGINE_VERSION = 'instagram-v2.3';
-const WEAK_LETTERS = new Set(['u','y','q','b','d']);
-
-function normalizeUsername(value){
-  let v=String(value||'').trim();
-  v=v.replace(/^https?:\/\/(www\.)?(instagram\.com|tiktok\.com)\//i,'');
-  v=v.replace(/^@/,'').split(/[/?#]/)[0].trim();
-  return v;
-}
-
-function round250(n){
-  return Math.max(0,Math.round((Number(n)||0)/250)*250);
-}
-
-function letterWeight(ch){
-  if(ch==='a') return 1.25;
-  if(WEAK_LETTERS.has(ch)) return 0.75;
-  return 1;
-}
-
-function tuneLetterDemand(payload,username,lang){
-  const m=username.toLowerCase().match(/^([a-z])([a-z])(\d)$/);
-  if(!m) return payload;
-
-  const a=m[1], b=m[2];
-  const repeated=a===b;
-  const pairWeight=(letterWeight(a)+letterWeight(b))/2;
-
-  payload.priceMin=round250(payload.priceMin*pairWeight);
-  payload.priceMax=round250(payload.priceMax*pairWeight);
-
-  // SovaZone rule: any clean 3-character Instagram username has a hard resale floor of $1,500.
-  // Letter/digit quality changes the upper range and quality score, but never pushes a clean 3-char below this floor.
-  payload.priceMin=Math.max(1500,payload.priceMin);
-  payload.priceMax=Math.max(payload.priceMin,payload.priceMax);
-
-  let scoreShift=0;
-  if(pairWeight>1) scoreShift=7;
-  else if(pairWeight<1) scoreShift=-8;
-  payload.qualityScore=Math.max(0,Math.min(100,Math.round((Number(payload.qualityScore)||0)+scoreShift)));
-
-  if(repeated){
-    let text;
-    if(a==='a'){
-      text=lang==='en'
-        ? 'AA has above-average visual appeal and demand among repeated-letter pairs.'
-        : 'AA относится к более привлекательным повторяющимся буквенным сочетаниям и имеет повышенный спрос.';
-    }else if(WEAK_LETTERS.has(a)){
-      text=lang==='en'
-        ? a.toUpperCase()+a.toUpperCase()+' is a weaker repeated-letter pair and trades below stronger letters in the same format.'
-        : a.toUpperCase()+a.toUpperCase()+' относится к более слабым повторяющимся буквенным сочетаниям и обычно стоит ниже сильных букв в том же формате.';
-    }else{
-      text=lang==='en'
-        ? a.toUpperCase()+a.toUpperCase()+' is a solid neutral repeated-letter pair.'
-        : a.toUpperCase()+a.toUpperCase()+' — хорошее нейтральное повторяющееся буквенное сочетание.';
-    }
-
-    if(Array.isArray(payload.factors) && payload.factors.length>=2){
-      payload.factors[1]={title:lang==='en'?'Letter quality':'Качество букв',text};
-    }
-  }
-
-  return payload;
-}
-
+// Transport-only wrapper for browsers that are flaky on cross-origin JSON preflight.
+// The valuation engine itself remains in username-value-v24.js (v3.1).
 export default async function handler(req,res){
-  let statusCode=200;
-  let payload;
-  let ended=false;
-  const headers={};
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers','Content-Type');
+  res.setHeader('Cache-Control','no-store');
 
-  const shadow={
-    setHeader(name,value){ headers[name]=value; },
-    status(code){ statusCode=code; return shadow; },
-    json(value){ payload=value; ended=true; return shadow; },
-    end(){ ended=true; return shadow; }
-  };
+  if(req.method==='OPTIONS') return res.status(204).end();
 
-  await v22Handler(req,shadow);
-
-  for(const [name,value] of Object.entries(headers)) res.setHeader(name,value);
-  res.setHeader('X-Sova-Engine-Version',ENGINE_VERSION);
-
-  if(payload && typeof payload==='object'){
-    const username=normalizeUsername(req.body?.username);
-    const platform=String(req.body?.platform||'instagram').toLowerCase()==='tiktok'?'tiktok':'instagram';
-    const lang=String(req.body?.lang||'ru').toLowerCase()==='en'?'en':'ru';
-
-    payload={...payload,engineVersion:ENGINE_VERSION};
-    if(statusCode===200 && platform==='instagram') payload=tuneLetterDemand(payload,username,lang);
+  if(typeof req.body==='string'){
+    try{ req.body=JSON.parse(req.body); }
+    catch(e){ return res.status(400).json({error:'Invalid request body'}); }
   }
 
-  if(payload!==undefined) return res.status(statusCode).json(payload);
-  if(ended) return res.status(statusCode).end();
-  return res.status(500).json({error:'Valuation wrapper did not receive a response.'});
+  return baseHandler(req,res);
 }
