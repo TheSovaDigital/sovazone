@@ -2,6 +2,11 @@ name: SovaUsername Collector 100k
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/sovausername-collector.yml"
   schedule:
     - cron: "17 */6 * * *"
 
@@ -18,9 +23,10 @@ jobs:
     timeout-minutes: 330
     env:
       API_URL: https://sovazone-git-main-thesovadigitals-projects.vercel.app/api/telegram-sales-batch-v13
+      REPAIR_URL: https://sovazone-git-main-thesovadigitals-projects.vercel.app/api/telegram-sales-repair-errors-v13
       TARGET_SALES: "100000"
       LIMIT: "30"
-      CONCURRENCY: "3"
+      CONCURRENCY: "2"
       MAX_RUN_SECONDS: "18000"
       COLLECTOR_KEY: ${{ secrets.SOVA_COLLECTOR_KEY }}
       VERCEL_BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
@@ -51,7 +57,7 @@ jobs:
             local outfile="$2"
             shift 2
             local code
-            code=$(curl -sS -L --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
+            code=$(curl -sS -L --retry 3 --retry-all-errors --connect-timeout 15 --max-time 180 \
               -H "Accept: application/json" \
               -H "x-vercel-protection-bypass: ${VERCEL_BYPASS}" \
               "$@" -o "$outfile" -w '%{http_code}' "$url")
@@ -71,6 +77,31 @@ jobs:
             fi
           }
 
+          repair_offset() {
+            local target_offset="$1"
+            local repair_attempt
+            for repair_attempt in 1 2 3 4; do
+              echo "Repairing Fragment errors at offset=${target_offset}, attempt=${repair_attempt}/4"
+              repair_file=$(mktemp)
+              if fetch_json "${REPAIR_URL}?offset=${target_offset}&concurrency=1&retries=5" "$repair_file" \
+                -H "Authorization: Bearer ${COLLECTOR_KEY}"; then
+                repaired=$(jq -r '.repaired // 0' "$repair_file")
+                unresolved=$(jq -r '.unresolved // 0' "$repair_file")
+                sold_added=$(jq -r '.sold_added // 0' "$repair_file")
+                echo "Repair result: repaired=${repaired}, unresolved=${unresolved}, sold_added=${sold_added}"
+                rm -f "$repair_file"
+                if [ "$unresolved" -eq 0 ]; then
+                  return 0
+                fi
+              else
+                rm -f "$repair_file"
+              fi
+              sleep $((15 * repair_attempt))
+            done
+            echo "Safety stop: unresolved Fragment errors remain at offset=${target_offset}."
+            return 1
+          }
+
           while true; do
             now=$(date +%s)
             elapsed=$((now - started_at))
@@ -85,9 +116,20 @@ jobs:
             sold=$(jq -r '.checkpoint.sold_with_price_total // 0' "$status_file")
             offset=$(jq -r '.checkpoint.next_offset // 0' "$status_file")
             complete=$(jq -r '.checkpoint.complete // false' "$status_file")
+            existing_errors=$(jq -r '.checkpoint.fragment_errors_total // 0' "$status_file")
+            last_batch_offset=$(jq -r '.checkpoint.last_batch.offset // -1' "$status_file")
             rm -f "$status_file"
 
-            echo "Checkpoint: offset=${offset}, sold=${sold}, complete=${complete}"
+            echo "Checkpoint: offset=${offset}, sold=${sold}, errors=${existing_errors}, complete=${complete}"
+
+            if [ "$existing_errors" -gt 0 ]; then
+              if [ "$last_batch_offset" -lt 0 ]; then
+                echo "Safety stop: checkpoint reports Fragment errors but last batch offset is unavailable."
+                exit 1
+              fi
+              repair_offset "$last_batch_offset" || exit 1
+              continue
+            fi
 
             if [ "$complete" = "true" ]; then
               echo "Collection enumeration is complete."
@@ -100,7 +142,7 @@ jobs:
             fi
 
             response_file=$(mktemp)
-            fetch_json "${API_URL}?mode=run&limit=${LIMIT}&concurrency=${CONCURRENCY}&retries=1" "$response_file" \
+            fetch_json "${API_URL}?mode=run&limit=${LIMIT}&concurrency=${CONCURRENCY}&retries=2" "$response_file" \
               -H "Authorization: Bearer ${COLLECTOR_KEY}"
 
             ok=$(jq -r '.ok // false' "$response_file")
@@ -114,6 +156,7 @@ jobs:
             next_offset=$(jq -r '.checkpoint.next_offset // 0' "$response_file")
             new_sold=$(jq -r '.checkpoint.sold_with_price_total // 0' "$response_file")
             fragment_errors=$(jq -r '.batch.fragment_errors // 0' "$response_file")
+            batch_offset=$(jq -r '.batch.offset // -1' "$response_file")
             complete=$(jq -r '.checkpoint.complete // false' "$response_file")
 
             if [ "$next_offset" -le "$offset" ] && [ "$complete" != "true" ]; then
@@ -123,16 +166,14 @@ jobs:
               exit 1
             fi
 
+            rm -f "$response_file"
+
             if [ "$fragment_errors" -gt 0 ]; then
-              cat "$response_file"
-              rm -f "$response_file"
-              echo "Safety stop: Fragment errors detected in the latest batch (${fragment_errors})."
-              exit 1
+              echo "Transient Fragment errors detected: ${fragment_errors}. Starting targeted repair."
+              repair_offset "$batch_offset" || exit 1
             fi
 
-            rm -f "$response_file"
             batch_no=$((batch_no + 1))
-
             if [ $((batch_no % 25)) -eq 0 ]; then
               echo "Progress: workflow batches=${batch_no}, offset=${next_offset}, sold=${new_sold}"
             fi
@@ -147,5 +188,5 @@ jobs:
               exit 0
             fi
 
-            sleep 1
+            sleep 2
           done
