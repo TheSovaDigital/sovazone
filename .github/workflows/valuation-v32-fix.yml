@@ -1,0 +1,37 @@
+name: Valuation v3.2 runtime fix
+
+on:
+  push:
+    paths:
+      - '.github/workflows/valuation-v32-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - name: Fix ESM numeric object keys and validate
+        shell: bash
+        run: |
+          set -e
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('api/username-value.js')
+          s=p.read_text()
+          old="const culture={404:4,007:1,666:2.5,100:2,999:0.5,888:0.4,200:1.2,911:0.7,420:0.3};"
+          new="const culture={'404':4,'007':1,'666':2.5,'100':2,'999':0.5,'888':0.4,'200':1.2,'911':0.7,'420':0.3};"
+          if old not in s:
+              raise SystemExit('target pattern not found')
+          p.write_text(s.replace(old,new))
+          PY
+          node -e "import('./api/username-value.js').then(m=>console.log('v3.2 import ok',typeof m.default)).catch(e=>{console.error(e);process.exit(1)})"
+          git config user.name 'SovaDigital'
+          git config user.email 'thesovaz@gmail.com'
+          git add api/username-value.js
+          git commit -m 'Fix v3.2 ESM numeric code keys'
+          git push origin HEAD:main
