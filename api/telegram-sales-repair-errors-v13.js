@@ -130,7 +130,7 @@ async function writeJson(pathname, value) {
 }
 
 async function writeJsonl(pathname, rows) {
-  const body = rows.map(row => JSON.stringify(row)).join('\n') + (rows.length ? '\n' : '');
+  const body = rows.length ? `${rows.map(row => JSON.stringify(row)).join('\n')}\n` : '\n';
   return put(pathname, body, { access: 'private', allowOverwrite: true, addRandomSuffix: false, contentType: 'application/x-ndjson; charset=utf-8' });
 }
 
