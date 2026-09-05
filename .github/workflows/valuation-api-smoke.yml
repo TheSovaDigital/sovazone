@@ -1,0 +1,42 @@
+name: Valuation API smoke test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/valuation-api-smoke.yml'
+      - 'api/**'
+      - 'tools/username-value.js'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check public API route
+        shell: bash
+        run: |
+          set +e
+          API='https://sovazone.vercel.app/api/username-value-v22/'
+          echo '=== OPTIONS ==='
+          curl -sS -D - -o /tmp/options.txt -X OPTIONS "$API" \
+            -H 'Origin: https://sovazone.com' \
+            -H 'Access-Control-Request-Method: POST' \
+            -H 'Access-Control-Request-Headers: content-type'
+          echo
+          cat /tmp/options.txt
+          echo
+          echo '=== POST Instagram ==='
+          curl -sS -D - -o /tmp/post-ig.txt -X POST "$API" \
+            -H 'Origin: https://sovazone.com' \
+            -H 'Content-Type: application/json' \
+            --data '{"username":"volk","platform":"instagram","lang":"ru","website":""}'
+          echo
+          cat /tmp/post-ig.txt
+          echo
+          echo '=== POST TikTok ==='
+          curl -sS -D - -o /tmp/post-tt.txt -X POST "$API" \
+            -H 'Origin: https://sovazone.com' \
+            -H 'Content-Type: application/json' \
+            --data '{"username":"volk","platform":"tiktok","lang":"ru","website":""}'
+          echo
+          cat /tmp/post-tt.txt
