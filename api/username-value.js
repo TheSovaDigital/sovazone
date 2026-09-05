@@ -1,6 +1,7 @@
 const buckets = globalThis.__sovaValuationBuckets || (globalThis.__sovaValuationBuckets = new Map());
+const valuationCache = globalThis.__sovaValuationCache || (globalThis.__sovaValuationCache = new Map());
 
-const ENGINE_VERSION = 'instagram-v2';
+const ENGINE_VERSION = 'instagram-v2.1';
 
 const OWNER_ANCHORS = {
   cat:[20000,30000], m8x:[1500,2000], '777':[50000,100000], aaaaa:[2000,3000], '88888':[1000,2000],
@@ -23,12 +24,14 @@ const OWNER_ANCHORS = {
   market:[5000,10000], rome:[2000,5000], monaco:[2000,5000], georgia:[1500,2500], mark:[5000,10000],
   daniel:[4000,6000], emma:[1500,2500], robert:[3000,5000], taylor:[2000,3000], wilson:[1000,2000],
   rrrrr:[1000,2000], sun:[15000,25000], '888':[10000,20000], top:[20000,30000], best:[20000,30000],
-  phone:[5000,10000], dream:[10000,20000], mike:[5000,10000], alice:[2000,3000], madrid:[1000,2000]
+  phone:[5000,10000], dream:[10000,20000], mike:[5000,10000], alice:[2000,3000], madrid:[1000,2000],
+  pricheska:[400,800]
 };
 
 const FIRST_NAME_ANCHORS = new Set(['david','alexander','alex','anna','sofia','ivan','ahmed','bella','max','john','maria','leo','sara','adam','eva','mark','daniel','emma','robert','mike','alice']);
 const SURNAME_ANCHORS = new Set(['petrov','smith','miller','brown','johnson','garcia','taylor','wilson']);
 const GEO_ANCHORS = new Set(['paris','armenia','berlin','dubai','london','tokyo','moscow','yerevan','rome','monaco','georgia','madrid']);
+const RUSSIAN_TRANSLIT_ANCHORS = new Set(['pricheska']);
 
 function anchorCategoryCode(username){
   const lower=username.toLowerCase();
@@ -37,21 +40,22 @@ function anchorCategoryCode(username){
   if(FIRST_NAME_ANCHORS.has(lower)) return 'first_name';
   if(SURNAME_ANCHORS.has(lower)) return 'surname';
   if(GEO_ANCHORS.has(lower)) return 'geography';
+  if(RUSSIAN_TRANSLIT_ANCHORS.has(lower)) return 'russian_word_translit';
   if(new Set(lower).size===1) return 'pattern';
   return 'english_word';
 }
 
 const CALIBRATION = `
-You are the SovaZone Username Valuation engine, version 2. Estimate the value of a social-media username using the owner's pricing logic. There is no transparent liquid market, so this is an informed valuation range, not a market quote.
+You are the SovaZone Username Valuation engine, version 2.1. Estimate the value of a social-media username using the owner's pricing logic. There is no transparent liquid market, so this is an informed valuation range, not a market quote.
 
 CORE INSTAGRAM LOGIC
 - Clean 2-character username: never below about $15,000. Even mixed forms like x7 remain valuable. Quality can push much higher.
 - Clean 3-character username: never below about $1,000. Strong words, abbreviations, patterns and digits can be far higher.
 - Clean 4-character username: base floor about $100, but meaning/quality often dominates.
-- Random 5+ character strings normally have little standalone resale value unless they are words, names, surnames, geography, highly memorable patterns, repeated characters, or culturally meaningful numeric forms.
+- Random 5+ character strings with no semantic meaning, name, geography or collectible pattern have ZERO standalone resale value. Do not assign token values such as $10-$30.
 - Usernames containing a dot or underscore have essentially no standalone resale value.
 - English dictionary words are the strongest semantic category. Short universal/common words can be worth tens of thousands.
-- Russian words written in Latin transliteration are a real semantic category and MUST NOT be mistaken for random strings. Examples of transliterated Russian forms include pricheska, shtopor, podlets, tekstura, koketka and sledopyt. Value them below equivalent high-demand English words unless global demand justifies otherwise.
+- Russian words written in Latin transliteration are a real semantic category and MUST NOT be mistaken for random strings. Ordinary Russian transliterations should be priced materially below equivalent English words. Example owner calibration: pricheska = $400-$800. Other examples include shtopor, podlets, tekstura, koketka and sledopyt.
 - Words in European or regional languages can still have value but generally less than equivalent English words. Smaller-language/market demand generally means lower valuation.
 - Names and surnames have value. Popular male names are generally more valuable than female names. Very common/global male first names can be $5k+; popular short forms can be much higher. Female names are often around $2k-$3k unless unusually strong/global/short.
 - Surnames are usually below top first names, but globally common or strong surnames can reach several thousand.
@@ -79,7 +83,7 @@ VALUATION METHOD
 3. Start from scarcity by clean length, then let semantic/global demand and pattern quality dominate where justified.
 4. Compare to several owner anchors internally, not just one nearest example.
 5. Return a conservative-to-realistic range, not an aspirational listing price.
-6. Random 5+ character strings should normally stay low. Do not invent value from pronounceability alone.
+6. Random 5+ character strings must return $0-$0.
 7. Transliteration must be recognized when it clearly represents a Russian word.
 8. Give exactly three short factors.
 `;
@@ -182,6 +186,12 @@ function localizedLiquidity(value,lang){
   return value==='high'?'Высокая':value==='medium'?'Средняя':'Низкая';
 }
 
+function categoryLabel(code,lang){
+  const ru={short:'Короткий username',english_word:'Английское слово',russian_word_translit:'Русское слово в латинице',other_language_word:'Слово на другом языке',first_name:'Имя',surname:'Фамилия',geography:'География',numeric:'Цифровой username',pattern:'Редкий паттерн',leetspeak:'Leetspeak',random:'Случайная комбинация'};
+  const en={short:'Short username',english_word:'English word',russian_word_translit:'Russian word in Latin script',other_language_word:'Other-language word',first_name:'First name',surname:'Surname',geography:'Geography',numeric:'Numeric username',pattern:'Rare pattern',leetspeak:'Leetspeak',random:'Random combination'};
+  return (lang==='en'?en:ru)[code] || (lang==='en'?'Username':'Username');
+}
+
 function anchorResponse(username,platform,lang){
   if(platform!=='instagram') return null;
   const anchor=OWNER_ANCHORS[username.toLowerCase()];
@@ -189,17 +199,23 @@ function anchorResponse(username,platform,lang){
   const [priceMin,priceMax]=anchor;
   const score=qualityFromAnchor(priceMin,priceMax,username);
   const liquidity=liquidityFromAnchor(priceMin,priceMax);
+  const code=anchorCategoryCode(username);
+  const semantic = code==='geography' ? (lang==='en'?'Globally recognizable geographic name.':'Узнаваемое географическое название.')
+    : code==='russian_word_translit' ? (lang==='en'?'Recognizable Russian word written in Latin script.':'Понятное русское слово, записанное латиницей.')
+    : code==='first_name' ? (lang==='en'?'Recognizable personal name.':'Узнаваемое личное имя.')
+    : code==='surname' ? (lang==='en'?'Recognizable surname.':'Узнаваемая фамилия.')
+    : (lang==='en'?'Memorable semantic or scarce format.':'Запоминаемый смысл или редкий формат.');
   return {
     username, platform, engineVersion:ENGINE_VERSION,
     priceMin, priceMax,
-    category:lang==='en'?'Owner calibration anchor':'Калибровочный ориентир',
-    categoryCode:anchorCategoryCode(username),
+    category:categoryLabel(code,lang),
+    categoryCode:code,
     qualityScore:score,
     liquidity,
     liquidityLabel:localizedLiquidity(liquidity,lang),
     factors:lang==='en'
-      ? [{title:'Calibration',text:'Matches a SovaZone owner pricing anchor.'},{title:'Scarcity',text:`Clean ${username.length}-character handle.`},{title:'Demand',text:'Range reflects the owner pricing model.'}]
-      : [{title:'Калибровка',text:'Совпадает с ценовым ориентиром SovaZone.'},{title:'Редкость',text:`Чистый username из ${username.length} символов.`},{title:'Спрос',text:'Диапазон соответствует ценовой модели владельца.'}],
+      ? [{title:'Type',text:semantic},{title:'Scarcity',text:`Clean ${username.length}-character handle.`},{title:'Demand',text:liquidity==='high'?'Broad buyer demand.':liquidity==='medium'?'Moderate realistic buyer demand.':'Narrow realistic buyer demand.'}]
+      : [{title:'Тип',text:semantic},{title:'Редкость',text:`Чистый username из ${username.length} символов.`},{title:'Спрос',text:liquidity==='high'?'Широкий потенциальный спрос.':liquidity==='medium'?'Умеренный реальный спрос.':'Узкий реальный спрос.'}],
     disclaimer:lang==='en'?'Indicative SovaZone estimate, not a guaranteed sale price.':'Ориентировочная оценка SovaZone, не гарантия цены сделки.'
   };
 }
@@ -224,9 +240,10 @@ function applyGuardrails(parsed,username,platform,lang){
   }
 
   if(parsed.categoryCode==='random' && cleanLength>=5){
-    const cap=platform==='instagram'?300:75;
-    min=Math.min(min,cap);
-    max=Math.min(Math.max(max,min),cap);
+    min=0;
+    max=0;
+    parsed.qualityScore=Math.min(Number(parsed.qualityScore)||0,10);
+    parsed.liquidity='low';
   }
 
   min=niceRound(min);
@@ -242,6 +259,7 @@ function applyGuardrails(parsed,username,platform,lang){
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
+  res.setHeader('X-Sova-Engine-Version',ENGINE_VERSION);
 
   const origin=String(req.headers.origin||'');
   const allowedOrigins=new Set(['https://sovazone.com','https://www.sovazone.com']);
@@ -279,6 +297,10 @@ export default async function handler(req,res){
   const anchor=anchorResponse(username,platform,lang);
   if(anchor) return res.status(200).json(anchor);
 
+  const cacheKey=`${ENGINE_VERSION}:${platform}:${lang}:${username.toLowerCase()}`;
+  const cached=valuationCache.get(cacheKey);
+  if(cached) return res.status(200).json(cached);
+
   if(rateLimited(req)) return res.status(429).json({error:lang==='en'?'Too many estimates. Try again later.':'Слишком много оценок. Попробуйте позже.'});
   if(!process.env.OPENAI_API_KEY) return res.status(503).json({error:lang==='en'?'Valuation service is not connected yet.':'Сервис оценки ещё не подключён.'});
 
@@ -303,13 +325,14 @@ export default async function handler(req,res){
   const requestBody={
     model:process.env.VALUATION_MODEL||'gpt-5.6-luna',
     store:false,
-    reasoning:{effort:'low'},
+    reasoning:{effort:'none'},
+    temperature:0,
     instructions:CALIBRATION+'\n'+languageRules(lang),
     input:`Evaluate @${username} for ${platform.toUpperCase()}.
 Deterministic format signals: ${JSON.stringify(signals)}
 Return the SovaZone valuation range and stable classification.`,
     max_output_tokens:600,
-    text:{verbosity:'low',format:{type:'json_schema',name:'username_valuation_v2',strict:true,schema}}
+    text:{verbosity:'low',format:{type:'json_schema',name:'username_valuation_v21',strict:true,schema}}
   };
 
   try{
@@ -324,8 +347,13 @@ Return the SovaZone valuation range and stable classification.`,
       return res.status(502).json({error:lang==='en'?'Valuation service is temporarily unavailable.':'Сервис оценки временно недоступен.'});
     }
     const txt=outputText(data);
-    const parsed=JSON.parse(txt);
-    return res.status(200).json(applyGuardrails(parsed,username,platform,lang));
+    const parsed=applyGuardrails(JSON.parse(txt),username,platform,lang);
+    valuationCache.set(cacheKey,parsed);
+    if(valuationCache.size>5000){
+      const first=valuationCache.keys().next().value;
+      valuationCache.delete(first);
+    }
+    return res.status(200).json(parsed);
   }catch(e){
     console.error('username-value error',e);
     return res.status(500).json({error:lang==='en'?'Could not complete the estimate.':'Не удалось выполнить оценку.'});
