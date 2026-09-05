@@ -50,7 +50,6 @@
     return t('Низкое качество','Low quality');
   }
   function liquidityLabel(data){
-    if(data.liquidityLabel) return data.liquidityLabel;
     var v=String(data.liquidity||'low');
     if(v==='high') return t('Высокая ликвидность','High liquidity');
     if(v==='medium') return t('Средняя ликвидность','Medium liquidity');
@@ -58,6 +57,8 @@
   }
   function render(data){
     var reasons = Array.isArray(data.factors) ? data.factors.slice(0,3) : [];
+    var sellHref = lang === 'en' ? '/en/sell' : '/sell';
+    var catalogHref = lang === 'en' ? '/en/usernames' : '/usernames';
     while(reasons.length<3) reasons.push({title:t('Фактор','Factor'),text:t('Учтён в общей оценке.','Included in the overall estimate.')});
     var meta = [];
     if(data.category) meta.push(escapeHtml(data.category));
@@ -70,7 +71,7 @@
       '</div>'+
       '<div class="uv-reasons">'+reasons.map(function(r){return reasonCard(r.title,r.text)}).join('')+'</div>'+
       '<p class="uv-result-note">'+escapeHtml(data.disclaimer||t('Оценка является ориентировочной и не гарантирует цену реальной сделки.','This is an indicative estimate and does not guarantee an actual transaction price.'))+'</p>'+
-      '<div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="/sell">'+t('Продать через SovaUsername','Sell via SovaUsername')+'</a><a class="uv-btn" href="/usernames">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
+      '<div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="'+sellHref+'">'+t('Продать через SovaUsername','Sell via SovaUsername')+'</a><a class="uv-btn" href="'+catalogHref+'">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
     result.classList.add('is-visible');
   }
   form.addEventListener('submit', async function(e){
