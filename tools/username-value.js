@@ -12,7 +12,7 @@
   var error = root.querySelector('.uv-error');
   var lastRun = 0;
   var CACHE_VERSION = 'instagram-v3.1';
-  var JSONP_ENDPOINT = 'https://sovazone.vercel.app/api/username-value-v23';
+  var API_ENDPOINT = 'https://sovazone.vercel.app/api/username-value-v23';
 
   function t(ru,en){ return lang === 'en' ? en : ru; }
   function cleanUsername(v){
@@ -96,12 +96,52 @@
     result.classList.add('is-visible');
   }
 
+  function requestViaFetch(username){
+    return new Promise(function(resolve,reject){
+      if(typeof fetch!=='function') return reject(new Error('fetch unavailable'));
+      var controller = typeof AbortController!=='undefined' ? new AbortController() : null;
+      var finished=false;
+      var timer=setTimeout(function(){
+        if(finished) return;
+        finished=true;
+        if(controller) try{controller.abort();}catch(e){}
+        reject(new Error('fetch timeout'));
+      },22000);
+
+      var options={
+        method:'POST',
+        mode:'cors',
+        cache:'no-store',
+        credentials:'omit',
+        headers:{'Content-Type':'text/plain;charset=UTF-8','Accept':'application/json'},
+        body:JSON.stringify({username:username,platform:platform,lang:lang,website:''})
+      };
+      if(controller) options.signal=controller.signal;
+
+      fetch(API_ENDPOINT,options).then(function(res){
+        return res.text().then(function(text){
+          var data;
+          try{ data=JSON.parse(text); }
+          catch(e){ throw new Error('invalid api response'); }
+          if(!res.ok) throw new Error(data.error||('HTTP '+res.status));
+          return data;
+        });
+      }).then(function(data){
+        if(finished) return;
+        finished=true;clearTimeout(timer);resolve(data);
+      }).catch(function(err){
+        if(finished) return;
+        finished=true;clearTimeout(timer);reject(err);
+      });
+    });
+  }
+
   function requestViaJsonp(username){
     return new Promise(function(resolve,reject){
       var callback='__sovaValuationCb'+Date.now()+Math.floor(Math.random()*1000000);
       var script=document.createElement('script');
       var done=false;
-      var timer=setTimeout(function(){ finish(new Error(t('Сервис оценки не ответил вовремя.','Valuation service timed out.'))); },35000);
+      var timer=setTimeout(function(){ finish(new Error('jsonp timeout')); },30000);
 
       function cleanup(){
         clearTimeout(timer);
@@ -117,7 +157,7 @@
 
       window[callback]=function(data){
         if(!data || Number(data.__httpStatus||200)>=400){
-          finish(new Error((data&&data.error)||t('Не удалось выполнить оценку.','Could not complete the estimate.')));
+          finish(new Error((data&&data.error)||'jsonp api error'));
           return;
         }
         try{ delete data.__httpStatus; }catch(e){}
@@ -125,8 +165,9 @@
       };
 
       script.async=true;
-      script.onerror=function(){ finish(new Error(t('Не удалось подключиться к сервису оценки.','Could not connect to valuation service.'))); };
-      script.src=JSONP_ENDPOINT+
+      script.referrerPolicy='no-referrer';
+      script.onerror=function(){ finish(new Error('jsonp network error')); };
+      script.src=API_ENDPOINT+
         '?username='+encodeURIComponent(username)+
         '&platform='+encodeURIComponent(platform)+
         '&lang='+encodeURIComponent(lang)+
@@ -134,6 +175,21 @@
         '&_='+Date.now();
       document.head.appendChild(script);
     });
+  }
+
+  async function requestValuation(username){
+    try{
+      return await requestViaFetch(username);
+    }catch(fetchError){
+      try{
+        return await requestViaJsonp(username);
+      }catch(jsonpError){
+        var err=new Error(t('Сервис оценки сейчас недоступен. Попробуйте ещё раз чуть позже.','Valuation service is currently unavailable. Please try again shortly.'));
+        err.fetchError=fetchError;
+        err.jsonpError=jsonpError;
+        throw err;
+      }
+    }
   }
 
   form.addEventListener('submit', async function(e){
@@ -150,7 +206,7 @@
     if(now-lastRun<1800){ showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.')); return; }
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
     try{
-      var data=await requestViaJsonp(username);
+      var data=await requestValuation(username);
       writeCache(username,data);
       render(data);
     }catch(err){ showError(err.message||t('Ошибка. Попробуйте ещё раз.','Error. Please try again.')); }
