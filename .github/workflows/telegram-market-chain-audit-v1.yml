@@ -1,6 +1,6 @@
 name: Telegram market chain audit v1
 
-# Retry using public TON Center access if the repository secret is unavailable.
+# Retry with stronger near-sale cycle detection and public TON Center fallback.
 on:
   push:
     branches: [main]
@@ -42,7 +42,7 @@ jobs:
           print('CHAIN_STATUS',c['status_counts'])
           print('CHAIN_RISK',c['risk_counts'])
           print('TOP_RESULTS')
-          for r in c['results'][:25]:
+          for r in c['results'][:30]:
               print(r['username'],r['sale_price_ton'],r['chain_wash_risk'],r['chain_status'],r['transfer_count'])
           PY
       - uses: actions/upload-artifact@v4
