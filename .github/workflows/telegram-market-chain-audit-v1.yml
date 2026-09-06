@@ -1,5 +1,6 @@
 name: Telegram market chain audit v1
 
+# Retry using public TON Center access if the repository secret is unavailable.
 on:
   push:
     branches: [main]
