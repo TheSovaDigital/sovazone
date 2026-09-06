@@ -1,6 +1,5 @@
-name: Final valuation semantic audit
+name: Final valuation runtime sentinel
 
-# Final v3.7 runtime pass
 on:
   push:
     paths:
@@ -8,62 +7,40 @@ on:
   workflow_dispatch:
 
 jobs:
-  audit:
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2, 3, 4]
+  sentinel:
     runs-on: ubuntu-latest
     steps:
-      - name: Run semantic valuation batch
-        env:
-          SHARD: ${{ matrix.shard }}
+      - name: Validate production v3.8 controls
         run: |
-          cat > /tmp/audit.mjs <<'EOF'
-          const groups = {
-            1: [
-              'king','money','cloud','gold','dream','hello','fast','love','work','wolf',
-              'deer','cat','home','storm','black','sun','blue','green','doctor','lawyer'
-            ],
-            2: [
-              'alex','sasha','alexander','den','denis','denchik','pavel','pasha','pashka','stepa',
-              'stepan','stepashka','kolyan','kolya','nikolay','kolyanchik','nastya','anastasia','nastenka','slastenka'
-            ],
-            3: [
-              'orlov','orel','baranov','baran','petrov','smith','miller','brown','johnson','garcia',
-              'paris','yerevan','armenia','berlin','dubai','london','tokyo','moscow','rome','monaco'
-            ],
-            4: [
-              'pricheska','pri_cheska','qzxvna','qz_xvna','m4d','h0me','hel_lo','aaaaa','aaabb','aabbb',
-              'azaza','abcde','qwert','vip','ceo','usa','bmw','killer','devil','crypto'
-            ]
-          };
-          const list = groups[Number(process.env.SHARD)] || [];
-          const endpoint = 'https://sovazone.vercel.app/api/username-value/';
-          console.log('username\tcategory\tprice\tquality\tliquidity\tengine\tstatus');
-          for (const username of list) {
-            let row;
-            try {
-              const r = await fetch(endpoint, {
-                method: 'POST',
-                headers: {'content-type':'application/json'},
-                body: JSON.stringify({username, platform:'instagram', lang:'en'})
-              });
-              const text = await r.text();
-              let data = {};
-              try { data = JSON.parse(text); } catch {}
-              if (!r.ok) {
-                row = [username,'','','','','',`HTTP_${r.status}:${String(data.error||text).slice(0,120)}`];
-              } else {
-                const min = Number(data.priceMin||0), max = Number(data.priceMax||0);
-                const price = data.openEnded ? `$${min}+` : (min===max ? `~$${min}` : `$${min}-$${max}`);
-                row = [username,data.categoryCode||data.category||'',price,data.qualityScore??'',data.liquidity||'',data.engineVersion||'', 'OK'];
-              }
-            } catch (e) {
-              row = [username,'','','','','',`ERR:${e.message}`];
-            }
-            console.log(row.join('\t'));
+          cat > /tmp/sentinel.mjs <<'EOF'
+          const endpoint='https://sovazone.vercel.app/api/username-value/';
+          const tests=[
+            ['volk','instagram',15000,20000],
+            ['cat','instagram',20000,30000],
+            ['alex','instagram',10000,15000],
+            ['pavel','instagram',7000,12000],
+            ['pasha','instagram',4000,8000],
+            ['orel','instagram',5000,8000],
+            ['orlov','instagram',2500,5000],
+            ['paris','instagram',3000,5000],
+            ['pricheska','instagram',400,800],
+            ['hel_lo','instagram',100,300],
+            ['vip','instagram',20000,30000],
+            ['111','instagram',50000,50000],
+            ['555','instagram',10000,15000],
+            ['aa','instagram',20000,30000],
+            ['qzxvna','instagram',0,0],
+            ['volk','tiktok',3750,5000]
+          ];
+          for(const [username,platform,min,max] of tests){
+            const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username,platform,lang:'en'})});
+            const data=await r.json();
+            if(!r.ok)throw new Error(`${username}/${platform}: HTTP ${r.status} ${JSON.stringify(data)}`);
+            if(data.engineVersion!=='instagram-v3.8')throw new Error(`${username}/${platform}: engine ${data.engineVersion}`);
+            if(Number(data.priceMin)!==min||Number(data.priceMax)!==max)throw new Error(`${username}/${platform}: ${data.priceMin}-${data.priceMax}, expected ${min}-${max}`);
+            console.log(`OK ${username}/${platform}: ${data.priceMin}-${data.priceMax}`);
             await new Promise(r=>setTimeout(r,650));
           }
+          console.log(`PASS ${tests.length} production controls on instagram-v3.8`);
           EOF
-          node /tmp/audit.mjs
+          node /tmp/sentinel.mjs
