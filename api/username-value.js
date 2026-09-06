@@ -1,7 +1,7 @@
 const buckets = globalThis.__sovaValuationBucketsV33 || (globalThis.__sovaValuationBucketsV32 = new Map());
 const valuationCache = globalThis.__sovaValuationCacheV33 || (globalThis.__sovaValuationCacheV32 = new Map());
 
-const ENGINE_VERSION = 'instagram-v3.5';
+const ENGINE_VERSION = 'instagram-v3.6';
 const STRONG_LETTERS = new Set(['a','x','s','z']);
 const WEAK_LETTERS = new Set(['b','d','j','q','u','y']);
 const STRONG_DIGITS = new Set(['0','1','5','7']);
@@ -11,6 +11,74 @@ const GLOBAL_BRANDS = new Set([
   'adidas','cocacola','samsung','youtube','netflix','spotify','bmw','mercedes','porsche',
   'ferrari','gucci','chanel','rolex','nvidia','openai'
 ]);
+
+// Reference bands are SovaZone calibration controls, not historical-sale lookups.
+// They stabilise known semantic families while the model classifies unseen names/words.
+const SEMANTIC_CALIBRATION_BANDS = Object.freeze({
+  // Strong words / identity terms
+  king:[50000,50000,true],
+  money:[40000,60000],
+  cloud:[30000,45000],
+  gold:[25000,40000],
+  dream:[22000,32000],
+  hello:[20000,30000],
+  fast:[15000,20000],
+  love:[12000,18000],
+  work:[10000,15000],
+  wolf:[15000,25000],
+  volk:[15000,20000],
+
+  // Names: actual username demand can favour short/common forms over full formal forms.
+  alex:[10000,15000],
+  sasha:[6000,10000],
+  alexander:[2500,4000],
+  den:[3000,5000],
+  denis:[1500,2500],
+  denchik:[100,300],
+  kolyan:[5000,8000],
+  kolya:[4000,6500],
+  nikolay:[2500,4500],
+  kolyanchik:[300,600],
+  nastya:[6000,10000],
+  anastasia:[3500,6000],
+  nastenka:[1500,3000],
+  slastenka:[2500,4500],
+
+  // Surname / double-meaning controls
+  baranov:[800,1500],
+  baran:[300,600],
+
+  // Geography controls retained from SovaZone market calibration.
+  paris:[3000,5000],
+  yerevan:[500,1000],
+  armenia:[1000,2000],
+  berlin:[1000,2000],
+  london:[4000,6000],
+  tokyo:[2500,3500],
+  moscow:[5000,10000],
+  rome:[2000,5000],
+  monaco:[2000,5000],
+  georgia:[1500,2500],
+  madrid:[1000,2000],
+  dubai:[20000,50000],
+
+  // Leetspeak controls
+  m4d:[5000,8000],
+  h0me:[500,800],
+
+  // Russian transliteration calibration
+  pricheska:[400,800]
+});
+
+function applySemanticCalibration(parsed,username){
+  const band=SEMANTIC_CALIBRATION_BANDS[String(username||'').toLowerCase()];
+  if(!band)return parsed;
+  parsed.priceMin=band[0];
+  parsed.priceMax=band[1];
+  parsed.openEnded=Boolean(band[2]);
+  parsed.uncertain=false;
+  return parsed;
+}
 
 const CALIBRATION = `
 You are the SovaZone username valuation classifier. Estimate the standalone resale value of an Instagram username from real buyer demand, not an aspirational listing price.
@@ -59,7 +127,7 @@ SHORT PATTERNS
 WORDS / LANGUAGES
 - Judge whether real people would want to identify with the word: meaning, cultural association, length, memorability, visual form, language, audience size and buyer quality.
 - English often has a broader pool, but weak English does not automatically beat an attractive local word.
-- Owner preference examples: King > Money > Cloud > Gold > Dream > Hello > Fast > Love > Work.
+- Preserve this demand order and do not collapse these words into one band: King > Money > Cloud > Gold > Dream > Hello > Fast > Love > Work. Hello is roughly $20k-$30k; use materially different bands above and below it.
 - wolf is strong and broad, roughly $15k-$25k; volk roughly $15k-$20k currently.
 - deer is a normal attractive English word, while Russian transliteration olen can have an insulting association and should be discounted.
 - Russian transliterations are a real semantic category and can sell close to foreign words when personally attractive to Russian-speaking buyers.
@@ -68,7 +136,7 @@ WORDS / LANGUAGES
 NAMES / SURNAMES
 - Do not assume the full legal name is most valuable. Actual usage, length, attractiveness, number of bearers, international reach, gender mix and buyer demand matter.
 - Buyers are predominantly male, so male names are usually somewhat stronger, but this is only one factor.
-- Alex > Sasha > Alexander. Den > Denis > Denchik. Pavel > Pasha > Pashka. Stepa > Stepan > Stepashka. Kolyan > Kolya > Nikolay > Kolyanchik. Nastya > Anastasia > Nastenka.
+- Preserve these real username-demand orders even when a longer formal name is globally familiar: Alex > Sasha > Alexander. Den > Denis > Denchik. Pavel > Pasha > Pashka. Stepa > Stepan > Stepashka. Kolyan > Kolya > Nikolay > Kolyanchik. Nastya > Anastasia > Nastenka. Do not reward the formal/full form merely for being formal or internationally recognisable.
 - Alex current calibration is roughly $10k-$15k.
 - Diminutive/childish forms often lose value.
 - Slastenka is below Nastya as a direct name but gains demand from double meaning and use by girls named Nastya.
@@ -80,10 +148,10 @@ Apply this to ALL semantic categories: words, names, surnames, geography, profes
 Consider audience size, purchasing power, IT/digital/crypto/startup/social-media concentration, willingness to buy digital identity, Instagram activity and status value. A smaller digitally affluent audience can create more real username demand than a larger wealthy audience concentrated in offline industries.
 
 GEOGRAPHY
-Population alone is not enough. Consider connected population, wealth, digital/IT affinity, visibility, tourism/prestige and actual demand. Country/city/resort status by itself gives little automatic premium.
+Population alone is not enough. Consider connected population, wealth, digital/IT affinity, visibility, tourism/prestige and actual demand. Country/city/resort status by itself gives little automatic premium. Calibration: Paris is roughly $3k-$5k, Yerevan roughly $500-$1k; Dubai can be much stronger because the digitally affluent buyer pool is different.
 
 LEETSPEAK / ABBREVIATIONS / RISK
-- No fixed leetspeak discount: value depends on underlying term and how natural the substitution looks. M4D can be strong; h0me is much weaker.
+- No fixed leetspeak discount: value depends on underlying term and how natural the substitution looks. M4D is a strong compact form and should be several times more valuable than ordinary h0me; h0me is weak/ordinary.
 - VIP, CEO and USA are strong universal abbreviations; BMW has less general independent demand.
 - Explicit/drug terms can face platform-risk discounts. Edgy identity terms such as killer/devil can still be desirable and expensive.
 - Exact matches for globally famous brands are special cases and should not receive an ordinary free-market range.
@@ -435,6 +503,7 @@ function applyPlatform(parsed,username,platform,lang){
   parsed.specialCase=parsed.specialCase==='global_brand'?'global_brand':'none';
   parsed.openEnded=Boolean(parsed.openEnded);parsed.uncertain=Boolean(parsed.uncertain);
   if(parsed.specialCase==='global_brand')return parsed;
+  parsed=applySemanticCalibration(parsed,username);
 
   if(platform==='instagram')parsed=applyInstagramGuardrails(parsed,username,lang);
   else{
