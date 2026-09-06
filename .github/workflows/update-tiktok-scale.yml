@@ -1,0 +1,64 @@
+name: Update TikTok scale to 20 percent
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-tiktok-scale.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Apply targeted valuation changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p=Path('api/username-value.js')
+          s=p.read_text()
+          assert s.count("platform==='tiktok'?0.25:1") == 2, 'unexpected direct TikTok scale count'
+          assert s.count("*0.25") >= 3, 'expected TikTok multipliers not found'
+          s=s.replace("platform==='tiktok'?0.25:1", "platform==='tiktok'?0.20:1")
+          s=s.replace('*0.25', '*0.20')
+          s=s.replace("const ENGINE_VERSION = 'instagram-v3.8';", "const ENGINE_VERSION = 'instagram-v3.9';")
+          p.write_text(s)
+
+          p=Path('tools/username-value.js')
+          s=p.read_text().replace("var CACHE_VERSION='instagram-v3.8';", "var CACHE_VERSION='instagram-v3.9';")
+          p.write_text(s)
+
+          p=Path('.github/scripts/test_username_valuation_v38.mjs')
+          s=p.read_text()
+          s=s.replace("'instagram-v3.8'", "'instagram-v3.9'")
+          s=s.replace('tiktok.priceMin!==5000||tiktok.priceMax!==7500', 'tiktok.priceMin!==4000||tiktok.priceMax!==6000')
+          s=s.replace('on instagram-v3.8', 'on instagram-v3.9')
+          p.write_text(s)
+
+          p=Path('.github/workflows/valuation-regression.yml')
+          s=p.read_text()
+          s=s.replace("CACHE_VERSION='instagram-v3.8'", "CACHE_VERSION='instagram-v3.9'")
+          s=s.replace("data.engineVersion!=='instagram-v3.8'", "data.engineVersion!=='instagram-v3.9'")
+          s=s.replace("['volk','tiktok',3750,5000]", "['volk','tiktok',3000,4000]")
+          s=s.replace('on instagram-v3.8', 'on instagram-v3.9')
+          p.write_text(s)
+          PY
+
+          node --check api/username-value.js
+          node --check tools/username-value.js
+          node .github/scripts/test_username_valuation_v38.mjs
+
+      - name: Commit change and remove temporary workflow
+        run: |
+          rm .github/workflows/update-tiktok-scale.yml
+          git config user.name "SovaDigital"
+          git config user.email "thesovaz@gmail.com"
+          git add api/username-value.js tools/username-value.js .github/scripts/test_username_valuation_v38.mjs .github/workflows/valuation-regression.yml .github/workflows/update-tiktok-scale.yml
+          git commit -m "Set TikTok valuation scale to 20 percent"
+          git push
