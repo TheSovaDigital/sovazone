@@ -35,12 +35,11 @@ jobs:
           node .github/scripts/test_username_valuation_v38.mjs
           grep -q "telegram-v1.2" api/telegram-username-value.js
           grep -q "telegram-v1.2" tools/username-value.js
-          grep -q "telegram-v1.2" .github/workflows/valuation-regression.yml
       - name: Commit calibrated production files
         run: |
           git config user.name 'SovaDigital'
           git config user.email 'thesovaz@gmail.com'
-          git add api/telegram-username-value.js tools/username-value.js .github/scripts/test_telegram_valuation_v1.mjs .github/workflows/valuation-regression.yml
+          git add api/telegram-username-value.js tools/username-value.js .github/scripts/test_telegram_valuation_v1.mjs
           git diff --cached --quiet && exit 0
           git commit -m 'Calibrate Telegram valuation market tiers v1.2'
           git push
