@@ -20,7 +20,6 @@ def fetch_batch(session, addresses, delay=1.1):
     r=session.get(BASE,params=params,timeout=60)
     if r.status_code==200:
         return r.json().get('nft_transfers') or []
-    # Conservative fallback if repeated-array query is rejected by an API proxy.
     if r.status_code in (400,414):
         out=[]
         for a in addresses:
@@ -73,18 +72,15 @@ def main():
             if old and new: raw.append((old,new,now))
         near=[x for x in raw if sale_ts is not None and abs(x[2]-sale_ts)<=45*86400]
 
-        # Strong signal: A -> common marketplace/auction intermediary -> A near the recorded sale.
-        strong=[]
-        for i,x in enumerate(near):
-            a,c,t1=x
-            if c not in common: continue
-            for y in near[i+1:i+6]:
-                c2,b,t2=y
-                if c2==c and b==a and 0 <= t2-t1 <= 45*86400:
-                    strong.append({'owner':a,'intermediary':c,'start':t1,'end':t2})
-                    break
+        # Strongest observable signal: A -> intermediary -> A close to the recorded sale.
+        # Fragment may use per-auction contracts, so the intermediary does not have to be globally common.
+        direct_roundtrips=[]
+        for i in range(len(near)-1):
+            a,b,t1=near[i]; b2,a2,t2=near[i+1]
+            if b==b2 and a==a2 and a!=b and 0 <= t2-t1 <= 45*86400:
+                direct_roundtrips.append({'owner':a,'intermediary':b,'start':t1,'end':t2,'seconds':t2-t1})
 
-        # Broader cycle signal after removing common marketplace/intermediary addresses.
+        # Broader owner-cycle signal, while ignoring marketplace addresses shared across many NFTs.
         owners=[]; owner_times=[]
         for old,new,now in raw:
             for a in (old,new):
@@ -95,13 +91,22 @@ def main():
         first={}
         for i,a in enumerate(owners):
             if a in first and i-first[a]>=2:
-                dt=max(0,owner_times[i]-owner_times[first[a]])
-                repeats.append({'owner':a,'steps':i-first[a],'seconds':dt})
+                start=owner_times[first[a]]; end=owner_times[i]
+                repeats.append({'owner':a,'steps':i-first[a],'start':start,'end':end,'seconds':max(0,end-start)})
             else:
                 first[a]=i
 
-        if strong:
-            risk='high'; status='near_sale_roundtrip'
+        # Any short owner cycle near the recorded sale is elevated, even if the intermediary contract is unique.
+        near_cycles=[]
+        if sale_ts is not None:
+            for cyc in repeats:
+                if abs(cyc['start']-sale_ts)<=45*86400 or abs(cyc['end']-sale_ts)<=45*86400:
+                    near_cycles.append(cyc)
+
+        if direct_roundtrips:
+            risk='high'; status='near_sale_direct_roundtrip'
+        elif near_cycles:
+            risk='high'; status='near_sale_owner_cycle'
         elif repeats:
             risk='medium'; status='owner_cycle_detected'
         elif len(raw)>=2:
@@ -113,11 +118,12 @@ def main():
         results.append({
             'username':row.get('username'),'nft_address':addr,'sale_price_ton':float(row.get('sale_price_ton') or 0),
             'purchased_at':row.get('purchased_at'),'transfer_count':len(raw),'noncommon_owner_sequence_count':len(owners),
-            'chain_wash_risk':risk,'chain_status':status,'near_sale_roundtrips':strong[:3],'owner_cycles':repeats[:5]
+            'chain_wash_risk':risk,'chain_status':status,'near_sale_direct_roundtrips':direct_roundtrips[:5],
+            'near_sale_owner_cycles':near_cycles[:5],'owner_cycles':repeats[:8]
         })
 
     summary={
-        'version':'telegram-transfer-risk-v1','generated_at':datetime.now(timezone.utc).isoformat(),
+        'version':'telegram-transfer-risk-v1.1','generated_at':datetime.now(timezone.utc).isoformat(),
         'public_api_without_key':not bool(api_key),
         'requested':len(addresses),'transfers_loaded':len(transfers),'errors':errors,
         'common_intermediary_threshold_nfts':common_threshold,'common_intermediary_count':len(common),
