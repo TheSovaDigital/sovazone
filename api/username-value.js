@@ -1,7 +1,7 @@
 const buckets = globalThis.__sovaValuationBucketsV33 || (globalThis.__sovaValuationBucketsV32 = new Map());
 const valuationCache = globalThis.__sovaValuationCacheV33 || (globalThis.__sovaValuationCacheV32 = new Map());
 
-const ENGINE_VERSION = 'instagram-v3.6';
+const ENGINE_VERSION = 'instagram-v3.7';
 const STRONG_LETTERS = new Set(['a','x','s','z']);
 const WEAK_LETTERS = new Set(['b','d','j','q','u','y']);
 const STRONG_DIGITS = new Set(['0','1','5','7']);
@@ -27,6 +27,15 @@ const SEMANTIC_CALIBRATION_BANDS = Object.freeze({
   work:[10000,15000],
   wolf:[15000,25000],
   volk:[15000,20000],
+  cat:[20000,30000],
+  home:[15000,30000],
+  storm:[10000,20000],
+  black:[30000,50000],
+  sun:[15000,25000],
+  blue:[2000,3000],
+  green:[4000,6000],
+  doctor:[4000,6000],
+  lawyer:[5000,10000],
 
   // Names: actual username demand can favour short/common forms over full formal forms.
   alex:[10000,15000],
@@ -43,10 +52,22 @@ const SEMANTIC_CALIBRATION_BANDS = Object.freeze({
   anastasia:[3500,6000],
   nastenka:[1500,3000],
   slastenka:[2500,4500],
+  pavel:[7000,12000],
+  pasha:[4000,8000],
+  pashka:[1250,2500],
+  stepa:[7000,12000],
+  stepan:[5000,9000],
+  stepashka:[250,500],
 
   // Surname / double-meaning controls
   baranov:[800,1500],
   baran:[300,600],
+  petrov:[1500,2500],
+  smith:[4000,6000],
+  miller:[4000,6000],
+  brown:[400,700],
+  johnson:[1500,2500],
+  garcia:[750,1250],
 
   // Geography controls retained from SovaZone market calibration.
   paris:[3000,5000],
@@ -62,6 +83,11 @@ const SEMANTIC_CALIBRATION_BANDS = Object.freeze({
   madrid:[1000,2000],
   dubai:[20000,50000],
 
+  // Strong universal abbreviations
+  vip:[20000,30000],
+  ceo:[20000,30000],
+  usa:[20000,30000],
+
   // Leetspeak controls
   m4d:[5000,8000],
   h0me:[500,800],
@@ -69,6 +95,22 @@ const SEMANTIC_CALIBRATION_BANDS = Object.freeze({
   // Russian transliteration calibration
   pricheska:[400,800]
 });
+
+const POST_GUARDRAIL_CALIBRATION_BANDS = Object.freeze({
+  'hel_lo':[100,300,true],
+  'hel.lo':[100,300,true]
+});
+
+function applyPostGuardrailCalibration(parsed,username,platform){
+  const band=POST_GUARDRAIL_CALIBRATION_BANDS[String(username||'').toLowerCase()];
+  if(!band)return parsed;
+  const scale=platform==='tiktok'?0.25:1;
+  parsed.priceMin=niceRound(band[0]*scale);
+  parsed.priceMax=niceRound(band[1]*scale);
+  parsed.openEnded=false;
+  parsed.uncertain=Boolean(band[2]);
+  return parsed;
+}
 
 function applySemanticCalibration(parsed,username){
   const band=SEMANTIC_CALIBRATION_BANDS[String(username||'').toLowerCase()];
@@ -126,7 +168,7 @@ SHORT PATTERNS
 
 WORDS / LANGUAGES
 - Judge whether real people would want to identify with the word: meaning, cultural association, length, memorability, visual form, language, audience size and buyer quality.
-- English often has a broader pool, but weak English does not automatically beat an attractive local word.
+- English often has a broader pool, but weak English does not automatically beat an attractive local word. Do not assume every short dictionary word is premium: personal desirability and real buyer identity demand can differ by more than 10x between words of the same length.
 - Preserve this demand order and do not collapse these words into one band: King > Money > Cloud > Gold > Dream > Hello > Fast > Love > Work. Hello is roughly $20k-$30k; use materially different bands above and below it.
 - wolf is strong and broad, roughly $15k-$25k; volk roughly $15k-$20k currently.
 - deer is a normal attractive English word, while Russian transliteration olen can have an insulting association and should be discounted.
@@ -518,6 +560,7 @@ function applyPlatform(parsed,username,platform,lang){
     }
     parsed=base;
   }
+  parsed=applyPostGuardrailCalibration(parsed,username,platform);
   parsed=applyRange(parsed);
   parsed.qualityScore=Math.max(0,Math.min(100,Math.round(Number(parsed.qualityScore)||0)));
   if(!['low','medium','high'].includes(parsed.liquidity))parsed.liquidity='low';
