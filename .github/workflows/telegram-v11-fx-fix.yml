@@ -39,7 +39,9 @@ jobs:
           test=Path('.github/scripts/test_telegram_valuation_v1.mjs')
           s=test.read_text()
           if "telegram-v1.0" not in s: raise SystemExit('test version not found')
-          test.write_text(s.replace("telegram-v1.0","telegram-v1.1"))
+          s=s.replace("telegram-v1.0","telegram-v1.1")
+          s=s.replace("({gram:{usd:1.42}})","({'the-open-network':{usd:1.42}})")
+          test.write_text(s)
 
           wf=Path('.github/workflows/valuation-regression.yml')
           s=wf.read_text()
