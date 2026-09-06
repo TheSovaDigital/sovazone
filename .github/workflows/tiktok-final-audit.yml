@@ -1,0 +1,52 @@
+name: TikTok final valuation audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tiktok-final-audit.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check production TikTok 20 percent controls
+        run: |
+          cat > /tmp/tiktok-audit.mjs <<'EOF'
+          const endpoint='https://sovazone.vercel.app/api/username-value/';
+          const tests=[
+            ['volk',3000,4000],
+            ['cat',4000,6000],
+            ['alex',2000,3000],
+            ['hello',4000,6000],
+            ['money',8000,12000],
+            ['paris',600,1000],
+            ['yerevan',100,200],
+            ['pavel',1500,2500],
+            ['pasha',800,1600],
+            ['orel',1000,1500],
+            ['orlov',500,1000],
+            ['pricheska',80,160],
+            ['m4d',1000,1500],
+            ['h0me',100,160],
+            ['aa',4000,6000],
+            ['x7',3000,4500],
+            ['q8y',300,400],
+            ['111',10000,10000],
+            ['404',2000,4000],
+            ['qzxvna',0,0]
+          ];
+          let passed=0;
+          for(const [username,min,max] of tests){
+            const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username,platform:'tiktok',lang:'en'})});
+            const data=await r.json();
+            if(!r.ok)throw new Error(`${username}: HTTP ${r.status} ${JSON.stringify(data)}`);
+            if(data.engineVersion!=='instagram-v3.9')throw new Error(`${username}: engine ${data.engineVersion}`);
+            if(Number(data.priceMin)!==min||Number(data.priceMax)!==max)throw new Error(`${username}: ${data.priceMin}-${data.priceMax}, expected ${min}-${max}`);
+            console.log(`OK ${username}: $${data.priceMin}-$${data.priceMax}`);
+            passed++;
+            await new Promise(r=>setTimeout(r,700));
+          }
+          console.log(`PASS ${passed}/${tests.length} TikTok production controls at 20% scale`);
+          EOF
+          node /tmp/tiktok-audit.mjs
