@@ -1,0 +1,62 @@
+name: Telegram v1.2 market calibration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/telegram-v12-calibration.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+      - name: Apply guarded v1.2 calibration
+        run: python .github/scripts/patch_telegram_v12.py
+      - name: Validate before commit
+        run: |
+          node --check api/telegram-username-value.js
+          node --check tools/username-value.js
+          node .github/scripts/test_telegram_valuation_v1.mjs
+          node .github/scripts/test_username_valuation_v38.mjs
+          grep -q "telegram-v1.2" api/telegram-username-value.js
+          grep -q "telegram-v1.2" tools/username-value.js
+          grep -q "telegram-v1.2" .github/workflows/valuation-regression.yml
+      - name: Commit calibrated production files
+        run: |
+          git config user.name 'SovaDigital'
+          git config user.email 'thesovaz@gmail.com'
+          git add api/telegram-username-value.js tools/username-value.js .github/scripts/test_telegram_valuation_v1.mjs .github/workflows/valuation-regression.yml
+          git diff --cached --quiet && exit 0
+          git commit -m 'Calibrate Telegram valuation market tiers v1.2'
+          git push
+      - name: Wait for Vercel deployment
+        run: sleep 40
+      - name: Check production v1.2 calibration
+        run: |
+          cat > /tmp/check.mjs <<'EOF'
+          const endpoint='https://sovazone.vercel.app/api/telegram-username-value/';
+          const expected={
+            aaaa:[5000,10000],work:[10000,20000],alex:[5000,15000],volk:[5000,10000],hello:[2000,5000],
+            money:[10000,30000],cloud:[10000,20000],dream:[10000,20000],love:[5000,10000],pavel:[20000,50000],
+            pasha:[1000,3000],paris:[500,1000],monkey:[30000,50000],trading:[3000,5000],qzxvna:[0,0]
+          };
+          for(const [username,[min,max]] of Object.entries(expected)){
+            const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username,lang:'en',website:''})});
+            const data=await r.json().catch(()=>({}));
+            if(!r.ok)throw new Error(`${username}: HTTP ${r.status} ${JSON.stringify(data)}`);
+            if(data.engineVersion!=='telegram-v1.2')throw new Error(`${username}: engine ${data.engineVersion}`);
+            console.log(JSON.stringify({username,tier:data.marketTier,category:data.categoryCode,demand:data.demandScore,ton:[data.priceMinTon,data.priceMaxTon],special:data.specialCase}));
+            if(Number(data.priceMinTon)!==min||Number(data.priceMaxTon)!==max)throw new Error(`${username}: ${data.priceMinTon}-${data.priceMaxTon}, expected ${min}-${max}`);
+            await new Promise(r=>setTimeout(r,800));
+          }
+          const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username:'hello_',lang:'en',website:''})});
+          const data=await r.json();
+          if(!r.ok||data.engineVersion!=='telegram-v1.2'||data.specialCase!=='invalid_username'||data.priceMaxTon!==0)throw new Error(`hello_: invalid rule failed ${JSON.stringify(data)}`);
+          console.log('PASS Telegram v1.2 production calibration');
+          EOF
+          node /tmp/check.mjs
