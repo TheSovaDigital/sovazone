@@ -1,6 +1,6 @@
 name: Username valuation regression
 
-# Permanent Instagram/TikTok v3.9 + Telegram v1.1 regression suite.
+# Permanent Instagram/TikTok v3.9 + Telegram v1.2 regression suite.
 on:
   push:
     branches: [main]
@@ -36,7 +36,7 @@ jobs:
           node .github/scripts/test_telegram_valuation_v1.mjs
       - name: Validate routes, cache versions and pages
         run: |
-          grep -q "platform==='telegram'?'telegram-v1.1':'instagram-v3.9'" tools/username-value.js
+          grep -q "platform==='telegram'?'telegram-v1.2':'instagram-v3.9'" tools/username-value.js
           grep -q "api/telegram-username-value/" tools/username-value.js
           grep -q "api/username-value/" tools/username-value.js
           for f in tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html; do
@@ -82,11 +82,11 @@ jobs:
             const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username,lang:'en'})});
             const data=await r.json();
             if(!r.ok)throw new Error(`${username}: HTTP ${r.status} ${JSON.stringify(data)}`);
-            if(data.engineVersion!=='telegram-v1.1')throw new Error(`${username}: engine ${data.engineVersion}`);
+            if(data.engineVersion!=='telegram-v1.2')throw new Error(`${username}: engine ${data.engineVersion}`);
             if(username!=='adidas'&&(!Number.isFinite(Number(data.priceMinTon))||!Number.isFinite(Number(data.priceMaxTon))))throw new Error(`${username}: missing TON range`);
             if(username!=='adidas'&&Number(data.priceMaxTon)>0&&Number(data.priceMax)<=0)throw new Error(`${username}: invalid USD conversion`);
             console.log(`OK Telegram ${username}: ${data.priceMinTon}-${data.priceMaxTon} TON / $${data.priceMin}-${data.priceMax}`);
             await new Promise(r=>setTimeout(r,700));
           }
-          console.log(`PASS ${tests.length} Telegram production controls on telegram-v1.1`);
+          console.log(`PASS ${tests.length} Telegram production controls on telegram-v1.2`);
           EOF
