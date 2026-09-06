@@ -1,3 +1,4 @@
+// Permanent Telegram v1.1 deterministic regression controls.
 import handler from '../../api/telegram-username-value.js';
 
 process.env.OPENAI_API_KEY='test-key';
