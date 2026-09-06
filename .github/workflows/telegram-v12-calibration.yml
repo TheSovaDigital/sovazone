@@ -16,7 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Apply guarded v1.2 calibration
-        run: python .github/scripts/patch_telegram_v12.py
+        run: |
+          python .github/scripts/patch_telegram_v12.py
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('api/telegram-username-value.js')
+          s=p.read_text()
+          old="""  // Four-character collectible scarcity is structural, but premium semantics may move above the floor.\n  if(len===4){\n    if(tier==='premium')return {min:10000,max:20000,note:'four-char-premium'};\n    if(tier==='elite')return {min:20000,max:50000,note:'four-char-elite'};\n    return {min:5000,max:10000,note:'four-char-floor'};\n  }\n\n  if(archetype==='platform_identity'&&tier==='elite')return {min:20000,max:50000,note:'platform-identity'};\n  if(archetype==='animal'&&tier==='elite')return {min:30000,max:50000,note:'elite-animal'};\n  if(archetype==='finance'&&(tier==='premium'||tier==='elite'))return {min:10000,max:30000,note:'finance-premium'};\n  if(code==='first_name'&&tier==='strong')return {min:5000,max:15000,note:'strong-name'};"""
+          new="""  if(code==='first_name'&&tier==='strong')return {min:5000,max:15000,note:'strong-name'};\n\n  // Four-character collectible scarcity is structural, but premium semantics may move above the floor.\n  if(len===4){\n    if(tier==='premium')return {min:10000,max:20000,note:'four-char-premium'};\n    if(tier==='elite')return {min:20000,max:50000,note:'four-char-elite'};\n    return {min:5000,max:10000,note:'four-char-floor'};\n  }\n\n  if(archetype==='platform_identity'&&tier==='elite')return {min:20000,max:50000,note:'platform-identity'};\n  if(archetype==='animal'&&tier==='elite')return {min:30000,max:50000,note:'elite-animal'};\n  if(archetype==='finance'&&(tier==='premium'||tier==='elite'))return {min:10000,max:30000,note:'finance-premium'};"""
+          if old not in s: raise SystemExit('short-name override block not found')
+          p.write_text(s.replace(old,new,1))
+          PY
       - name: Validate before commit
         run: |
           node --check api/telegram-username-value.js
