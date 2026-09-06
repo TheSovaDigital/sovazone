@@ -1,0 +1,64 @@
+name: Telegram v1.1 TON USD fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/telegram-v11-fx-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Patch Telegram v1.1
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          api=Path('api/telegram-username-value.js')
+          s=api.read_text()
+          s=s.replace("const ENGINE_VERSION='telegram-v1.0';","const ENGINE_VERSION='telegram-v1.1';")
+          s=s.replace("const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:1.42,at:0,source:'fallback'});","const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:3,at:0,source:'fallback'});")
+          old="""  const urls=[\n    ['https://api.coingecko.com/api/v3/simple/price?ids=gram&vs_currencies=usd','gram'],\n    ['https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd','the-open-network']\n  ];"""
+          new="""  const urls=[\n    ['https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd','the-open-network']\n  ];"""
+          if old not in s:
+              raise SystemExit('CoinGecko block not found')
+          s=s.replace(old,new)
+          api.write_text(s)
+
+          front=Path('tools/username-value.js')
+          s=front.read_text()
+          if "telegram-v1.0" not in s: raise SystemExit('frontend version not found')
+          front.write_text(s.replace("telegram-v1.0","telegram-v1.1"))
+
+          test=Path('.github/scripts/test_telegram_valuation_v1.mjs')
+          s=test.read_text()
+          if "telegram-v1.0" not in s: raise SystemExit('test version not found')
+          test.write_text(s.replace("telegram-v1.0","telegram-v1.1"))
+
+          wf=Path('.github/workflows/valuation-regression.yml')
+          s=wf.read_text()
+          if "telegram-v1.0" not in s: raise SystemExit('regression version not found')
+          wf.write_text(s.replace("telegram-v1.0","telegram-v1.1"))
+          PY
+      - name: Validate before commit
+        run: |
+          node --check api/telegram-username-value.js
+          node --check tools/username-value.js
+          grep -q "the-open-network" api/telegram-username-value.js
+          ! grep -q "ids=gram" api/telegram-username-value.js
+          node .github/scripts/test_telegram_valuation_v1.mjs
+          node .github/scripts/test_username_valuation_v38.mjs
+      - name: Commit guarded patch
+        run: |
+          git config user.name 'SovaDigital'
+          git config user.email 'thesovaz@gmail.com'
+          git add api/telegram-username-value.js tools/username-value.js .github/scripts/test_telegram_valuation_v1.mjs .github/workflows/valuation-regression.yml
+          git diff --cached --quiet && exit 0
+          git commit -m 'Fix Telegram TON USD conversion and bump v1.1'
+          git push
