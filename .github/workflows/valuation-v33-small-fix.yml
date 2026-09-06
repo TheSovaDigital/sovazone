@@ -1,4 +1,4 @@
-name: Valuation v3.5 two-character calibration
+name: Valuation v3.6 semantic calibration
 
 on:
   push:
@@ -16,21 +16,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Apply two-character-only patch
-        run: python .github/scripts/patch_twochar_v35.py
+      - name: Apply semantic-only patch
+        run: python .github/scripts/patch_semantic_v36.py
 
       - name: Validate backend and frontend syntax
         run: |
           node --check api/username-value.js
           node --check tools/username-value.js
 
-      - name: Run two-character and numeric regression tests
+      - name: Run existing structural regression tests
         run: node .github/scripts/test_twochar_v35.mjs
 
-      - name: Commit two-character calibration
+      - name: Commit semantic calibration
         run: |
           git config user.name "SovaDigital"
           git config user.email "thesovaz@gmail.com"
           git add api/username-value.js tools/username-value.js tools/instagram-username-value.html tools/tiktok-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html
-          git commit -m "Calibrate deterministic two-character valuation"
+          git commit -m "Calibrate semantic valuation relationships v3.6"
           git push origin HEAD:main
