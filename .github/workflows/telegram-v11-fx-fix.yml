@@ -26,10 +26,8 @@ jobs:
           s=s.replace("const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:1.42,at:0,source:'fallback'});","const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:3,at:0,source:'fallback'});")
           old="""  const urls=[\n    ['https://api.coingecko.com/api/v3/simple/price?ids=gram&vs_currencies=usd','gram'],\n    ['https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd','the-open-network']\n  ];"""
           new="""  const urls=[\n    ['https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd','the-open-network']\n  ];"""
-          if old not in s:
-              raise SystemExit('CoinGecko block not found')
-          s=s.replace(old,new)
-          api.write_text(s)
+          if old not in s: raise SystemExit('CoinGecko block not found')
+          api.write_text(s.replace(old,new))
 
           front=Path('tools/username-value.js')
           s=front.read_text()
@@ -42,11 +40,6 @@ jobs:
           s=s.replace("telegram-v1.0","telegram-v1.1")
           s=s.replace("({gram:{usd:1.42}})","({'the-open-network':{usd:1.42}})")
           test.write_text(s)
-
-          wf=Path('.github/workflows/valuation-regression.yml')
-          s=wf.read_text()
-          if "telegram-v1.0" not in s: raise SystemExit('regression version not found')
-          wf.write_text(s.replace("telegram-v1.0","telegram-v1.1"))
           PY
       - name: Validate before commit
         run: |
@@ -60,7 +53,7 @@ jobs:
         run: |
           git config user.name 'SovaDigital'
           git config user.email 'thesovaz@gmail.com'
-          git add api/telegram-username-value.js tools/username-value.js .github/scripts/test_telegram_valuation_v1.mjs .github/workflows/valuation-regression.yml
+          git add api/telegram-username-value.js tools/username-value.js .github/scripts/test_telegram_valuation_v1.mjs
           git diff --cached --quiet && exit 0
           git commit -m 'Fix Telegram TON USD conversion and bump v1.1'
           git push
