@@ -1,17 +1,21 @@
 name: Username valuation regression
 
-# Permanent v3.9 regression suite.
+# Permanent Instagram/TikTok v3.9 + Telegram v1.0 regression suite.
 on:
   push:
     branches: [main]
     paths:
       - 'api/username-value.js'
+      - 'api/telegram-username-value.js'
       - 'tools/username-value.js'
       - 'tools/instagram-username-value.html'
       - 'tools/tiktok-username-value.html'
+      - 'tools/telegram-username-value.html'
       - 'en/tools/instagram-username-value.html'
       - 'en/tools/tiktok-username-value.html'
+      - 'en/tools/telegram-username-value.html'
       - '.github/scripts/test_username_valuation_v38.mjs'
+      - '.github/scripts/test_telegram_valuation_v1.mjs'
       - '.github/workflows/valuation-regression.yml'
   workflow_dispatch:
 
@@ -23,16 +27,21 @@ jobs:
       - name: Validate syntax and import
         run: |
           node --check api/username-value.js
+          node --check api/telegram-username-value.js
           node --check tools/username-value.js
-          node -e "import('./api/username-value.js').then(m=>{if(typeof m.default!=='function')process.exit(1);console.log('backend import OK')})"
+          node -e "Promise.all([import('./api/username-value.js'),import('./api/telegram-username-value.js')]).then(([a,b])=>{if(typeof a.default!=='function'||typeof b.default!=='function')process.exit(1);console.log('backend imports OK')})"
       - name: Run deterministic regression controls
-        run: node .github/scripts/test_username_valuation_v38.mjs
-      - name: Validate production route and cache version
         run: |
-          grep -q "CACHE_VERSION='instagram-v3.9'" tools/username-value.js
-          grep -q "API_ENDPOINT='https://sovazone.vercel.app/api/username-value/'" tools/username-value.js
-          for f in tools/instagram-username-value.html tools/tiktok-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html; do
+          node .github/scripts/test_username_valuation_v38.mjs
+          node .github/scripts/test_telegram_valuation_v1.mjs
+      - name: Validate routes, cache versions and pages
+        run: |
+          grep -q "platform==='telegram'?'telegram-v1.0':'instagram-v3.9'" tools/username-value.js
+          grep -q "api/telegram-username-value/" tools/username-value.js
+          grep -q "api/username-value/" tools/username-value.js
+          for f in tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html; do
             grep -q 'username-value.js?v=' "$f"
+            grep -q 'Telegram' "$f"
           done
 
   production-sentinel:
@@ -40,7 +49,7 @@ jobs:
     needs: local-regression
     runs-on: ubuntu-latest
     steps:
-      - name: Validate production semantic controls
+      - name: Validate production Instagram/TikTok semantic controls
         run: |
           cat > /tmp/sentinel.mjs <<'EOF'
           const endpoint='https://sovazone.vercel.app/api/username-value/';
