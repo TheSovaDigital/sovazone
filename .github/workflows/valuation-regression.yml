@@ -1,5 +1,6 @@
 name: Username valuation regression
 
+# Permanent v3.8 regression suite.
 on:
   push:
     branches: [main]
