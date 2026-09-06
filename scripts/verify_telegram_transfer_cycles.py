@@ -14,7 +14,7 @@ def parse_ts(value):
     except Exception: return None
 
 
-def fetch_batch(session, addresses):
+def fetch_batch(session, addresses, delay=1.1):
     params=[('item_address',a) for a in addresses]
     params += [('limit','1000'),('offset','0'),('sort','asc')]
     r=session.get(BASE,params=params,timeout=60)
@@ -26,7 +26,7 @@ def fetch_batch(session, addresses):
         for a in addresses:
             q=session.get(BASE,params={'item_address':a,'limit':1000,'offset':0,'sort':'asc'},timeout=60)
             q.raise_for_status(); out.extend(q.json().get('nft_transfers') or [])
-            time.sleep(0.12)
+            time.sleep(delay)
         return out
     r.raise_for_status()
 
@@ -38,18 +38,19 @@ def main():
     ap.add_argument('--batch-size',type=int,default=20)
     args=ap.parse_args()
 
-    api_key=os.environ.get('TONCENTER_API_KEY','')
-    if not api_key: raise SystemExit('TONCENTER_API_KEY missing')
+    api_key=os.environ.get('TONCENTER_API_KEY','').strip()
     rows=list(csv.DictReader(open(args.queue_csv,encoding='utf-8')))
     by_addr={r['nft_address']:r for r in rows if r.get('nft_address')}
     addresses=list(by_addr)
-    session=requests.Session(); session.headers.update({'Accept':'application/json','X-API-Key':api_key})
+    session=requests.Session(); session.headers.update({'Accept':'application/json'})
+    if api_key: session.headers.update({'X-API-Key':api_key})
+    request_delay=0.20 if api_key else 1.15
     transfers=[]; errors=[]
     for i in range(0,len(addresses),args.batch_size):
         batch=addresses[i:i+args.batch_size]
-        try: transfers.extend(fetch_batch(session,batch))
+        try: transfers.extend(fetch_batch(session,batch,request_delay))
         except Exception as e: errors.append({'addresses':batch,'error':repr(e)})
-        time.sleep(0.20)
+        time.sleep(request_delay)
 
     per=defaultdict(list)
     address_nfts=defaultdict(set)
@@ -117,6 +118,7 @@ def main():
 
     summary={
         'version':'telegram-transfer-risk-v1','generated_at':datetime.now(timezone.utc).isoformat(),
+        'public_api_without_key':not bool(api_key),
         'requested':len(addresses),'transfers_loaded':len(transfers),'errors':errors,
         'common_intermediary_threshold_nfts':common_threshold,'common_intermediary_count':len(common),
         'status_counts':dict(Counter(r['chain_status'] for r in results)),
@@ -124,6 +126,6 @@ def main():
         'results':sorted(results,key=lambda r:r['sale_price_ton'],reverse=True)
     }
     with open(args.out,'w',encoding='utf-8') as f: json.dump(summary,f,ensure_ascii=False,indent=2)
-    print(json.dumps({k:summary[k] for k in ('version','requested','transfers_loaded','common_intermediary_count','status_counts','risk_counts')},ensure_ascii=False))
+    print(json.dumps({k:summary[k] for k in ('version','public_api_without_key','requested','transfers_loaded','common_intermediary_count','status_counts','risk_counts')},ensure_ascii=False))
 
 if __name__=='__main__': main()
