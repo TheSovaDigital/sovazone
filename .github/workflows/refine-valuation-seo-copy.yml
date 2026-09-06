@@ -1,4 +1,5 @@
 name: Refine Valuation AI SEO copy
+# retry after tightening the RU terminology guard
 
 on:
   push:
