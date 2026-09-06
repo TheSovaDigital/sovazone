@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 ru_pages = [
     'tools/instagram-username-value.html',
@@ -32,12 +33,13 @@ for path in ru_pages:
     s = p.read_text(encoding='utf-8')
     for old, new in replacements.items():
         s = s.replace(old, new)
-    # Guard visible body copy: technical URLs/attributes may still contain "username", but body text should not.
+    # Guard visible body copy. Preserve the SovaUsername brand, but remove generic English "username" from RU text.
     body = s.split('</head>', 1)[1]
-    import re
     visible = ' '.join(re.findall(r'>([^<>]+)<', body))
-    if 'username' in visible.lower():
-        raise SystemExit(f'Visible username remains in RU page {path}: {visible[visible.lower().find("username")-80:visible.lower().find("username")+120]}')
+    visible_guard = visible.replace('SovaUsername', '').replace('sovausername', '')
+    if 'username' in visible_guard.lower():
+        i = visible_guard.lower().find('username')
+        raise SystemExit(f'Visible username remains in RU page {path}: {visible_guard[max(0,i-80):i+120]}')
     p.write_text(s, encoding='utf-8')
 
 # Main RU H1: keep the exact search phrase; AI already lives in the brand kicker.
