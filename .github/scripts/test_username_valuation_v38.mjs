@@ -19,11 +19,11 @@ const exact={
 for(const [u,[min,max]] of Object.entries(exact)){
   const r=await evaluate(u);
   if(r.priceMin!==min||r.priceMax!==max)throw new Error(`${u}: got ${r.priceMin}-${r.priceMax}, expected ${min}-${max}`);
-  if(r.engineVersion!=='instagram-v3.8')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
+  if(r.engineVersion!=='instagram-v3.9')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
 }
 
 const tiktok=await evaluate('aa','tiktok');
-if(tiktok.priceMin!==5000||tiktok.priceMax!==7500)throw new Error(`TikTok aa scaling: ${tiktok.priceMin}-${tiktok.priceMax}`);
-if(tiktok.engineVersion!=='instagram-v3.8')throw new Error(`TikTok aa wrong engine ${tiktok.engineVersion}`);
+if(tiktok.priceMin!==4000||tiktok.priceMax!==6000)throw new Error(`TikTok aa scaling: ${tiktok.priceMin}-${tiktok.priceMax}`);
+if(tiktok.engineVersion!=='instagram-v3.9')throw new Error(`TikTok aa wrong engine ${tiktok.engineVersion}`);
 
-console.log(`PASS ${Object.keys(exact).length+1} local deterministic valuation controls on instagram-v3.8`);
+console.log(`PASS ${Object.keys(exact).length+1} local deterministic valuation controls on instagram-v3.9`);

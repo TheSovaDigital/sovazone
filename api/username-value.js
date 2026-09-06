@@ -1,7 +1,7 @@
 const buckets = globalThis.__sovaValuationBucketsV33 || (globalThis.__sovaValuationBucketsV32 = new Map());
 const valuationCache = globalThis.__sovaValuationCacheV33 || (globalThis.__sovaValuationCacheV32 = new Map());
 
-const ENGINE_VERSION = 'instagram-v3.8';
+const ENGINE_VERSION = 'instagram-v3.9';
 const STRONG_LETTERS = new Set(['a','x','s','z']);
 const WEAK_LETTERS = new Set(['b','d','j','q','u','y']);
 const STRONG_DIGITS = new Set(['0','1','5','7']);
@@ -106,7 +106,7 @@ const POST_GUARDRAIL_CALIBRATION_BANDS = Object.freeze({
 function applyPostGuardrailCalibration(parsed,username,platform){
   const band=POST_GUARDRAIL_CALIBRATION_BANDS[String(username||'').toLowerCase()];
   if(!band)return parsed;
-  const scale=platform==='tiktok'?0.25:1;
+  const scale=platform==='tiktok'?0.20:1;
   parsed.priceMin=niceRound(band[0]*scale);
   parsed.priceMax=niceRound(band[1]*scale);
   parsed.openEnded=false;
@@ -369,7 +369,7 @@ function numericRange3(lower){
 
 function structuralResult(username,platform,lang){
   const lower=username.toLowerCase(),len=[...lower].length;
-  const scale=platform==='tiktok'?0.25:1;
+  const scale=platform==='tiktok'?0.20:1;
   function make(min,max,open,category,code,score,liq,factors){
     if(scale!==1){min=niceRound(min*scale);max=open?min:niceRound(max*scale);open=false;}
     return {username,platform,engineVersion:ENGINE_VERSION,priceMin:min,priceMax:max,openEnded:Boolean(open),uncertain:false,specialCase:'none',category,categoryCode:code,qualityScore:score,liquidity:liq,liquidityLabel:localizedLiquidity(liq,lang),factors,disclaimer:lang==='en'?'Indicative SovaZone estimate, not a guaranteed transaction price.':'Ориентировочная оценка SovaZone, не гарантия цены сделки.'};
@@ -552,12 +552,12 @@ function applyPlatform(parsed,username,platform,lang){
   if(platform==='instagram')parsed=applyInstagramGuardrails(parsed,username,lang);
   else{
     const base=applyInstagramGuardrails({...parsed,platform:'instagram'},username,lang);
-    base.priceMin=niceRound((Number(base.priceMin)||0)*0.25);
-    base.priceMax=base.openEnded?base.priceMin:niceRound((Number(base.priceMax)||0)*0.25);
+    base.priceMin=niceRound((Number(base.priceMin)||0)*0.20);
+    base.priceMax=base.openEnded?base.priceMin:niceRound((Number(base.priceMax)||0)*0.20);
     base.openEnded=false;base.platform='tiktok';
     const len=[...username.toLowerCase()].length;
     if(len<=4&&Array.isArray(base.factors)&&base.factors.length){
-      const floor=niceRound(shortFloor(len)*0.25);
+      const floor=niceRound(shortFloor(len)*0.20);
       base.factors[0]={title:lang==='en'?'Short-handle scarcity':'Редкость короткого ника',text:lang==='en'?`A ${len}-character TikTok username retains a scarcity reference from about $${floor.toLocaleString('en-US')} after the TikTok market adjustment.`:`TikTok username длиной ${len} символа сохраняет ориентир редкости примерно от $${floor.toLocaleString('en-US')} после поправки на рынок TikTok.`};
     }
     parsed=base;
