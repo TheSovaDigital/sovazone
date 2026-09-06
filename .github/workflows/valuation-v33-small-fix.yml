@@ -1,5 +1,6 @@
 name: Valuation v3.6 semantic calibration
 
+# v3.6 guarded retry after structural test version bump
 on:
   push:
     paths:
