@@ -40,7 +40,7 @@ const cases=[
   ['qzxvna',0,0,0,0],
   ['aaaa',5000,8000,7000,11500],
   ['work',5500,10000,8000,14000],
-  ['hello',1400,7250,2000,10500],
+  ['hello',1400,4200,2000,6000],
   ['hello_',0,20,0,30]
 ];
 for(const [u,minTon,maxTon,minUsd,maxUsd] of cases){
