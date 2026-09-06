@@ -10,13 +10,13 @@
   var result=root.querySelector('.uv-result');
   var error=root.querySelector('.uv-error');
   var lastRun=0;
-  var CACHE_VERSION='instagram-v3.9';
-  var API_ENDPOINT='https://sovazone.vercel.app/api/username-value/';
+  var CACHE_VERSION=platform==='telegram'?'telegram-v1.0':'instagram-v3.9';
+  var API_ENDPOINT=platform==='telegram'?'https://sovazone.vercel.app/api/telegram-username-value/':'https://sovazone.vercel.app/api/username-value/';
 
   function t(ru,en){return lang==='en'?en:ru;}
   function cleanUsername(v){
     v=String(v||'').trim();
-    v=v.replace(/^https?:\/\/(www\.)?(instagram\.com|tiktok\.com)\//i,'');
+    v=v.replace(/^https?:\/\/(www\.)?(instagram\.com|tiktok\.com|t\.me|telegram\.me|fragment\.com\/username)\//i,'');
     v=v.replace(/^@/,'').split(/[/?#]/)[0].trim();
     return v;
   }
@@ -27,6 +27,12 @@
     if(data&&data.openEnded)return money(min)+'+';
     if(min===max)return '≈ '+money(min);
     return money(min)+'–'+money(max);
+  }
+  function tonText(data){
+    if(platform!=='telegram'||!data||data.specialCase==='global_brand')return '';
+    var min=Number(data.priceMinTon||0),max=Number(data.priceMaxTon||0);
+    var txt=min===max?'≈ '+Math.round(min).toLocaleString('en-US')+' TON':Math.round(min).toLocaleString('en-US')+'–'+Math.round(max).toLocaleString('en-US')+' TON';
+    return '<div class="uv-confidence">'+escapeHtml(txt)+'</div>';
   }
   function showError(msg){error.textContent=msg;error.classList.add('is-visible');result.classList.remove('is-visible');}
   function hideError(){error.classList.remove('is-visible');error.textContent='';}
@@ -47,7 +53,7 @@
     if(data.category)meta.push(escapeHtml(data.category));
     if(typeof data.qualityScore!=='undefined')meta.push(escapeHtml(qualityLabel(data.qualityScore))+' · '+Math.round(Number(data.qualityScore)||0)+'/100');
     if(data.liquidity)meta.push(escapeHtml(liquidityLabel(data)));
-    result.innerHTML='<div class="uv-result-top"><div><div class="uv-result-label">'+t('Username','Username')+'</div><div class="uv-result-handle">@'+escapeHtml(data.username)+'</div><div class="uv-confidence">'+meta.join(' · ')+'</div></div><div><div class="uv-result-label">'+t('Ориентировочная стоимость','Estimated value')+'</div><div class="uv-price">'+priceText(data)+'</div></div></div><div class="uv-reasons">'+reasons.map(function(r){return reasonCard(r.title,r.text);}).join('')+'</div><p class="uv-result-note">'+escapeHtml(data.disclaimer||t('Оценка является ориентировочной и не гарантирует цену реальной сделки.','This is an indicative estimate and does not guarantee an actual transaction price.'))+'</p><div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="'+sellHref+'">'+t('Продать через SovaUsername','Sell via SovaUsername')+'</a><a class="uv-btn" href="'+catalogHref+'">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
+    result.innerHTML='<div class="uv-result-top"><div><div class="uv-result-label">'+t('Username','Username')+'</div><div class="uv-result-handle">@'+escapeHtml(data.username)+'</div><div class="uv-confidence">'+meta.join(' · ')+'</div></div><div><div class="uv-result-label">'+t('Ориентировочная стоимость','Estimated value')+'</div><div class="uv-price">'+priceText(data)+'</div>'+tonText(data)+'</div></div><div class="uv-reasons">'+reasons.map(function(r){return reasonCard(r.title,r.text);}).join('')+'</div><p class="uv-result-note">'+escapeHtml(data.disclaimer||t('Оценка является ориентировочной и не гарантирует цену реальной сделки.','This is an indicative estimate and does not guarantee an actual transaction price.'))+'</p><div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="'+sellHref+'">'+t('Продать через SovaUsername','Sell via SovaUsername')+'</a><a class="uv-btn" href="'+catalogHref+'">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
     result.classList.add('is-visible');
   }
 
@@ -55,8 +61,9 @@
     e.preventDefault();hideError();
     var username=cleanUsername(input.value);
     if(!username){showError(t('Введите username.','Enter a username.'));return;}
-    if(username.length>30){showError(t('Username слишком длинный.','Username is too long.'));return;}
-    if(!/^[a-zA-Z0-9._]+$/.test(username)){showError(t('Используйте латинские буквы, цифры, точку или _.','Use Latin letters, numbers, a dot, or _.'));return;}
+    if(username.length>(platform==='telegram'?32:30)){showError(t('Username слишком длинный.','Username is too long.'));return;}
+    var valid=platform==='telegram'?/^[a-zA-Z0-9_]+$/.test(username):/^[a-zA-Z0-9._]+$/.test(username);
+    if(!valid){showError(platform==='telegram'?t('Для Telegram используйте латинские буквы, цифры или _.','For Telegram use Latin letters, numbers, or _.'):t('Используйте латинские буквы, цифры, точку или _.','Use Latin letters, numbers, a dot, or _.'));return;}
     var cached=readCache(username);if(cached){render(cached);return;}
     var now=Date.now();if(now-lastRun<1800){showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.'));return;}
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
