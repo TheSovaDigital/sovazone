@@ -1,0 +1,60 @@
+name: Final valuation semantic audit
+
+on:
+  push:
+    paths:
+      - '.github/workflows/final-valuation-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run semantic valuation batch
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: |
+          cat > /tmp/audit.mjs <<'EOF'
+          const groups = {
+            1: [
+              'hello','money','cloud','dream','love','work','wolf','deer','pricheska','pri_cheska',
+              'qzxvna','qz_xvna','m4d','h0me','alex','sasha','alexander','den','denis','denchik'
+            ],
+            2: [
+              'pavel','pasha','pashka','stepa','stepan','stepashka','kolyan','kolya','nikolay','kolyanchik',
+              'nastya','anastasia','nastenka','slastenka','orlov','orel','baranov','baran','paris','yerevan'
+            ]
+          };
+          const list = groups[Number(process.env.SHARD)] || [];
+          const endpoint = 'https://sovazone.vercel.app/api/username-value/';
+          console.log('username\tcategory\tprice\tquality\tliquidity\tengine\tstatus');
+          for (const username of list) {
+            let row;
+            try {
+              const r = await fetch(endpoint, {
+                method: 'POST',
+                headers: {'content-type':'application/json'},
+                body: JSON.stringify({username, platform:'instagram', lang:'en'})
+              });
+              const text = await r.text();
+              let data = {};
+              try { data = JSON.parse(text); } catch {}
+              if (!r.ok) {
+                row = [username,'','','','','',`HTTP_${r.status}:${String(data.error||text).slice(0,120)}`];
+              } else {
+                const min = Number(data.priceMin||0), max = Number(data.priceMax||0);
+                const price = data.openEnded ? `$${min}+` : (min===max ? `~$${min}` : `$${min}-$${max}`);
+                row = [username,data.categoryCode||data.category||'',price,data.qualityScore??'',data.liquidity||'',data.engineVersion||'', 'OK'];
+              }
+            } catch (e) {
+              row = [username,'','','','','',`ERR:${e.message}`];
+            }
+            console.log(row.join('\t'));
+            await new Promise(r=>setTimeout(r,700));
+          }
+          EOF
+          node /tmp/audit.mjs
