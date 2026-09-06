@@ -1,0 +1,49 @@
+name: Username selling guidance fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/username-sell-guidance-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Apply guarded copy fix
+        run: python .github/scripts/patch_username_sell_guidance.py
+      - name: Validate valuation code and copy
+        run: |
+          node --check tools/username-value.js
+          node --check api/username-value.js
+          node --check api/telegram-username-value.js
+          node .github/scripts/test_username_valuation_v38.mjs
+          node .github/scripts/test_telegram_valuation_v1.mjs
+          grep -q 'Как продать username' tools/username-value.html
+          grep -q 'Как продать username' tools/instagram-username-value.html
+          grep -q 'How to sell a username' en/tools/username-value.html
+          grep -q 'How to sell a username' en/tools/instagram-username-value.html
+          grep -q 'Как продать username' tools/username-value.js
+          for f in tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html; do grep -q 'username-value.js?v=16' "$f"; done
+      - name: Commit production copy fix
+        run: |
+          git config user.name 'SovaDigital'
+          git config user.email 'thesovaz@gmail.com'
+          git add tools/username-value.html en/tools/username-value.html tools/instagram-username-value.html en/tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html tools/username-value.js
+          git diff --cached --quiet && exit 0
+          git commit -m 'Clarify self-service username selling flow'
+          git push
+      - name: Wait for deployment
+        run: sleep 35
+      - name: Verify live copy
+        run: |
+          curl -fsSL https://sovazone.com/tools/username-value | grep -q 'Как продать username'
+          curl -fsSL https://sovazone.com/tools/instagram-username-value | grep -q 'самостоятельной публикации объявления'
+          curl -fsSL https://sovazone.com/en/tools/username-value | grep -q 'How to sell a username'
+          curl -fsSL https://sovazone.com/en/tools/instagram-username-value | grep -q 'publish your listing yourself'
+          curl -fsSL https://sovazone.com/tools/instagram-username-value | grep -q 'username-value.js?v=16'
