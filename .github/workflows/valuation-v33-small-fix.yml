@@ -1,4 +1,4 @@
-name: Valuation v3.7 final calibration
+name: Valuation v3.8 final relation correction
 
 on:
   push:
@@ -16,8 +16,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Apply final semantic calibration patch
-        run: python .github/scripts/patch_semantic_v37.py
+      - name: Apply final Orel Orlov relation patch
+        run: python .github/scripts/patch_v38_final_relation.py
 
       - name: Validate backend and frontend syntax
         run: |
@@ -27,10 +27,10 @@ jobs:
       - name: Run structural and numeric regression tests
         run: node .github/scripts/test_twochar_v35.mjs
 
-      - name: Commit final calibration
+      - name: Commit final relation correction
         run: |
           git config user.name "SovaDigital"
           git config user.email "thesovaz@gmail.com"
           git add api/username-value.js tools/username-value.js tools/instagram-username-value.html tools/tiktok-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html
-          git commit -m "Finalize valuation calibration v3.7"
+          git commit -m "Finalize Orel Orlov valuation relation v3.8"
           git push origin HEAD:main
