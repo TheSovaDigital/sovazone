@@ -1,6 +1,6 @@
 name: Username valuation regression
 
-# Permanent v3.8 regression suite.
+# Permanent v3.9 regression suite.
 on:
   push:
     branches: [main]
@@ -29,7 +29,7 @@ jobs:
         run: node .github/scripts/test_username_valuation_v38.mjs
       - name: Validate production route and cache version
         run: |
-          grep -q "CACHE_VERSION='instagram-v3.8'" tools/username-value.js
+          grep -q "CACHE_VERSION='instagram-v3.9'" tools/username-value.js
           grep -q "API_ENDPOINT='https://sovazone.vercel.app/api/username-value/'" tools/username-value.js
           for f in tools/instagram-username-value.html tools/tiktok-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html; do
             grep -q 'username-value.js?v=' "$f"
@@ -50,17 +50,17 @@ jobs:
             ['orlov','instagram',2500,5000],['paris','instagram',3000,5000],['pricheska','instagram',400,800],
             ['hel_lo','instagram',100,300],['vip','instagram',20000,30000],['111','instagram',50000,50000],
             ['555','instagram',10000,15000],['aa','instagram',20000,30000],['qzxvna','instagram',0,0],
-            ['volk','tiktok',3750,5000]
+            ['volk','tiktok',3000,4000]
           ];
           for(const [username,platform,min,max] of tests){
             const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username,platform,lang:'en'})});
             const data=await r.json();
             if(!r.ok)throw new Error(`${username}/${platform}: HTTP ${r.status} ${JSON.stringify(data)}`);
-            if(data.engineVersion!=='instagram-v3.8')throw new Error(`${username}/${platform}: engine ${data.engineVersion}`);
+            if(data.engineVersion!=='instagram-v3.9')throw new Error(`${username}/${platform}: engine ${data.engineVersion}`);
             if(Number(data.priceMin)!==min||Number(data.priceMax)!==max)throw new Error(`${username}/${platform}: ${data.priceMin}-${data.priceMax}, expected ${min}-${max}`);
             console.log(`OK ${username}/${platform}: ${data.priceMin}-${data.priceMax}`);
             await new Promise(r=>setTimeout(r,650));
           }
-          console.log(`PASS ${tests.length} production controls on instagram-v3.8`);
+          console.log(`PASS ${tests.length} production controls on instagram-v3.9`);
           EOF
           node /tmp/sentinel.mjs
