@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Apply SEO copy refinement
-        run: python .github/scripts/refine_valuation_seo_copy.py
+        run: python .github/scripts/run_refine_valuation_seo_copy_v2.py
       - name: Validate valuation engines and pages
         run: |
           node --check tools/username-value.js
