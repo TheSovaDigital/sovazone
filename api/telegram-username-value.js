@@ -1,4 +1,4 @@
-const ENGINE_VERSION='telegram-v1.1';
+const ENGINE_VERSION='telegram-v1.2';
 const buckets=globalThis.__sovaTelegramValuationBuckets||(globalThis.__sovaTelegramValuationBuckets=new Map());
 const valuationCache=globalThis.__sovaTelegramValuationCache||(globalThis.__sovaTelegramValuationCache=new Map());
 const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:3,at:0,source:'fallback'});
@@ -37,6 +37,37 @@ RULES
 - Underscores are not comparable to the clean Fragment collectible dataset and should receive a very low demand score unless there is extraordinary reason.
 - Globally famous trademarks are special cases and should not receive an ordinary free-market score.
 - Do not copy any historical sale price into the score.
+
+MARKET TIER
+Also classify one deterministic marketTier. This is a demand class, not a price estimate:
+- zero: no standalone resale demand.
+- micro: recognizable but weak Telegram buyer pool, especially ordinary geography.
+- low: limited personal identity demand, weak diminutives or ordinary niche names.
+- medium: useful but not premium term, greeting or narrower commercial descriptor.
+- strong: compact strong identity term, strong transliteration or strong common name.
+- premium: broad memorable English identity term with many independent buyers.
+- elite: exceptional iconic identity or direct Telegram-specific identity association; use sparingly.
+
+ARCHETYPE
+Return archetype as one of generic, greeting, commercial, finance, animal, platform_identity, name, geography, pattern, random. Use platform_identity only when the exact word/name has an unusually strong direct association with Telegram itself.
+
+Calibration examples are classification references, not hardcoded prices:
+- aaaa => strong / pattern
+- work => premium / commercial
+- alex => strong / name
+- volk => strong / generic
+- hello => medium / greeting
+- money => premium / finance
+- cloud => premium / generic
+- dream => premium / generic
+- love => strong / generic
+- pavel => elite / platform_identity because of the Telegram founder association
+- pasha => low / name
+- paris => micro / geography
+- monkey => elite / animal
+- trading => medium / commercial
+- qzxvna => zero / random
+Generalize these distinctions to similar usernames instead of copying the examples mechanically.
 `;
 
 function normalizeUsername(value){
@@ -154,33 +185,60 @@ function patternBand(username,score){
   return null;
 }
 
+function legacyTier(score){
+  score=Math.max(0,Math.min(100,Number(score)||0));
+  if(score<=20)return 'zero';
+  if(score<=55)return 'micro';
+  if(score<=70)return 'low';
+  if(score<=84)return 'strong';
+  if(score<=94)return 'premium';
+  return 'elite';
+}
+
+function tierBand(tier){
+  if(tier==='zero')return [0,0];
+  if(tier==='micro')return [500,1000];
+  if(tier==='low')return [1000,3000];
+  if(tier==='medium')return [2000,5000];
+  if(tier==='strong')return [5000,10000];
+  if(tier==='premium')return [10000,20000];
+  if(tier==='elite')return [20000,50000];
+  return [0,0];
+}
+
 function telegramRange(username,classification){
   const lower=username.toLowerCase(),len=lower.length,score=Number(classification.demandScore)||0,code=classification.categoryCode;
-  if(lower.includes('_'))return {min:0,max:20,note:'underscore'};
+  const tier=classification.marketTier||legacyTier(score);
+  const archetype=classification.archetype||'generic';
 
+  if(lower.includes('_'))return {min:0,max:30,note:'underscore'};
+  if(code==='random'&&tier==='zero')return {min:0,max:0,note:'random'};
+
+  if(code==='first_name'&&tier==='strong')return {min:5000,max:15000,note:'strong-name'};
+
+  // Four-character collectible scarcity is structural, but premium semantics may move above the floor.
   if(len===4){
-    if(score<=45)return {min:5000,max:6500,note:'four-char-floor'};
-    if(score<=65)return {min:5000,max:8000,note:'four-char-floor'};
-    if(score<=80)return {min:5500,max:10000,note:'four-char-premium'};
-    if(score<=88)return {min:6500,max:14000,note:'four-char-premium'};
-    if(score<=94)return {min:8000,max:20000,note:'four-char-premium'};
-    return {min:10000,max:30000,note:'four-char-premium'};
+    if(tier==='premium')return {min:10000,max:20000,note:'four-char-premium'};
+    if(tier==='elite')return {min:20000,max:50000,note:'four-char-elite'};
+    return {min:5000,max:10000,note:'four-char-floor'};
   }
 
-  if(code==='random'&&score<=25)return {min:0,max:0,note:'random'};
-  const p=patternBand(lower,score);
-  if(p&&['pattern','random'].includes(code))return {min:p[0],max:p[1],note:'pattern'};
+  if(archetype==='platform_identity'&&tier==='elite')return {min:20000,max:50000,note:'platform-identity'};
+  if(archetype==='animal'&&tier==='elite')return {min:30000,max:50000,note:'elite-animal'};
+  if(archetype==='finance'&&(tier==='premium'||tier==='elite'))return {min:10000,max:30000,note:'finance-premium'};
+  if(archetype==='commercial'&&tier==='medium')return {min:3000,max:5000,note:'commercial-medium'};
 
-  let [min,max]=baseBand(score);
-  const mult=lengthFactor(len)*categoryFactor(code);
-  min=niceTon(min*mult);max=niceTon(max*mult);
-  if(min>0&&max>min*3)max=niceTon(min*3);
-  return {min,max:Math.max(min,max),note:'semantic'};
+  const [min,max]=tierBand(tier);
+  return {min,max,note:'semantic-tier'};
 }
 
 function localizedLiquidity(value,lang){
   if(lang==='en')return value[0].toUpperCase()+value.slice(1);
   return value==='high'?'Высокая':value==='medium'?'Средняя':'Низкая';
+}
+
+function invalidUsernameResponse(username,lang){
+  return {username,platform:'telegram',engineVersion:ENGINE_VERSION,priceMin:0,priceMax:0,priceMinTon:0,priceMaxTon:0,tonUsdRate:null,tonUsdSource:'not_applicable',openEnded:false,uncertain:false,specialCase:'invalid_username',category:lang==='en'?'Invalid Telegram username':'Недопустимый Telegram username',categoryCode:'special',qualityScore:0,demandScore:0,liquidity:'low',liquidityLabel:localizedLiquidity('low',lang),factors:lang==='en'?[{title:'Telegram rule',text:'A Telegram username cannot start or end with an underscore.'},{title:'Tradability',text:'An invalid public username is not assigned a normal resale range.'},{title:'Estimate',text:'SovaZone therefore shows no ordinary market value.'}]:[{title:'Правило Telegram',text:'Username Telegram не может начинаться или заканчиваться символом подчёркивания.'},{title:'Оборот',text:'Недопустимый публичный username не получает обычный диапазон перепродажи.'},{title:'Оценка',text:'Поэтому SovaZone не показывает для него обычную рыночную стоимость.'}],disclaimer:lang==='en'?'Invalid Telegram username format: no ordinary market estimate is shown.':'Недопустимый формат Telegram username: обычная рыночная оценка не показывается.'};
 }
 
 function brandResponse(username,lang,rate){
@@ -220,6 +278,7 @@ export default async function handler(req,res){
   const username=normalizeUsername(body.username);
   if(!username||username.length>32||!/^[A-Za-z0-9_]+$/.test(username))return res.status(400).json({error:lang==='en'?'Invalid Telegram username format.':'Некорректный формат Telegram username.'});
   if(username.length<4)return res.status(400).json({error:lang==='en'?'Telegram collectible valuation currently supports usernames from 4 characters.':'Оценка collectible username Telegram сейчас поддерживает ники от 4 символов.'});
+  if(username.startsWith('_')||username.endsWith('_'))return res.status(200).json(invalidUsernameResponse(username,lang));
 
   const fx=await tonUsdRate();
   const brand=brandResponse(username,lang,fx.rate);
@@ -231,10 +290,10 @@ export default async function handler(req,res){
   if(rateLimited(req))return res.status(429).json({error:lang==='en'?'Too many estimates. Try again later.':'Слишком много оценок. Попробуйте позже.'});
   if(!process.env.OPENAI_API_KEY)return res.status(503).json({error:lang==='en'?'Valuation service is not connected yet.':'Сервис оценки ещё не подключён.'});
 
-  const schema={type:'object',additionalProperties:false,properties:{category:{type:'string'},categoryCode:{type:'string',enum:['english_word','russian_word_translit','other_language_word','first_name','surname','geography','numeric','pattern','leetspeak','abbreviation','random']},demandScore:{type:'integer',minimum:0,maximum:100},qualityScore:{type:'integer',minimum:0,maximum:100},liquidity:{type:'string',enum:['low','medium','high']},uncertain:{type:'boolean'},factors:{type:'array',minItems:3,maxItems:3,items:{type:'object',additionalProperties:false,properties:{title:{type:'string'},text:{type:'string'}},required:['title','text']}}},required:['category','categoryCode','demandScore','qualityScore','liquidity','uncertain','factors']};
+  const schema={type:'object',additionalProperties:false,properties:{category:{type:'string'},categoryCode:{type:'string',enum:['english_word','russian_word_translit','other_language_word','first_name','surname','geography','numeric','pattern','leetspeak','abbreviation','random']},marketTier:{type:'string',enum:['zero','micro','low','medium','strong','premium','elite']},archetype:{type:'string',enum:['generic','greeting','commercial','finance','animal','platform_identity','name','geography','pattern','random']},demandScore:{type:'integer',minimum:0,maximum:100},qualityScore:{type:'integer',minimum:0,maximum:100},liquidity:{type:'string',enum:['low','medium','high']},uncertain:{type:'boolean'},factors:{type:'array',minItems:3,maxItems:3,items:{type:'object',additionalProperties:false,properties:{title:{type:'string'},text:{type:'string'}},required:['title','text']}}},required:['category','categoryCode','marketTier','archetype','demandScore','qualityScore','liquidity','uncertain','factors']};
   const languageRule=lang==='en'?'Return category and factors in concise natural English.':'Верни category и факторы на коротком естественном русском языке.';
   const signals={length:username.length,hasUnderscore:username.includes('_'),allNumeric:/^\d+$/.test(username),lettersOnly:/^[a-z]+$/i.test(username),uniqueChars:new Set(username.toLowerCase()).size};
-  const requestBody={model:process.env.VALUATION_MODEL||'gpt-5.6-luna',store:false,reasoning:{effort:'none'},temperature:0,instructions:MARKET_EVIDENCE+'\n'+languageRule,input:`Classify Telegram username @${username}. Deterministic signals: ${JSON.stringify(signals)}. Do not estimate price; only classify demand/quality.`,max_output_tokens:550,text:{verbosity:'low',format:{type:'json_schema',name:'telegram_username_classification_v1',strict:true,schema}}};
+  const requestBody={model:process.env.VALUATION_MODEL||'gpt-5.6-luna',store:false,reasoning:{effort:'none'},temperature:0,instructions:MARKET_EVIDENCE+'\n'+languageRule,input:`Classify Telegram username @${username}. Deterministic signals: ${JSON.stringify(signals)}. Do not estimate price; only classify demand/quality.`,max_output_tokens:550,text:{verbosity:'low',format:{type:'json_schema',name:'telegram_username_classification_v2',strict:true,schema}}};
   try{
     const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify(requestBody)});
     const data=await r.json();
