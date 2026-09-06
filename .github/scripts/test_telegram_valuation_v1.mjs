@@ -13,7 +13,7 @@ const classifications={
 const originalFetch=globalThis.fetch;
 globalThis.fetch=async (url,opts={})=>{
   const s=String(url);
-  if(s.includes('api.coingecko.com'))return {ok:true,json:async()=>({gram:{usd:1.42}})};
+  if(s.includes('api.coingecko.com'))return {ok:true,json:async()=>({'the-open-network':{usd:1.42}})};
   if(s.includes('api.openai.com')){
     const body=JSON.parse(opts.body||'{}');
     const input=String(body.input||'');
@@ -45,11 +45,11 @@ const cases=[
 ];
 for(const [u,minTon,maxTon,minUsd,maxUsd] of cases){
   const r=await evaluate(u);
-  if(r.engineVersion!=='telegram-v1.0')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
+  if(r.engineVersion!=='telegram-v1.1')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
   if(r.priceMinTon!==minTon||r.priceMaxTon!==maxTon)throw new Error(`${u}: TON ${r.priceMinTon}-${r.priceMaxTon}, expected ${minTon}-${maxTon}`);
   if(r.priceMin!==minUsd||r.priceMax!==maxUsd)throw new Error(`${u}: USD ${r.priceMin}-${r.priceMax}, expected ${minUsd}-${maxUsd}`);
 }
 const brand=await evaluate('adidas');
 if(brand.specialCase!=='global_brand'||brand.priceMin!==0||brand.priceMax!==0)throw new Error('Brand special case failed');
-console.log('PASS 6 Telegram valuation controls on telegram-v1.0');
+console.log('PASS 6 Telegram valuation controls on telegram-v1.1');
 globalThis.fetch=originalFetch;

@@ -1,7 +1,7 @@
-const ENGINE_VERSION='telegram-v1.0';
+const ENGINE_VERSION='telegram-v1.1';
 const buckets=globalThis.__sovaTelegramValuationBuckets||(globalThis.__sovaTelegramValuationBuckets=new Map());
 const valuationCache=globalThis.__sovaTelegramValuationCache||(globalThis.__sovaTelegramValuationCache=new Map());
-const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:1.42,at:0,source:'fallback'});
+const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:3,at:0,source:'fallback'});
 
 const GLOBAL_BRANDS=new Set(['apple','nike','tesla','google','amazon','microsoft','instagram','facebook','tiktok','adidas','cocacola','samsung','youtube','netflix','spotify','bmw','mercedes','porsche','ferrari','gucci','chanel','rolex','nvidia','openai','mastercard']);
 
@@ -92,7 +92,6 @@ async function tonUsdRate(){
   const now=Date.now();
   if(now-fxCache.at<30*60*1000&&fxCache.rate>0)return fxCache;
   const urls=[
-    ['https://api.coingecko.com/api/v3/simple/price?ids=gram&vs_currencies=usd','gram'],
     ['https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd','the-open-network']
   ];
   for(const [url,key] of urls){
