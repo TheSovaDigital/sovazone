@@ -30,7 +30,7 @@ const expected={
 for(const [u,[min,max]] of Object.entries(expected)){
   const r=await evaluate(u);
   if(r.priceMin!==min||r.priceMax!==max)throw new Error(`${u}: got ${r.priceMin}-${r.priceMax}, expected ${min}-${max}`);
-  if(r.engineVersion!=='instagram-v3.7')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
+  if(r.engineVersion!=='instagram-v3.8')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
   if(r.categoryCode!=='short')throw new Error(`${u}: wrong category ${r.categoryCode}`);
 }
 
@@ -48,4 +48,4 @@ for(const [u,[min,max]] of Object.entries({
 const tiktok=await evaluate('aa','tiktok');
 if(tiktok.priceMin!==5000||tiktok.priceMax!==7500)throw new Error(`TikTok aa scaling: ${tiktok.priceMin}-${tiktok.priceMax}`);
 
-console.log('v3.7 structural regression tests passed');
+console.log('v3.8 structural regression tests passed');
