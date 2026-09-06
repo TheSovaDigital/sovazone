@@ -15,8 +15,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-      - name: Apply SEO copy refinement
-        run: python .github/scripts/run_refine_valuation_seo_copy_v2.py
+      - name: Polish RU terminology
+        run: python .github/scripts/polish_valuation_ru_language.py
       - name: Validate valuation engines and pages
         run: |
           node --check tools/username-value.js
@@ -24,20 +24,17 @@ jobs:
           node --check api/telegram-username-value.js
           node .github/scripts/test_username_valuation_v38.mjs
           node .github/scripts/test_telegram_valuation_v1.mjs
-          grep -q 'Узнать стоимость никнейма' tools/username-value.html
+          grep -q '<span class="uv-title-line">Узнать стоимость</span> <span class="uv-title-line">никнейма</span>' tools/username-value.html
           grep -q 'Узнать стоимость никнейма Instagram' tools/instagram-username-value.html
           grep -q 'Узнать стоимость никнейма TikTok' tools/tiktok-username-value.html
           grep -q 'Узнать стоимость никнейма Telegram' tools/telegram-username-value.html
-          grep -q 'Username Value' en/tools/username-value.html
-          grep -q 'Instagram Username Value' en/tools/instagram-username-value.html
-          grep -q 'TikTok Username Value' en/tools/tiktok-username-value.html
-          grep -q 'Telegram Username Value' en/tools/telegram-username-value.html
-          for f in tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html; do grep -q 'username-value.js?v=17' "$f"; done
-      - name: Commit refined tool SEO copy
+          grep -q 'Как разместить объявление' tools/username-value.js
+          for f in tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html; do grep -q 'username-value.js?v=18' "$f"; done
+      - name: Commit terminology polish
         run: |
           git config user.name 'SovaDigital'
           git config user.email 'thesovaz@gmail.com'
-          git add tools/username-value.html en/tools/username-value.html tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html tools/username-value.js
+          git add tools/username-value.html tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html tools/username-value.js
           git diff --cached --quiet && exit 0
-          git commit -m 'Refine Valuation AI search intent and terminology'
+          git commit -m 'Polish Russian Valuation AI terminology'
           git push
