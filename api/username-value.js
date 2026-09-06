@@ -1,7 +1,7 @@
 const buckets = globalThis.__sovaValuationBucketsV33 || (globalThis.__sovaValuationBucketsV32 = new Map());
 const valuationCache = globalThis.__sovaValuationCacheV33 || (globalThis.__sovaValuationCacheV32 = new Map());
 
-const ENGINE_VERSION = 'instagram-v3.7';
+const ENGINE_VERSION = 'instagram-v3.8';
 const STRONG_LETTERS = new Set(['a','x','s','z']);
 const WEAK_LETTERS = new Set(['b','d','j','q','u','y']);
 const STRONG_DIGITS = new Set(['0','1','5','7']);
@@ -60,6 +60,8 @@ const SEMANTIC_CALIBRATION_BANDS = Object.freeze({
   stepashka:[250,500],
 
   // Surname / double-meaning controls
+  orel:[5000,8000],
+  orlov:[2500,5000],
   baranov:[800,1500],
   baran:[300,600],
   petrov:[1500,2500],
