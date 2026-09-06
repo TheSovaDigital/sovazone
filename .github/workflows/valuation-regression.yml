@@ -1,0 +1,65 @@
+name: Username valuation regression
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/username-value.js'
+      - 'tools/username-value.js'
+      - 'tools/instagram-username-value.html'
+      - 'tools/tiktok-username-value.html'
+      - 'en/tools/instagram-username-value.html'
+      - 'en/tools/tiktok-username-value.html'
+      - '.github/scripts/test_username_valuation_v38.mjs'
+      - '.github/workflows/valuation-regression.yml'
+  workflow_dispatch:
+
+jobs:
+  local-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate syntax and import
+        run: |
+          node --check api/username-value.js
+          node --check tools/username-value.js
+          node -e "import('./api/username-value.js').then(m=>{if(typeof m.default!=='function')process.exit(1);console.log('backend import OK')})"
+      - name: Run deterministic regression controls
+        run: node .github/scripts/test_username_valuation_v38.mjs
+      - name: Validate production route and cache version
+        run: |
+          grep -q "CACHE_VERSION='instagram-v3.8'" tools/username-value.js
+          grep -q "API_ENDPOINT='https://sovazone.vercel.app/api/username-value/'" tools/username-value.js
+          for f in tools/instagram-username-value.html tools/tiktok-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html; do
+            grep -q 'username-value.js?v=' "$f"
+          done
+
+  production-sentinel:
+    if: github.event_name == 'workflow_dispatch'
+    needs: local-regression
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate production semantic controls
+        run: |
+          cat > /tmp/sentinel.mjs <<'EOF'
+          const endpoint='https://sovazone.vercel.app/api/username-value/';
+          const tests=[
+            ['volk','instagram',15000,20000],['cat','instagram',20000,30000],['alex','instagram',10000,15000],
+            ['pavel','instagram',7000,12000],['pasha','instagram',4000,8000],['orel','instagram',5000,8000],
+            ['orlov','instagram',2500,5000],['paris','instagram',3000,5000],['pricheska','instagram',400,800],
+            ['hel_lo','instagram',100,300],['vip','instagram',20000,30000],['111','instagram',50000,50000],
+            ['555','instagram',10000,15000],['aa','instagram',20000,30000],['qzxvna','instagram',0,0],
+            ['volk','tiktok',3750,5000]
+          ];
+          for(const [username,platform,min,max] of tests){
+            const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username,platform,lang:'en'})});
+            const data=await r.json();
+            if(!r.ok)throw new Error(`${username}/${platform}: HTTP ${r.status} ${JSON.stringify(data)}`);
+            if(data.engineVersion!=='instagram-v3.8')throw new Error(`${username}/${platform}: engine ${data.engineVersion}`);
+            if(Number(data.priceMin)!==min||Number(data.priceMax)!==max)throw new Error(`${username}/${platform}: ${data.priceMin}-${data.priceMax}, expected ${min}-${max}`);
+            console.log(`OK ${username}/${platform}: ${data.priceMin}-${data.priceMax}`);
+            await new Promise(r=>setTimeout(r,650));
+          }
+          console.log(`PASS ${tests.length} production controls on instagram-v3.8`);
+          EOF
+          node /tmp/sentinel.mjs
