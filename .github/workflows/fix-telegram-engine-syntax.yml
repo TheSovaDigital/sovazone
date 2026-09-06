@@ -1,0 +1,39 @@
+name: Fix Telegram valuation engine syntax
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-telegram-engine-syntax.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Patch and validate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('api/telegram-username-value.js')
+          s=p.read_text()
+          old="return code==='abbreviation'?1.25:code==='english_word'?1.15:code==='first_name'?1:code==='geography'?1:code==='russian_word_translit'?.9:code==='surname'?.9:code==='other_language_word'?.85:code==='leetspeak'?.75:1;"
+          new="return code==='abbreviation'?1.25:code==='english_word'?1.15:code==='first_name'?1:code==='geography'?1:code==='russian_word_translit'?.9:1;"
+          # Avoid ambiguous ternary syntax by replacing the whole function explicitly.
+          start=s.index('function categoryFactor(code){')
+          end=s.index('\n}\n\nfunction patternBand',start)+2
+          replacement="function categoryFactor(code){\n  if(code==='abbreviation')return 1.25;\n  if(code==='english_word')return 1.15;\n  if(code==='first_name'||code==='geography')return 1;\n  if(code==='russian_word_translit'||code==='surname')return .9;\n  if(code==='other_language_word')return .85;\n  if(code==='leetspeak')return .75;\n  return 1;\n}"
+          s=s[:start]+replacement+s[end:]
+          p.write_text(s)
+          PY
+          node --check api/telegram-username-value.js
+      - name: Commit endpoint only
+        run: |
+          git config user.name "SovaDigital"
+          git config user.email "thesovaz@gmail.com"
+          git add api/telegram-username-value.js
+          git commit -m "Fix Telegram valuation category factors"
+          git push
