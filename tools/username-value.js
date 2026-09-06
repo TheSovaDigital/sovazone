@@ -23,13 +23,14 @@
   function money(n){return '$'+Math.round(Number(n||0)).toLocaleString('en-US');}
   function priceText(data){
     if(data&&data.specialCase==='global_brand')return t('Особый случай','Special case');
+    if(data&&data.specialCase==='invalid_username')return t('Недопустимый username','Invalid username');
     var min=Number((data&&data.priceMin)||0),max=Number((data&&data.priceMax)||0);
     if(data&&data.openEnded)return money(min)+'+';
     if(min===max)return '≈ '+money(min);
     return money(min)+'–'+money(max);
   }
   function tonText(data){
-    if(platform!=='telegram'||!data||data.specialCase==='global_brand')return '';
+    if(platform!=='telegram'||!data||(data.specialCase&&data.specialCase!=='none'))return '';
     var min=Number(data.priceMinTon||0),max=Number(data.priceMaxTon||0);
     var txt=min===max?'≈ '+Math.round(min).toLocaleString('en-US')+' TON':Math.round(min).toLocaleString('en-US')+'–'+Math.round(max).toLocaleString('en-US')+' TON';
     return '<div class="uv-confidence">'+escapeHtml(txt)+'</div>';
@@ -54,7 +55,8 @@
     if(typeof data.qualityScore!=='undefined')meta.push(escapeHtml(qualityLabel(data.qualityScore))+' · '+Math.round(Number(data.qualityScore)||0)+'/100');
     if(data.liquidity)meta.push(escapeHtml(liquidityLabel(data)));
     result.innerHTML='<div class="uv-result-top"><div><div class="uv-result-label">'+t('Username','Username')+'</div><div class="uv-result-handle">@'+escapeHtml(data.username)+'</div><div class="uv-confidence">'+meta.join(' · ')+'</div></div><div><div class="uv-result-label">'+t('Ориентировочная стоимость','Estimated value')+'</div><div class="uv-price">'+priceText(data)+'</div>'+tonText(data)+'</div></div><div class="uv-reasons">'+reasons.map(function(r){return reasonCard(r.title,r.text);}).join('')+'</div><p class="uv-result-note">'+escapeHtml(data.disclaimer||t('Оценка является ориентировочной и не гарантирует цену реальной сделки.','This is an indicative estimate and does not guarantee an actual transaction price.'))+'</p><div class="uv-result-actions"><a class="uv-btn uv-btn--accent" href="'+sellHref+'">'+t('Продать через SovaUsername','Sell via SovaUsername')+'</a><a class="uv-btn" href="'+catalogHref+'">'+t('Каталог SovaZone','SovaZone catalog')+'</a></div>';
-    result.classList.add('is-visible');
+    if(platform!=='instagram'||(data.specialCase&&data.specialCase!=='none')){var sellButton=result.querySelector('.uv-btn--accent');if(sellButton)sellButton.remove();}
+        result.classList.add('is-visible');
   }
 
   form.addEventListener('submit',async function(e){
@@ -64,6 +66,8 @@
     if(username.length>(platform==='telegram'?32:30)){showError(t('Username слишком длинный.','Username is too long.'));return;}
     var valid=platform==='telegram'?/^[a-zA-Z0-9_]+$/.test(username):/^[a-zA-Z0-9._]+$/.test(username);
     if(!valid){showError(platform==='telegram'?t('Для Telegram используйте латинские буквы, цифры или _.','For Telegram use Latin letters, numbers, or _.'):t('Используйте латинские буквы, цифры, точку или _.','Use Latin letters, numbers, a dot, or _.'));return;}
+    if(platform==='telegram'&&username.length<4){showError(t('Telegram collectible username должен содержать минимум 4 символа.','A Telegram collectible username must contain at least 4 characters.'));return;}
+    if(platform==='telegram'&&(username.charAt(0)==='_'||username.charAt(username.length-1)==='_')){showError(t('Username Telegram не может начинаться или заканчиваться символом _.','A Telegram username cannot start or end with _.'));return;}
     var cached=readCache(username);if(cached){render(cached);return;}
     var now=Date.now();if(now-lastRun<1800){showError(t('Подождите пару секунд перед новой оценкой.','Wait a couple of seconds before another estimate.'));return;}
     lastRun=now;setLoading(true);result.classList.remove('is-visible');
