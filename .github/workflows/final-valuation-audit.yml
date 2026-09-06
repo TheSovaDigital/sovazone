@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2]
+        shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
       - name: Run semantic valuation batch
@@ -21,12 +21,20 @@ jobs:
           cat > /tmp/audit.mjs <<'EOF'
           const groups = {
             1: [
-              'hello','money','cloud','dream','love','work','wolf','deer','pricheska','pri_cheska',
-              'qzxvna','qz_xvna','m4d','h0me','alex','sasha','alexander','den','denis','denchik'
+              'king','money','cloud','gold','dream','hello','fast','love','work','wolf',
+              'deer','cat','home','storm','black','sun','blue','green','doctor','lawyer'
             ],
             2: [
-              'pavel','pasha','pashka','stepa','stepan','stepashka','kolyan','kolya','nikolay','kolyanchik',
-              'nastya','anastasia','nastenka','slastenka','orlov','orel','baranov','baran','paris','yerevan'
+              'alex','sasha','alexander','den','denis','denchik','pavel','pasha','pashka','stepa',
+              'stepan','stepashka','kolyan','kolya','nikolay','kolyanchik','nastya','anastasia','nastenka','slastenka'
+            ],
+            3: [
+              'orlov','orel','baranov','baran','petrov','smith','miller','brown','johnson','garcia',
+              'paris','yerevan','armenia','berlin','dubai','london','tokyo','moscow','rome','monaco'
+            ],
+            4: [
+              'pricheska','pri_cheska','qzxvna','qz_xvna','m4d','h0me','hel_lo','aaaaa','aaabb','aabbb',
+              'azaza','abcde','qwert','vip','ceo','usa','bmw','killer','devil','crypto'
             ]
           };
           const list = groups[Number(process.env.SHARD)] || [];
@@ -54,7 +62,7 @@ jobs:
               row = [username,'','','','','',`ERR:${e.message}`];
             }
             console.log(row.join('\t'));
-            await new Promise(r=>setTimeout(r,700));
+            await new Promise(r=>setTimeout(r,650));
           }
           EOF
           node /tmp/audit.mjs
