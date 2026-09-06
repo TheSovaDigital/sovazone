@@ -134,7 +134,13 @@ function lengthFactor(len){
 }
 
 function categoryFactor(code){
-  return code==='abbreviation'?1.25:code==='english_word'?1.15:code==='first_name'?1:code==='geography'?1:code==='russian_word_translit'?.9:code==='surname'?.9:code==='other_language_word'?.85:code==='leetspeak'?.75:1;
+  if(code==='abbreviation')return 1.25;
+  if(code==='english_word')return 1.15;
+  if(code==='first_name'||code==='geography')return 1;
+  if(code==='russian_word_translit'||code==='surname')return .9;
+  if(code==='other_language_word')return .85;
+  if(code==='leetspeak')return .75;
+  return 1;
 }
 
 function patternBand(username,score){
