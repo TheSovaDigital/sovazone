@@ -1,7 +1,7 @@
 const buckets = globalThis.__sovaValuationBucketsV33 || (globalThis.__sovaValuationBucketsV32 = new Map());
 const valuationCache = globalThis.__sovaValuationCacheV33 || (globalThis.__sovaValuationCacheV32 = new Map());
 
-const ENGINE_VERSION = 'instagram-v3.3';
+const ENGINE_VERSION = 'instagram-v3.4';
 const STRONG_LETTERS = new Set(['a','x','s','z']);
 const WEAK_LETTERS = new Set(['b','d','j','q','u','y']);
 const STRONG_DIGITS = new Set(['0','1','5','7']);
@@ -194,18 +194,65 @@ function numericSignals(lower){
   return {chars,allSame,palindrome,ascending,descending,pairPrefix,pairSuffix};
 }
 
-function numericScore3(lower){
+function numericRange3(lower){
   const s=numericSignals(lower),chars=s.chars;
-  let score=chars.reduce((a,c)=>a+symbolTier(c),0)/3;
-  if(s.allSame)score+=5;
-  if(s.palindrome&&!s.allSame)score+=2;
-  if(s.ascending)score+=4;
-  if(s.descending)score+=3.5;
-  if(!s.allSame&&(s.pairPrefix||s.pairSuffix))score+=1;
-  if(s.allSame&&['1','7','0'].includes(chars[0]))score+=3;
-  const culture={'404':4,'007':1,'666':2.5,'100':2,'999':0.5,'888':0.4,'200':1.2,'911':0.7,'420':0.3};
-  if(Object.prototype.hasOwnProperty.call(culture,lower))score+=culture[lower];
-  return score;
+  const strong=chars.filter(c=>STRONG_DIGITS.has(c)).length;
+  const weak=chars.filter(c=>WEAK_DIGITS.has(c)).length;
+  const out=(min,max,score,liq='medium',open=false)=>({min,max,score,liq,open});
+
+  // Repeating triples: repetition is the main premium, then digit demand separates tiers.
+  if(s.allSame){
+    if(['1','7','0'].includes(chars[0]))return out(50000,50000,94,'high',true);
+    if(['5','6','9'].includes(chars[0]))return out(10000,15000,80,'high');
+    if(chars[0]==='8')return out(7000,12000,76,'high');
+    return out(5000,10000,70,'medium');
+  }
+
+  // Recognisable cultural / internet / emergency codes get semantic demand on top of structure.
+  if(lower==='404')return out(10000,20000,86,'high');
+  if(lower==='007')return out(5000,10000,72,'medium');
+  if(lower==='911')return out(3000,5000,64,'medium');
+  if(lower==='420')return out(1500,2000,55,'low');
+
+  // Round hundreds generalise by the leading digit rather than exact-number lookup.
+  if(chars[1]==='0'&&chars[2]==='0'){
+    if(chars[0]==='1')return out(10000,15000,80,'high');
+    if(chars[0]==='2')return out(5000,10000,70,'medium');
+    if(STRONG_DIGITS.has(chars[0]))return out(7000,12000,74,'medium');
+    if(WEAK_DIGITS.has(chars[0]))return out(3000,5000,62,'medium');
+    return out(5000,8000,67,'medium');
+  }
+
+  // 101 is a particularly recognisable palindrome (binary / introductory-course notation).
+  if(lower==='101')return out(7000,10000,78,'high');
+
+  // Other palindromes scale with the quality of their digits.
+  if(s.palindrome){
+    if(strong===3)return out(5000,8000,72,'medium');
+    if(strong>=2)return out(5000,8000,70,'medium');
+    if(weak>=2)return out(2000,3500,59,'low');
+    return out(3000,5000,64,'medium');
+  }
+
+  // Ascending sequences are stronger when they start cleanly and avoid weak digits.
+  if(s.ascending){
+    if(chars[0]==='1'&&weak===0)return out(10000,15000,80,'high');
+    if(weak>=2)return out(3000,5000,64,'medium');
+    if(strong>=2)return out(5000,10000,70,'medium');
+    return out(3000,5000,64,'medium');
+  }
+
+  // Descending sequences carry a smaller premium than comparable ascending sequences.
+  if(s.descending){
+    if(strong>=2)return out(5000,8000,69,'medium');
+    return out(3000,5000,64,'medium');
+  }
+
+  // Non-pattern triples stay close to scarcity floor unless digit quality itself is strong.
+  if(weak>=2)return out(1500,2000,55,'low');
+  if(strong>=2)return out(3000,5000,64,'medium');
+  if(strong===1&&weak===0)return out(2000,3500,60,'low');
+  return out(1500,2500,56,'low');
 }
 
 function structuralResult(username,platform,lang){
@@ -217,13 +264,7 @@ function structuralResult(username,platform,lang){
   }
 
   if(/^\d{3}$/.test(lower)){
-    const s=numericScore3(lower);let min,max,open=false,score,liq;
-    if(s>=8.5){min=50000;max=50000;open=true;score=94;liq='high';}
-    else if(s>=6.15){min=10000;max=20000;score=86;liq='high';}
-    else if(s>=4){min=10000;max=15000;score=80;liq='high';}
-    else if(s>=2.5){min=5000;max=10000;score=72;liq='medium';}
-    else if(s>=1.5){min=3000;max=6000;score=64;liq='medium';}
-    else{min=1500;max=3500;score=55;liq='low';}
+    const r=numericRange3(lower),min=r.min,max=r.max,open=r.open,score=r.score,liq=r.liq;
     const factors=lang==='en'
       ? [{title:'Numeric scarcity',text:'Three-digit handles are scarce; pattern quality determines the premium.'},{title:'Pattern',text:'Repetition, symmetry, sequence, digit quality and cultural meaning are scored together.'},{title:'Demand',text:liq==='high'?'The number pattern has broad real buyer appeal.':liq==='medium'?'The pattern has clear but narrower demand.':'Scarcity remains, but the pattern itself is comparatively weak.'}]
       : [{title:'Редкость',text:'Трёхзначные ники редки; премию определяет качество числового паттерна.'},{title:'Паттерн',text:'Повторы, симметрия, последовательность, качество цифр и культурный смысл учитываются вместе.'},{title:'Спрос',text:liq==='high'?'У числового паттерна широкий реальный спрос.':liq==='medium'?'У паттерна заметный, но более узкий спрос.':'Редкость сохраняется, но сам паттерн сравнительно слабый.'}];
