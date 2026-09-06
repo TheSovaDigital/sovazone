@@ -40,25 +40,16 @@ jobs:
           s=s.replace('tiktok.priceMin!==5000||tiktok.priceMax!==7500', 'tiktok.priceMin!==4000||tiktok.priceMax!==6000')
           s=s.replace('on instagram-v3.8', 'on instagram-v3.9')
           p.write_text(s)
-
-          p=Path('.github/workflows/valuation-regression.yml')
-          s=p.read_text()
-          s=s.replace("CACHE_VERSION='instagram-v3.8'", "CACHE_VERSION='instagram-v3.9'")
-          s=s.replace("data.engineVersion!=='instagram-v3.8'", "data.engineVersion!=='instagram-v3.9'")
-          s=s.replace("['volk','tiktok',3750,5000]", "['volk','tiktok',3000,4000]")
-          s=s.replace('on instagram-v3.8', 'on instagram-v3.9')
-          p.write_text(s)
           PY
 
           node --check api/username-value.js
           node --check tools/username-value.js
           node .github/scripts/test_username_valuation_v38.mjs
 
-      - name: Commit change and remove temporary workflow
+      - name: Commit targeted files
         run: |
-          rm .github/workflows/update-tiktok-scale.yml
           git config user.name "SovaDigital"
           git config user.email "thesovaz@gmail.com"
-          git add api/username-value.js tools/username-value.js .github/scripts/test_username_valuation_v38.mjs .github/workflows/valuation-regression.yml .github/workflows/update-tiktok-scale.yml
+          git add api/username-value.js tools/username-value.js .github/scripts/test_username_valuation_v38.mjs
           git commit -m "Set TikTok valuation scale to 20 percent"
           git push
