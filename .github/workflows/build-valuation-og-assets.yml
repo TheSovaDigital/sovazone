@@ -1,0 +1,52 @@
+name: Build Valuation OG assets
+
+on:
+  push:
+    branches:
+      - valuation-og-assets
+    paths:
+      - .github/og-assets/READY
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: valuation-og-assets
+
+      - name: Decode and verify OG assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p image/og
+          for base in \
+            valuation-ai-ru \
+            valuation-ai-instagram-ru \
+            valuation-ai-tiktok-ru \
+            valuation-ai-telegram-ru \
+            valuation-ai-en \
+            valuation-ai-instagram-en \
+            valuation-ai-tiktok-en \
+            valuation-ai-telegram-en
+          do
+            cat ".github/og-assets/${base}.part1" ".github/og-assets/${base}.part2" ".github/og-assets/${base}.part3" | base64 --decode > "image/og/${base}.jpg"
+            test -s "image/og/${base}.jpg"
+            file "image/og/${base}.jpg" | grep -qi 'JPEG'
+          done
+          rm -rf .github/og-assets
+
+      - name: Commit optimized OG assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A image/og .github/og-assets
+          git commit -m "Add optimized Valuation AI OG assets [skip ci]"
+          git push origin HEAD:valuation-og-assets
