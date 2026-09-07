@@ -1,0 +1,94 @@
+name: Install Valuation OG assets
+
+on:
+  push:
+    branches:
+      - valuation-og-final
+    paths:
+      - '.github/valuation-og-zip/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: valuation-og-final
+
+      - name: Decode assets and patch metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p image/og
+          cat .github/valuation-og-zip/part* > /tmp/valuation-og.zip.b64
+          base64 --decode /tmp/valuation-og.zip.b64 > /tmp/valuation-og.zip
+          unzip -o /tmp/valuation-og.zip -d image/og
+
+          for f in \
+            valuation-ai-ru.jpg \
+            valuation-ai-instagram-ru.jpg \
+            valuation-ai-tiktok-ru.jpg \
+            valuation-ai-telegram-ru.jpg \
+            valuation-ai-en.jpg \
+            valuation-ai-instagram-en.jpg \
+            valuation-ai-tiktok-en.jpg \
+            valuation-ai-telegram-en.jpg
+          do
+            test -s "image/og/$f"
+            file "image/og/$f" | grep -qi 'JPEG'
+          done
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          pages = {
+              "tools/username-value.html": ("valuation-ai-ru.jpg", "Оценка стоимости никнейма — SovaZone Valuation AI"),
+              "tools/instagram-username-value.html": ("valuation-ai-instagram-ru.jpg", "Оценка стоимости никнейма Instagram — SovaZone Valuation AI"),
+              "tools/tiktok-username-value.html": ("valuation-ai-tiktok-ru.jpg", "Оценка стоимости никнейма TikTok — SovaZone Valuation AI"),
+              "tools/telegram-username-value.html": ("valuation-ai-telegram-ru.jpg", "Оценка стоимости никнейма Telegram — SovaZone Valuation AI"),
+              "en/tools/username-value.html": ("valuation-ai-en.jpg", "Username Value — SovaZone Valuation AI"),
+              "en/tools/instagram-username-value.html": ("valuation-ai-instagram-en.jpg", "Instagram Username Value — SovaZone Valuation AI"),
+              "en/tools/tiktok-username-value.html": ("valuation-ai-tiktok-en.jpg", "TikTok Username Value — SovaZone Valuation AI"),
+              "en/tools/telegram-username-value.html": ("valuation-ai-telegram-en.jpg", "Telegram Username Value — SovaZone Valuation AI"),
+          }
+
+          old_og = '<meta property="og:image" content="https://sovazone.com/og-image.png">'
+          old_tw = '<meta name="twitter:image" content="https://sovazone.com/og-twitter.png">'
+
+          for path, (img, alt) in pages.items():
+              p = Path(path)
+              s = p.read_text(encoding="utf-8")
+              if old_og not in s or old_tw not in s:
+                  raise SystemExit(f"Expected OG tags not found in {path}")
+
+              new_og = (
+                  f'<meta property="og:image" content="https://sovazone.com/image/og/{img}">\n'
+                  f'  <meta property="og:image:type" content="image/jpeg">\n'
+                  f'  <meta property="og:image:width" content="1200">\n'
+                  f'  <meta property="og:image:height" content="630">\n'
+                  f'  <meta property="og:image:alt" content="{alt}">'
+              )
+              new_tw = (
+                  f'<meta name="twitter:image" content="https://sovazone.com/image/og/{img}">\n'
+                  f'  <meta name="twitter:image:alt" content="{alt}">'
+              )
+              s = s.replace(old_og, new_og, 1).replace(old_tw, new_tw, 1)
+              p.write_text(s, encoding="utf-8")
+          PY
+
+          rm -rf .github/valuation-og-zip
+
+      - name: Commit final assets and metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A image/og tools en/tools .github/valuation-og-zip
+          git commit -m "Add page-specific Valuation AI OG images [skip ci]"
+          git push origin HEAD:valuation-og-final
