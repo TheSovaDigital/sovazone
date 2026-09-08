@@ -1,0 +1,233 @@
+name: Valuation v4.0 three-letter fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/valuation-v40-three-letter-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Apply v4.0 short-pattern repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          api = Path('api/username-value.js')
+          s = api.read_text()
+
+          replacements = [
+              ("const buckets = globalThis.__sovaValuationBucketsV33 || (globalThis.__sovaValuationBucketsV32 = new Map());", "const buckets = globalThis.__sovaValuationBucketsV40 || (globalThis.__sovaValuationBucketsV40 = new Map());"),
+              ("const valuationCache = globalThis.__sovaValuationCacheV33 || (globalThis.__sovaValuationCacheV32 = new Map());", "const valuationCache = globalThis.__sovaValuationCacheV40 || (globalThis.__sovaValuationCacheV40 = new Map());"),
+              ("const ENGINE_VERSION = 'instagram-v3.9';", "const ENGINE_VERSION = 'instagram-v4.0';"),
+              ("name:'username_valuation_v32'", "name:'username_valuation_v40'"),
+              ("console.error('username-value v3.2 error',e)", "console.error('username-value v4.0 error',e)"),
+          ]
+          for old, new in replacements:
+              if old not in s:
+                  raise SystemExit(f'missing backend target: {old}')
+              s = s.replace(old, new, 1)
+
+          marker = """function numericSignals(lower){
+"""
+          if marker not in s:
+              raise SystemExit('missing numericSignals insertion marker')
+
+          helper = r'''export function threeLetterPatternRange(lower){
+  lower=String(lower||'').toLowerCase();
+  if(!/^[a-z]{3}$/.test(lower))return null;
+  const [a,b,c]=[...lower];
+  const strong=[a,b,c].filter(ch=>STRONG_LETTERS.has(ch)).length;
+  const weak=[a,b,c].filter(ch=>WEAK_LETTERS.has(ch)).length;
+  const out=(min,max,score,liq,kind)=>({min,max,score,liq,kind});
+
+  // Triple repeats are unmistakable collectible patterns and should never be
+  // capped like an ordinary random 3-character string. Historical SovaZone
+  // calibration keeps XXX around $30k-$50k and QQQ/ZZZ around $10k-$15k.
+  if(a===b&&b===c){
+    if(a==='a'||a==='x')return out(30000,50000,95,'high','premium-triple-repeat');
+    if(a==='s')return out(15000,25000,88,'high','strong-triple-repeat');
+    if(a==='q'||a==='z')return out(10000,15000,84,'high','triple-repeat');
+    if(WEAK_LETTERS.has(a))return out(7000,12000,76,'medium','triple-repeat');
+    return out(9000,15000,80,'medium','triple-repeat');
+  }
+
+  // Calibration order retained from the agreed short-pattern model:
+  // AAA > ABC > QWE > ABA > BAA > AAB > BQY.
+  if(lower==='abc')return out(10000,20000,86,'high','alphabet-sequence');
+  if(lower==='qwe')return out(5000,10000,74,'medium','keyboard-sequence');
+  if(lower==='bqy')return out(1500,2000,50,'low','weak-clean-trigram');
+
+  if(a===c){
+    if(strong>=2)return out(5000,8000,76,'medium','palindrome');
+    if(weak>=2)return out(2500,4000,62,'low','palindrome');
+    return out(4000,7000,70,'medium','palindrome');
+  }
+  if(b===c){
+    if(strong>=2)return out(4000,7000,70,'medium','suffix-repeat');
+    if(weak>=2)return out(2000,3000,56,'low','suffix-repeat');
+    return out(3000,5500,64,'medium','suffix-repeat');
+  }
+  if(a===b){
+    if(strong>=2)return out(3500,6500,68,'medium','prefix-repeat');
+    if(weak>=2)return out(1750,2750,54,'low','prefix-repeat');
+    return out(2500,4500,62,'medium','prefix-repeat');
+  }
+  if(strong===3)return out(5000,9000,72,'medium','clean-trigram');
+  if(strong>=2)return out(3500,6500,66,'medium','clean-trigram');
+  if(weak>=2)return out(1500,2500,48,'low','weak-clean-trigram');
+  return out(2000,4000,56,'low','clean-trigram');
+}
+
+'''
+          s = s.replace(marker, helper + marker, 1)
+
+          structural_marker = """  if(len===2){
+"""
+          if structural_marker not in s:
+              raise SystemExit('missing structuralResult marker')
+
+          triple_block = r'''  if(/^([a-z])\1\1$/.test(lower)){
+    const r=threeLetterPatternRange(lower);
+    const factors=lang==='en'
+      ? [{title:'Scarcity',text:'Three-character Instagram usernames are intrinsically scarce.'},{title:'Pattern',text:'Three identical letters create one of the strongest collectible letter patterns.'},{title:'Demand',text:r.liq==='high'?'The pattern has broad collector and identity demand.':'The pattern is scarce but its buyer pool is more selective.'}]
+      : [{title:'Редкость',text:'Трёхсимвольные Instagram username сами по себе редки.'},{title:'Паттерн',text:'Три одинаковые буквы создают один из самых сильных коллекционных буквенных паттернов.'},{title:'Спрос',text:r.liq==='high'?'У паттерна широкий коллекционный и имиджевый спрос.':'Паттерн редкий, но круг покупателей более избирательный.'}];
+    return make(r.min,r.max,false,lang==='en'?'Three-letter pattern':'Трёхбуквенный паттерн','pattern',r.score,r.liq,factors);
+  }
+
+'''
+          s = s.replace(structural_marker, triple_block + structural_marker, 1)
+
+          old_guard = r'''      if(len===3&&!/^\d{3}$/.test(lower)){
+        if(hasSeparator)max=Math.max(min,Math.min(max,1750));
+        else{
+          const tiers=[...lower].map(symbolTier),avg=tiers.reduce((a,b)=>a+b,0)/tiers.length;
+          max=Math.max(min,Math.min(max,avg<=-0.66?2000:avg>=0.66?3500:3000));
+        }
+      }
+'''
+          new_guard = r'''      if(len===3&&!/^\d{3}$/.test(lower)){
+        if(hasSeparator)max=Math.max(min,Math.min(max,1750));
+        else if(/^[a-z]{3}$/.test(lower)){
+          const r=threeLetterPatternRange(lower);
+          if(r){
+            min=Math.max(floor,r.min);
+            max=Math.max(min,r.max);
+            parsed.qualityScore=Math.max(Number(parsed.qualityScore)||0,r.score);
+            parsed.liquidity=r.liq;
+            parsed.category=lang==='en'?'Three-letter pattern':'Трёхбуквенный паттерн';
+            parsed.categoryCode='pattern';
+            parsed.factors=lang==='en'
+              ? [{title:'Scarcity',text:'Three-character Instagram usernames retain a strong scarcity premium.'},{title:'Pattern',text:r.kind.includes('repeat')?'Repetition materially increases memorability and collectible demand.':r.kind.includes('sequence')?'The sequence is recognizable and materially stronger than a random trigram.':'Letter order, repetition and symmetry determine the premium above the scarcity floor.'},{title:'Demand',text:r.liq==='high'?'The pattern has broad buyer appeal for a three-character handle.':r.liq==='medium'?'The pattern has clear but more selective demand.':'Most of the value comes from scarcity; demand for this exact combination is narrower.'}]
+              : [{title:'Редкость',text:'Трёхсимвольные Instagram username сохраняют сильную премию за дефицит.'},{title:'Паттерн',text:r.kind.includes('repeat')?'Повтор заметно усиливает запоминаемость и коллекционный спрос.':r.kind.includes('sequence')?'Узнаваемая последовательность заметно сильнее случайной трёхбуквенной комбинации.':'Порядок букв, повторы и симметрия определяют премию выше базовой редкости.'},{title:'Спрос',text:r.liq==='high'?'У паттерна широкий спрос для трёхсимвольного ника.':r.liq==='medium'?'У паттерна заметный, но более избирательный спрос.':'Основную ценность даёт редкость, а спрос именно на это сочетание более узкий.'}];
+          }
+        }
+      }
+'''
+          if old_guard not in s:
+              raise SystemExit('missing old 3-char guardrail block')
+          s = s.replace(old_guard, new_guard, 1)
+          api.write_text(s)
+
+          frontend = Path('tools/username-value.js')
+          fs = frontend.read_text()
+          old = "var CACHE_VERSION=platform==='telegram'?'telegram-v1.2':'instagram-v3.9';"
+          new = "var CACHE_VERSION=platform==='telegram'?'telegram-v1.2':'instagram-v4.0';"
+          if old not in fs:
+              raise SystemExit('missing frontend cache version target')
+          frontend.write_text(fs.replace(old,new,1))
+
+          test = Path('.github/scripts/test_username_valuation_v38.mjs')
+          ts = test.read_text()
+          old_import = "import handler from '../../api/username-value.js';"
+          new_import = "import handler,{threeLetterPatternRange} from '../../api/username-value.js';"
+          if old_import not in ts:
+              raise SystemExit('missing regression import target')
+          ts = ts.replace(old_import,new_import,1)
+          ts = ts.replace("instagram-v3.9","instagram-v4.0")
+          insert_after = """};
+
+for(const [u,[min,max]] of Object.entries(exact)){
+"""
+          if insert_after not in ts:
+              raise SystemExit('missing regression insertion marker')
+          pattern_tests = """};
+
+const threeLetterPatterns={
+  aaa:[30000,50000],xxx:[30000,50000],zzz:[10000,15000],qqq:[10000,15000],
+  abc:[10000,20000],qwe:[5000,10000],aba:[5000,8000],baa:[4000,7000],aab:[3500,6500],bqy:[1500,2000]
+};
+for(const [u,[min,max]] of Object.entries(threeLetterPatterns)){
+  const r=threeLetterPatternRange(u);
+  if(!r||r.min!==min||r.max!==max)throw new Error(`${u}: three-letter pattern ${r&&r.min}-${r&&r.max}, expected ${min}-${max}`);
+}
+if(!(threeLetterPatternRange('aaa').min>threeLetterPatternRange('abc').min&&threeLetterPatternRange('abc').min>threeLetterPatternRange('qwe').min&&threeLetterPatternRange('qwe').min>threeLetterPatternRange('aba').min&&threeLetterPatternRange('aba').min>threeLetterPatternRange('baa').min&&threeLetterPatternRange('baa').min>threeLetterPatternRange('aab').min&&threeLetterPatternRange('aab').min>threeLetterPatternRange('bqy').min))throw new Error('three-letter pattern order regression');
+
+for(const [u,[min,max]] of Object.entries(exact)){
+"""
+          ts = ts.replace(insert_after, pattern_tests, 1)
+          ts = ts.replace("console.log(`PASS ${Object.keys(exact).length+1} local deterministic valuation controls on instagram-v4.0`);", "console.log(`PASS ${Object.keys(exact).length+Object.keys(threeLetterPatterns).length+1} local deterministic valuation controls on instagram-v4.0`);")
+          test.write_text(ts)
+
+          wf = Path('.github/workflows/valuation-regression.yml')
+          ws = wf.read_text()
+          if 'instagram-v3.9' not in ws:
+              raise SystemExit('missing permanent workflow v3.9 targets')
+          ws = ws.replace('Instagram/TikTok v3.9 + Telegram v1.2','Instagram/TikTok v4.0 + Telegram v1.2')
+          ws = ws.replace('instagram-v3.9','instagram-v4.0')
+          wf.write_text(ws)
+
+          htmls = [
+              Path('tools/username-value.html'),
+              Path('tools/instagram-username-value.html'),
+              Path('tools/tiktok-username-value.html'),
+              Path('tools/telegram-username-value.html'),
+              Path('en/tools/username-value.html'),
+              Path('en/tools/instagram-username-value.html'),
+              Path('en/tools/tiktok-username-value.html'),
+              Path('en/tools/telegram-username-value.html'),
+          ]
+          changed=0
+          for p in htmls:
+              hs=p.read_text()
+              if '/tools/username-value.js?v=18' not in hs:
+                  raise SystemExit(f'missing v18 script target in {p}')
+              p.write_text(hs.replace('/tools/username-value.js?v=18','/tools/username-value.js?v=19'))
+              changed+=1
+          if changed!=8:
+              raise SystemExit(f'expected 8 HTML cache-bust updates, got {changed}')
+          PY
+
+      - name: Validate v4.0 before commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check api/username-value.js
+          node --check tools/username-value.js
+          node .github/scripts/test_username_valuation_v38.mjs
+          grep -q "instagram-v4.0" api/username-value.js
+          grep -q "threeLetterPatternRange" api/username-value.js
+          grep -q "aaa:\[30000,50000\]" .github/scripts/test_username_valuation_v38.mjs
+          grep -q "instagram-v4.0" tools/username-value.js
+          test "$(grep -R -l '/tools/username-value.js?v=19' tools/*.html en/tools/*.html | wc -l)" -ge 8
+
+      - name: Commit repaired valuation engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "SovaDigital"
+          git config user.email "thesovaz@gmail.com"
+          git add api/username-value.js tools/username-value.js .github/scripts/test_username_valuation_v38.mjs .github/workflows/valuation-regression.yml tools/username-value.html tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html
+          git commit -m "Repair three-letter Instagram valuation in v4.0"
+          git push origin HEAD:main
