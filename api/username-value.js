@@ -1,7 +1,7 @@
-const buckets = globalThis.__sovaValuationBucketsV33 || (globalThis.__sovaValuationBucketsV32 = new Map());
-const valuationCache = globalThis.__sovaValuationCacheV33 || (globalThis.__sovaValuationCacheV32 = new Map());
+const buckets = globalThis.__sovaValuationBucketsV40 || (globalThis.__sovaValuationBucketsV40 = new Map());
+const valuationCache = globalThis.__sovaValuationCacheV40 || (globalThis.__sovaValuationCacheV40 = new Map());
 
-const ENGINE_VERSION = 'instagram-v3.9';
+const ENGINE_VERSION = 'instagram-v4.0';
 const STRONG_LETTERS = new Set(['a','x','s','z']);
 const WEAK_LETTERS = new Set(['b','d','j','q','u','y']);
 const STRONG_DIGITS = new Set(['0','1','5','7']);
@@ -295,6 +295,52 @@ function localizedLiquidity(value,lang){
   return value==='high'?'Высокая':value==='medium'?'Средняя':'Низкая';
 }
 
+export function threeLetterPatternRange(lower){
+  lower=String(lower||'').toLowerCase();
+  if(!/^[a-z]{3}$/.test(lower))return null;
+  const [a,b,c]=[...lower];
+  const strong=[a,b,c].filter(ch=>STRONG_LETTERS.has(ch)).length;
+  const weak=[a,b,c].filter(ch=>WEAK_LETTERS.has(ch)).length;
+  const out=(min,max,score,liq,kind)=>({min,max,score,liq,kind});
+
+  // Triple repeats are unmistakable collectible patterns and should never be
+  // capped like an ordinary random 3-character string. Historical SovaZone
+  // calibration keeps XXX around $30k-$50k and QQQ/ZZZ around $10k-$15k.
+  if(a===b&&b===c){
+    if(a==='a'||a==='x')return out(30000,50000,95,'high','premium-triple-repeat');
+    if(a==='s')return out(15000,25000,88,'high','strong-triple-repeat');
+    if(a==='q'||a==='z')return out(10000,15000,84,'high','triple-repeat');
+    if(WEAK_LETTERS.has(a))return out(7000,12000,76,'medium','triple-repeat');
+    return out(9000,15000,80,'medium','triple-repeat');
+  }
+
+  // Calibration order retained from the agreed short-pattern model:
+  // AAA > ABC > QWE > ABA > BAA > AAB > BQY.
+  if(lower==='abc')return out(10000,20000,86,'high','alphabet-sequence');
+  if(lower==='qwe')return out(6000,10000,74,'medium','keyboard-sequence');
+  if(lower==='bqy')return out(1500,2000,50,'low','weak-clean-trigram');
+
+  if(a===c){
+    if(strong>=2)return out(5000,8000,76,'medium','palindrome');
+    if(weak>=2)return out(2500,4000,62,'low','palindrome');
+    return out(4000,7000,70,'medium','palindrome');
+  }
+  if(b===c){
+    if(strong>=2)return out(4000,7000,70,'medium','suffix-repeat');
+    if(weak>=2)return out(2000,3000,56,'low','suffix-repeat');
+    return out(3000,5500,64,'medium','suffix-repeat');
+  }
+  if(a===b){
+    if(strong>=2)return out(3500,6500,68,'medium','prefix-repeat');
+    if(weak>=2)return out(1750,2750,54,'low','prefix-repeat');
+    return out(2500,4500,62,'medium','prefix-repeat');
+  }
+  if(strong===3)return out(5000,9000,72,'medium','clean-trigram');
+  if(strong>=2)return out(3500,6500,66,'medium','clean-trigram');
+  if(weak>=2)return out(1500,2500,48,'low','weak-clean-trigram');
+  return out(2000,4000,56,'low','clean-trigram');
+}
+
 function numericSignals(lower){
   const chars=[...lower],nums=chars.map(Number);
   const allSame=chars.every(c=>c===chars[0]);
@@ -375,6 +421,14 @@ function structuralResult(username,platform,lang){
     return {username,platform,engineVersion:ENGINE_VERSION,priceMin:min,priceMax:max,openEnded:Boolean(open),uncertain:false,specialCase:'none',category,categoryCode:code,qualityScore:score,liquidity:liq,liquidityLabel:localizedLiquidity(liq,lang),factors,disclaimer:lang==='en'?'Indicative SovaZone estimate, not a guaranteed transaction price.':'Ориентировочная оценка SovaZone, не гарантия цены сделки.'};
   }
 
+
+  if(/^([a-z])\1\1$/.test(lower)){
+    const r=threeLetterPatternRange(lower);
+    const factors=lang==='en'
+      ? [{title:'Scarcity',text:'Three-character Instagram usernames are intrinsically scarce.'},{title:'Pattern',text:'Three identical letters create one of the strongest collectible letter patterns.'},{title:'Demand',text:r.liq==='high'?'The pattern has broad collector and identity demand.':'The pattern is scarce but its buyer pool is more selective.'}]
+      : [{title:'Редкость',text:'Трёхсимвольные Instagram username сами по себе редки.'},{title:'Паттерн',text:'Три одинаковые буквы создают один из самых сильных коллекционных буквенных паттернов.'},{title:'Спрос',text:r.liq==='high'?'У паттерна широкий коллекционный и имиджевый спрос.':'Паттерн редкий, но круг покупателей более избирательный.'}];
+    return make(r.min,r.max,false,lang==='en'?'Three-letter pattern':'Трёхбуквенный паттерн','pattern',r.score,r.liq,factors);
+  }
 
   if(len===2){
     // Two-character handles use a deterministic SovaZone scarcity formula.
@@ -498,9 +552,19 @@ function applyInstagramGuardrails(parsed,username,lang){
       }
       if(len===3&&!/^\d{3}$/.test(lower)){
         if(hasSeparator)max=Math.max(min,Math.min(max,1750));
-        else{
-          const tiers=[...lower].map(symbolTier),avg=tiers.reduce((a,b)=>a+b,0)/tiers.length;
-          max=Math.max(min,Math.min(max,avg<=-0.66?2000:avg>=0.66?3500:3000));
+        else if(/^[a-z]{3}$/.test(lower)){
+          const r=threeLetterPatternRange(lower);
+          if(r){
+            min=Math.max(floor,r.min);
+            max=Math.max(min,r.max);
+            parsed.qualityScore=Math.max(Number(parsed.qualityScore)||0,r.score);
+            parsed.liquidity=r.liq;
+            parsed.category=lang==='en'?'Three-letter pattern':'Трёхбуквенный паттерн';
+            parsed.categoryCode='pattern';
+            parsed.factors=lang==='en'
+              ? [{title:'Scarcity',text:'Three-character Instagram usernames retain a strong scarcity premium.'},{title:'Pattern',text:r.kind.includes('repeat')?'Repetition materially increases memorability and collectible demand.':r.kind.includes('sequence')?'The sequence is recognizable and materially stronger than a random trigram.':'Letter order, repetition and symmetry determine the premium above the scarcity floor.'},{title:'Demand',text:r.liq==='high'?'The pattern has broad buyer appeal for a three-character handle.':r.liq==='medium'?'The pattern has clear but more selective demand.':'Most of the value comes from scarcity; demand for this exact combination is narrower.'}]
+              : [{title:'Редкость',text:'Трёхсимвольные Instagram username сохраняют сильную премию за дефицит.'},{title:'Паттерн',text:r.kind.includes('repeat')?'Повтор заметно усиливает запоминаемость и коллекционный спрос.':r.kind.includes('sequence')?'Узнаваемая последовательность заметно сильнее случайной трёхбуквенной комбинации.':'Порядок букв, повторы и симметрия определяют премию выше базовой редкости.'},{title:'Спрос',text:r.liq==='high'?'У паттерна широкий спрос для трёхсимвольного ника.':r.liq==='medium'?'У паттерна заметный, но более избирательный спрос.':'Основную ценность даёт редкость, а спрос именно на это сочетание более узкий.'}];
+          }
         }
       }
     }
@@ -604,7 +668,7 @@ export default async function handler(req,res){
 
   const chars=[...username.toLowerCase()];
   const signals={length:chars.length,hasSeparator:/[._]/.test(username),allNumeric:/^\d+$/.test(username),lettersOnly:/^[a-z]+$/i.test(username),uniqueChars:new Set(chars).size,strongSymbols:chars.filter(c=>symbolTier(c)===1).length,weakSymbols:chars.filter(c=>symbolTier(c)===-1).length};
-  const requestBody={model:process.env.VALUATION_MODEL||'gpt-5.6-luna',store:false,reasoning:{effort:'none'},temperature:0,instructions:CALIBRATION+'\n'+languageRules(lang),input:`Evaluate @${username}. First estimate its Instagram-equivalent value; backend handles TikTok scaling. Deterministic format signals: ${JSON.stringify(signals)}. Do not use any exact example as a lookup answer.`,max_output_tokens:700,text:{verbosity:'low',format:{type:'json_schema',name:'username_valuation_v32',strict:true,schema}}};
+  const requestBody={model:process.env.VALUATION_MODEL||'gpt-5.6-luna',store:false,reasoning:{effort:'none'},temperature:0,instructions:CALIBRATION+'\n'+languageRules(lang),input:`Evaluate @${username}. First estimate its Instagram-equivalent value; backend handles TikTok scaling. Deterministic format signals: ${JSON.stringify(signals)}. Do not use any exact example as a lookup answer.`,max_output_tokens:700,text:{verbosity:'low',format:{type:'json_schema',name:'username_valuation_v40',strict:true,schema}}};
 
   try{
     const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'Authorization':`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify(requestBody)});
@@ -616,5 +680,5 @@ export default async function handler(req,res){
     valuationCache.set(cacheKey,parsed);
     if(valuationCache.size>5000){const first=valuationCache.keys().next().value;valuationCache.delete(first);}
     return res.status(200).json(parsed);
-  }catch(e){console.error('username-value v3.2 error',e);return res.status(500).json({error:lang==='en'?'Could not complete the estimate.':'Не удалось выполнить оценку.'});}
+  }catch(e){console.error('username-value v4.0 error',e);return res.status(500).json({error:lang==='en'?'Could not complete the estimate.':'Не удалось выполнить оценку.'});}
 }

@@ -10,7 +10,7 @@
   var result=root.querySelector('.uv-result');
   var error=root.querySelector('.uv-error');
   var lastRun=0;
-  var CACHE_VERSION=platform==='telegram'?'telegram-v1.2':'instagram-v3.9';
+  var CACHE_VERSION=platform==='telegram'?'telegram-v1.2':'instagram-v4.0';
   var API_ENDPOINT=platform==='telegram'?'https://sovazone.vercel.app/api/telegram-username-value/':'https://sovazone.vercel.app/api/username-value/';
 
   function t(ru,en){return lang==='en'?en:ru;}
