@@ -1,4 +1,4 @@
-name: Valuation v4.0 three-letter fix
+name: Valuation v4.0 production check
 
 on:
   push:
@@ -6,45 +6,36 @@ on:
     paths:
       - '.github/workflows/valuation-v40-three-letter-fix.yml'
 
-permissions:
-  contents: write
-
 jobs:
-  patch:
+  validate-production:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Apply v4.0 short-pattern repair
-        shell: bash
+      - name: Check live v4.0 short patterns
         run: |
-          set -euo pipefail
-          sed -i "/Path('tools\/username-value.html'),/d; /Path('en\/tools\/username-value.html'),/d; s/changed!=8/changed!=6/; s/expected 8 HTML/expected 6 HTML/; s/out(5000,10000,74,'medium','keyboard-sequence')/out(6000,10000,74,'medium','keyboard-sequence')/; s/qwe:\[5000,10000\]/qwe:[6000,10000]/" .github/scripts/patch_valuation_v40.py
-          python .github/scripts/patch_valuation_v40.py
-
-      - name: Validate v4.0 before commit
-        shell: bash
-        run: |
-          set -euo pipefail
-          node --check api/username-value.js
-          node --check tools/username-value.js
-          node .github/scripts/test_username_valuation_v38.mjs
-          grep -q "instagram-v4.0" api/username-value.js
-          grep -q "threeLetterPatternRange" api/username-value.js
-          grep -q "aaa:\[30000,50000\]" .github/scripts/test_username_valuation_v38.mjs
-          grep -q "qwe:\[6000,10000\]" .github/scripts/test_username_valuation_v38.mjs
-          grep -q "instagram-v4.0" tools/username-value.js
-          test "$(grep -R -l '/tools/username-value.js?v=19' tools/*.html en/tools/*.html | wc -l)" -ge 6
-
-      - name: Commit repaired valuation engine
-        shell: bash
-        run: |
-          set -euo pipefail
-          git restore .github/workflows/valuation-regression.yml
-          git config user.name "SovaDigital"
-          git config user.email "thesovaz@gmail.com"
-          git add api/username-value.js tools/username-value.js .github/scripts/test_username_valuation_v38.mjs tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html
-          git commit -m "Repair three-letter Instagram valuation in v4.0"
-          git push origin HEAD:main
+          node - <<'EOF'
+          const endpoint='https://sovazone.vercel.app/api/username-value/';
+          const tests=[
+            ['aaa',30000,50000],
+            ['xxx',30000,50000],
+            ['zzz',10000,15000],
+            ['qqq',10000,15000],
+            ['abc',10000,20000],
+            ['qwe',6000,10000],
+            ['aba',5000,8000],
+            ['baa',4000,7000],
+            ['aab',3500,6500],
+            ['bqy',1500,2000],
+            ['111',50000,50000],
+            ['aa',20000,30000]
+          ];
+          for(const [username,min,max] of tests){
+            const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username,platform:'instagram',lang:'en'})});
+            const data=await r.json();
+            console.log(`${username}: engine=${data.engineVersion} price=${data.priceMin}-${data.priceMax} category=${data.categoryCode||data.category||''}`);
+            if(!r.ok)throw new Error(`${username}: HTTP ${r.status}`);
+            if(data.engineVersion!=='instagram-v4.0')throw new Error(`${username}: expected instagram-v4.0, got ${data.engineVersion}`);
+            if(Number(data.priceMin)!==min||Number(data.priceMax)!==max)throw new Error(`${username}: expected ${min}-${max}, got ${data.priceMin}-${data.priceMax}`);
+            await new Promise(r=>setTimeout(r,500));
+          }
+          console.log(`PASS ${tests.length} live Instagram v4.0 short-pattern controls`);
+          EOF
