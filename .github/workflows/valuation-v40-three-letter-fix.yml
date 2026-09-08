@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          sed -i "/Path('tools\/username-value.html'),/d; /Path('en\/tools\/username-value.html'),/d; s/changed!=8/changed!=6/; s/expected 8 HTML/expected 6 HTML/" .github/scripts/patch_valuation_v40.py
+          sed -i "/Path('tools\/username-value.html'),/d; /Path('en\/tools\/username-value.html'),/d; s/changed!=8/changed!=6/; s/expected 8 HTML/expected 6 HTML/; s/out(5000,10000,74,'medium','keyboard-sequence')/out(6000,10000,74,'medium','keyboard-sequence')/; s/qwe:\[5000,10000\]/qwe:[6000,10000]/" .github/scripts/patch_valuation_v40.py
           python .github/scripts/patch_valuation_v40.py
 
       - name: Validate v4.0 before commit
@@ -34,6 +34,7 @@ jobs:
           grep -q "instagram-v4.0" api/username-value.js
           grep -q "threeLetterPatternRange" api/username-value.js
           grep -q "aaa:\[30000,50000\]" .github/scripts/test_username_valuation_v38.mjs
+          grep -q "qwe:\[6000,10000\]" .github/scripts/test_username_valuation_v38.mjs
           grep -q "instagram-v4.0" tools/username-value.js
           test "$(grep -R -l '/tools/username-value.js?v=19' tools/*.html en/tools/*.html | wc -l)" -ge 6
 
