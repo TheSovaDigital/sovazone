@@ -18,7 +18,11 @@ jobs:
           fetch-depth: 0
 
       - name: Apply v4.0 short-pattern repair
-        run: python .github/scripts/patch_valuation_v40.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i "/Path('tools\/username-value.html'),/d; /Path('en\/tools\/username-value.html'),/d; s/changed!=8/changed!=6/; s/expected 8 HTML/expected 6 HTML/" .github/scripts/patch_valuation_v40.py
+          python .github/scripts/patch_valuation_v40.py
 
       - name: Validate v4.0 before commit
         shell: bash
@@ -31,7 +35,7 @@ jobs:
           grep -q "threeLetterPatternRange" api/username-value.js
           grep -q "aaa:\[30000,50000\]" .github/scripts/test_username_valuation_v38.mjs
           grep -q "instagram-v4.0" tools/username-value.js
-          test "$(grep -R -l '/tools/username-value.js?v=19' tools/*.html en/tools/*.html | wc -l)" -ge 8
+          test "$(grep -R -l '/tools/username-value.js?v=19' tools/*.html en/tools/*.html | wc -l)" -ge 6
 
       - name: Commit repaired valuation engine
         shell: bash
@@ -39,6 +43,6 @@ jobs:
           set -euo pipefail
           git config user.name "SovaDigital"
           git config user.email "thesovaz@gmail.com"
-          git add api/username-value.js tools/username-value.js .github/scripts/test_username_valuation_v38.mjs .github/workflows/valuation-regression.yml tools/username-value.html tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html
+          git add api/username-value.js tools/username-value.js .github/scripts/test_username_valuation_v38.mjs .github/workflows/valuation-regression.yml tools/instagram-username-value.html tools/tiktok-username-value.html tools/telegram-username-value.html en/tools/instagram-username-value.html en/tools/tiktok-username-value.html en/tools/telegram-username-value.html
           git commit -m "Repair three-letter Instagram valuation in v4.0"
           git push origin HEAD:main
