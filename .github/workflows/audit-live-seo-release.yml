@@ -27,7 +27,7 @@ jobs:
           for(const path of paths){
             const r=await get(BASE+'/'+path);
             if(r.status!==200||!r.text.includes('<urlset'))throw new Error(path+' response '+r.status);
-            const list=[...r.text.matchAll(/<loc>(https:\/\/sovazone\.com\/[^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
+            const list=[...r.text.matchAll(/<loc>(https:\/\/sovazone\.com\/[^<]*)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
             count[path]=list.length;
             targets.push(...list);
             console.log('PASS SITEMAP',path,list.length);
