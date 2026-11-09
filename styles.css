@@ -895,7 +895,7 @@ html, body {
      z-index: 90;
      padding: 16px 18px 18px;
      border-left: 1px solid rgba(255, 255, 255, 0.05);
-     background: #0b0b0d;
+     background: rgba(11,11,14,.91); -webkit-backdrop-filter:blur(22px); backdrop-filter:blur(22px);
      transform: translateX(100%);
      transition: transform 0.16s ease;
      overflow-y: auto;
@@ -1455,9 +1455,11 @@ html, body {
 .sz-nav-panel{
  position:absolute;top:calc(100% + 15px);left:50%;z-index:130;
  width:380px;max-width:min(92vw,550px);padding:13px;
- border:1px solid rgba(255,255,255,.12);border-radius:18px;
- background:#0b0b0d;
- box-shadow:0 24px 64px rgba(0,0,0,.65);
+ border:1px solid rgba(255,255,255,.16);border-radius:18px;
+ background:linear-gradient(145deg,rgba(29,29,35,.79),rgba(9,9,13,.83));
+ -webkit-backdrop-filter:blur(20px) saturate(135%);
+ backdrop-filter:blur(20px) saturate(135%);
+ box-shadow:0 24px 64px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08);
  opacity:0;visibility:hidden;pointer-events:none;
  transform:translate(-50%,-6px);transition:opacity .11s ease,transform .11s ease;
 }
@@ -1468,6 +1470,10 @@ html, body {
  .sz-nav-item:hover > .sz-nav-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 }
 .sz-nav-panel::before{content:"";position:absolute;top:-17px;left:0;right:0;height:17px;}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .sz-nav-panel{background:#101013}
+ .sz-side__dropdown[open]{background:#17171c}
+}
 .sz-nav-panel__eyebrow{padding:8px 10px 10px;color:#aaa8b0;font-size:11px;font-weight:800;letter-spacing:.06em}
 .sz-nav-panel__items{display:grid;grid-template-columns:1fr;gap:3px}
 .sz-nav-card{
@@ -1485,6 +1491,12 @@ html, body {
 .sz-nav-card__text strong{font-size:13px;font-weight:700;line-height:1.25;white-space:normal}
 .sz-nav-card__text small{font-size:11px;line-height:1.4;color:#a9a5b8;white-space:normal}
 .sz-side__dropdown{min-width:0;border-radius:12px}
+.sz-side__dropdown[open]{
+ background:rgba(28,28,34,.58);
+ -webkit-backdrop-filter:blur(12px);
+ backdrop-filter:blur(12px);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
 .sz-side__dropdown-label{display:inline-flex;align-items:baseline;white-space:nowrap;min-width:0}
 .sz-side__dropdown-trigger{
  display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;
