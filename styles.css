@@ -1425,6 +1425,22 @@ html, body {
   .sz-valuation-callout__link{width:100%}
 }
 
+/* Homepage Valuation AI description: single line on sufficiently wide screens.
+   Below that width it wraps naturally; the CTA can flow to the next row. */
+@media (min-width:980px){
+ .sz-valuation-callout--home{flex-wrap:wrap}
+ .sz-valuation-callout--home .sz-valuation-callout__copy{flex:1 1 auto;min-width:min(100%,750px)}
+ .sz-valuation-callout--home p{
+  max-width:none;
+  white-space:nowrap;
+  font-size:clamp(12px,1.02vw,14px);
+  letter-spacing:-.012em;
+ }
+}
+@media (min-width:1420px){
+ .sz-valuation-callout--home{flex-wrap:nowrap}
+}
+
 /* VALUATION AI: subtle Instagram-spectrum iridescence on "AI" only. */
 .sz-valuation-ai-gradient{
   display:inline-block;
