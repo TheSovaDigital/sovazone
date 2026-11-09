@@ -93,6 +93,15 @@
 @media(hover:hover) and (pointer:fine){
  .sz-nav-item:hover > .sz-nav-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 }
+.sz-nav-item--contacts > .sz-nav-panel{
+ left:auto;right:0;transform:translateY(-6px);
+}
+.sz-nav-item--contacts.is-open > .sz-nav-panel{
+ transform:translateY(0);
+}
+@media(hover:hover) and (pointer:fine){
+ .sz-nav-item--contacts:hover > .sz-nav-panel{transform:translateY(0)}
+}
 .sz-nav-panel::before{content:"";position:absolute;top:-17px;left:0;right:0;height:17px;}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
  .sz-nav-panel{background:#101013}
@@ -185,7 +194,15 @@
           <a class="sz-nav-card" href="/en/projects"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span><span class="sz-nav-card__text"><strong>Projects</strong><small>Explore the SovaZone ecosystem</small></span></a></div>
         </div>
       </div>
-      <a class="sz-header__link" href="/en/contacts">Contacts</a>
+      <div class="sz-nav-item sz-nav-item--contacts" data-nav-menu>
+        <button class="sz-header__link sz-nav-trigger" type="button" aria-expanded="false" aria-controls="sz-nav-contacts-en">Contacts<svg class="sz-nav-caret" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+        <div class="sz-nav-panel" id="sz-nav-contacts-en">
+          <div class="sz-nav-panel__eyebrow">SovaZone information</div>
+          <div class="sz-nav-panel__items"><a class="sz-nav-card" href="/en/contacts"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="m3 7 9 7 9-7"/></svg></span><span class="sz-nav-card__text"><strong>Contacts</strong><small>Get in touch with SovaZone</small></span></a>
+          <a class="sz-nav-card" href="/en/about"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.5" r=".8" fill="currentColor" stroke="none"/></svg></span><span class="sz-nav-card__text"><strong>About</strong><small>Learn about SovaZone</small></span></a>
+          <a class="sz-nav-card" href="/en/guarantees"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span class="sz-nav-card__text"><strong>Guarantees</strong><small>Service terms and guarantees</small></span></a></div>
+        </div>
+      </div>
 
       <a class="sz-header__store" href="https://sovads.ru/" target="_blank" rel="noopener">
         <span>Online store</span>
@@ -257,7 +274,12 @@
           <a class="sz-nav-card" href="/en/articles"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 11h4M7 15h4M15 11h2v4h-2z"/></svg></span><span class="sz-nav-card__text"><strong>Articles</strong><small>Guides and research</small></span></a>
           <a class="sz-nav-card" href="/en/projects"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span><span class="sz-nav-card__text"><strong>Projects</strong><small>Explore the SovaZone ecosystem</small></span></a></div>
         </details>
-        <a class="sz-side__link" href="/en/contacts">Contacts</a>
+        <details class="sz-side__dropdown" data-side-dropdown>
+          <summary class="sz-side__dropdown-trigger">Contacts<svg class="sz-nav-caret" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
+          <div class="sz-side__dropdown-content"><a class="sz-nav-card" href="/en/contacts"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="m3 7 9 7 9-7"/></svg></span><span class="sz-nav-card__text"><strong>Contacts</strong><small>Get in touch with SovaZone</small></span></a>
+          <a class="sz-nav-card" href="/en/about"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.5" r=".8" fill="currentColor" stroke="none"/></svg></span><span class="sz-nav-card__text"><strong>About</strong><small>Learn about SovaZone</small></span></a>
+          <a class="sz-nav-card" href="/en/guarantees"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span class="sz-nav-card__text"><strong>Guarantees</strong><small>Service terms and guarantees</small></span></a></div>
+        </details>
         <a class="sz-side__link" href="https://sovads.ru/" target="_blank" rel="noopener">
           <span>Online store</span>
           <svg class="sz-side__ext" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
@@ -282,10 +304,8 @@
 
       <div class="sz-side__group">
         <div class="sz-side__group-title">Information</div>
-        <a class="sz-side__link" href="/en/about">About</a>
         <a class="sz-side__link" href="/en/how-to-buy">How to buy</a>
         <a class="sz-side__link" href="/en/sell">How to sell</a>
-        <a class="sz-side__link" href="/en/guarantees">Guarantees</a>
         <a class="sz-side__link" href="/en/faq">FAQ</a>
       </div>
 

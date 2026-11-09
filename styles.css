@@ -1469,6 +1469,13 @@ html, body {
 @media(hover:hover) and (pointer:fine){
  .sz-nav-item:hover > .sz-nav-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 }
+.sz-nav-item--contacts > .sz-nav-panel{
+ left:auto;right:0;transform:translateY(-6px);
+}
+.sz-nav-item--contacts.is-open > .sz-nav-panel{transform:translateY(0)}
+@media(hover:hover) and (pointer:fine){
+ .sz-nav-item--contacts:hover > .sz-nav-panel{transform:translateY(0)}
+}
 .sz-nav-panel::before{content:"";position:absolute;top:-17px;left:0;right:0;height:17px;}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
  .sz-nav-panel{background:#101013}
