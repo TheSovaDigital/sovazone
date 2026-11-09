@@ -130,13 +130,71 @@
     const burger = header.querySelector(".sz-header__burger");
     const side = header.querySelector(".sz-side");
     const overlay = header.querySelector(".sz-overlay");
-    const links = header.querySelectorAll(".sz-side__link");
+    const links = header.querySelectorAll(".sz-side__link, .sz-side__dropdown .sz-nav-card");
+
+
+    // Lightweight desktop dropdowns: hover, click, keyboard and outside dismiss.
+    var navMenus = Array.from(header.querySelectorAll("[data-nav-menu]"));
+    function hideNavMenu(item) {
+      item.classList.remove("is-open");
+      var trigger = item.querySelector(".sz-nav-trigger");
+      if (trigger) trigger.setAttribute("aria-expanded", "false");
+    }
+    function closeNavMenus(except) {
+      navMenus.forEach(function (item) { if (item !== except) hideNavMenu(item); });
+    }
+    navMenus.forEach(function (item) {
+      var trigger = item.querySelector(".sz-nav-trigger");
+      if (!trigger) return;
+      function showMenu() {
+        closeNavMenus(item);
+        item.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+      trigger.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (item.classList.contains("is-open")) hideNavMenu(item);
+        else showMenu();
+      });
+      item.addEventListener("pointerenter", function (event) {
+        if (event.pointerType === "mouse") showMenu();
+      });
+      item.addEventListener("pointerleave", function (event) {
+        if (event.pointerType === "mouse") hideNavMenu(item);
+      });
+      item.addEventListener("focusin", showMenu);
+      item.addEventListener("focusout", function (event) {
+        if (!item.contains(event.relatedTarget)) hideNavMenu(item);
+      });
+    });
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest("[data-nav-menu]")) closeNavMenus();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        var current = navMenus.find(function (item) { return item.classList.contains("is-open"); });
+        if (current) {
+          hideNavMenu(current);
+          var trigger = current.querySelector(".sz-nav-trigger");
+          if (trigger) trigger.blur();
+        }
+      }
+    });
+    var sideDropdowns = Array.from(side.querySelectorAll("[data-side-dropdown]"));
+    sideDropdowns.forEach(function (item) {
+      item.addEventListener("toggle", function () {
+        if (item.open) sideDropdowns.forEach(function (other) {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
 
     updateLanguageSwitch();
 
     if (!burger || !side || !overlay) return;
 
     function openMenu() {
+      closeNavMenus();
       side.classList.add("is-open");
       overlay.hidden = false;
       requestAnimationFrame(() => overlay.classList.add("is-visible"));
