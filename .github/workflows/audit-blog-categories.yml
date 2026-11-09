@@ -1,4 +1,4 @@
-name: Audit Blog category dropdown and URL filtering
+name: Verify public SovaZone Blog categories and navigation
 on:
   push:
     branches: [audit-blog-dropdown-categories-20261109]
@@ -35,7 +35,7 @@ jobs:
                 const titles=locale==='ru'?{articles:'Статьи',news:'Новости',cases:'Кейсы'}:{articles:'Articles',news:'News',cases:'Cases'};
                 const page=await browser.newPage();
                 await page.setViewport({width:1440,height:900});
-                await page.goto('http://127.0.0.1:8123'+prefix+'/blog.html',{waitUntil:'domcontentloaded'});
+                await page.goto('https://sovazone.com'+prefix+'/blog',{waitUntil:'domcontentloaded'});
                 await page.waitForSelector('.sz-nav-panel[id^="sz-nav-blog-"]',{timeout:10000});
                 const desktop=await page.$eval('.sz-nav-panel[id^="sz-nav-blog-"]',n=>[...n.querySelectorAll('.sz-nav-card')].map(a=>({text:a.querySelector('strong')?.textContent,url:new URL(a.href).pathname+new URL(a.href).search})));
                 verify(desktop.length===4,locale+' desktop blog has four entries');
@@ -43,7 +43,7 @@ jobs:
                 const navBlogs=await page.$eval('.sz-nav-panel[id^="sz-nav-blog-"]',n=>n.textContent);
                 verify(!navBlogs.includes(locale==='ru'?'Проекты':'Projects'),locale+' Projects removed from Blog');
                 for(const slug of ['articles','news','cases']){
-                  await page.goto('http://127.0.0.1:8123'+prefix+'/blog.html?category='+slug,{waitUntil:'domcontentloaded'});
+                  await page.goto('https://sovazone.com'+prefix+'/blog?category='+slug,{waitUntil:'domcontentloaded'});
                   await page.waitForFunction(()=>document.getElementById('blog-loading')?.hidden===true,{timeout:15000});
                   const state=await page.evaluate(()=>{
                     const active=document.querySelector('.blog-filter-btn.is-active');
@@ -59,7 +59,7 @@ jobs:
                 await new Promise(r=>setTimeout(r,200));
                 verify(await page.$eval('.blog-filter-btn.is-active',n=>n.dataset.filter)===titles.cases,locale+' browser Back restores category');
                 await page.setViewport({width:390,height:844});
-                await page.goto('http://127.0.0.1:8123'+prefix+'/',{waitUntil:'domcontentloaded'});
+                await page.goto('https://sovazone.com'+prefix+'/',{waitUntil:'domcontentloaded'});
                 await page.click('.sz-header__burger');
                 await new Promise(r=>setTimeout(r,240));
                 const mobile=await page.evaluate(()=>{
