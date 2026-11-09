@@ -1,0 +1,78 @@
+name: Audit Blog category dropdown and URL filtering
+on:
+  push:
+    branches: [audit-blog-dropdown-categories-20261109]
+    paths: ['.github/workflows/audit-blog-categories.yml']
+permissions:
+  contents: read
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Prepare browser
+        shell: bash
+        run: |
+          which google-chrome
+          npm --prefix /tmp/blogtest install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
+      - name: Test locale-specific blog filters and responsive navigation
+        shell: bash
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 >/tmp/blogserver.log 2>&1 &
+          sleep 1
+          cat >/tmp/blog-test.cjs <<'JS'
+          const puppeteer=require('/tmp/blogtest/node_modules/puppeteer-core');
+          let tests=0;
+          const verify=(condition, msg)=>{if(!condition)throw Error('FAIL '+msg);console.log('PASS '+msg);tests++};
+          (async()=>{
+            const browser=await puppeteer.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
+            try{
+              for(const locale of ['ru','en']){
+                const prefix=locale==='ru'?'':'/en';
+                const titles=locale==='ru'?{articles:'Статьи',news:'Новости',cases:'Кейсы'}:{articles:'Articles',news:'News',cases:'Cases'};
+                const page=await browser.newPage();
+                await page.setViewport({width:1440,height:900});
+                await page.goto('http://127.0.0.1:8123'+prefix+'/blog',{waitUntil:'domcontentloaded'});
+                await page.waitForSelector('.sz-nav-panel[id^="sz-nav-blog-"]',{timeout:10000});
+                const desktop=await page.$eval('.sz-nav-panel[id^="sz-nav-blog-"]',n=>[...n.querySelectorAll('.sz-nav-card')].map(a=>({text:a.querySelector('strong')?.textContent,url:new URL(a.href).pathname+new URL(a.href).search})));
+                verify(desktop.length===4,locale+' desktop blog has four entries');
+                verify(JSON.stringify(desktop.map(a=>a.url))===JSON.stringify([prefix+'/blog',prefix+'/blog?category=articles',prefix+'/blog?category=news',prefix+'/blog?category=cases']),locale+' exact destination URLs');
+                const navBlogs=await page.$eval('.sz-nav-panel[id^="sz-nav-blog-"]',n=>n.textContent);
+                verify(!navBlogs.includes(locale==='ru'?'Проекты':'Projects'),locale+' Projects removed from Blog');
+                for(const slug of ['articles','news','cases']){
+                  await page.goto('http://127.0.0.1:8123'+prefix+'/blog?category='+slug,{waitUntil:'domcontentloaded'});
+                  await page.waitForFunction(()=>document.getElementById('blog-loading')?.hidden===true,{timeout:15000});
+                  const state=await page.evaluate(()=>{
+                    const active=document.querySelector('.blog-filter-btn.is-active');
+                    return {active:active?.dataset.filter,pressed:active?.getAttribute('aria-pressed'),empty:!document.querySelector('#blog-empty')?.hidden,grid:!document.querySelector('#blog-content-grid')?.hidden,cards:document.querySelectorAll('.blog-grid-card').length,url:location.search};
+                  });
+                  verify(state.active===titles[slug]&&state.pressed==='true',locale+' '+slug+' direct category link selects correct filter');
+                  if(slug==='cases')verify(state.empty&&state.cards===0,locale+' Cases correctly reports empty category');
+                  else verify(state.grid&&state.cards>=1,locale+' '+slug+' shows matching posts');
+                }
+                await page.click('.blog-filter-btn[data-filter="'+titles.articles+'"]');
+                verify(await page.evaluate(()=>location.search.includes('category=articles')),locale+' filter click updates shareable URL');
+                await page.evaluate(()=>history.back());
+                await new Promise(r=>setTimeout(r,200));
+                verify(await page.$eval('.blog-filter-btn.is-active',n=>n.dataset.filter)===titles.cases,locale+' browser Back restores category');
+                await page.setViewport({width:390,height:844});
+                await page.goto('http://127.0.0.1:8123'+prefix+'/',{waitUntil:'domcontentloaded'});
+                await page.click('.sz-header__burger');
+                await new Promise(r=>setTimeout(r,240));
+                const mobile=await page.evaluate(()=>{
+                  const group=[...document.querySelectorAll('.sz-side__dropdown')].find(d=>d.querySelector('summary')?.textContent.trim()===(document.documentElement.lang==='ru'?'Блог':'Blog'));
+                  return {exists:!!group,urls:[...group.querySelectorAll('.sz-nav-card')].map(a=>new URL(a.href).pathname+new URL(a.href).search),numGroups:document.querySelectorAll('.sz-side__dropdown').length,overflow:document.documentElement.scrollWidth>innerWidth+2};
+                });
+                verify(mobile.exists&&mobile.numGroups===4,locale+' mobile Blog and other groups available');
+                verify(JSON.stringify(mobile.urls)===JSON.stringify(desktop.map(x=>x.url)),locale+' mobile category links match desktop');
+                verify(!mobile.overflow,locale+' mobile no horizontal overflow');
+                await page.close();
+              }
+              console.log('PASS ALL '+tests+' BLOG CATEGORY ASSERTIONS');
+            }finally{await browser.close()}
+          })().catch(e=>{console.error(e.stack||e);process.exit(1)});
+          JS
+          node /tmp/blog-test.cjs
