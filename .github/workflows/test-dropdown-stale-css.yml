@@ -42,7 +42,7 @@ jobs:
                   await page.setViewport({width:1440,height:900});
                   if(variant==='stale'){
                     await page.setRequestInterception(true);
-                    page.on('request',req=>req.url.endsWith('/styles.css')?req.respond({status:200,contentType:'text/css',body:oldCSS}):req.continue());
+                    page.on('request',req=>req.url().endsWith('/styles.css')?req.respond({status:200,contentType:'text/css',body:oldCSS}):req.continue());
                   }
                   await page.goto('http://127.0.0.1:8123/'+(lang==='en'?'en/':''),{waitUntil:'domcontentloaded'});
                   await page.waitForSelector('.sz-nav-panel',{timeout:10000});
