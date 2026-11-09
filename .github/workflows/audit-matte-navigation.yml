@@ -1,4 +1,4 @@
-name: Audit matte navigation, TikTok icon and mobile sections
+name: Verify published matte SovaZone navigation in browser
 on:
   push:
     branches: [audit-matte-nav-mobile-20261109]
@@ -43,7 +43,7 @@ jobs:
                     page.on('request',req=>req.url().endsWith('/styles.css')?req.respond({status:200,contentType:'text/css',body:oldCss}):req.continue());
                   }
                   const prefix=lang==='en'?'/en':'';
-                  await page.goto('http://127.0.0.1:8123/'+(lang==='en'?'en/':''),{waitUntil:'domcontentloaded'});
+                  await page.goto('https://sovazone.com/'+(lang==='en'?'en/':'')+'?audit=matte20261109',{waitUntil:'domcontentloaded',timeout:30000});
                   await page.waitForSelector('.sz-nav-item');
                   const desktop=await page.evaluate(pref=>{
                     const nav=document.querySelector('.sz-header__nav');
