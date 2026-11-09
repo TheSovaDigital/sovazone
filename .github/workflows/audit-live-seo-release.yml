@@ -1,0 +1,63 @@
+name: Live public SEO release URL audit
+on:
+  push:
+    branches: [audit-live-seo-20261109]
+    paths: [.github/workflows/audit-live-seo-release.yml]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify published sitemap index and all listed URLs
+        shell: bash
+        run: |
+          cat >/tmp/live-seo.mjs <<'JS'
+          const BASE='https://sovazone.com';
+          const paths=['sitemap-pages.xml','sitemap-blog.xml','sitemap-articles.xml','sitemap-usernames.xml','en/sitemap.xml'];
+          const get=async(url)=>{const r=await fetch(url,{signal:AbortSignal.timeout(15000),headers:{'user-agent':'SovaZone SEO Audit/1.0'}});return {status:r.status,text:await r.text()}};
+          const doc=await get(BASE+'/sitemap.xml');
+          if(doc.status!==200||!doc.text.includes('sitemapindex'))throw new Error('Root sitemap invalid: '+doc.status);
+          for(const name of paths)if(!doc.text.includes(BASE+'/'+name))throw new Error('Root sitemap missing '+name);
+          let targets=[],count={};
+          for(const path of paths){
+            const r=await get(BASE+'/'+path);
+            if(r.status!==200||!r.text.includes('<urlset'))throw new Error(path+' response '+r.status);
+            const list=[...r.text.matchAll(/<loc>(https:\/\/sovazone\.com\/[^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
+            count[path]=list.length;
+            targets.push(...list);
+            console.log('PASS SITEMAP',path,list.length);
+          }
+          if(targets.length!==156||new Set(targets).size!==156)throw new Error('Expected 156 unique URLs, got '+targets.length+' / '+new Set(targets).size);
+          for(const must of [BASE+'/tools/instagram-username-value',BASE+'/tools/tiktok-username-value',BASE+'/tools/telegram-username-value',BASE+'/en/tools/username-value',BASE+'/post?slug=instagram-username-price-2026'])if(!targets.includes(must))throw new Error('Missing key URL '+must);
+          const results=[],limit=8;
+          let next=0;
+          async function worker(){
+            while(true){
+              const i=next++;if(i>=targets.length)return;
+              const url=targets[i];
+              try{
+                const res=await fetch(url,{method:'HEAD',signal:AbortSignal.timeout(13000),redirect:'follow',headers:{'user-agent':'SovaZone SEO Audit/1.0'}});
+                results[i]={url,status:res.status,final:res.url};
+              }catch(err){results[i]={url,error:String(err)}}
+            }
+          }
+          await Promise.all(Array.from({length:limit},()=>worker()));
+          const bad=results.filter(x=>x.error||x.status!==200);
+          console.log('LIVE URLS',JSON.stringify({total:results.length,passed:results.length-bad.length,failed:bad.length,sitemapCounts:count}));
+          for(const row of bad.slice(0,25))console.error('BAD URL',JSON.stringify(row));
+          if(bad.length)throw new Error('Live listed URLs failed: '+bad.length);
+          for(const route of ['/','/en/','/tools/username-value','/en/tools/username-value','/contacts','/en/contacts']){
+            const r=await get(BASE+route);
+            if(r.status!==200||!r.text.includes('rel="canonical"')||!r.text.includes('hreflang='))throw new Error('Missing canonical/hreflang: '+route);
+            console.log('PASS HTML HEAD',route);
+          }
+          const rb=await get(BASE+'/robots.txt');
+          if(rb.status!==200||!rb.text.includes('Sitemap: https://sovazone.com/sitemap.xml'))throw new Error('robots sitemap declaration missing');
+          console.log('PASS ALL PUBLIC SEO URL ASSERTIONS',targets.length);
+          JS
+          node /tmp/live-seo.mjs
