@@ -1459,7 +1459,7 @@ html, body {
  background:linear-gradient(160deg,rgba(25,23,36,.99),rgba(10,10,17,.99));
  box-shadow:0 22px 65px rgba(0,0,0,.5);
  opacity:0;visibility:hidden;pointer-events:none;
- transform:translate(-50%,-6px);transition:opacity .13s ease,transform .13s ease,visibility .13s;
+ transform:translate(-50%,-6px);transition:opacity .11s ease,transform .11s ease;
 }
 .sz-nav-item.is-open > .sz-nav-panel{
  opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
