@@ -71,9 +71,9 @@ jobs:
                 await page.reload({waitUntil:'domcontentloaded'});
                 await page.click('.sz-header__burger');
                 await new Promise(r=>setTimeout(r,220));
-                const groups=await page.$('.sz-side__dropdown');
+                const groups=await page.$$('.sz-side__dropdown');
                 assert(groups.length===4,lang+' mobile has four dropdown groups');
-                const blogLinks=await groups[2].$eval('.sz-nav-card',items=>items.map(x=>new URL(x.href).pathname));
+                const blogLinks=await groups[2].$$eval('.sz-nav-card',items=>items.map(x=>new URL(x.href).pathname));
                 assert(JSON.stringify(blogLinks)===JSON.stringify(['blog','articles'].map(x=>prefix+'/'+x)),lang+' mobile Blog contains only Blog and Articles');
                 await (await groups[3].$('summary')).click();
                 assert(await groups[3].evaluate(x=>x.open),lang+' mobile Contacts opens');
