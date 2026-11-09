@@ -129,13 +129,13 @@ for page in public:
 mdFiles=sorted(list(ROOT.glob("content/blog/*.md"))+list(ROOT.glob("en/content/blog/*.md")))
 for p in mdFiles:
  raw=p.read_text(encoding="utf-8",errors="replace")
- m=re.match(r"^---\\s*\\n([\\s\\S]*?)\\n---",raw)
+ m=re.match(r"^---\s*\n([\s\S]*?)\n---",raw)
  if not m:issues["markdown_missing_frontmatter"].append(name(p))
- elif not re.search(r"^title\\s*:",m.group(1),re.M):issues["markdown_missing_title"].append(name(p))
+ elif not re.search(r"^title\s*:",m.group(1),re.M):issues["markdown_missing_title"].append(name(p))
  if raw.count("```")%2:issues["markdown_unbalanced_code_fence"].append(name(p))
- for ch in ["\\ufffd","&#x20;","&amp;#x20;","Lorem ipsum"]:
+ for ch in ["\ufffd","&#x20;","&amp;#x20;","Lorem ipsum"]:
   if ch in raw:issues["markdown_text_artifact"].append(name(p)+" "+ch)
- for mm in re.finditer(r"!\\[[^\\]]*\\]\\((/[^)]+)\\)",raw):
+ for mm in re.finditer(r"!\[[^\]]*\]\((/[^)]+)\)",raw):
   if not resolves(mm.group(1)):issues["markdown_missing_image"].append(name(p)+" -> "+mm.group(1))
 counts["blog_markdown_files"]=len(mdFiles)
 print("AUDIT_TOTALS",json.dumps({"public_html":len(public),"indexable_html":len(indexable),"sitemap_urls":{p:len(x) for p,x in sitemapUrls.items()},"unique_sitemap_urls":len(sitemapped),"issues":{k:len(v) for k,v in sorted(issues.items())}},ensure_ascii=False))
