@@ -60,6 +60,7 @@ jobs:
                 await page.waitForSelector('.sz-header__burger');
                 await page.click('.sz-header__burger');
                 check(await page.$eval('.sz-side',s=>s.classList.contains('is-open')),lang+' mobile burger opens');
+                await new Promise(r=>setTimeout(r,220));
                 const details=await page.$$('.sz-side__dropdown');
                 check(details.length===3,lang+' 3 mobile accordion groups');
                 await (await details[1].$('summary')).click();
