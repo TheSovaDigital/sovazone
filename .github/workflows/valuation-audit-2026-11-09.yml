@@ -82,3 +82,43 @@ jobs:
           console.log('PASS ALL 8 live price controls and 8 SEO page checks');
           JS
           node /tmp/live.mjs
+
+
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare live URL routing, content types, redirects
+        shell: bash
+        run: |
+          cat > /tmp/diag.mjs <<'JS'
+          const urls=[
+            'https://sovazone.com/',
+            'https://sovazone.com/tools/username-value',
+            'https://sovazone.com/tools/username-value/',
+            'https://sovazone.com/tools/username-value.html',
+            'https://www.sovazone.com/tools/username-value/',
+            'https://www.sovazone.com/tools/username-value.html',
+            'https://sovazone.vercel.app/tools/username-value/',
+            'https://sovazone.vercel.app/tools/username-value.html',
+            'https://sovazone-6cc13rjqj-thesovadigitals-projects.vercel.app/tools/username-value.html',
+            'https://sovazone.com/api/username-value',
+            'https://sovazone.com/api/username-value/',
+            'https://www.sovazone.com/api/username-value',
+            'https://sovazone.vercel.app/api/username-value/',
+          ];
+          for (const u of urls){
+            try{
+              const r=await fetch(u,{signal:AbortSignal.timeout(12000)});
+              const txt=await r.text();
+              console.log('GET',u,'=>',r.status, 'resolved',r.url,'type',r.headers.get('content-type'),'server',r.headers.get('server'),'x-vercel-id',r.headers.get('x-vercel-id'),'body',JSON.stringify(txt.slice(0,150)));
+            }catch(e){console.log('GET ERROR',u,String(e))}
+          }
+          for(const u of ['https://sovazone.com/api/username-value','https://sovazone.com/api/username-value/','https://www.sovazone.com/api/username-value','https://sovazone.vercel.app/api/username-value/']){
+            try{
+              const r=await fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username:'aa',platform:'instagram',lang:'en'}),signal:AbortSignal.timeout(12000)});
+              const txt=await r.text();
+              console.log('POST',u,'=>',r.status,'resolved',r.url,'type',r.headers.get('content-type'),'server',r.headers.get('server'),'x-vercel-id',r.headers.get('x-vercel-id'),'body',JSON.stringify(txt.slice(0,240)));
+            }catch(e){console.log('POST ERROR',u,String(e))}
+          }
+          JS
+          node /tmp/diag.mjs
