@@ -1428,6 +1428,7 @@ html, body {
 /* VALUATION AI: subtle Instagram-spectrum iridescence on "AI" only. */
 .sz-valuation-ai-gradient{
   display:inline-block;
+  margin-left:0.2em;
   color:#d62976;
   font-weight:800;
   background-image:linear-gradient(105deg,#feda75 0%,#fa7e1e 18%,#d62976 42%,#962fbf 65%,#4f5bd5 82%,#d62976 100%);
