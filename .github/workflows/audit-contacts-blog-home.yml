@@ -1,4 +1,4 @@
-name: Audit Contacts dropdown and single-line homepage valuation description
+name: Verify published Contacts Blog and Valuation homepage
 on:
   push:
     branches: [audit-contacts-blog-home-20261109]
@@ -33,7 +33,7 @@ jobs:
             try{
               for(const lang of ['ru','en']){
                 const page=await browser.newPage();
-                const home='http://127.0.0.1:8123/'+(lang==='en'?'en/':'');
+                const home='https://sovazone.com/'+(lang==='en'?'en/':'')+'?audit=contacts-blog-20261109';
                 const prefix=lang==='en'?'/en':'';
                 for(const width of [390,768,1024,1280,1440,1600]){
                   await page.setViewport({width,height:900});
