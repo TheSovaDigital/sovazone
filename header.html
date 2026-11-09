@@ -65,6 +65,7 @@
     }
   
   
+    .sz-side{background:#0b0b0d;}
     /* Inline critical nav rules: prevent old /styles.css browser cache from expanding dropdown panels. */
     /* SovaZone fast icon dropdowns: static SVG, no libraries or external images */
 .sz-nav-item{position:relative;display:inline-flex;align-items:center;flex:0 0 auto}
@@ -74,9 +75,9 @@
 .sz-nav-panel{
  position:absolute;top:calc(100% + 15px);left:50%;z-index:130;
  width:380px;max-width:min(92vw,550px);padding:13px;
- border:1px solid rgba(180,136,232,.2);border-radius:18px;
- background:linear-gradient(160deg,rgba(25,23,36,.99),rgba(10,10,17,.99));
- box-shadow:0 22px 65px rgba(0,0,0,.5);
+ border:1px solid rgba(255,255,255,.12);border-radius:18px;
+ background:#0b0b0d;
+ box-shadow:0 24px 64px rgba(0,0,0,.65);
  opacity:0;visibility:hidden;pointer-events:none;
  transform:translate(-50%,-6px);transition:opacity .11s ease,transform .11s ease;
 }
@@ -87,17 +88,17 @@
  .sz-nav-item:hover > .sz-nav-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 }
 .sz-nav-panel::before{content:"";position:absolute;top:-17px;left:0;right:0;height:17px;}
-.sz-nav-panel__eyebrow{padding:8px 10px 10px;color:#ba9acf;font-size:11px;font-weight:800;letter-spacing:.06em}
+.sz-nav-panel__eyebrow{padding:8px 10px 10px;color:#aaa8b0;font-size:11px;font-weight:800;letter-spacing:.06em}
 .sz-nav-panel__items{display:grid;grid-template-columns:1fr;gap:3px}
 .sz-nav-card{
  display:flex;align-items:center;gap:11px;min-width:0;padding:10px;
  border-radius:12px;color:#fff;text-decoration:none;transition:background .12s ease;
 }
-.sz-nav-card:hover,.sz-nav-card:focus-visible{background:rgba(151,94,207,.14)}
+.sz-nav-card:hover,.sz-nav-card:focus-visible{background:rgba(255,255,255,.065)}
 .sz-nav-card:focus-visible{outline:2px solid #b993e8;outline-offset:-2px}
 .sz-nav-card__icon{
  display:flex;align-items:center;justify-content:center;flex:0 0 36px;width:36px;height:36px;
- color:#e5baf0;border-radius:10px;background:rgba(173,125,236,.095);border:1px solid rgba(188,146,236,.1);
+ color:#dddde3;border-radius:10px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
 }
 .sz-nav-card__svg{width:18px;height:18px}
 .sz-nav-card__text{display:flex;flex-direction:column;gap:3px;min-width:0}
@@ -111,7 +112,7 @@
 }
 .sz-side__dropdown-trigger::-webkit-details-marker{display:none}
 .sz-side__dropdown-trigger:focus-visible{outline:2px solid #b993e8;outline-offset:2px}
-.sz-side__dropdown-content{display:grid;gap:2px;padding:4px 0 10px 5px;border-left:1px solid rgba(188,146,236,.18)}
+.sz-side__dropdown-content{display:grid;gap:2px;padding:4px 0 10px 5px;border-left:1px solid rgba(255,255,255,.12)}
 .sz-side__dropdown-content .sz-nav-card{padding:8px 9px}
 .sz-side__dropdown-content .sz-nav-card__icon{width:32px;height:32px;flex-basis:32px}
 .sz-side__dropdown-content .sz-nav-card__text strong{font-size:13px}
@@ -135,6 +136,7 @@
 
     <nav class="sz-header__nav" aria-label="Основная навигация">
       <a class="sz-header__link" href="/">Главная</a>
+      <a class="sz-header__link" href="/usernames">Никнеймы</a>
       <div class="sz-nav-item" data-nav-menu>
         <button class="sz-header__link sz-nav-trigger" type="button" aria-expanded="false" aria-controls="sz-nav-services-ru">Услуги<svg class="sz-nav-caret" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
         <div class="sz-nav-panel" id="sz-nav-services-ru">
@@ -148,15 +150,14 @@
           <a class="sz-nav-card" href="/services/consultation"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11a8 8 0 0 1-8 8H7l-4 3V11a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/><path d="M8 11h8"/></svg></span><span class="sz-nav-card__text"><strong>Консультация</strong><small>Разбор ситуации и план действий</small></span></a></div>
         </div>
       </div>
-      <a class="sz-header__link" href="/usernames">Никнеймы</a>
       <div class="sz-nav-item" data-nav-menu>
         <button class="sz-header__link sz-nav-trigger" type="button" aria-expanded="false" aria-controls="sz-nav-valuation-ru">Valuation <span class="sz-valuation-ai-gradient">AI</span><svg class="sz-nav-caret" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
         <div class="sz-nav-panel" id="sz-nav-valuation-ru">
           <div class="sz-nav-panel__eyebrow">Оценка стоимости никнеймов</div>
           <div class="sz-nav-panel__items"><a class="sz-nav-card" href="/tools/username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></span><span class="sz-nav-card__text"><strong>Valuation AI</strong><small>Бесплатная ориентировочная оценка</small></span></a>
-          <a class="sz-nav-card" href="/tools/instagram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="4"/><circle cx="12" cy="13" r="4"/><path d="M8 5 9 3h6l1 2"/></svg></span><span class="sz-nav-card__text"><strong>Instagram</strong><small>Стоимость Instagram-никнейма</small></span></a>
-          <a class="sz-nav-card" href="/tools/tiktok-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="18" cy="16" rx="3" ry="2"/></svg></span><span class="sz-nav-card__text"><strong>TikTok</strong><small>Стоимость TikTok-никнейма</small></span></a>
-          <a class="sz-nav-card" href="/tools/telegram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></span><span class="sz-nav-card__text"><strong>Telegram</strong><small>Оценка по модели с данными Fragment</small></span></a></div>
+          <a class="sz-nav-card" href="/tools/instagram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="4"/><circle cx="12" cy="13" r="4"/><path d="M8 5 9 3h6l1 2"/></svg></span><span class="sz-nav-card__text"><strong>Instagram</strong><small>Стоимость никнейма Instagram</small></span></a>
+          <a class="sz-nav-card" href="/tools/tiktok-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span><span class="sz-nav-card__text"><strong>TikTok</strong><small>Стоимость никнейма TikTok</small></span></a>
+          <a class="sz-nav-card" href="/tools/telegram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></span><span class="sz-nav-card__text"><strong>Telegram</strong><small>Стоимость никнейма Telegram</small></span></a></div>
         </div>
       </div>
       <div class="sz-nav-item" data-nav-menu>
@@ -216,6 +217,7 @@
       <div class="sz-side__group sz-side__group--primary">
         <div class="sz-side__group-title">Основное</div>
         <a class="sz-side__link" href="/">Главная</a>
+        <a class="sz-side__link" href="/usernames">Никнеймы</a>
         <details class="sz-side__dropdown" data-side-dropdown>
           <summary class="sz-side__dropdown-trigger">Услуги<svg class="sz-nav-caret" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
           <div class="sz-side__dropdown-content"><a class="sz-nav-card" href="/services"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="sz-nav-card__text"><strong>Все услуги</strong><small>Полный список возможностей SovaZone</small></span></a>
@@ -226,13 +228,12 @@
           <a class="sz-nav-card" href="/services/recovery-after-hack"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 7a5 5 0 0 0-6 6l-6 6 2 2 6-6a5 5 0 0 0 6-6l-3 3-3-3 3-3z"/></svg></span><span class="sz-nav-card__text"><strong>Восстановление после взлома</strong><small>Сопровождение при компрометации</small></span></a>
           <a class="sz-nav-card" href="/services/consultation"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11a8 8 0 0 1-8 8H7l-4 3V11a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/><path d="M8 11h8"/></svg></span><span class="sz-nav-card__text"><strong>Консультация</strong><small>Разбор ситуации и план действий</small></span></a></div>
         </details>
-        <a class="sz-side__link" href="/usernames">Никнеймы</a>
         <details class="sz-side__dropdown" data-side-dropdown>
           <summary class="sz-side__dropdown-trigger"><span class="sz-side__dropdown-label">Valuation <span class="sz-valuation-ai-gradient">AI</span></span><svg class="sz-nav-caret" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
           <div class="sz-side__dropdown-content"><a class="sz-nav-card" href="/tools/username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></span><span class="sz-nav-card__text"><strong>Valuation AI</strong><small>Бесплатная ориентировочная оценка</small></span></a>
-          <a class="sz-nav-card" href="/tools/instagram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="4"/><circle cx="12" cy="13" r="4"/><path d="M8 5 9 3h6l1 2"/></svg></span><span class="sz-nav-card__text"><strong>Instagram</strong><small>Стоимость Instagram-никнейма</small></span></a>
-          <a class="sz-nav-card" href="/tools/tiktok-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="18" cy="16" rx="3" ry="2"/></svg></span><span class="sz-nav-card__text"><strong>TikTok</strong><small>Стоимость TikTok-никнейма</small></span></a>
-          <a class="sz-nav-card" href="/tools/telegram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></span><span class="sz-nav-card__text"><strong>Telegram</strong><small>Оценка по модели с данными Fragment</small></span></a></div>
+          <a class="sz-nav-card" href="/tools/instagram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="4"/><circle cx="12" cy="13" r="4"/><path d="M8 5 9 3h6l1 2"/></svg></span><span class="sz-nav-card__text"><strong>Instagram</strong><small>Стоимость никнейма Instagram</small></span></a>
+          <a class="sz-nav-card" href="/tools/tiktok-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span><span class="sz-nav-card__text"><strong>TikTok</strong><small>Стоимость никнейма TikTok</small></span></a>
+          <a class="sz-nav-card" href="/tools/telegram-username-value"><span class="sz-nav-card__icon"><svg class="sz-nav-card__svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></span><span class="sz-nav-card__text"><strong>Telegram</strong><small>Стоимость никнейма Telegram</small></span></a></div>
         </details>
         <details class="sz-side__dropdown" data-side-dropdown>
           <summary class="sz-side__dropdown-trigger">Блог<svg class="sz-nav-caret" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
@@ -248,6 +249,19 @@
             <path d="M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
           </svg>
         </a>
+      </div>
+
+      <div class="sz-side__group">
+        <div class="sz-side__group-title">Разделы</div>
+        <a class="sz-side__link" href="/projects">Проекты</a>
+        <a class="sz-side__link" href="/articles">Статьи</a>
+      </div>
+
+      <div class="sz-side__group">
+        <div class="sz-side__group-title">Valuation <span class="sz-valuation-ai-gradient">AI</span></div>
+        <a class="sz-side__link" href="/tools/instagram-username-value">Стоимость никнейма Instagram</a>
+        <a class="sz-side__link" href="/tools/tiktok-username-value">Стоимость никнейма TikTok</a>
+        <a class="sz-side__link" href="/tools/telegram-username-value">Стоимость никнейма Telegram</a>
       </div>
 
       <div class="sz-side__group">
