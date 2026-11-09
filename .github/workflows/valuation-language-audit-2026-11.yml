@@ -51,8 +51,8 @@ jobs:
             }catch(e){failures++;console.error('FAIL PROJECT '+path+' '+String(e))}
           }
           const expectedHeaders=[
-            ['/header.html','data-lang-target="en"','href="/en/tools/username-value"'],
-            ['/en/header.html','data-lang-target="ru"','href="/tools/username-value"']
+            ['/header.html','data-lang-target="en"','href="/tools/username-value"'],
+            ['/en/header.html','data-lang-target="ru"','href="/en/tools/username-value"']
           ];
           for(const [path,lang,href] of expectedHeaders){
             try{
