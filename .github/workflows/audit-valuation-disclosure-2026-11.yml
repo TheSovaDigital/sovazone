@@ -1,0 +1,47 @@
+name: Verify published Valuation AI disclosure panels and EN cleanup
+on:
+  push:
+    branches: [audit-live-ai-gradient-2026-11]
+    paths: ['.github/workflows/audit-valuation-disclosure-2026-11.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check public EN pages, RU/EN accordions and CSS
+        shell: bash
+        run: |
+          cat >/tmp/check.mjs <<'JS'
+          const base="https://sovazone.com";
+          const paths=[
+            ["/en/tools/username-value",0],
+            ["/en/tools/instagram-username-value",2],
+            ["/en/tools/tiktok-username-value",2],
+            ["/en/tools/telegram-username-value",0],
+            ["/tools/instagram-username-value",2],
+            ["/tools/tiktok-username-value",2]
+          ];
+          let failures=0;
+          for(const [path,accordions] of paths){
+            try{
+              const r=await fetch(base+path+"?live-audit=20261109",{signal:AbortSignal.timeout(15000),cache:"no-store"});
+              const html=await r.text();
+              const crumb=html.includes('<nav class="uv-breadcrumbs">');
+              const panels=(html.match(/<details class="uv-accordion">/g)||[]).length;
+              const cached=accordions>0?html.includes('/tools/username-value.css?v=6'):true;
+              const ok=r.ok&&(!path.startsWith('/en/')||!crumb)&&panels===accordions&&cached;
+              console.log((ok?'PASS':'FAIL'),path,'http',r.status,'breadcrumbs',crumb,'panels',panels,'css6',cached);
+              if(!ok)failures++;
+            }catch(err){failures++;console.error('FAIL',path,String(err))}
+          }
+          const url=base+'/tools/username-value.css?v=6';
+          const r=await fetch(url,{signal:AbortSignal.timeout(15000),cache:'no-store'});
+          const css=await r.text();
+          const cssOK=r.ok&&css.includes('.uv-card--accordion .uv-accordion > summary')&&css.includes('.uv-accordion[open] > summary::after');
+          console.log(cssOK?'PASS':'FAIL','accordion CSS',r.status,css.length);
+          if(!cssOK)failures++;
+          if(failures)throw new Error(failures+' live checks failed');
+          console.log('PASS ALL PUBLIC VALUATION UI CHECKS');
+          JS
+          node /tmp/check.mjs
