@@ -62,6 +62,9 @@ jobs:
                     const h=document.querySelector('.sz-header').getBoundingClientRect(),p=document.querySelector('.sz-nav-panel').getBoundingClientRect();return {header:h.height,panelY:p.y,headBottom:h.bottom};
                   });
                   assert(alignment.panelY>=alignment.headBottom-15,variant+' '+lang+' dropdown anchors below bar');
+                  await page.hover('.sz-nav-panel .sz-nav-card');
+                  assert(await page.$eval('.sz-nav-panel',p=>getComputedStyle(p).visibility==='visible'),variant+' '+lang+' cursor moves from trigger into dropdown');
+
                   await page.keyboard.press('Escape');
                   await page.mouse.move(10,800);
                   await page.setViewport({width:390,height:844});
