@@ -1,0 +1,24 @@
+name: Full SEO and text audit
+on:
+  push:
+    branches: [seo-content-audit-release-20261109]
+    paths: ['scripts/site-seo-audit.py','.github/workflows/site-seo-audit.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: HTML audit (all RU and EN pages, sitemap, links, metadata and text)
+        run: |
+          python3 -m pip install beautifulsoup4 --quiet
+          python3 scripts/site-seo-audit.py
+      - name: JavaScript syntax
+        run: |
+          find . -path ./.git -prune -o -name '*.js' -type f -print0 | xargs -0 -r -n1 node --check
+          find scripts -name '*.mjs' -type f -print0 | xargs -0 -r -n1 node --check
