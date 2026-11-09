@@ -1402,3 +1402,25 @@ html, body {
   }
 
 }
+
+/* SovaZone Valuation AI — compact links on relevant pages */
+.sz-valuation-callout{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  margin:20px 0;padding:22px 24px;border:1px solid rgba(166,116,241,.24);
+  border-radius:20px;background:linear-gradient(110deg,rgba(119,60,180,.12),rgba(255,255,255,.025) 65%);
+}
+.sz-valuation-callout__copy{min-width:0}
+.sz-valuation-callout__eyebrow{display:block;margin-bottom:8px;color:#c0a6ea;font-size:10px;font-weight:800;letter-spacing:.15em}
+.sz-valuation-callout h2{margin:0 0 7px;color:#f5f3fa;font-size:clamp(18px,2.1vw,24px);line-height:1.2}
+.sz-valuation-callout p{margin:0;max-width:690px;color:var(--muted);font-size:14px;line-height:1.6}
+.sz-valuation-callout__link{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;flex:0 0 auto;
+  min-height:43px;padding:10px 15px;border:1px solid rgba(188,145,245,.3);
+  border-radius:12px;background:rgba(137,76,210,.14);color:#f0e4ff;
+  font-size:13px;font-weight:700;line-height:1.3;text-align:center;
+}
+.sz-valuation-callout__link:hover{border-color:rgba(188,145,245,.58);background:rgba(137,76,210,.22)}
+@media(max-width:700px){
+  .sz-valuation-callout{align-items:stretch;flex-direction:column;padding:18px;gap:14px}
+  .sz-valuation-callout__link{width:100%}
+}
