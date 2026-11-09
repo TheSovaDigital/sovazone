@@ -72,7 +72,7 @@
 .sz-nav-caret{flex:0 0 auto;opacity:.65;transition:transform .14s ease}
 .sz-nav-item.is-open .sz-nav-caret,.sz-side__dropdown[open] > summary .sz-nav-caret{transform:rotate(180deg)}
 .sz-nav-panel{
- position:absolute;top:calc(100% - 1px);left:50%;z-index:130;
+ position:absolute;top:calc(100% + 15px);left:50%;z-index:130;
  width:380px;max-width:min(92vw,550px);padding:13px;
  border:1px solid rgba(180,136,232,.2);border-radius:18px;
  background:linear-gradient(160deg,rgba(25,23,36,.99),rgba(10,10,17,.99));
@@ -86,6 +86,7 @@
 @media(hover:hover) and (pointer:fine){
  .sz-nav-item:hover > .sz-nav-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 }
+.sz-nav-panel::before{content:"";position:absolute;top:-17px;left:0;right:0;height:17px;}
 .sz-nav-panel__eyebrow{padding:8px 10px 10px;color:#ba9acf;font-size:11px;font-weight:800;letter-spacing:.06em}
 .sz-nav-panel__items{display:grid;grid-template-columns:1fr;gap:3px}
 .sz-nav-card{
