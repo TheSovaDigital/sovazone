@@ -40,6 +40,28 @@
         display:none;
       }
     }
+  
+    /* data-style valuation-ai-highlight: Embedded in shared fragments so the highlight does not depend on a cached page stylesheet. */
+    .sz-valuation-ai-gradient {
+      display:inline-block;
+      font-weight:800;
+      color:#ff3889;
+      background-image:linear-gradient(110deg,#ffcd55 0%,#ff7438 17%,#ff2588 35%,#c529ce 54%,#7846eb 72%,#ff3a8c 91%,#ffb43a 100%);
+      background-size:280% 100%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:sz-valuation-ai-shimmer 4.6s linear infinite;
+      filter:drop-shadow(0 0 2px rgba(238,64,175,.27));
+    }
+    @keyframes sz-valuation-ai-shimmer {
+      0% { background-position:0% 50%; }
+      100% { background-position:100% 50%; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      .sz-valuation-ai-gradient { animation:none;background-position:53% 50%; }
+    }
+  
   </style>
   <div class="container sz-header__inner">
     <a class="sz-header__brand" href="/" aria-label="SovaZone — главная">
