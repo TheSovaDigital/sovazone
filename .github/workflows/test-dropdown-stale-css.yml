@@ -1,4 +1,4 @@
-name: Test menu layout with fresh and cached old CSS
+name: Verify public SovaZone menu with fresh and cached old CSS
 on:
   push:
     branches: [audit-dropdown-cached-css-20261109]
@@ -44,7 +44,7 @@ jobs:
                     await page.setRequestInterception(true);
                     page.on('request',req=>req.url().endsWith('/styles.css')?req.respond({status:200,contentType:'text/css',body:oldCSS}):req.continue());
                   }
-                  await page.goto('http://127.0.0.1:8123/'+(lang==='en'?'en/':''),{waitUntil:'domcontentloaded'});
+                  await page.goto('https://sovazone.com/'+(lang==='en'?'en/':'')+'?live-nav-cache=20261109',{waitUntil:'domcontentloaded',timeout:30000});
                   await page.waitForSelector('.sz-nav-panel',{timeout:10000});
                   const initial=await page.evaluate(()=>{
                     const h=document.querySelector('.sz-header').getBoundingClientRect();
