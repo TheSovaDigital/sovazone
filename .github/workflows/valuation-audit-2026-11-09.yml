@@ -34,6 +34,7 @@ jobs:
         run: |
           cat > /tmp/live.mjs <<'JS'
           const host='https://sovazone.com';
+          const apiHost='https://sovazone.vercel.app';
           const requests=[
             {platform:'instagram',username:'aa',endpoint:'username-value',engine:'instagram-v4.0',min:20000,max:30000},
             {platform:'tiktok',username:'aa',endpoint:'username-value',engine:'instagram-v4.0',min:4000,max:6000},
@@ -46,7 +47,7 @@ jobs:
           ];
           let failures=0;
           for(const t of requests){
-            const url=host+'/api/'+t.endpoint+'/';
+            const url=apiHost+'/api/'+t.endpoint+'/';
             try{
               const r=await fetch(url,{method:'POST',headers:{'content-type':'application/json',origin:host},body:JSON.stringify({username:t.username,platform:t.platform,lang:'en'}),signal:AbortSignal.timeout(40000)});
               const body=await r.text();
@@ -61,14 +62,14 @@ jobs:
             await new Promise(r=>setTimeout(r,600));
           }
           const pages=[
-            ['/tools/username-value/','valuation-ai-ru.png','Как узнать стоимость никнейма бесплатно?'],
-            ['/en/tools/username-value/','valuation-ai-en.png','How much is my username worth?'],
-            ['/tools/instagram-username-value/','instagram-username-value-ru.png','Узнать стоимость никнейма Instagram'],
-            ['/en/tools/instagram-username-value/','instagram-username-value-en.png','Instagram username value'],
-            ['/tools/tiktok-username-value/','tiktok-username-value-ru.png','Почему стоимость никнейма TikTok отличается от Instagram?'],
-            ['/en/tools/tiktok-username-value/','tiktok-username-value-en.png','How much is my TikTok username worth?'],
-            ['/tools/telegram-username-value/','telegram-username-value-ru.png','Узнать стоимость никнейма Telegram'],
-            ['/en/tools/telegram-username-value/','telegram-username-value-en.png','Telegram username value']
+            ['/tools/username-value','valuation-ai-ru.png','Как узнать стоимость никнейма бесплатно?'],
+            ['/en/tools/username-value','valuation-ai-en.png','How much is my username worth?'],
+            ['/tools/instagram-username-value','instagram-username-value-ru.png','Узнать стоимость никнейма Instagram'],
+            ['/en/tools/instagram-username-value','instagram-username-value-en.png','Instagram username value'],
+            ['/tools/tiktok-username-value','tiktok-username-value-ru.png','Почему стоимость никнейма TikTok отличается от Instagram?'],
+            ['/en/tools/tiktok-username-value','tiktok-username-value-en.png','How much is my TikTok username worth?'],
+            ['/tools/telegram-username-value','telegram-username-value-ru.png','Узнать стоимость никнейма Telegram'],
+            ['/en/tools/telegram-username-value','telegram-username-value-en.png','Telegram username value']
           ];
           for(const [path,img,needle] of pages){
             try{
@@ -78,8 +79,20 @@ jobs:
               console.log('PASS PAGE '+path+': OG '+img);
             }catch(e){failures++;console.error('FAIL PAGE '+path+': '+String(e))}
           }
+          const images=[...new Set(pages.map(x=>x[1]))];
+          for(const name of images){
+            try {
+              const r=await fetch(host+'/image/og/'+name,{signal:AbortSignal.timeout(15000)});
+              if(!r.ok)throw new Error('HTTP '+r.status);
+              const bytes=Buffer.from(await r.arrayBuffer());
+              if(bytes.toString('hex',0,8)!=='89504e470d0a1a0a')throw new Error('PNG signature missing');
+              const width=bytes.readUInt32BE(16),height=bytes.readUInt32BE(20);
+              if(width!==1200||height!==630)throw new Error('Dimensions '+width+'x'+height);
+              console.log('PASS OG '+name+': 1200x630 PNG ('+bytes.length+' bytes)');
+            }catch(e){failures++;console.error('FAIL OG '+name+': '+String(e))}
+          }
           if(failures)throw new Error(failures+' production check(s) failed');
-          console.log('PASS ALL 8 live price controls and 8 SEO page checks');
+          console.log('PASS ALL 8 live price controls, 8 SEO page checks, 8 OG images');
           JS
           node /tmp/live.mjs
 
