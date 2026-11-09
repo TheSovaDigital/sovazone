@@ -1,0 +1,91 @@
+name: Audit Contacts dropdown desktop and mobile
+on:
+  push:
+    branches: [audit-contacts-dropdown-20261109]
+    paths: ['.github/workflows/audit-contacts-dropdown.yml']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install browser driver
+        run: |
+          node --check script.js
+          node --check en/script.js
+          which google-chrome
+          npm --prefix /tmp/test install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
+      - name: Test Contacts dropdown RU EN in Chrome with fresh and stale stylesheet
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 >/tmp/test-server.log 2>&1 &
+          sleep 1
+          cat > /tmp/test.cjs <<'JS'
+          const puppeteer=require('/tmp/test/node_modules/puppeteer-core');
+          const fs=require('fs');
+          const css=fs.readFileSync('styles.css','utf8');
+          const staleCss=css.slice(0,css.indexOf('/* SovaZone fast icon dropdowns:'));
+          if(staleCss.length<20000)throw new Error('Stale stylesheet fixture unavailable');
+          let checks=0;
+          const check=(ok,message)=>{if(!ok)throw new Error('FAIL '+message);console.log('PASS '+message);checks++};
+          (async()=>{
+            const browser=await puppeteer.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
+            try{
+              for(const variant of ['fresh','cached']){
+                for(const lang of ['ru','en']){
+                  const page=await browser.newPage();
+                  const base='http://127.0.0.1:8123/'+(lang==='en'?'en/':'');
+                  const prefix=lang==='en'?'/en':'';
+                  if(variant==='cached'){
+                    await page.setRequestInterception(true);
+                    page.on('request',req=>req.url().endsWith('/styles.css')?req.respond({status:200,contentType:'text/css',body:staleCss}):req.continue());
+                  }
+                  await page.setViewport({width:1280,height:900});
+                  await page.goto(base,{waitUntil:'domcontentloaded'});
+                  await page.waitForSelector('.sz-nav-item--contacts');
+                  const initial=await page.evaluate(()=>{
+                    const n=document.querySelectorAll('.sz-nav-item'),p=document.querySelector('.sz-nav-item--contacts .sz-nav-panel'),s=getComputedStyle(p);
+                    return {menus:n.length,visibility:s.visibility,position:s.position,blur:s.backdropFilter,header:document.querySelector('.sz-header').getBoundingClientRect().height};
+                  });
+                  check(initial.menus===4,variant+' '+lang+' 4 desktop groups');
+                  check(initial.visibility==='hidden'&&initial.position==='absolute'&&initial.header<90,variant+' '+lang+' overlay hidden');
+                  check(initial.blur.includes('blur(20px)'),variant+' '+lang+' glass backdrop');
+                  await page.hover('.sz-nav-item--contacts .sz-nav-trigger');
+                  await page.waitForFunction(()=>getComputedStyle(document.querySelector('.sz-nav-item--contacts .sz-nav-panel')).visibility==='visible');
+                  const popup=await page.$eval('.sz-nav-item--contacts .sz-nav-panel',p=>{
+                    const r=p.getBoundingClientRect();
+                    return {left:r.left,right:r.right,links:Array.from(p.querySelectorAll('.sz-nav-card')).map(a=>new URL(a.href).pathname)};
+                  });
+                  check(popup.left>=0&&popup.right<=1281,variant+' '+lang+' contacts dropdown within viewport');
+                  check(JSON.stringify(popup.links)===JSON.stringify(['contacts','about','guarantees'].map(x=>prefix+'/'+x)),variant+' '+lang+' all three correct links');
+                  await page.hover('.sz-nav-item--contacts .sz-nav-card:nth-child(2)');
+                  check(await page.$eval('.sz-nav-item--contacts .sz-nav-panel',p=>getComputedStyle(p).visibility==='visible'),variant+' '+lang+' pointer can enter contacts panel');
+                  await page.keyboard.press('Escape');
+                  await page.mouse.move(3,850);
+                  await page.setViewport({width:390,height:844});
+                  await page.reload({waitUntil:'domcontentloaded'});
+                  await page.waitForSelector('.sz-header__burger');
+                  await page.click('.sz-header__burger');
+                  await new Promise(r=>setTimeout(r,230));
+                  const groups=await page.$$('.sz-side__dropdown');
+                  check(groups.length===4,variant+' '+lang+' four mobile dropdowns');
+                  const contacts=groups[3],summary=await contacts.$('summary');
+                  await summary.click();
+                  check(await contacts.evaluate(d=>d.open),variant+' '+lang+' contacts accordion opens');
+                  const links=await contacts.$$eval('.sz-nav-card',as=>as.map(a=>new URL(a.href).pathname));
+                  check(JSON.stringify(links)===JSON.stringify(['contacts','about','guarantees'].map(x=>prefix+'/'+x)),variant+' '+lang+' mobile links');
+                  check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),variant+' '+lang+' no horizontal overflow');
+                  await (await groups[1].$('summary')).click();
+                  await new Promise(r=>setTimeout(r,80));
+                  check(!(await contacts.evaluate(d=>d.open)),variant+' '+lang+' accordion closes when another opens');
+                  await page.close();
+                }
+              }
+              console.log('PASS ALL '+checks+' CONTACTS NAVIGATION ASSERTIONS');
+            }finally{await browser.close()}
+          })().catch(e=>{console.error(e.stack||e);process.exit(1)});
+          JS
+          node /tmp/test.cjs
