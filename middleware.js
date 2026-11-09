@@ -1,86 +1,77 @@
 /**
- * Serve article-specific SEO metadata on the initial HTML response.
- * URLs remain /post?slug=... and /en/post?slug=...; the valuation engine is untouched.
- * This file is limited to blog routes and uses the existing blog indexes as metadata.
+ * Deliver per-article metadata in the initial HTML response for social crawlers.
+ * Scoped only to legacy RU/EN blog routes; leaves Valuation AI unchanged.
  */
 import ruIndex from './content/blog/index.json';
 import enIndex from './en/content/blog/index.json';
 
-const byLocale = {
+const catalogs = {
   ru: new Map(ruIndex.map(post => [post.slug, post])),
   en: new Map(enIndex.map(post => [post.slug, post])),
 };
-
-const escapeAttribute = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
-  '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-}[ch]));
-
-function replaceMeta(html, selector, value) {
-  const safe = escapeAttribute(value);
-  const regex = new RegExp('(<meta\\s+(?:name|property)="' + selector.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&') + '"\\s+content=")[^"]*(")', 'i');
-  return html.replace(regex, (_all, start, end) => start + safe + end);
+const escapeHtml = input => String(input ?? '').replace(/[&<>"']/g, char =>
+  ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char])
+);
+function replaceMeta(html, tag, value) {
+  const pattern = new RegExp('(<meta\\s+(?:name|property)="' + tag + '"\\s+content=")[^"]*(")', 'i');
+  return html.replace(pattern, (_match, before, after) => before + escapeHtml(value) + after);
 }
-
 function replaceLink(html, rel, value) {
-  const safe = escapeAttribute(value);
-  const regex = new RegExp('(<link\\s+rel="' + rel + '"\\s+href=")[^"]*(")', 'i');
-  return html.replace(regex, (_all, start, end) => start + safe + end);
+  const pattern = new RegExp('(<link\\s+rel="' + rel + '"\\s+href=")[^"]*(")', 'i');
+  return html.replace(pattern, (_match, before, after) => before + escapeHtml(value) + after);
 }
-
-export const config = {
-  matcher: ['/post', '/post/', '/en/post', '/en/post/'],
-};
+export const config = {matcher: ['/post', '/post/', '/en/post', '/en/post/']};
 
 export default async function middleware(request) {
   const url = new URL(request.url);
-  const path = url.pathname.replace(/\\/g, '/').replace(/\\/$/, '');
-  const locale = path === '/en/post' ? 'en' : path === '/post' ? 'ru' : null;
+  const pathname = url.pathname.replace(/\/$/, '');
+  const locale = pathname === '/en/post' ? 'en' : pathname === '/post' ? 'ru' : null;
   if (!locale || request.method !== 'GET') return;
-
   const slug = url.searchParams.get('slug');
-  if (!slug || !/^[a-zA-Z0-9_-]+$/.test(slug)) return;
-  const meta = byLocale[locale].get(slug);
-  if (!meta) return;
+  if (!slug || !/^[A-Za-z0-9_-]+$/.test(slug)) return;
+  const post = catalogs[locale].get(slug);
+  if (!post) return;
 
-  // Read the unmodified static template. Only the two blog routes run middleware.
-  const template = new URL(locale === 'en' ? '/en/post.html' : '/post.html', url);
-  const source = await fetch(template, {headers: {'Accept': 'text/html'}});
-  if (!source.ok) return;
-  let html = await source.text();
-  if (!html.toLowerCase().includes('<!doctype html')) return;
+  const templateUrl = new URL(locale === 'en' ? '/en/post.html' : '/post.html', url);
+  const templateResponse = await fetch(templateUrl, {headers: {'Accept': 'text/html'}});
+  if (!templateResponse.ok) return;
+  let html = await templateResponse.text();
+  if (!/<!doctype html/i.test(html)) return;
 
   const canonical = 'https://sovazone.com/' + (locale === 'en' ? 'en/' : '') + 'post?slug=' + encodeURIComponent(slug);
-  const title = String(meta.title || '').trim() + ' | SovaZone';
-  const desc = String(meta.description || '').trim();
-  const cover = typeof meta.cover === 'string' && /^\\/[^/]/.test(meta.cover)
-    ? 'https://sovazone.com' + meta.cover : 'https://sovazone.com/og-image.png';
+  const title = String(post.title).trim() + ' | SovaZone';
+  const description = String(post.description || '').trim();
+  const image = typeof post.cover === 'string' && /^\/[^/]/.test(post.cover)
+    ? 'https://sovazone.com' + post.cover
+    : 'https://sovazone.com/og-image.png';
 
-  html = html.replace(/<title>[\\s\\S]*?<\\/title>/i, '<title>' + escapeAttribute(title) + '</title>');
-  html = replaceMeta(html, 'description', desc);
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + escapeHtml(title) + '</title>');
+  html = replaceMeta(html, 'description', description);
   html = replaceLink(html, 'canonical', canonical);
-  for (const tag of ['og:title','twitter:title']) html = replaceMeta(html, tag, title);
-  for (const tag of ['og:description','twitter:description']) html = replaceMeta(html, tag, desc);
+  for (const name of ['og:title', 'twitter:title']) html = replaceMeta(html, name, title);
+  for (const name of ['og:description', 'twitter:description']) html = replaceMeta(html, name, description);
   html = replaceMeta(html, 'og:url', canonical);
-  for (const tag of ['og:image','og:image:secure_url','twitter:image']) html = replaceMeta(html, tag, cover);
-  // The source images are not uniformly 1200x630; avoid inaccurate dimensions.
-  html = html.replace(/\\s*<meta property="og:image:(?:width|height)"[^>]*>/gi, '');
-  const jsonLd = JSON.stringify({
+  for (const name of ['og:image', 'og:image:secure_url', 'twitter:image']) html = replaceMeta(html, name, image);
+  // Individual blog cover dimensions vary, so remove misleading template dimensions.
+  html = html.replace(/\s*<meta property="og:image:(?:width|height)"[^>]*>/gi, '');
+
+  const schema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: meta.title,
-    description: desc,
-    datePublished: meta.date,
-    image: cover,
+    headline: post.title,
+    description,
+    datePublished: post.date,
+    image,
     url: canonical,
     inLanguage: locale,
     author: {'@type':'Organization', name:'SovaZone'},
     publisher: {'@type':'Organization', name:'SovaZone', url:'https://sovazone.com/'}
   }).replace(/</g, '\\u003c');
-  html = html.replace('</head>', '<script type="application/ld+json">' + jsonLd + '</script>\\n</head>');
+  html = html.replace('</head>', '<script type="application/ld+json">' + schema + '</script>\n</head>');
 
-  const headers = new Headers(source.headers);
-  headers.set('Content-Type', 'text/html; charset=utf-8');
-  headers.delete('Content-Length');
-  headers.set('Cache-Control', 'public, max-age=0, s-maxage=3600');
-  return new Response(html, {status: 200, headers});
+  const headers = new Headers(templateResponse.headers);
+  headers.set('content-type', 'text/html; charset=utf-8');
+  headers.delete('content-length');
+  headers.set('cache-control', 'public, max-age=0, s-maxage=3600');
+  return new Response(html, {status:200, headers});
 }
