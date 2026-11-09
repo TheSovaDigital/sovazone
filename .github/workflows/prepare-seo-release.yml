@@ -1,0 +1,39 @@
+name: Prepare SEO release files on audit branch
+on:
+  push:
+    branches: [seo-content-audit-release-20261109]
+    paths: [scripts/prepare-seo-release.py,.github/workflows/prepare-seo-release.yml]
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate complete validated sitemaps and repair locale metadata
+        run: |
+          python3 scripts/prepare-seo-release.py
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          for p in ("sitemap.xml","sitemap-pages.xml","sitemap-articles.xml","sitemap-blog.xml","sitemap-usernames.xml","en/sitemap.xml"):
+              root=ET.parse(p).getroot()
+              print("VALID_XML",p,root.tag)
+          PY
+      - name: Recheck entire site
+        run: |
+          python3 -m pip install beautifulsoup4 --quiet
+          python3 scripts/site-seo-audit.py
+      - name: Commit generated release content to review branch
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -- '*.html' '*.xml'
+            git commit -m "SEO release: complete sitemaps, reciprocal hreflang and concise metadata"
+            git push origin HEAD:seo-content-audit-release-20261109
+          else
+            echo "No site changes needed"
+          fi
