@@ -162,7 +162,6 @@
       item.addEventListener("pointerleave", function (event) {
         if (event.pointerType === "mouse") hideNavMenu(item);
       });
-      item.addEventListener("focusin", showMenu);
       item.addEventListener("focusout", function (event) {
         if (!item.contains(event.relatedTarget)) hideNavMenu(item);
       });
