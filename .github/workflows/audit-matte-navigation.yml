@@ -72,7 +72,7 @@ jobs:
                   },prefix);
                   check(state.open&&state.order,variant+' '+lang+' burger open and Nicknames first');
                   check(state.background==='rgb(11, 11, 13)',variant+' '+lang+' matte mobile drawer');
-                  check(state.groups.some(x=>x.toLowerCase().includes(lang==='en'?'sections':'разделы'))&&state.groups.some(x=>x.toLowerCase().includes(lang==='en'?'information':'информация'))&&state.groups.some(x=>x.includes('Valuation')),variant+' '+lang+' all sidebar categories restored');
+                  check(state.groups.some(x=>x.toLowerCase().includes(lang==='en'?'sections':'разделы'))&&state.groups.some(x=>x.toLowerCase().includes(lang==='en'?'information':'информация'))&&state.groups.some(x=>x.toLowerCase().includes('valuation')),variant+' '+lang+' all sidebar categories restored');
                   check(state.hasProjects&&state.hasArticles&&state.hasAbout&&state.hasFaq&&state.hasTelegram,variant+' '+lang+' restored section links');
                   check(state.overflow&&state.sideScroll,variant+' '+lang+' scrollable mobile content without overflow');
                   const dropdowns=await page.$$('.sz-side__dropdown');
