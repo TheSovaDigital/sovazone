@@ -20,11 +20,11 @@ function replaceLink(html, rel, value) {
   const pattern = new RegExp('(<link\\s+rel="' + rel + '"\\s+href=")[^"]*(")', 'i');
   return html.replace(pattern, (_match, before, after) => before + escapeHtml(value) + after);
 }
-export const config = {matcher: ['/post', '/post/', '/en/post', '/en/post/']};
+export const config = {runtime: 'nodejs', matcher: ['/post', '/post/', '/post.html', '/en/post', '/en/post/', '/en/post.html']};
 
 export default async function middleware(request) {
   const url = new URL(request.url);
-  const pathname = url.pathname.replace(/\/$/, '');
+  const pathname = url.pathname.replace(/\/$/, '').replace(/\.html$/, '');
   const locale = pathname === '/en/post' ? 'en' : pathname === '/post' ? 'ru' : null;
   if (!locale || request.method !== 'GET') return;
   const slug = url.searchParams.get('slug');
