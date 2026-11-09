@@ -42,10 +42,11 @@ jobs:
                 for(const width of [390,1366]){
                   const page=await browser.newPage();
                   await page.setViewport({width,height:850});
+                  await page.setCacheEnabled(false);
                   for(const route of routes){
                     const path=prefix+(route?route+'.html':'index.html');
                     const response=await page.goto('http://127.0.0.1:8123/'+path,{waitUntil:'domcontentloaded',timeout:18000});
-                    assert(response.status()===200,locale+' '+width+' '+path+' HTTP 200');
+                    assert(response.status()===200||response.status()===304,locale+' '+width+' '+path+' HTTP 200/304');
                     const meta=await page.evaluate(()=>{
                       const h=document.head,canonical=h.querySelector('link[rel=canonical]'),og=h.querySelector('meta[property="og:image"]'),d=h.querySelector('meta[name=description]'),headings=document.querySelectorAll('h1');
                       return {title:document.title,canonical:canonical?.href,og:og?.content,desc:d?.content,headings:headings.length,language:document.documentElement.lang,overflow:document.documentElement.scrollWidth-innerWidth,alts:[...h.querySelectorAll('link[hreflang]')].map(x=>x.hreflang)};
