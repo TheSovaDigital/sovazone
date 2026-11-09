@@ -725,19 +725,47 @@
       setState("ready");
     }
 
+
+    // Shareable blog category links, used by the desktop and mobile Blog dropdowns.
+    const blogCategories = {"articles":"Articles","news":"News","cases":"Cases"};
+    function categoryFromUrl() {
+      const slug = new URLSearchParams(window.location.search).get("category");
+      return blogCategories[slug] || "all";
+    }
+    function syncBlogFilterUi() {
+      const buttons = document.querySelectorAll(".blog-filter-btn");
+      buttons.forEach(button => {
+        const active = (button.dataset.filter || "all") === currentFilter;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      const empty = document.getElementById("blog-empty");
+      if (empty) empty.textContent = currentFilter === "all" ?
+        "No posts found." :
+        "No posts in this category yet.";
+    }
+    function setBlogCategory(filter, updateUrl) {
+      currentFilter = filter;
+      syncBlogFilterUi();
+      if (updateUrl) {
+        const slug = Object.keys(blogCategories).find(key => blogCategories[key] === filter);
+        const url = new URL(window.location.href);
+        if (slug) url.searchParams.set("category", slug);
+        else url.searchParams.delete("category");
+        window.history.pushState({blogCategory:slug || null}, "", url.pathname + url.search + url.hash);
+      }
+      if (allPosts.length) renderBlog();
+    }
+
     function initFilters() {
       const buttons = document.querySelectorAll(".blog-filter-btn");
-
+      setBlogCategory(categoryFromUrl(), false);
       buttons.forEach(button => {
         button.addEventListener("click", () => {
-          currentFilter = button.dataset.filter || "all";
-
-          buttons.forEach(btn => btn.classList.remove("is-active"));
-          button.classList.add("is-active");
-
-          renderBlog();
+          setBlogCategory(button.dataset.filter || "all", true);
         });
       });
+      window.addEventListener("popstate", () => setBlogCategory(categoryFromUrl(), false));
     }
 
     async function initBlog() {
