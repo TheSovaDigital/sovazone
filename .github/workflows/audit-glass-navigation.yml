@@ -57,7 +57,7 @@ jobs:
                   check(desktop.panelGradient.includes('linear-gradient')&&desktop.panelBlur.includes('blur(20px)'),variant+' '+lang+' dark glass dropdown with blur');
                   check(desktop.tikBrand&&!desktop.oldMusic,variant+' '+lang+' branded TikTok icon');
                   check(desktop.telegram===(lang==='en'?'Estimate a Telegram username':'Стоимость Telegram-никнейма'),variant+' '+lang+' restored Telegram caption');
-                  const saleText=await page.$eval('.sz-nav-card[href$="/services/username-sale"] .sz-nav-card__text', el=>el.innerText);
+                  const saleText=await page.$eval('.sz-nav-card[href$="/services/username-sale"] .sz-nav-card__text', el=>el.textContent);
                   check(saleText.includes(lang==='en'?'Ready-made usernames in the SovaZone catalog':'Готовые никнеймы из каталога SovaZone'),variant+' '+lang+' sales service description is accurate');
                   await page.hover('.sz-nav-trigger');
                   await page.waitForFunction(()=>getComputedStyle(document.querySelector('.sz-nav-panel')).visibility==='visible');
