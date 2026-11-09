@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
-      - uses: actions/checkout@11bd71901bbe5b163ceea73d27597364c9a8b390 # v4.2.2
+      - uses: actions/checkout@v4 # v4.2.2
         with:
           persist-credentials: false
       - name: Validate scripts, install lightweight browser driver
