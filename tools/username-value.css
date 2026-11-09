@@ -44,3 +44,28 @@
 @media(max-width:1100px){.uv-hero h1,.uv-hero p{white-space:normal}.uv-tool-head{display:block}.uv-tool-head p{margin-top:5px;text-align:left}}
 @media(max-width:900px){.uv-choices{grid-template-columns:1fr}}
 @media(max-width:720px){.uv-page{padding-top:2px}.uv-wrap{width:100%}.uv-hero{margin-bottom:12px}.uv-hero h1{font-size:30px;white-space:normal}.uv-title-line{display:block}.uv-hero p{font-size:14px}.uv-tabs{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border-radius:15px}.uv-tab{min-width:0;border-radius:11px;height:40px;padding:0 6px;gap:5px;font-size:12px}.uv-dot{width:6px;height:6px;box-shadow:0 0 0 4px rgba(217,179,140,.06)}.uv-tool{border-radius:18px}.uv-tool-head{padding:17px 16px 0}.uv-form{padding:14px 16px 18px}.uv-input-row{grid-template-columns:1fr}.uv-submit{width:100%}.uv-hint{display:block}.uv-hint span{display:block}.uv-hint span+span{margin-top:3px;text-align:left}.uv-result{padding:18px 16px}.uv-result-top{display:block}.uv-price{margin-top:12px;font-size:37px}.uv-reasons{grid-template-columns:1fr}.uv-reason{min-height:0}.uv-sell-callout{align-items:flex-start;flex-direction:column;gap:12px}.uv-sell-callout a{width:100%}.uv-seo{margin-top:20px}.uv-seo-grid,.uv-choices{grid-template-columns:1fr}.uv-card--wide{grid-column:auto}.uv-choice{padding:19px}}
+
+/* Collapsible information panels (native details; no JavaScript required). */
+.uv-card--accordion{padding:0;overflow:hidden}
+.uv-card--accordion .uv-accordion{display:block}
+.uv-card--accordion .uv-accordion > summary{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:20px;cursor:pointer;list-style:none;color:#fff;
+}
+.uv-card--accordion .uv-accordion > summary::-webkit-details-marker{display:none}
+.uv-card--accordion .uv-accordion > summary h2{margin:0;font-size:21px;line-height:1.3}
+.uv-card--accordion .uv-accordion > summary::after{
+  content:"+";display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;flex:0 0 30px;border:1px solid var(--uv-line);
+  border-radius:10px;color:var(--uv-accent);font-size:21px;line-height:1;
+}
+.uv-card--accordion .uv-accordion[open] > summary::after{content:"−"}
+.uv-card--accordion .uv-accordion > summary:hover{background:rgba(255,255,255,.025)}
+.uv-card--accordion .uv-accordion > summary:focus-visible{outline:2px solid var(--uv-accent);outline-offset:-3px;border-radius:14px}
+.uv-card--accordion .uv-accordion__body{padding:0 20px 20px;border-top:1px solid rgba(255,255,255,.05)}
+.uv-card--accordion .uv-accordion__body p:first-child{margin-top:14px}
+@media(max-width:720px){
+  .uv-card--accordion .uv-accordion > summary{padding:18px}
+  .uv-card--accordion .uv-accordion > summary h2{font-size:19px}
+  .uv-card--accordion .uv-accordion__body{padding:0 18px 18px}
+}
