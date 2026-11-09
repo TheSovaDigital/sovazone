@@ -1,0 +1,31 @@
+name: One-time live Valuation AI shimmer audit
+on:
+  push:
+    branches: [audit-live-ai-gradient-2026-11]
+    paths: ['.github/workflows/live-ai-gradient-audit.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify served fragments and styling from public domain
+        run: |
+          cat > /tmp/check.mjs <<'JS'
+          const base='https://sovazone.com';
+          const paths=['/header.html','/en/header.html','/footer.html','/en/footer.html'];
+          let failures=0;
+          for(const path of paths){
+            const r=await fetch(base+path+'?test=gradient-fix-20261109',{cache:'no-store',signal:AbortSignal.timeout(15000)});
+            const html=await r.text();
+            const counts=(html.match(/<span class="sz-valuation-ai-gradient">AI<\/span>/g)||[]).length;
+            const expected=path.includes('header')?3:1;
+            const hasEmbedded=html.includes('linear-gradient(110deg,#ffcd55') && html.includes('animation:sz-valuation-ai-shimmer 4.6s linear infinite') && html.includes('prefers-reduced-motion');
+            const ok=r.ok && counts===expected && hasEmbedded;
+            console.log((ok?'PASS':'FAIL'),path,'HTTP',r.status,'spans',counts,'embedded CSS',hasEmbedded,'age',r.headers.get('age'),'cache-control',r.headers.get('cache-control'));
+            if(!ok)failures++;
+          }
+          if(failures)throw new Error(failures+' public fragments do not have working embedded gradient');
+          console.log('ALL FOUR PUBLIC GRADIENT FRAGMENTS VERIFIED');
+          JS
+          node /tmp/check.mjs
