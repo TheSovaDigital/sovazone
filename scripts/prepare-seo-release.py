@@ -13,7 +13,7 @@ NS="http://www.sitemaps.org/schemas/sitemap/0.9"
 IMG="http://www.google.com/schemas/sitemap-image/1.1"
 ET.register_namespace("",NS)
 ET.register_namespace("image",IMG)
-TODAY="2026-11-09"
+TODAY=date.today().isoformat()
 modified=set()
 def gitdate(path):
  try:
@@ -35,7 +35,7 @@ def canon(path):
 def is_public(path):
  s=path.as_posix()
  if path.name in ("header.html","footer.html","404.html","post.html"):return False
- if s.startswith("admin/") or path.name.startswith(("google","pinterest","yandex_","zen_")):return False
+ if "admin" in path.parts or path.name.startswith(("google","pinterest","yandex_","zen_")):return False
  raw=path.read_text(encoding="utf-8",errors="replace")
  if re.search(r'<meta\s+name=["\x27]robots["\x27][^>]*noindex',raw,re.I):return False
  return True
@@ -85,7 +85,6 @@ for p in pages:
    match=re.search(r'<link\b[^>]*rel=["\x27]canonical["\x27][^>]*>',raw,re.I)
    if match:
     ru=p if not p.as_posix().startswith("en/") else other
-    en=other if not other.as_posix().startswith("en/")==False else p
     # Derive deterministic RU/EN pair independent of iteration order.
     root=p if not p.as_posix().startswith("en/") else other
     enfile=other if not p.as_posix().startswith("en/") else p

@@ -8,7 +8,7 @@ import re, json, xml.etree.ElementTree as ET
 
 ROOT=Path(".")
 files=sorted(x for x in ROOT.rglob("*.html") if not any(z in x.parts for z in (".git","node_modules")))
-public=[p for p in files if p.name not in ("header.html","footer.html","404.html") and p.parts[0] not in ("admin",) and not p.name.startswith(("google","pinterest"))]
+public=[p for p in files if p.name not in ("header.html","footer.html","404.html","post.html") and p.parts[0] not in ("admin",) and not p.name.startswith(("google","pinterest","yandex_","zen_"))]
 fileset={p.as_posix() for p in files}
 assets={p.as_posix() for p in ROOT.rglob("*") if p.is_file() and ".git" not in p.parts}
 sitemapPaths=["sitemap-pages.xml","sitemap-articles.xml","sitemap-blog.xml","sitemap-usernames.xml","en/sitemap.xml"]
@@ -124,6 +124,20 @@ for page in public:
   issues["incomplete_hreflang_pairs"].append(p)
  if b.get("en")!= (u2 if not p.startswith("en/") else u1) or b.get("ru")!= (u1 if not p.startswith("en/") else u2):
   issues["incomplete_hreflang_pairs"].append(other)
+
+# Blog content audit: Markdown frontmatter, broken local media, corrupted entities.
+mdFiles=sorted(list(ROOT.glob("content/blog/*.md"))+list(ROOT.glob("en/content/blog/*.md")))
+for p in mdFiles:
+ raw=p.read_text(encoding="utf-8",errors="replace")
+ m=re.match(r"^---\\s*\\n([\\s\\S]*?)\\n---",raw)
+ if not m:issues["markdown_missing_frontmatter"].append(name(p))
+ elif not re.search(r"^title\\s*:",m.group(1),re.M):issues["markdown_missing_title"].append(name(p))
+ if raw.count("```")%2:issues["markdown_unbalanced_code_fence"].append(name(p))
+ for ch in ["\\ufffd","&#x20;","&amp;#x20;","Lorem ipsum"]:
+  if ch in raw:issues["markdown_text_artifact"].append(name(p)+" "+ch)
+ for mm in re.finditer(r"!\\[[^\\]]*\\]\\((/[^)]+)\\)",raw):
+  if not resolves(mm.group(1)):issues["markdown_missing_image"].append(name(p)+" -> "+mm.group(1))
+counts["blog_markdown_files"]=len(mdFiles)
 print("AUDIT_TOTALS",json.dumps({"public_html":len(public),"indexable_html":len(indexable),"sitemap_urls":{p:len(x) for p,x in sitemapUrls.items()},"unique_sitemap_urls":len(sitemapped),"issues":{k:len(v) for k,v in sorted(issues.items())}},ensure_ascii=False))
 for label,ls in sorted(issues.items(),key=lambda z:-len(z[1])):
  print("AUDIT",label,len(ls),json.dumps(list(dict.fromkeys(ls))[:17],ensure_ascii=False))
