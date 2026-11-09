@@ -1,0 +1,84 @@
+name: One-time Valuation AI production regression 2026-11-09
+
+on:
+  push:
+    branches: [audit-valuation-2026-11-09]
+    paths: ['.github/workflows/valuation-audit-2026-11-09.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Backend syntax and imports
+        run: |
+          node --version
+          node --check api/username-value.js
+          node --check api/telegram-username-value.js
+          node --check tools/username-value.js
+          node -e "Promise.all([import('./api/username-value.js'),import('./api/telegram-username-value.js')]).then(([a,b])=>{if(typeof a.default!=='function'||typeof b.default!=='function')process.exit(1);console.log('BACKEND IMPORTS OK')}).catch(e=>{console.error(e);process.exit(1)})"
+      - name: Instagram and TikTok deterministic cases
+        run: node .github/scripts/test_username_valuation_v38.mjs
+      - name: Telegram deterministic cases (mocked OpenAI and FX)
+        run: node .github/scripts/test_telegram_valuation_v1.mjs
+
+  production:
+    needs: deterministic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test production route responses and metadata
+        shell: bash
+        run: |
+          cat > /tmp/live.mjs <<'JS'
+          const host='https://sovazone.com';
+          const requests=[
+            {platform:'instagram',username:'aa',endpoint:'username-value',engine:'instagram-v4.0',min:20000,max:30000},
+            {platform:'tiktok',username:'aa',endpoint:'username-value',engine:'instagram-v4.0',min:4000,max:6000},
+            {platform:'instagram',username:'alex',endpoint:'username-value',engine:'instagram-v4.0',min:10000,max:15000},
+            {platform:'tiktok',username:'volk',endpoint:'username-value',engine:'instagram-v4.0',min:3000,max:4000},
+            {platform:'telegram',username:'hello_',endpoint:'telegram-username-value',engine:'telegram-v1.2',special:'invalid_username'},
+            {platform:'telegram',username:'adidas',endpoint:'telegram-username-value',engine:'telegram-v1.2',special:'global_brand'},
+            {platform:'telegram',username:'work',endpoint:'telegram-username-value',engine:'telegram-v1.2',minTon:10000,maxTon:20000},
+            {platform:'telegram',username:'aaaa',endpoint:'telegram-username-value',engine:'telegram-v1.2',minTon:5000,maxTon:10000},
+          ];
+          let failures=0;
+          for(const t of requests){
+            const url=host+'/api/'+t.endpoint+'/';
+            try{
+              const r=await fetch(url,{method:'POST',headers:{'content-type':'application/json',origin:host},body:JSON.stringify({username:t.username,platform:t.platform,lang:'en'}),signal:AbortSignal.timeout(40000)});
+              const body=await r.text();
+              let d;try{d=JSON.parse(body)}catch{throw new Error('Non-JSON HTTP '+r.status+': '+body.slice(0,160))}
+              if(r.status!==200)throw new Error('HTTP '+r.status+': '+JSON.stringify(d).slice(0,250));
+              if(d.engineVersion!==t.engine)throw new Error('Engine '+d.engineVersion+' expected '+t.engine);
+              if(t.special&&d.specialCase!==t.special)throw new Error('specialCase '+d.specialCase+' expected '+t.special);
+              if(t.min!==undefined&&(d.priceMin!==t.min||d.priceMax!==t.max))throw new Error('USD '+d.priceMin+'-'+d.priceMax+' expected '+t.min+'-'+t.max);
+              if(t.minTon!==undefined&&(d.priceMinTon!==t.minTon||d.priceMaxTon!==t.maxTon))throw new Error('TON '+d.priceMinTon+'-'+d.priceMaxTon+' expected '+t.minTon+'-'+t.maxTon);
+              console.log('PASS LIVE '+t.platform+'/'+t.username+': USD '+d.priceMin+'-'+d.priceMax+(d.priceMinTon!==undefined?' TON '+d.priceMinTon+'-'+d.priceMaxTon:''));
+            }catch(e){failures++;console.error('FAIL LIVE '+t.platform+'/'+t.username+': '+String(e))}
+            await new Promise(r=>setTimeout(r,600));
+          }
+          const pages=[
+            ['/tools/username-value/','valuation-ai-ru.png','Как узнать стоимость никнейма бесплатно?'],
+            ['/en/tools/username-value/','valuation-ai-en.png','How much is my username worth?'],
+            ['/tools/instagram-username-value/','instagram-username-value-ru.png','Узнать стоимость никнейма Instagram'],
+            ['/en/tools/instagram-username-value/','instagram-username-value-en.png','Instagram username value'],
+            ['/tools/tiktok-username-value/','tiktok-username-value-ru.png','Почему стоимость никнейма TikTok отличается от Instagram?'],
+            ['/en/tools/tiktok-username-value/','tiktok-username-value-en.png','How much is my TikTok username worth?'],
+            ['/tools/telegram-username-value/','telegram-username-value-ru.png','Узнать стоимость никнейма Telegram'],
+            ['/en/tools/telegram-username-value/','telegram-username-value-en.png','Telegram username value']
+          ];
+          for(const [path,img,needle] of pages){
+            try{
+              const r=await fetch(host+path,{signal:AbortSignal.timeout(15000)});
+              const page=await r.text();
+              if(!r.ok||!page.includes(img)||!page.includes(needle))throw new Error('HTTP '+r.status+' image '+page.includes(img)+' text '+page.includes(needle));
+              console.log('PASS PAGE '+path+': OG '+img);
+            }catch(e){failures++;console.error('FAIL PAGE '+path+': '+String(e))}
+          }
+          if(failures)throw new Error(failures+' production check(s) failed');
+          console.log('PASS ALL 8 live price controls and 8 SEO page checks');
+          JS
+          node /tmp/live.mjs
