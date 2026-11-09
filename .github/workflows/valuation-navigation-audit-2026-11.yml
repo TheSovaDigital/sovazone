@@ -1,0 +1,54 @@
+name: Validate published Valuation AI navigation links
+
+on:
+  push:
+    branches: [audit-valuation-navigation-2026-11]
+    paths: ['.github/workflows/valuation-navigation-audit-2026-11.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  public-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate public RU and EN navigation and context links
+        shell: bash
+        run: |
+          cat > /tmp/audit.mjs <<'JS'
+          const host='https://sovazone.com';
+          const checks=[
+            ['/', ['Сколько стоит ваш никнейм?','href="/tools/username-value"']],
+            ['/en/', ['How much is your username worth?','href="/en/tools/username-value"']],
+            ['/header.html',['Оценка никнейма','/tools/username-value','/tools/instagram-username-value','/tools/tiktok-username-value','/tools/telegram-username-value']],
+            ['/en/header.html',['Username value','/en/tools/username-value','/en/tools/instagram-username-value','/en/tools/tiktok-username-value','/en/tools/telegram-username-value']],
+            ['/footer.html',['Оценка никнейма','href="/tools/username-value"']],
+            ['/en/footer.html',['Username value','href="/en/tools/username-value"']],
+            ['/services',['Оценка стоимости никнейма','href="/tools/username-value"']],
+            ['/en/services',['Username value estimator','href="/en/tools/username-value"']],
+            ['/sell',['Сначала узнайте стоимость','href="/tools/username-value"']],
+            ['/en/sell',['Check the value first','href="/en/tools/username-value"']],
+            ['/usernames',['Есть свой никнейм?','href="/tools/username-value"']],
+            ['/en/usernames',['Have your own username?','href="/en/tools/username-value"']],
+            ['/services/username-sale',['Как определить стоимость никнейма?','href="/tools/username-value"']],
+            ['/en/services/username-sale',['How to estimate username value','href="/en/tools/username-value"']],
+            ['/articles/how-to-choose-instagram-username',['href="/tools/instagram-username-value"']],
+            ['/en/articles/how-to-choose-instagram-username',['href="/en/tools/instagram-username-value"']],
+            ['/tools/username-value',['SOVAZONE VALUATION AI']],
+            ['/en/tools/username-value',['SOVAZONE VALUATION AI']],
+            ['/styles.css',['.sz-valuation-callout','.sz-valuation-callout__link']]
+          ];
+          let bad=0;
+          for(const [path,fragments] of checks){
+            try{
+              const resp=await fetch(host+path+'?audit=20261109',{signal:AbortSignal.timeout(14000)});
+              const html=await resp.text();
+              const missing=fragments.filter(x=>!html.includes(x));
+              if(!resp.ok||missing.length){bad++;console.log('FAIL '+path+' HTTP '+resp.status+' missing='+JSON.stringify(missing))}
+              else console.log('PASS '+path+' HTTP '+resp.status);
+            }catch(e){bad++;console.log('FAIL '+path+' '+String(e))}
+          }
+          if(bad)throw new Error(bad+' live navigation check(s) failed');
+          console.log('PASS '+checks.length+' public page and fragment checks');
+          JS
+          node /tmp/audit.mjs
