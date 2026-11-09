@@ -113,7 +113,7 @@ for p in pages:
 enpost=Path("en/post.html")
 src=enpost.read_text(encoding="utf-8")
 src,n=re.subn(r'\s*<link\b[^>]*hreflang="(?:ru|en|x-default)"[^>]*>',"",src)
-if n!=3:raise RuntimeError("Unexpected EN post template hreflang tags: "+str(n))
+if n not in (0,3):raise RuntimeError("Unexpected EN post template hreflang tags: "+str(n))
 setfile(enpost,src)
 stats["dynamic_template_wrong_alternates_removed"]=n
 
