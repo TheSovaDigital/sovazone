@@ -43,12 +43,12 @@ jobs:
                 check(navOrder.indexOf(lang==='en'?'Blog':'Блог')<navOrder.indexOf(lang==='en'?'Contacts':'Контакты'),lang+' blog then contacts');
                 const services=(await page.$$('[data-nav-menu]'))[0];
                 await services.hover();
-                await page.waitForFunction(()=>document.querySelectorAll('[data-nav-menu]')[0].classList.contains('is-open'));
-                console.log('DEBUG CSS RULES',await page.evaluate(async()=>{const r=await fetch('/styles.css');const txt=await r.text();const sheet=Array.from(document.styleSheets).find(sh=>sh.href&&sh.href.endsWith('styles.css'));return {containsNew:txt.includes('.sz-nav-item.is-open > .sz-nav-panel'),end:txt.slice(-1000),rules:Array.from(sheet?.cssRules||[]).filter(rule=>rule.cssText.includes('sz-nav-panel')).map(rule=>rule.cssText.slice(0,280)),matching:document.querySelector('.sz-nav-panel')?.matches('.sz-nav-item.is-open > .sz-nav-panel'),parent:document.querySelector('.sz-nav-panel')?.parentElement?.outerHTML.slice(0,180)}}));
-                console.log('DEBUG SERVICE PANEL', await services.evaluate(el=>{const p=el.querySelector('.sz-nav-panel');const c=getComputedStyle(p);const r=p.getBoundingClientRect();return {class:el.className,parentHover:el.matches(':hover'),visibility:c.visibility,opacity:c.opacity,pointer:c.pointerEvents,transform:c.transform,rect:[r.x,r.y,r.width,r.height],cssLoaded:!!Array.from(document.styleSheets).find(s=>s.href?.includes('styles.css'))}}));
+                await page.waitForFunction(()=>getComputedStyle(document.querySelectorAll('[data-nav-menu]')[0].querySelector('.sz-nav-panel')).visibility==='visible');
+                await new Promise(r=>setTimeout(r,140));
                 check(await services.$eval('.sz-nav-panel',e=>getComputedStyle(e).visibility==='visible'),lang+' hover opens services');
                 const valuation=(await page.$$('[data-nav-menu]'))[1];
                 await valuation.hover();
+                await new Promise(r=>setTimeout(r,150));
                 check(await valuation.$eval('.sz-nav-panel',e=>getComputedStyle(e).visibility==='visible'),lang+' hover opens valuation');
                 check(!(await services.$eval('.sz-nav-panel',e=>getComputedStyle(e).visibility==='visible')),lang+' switching closes previous dropdown');
                 await page.keyboard.press('Escape');
@@ -64,9 +64,8 @@ jobs:
                 check(details.length===3,lang+' 3 mobile accordion groups');
                 await (await details[1].$('summary')).click();
                 check(await details[1].evaluate(d=>d.open),lang+' mobile Valuation opens');
-                const gap=await page.$eval('.sz-side__dropdown:nth-of-type(1)',x=>x.innerText.length).catch(()=>0);
-                const brandPos=await details[1].evaluate(d=>{const span=d.querySelector('.sz-side__dropdown-label'),ai=d.querySelector('.sz-valuation-ai-gradient');const a=span.getBoundingClientRect(),b=ai.getBoundingClientRect();return {left:b.left,right:a.right,width:a.width}});
-                check(brandPos.left>0&&brandPos.right-brandPos.left<12,lang+' Valuation AI label stays together');
+                const brandGap=await details[1].evaluate(d=>{const span=d.querySelector('.sz-side__dropdown-label'),ai=d.querySelector('.sz-valuation-ai-gradient');const range=document.createRange();range.selectNode(span.firstChild);return ai.getBoundingClientRect().left-range.getBoundingClientRect().right;});
+                check(brandGap>=0&&brandGap<16,lang+' Valuation AI label stays together');
                 await (await details[0].$('summary')).click();
                 await new Promise(r=>setTimeout(r,180));
                 check(!(await details[1].evaluate(d=>d.open))&&await details[0].evaluate(d=>d.open),lang+' mobile group switching closes old group');
