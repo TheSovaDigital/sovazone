@@ -1,0 +1,84 @@
+name: SEO release browser and sitemap smoke QA
+on:
+  push:
+    branches: [seo-content-audit-release-20261109]
+    paths: [.github/workflows/seo-browser-qa.yml]
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install Puppeteer Core for Chrome
+        run: |
+          which google-chrome
+          npm --prefix /tmp/seo-qa install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
+      - name: Validate public redirect versus canonical policy
+        run: |
+          for u in "https://sovazone.com/about" "https://sovazone.com/tools/username-value" "https://sovazone.com/en/blog"; do
+            echo "LIVE_ROUTE: $u"
+            curl -sSIL --max-time 15 "$u" | grep -iE '^HTTP/|^location:' | head -8
+          done
+      - name: Responsive browser and sitemap SEO QA
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 >/tmp/site.log 2>&1 &
+          sleep 1
+          cat > /tmp/seo-release.cjs <<'JS'
+          const puppeteer=require('/tmp/seo-qa/node_modules/puppeteer-core');
+          const fs=require('fs');
+          const assert=(x,msg)=>{if(!x)throw new Error('FAIL '+msg);console.log('PASS '+msg);tests++};
+          let tests=0;
+          (async()=>{
+            const browser=await puppeteer.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
+            const routes=['','about','contacts','guarantees','services','usernames','blog','articles','faq','projects','services/verification','username/m4d','tools/username-value','tools/instagram-username-value','tools/tiktok-username-value','tools/telegram-username-value'];
+            try{
+              for(const locale of ['ru','en']){
+                const prefix=locale==='en'?'en/':'';
+                for(const width of [390,1366]){
+                  const page=await browser.newPage();
+                  await page.setViewport({width,height:850});
+                  for(const route of routes){
+                    const path=prefix+(route?route+'.html':'index.html');
+                    const response=await page.goto('http://127.0.0.1:8123/'+path,{waitUntil:'domcontentloaded',timeout:18000});
+                    assert(response.status()===200,locale+' '+width+' '+path+' HTTP 200');
+                    const meta=await page.evaluate(()=>{
+                      const h=document.head,canonical=h.querySelector('link[rel=canonical]'),og=h.querySelector('meta[property="og:image"]'),d=h.querySelector('meta[name=description]'),headings=document.querySelectorAll('h1');
+                      return {title:document.title,canonical:canonical?.href,og:og?.content,desc:d?.content,headings:headings.length,language:document.documentElement.lang,overflow:document.documentElement.scrollWidth-innerWidth,alts:[...h.querySelectorAll('link[hreflang]')].map(x=>x.hreflang)};
+                    });
+                    assert(meta.title?.length>10&&!!meta.canonical&&!!meta.og&&!!meta.desc,locale+' '+width+' '+route+' SEO head');
+                    assert(meta.headings===1&&meta.language===locale,locale+' '+width+' '+route+' heading and locale');
+                    assert(meta.canonical.startsWith('https://sovazone.com/'),locale+' '+width+' '+route+' canonical host');
+                    assert(meta.overflow<=3,locale+' '+width+' '+route+' no horizontal overflow');
+                    assert(meta.alts.includes('ru')&&meta.alts.includes('en'),locale+' '+width+' '+route+' reciprocal locale tags');
+                  }
+                  await page.close();
+                }
+              }
+              const page=await browser.newPage();
+              await page.goto('http://127.0.0.1:8123/index.html',{waitUntil:'domcontentloaded'});
+              await page.waitForSelector('.sz-nav-item--contacts',{timeout:10000});
+              assert(await page.$eval('.sz-nav-item--contacts .sz-nav-panel',p=>p.querySelectorAll('.sz-nav-card').length===3),'Contacts glass panel remains intact');
+              assert(await page.$eval('.sz-nav-panel[id^="sz-nav-blog-"]',p=>p.querySelectorAll('.sz-nav-card').length===4),'Blog category navigation remains intact');
+              const xml=['sitemap.xml','sitemap-pages.xml','sitemap-articles.xml','sitemap-blog.xml','sitemap-usernames.xml','en/sitemap.xml'];
+              for(const file of xml){
+                const resp=await fetch('http://127.0.0.1:8123/'+file);
+                const body=await resp.text();
+                assert(resp.status===200&&body.includes('sitemaps.org/schemas/sitemap/0.9'),file+' sitemap XML served');
+              }
+              assert(fs.readFileSync('sitemap-pages.xml','utf8').includes('tools/telegram-username-value'),'Valuation AI in sitemap');
+              assert(fs.readFileSync('sitemap-blog.xml','utf8').includes('how-to-value-username-before-selling'),'Recent blog post in sitemap');
+              console.log('PASS ALL '+tests+' SEO BROWSER SMOKE ASSERTIONS');
+              await page.close();
+            }finally{await browser.close()}
+          })().catch(e=>{console.error(e.stack||e);process.exit(1)});
+          JS
+          node /tmp/seo-release.cjs
+      - name: Valuation AI deterministic backend regressions
+        run: |
+          node .github/scripts/test_username_valuation_v38.mjs
+          node .github/scripts/test_telegram_valuation_v1.mjs
