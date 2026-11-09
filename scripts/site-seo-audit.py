@@ -141,3 +141,10 @@ counts["blog_markdown_files"]=len(mdFiles)
 print("AUDIT_TOTALS",json.dumps({"public_html":len(public),"indexable_html":len(indexable),"sitemap_urls":{p:len(x) for p,x in sitemapUrls.items()},"unique_sitemap_urls":len(sitemapped),"issues":{k:len(v) for k,v in sorted(issues.items())}},ensure_ascii=False))
 for label,ls in sorted(issues.items(),key=lambda z:-len(z[1])):
  print("AUDIT",label,len(ls),json.dumps(list(dict.fromkeys(ls))[:17],ensure_ascii=False))
+fatal={"missing_title","missing_description","missing_canonical","missing_hreflang","html_lang_wrong","h1_count","broken_local_href","missing_img_src","missing_social_image","sitemap_xml_error","sitemap_nonexistent","sitemap_duplicates","indexable_absent_sitemap","hreflang_missing_target","incomplete_hreflang_pairs","jsonld_syntax","source_encoding_artifact","markdown_missing_frontmatter","markdown_missing_title","markdown_unbalanced_code_fence","markdown_missing_image"}
+found={key:len(entries) for key,entries in issues.items() if key in fatal and entries}
+if found:
+ print("SEO_AUDIT_FAILED",json.dumps(found,ensure_ascii=False))
+ raise SystemExit(1)
+print("SEO_AUDIT_OK",len(public),"public static HTML pages and",len(mdFiles),"blog Markdown files")
+

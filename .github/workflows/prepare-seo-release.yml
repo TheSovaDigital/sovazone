@@ -1,5 +1,6 @@
 name: Prepare SEO release files on audit branch
 on:
+  workflow_dispatch:
   push:
     branches: [seo-content-audit-release-20261109]
     paths: [scripts/prepare-seo-release.py,.github/workflows/prepare-seo-release.yml]

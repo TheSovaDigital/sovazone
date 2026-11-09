@@ -1,8 +1,17 @@
 name: Full SEO and text audit
 on:
   push:
-    branches: [seo-content-audit-release-20261109]
-    paths: ['scripts/site-seo-audit.py','.github/workflows/site-seo-audit.yml']
+    branches: [main,seo-content-audit-release-20261109]
+    paths:
+      - '*.html'
+      - '**/*.html'
+      - '*.xml'
+      - '**/*.xml'
+      - 'content/blog/**'
+      - 'en/content/blog/**'
+      - 'scripts/site-seo-audit.py'
+      - '.github/workflows/site-seo-audit.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
