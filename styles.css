@@ -1424,3 +1424,24 @@ html, body {
   .sz-valuation-callout{align-items:stretch;flex-direction:column;padding:18px;gap:14px}
   .sz-valuation-callout__link{width:100%}
 }
+
+/* VALUATION AI: subtle Instagram-spectrum iridescence on "AI" only. */
+.sz-valuation-ai-gradient{
+  display:inline-block;
+  color:#d62976;
+  font-weight:800;
+  background-image:linear-gradient(105deg,#feda75 0%,#fa7e1e 18%,#d62976 42%,#962fbf 65%,#4f5bd5 82%,#d62976 100%);
+  background-size:240% 100%;
+  background-position:0% 50%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:sz-valuation-ai-shimmer 6s ease-in-out infinite alternate;
+}
+@keyframes sz-valuation-ai-shimmer{
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
+}
+@media(prefers-reduced-motion:reduce){
+  .sz-valuation-ai-gradient{animation:none;background-position:50% 50%}
+}
