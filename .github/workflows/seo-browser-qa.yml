@@ -79,6 +79,10 @@ jobs:
           })().catch(e=>{console.error(e.stack||e);process.exit(1)});
           JS
           node /tmp/seo-release.cjs
+      - name: Verify sitemap generator is idempotent
+        run: |
+          python3 scripts/prepare-seo-release.py
+          git diff --exit-code -- '*.html' '*.xml'
       - name: Valuation AI deterministic backend regressions
         run: |
           node .github/scripts/test_username_valuation_v38.mjs

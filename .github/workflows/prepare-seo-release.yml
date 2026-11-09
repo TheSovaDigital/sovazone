@@ -34,7 +34,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add -- '*.html' '*.xml'
             git commit -m "SEO release: complete sitemaps, reciprocal hreflang and concise metadata"
-            git push origin HEAD:seo-content-audit-release-20261109
+            git push origin "HEAD:$GITHUB_REF_NAME"
           else
             echo "No site changes needed"
           fi
