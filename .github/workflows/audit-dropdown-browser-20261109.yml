@@ -1,0 +1,78 @@
+name: One-time responsive dropdown navigation browser audit
+on:
+  push:
+    branches: [audit-icon-dropdown-navigation-20261109]
+    paths: ['.github/workflows/audit-dropdown-browser-20261109.yml']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b163ceea73d27597364c9a8b390 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Validate scripts, install lightweight browser driver
+        shell: bash
+        run: |
+          node --check script.js
+          node --check en/script.js
+          which google-chrome
+          npm --prefix /tmp/navtest install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
+      - name: Browser test RU/EN dropdowns at desktop and mobile widths
+        shell: bash
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 >/tmp/nav-server.log 2>&1 &
+          sleep 1
+          cat >/tmp/test-nav.cjs <<'JS'
+          const puppeteer=require('/tmp/navtest/node_modules/puppeteer-core');
+          (async()=>{
+            const browser=await puppeteer.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
+            let tests=0;
+            const check=(ok,msg)=>{if(!ok)throw new Error('FAIL '+msg);console.log('PASS '+msg);tests++};
+            const page=await browser.newPage();
+            try{
+              for(const lang of ['ru','en']){
+                await page.setViewport({width:1440,height:900});
+                await page.goto('http://127.0.0.1:8123/'+(lang==='en'?'en/':''),{waitUntil:'domcontentloaded'});
+                await page.waitForSelector('.sz-header .sz-nav-item',{timeout:8000});
+                const itemCounts=await page.$$eval('.sz-header .sz-nav-item',items=>items.map(x=>x.querySelectorAll('.sz-nav-card').length));
+                check(JSON.stringify(itemCounts)==='[7,4,3]',lang+' 3 desktop menus: Services 7, Valuation 4, Blog 3');
+                const navOrder=await page.$eval('.sz-header__nav',n=>n.innerText);
+                check(navOrder.indexOf(lang==='en'?'Blog':'Блог')<navOrder.indexOf(lang==='en'?'Contacts':'Контакты'),lang+' blog then contacts');
+                const services=page.locator('[data-nav-menu]').nth(0);
+                await services.hover();
+                await page.waitForFunction(()=>document.querySelectorAll('[data-nav-menu]')[0].classList.contains('is-open'));
+                check(await services.locator('.sz-nav-panel').isVisible(),lang+' hover opens services');
+                const valuation=page.locator('[data-nav-menu]').nth(1);
+                await valuation.hover();
+                check(await valuation.locator('.sz-nav-panel').isVisible(),lang+' hover opens valuation');
+                check(!(await services.locator('.sz-nav-panel').isVisible()),lang+' switching closes previous dropdown');
+                await page.keyboard.press('Escape');
+                await page.mouse.move(10,850);
+                check(!(await valuation.locator('.sz-nav-panel').isVisible()),lang+' Escape closes dropdown');
+                check(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),lang+' desktop no horizontal overflow');
+                await page.setViewport({width:390,height:844});
+                await page.reload({waitUntil:'domcontentloaded'});
+                await page.waitForSelector('.sz-header__burger');
+                await page.click('.sz-header__burger');
+                check(await page.$eval('.sz-side',s=>s.classList.contains('is-open')),lang+' mobile burger opens');
+                const details=page.locator('.sz-side__dropdown');
+                check(await details.count()===3,lang+' 3 mobile accordion groups');
+                await details.nth(1).locator('summary').click();
+                check(await details.nth(1).evaluate(d=>d.open),lang+' mobile Valuation opens');
+                const gap=await page.$eval('.sz-side__dropdown:nth-of-type(1)',x=>x.innerText.length).catch(()=>0);
+                const brandPos=await details.nth(1).evaluate(d=>{const span=d.querySelector('.sz-side__dropdown-label'),ai=d.querySelector('.sz-valuation-ai-gradient');const a=span.getBoundingClientRect(),b=ai.getBoundingClientRect();return {left:b.left,right:a.right,width:a.width}});
+                check(brandPos.left>0&&brandPos.right-brandPos.left<12,lang+' Valuation AI label stays together');
+                await details.nth(0).locator('summary').click();
+                await new Promise(r=>setTimeout(r,180));
+                check(!(await details.nth(1).evaluate(d=>d.open))&&await details.nth(0).evaluate(d=>d.open),lang+' mobile group switching closes old group');
+                check(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),lang+' mobile no horizontal overflow');
+                await page.keyboard.press('Escape');
+              }
+              console.log('PASSED '+tests+' RESPONSIVE NAVIGATION ASSERTIONS');
+            } finally {await browser.close()}
+          })().catch(e=>{console.error(e.stack||e);process.exit(1)});
+          JS
+          node /tmp/test-nav.cjs
