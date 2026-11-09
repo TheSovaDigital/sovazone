@@ -1,0 +1,81 @@
+name: One-time Valuation AI language and projects public audit
+on:
+  push:
+    branches: [audit-valuation-language-2026-11]
+    paths: ['.github/workflows/valuation-language-audit-2026-11.yml']
+permissions:
+  contents: read
+jobs:
+  public:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify public pages, correct locale loader and project links
+        shell: bash
+        run: |
+          cat >/tmp/verify.mjs <<'JS'
+          import vm from 'node:vm';
+          import {readFileSync} from 'node:fs';
+          const host='https://sovazone.com';
+          const pages=[
+            ['/tools/username-value','/script.js'],
+            ['/tools/instagram-username-value','/script.js'],
+            ['/tools/tiktok-username-value','/script.js'],
+            ['/tools/telegram-username-value','/script.js'],
+            ['/en/tools/username-value','/en/script.js'],
+            ['/en/tools/instagram-username-value','/en/script.js'],
+            ['/en/tools/tiktok-username-value','/en/script.js'],
+            ['/en/tools/telegram-username-value','/en/script.js'],
+          ];
+          let failures=0;
+          for(const [path,script] of pages){
+            try{
+              const r=await fetch(host+path+'?test=lang20261109',{signal:AbortSignal.timeout(20000)});
+              const s=await r.text();
+              if(!r.ok||!s.includes('<script src="'+script+'"></script>'))throw new Error('status '+r.status+' expected '+script);
+              if(path.startsWith('/en/')){if(!s.includes('hreflang="ru"')||!s.includes('hreflang="en"'))throw new Error('missing hreflang')}
+              console.log('PASS PAGE '+path+' locale script '+script);
+            }catch(e){failures++;console.error('FAIL PAGE '+path+' '+String(e))}
+          }
+          const projectChecks=[
+            ['/projects','/tools/username-value','/tools/instagram-username-value','/tools/tiktok-username-value','/tools/telegram-username-value'],
+            ['/en/projects','/en/tools/username-value','/en/tools/instagram-username-value','/en/tools/tiktok-username-value','/en/tools/telegram-username-value']
+          ];
+          for(const [path,...urls] of projectChecks){
+            try{
+              const r=await fetch(host+path+'?test=projects20261109',{signal:AbortSignal.timeout(20000)});
+              const html=await r.text();
+              const missing=urls.filter(url=>!html.includes('href="'+url+'"'));
+              if(!r.ok||missing.length||!html.includes('project-card--valuation'))throw new Error('HTTP '+r.status+' missing '+missing.join(','));
+              console.log('PASS PROJECT '+path);
+            }catch(e){failures++;console.error('FAIL PROJECT '+path+' '+String(e))}
+          }
+          const expectedHeaders=[
+            ['/header.html','data-lang-target="en"','href="/en/tools/username-value"'],
+            ['/en/header.html','data-lang-target="ru"','href="/tools/username-value"']
+          ];
+          for(const [path,lang,href] of expectedHeaders){
+            try{
+              const r=await fetch(host+path);
+              const s=await r.text();
+              if(!r.ok||!s.includes(lang)||!s.includes(href))throw new Error('HTTP '+r.status+' missing language or valuation link');
+              console.log('PASS HEADER '+path);
+            }catch(e){failures++;console.error('FAIL HEADER '+path+' '+String(e))}
+          }
+          for(const [file,cases] of [
+            ['script.js', [['/tools/instagram-username-value','en','/en/tools/instagram-username-value'],['/tools/username-value','en','/en/tools/username-value']]],
+            ['en/script.js', [['/en/tools/tiktok-username-value','ru','/tools/tiktok-username-value'],['/en/tools/telegram-username-value','ru','/tools/telegram-username-value'],['/en/tools/username-value','ru','/tools/username-value']]]
+          ]){
+            const s=readFileSync(file,'utf8');
+            const fn=s.slice(s.indexOf('function buildCounterpartPath'),s.indexOf('function updateLanguageSwitch'));
+            if(!fn.trim())throw Error('Cannot locate path logic');
+            for(const [pathname,language,expected] of cases){
+              const actual=vm.runInNewContext(fn+';buildCounterpartPath('+JSON.stringify(language)+')',{window:{location:{pathname,search:'',hash:''}}});
+              if(actual!==expected){failures++;console.error('FAIL PATH '+pathname+' '+actual+' expected '+expected)}
+              else console.log('PASS PATH '+pathname+' => '+actual);
+            }
+          }
+          if(failures)throw new Error(failures+' live locale/project checks failed');
+          console.log('ALL LIVE LOCALE & PROJECT CHECKS PASSED');
+          JS
+          node /tmp/verify.mjs
