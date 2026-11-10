@@ -66,10 +66,10 @@ author: SovaZone
 
 Например:
 
-- `theusername`  
-- `imusername`  
-- `username.io`  
-- `username.co`  
+- **theusername**  
+- **imusername**  
+- **username.io**  
+- **username.co**  
 
 Иногда достаточно небольшого изменения, чтобы получить свободный и красивый ник.
 
