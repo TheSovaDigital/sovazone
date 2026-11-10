@@ -52,10 +52,13 @@ for(const lang of ['ru','en']){
     for(const k of ['og:image','og:image:secure_url','twitter:image'])h=meta(h,k,cover);
     h=h.replace(/(<link rel="canonical" href=")[^"]*(")/,(_m,a,b)=>a+canonical+b);
     h=h.replace(/\s*<meta property="og:image:(?:width|height)"[^>]*>/gi,'');
-    if(ids[other].has(p.slug)){
+    {
       const anchor='<link rel="canonical" href="'+canonical+'">';
-      const alternates=['ru','en'].map(l=>'<link rel="alternate" hreflang="'+l+'" href="'+link(l,p.slug)+'">');
-      alternates.push('<link rel="alternate" hreflang="x-default" href="'+link('ru',p.slug)+'">');
+      const paired=ids[other].has(p.slug);
+      const alternates=paired
+        ? ['ru','en'].map(l=>'<link rel="alternate" hreflang="'+l+'" href="'+link(l,p.slug)+'">')
+        : ['<link rel="alternate" hreflang="'+lang+'" href="'+canonical+'">'];
+      alternates.push('<link rel="alternate" hreflang="x-default" href="'+(paired?link('ru',p.slug):canonical)+'">');
       h=h.replace(anchor,anchor+'\n  '+alternates.join('\n  '));
     }
     h=h.replace(/(<h1 class="post-title" id="post-title" itemprop="headline">)[\s\S]*?(<\/h1>)/,(_m,a,b)=>a+esc(p.title)+b);
