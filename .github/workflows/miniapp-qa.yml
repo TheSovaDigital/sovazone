@@ -25,10 +25,14 @@ jobs:
       - name: Install browser test dependencies
         run: npm --prefix /tmp/sova-miniapp-qa install puppeteer-core@24.25.0 --no-audit --no-fund
       - name: Test live Mini App in real Chrome
-        run: node miniapp/tests/browser.cjs
+        run: |
+          python3 -m http.server 8123 --directory miniapp --bind 127.0.0.1 >/tmp/sova-miniapp-http.log 2>&1 &
+          sleep 1
+          node miniapp/tests/browser.cjs
         env:
           NODE_PATH: /tmp/sova-miniapp-qa/node_modules
-          MINIAPP_URL: https://sova-username-miniapp-mzn2i2460-thesovadigitals-projects.vercel.app
+          MINIAPP_URL: http://127.0.0.1:8123
+          MINIAPP_LOCAL: '1'
       - name: Store screenshots
         if: always()
         uses: actions/upload-artifact@v4
