@@ -2167,8 +2167,7 @@
             ''
           ).trim(),
           cover: (post.cover || post.image || post.thumbnail || post.preview || '/og-image.png').trim(),
-          date: post.date || '',
-          publishedOrder: Number(post.publishedOrder || 0)
+          date: post.date || ''
         };
       }
 
@@ -2176,7 +2175,7 @@
         return [...posts].sort((a, b) => {
           const dateA = new Date(a.date || 0).getTime();
           const dateB = new Date(b.date || 0).getTime();
-          return dateB - dateA || (b.publishedOrder || 0) - (a.publishedOrder || 0);
+          return dateB - dateA;
         });
       }
 
@@ -2202,7 +2201,7 @@
       }
 
       function buildPostUrl(slug) {
-        return '/en/post/' + encodeURIComponent(slug || '');
+        return '/en/post?slug=' + encodeURIComponent(slug || '');
       }
 
       function render(posts) {
