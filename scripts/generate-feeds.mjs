@@ -492,7 +492,7 @@ function sortItems(items) {
     const dateA = new Date(a.date || 0).getTime();
     const dateB = new Date(b.date || 0).getTime();
     if (dateB !== dateA) return dateB - dateA;
-    if ((b.publishedOrder || 0) !== (a.publishedOrder || 0)) return (b.publishedOrder || 0) - (a.publishedOrder || 0);
+    if ((a.publishedOrder || 0) !== (b.publishedOrder || 0)) return (a.publishedOrder || 0) - (b.publishedOrder || 0);
     return a.title.localeCompare(b.title, "ru");
   });
 }
