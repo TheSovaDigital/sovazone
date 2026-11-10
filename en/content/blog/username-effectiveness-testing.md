@@ -2,6 +2,7 @@
 title: "How to Test a Username Before Launching Your Brand"
 slug: username-effectiveness-testing
 date: 2026-11-10
+publishedOrder: 2
 description: "A practical username testing framework: recall, spelling mistakes, search clarity, brand fit, and a simple candidate scorecard."
 cover: /image/blog/username-effectiveness-testing.jpg
 category: Articles

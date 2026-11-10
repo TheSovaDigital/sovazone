@@ -2,6 +2,7 @@
 title: "Как защитить никнейм бренда в Instagram, TikTok и YouTube"
 slug: protect-brand-username-social-platforms
 date: 2026-11-10
+publishedOrder: 3
 description: "Практические меры защиты никнейма и цифровой идентичности бренда: доступы, 2FA, единый список аккаунтов, мониторинг подделок и смена имени."
 cover: /image/blog/protect-brand-username-social-platforms.jpg
 category: Статьи

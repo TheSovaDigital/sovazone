@@ -2,6 +2,7 @@
 title: "Никнейм для личного бренда: как выбрать имя, которое запомнят"
 slug: personal-brand-username-guide
 date: 2026-11-10
+publishedOrder: 4
 description: "Как подобрать никнейм для личного бренда: стратегии имени, ошибки, проверка узнаваемости и варианты для Instagram, TikTok и YouTube."
 cover: /image/blog/personal-brand-username-guide.jpg
 category: Статьи

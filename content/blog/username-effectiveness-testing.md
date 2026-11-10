@@ -2,6 +2,7 @@
 title: "Как проверить эффективность никнейма до запуска бренда"
 slug: username-effectiveness-testing
 date: 2026-11-10
+publishedOrder: 2
 description: "Метод проверки никнейма до запуска: тест запоминаемости, ошибок при наборе, поиска в соцсетях, смысловых ассоциаций и сравнительная таблица."
 cover: /image/blog/username-effectiveness-testing.jpg
 category: Статьи

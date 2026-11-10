@@ -2,6 +2,7 @@
 title: "How to Protect Your Brand Username Across Social Platforms"
 slug: protect-brand-username-social-platforms
 date: 2026-11-10
+publishedOrder: 3
 description: "Protect your brand identity and usernames across Instagram, TikTok, and YouTube with access controls, 2FA, impersonation monitoring, and a change plan."
 cover: /image/blog/protect-brand-username-social-platforms.jpg
 category: Articles
