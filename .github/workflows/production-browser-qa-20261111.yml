@@ -1,4 +1,5 @@
 name: Temporary SovaZone production browser QA
+# QA-only rerun after verifying CSS clipping and off-canvas drawer in real Chrome.
 on:
   push:
     branches:
