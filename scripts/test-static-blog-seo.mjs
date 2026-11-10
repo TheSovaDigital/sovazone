@@ -56,3 +56,11 @@ for(const file of ['blog.html','en/blog.html']){
  assert.ok(!read(file).includes('return "/'+(file.startsWith('en/')?'en/':'')+'post?slug="'),'Blog listing old URL in '+file);
 }
 console.log('STATIC_BLOG_SEO_PASS',JSON.stringify({articles:checked,reciprocalLocaleLinks:paired,redirects:2}));
+
+// Legacy query URLs on GitHub Pages must navigate to the indexable static article.
+for(const [lang,template] of [['ru','post.html'],['en','en/post.html']]) {
+  const source=read(template);
+  assert.ok(source.includes('content="noindex,follow"'),template+' thin template noindex');
+  assert.ok(source.includes('<!-- legacy-blog-redirect -->'),template+' browser fallback');
+  assert.ok(source.includes((lang==='ru'?'/post/':'/en/post/')+'" + encodeURIComponent(slug)'),template+' redirect target');
+}

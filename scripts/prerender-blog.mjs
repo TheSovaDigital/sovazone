@@ -44,6 +44,9 @@ for(const lang of ['ru','en']){
   for(const p of data[lang]){
     assert.match(p.slug,/^[A-Za-z0-9_-]+$/);
     let h=read(pref+'post.html'),canonical=link(lang,p.slug),cover=p.cover?.startsWith('/')?site+p.cover:site+'/og-image.png';
+    // Do not inherit the legacy template's noindex or client redirect.
+    h=h.replace(/<!-- legacy-blog-redirect -->[\s\S]*?<!-- \/legacy-blog-redirect -->\s*/g,'');
+    h=h.replace('<meta name="robots" content="noindex,follow">','<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">');
     h=h.replace(/<title>[\s\S]*?<\/title>/i,'<title>'+esc(short(p.title))+'</title>');
     h=meta(h,'description',p.description);
     for(const k of ['og:title','twitter:title'])h=meta(h,k,p.title+' | SovaZone');

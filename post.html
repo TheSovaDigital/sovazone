@@ -5,7 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#0b0b0f">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="robots" content="noindex,follow">
+  <!-- legacy-blog-redirect -->
+  <script>
+    (function () {
+      const slug = new URLSearchParams(window.location.search).get("slug");
+      if (slug && /^[A-Za-z0-9_-]+$/.test(slug)) {
+        window.location.replace("/post/" + encodeURIComponent(slug));
+      }
+    })();
+  </script>
+  <!-- /legacy-blog-redirect -->
 
   <title>Статья — SovaZone</title>
   <meta name="description" content="Статья блога SovaZone о никнеймах, социальных сетях, безопасности аккаунтов, верификации и цифровых проектах.">
