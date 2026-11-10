@@ -3,7 +3,7 @@ title: "Никнейм для Instagram для бизнеса: как выбра
 slug: instagram-username-for-business-checklist
 date: 2026-11-10
 description: "Как выбрать никнейм для Instagram-магазина или бренда: критерии, проверка доступности, распространённые ошибки и ограничения платформы."
-cover: /og-image.png
+cover: /image/blog/instagram-username-for-business-checklist.jpg
 category: Статьи
 author: SovaZone
 ---
