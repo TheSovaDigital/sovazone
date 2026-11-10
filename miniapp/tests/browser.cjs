@@ -12,7 +12,7 @@ const browser=await puppeteer.launch({executablePath:chrome,headless:true,args:[
 fs.mkdirSync(path,{recursive:true});
 try{
 for(const width of [390,1366]){
-const page=await browser.newPage();await page.setViewport({width,height:860,deviceScaleFactor:1});
+const context=await browser.createBrowserContext();const page=await context.newPage();await page.setViewport({width,height:860,deviceScaleFactor:1});
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
 const response=await page.goto(BASE,{waitUntil:'networkidle2',timeout:45000});
 ok([200,304].includes(response.status()),'Landing HTTP '+width,{status:response.status()});
@@ -54,7 +54,7 @@ await page.click('#language-switch');
 ok(await page.$eval('html',x=>['ru','en'].includes(x.lang)),'RU/EN language switch '+width);
 await page.screenshot({path:path+'/profile-'+width+'.png',fullPage:true});
 ok(errors.length===0,'No uncaught browser JS errors '+width,errors);
-await page.close();
+await page.close();await context.close();
 }
 if(process.env.MINIAPP_LOCAL!=='1'){
 const api=await fetch(BASE+'/api/me');const me=await api.json();ok(api.ok&&!me.authenticated,'API demo explicitly unauthenticated',me);
