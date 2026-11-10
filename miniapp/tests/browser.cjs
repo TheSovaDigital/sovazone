@@ -30,8 +30,9 @@ await page.click('[data-filter="short"]');
 state=await page.evaluate(()=>({count:document.querySelectorAll('#catalog-grid article.username-card').length,active:document.querySelector('.chip.active')?.dataset.filter}));
 ok(state.count>=2&&state.active==='short','Filter short usernames '+width,state);
 await page.click('[data-filter="all"]');
-await page.click('.card-open');
-await page.waitForSelector('#modal-overlay:not([hidden])');
+await page.$eval('#catalog-grid .card-open',el=>el.scrollIntoView({block:'center'}));
+await page.click('#catalog-grid .card-open');
+try{await page.waitForSelector('#modal-overlay:not([hidden])',{timeout:7000})}catch(error){const debug=await page.evaluate(()=>({overlayHidden:document.querySelector('#modal-overlay')?.hidden,screen:document.querySelector('.screen.is-current')?.id,buttons:[...document.querySelectorAll('#catalog-grid .card-open')].slice(0,2).map(x=>x.outerHTML),bodyScrollY:window.scrollY}));console.log('MODAL_DEBUG',JSON.stringify(debug));throw error;}
 ok((await page.$eval('#detail-title',x=>x.textContent)).startsWith('@'),'Product details modal '+width);
 await page.click('#modal-close');
 ok(await page.$eval('#modal-overlay',x=>x.hidden),'Product modal closes '+width);
