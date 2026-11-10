@@ -184,7 +184,7 @@ function buildIndex() {
   posts.sort((a, b) => {
     const dateA = new Date(a.date || 0).getTime();
     const dateB = new Date(b.date || 0).getTime();
-    return dateB - dateA || (b.publishedOrder || 0) - (a.publishedOrder || 0);
+    return dateB - dateA || (a.publishedOrder || 0) - (b.publishedOrder || 0);
   });
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(posts, null, 2) + "\n", "utf8");
