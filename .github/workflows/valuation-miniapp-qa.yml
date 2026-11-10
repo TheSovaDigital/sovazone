@@ -38,6 +38,13 @@ jobs:
         env:
           NODE_PATH: /tmp/valuation-qa/node_modules
         run: node valuation-miniapp/tests/browser.cjs
+      - name: Test current branded source in Chrome
+        env:
+          NODE_PATH: /tmp/valuation-qa/node_modules
+        run: |
+          python3 -m http.server 8124 --directory valuation-miniapp --bind 127.0.0.1 >/tmp/valuation-source-server.log 2>&1 &
+          sleep 1
+          node valuation-miniapp/tests/branding-browser.cjs
       - name: Upload diagnostic screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -47,4 +54,7 @@ jobs:
             valuation-qa.json
             valuation-390.png
             valuation-1366.png
+            valuation-sovazone-390.png
+            valuation-sovazone-1366.png
+            valuation-branding-qa.json
           if-no-files-found: ignore
