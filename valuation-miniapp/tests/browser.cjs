@@ -16,7 +16,7 @@ const pause=ms=>new Promise(r=>setTimeout(r,ms));
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
    page.on('response',r=>{if(/\/api\/estimate/.test(r.url()))results.calls.push({url:r.url(),status:r.status()})});
    const res=await page.goto(base+'/',{waitUntil:'networkidle2',timeout:30000});
-   ok(res?.status()===200,'Homepage HTTP '+width,res?.status());
+   ok([200,304].includes(res?.status()),'Homepage HTTP '+width,res?.status());
    const ready=await page.evaluate(()=>({platforms:document.querySelectorAll('.platform').length,overflow:document.documentElement.scrollWidth-innerWidth,h1:document.querySelectorAll('h1').length,button:!!document.getElementById('submit-btn')}));
    ok(ready.platforms===3&&ready.h1===1&&ready.button,'Frontend markup '+width,JSON.stringify(ready));
    ok(ready.overflow<=1,'No viewport overflow '+width,ready.overflow);
