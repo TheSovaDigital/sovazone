@@ -60,7 +60,11 @@ console.log('STATIC_BLOG_SEO_PASS',JSON.stringify({articles:checked,reciprocalLo
 // Legacy query URLs on GitHub Pages must navigate to the indexable static article.
 for(const [lang,template] of [['ru','post.html'],['en','en/post.html']]) {
   const source=read(template);
-  assert.ok(source.includes('content="noindex,follow"'),template+' thin template noindex');
+  const head=source.slice(0,source.indexOf('</head>'));
+  assert.ok(head.includes('content="index,follow"'),template+' allows initial JS rendering');
+  assert.ok(!head.includes('content="noindex,follow"'),template+' must not block JS rendering');
+  assert.ok(!head.includes('<link rel="canonical"'),template+' must not canonicalize all query posts to a generic route');
+  assert.ok(source.includes('setAttribute("content", "noindex,follow")'),template+' no-slug fallback noindex');
   assert.ok(source.includes('<!-- legacy-blog-redirect -->'),template+' browser fallback');
   assert.ok(source.includes((lang==='ru'?'/post/':'/en/post/')+'" + encodeURIComponent(slug)'),template+' redirect target');
 }
