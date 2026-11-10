@@ -446,7 +446,8 @@ function buildBlogItems(config) {
         category: cleanText(meta.category || config.defaults.category, config.defaults.category),
         author: cleanText(meta.author || config.defaults.author, config.defaults.author),
         date: cleanText(meta.date || ""),
-        url: `${SITE_URL}${config.basePath}/post?slug=${encodeURIComponent(slug)}`,
+        publishedOrder: Number(meta.publishedOrder || 0),
+        url: `${SITE_URL}${config.basePath}/post/${encodeURIComponent(slug)}`,
         image: cover,
         content
       };
@@ -491,6 +492,7 @@ function sortItems(items) {
     const dateA = new Date(a.date || 0).getTime();
     const dateB = new Date(b.date || 0).getTime();
     if (dateB !== dateA) return dateB - dateA;
+    if ((b.publishedOrder || 0) !== (a.publishedOrder || 0)) return (b.publishedOrder || 0) - (a.publishedOrder || 0);
     return a.title.localeCompare(b.title, "ru");
   });
 }

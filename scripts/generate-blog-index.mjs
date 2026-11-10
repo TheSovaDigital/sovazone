@@ -173,6 +173,7 @@ function buildIndex() {
       title: (meta.title || slug).trim(),
       slug,
       date: (meta.date || "").trim(),
+      publishedOrder: Number(meta.publishedOrder || 0),
       description: pickDescription(meta),
       category: (meta.category || "Статьи").trim(),
       author: (meta.author || "SovaZone").trim(),
@@ -183,7 +184,7 @@ function buildIndex() {
   posts.sort((a, b) => {
     const dateA = new Date(a.date || 0).getTime();
     const dateB = new Date(b.date || 0).getTime();
-    return dateB - dateA;
+    return dateB - dateA || (b.publishedOrder || 0) - (a.publishedOrder || 0);
   });
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(posts, null, 2) + "\n", "utf8");

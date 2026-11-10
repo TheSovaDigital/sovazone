@@ -632,6 +632,7 @@
         category: cleanText(post.category, "Articles"),
         cover: cleanText(post.cover, "/og-image.png"),
         date: post.date || "",
+        publishedOrder: Number(post.publishedOrder || 0),
         author: cleanText(post.author, "SovaZone")
       };
     }
@@ -640,7 +641,7 @@
       return [...posts].sort((a, b) => {
         const dateA = new Date(a.date || 0).getTime();
         const dateB = new Date(b.date || 0).getTime();
-        return dateB - dateA;
+        return dateB - dateA || (b.publishedOrder || 0) - (a.publishedOrder || 0);
       });
     }
 
