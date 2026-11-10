@@ -84,6 +84,8 @@ Even when a profile appears long inactive, prospects must be reviewed separately
 
 Avoid offers guaranteeing any handle without reviewing the circumstances. Protect your login codes and consider trademark conflicts before committing to a name.
 
+Review [Instagram's Terms of Use](https://help.instagram.com/581066165581870) as part of your due diligence, including restrictions concerning account transactions. A custom username request is not the same as buying access to somebody else's profile.
+
 ## Pre-launch checklist
 
 - People can pronounce and spell the name easily.
