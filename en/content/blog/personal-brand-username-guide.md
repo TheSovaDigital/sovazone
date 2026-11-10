@@ -2,6 +2,7 @@
 title: "Username for a Personal Brand: How to Choose a Memorable Handle"
 slug: personal-brand-username-guide
 date: 2026-11-10
+publishedOrder: 4
 description: "How to choose a personal brand username: naming approaches, common mistakes, audience tests, and cross-platform consistency."
 cover: /image/blog/personal-brand-username-guide.jpg
 category: Articles
