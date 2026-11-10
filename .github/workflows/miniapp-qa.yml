@@ -1,0 +1,38 @@
+name: SOVA Username Mini App QA
+on:
+  push:
+    branches:
+      - feature/username-miniapp-v1
+    paths:
+      - 'miniapp/**'
+      - '.github/workflows/miniapp-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install server-side dependencies
+        run: npm --prefix miniapp install --no-audit --no-fund
+      - name: Validate backend Telegram authentication
+        run: npm --prefix miniapp test
+      - name: Install browser test dependencies
+        run: npm --prefix /tmp/sova-miniapp-qa install puppeteer-core@24.25.0 --no-audit --no-fund
+      - name: Test live Mini App in real Chrome
+        run: node miniapp/tests/browser.cjs
+        env:
+          NODE_PATH: /tmp/sova-miniapp-qa/node_modules
+          MINIAPP_URL: https://sova-username-miniapp-mzn2i2460-thesovadigitals-projects.vercel.app
+      - name: Store screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova-miniapp-chrome-screenshots
+          path: /tmp/sova-miniapp-browser-screens/
+          if-no-files-found: ignore
