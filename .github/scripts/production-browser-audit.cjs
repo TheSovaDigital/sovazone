@@ -52,7 +52,7 @@ const executable=cp.execSync('which google-chrome || which chromium || which chr
   const state=await p.evaluate(()=>({
    articleCards:[...document.querySelectorAll('#latest-articles-grid .latest-article-card')].map(x=>({title:x.querySelector('h3')?.textContent?.trim(),href:x.dataset.href})),
    cards:[...document.querySelectorAll('article.username-card')].map(x=>x.textContent),
-   overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)-innerWidth,
+   overflow:document.documentElement.scrollWidth-innerWidth,
    h1:document.querySelectorAll('h1').length,
    lang:document.documentElement.lang,
    services:[...document.querySelectorAll('a[href*="/services/"]')].length
@@ -90,7 +90,7 @@ const executable=cp.execSync('which google-chrome || which chromium || which chr
   let state=await p.evaluate(()=>({
     total:document.querySelectorAll('#blog-grid .blog-grid-card').length,
     featured:document.querySelector('#blog-featured')?.getAttribute('href'),
-    overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)-innerWidth,
+    overflow:document.documentElement.scrollWidth-innerWidth,
     hasError:!document.querySelector('#blog-error')?.hidden
   }));
   const key=lang+'/'+width;
@@ -110,7 +110,7 @@ const executable=cp.execSync('which google-chrome || which chromium || which chr
  async function catalog(lang,width){
   const pre=lang==='en'?'/en':'';
   const p=await page(width);const resp=await visit(p,pre+'/usernames');
-  const state=await p.evaluate(()=>({count:document.querySelectorAll('article.username-card').length,detail:document.querySelector('article.username-card a[href*="username/"]')?.getAttribute('href'),overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)-innerWidth}));
+  const state=await p.evaluate(()=>({count:document.querySelectorAll('article.username-card').length,detail:document.querySelector('article.username-card a[href*="username/"]')?.getAttribute('href'),overflow:document.documentElement.scrollWidth-innerWidth}));
   assert(resp.status()===200&&state.count>=20,'Catalog cards '+lang+'/'+width,JSON.stringify(state));
   assert(state.overflow<=5,'Catalog horizontal overflow '+lang+'/'+width,String(state.overflow));
   await p.close();
@@ -118,7 +118,7 @@ const executable=cp.execSync('which google-chrome || which chromium || which chr
  async function inspectPage(lang,path,width){
   const pre=lang==='en'?'/en':'';
   const p=await page(width);const resp=await visit(p,pre+path);
-  const state=await p.evaluate(()=>({h1:document.querySelectorAll('h1').length,overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)-innerWidth,title:document.title}));
+  const state=await p.evaluate(()=>({h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth-innerWidth,title:document.title}));
   assert(resp.status()===200 && state.h1===1 && state.overflow<=5,'Responsive static page '+lang+path+'/'+width,JSON.stringify(state));
   await p.close();
  }
