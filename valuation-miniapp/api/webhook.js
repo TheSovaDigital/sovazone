@@ -1,7 +1,7 @@
 // Telegram webhook for @ValuationAiBot. Does not log or store Telegram user identities.
 import crypto from 'node:crypto';
 
-const APP_URL = process.env.PUBLIC_APP_URL || 'https://sova-valuation-ai.vercel.app';
+const APP_URL = process.env.PUBLIC_APP_URL || 'https://valuation.sovazone.com';
 
 function equalsSecret(value, secret) {
   if (!value || !secret) return false;
