@@ -6,6 +6,30 @@
       "source": "/admin",
       "destination": "/admin/",
       "permanent": false
+    },
+    {
+      "source": "/post",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "(?<blogslug>[A-Za-z0-9_-]+)"
+        }
+      ],
+      "destination": "/post/:blogslug",
+      "permanent": true
+    },
+    {
+      "source": "/en/post",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "(?<blogslug>[A-Za-z0-9_-]+)"
+        }
+      ],
+      "destination": "/en/post/:blogslug",
+      "permanent": true
     }
   ],
   "rewrites": [
