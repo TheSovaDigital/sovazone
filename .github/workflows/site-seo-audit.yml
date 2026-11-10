@@ -14,6 +14,7 @@ on:
       - 'en/post/**'
       - 'vercel.json'
       - 'scripts/test-static-blog-seo.mjs'
+      - 'scripts/test-homepage-preview-schema.mjs'
       - 'scripts/prerender-blog.mjs'
       - '.github/workflows/site-seo-audit.yml'
   pull_request:
@@ -34,6 +35,8 @@ jobs:
         run: |
           python3 -m pip install beautifulsoup4 --quiet
           python3 scripts/site-seo-audit.py
+      - name: Featured usernames homepage schema regressions
+        run: node scripts/test-homepage-preview-schema.mjs
       - name: Prerendered blog SEO regressions
         run: node scripts/test-static-blog-seo.mjs
       - name: JavaScript syntax
