@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import setup from '../api/setup.js';
 import webhook from '../api/webhook.js';
 
-const expectedUrl = 'https://sova-valuation-ai.vercel.app';
+const expectedUrl = 'https://valuation.sovazone.com';
 const setupKey = 'test-setup-key';
 const webhookSecret = 'test-webhook-secret';
 const botToken = '123456:test-token';
