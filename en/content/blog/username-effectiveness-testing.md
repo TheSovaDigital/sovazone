@@ -53,14 +53,12 @@ Record where similar profiles appear and whether the name needs clarification. A
 
 ## Step 5: Put the observations in one scorecard
 
-| Dimension | What to record |
-| --- | --- |
-| Recall | How many people reproduce the exact name |
-| Spelling | Number and types of errors |
-| Pronunciation | Whether clarification is necessary |
-| Brand fit | Associations and perceived subject |
-| Search | Confusion with unrelated accounts |
-| Flexibility | Fit with your next phase of growth |
+- **Recall:** how many people reproduce the exact name without prompting.
+- **Spelling:** the number and types of errors.
+- **Pronunciation:** whether additional explanation is necessary.
+- **Brand fit:** associations and the perceived subject.
+- **Search:** confusion with unrelated accounts.
+- **Flexibility:** fit with the next phase of growth.
 
 The right criteria vary by business. A local service might prioritize easy pronunciation, while an international creator may care more about language neutrality. There is no universally correct numerical weighting.
 

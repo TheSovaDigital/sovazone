@@ -47,7 +47,7 @@ If your first choice is unavailable, compare an intentional word addition with a
 
 No. A random three-character string may be rarer than a pronounceable six-letter name while being less suitable for a creator. Consider spelling, meaning, recognizability, and potential confusion before character count.
 
-For context, read our [guide to rare and OG usernames](/en/post/rare-og-usernames) — note that the linked guide is currently available in Russian, so instead use the [English introductory guide to usernames](/en/post/what-is-username-nickname) for terminology. Rarity does not grant ownership of another person's account.
+For background on the terminology, read the [English introductory guide to usernames](/en/post/what-is-username-nickname). Rarity does not grant ownership of another person's account.
 
 ## Consistency across platforms
 
