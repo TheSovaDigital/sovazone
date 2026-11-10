@@ -10,7 +10,7 @@
     <atom:link href="https://sovazone.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>RSS-лента SovaZone: блог, статьи о никнеймах, digital identity, социальных сетях, безопасности аккаунтов и верификации.</description>
     <language>ru</language>
-    <lastBuildDate>Tue, 10 Nov 2026 19:04:16 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 19:12:44 GMT</lastBuildDate>
     <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
     <image>
       <url>https://sovazone.com/logo.png</url>
@@ -2048,7 +2048,7 @@ The owner has lost access to the account. I am writing from another account to h
               <p>Главное — чтобы после всех добавлений никнейм всё равно оставался аккуратным, читаемым и не выглядел как случайная сборка из кусков.</p>
 
               <div class="article-note">
-                <p><strong>Если подходящий username всё равно не находится,</strong> можно посмотреть наш <a href="https://sovazone.com/usernames">каталог никнеймов</a>. Там можно присмотреть уже готовые варианты. Если нужен строго определённый занятый username, можно обратиться за <a href="https://sovazone.com/services/custom-username">индивидуальной оценкой имени под заказ</a>. Неактивность профиля — лишь один из факторов; также можно обсудить использование имени на существующем аккаунте.</p>
+                <p><strong>Если подходящий username всё равно не находится,</strong> можно посмотреть наш <a href="https://sovazone.com/usernames">каталог никнеймов</a>. Там можно присмотреть уже готовые варианты. А если желаемый ник занят, но давно заброшен, можно обратиться к нам напрямую — в некоторых случаях есть возможность помочь с получением такого имени.</p>
               </div>
 
               <hr>
@@ -2326,7 +2326,6 @@ Phone number</p>
               </p>
 
               <h2>Что обычно происходит дальше</h2>
-              <p>Ниже приведены ориентиры для самостоятельных обращений через общедоступные формы, а не сроки индивидуального сопровождения.</p>
               <ul>
                 <li>Ответа на формы может не быть вообще.</li>
                 <li>Никто не обязан вступать в переписку и объяснять детали блокировки.</li>
