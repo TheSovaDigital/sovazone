@@ -10,7 +10,7 @@
     <atom:link href="https://sovazone.com/blog-feed.xml" rel="self" type="application/rss+xml" />
     <description>RSS-лента блога SovaZone: новости, статьи и публикации о digital identity, аккаунтах и социальных сетях.</description>
     <language>ru</language>
-    <lastBuildDate>Tue, 10 Nov 2026 18:44:57 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 19:04:16 GMT</lastBuildDate>
     <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
     <image>
       <url>https://sovazone.com/logo.png</url>
@@ -1896,10 +1896,10 @@
 </ul>
 <p>Например:</p>
 <ul>
-<li><code>theusername</code></li>
-<li><code>imusername</code></li>
-<li><code>username.io</code></li>
-<li><code>username.co</code></li>
+<li><strong>theusername</strong></li>
+<li><strong>imusername</strong></li>
+<li><strong>username.io</strong></li>
+<li><strong>username.co</strong></li>
 </ul>
 <p>Иногда достаточно небольшого изменения, чтобы получить свободный и красивый ник.</p>
 <hr>
