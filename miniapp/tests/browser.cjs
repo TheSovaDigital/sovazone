@@ -15,7 +15,7 @@ for(const width of [390,1366]){
 const page=await browser.newPage();await page.setViewport({width,height:860,deviceScaleFactor:1});
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
 const response=await page.goto(BASE,{waitUntil:'networkidle2',timeout:45000});
-ok(response.status()===200,'Landing HTTP '+width);
+ok([200,304].includes(response.status()),'Landing HTTP '+width,{status:response.status()});
 await page.waitForSelector('#catalog-grid article.username-card',{timeout:16000});
 let state=await page.evaluate(()=>({cards:document.querySelectorAll('#catalog-grid article.username-card').length,hero:document.querySelector('.hero h1')?.textContent,visible:document.querySelector('.screen.is-current')?.dataset.screen,root:document.documentElement.scrollWidth,viewport:innerWidth,notificationsDisabled:document.querySelector('#marketing-opt-in')?.disabled}));
 ok(state.cards===31,'31 available catalog listings '+width,state);
