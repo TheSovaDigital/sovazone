@@ -68,3 +68,11 @@ for(const [lang,template] of [['ru','post.html'],['en','en/post.html']]) {
   assert.ok(source.includes('<!-- legacy-blog-redirect -->'),template+' browser fallback');
   assert.ok(source.includes((lang==='ru'?'/post/':'/en/post/')+'" + encodeURIComponent(slug)'),template+' redirect target');
 }
+
+// New bilingual editorial sample must render real Markdown links for crawlable internal linking.
+for (const prefix of ['', 'en/']) {
+  const page=read(prefix+'post/instagram-username-for-business-checklist.html');
+  assert.ok(page.includes('<a href="/'+prefix+'usernames">'),prefix+'catalogue links must be clickable');
+  assert.ok(page.includes('<a href="/'+prefix+'tools/username-value">'),prefix+'valuation links must be clickable');
+  assert.ok(page.includes('<a href="https://help.instagram.com/581066165581870">'),prefix+'Instagram terms source must be linked');
+}
