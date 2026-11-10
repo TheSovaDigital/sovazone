@@ -57,6 +57,11 @@ for(const loc of ['/post','/en/post']){
 for(const file of ['blog.html','en/blog.html']){
  assert.ok(!read(file).includes('return "/'+(file.startsWith('en/')?'en/':'')+'post?slug="'),'Blog listing old URL in '+file);
 }
+// Guard against raw inline Markdown syntax leaking into the prerendered username examples.
+const sample=read('post/what-is-username-nickname.html');
+for(const username of ['theusername','imusername','username.io','username.co']){
+  assert.ok(sample.includes('<li><strong>'+username+'</strong></li>'),'Blog username example formatting: '+username);
+}
 console.log('STATIC_BLOG_SEO_PASS',JSON.stringify({articles:checked,reciprocalLocaleLinks:paired,redirects:2}));
 
 // Legacy query URLs on GitHub Pages must navigate to the indexable static article.
