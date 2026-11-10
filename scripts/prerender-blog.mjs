@@ -44,16 +44,19 @@ for(const lang of ['ru','en']){
   for(const p of data[lang]){
     assert.match(p.slug,/^[A-Za-z0-9_-]+$/);
     let h=read(pref+'post.html'),canonical=link(lang,p.slug),cover=p.cover?.startsWith('/')?site+p.cover:site+'/og-image.png';
-    // Do not inherit the legacy template's noindex or client redirect.
+    // Prerendered pages must have full article robots metadata and no browser redirect.
     h=h.replace(/<!-- legacy-blog-redirect -->[\s\S]*?<!-- \/legacy-blog-redirect -->\s*/g,'');
-    h=h.replace('<meta name="robots" content="noindex,follow">','<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">');
+    h=h.replace('<meta name="robots" content="index,follow">','<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">');
     h=h.replace(/<title>[\s\S]*?<\/title>/i,'<title>'+esc(short(p.title))+'</title>');
     h=meta(h,'description',p.description);
     for(const k of ['og:title','twitter:title'])h=meta(h,k,p.title+' | SovaZone');
     for(const k of ['og:description','twitter:description'])h=meta(h,k,p.description);
     h=meta(h,'og:url',canonical);
     for(const k of ['og:image','og:image:secure_url','twitter:image'])h=meta(h,k,cover);
-    h=h.replace(/(<link rel="canonical" href=")[^"]*(")/,(_m,a,b)=>a+canonical+b);
+    // Legacy query pages have no static canonical: inject it only in prerendered articles.
+    const canonicalTag='<link rel="canonical" href="'+canonical+'">';
+    h=h.replace(/<link rel="canonical" href="[^"]*">/,canonicalTag);
+    if(!h.includes(canonicalTag))h=h.replace('<title>',canonicalTag+'\n  <title>');
     h=h.replace(/\s*<meta property="og:image:(?:width|height)"[^>]*>/gi,'');
     {
       const anchor='<link rel="canonical" href="'+canonical+'">';

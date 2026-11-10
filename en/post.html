@@ -5,13 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#0b0b0f">
-  <meta name="robots" content="noindex,follow">
+  <meta name="robots" content="index,follow">
   <!-- legacy-blog-redirect -->
   <script>
     (function () {
       const slug = new URLSearchParams(window.location.search).get("slug");
       if (slug && /^[A-Za-z0-9_-]+$/.test(slug)) {
         window.location.replace("/en/post/" + encodeURIComponent(slug));
+      } else {
+        // Keep only the bare/invalid legacy template out of the index.
+        document.querySelector('meta[name="robots"]').setAttribute("content", "noindex,follow");
       }
     })();
   </script>
@@ -20,7 +23,6 @@
   <title>Post — SovaZone</title>
   <meta name="description" content="SovaZone blog post about usernames, social platforms, account security, verification, and digital projects.">
   <meta name="keywords" content="SovaZone blog, SovaZone post, usernames, social platforms, account security, verification, Instagram, TikTok, YouTube, Telegram">
-  <link rel="canonical" href="https://sovazone.com/en/post">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

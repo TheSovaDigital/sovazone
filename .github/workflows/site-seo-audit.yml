@@ -38,7 +38,9 @@ jobs:
       - name: Featured usernames homepage schema regressions
         run: node scripts/test-homepage-preview-schema.mjs
       - name: Prerendered blog SEO regressions
-        run: node scripts/test-static-blog-seo.mjs
+        run: |
+          node scripts/prerender-blog.mjs
+          node scripts/test-static-blog-seo.mjs
       - name: JavaScript syntax
         run: |
           find . -path ./.git -prune -o -name '*.js' -type f -print0 | xargs -0 -r -n1 node --check
