@@ -36,10 +36,13 @@ export function createSubscriberStore({ get, put, del }) {
         lastStartedAt: now,
         source: current?.source || (entrySource === 'share' ? 'share' : 'direct'),
         newsOptIn: current?.newsOptIn === true,
+        marketingConsentAt: current?.marketingConsentAt || null,
+        marketingConsentSource: current?.marketingConsentSource || null,
+        marketingConsentVersion: current?.marketingConsentVersion || null,
         blocked: false
       });
     },
-    async setUpdates(chatId, language, permitted) {
+    async setUpdates(chatId, language, permitted, consentSource = 'command') {
       const current = await read(chatId);
       const now = new Date().toISOString();
       return save(chatId, {
@@ -49,13 +52,16 @@ export function createSubscriberStore({ get, put, del }) {
         lastStartedAt: current?.lastStartedAt || now,
         source: current?.source || 'direct',
         newsOptIn: permitted === true,
+        marketingConsentAt: permitted === true ? now : null,
+        marketingConsentSource: permitted === true ? (consentSource === 'button' ? 'button' : 'command') : null,
+        marketingConsentVersion: permitted === true ? 'valuation-marketing-v1-2026-11' : null,
         blocked: false
       });
     },
     async markBlocked(chatId, blocked) {
       const current = await read(chatId);
       if (!current) return null;
-      return save(chatId, { ...current, blocked: !!blocked, newsOptIn: blocked ? false : current.newsOptIn });
+      return save(chatId, { ...current, blocked: !!blocked, newsOptIn: blocked ? false : current.newsOptIn, marketingConsentAt: blocked ? null : current.marketingConsentAt || null });
     },
     async get(chatId) { return read(chatId) },
     async erase(chatId) {

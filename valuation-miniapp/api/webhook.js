@@ -10,23 +10,23 @@ function equalsSecret(value, secret) {
 }
 const RU = {
   open: 'Оценить никнейм',
-  optin: 'Получать новости и предложения',
-  start: '<b>Valuation AI</b>\n\nОценивайте никнеймы Instagram, TikTok и Telegram: ориентировочная стоимость, качество, ликвидность и факторы оценки.\n\nНажмите кнопку, чтобы открыть приложение.\n\nДля получения новостей и предложений нужна отдельная подписка. /privacy — данные, /delete — удаление.',
+  optin: 'Получать новости и рекламу',
+  start: '<b>Valuation AI</b>\n\nОцените никнейм Instagram, TikTok или Telegram — бесплатно и за пару нажатий.\n\nНажмите «Оценить никнейм», чтобы открыть приложение.\n\nПродолжая пользоваться ботом, вы соглашаетесь с обработкой Telegram ID для работы сервиса. Новости и рекламные предложения — только по желанию: нажмите «Получать новости и рекламу». Отписаться можно в любой момент через /unsubscribe.',
   help: '<b>Как пользоваться</b>\n\n1. Откройте приложение.\n2. Выберите платформу.\n3. Введите никнейм и запустите оценку.\n\nКоманды: /subscribe — подписка на новости, /unsubscribe — отказ, /delete — удалить запись, /privacy — конфиденциальность.',
   estimate: 'Выберите платформу и введите никнейм в приложении.',
-  privacy: '<b>Конфиденциальность</b>\n\nПосле /start мы сохраняем Telegram ID чата, язык, дату входа и источник перехода в закрытом хранилище, чтобы бот мог отвечать вам. Никнеймы и результаты оценки там не сохраняются. Новости и предложения отправляются только после /subscribe или согласия через кнопку. /unsubscribe отменяет рассылки, /delete удаляет запись.',
-  subscribed: 'Вы подписались на новости и предложения Valuation AI. Отписаться: /unsubscribe.',
+  privacy: '<b>Конфиденциальность</b>\n\nПосле /start мы сохраняем Telegram ID чата, язык, дату входа и источник перехода, чтобы бот работал. Рекламные и информационные рассылки включаются отдельно кнопкой «Получать новости и рекламу» или командой /subscribe. Согласие можно отозвать через /unsubscribe, а запись удалить через /delete. Оцениваемые никнеймы и результаты в базе подписчиков не хранятся.',
+  subscribed: 'Вы дали согласие получать новости и рекламные предложения Valuation AI. Отписаться: /unsubscribe.',
   unsubscribed: 'Подписка на новости и предложения отключена. Оценка никнеймов по-прежнему доступна.',
   deleted: 'Ваша запись удалена. При повторном /start она будет создана заново.'
 };
 const EN = {
   open: 'Evaluate username',
-  optin: 'Receive updates and offers',
-  start: '<b>Valuation AI</b>\n\nEstimate Instagram, TikTok and Telegram usernames: indicative price ranges, quality, liquidity and valuation factors.\n\nOpen the app using the button below.\n\nUpdates and offers are opt-in. /privacy — data, /delete — removal.',
+  optin: 'Receive updates & offers',
+  start: '<b>Valuation AI</b>\n\nEstimate an Instagram, TikTok or Telegram username in just a few taps.\n\nTap “Evaluate username” to open the app.\n\nBy using the bot, you acknowledge processing of your Telegram ID to provide the service. News and promotional messages are optional: tap “Receive updates & offers” to opt in. Unsubscribe any time with /unsubscribe.',
   help: '<b>How to use Valuation AI</b>\n\n1. Open the app.\n2. Choose a platform.\n3. Enter a username and run valuation.\n\nCommands: /subscribe — opt in, /unsubscribe — opt out, /delete — erase your record, /privacy — privacy details.',
   estimate: 'Choose a platform and enter the username in the app.',
-  privacy: '<b>Privacy</b>\n\nAfter /start, we privately store your Telegram chat ID, language, start date and referral source to respond to you. We do not store your valued usernames or results. Updates and offers require /subscribe or a separate button opt-in. /unsubscribe stops updates; /delete erases your record.',
-  subscribed: 'You opted in to Valuation AI updates and offers. To opt out: /unsubscribe.',
+  privacy: '<b>Privacy</b>\n\nAfter /start, we store your Telegram chat ID, language, start date and referral source for bot operation. News and promotional messages are separate and require the “Receive updates & offers” button or /subscribe. Use /unsubscribe to withdraw consent and /delete to erase your record. Valued usernames and results are not stored in the subscriber database.',
+  subscribed: 'You have opted in to Valuation AI news and promotional messages. Unsubscribe: /unsubscribe.',
   unsubscribed: 'Updates and offers are now turned off. You can still use username valuations.',
   deleted: 'Your record was erased. Starting the bot again will create a new record.'
 };
@@ -70,7 +70,7 @@ export async function handleUpdate(req, res, customStore) {
     if (cb && typeof cb.id === 'string' && cb.message?.chat?.type === 'private' && Number.isSafeInteger(cb.message.chat.id)) {
       const chatId = cb.message.chat.id;
       if (cb.data === 'optin_yes') {
-        await store.setUpdates(chatId, cb.from?.language_code, true);
+        await store.setUpdates(chatId, cb.from?.language_code, true, 'button');
         await apiCall('answerCallbackQuery', { callback_query_id: cb.id, text: copyFor(cb.from?.language_code).subscribed.replace(/<\/?[^>]*>/g, '').slice(0,180) });
         await reply(chatId, cb.from?.language_code, 'subscribed', false);
       }

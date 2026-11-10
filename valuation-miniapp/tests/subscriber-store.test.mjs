@@ -25,6 +25,7 @@ test('registers minimal private contact and defaults to no marketing consent',as
  const rec=await store.register(123456,'ru','share');
  assert.equal(rec.chatId,123456);
  assert.equal(rec.newsOptIn,false);
+ assert.equal(rec.marketingConsentAt,null);
  assert.equal(rec.source,'share');
  assert.equal(rec.language,'ru');
  assert.equal(db.args.find(x=>x.method==='put').opts.access,'private');
@@ -36,13 +37,17 @@ test('registers minimal private contact and defaults to no marketing consent',as
 test('keeps explicit opt-in across repeated /start, supports opt-out and erasure',async()=>{
  const db=mockBlob();const store=createSubscriberStore(db.blob);
  await store.register(7,'ru','share');
- await store.setUpdates(7,'ru',true);
+ await store.setUpdates(7,'ru',true,'button');
+ assert.equal((await store.get(7)).marketingConsentSource,'button');
+ assert.equal((await store.get(7)).marketingConsentVersion,'valuation-marketing-v1-2026-11');
+ assert.ok((await store.get(7)).marketingConsentAt);
  assert.equal((await store.get(7)).newsOptIn,true);
  await store.register(7,'en','direct');
  assert.equal((await store.get(7)).newsOptIn,true);
  assert.equal((await store.get(7)).source,'share');
  await store.setUpdates(7,'en',false);
  assert.equal((await store.get(7)).newsOptIn,false);
+ assert.equal((await store.get(7)).marketingConsentAt,null);
  await store.erase(7);
  assert.equal(await store.get(7),null);
 });

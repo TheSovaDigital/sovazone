@@ -19,6 +19,7 @@ test('production configurator registers webhook and official Mini App',async()=>
   assert.equal(calls.find(x=>x.method==='setWebhook').input.secret_token,'test-secret');
   assert.equal(calls.find(x=>x.method==='setChatMenuButton').input.menu_button.web_app.url,APP_URL);
   assert.equal(calls.filter(x=>x.method==='setMyCommands').length,3);
+ assert.ok(calls.find(x=>x.method==='setMyCommands'&&x.input.language_code==='ru').input.commands.some(x=>x.command==='unsubscribe'));
   assert.equal(calls.find(x=>x.method==='setMyCommands'&&x.input.language_code==='en').input.commands[1].description,'Evaluate a username');
 });
 

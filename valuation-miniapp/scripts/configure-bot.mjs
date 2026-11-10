@@ -8,12 +8,16 @@ const COMMANDS={
     {command:'start',description:'Открыть Valuation AI'},
     {command:'estimate',description:'Оценить никнейм'},
     {command:'help',description:'Как работает оценка'},
+    {command:'subscribe',description:'Подписаться на новости и рекламу'},
+    {command:'unsubscribe',description:'Отписаться от рассылок'},
     {command:'privacy',description:'Конфиденциальность'}
   ],
   en:[
     {command:'start',description:'Open Valuation AI'},
     {command:'estimate',description:'Evaluate a username'},
     {command:'help',description:'How valuation works'},
+    {command:'subscribe',description:'Opt in to updates and offers'},
+    {command:'unsubscribe',description:'Unsubscribe from messages'},
     {command:'privacy',description:'Privacy information'}
   ]
 };
