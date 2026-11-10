@@ -1,0 +1,41 @@
+name: Valuation AI standalone Mini App browser QA
+on:
+  push:
+    branches:
+      - feature/valuation-ai-miniapp
+    paths:
+      - 'valuation-miniapp/**'
+      - '.github/workflows/valuation-miniapp-qa.yml'
+permissions:
+  contents: read
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chrome driver
+        run: npm --prefix /tmp/valuation-qa install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
+      - name: Verify JS syntax
+        run: |
+          node --check valuation-miniapp/app.js
+          node --check valuation-miniapp/api/webhook.js
+      - name: Run browser integration tests
+        env:
+          NODE_PATH: /tmp/valuation-qa/node_modules
+        run: node valuation-miniapp/tests/browser.cjs
+      - name: Upload diagnostic screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: valuation-miniapp-browser-qa
+          path: |
+            valuation-qa.json
+            valuation-390.png
+            valuation-1366.png
+          if-no-files-found: ignore
