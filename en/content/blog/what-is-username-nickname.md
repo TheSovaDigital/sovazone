@@ -95,19 +95,13 @@ This helps avoid weak, rushed choices.
 
 ---
 
-## If the username is taken but not being used
+## If you need one exact occupied username
 
-Sometimes the handle is technically occupied, but the account behind it looks abandoned.
+A preferred handle being taken does not always mean that adding random characters is the only option. For an important business or personal brand, request an [individual assessment](/en/services/custom-username) from SovaZone.
 
-In that situation, the next step depends on:
+We review custom requests for occupied usernames, including those associated with long-inactive profiles. If you need the name on an existing account, make that requirement clear at the outset. Prospects, timing, and budget are discussed only after reviewing the specific case.
 
-- how inactive the account really is  
-- the type of handle  
-- the rarity of the word  
-- the realistic technical path  
-- whether a custom review makes sense  
-
-Not every inactive-looking account creates a viable opportunity, but some cases are worth reviewing.
+This is a different service from choosing a [ready-made handle in the catalogue](/en/usernames). No blanket guarantee applies to every request.
 
 ---
 
