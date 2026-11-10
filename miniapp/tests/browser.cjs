@@ -30,6 +30,11 @@ await page.click('[data-filter="short"]');
 state=await page.evaluate(()=>({count:document.querySelectorAll('#catalog-grid article.username-card').length,active:document.querySelector('.chip.active')?.dataset.filter}));
 ok(state.count>=2&&state.active==='short','Filter short usernames '+width,state);
 await page.click('[data-filter="all"]');
+await page.evaluate(()=>window.scrollBy(0,450));
+await new Promise(r=>setTimeout(r,180));
+const scrollInfo=await page.evaluate(()=>({scrollY,scrollHeight:document.documentElement.scrollHeight,viewport:innerHeight,card:document.querySelector('#catalog-grid .card-open')?.getBoundingClientRect().top}));
+console.log('CARD_SCROLL',JSON.stringify(scrollInfo));
+ok(scrollInfo.scrollY>20,'Catalog scrolls normally '+width,scrollInfo);
 await page.$eval('#catalog-grid .card-open',el=>el.scrollIntoView({block:'center'}));
 await page.click('#catalog-grid .card-open');
 try{await page.waitForSelector('#modal-overlay:not([hidden])',{timeout:7000})}catch(error){const debug=await page.evaluate(()=>({overlayHidden:document.querySelector('#modal-overlay')?.hidden,screen:document.querySelector('.screen.is-current')?.id,buttons:[...document.querySelectorAll('#catalog-grid .card-open')].slice(0,2).map(x=>x.outerHTML),bodyScrollY:window.scrollY}));console.log('MODAL_DEBUG',JSON.stringify(debug));throw error;}
@@ -51,8 +56,10 @@ await page.screenshot({path:path+'/profile-'+width+'.png',fullPage:true});
 ok(errors.length===0,'No uncaught browser JS errors '+width,errors);
 await page.close();
 }
+if(process.env.MINIAPP_LOCAL!=='1'){
 const api=await fetch(BASE+'/api/me');const me=await api.json();ok(api.ok&&!me.authenticated,'API demo explicitly unauthenticated',me);
 const notAdmin=await fetch(BASE+'/api/admin');ok(notAdmin.status===401||notAdmin.status===503,'Analytics protected',notAdmin.status);
+}
 console.log('ALL MINIAPP BROWSER CHECKS PASSED '+passed);
 }finally{await browser.close()}}
 test().catch(e=>{console.error('QA_FAIL',e.stack||e);process.exitCode=1});
