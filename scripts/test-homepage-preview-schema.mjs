@@ -21,7 +21,7 @@ for(const language of ['ru','en']){
   assert.deepEqual(urls,expectedSlugs.map(s=>'username/'+s),page+' detail links unchanged');
   // The homepage blog preview must keep same-day editorial order and indexable clean URLs.
   assert.ok(html.includes('publishedOrder: Number(post.publishedOrder || 0)'),page+' blog order property');
-  assert.ok(html.includes('return dateB - dateA || (b.publishedOrder || 0) - (a.publishedOrder || 0);'),page+' same-day order');
+  assert.ok(html.includes('return dateB - dateA || (a.publishedOrder || 0) - (b.publishedOrder || 0);'),page+' same-day order');
   assert.ok(html.includes("return '/"+dir+"post/' + encodeURIComponent(slug || '');"),page+' clean blog post link');
   assert.ok(!html.includes("return '/"+dir+"post?slug='"),page+' must not use query-based legacy links');
   const script=html.match(/<script type="application\/ld\+json" id="featured-usernames-itemlist">([\s\S]*?)<\/script>/);
@@ -35,4 +35,24 @@ for(const language of ['ru','en']){
     assert.ok(fs.existsSync(detail),page+' has corresponding detail page '+detail);
   }
 }
+
+// Check real chronological ordering, not only the presence of a comparator.
+// On 2026-11-10, the business guide was published first (order 5);
+// the purchase guide was published last (order 1).
+const expectedNewestFirst=["instagram-username-purchase-risks","username-effectiveness-testing","protect-brand-username-social-platforms","personal-brand-username-guide","instagram-username-for-business-checklist"];
+for (const prefix of ['', 'en/']) {
+  const data=JSON.parse(fs.readFileSync(prefix+'content/blog/index.json','utf8'));
+  assert.deepEqual(data.slice(0,5).map(x=>x.slug),expectedNewestFirst,prefix+' newest posts first');
+  assert.deepEqual(data.slice(0,5).map(x=>x.publishedOrder),[1,2,3,4,5],prefix+' same-day chronological order');
+  for (const page of [prefix+'index.html',prefix+'blog.html']) {
+    const html=fs.readFileSync(page,'utf8');
+    assert.ok(html.includes('return dateB - dateA || (a.publishedOrder || 0) - (b.publishedOrder || 0);'),page+' chronological tie-breaker');
+    assert.ok(!html.includes('return dateB - dateA || (b.publishedOrder || 0) - (a.publishedOrder || 0);'),page+' must not reverse same-day posts');
+  }
+}
+const generator=fs.readFileSync('scripts/generate-blog-index.mjs','utf8');
+assert.ok(generator.includes('return dateB - dateA || (a.publishedOrder || 0) - (b.publishedOrder || 0);'),'blog index generator preserves chronology');
+const feedGenerator=fs.readFileSync('scripts/generate-feeds.mjs','utf8');
+assert.ok(feedGenerator.includes('if ((a.publishedOrder || 0) !== (b.publishedOrder || 0)) return (a.publishedOrder || 0) - (b.publishedOrder || 0);'),'RSS feed generator preserves chronology');
+
 console.log('PASS: RU/EN homepage preview markup, eight unchanged prices, ItemList links and detail pages');
