@@ -53,6 +53,9 @@ for(const lang of ['ru','en']){
     for(const k of ['og:description','twitter:description'])h=meta(h,k,p.description);
     h=meta(h,'og:url',canonical);
     for(const k of ['og:image','og:image:secure_url','twitter:image'])h=meta(h,k,cover);
+    // Keep metadata consistent with each article's actual image format, not the generic template's PNG.
+    const imageType=/\.jpe?g(?:\?|$)/i.test(cover)?'image/jpeg':/\.webp(?:\?|$)/i.test(cover)?'image/webp':'image/png';
+    h=meta(h,'og:image:type',imageType);
     // Legacy query pages have no static canonical: inject it only in prerendered articles.
     const canonicalTag='<link rel="canonical" href="'+canonical+'">';
     h=h.replace(/<link rel="canonical" href="[^"]*">/,canonicalTag);
