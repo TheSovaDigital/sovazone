@@ -12,7 +12,7 @@ const copy = {
 };
 const $=id=>document.getElementById(id);
 const els={input:$('username'),counter:$('counter'),error:$('input-error'),form:$('estimate-form'),submit:$('submit-btn'),loading:$('loading'),result:$('result'),history:$('history'),historyList:$('history-list'),toast:$('toast')};
-const state={platform:'instagram',lang:((telegram?.initDataUnsafe?.user?.language_code||navigator.language||'ru').toLowerCase().startsWith('ru')?'ru':'en'),pending:false,current:null,history:[]};
+const state={accessAllowed:false,platform:'instagram',lang:((telegram?.initDataUnsafe?.user?.language_code||navigator.language||'ru').toLowerCase().startsWith('ru')?'ru':'en'),pending:false,current:null,history:[]};
 const STORAGE='valuation-ai-local-history-v1';
 const text=k=>copy[state.lang][k]||k;
 const clean=(raw)=>{
@@ -57,5 +57,65 @@ function copyText(){if(!state.current)return '';const r=state.current;return '@'
 async function copyToClipboard(textValue){try{await navigator.clipboard.writeText(textValue);return true}catch(_){const ta=document.createElement('textarea');ta.value=textValue;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.focus();ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();return ok}}
 async function share(){if(!state.current)return;const message=copyText(),url='https://t.me/ValuationAiBot?start=share';const tgShare='https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(message);if(telegram?.openTelegramLink){telegram.openTelegramLink(tgShare);return}if(navigator.share){try{await navigator.share({text:message,url});return}catch(_){}}const ok=await copyToClipboard(message+'\n'+url);showToast(text(ok?'copied':'notSupported'))}
 function setGlobalActions(){$('lang-btn').addEventListener('click',()=>setLang(state.lang==='ru'?'en':'ru'));document.querySelectorAll('[data-platform]').forEach(b=>b.addEventListener('click',()=>setPlatform(b.dataset.platform)));els.input.addEventListener('input',updateInput);$('clear-input').addEventListener('click',()=>{els.input.value='';updateInput();els.input.focus()});$('new-estimate').addEventListener('click',()=>{els.input.value='';updateInput();els.form.scrollIntoView({behavior:'smooth',block:'center'});els.input.focus({preventScroll:true})});$('copy-result').addEventListener('click',async()=>showToast(text(await copyToClipboard(copyText())?'copied':'notSupported')));$('share-result').addEventListener('click',share);$('clear-history').addEventListener('click',()=>{state.history=[];persistHistory();showHistory();showToast(text('historyCleared'))});els.form.addEventListener('submit',estimate)}
-async function estimate(event){event.preventDefault();if(state.pending)return;hideError();const parsed=validate(els.input.value,state.platform);if(parsed.error){showError(parsed.error);return}const platform=state.platform,username=parsed.username,lang=state.lang;els.input.value=username;updateInput();busy(true);try{const endpoint=platform==='telegram'?'/api/estimate-telegram':'/api/estimate';const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),65000);let response;try{response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,platform,lang,website:''}),cache:'no-store',signal:controller.signal})}finally{clearTimeout(timer)}const data=await response.json().catch(()=>({}));if(!response.ok){let error=response.status===429?text('error429'):response.status===503?text('error503'):String(data.error||text('noResponse'));throw new Error(error)}if(!data||!data.username||typeof data.priceMin!=='number')throw new Error(text('noResponse'));busy(false);showResult(data,platform);saveHistory(data,platform)}catch(e){busy(false);showError(e.name==='AbortError'?text('noResponse'):String(e.message||text('noResponse')));els.form.scrollIntoView({behavior:'smooth',block:'start'})}}
-$('year').textContent=String(new Date().getFullYear());loadHistory();setGlobalActions();setLang(state.lang);updateInput();
+async function estimate(event){event.preventDefault();if(state.pending)return;if(!state.accessAllowed){showAccessGate('start');return}hideError();const parsed=validate(els.input.value,state.platform);if(parsed.error){showError(parsed.error);return}const platform=state.platform,username=parsed.username,lang=state.lang;els.input.value=username;updateInput();busy(true);try{const endpoint=platform==='telegram'?'/api/estimate-telegram':'/api/estimate';const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),65000);let response;try{response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,platform,lang,website:''}),cache:'no-store',signal:controller.signal})}finally{clearTimeout(timer)}const data=await response.json().catch(()=>({}));if(!response.ok){let error=response.status===429?text('error429'):response.status===503?text('error503'):String(data.error||text('noResponse'));throw new Error(error)}if(!data||!data.username||typeof data.priceMin!=='number')throw new Error(text('noResponse'));busy(false);showResult(data,platform);saveHistory(data,platform)}catch(e){busy(false);showError(e.name==='AbortError'?text('noResponse'):String(e.message||text('noResponse')));els.form.scrollIntoView({behavior:'smooth',block:'start'})}}
+
+const onboarding = {
+  ru: {
+    startTitle:'Начните с бота',
+    startDesc:'Для оценки никнеймов сначала откройте @ValuationAiBot и нажмите «Запустить». После этого вернитесь в приложение.',
+    browserTitle:'Откройте в Telegram',
+    browserDesc:'Valuation AI доступен через @ValuationAiBot. Перейдите к боту и нажмите «Запустить», чтобы сохранить доступ к оценкам.',
+    errorTitle:'Не удалось проверить доступ',
+    errorDesc:'Проверьте подключение к интернету и откройте бота ещё раз.',
+    button:'Открыть @ValuationAiBot'
+  },
+  en: {
+    startTitle:'Start the bot first',
+    startDesc:'Open @ValuationAiBot and press Start before evaluating usernames. Then return to the app.',
+    browserTitle:'Open in Telegram',
+    browserDesc:'Valuation AI works through @ValuationAiBot. Open the bot and tap Start to unlock valuations.',
+    errorTitle:'Could not verify access',
+    errorDesc:'Check your internet connection and reopen the bot.',
+    button:'Open @ValuationAiBot'
+  }
+};
+let accessChecking=false;
+let accessReason='start';
+function showAccessGate(reason='start') {
+  state.accessAllowed=false;
+  accessReason=reason;
+  const t=onboarding[state.lang];
+  const variant=reason==='browser'?'browser':reason==='error'?'error':'start';
+  $('access-gate-title').textContent=t[variant+'Title'];
+  $('access-gate-desc').textContent=t[variant+'Desc'];
+  $('access-gate-open').textContent=t.button;
+  $('access-gate').hidden=false;
+  els.submit.disabled=true;
+}
+function hideAccessGate() {
+  state.accessAllowed=true;
+  $('access-gate').hidden=true;
+  els.submit.disabled=false;
+}
+async function verifyAccessOnOpen() {
+  if (accessChecking) return;
+  accessChecking=true;
+  try {
+    if (!telegram?.initData) {showAccessGate('browser');return;}
+    const resp=await fetch('/api/access',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({initData:telegram.initData})});
+    const data=await resp.json().catch(()=>({}));
+    if (resp.ok && data.authorized) hideAccessGate();
+    else showAccessGate(resp.status===403?'start':'error');
+  } catch {showAccessGate('error')}
+  finally {accessChecking=false;}
+}
+$('access-gate-open').addEventListener('click',e=>{
+  if (telegram?.openTelegramLink) {
+    e.preventDefault();
+    telegram.openTelegramLink('https://t.me/ValuationAiBot?start=join');
+  }
+});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!state.accessAllowed)verifyAccessOnOpen()});
+window.addEventListener('focus',()=>{if(!state.accessAllowed)verifyAccessOnOpen()});
+
+$('year').textContent=String(new Date().getFullYear());loadHistory();setGlobalActions();setLang(state.lang);updateInput();showAccessGate('start');verifyAccessOnOpen();

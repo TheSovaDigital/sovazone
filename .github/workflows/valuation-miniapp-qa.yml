@@ -28,10 +28,12 @@ jobs:
           node --check valuation-miniapp/app.js
           node --check valuation-miniapp/api/webhook.js
           node --check valuation-miniapp/api/subscriber-store.js
+          node --check valuation-miniapp/api/verify-telegram.js
+          node --check valuation-miniapp/api/access.js
           node --check valuation-miniapp/api/setup.js
           node --check valuation-miniapp/scripts/configure-bot.mjs
       - name: Test Telegram webhook security and BotFather configuration
-        run: node --test valuation-miniapp/tests/bot-setup.test.mjs valuation-miniapp/tests/configure-bot.test.mjs valuation-miniapp/tests/subscriber-store.test.mjs
+        run: node --test valuation-miniapp/tests/bot-setup.test.mjs valuation-miniapp/tests/configure-bot.test.mjs valuation-miniapp/tests/subscriber-store.test.mjs valuation-miniapp/tests/access.test.mjs
       - name: Run browser integration tests
         env:
           NODE_PATH: /tmp/valuation-qa/node_modules

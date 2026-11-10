@@ -19,3 +19,6 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - /subscribe explicitly opts into bot updates and offers; /unsubscribe opts out; /delete erases the contact record. No broadcasts are implemented or sent automatically.
 - Sharing an estimate links to t.me/ValuationAiBot?start=share, so first-time users enter via /start rather than immediately launching the Mini App.
 - External data from the valuation engine is rendered as escaped text.
+## Subscriber-only Mini App onboarding
+- Telegram initData is HMAC-verified server-side at `/api/access` against the bot token; only users whose private record exists after `/start` may interact with the Mini App UI.
+- Direct Main Mini App launches, and the website opened outside Telegram, show a bot-onboarding screen. The public valuation APIs on SovaZone remain independently accessible; this gate protects the Mini App user experience, not those unrelated public APIs.
