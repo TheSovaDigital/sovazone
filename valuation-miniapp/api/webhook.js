@@ -11,7 +11,7 @@ function equalsSecret(value, secret) {
 const RU = {
   open: 'Оценить никнейм',
   optin: 'Получать новости и рекламу',
-  start: '<b>Valuation AI</b>\n\nОцените никнейм Instagram, TikTok или Telegram — бесплатно и за пару нажатий.\n\nНажмите «Оценить никнейм», чтобы открыть приложение.\n\nПродолжая пользоваться ботом, вы соглашаетесь с обработкой Telegram ID для работы сервиса. Новости и рекламные предложения — только по желанию: нажмите «Получать новости и рекламу». Отписаться можно в любой момент через /unsubscribe.',
+  start: '<b>SovaZone Valuation AI</b>\n\nОцените никнейм Instagram, TikTok или Telegram — бесплатно и за пару нажатий.\n\nНажмите «Оценить никнейм», чтобы открыть приложение.\n\nПродолжая пользоваться ботом, вы соглашаетесь с обработкой Telegram ID для работы сервиса. Новости и рекламные предложения — только по желанию: нажмите «Получать новости и рекламу». Отписаться можно в любой момент через /unsubscribe.',
   help: '<b>Как пользоваться</b>\n\n1. Откройте приложение.\n2. Выберите платформу.\n3. Введите никнейм и запустите оценку.\n\nКоманды: /subscribe — подписка на новости, /unsubscribe — отказ, /delete — удалить запись, /privacy — конфиденциальность.',
   estimate: 'Выберите платформу и введите никнейм в приложении.',
   privacy: '<b>Конфиденциальность</b>\n\nПосле /start мы сохраняем Telegram ID чата, язык, дату входа и источник перехода, чтобы бот работал. Рекламные и информационные рассылки включаются отдельно кнопкой «Получать новости и рекламу» или командой /subscribe. Согласие можно отозвать через /unsubscribe, а запись удалить через /delete. Оцениваемые никнеймы и результаты в базе подписчиков не хранятся.',
@@ -22,7 +22,7 @@ const RU = {
 const EN = {
   open: 'Evaluate username',
   optin: 'Receive updates & offers',
-  start: '<b>Valuation AI</b>\n\nEstimate an Instagram, TikTok or Telegram username in just a few taps.\n\nTap “Evaluate username” to open the app.\n\nBy using the bot, you acknowledge processing of your Telegram ID to provide the service. News and promotional messages are optional: tap “Receive updates & offers” to opt in. Unsubscribe any time with /unsubscribe.',
+  start: '<b>SovaZone Valuation AI</b>\n\nEstimate an Instagram, TikTok or Telegram username in just a few taps.\n\nTap “Evaluate username” to open the app.\n\nBy using the bot, you acknowledge processing of your Telegram ID to provide the service. News and promotional messages are optional: tap “Receive updates & offers” to opt in. Unsubscribe any time with /unsubscribe.',
   help: '<b>How to use Valuation AI</b>\n\n1. Open the app.\n2. Choose a platform.\n3. Enter a username and run valuation.\n\nCommands: /subscribe — opt in, /unsubscribe — opt out, /delete — erase your record, /privacy — privacy details.',
   estimate: 'Choose a platform and enter the username in the app.',
   privacy: '<b>Privacy</b>\n\nAfter /start, we store your Telegram chat ID, language, start date and referral source for bot operation. News and promotional messages are separate and require the “Receive updates & offers” button or /subscribe. Use /unsubscribe to withdraw consent and /delete to erase your record. Valued usernames and results are not stored in the subscriber database.',

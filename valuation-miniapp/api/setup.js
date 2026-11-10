@@ -49,28 +49,28 @@ export default async function handler(req, res) {
     if (String(identity.username || '').toLowerCase() !== 'valuationaibot')
       return res.status(409).json({ ok: false, error: 'This token belongs to another bot' });
 
-    await api('setMyName', { name: 'Valuation AI' });
-    await api('setMyName', { name: 'Valuation AI — Оценка никнеймов', language_code: 'ru' });
-    await api('setMyName', { name: 'Valuation AI — Username Valuation', language_code: 'en' });
+    await api('setMyName', { name: 'SovaZone Valuation AI' });
+    await api('setMyName', { name: 'SovaZone Valuation AI — Оценка никнеймов', language_code: 'ru' });
+    await api('setMyName', { name: 'SovaZone Valuation AI — Username Valuation', language_code: 'en' });
 
     await api('setMyDescription', {
-      description: 'Оценка никнеймов Instagram, TikTok и Telegram. Выберите платформу и получите ориентировочную стоимость, качество, ликвидность и ключевые факторы оценки. Результат не подтверждает доступность или право владения никнеймом.',
+      description: 'SovaZone Valuation AI — оценка никнеймов Instagram, TikTok и Telegram. Выберите платформу и получите ориентировочную стоимость, качество, ликвидность и ключевые факторы оценки. Результат не подтверждает доступность или право владения никнеймом.',
       language_code: 'ru'
     });
     await api('setMyDescription', {
-      description: 'Evaluate Instagram, TikTok and Telegram usernames. Choose a platform and get an indicative value range, quality and liquidity indicators, and the key valuation factors. Results do not verify ownership or availability.',
+      description: 'SovaZone Valuation AI evaluates Instagram, TikTok and Telegram usernames. Choose a platform and get an indicative value range, quality and liquidity indicators, and the key valuation factors. Results do not verify ownership or availability.',
       language_code: 'en'
     });
     await api('setMyDescription', {
-      description: 'Оценка никнеймов Instagram, TikTok и Telegram: стоимость, качество, ликвидность и основные факторы. Оценки ориентировочные.'
+      description: 'SovaZone Valuation AI — оценка никнеймов Instagram, TikTok и Telegram: стоимость, качество, ликвидность и основные факторы. Оценки ориентировочные.'
     });
 
     await api('setMyShortDescription', {
-      short_description: 'Оценка никнеймов Instagram, TikTok и Telegram с помощью Valuation AI.',
+      short_description: 'SovaZone Valuation AI — оценка никнеймов Instagram, TikTok и Telegram.',
       language_code: 'ru'
     });
     await api('setMyShortDescription', {
-      short_description: 'Instagram, TikTok and Telegram username valuation by Valuation AI.',
+      short_description: 'Instagram, TikTok and Telegram username valuation by SovaZone Valuation AI.',
       language_code: 'en'
     });
     await api('setMyShortDescription', {

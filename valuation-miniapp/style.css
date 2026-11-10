@@ -17,3 +17,37 @@
 .access-gate__card p{margin:0 0 25px;color:#aaa8b7;line-height:1.6;font-size:15px}
 .access-gate__card a{display:block;padding:17px 22px;border-radius:14px;background:#b595ec;color:#0a0710;text-decoration:none;font-size:15px;font-weight:750}
 .access-gate__card a:hover{background:#ceb4f7}
+/* SovaZone Valuation AI identity, logo and utility navigation */
+.identity{gap:10px;min-width:0}
+.identity-mark{padding:0;overflow:hidden;background:#14111d;border:1px solid rgba(185,153,225,.24)}
+.identity-mark img{display:block;width:100%;height:100%;object-fit:cover}
+.identity-copy{min-width:0}
+.identity-copy .identity-overline{font-size:10px;letter-spacing:.23em;font-weight:850;color:#e0c6f6;line-height:1.12}
+.identity-copy b{font-size:16px;letter-spacing:.1em;margin-top:1px;white-space:nowrap}
+.identity-copy small{font-size:7px;letter-spacing:.18em}
+.hero h1{max-width:730px}
+.section-head h2{margin-top:0}
+.sova-footer{display:block;padding:0 0 calc(26px + env(safe-area-inset-bottom,0px));border-top:0;color:#958e9f;letter-spacing:normal}
+.sova-footer-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px 0 21px}
+.sova-footer-nav a{min-height:65px;border:1px solid rgba(208,177,242,.15);border-radius:14px;background:linear-gradient(155deg,#211b2d,#14131c);color:#e9dcef;display:flex;align-items:center;justify-content:center;gap:9px;padding:9px 11px;font-size:12px;font-weight:690;transition:background .16s,border-color .16s,transform .16s}
+.sova-footer-nav a:hover{border-color:#c8a2e6;background:linear-gradient(145deg,#342441,#1a1725)}
+.sova-footer-nav a:active{transform:scale(.98)}
+.sova-footer-nav svg{width:19px;height:19px;flex:0 0 19px;color:#cda8ed}
+.sova-footer-bottom{border-top:1px solid #ffffff10;padding:19px 0 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:5px 18px;color:#80798d;font-size:11px}
+.sova-footer-owner{display:flex;align-items:center;gap:6px;letter-spacing:.02em}
+.sova-footer-owner strong{color:#dec5ef}
+.sova-footer-owner b{color:#aaa0b7}
+.sova-footer-bottom>span{color:#80788b}
+@media(max-width:650px){
+.identity-copy .identity-overline{font-size:8px}
+.identity-copy b{font-size:13px;letter-spacing:.08em}
+.identity-copy small{font-size:6px;letter-spacing:.11em}
+.status span{display:none}
+.topbar-right{gap:8px}
+.hero h1{font-size:clamp(31px,8.3vw,44px);letter-spacing:-.047em}
+.sova-footer-nav{gap:7px}
+.sova-footer-nav a{min-height:68px;gap:5px;flex-direction:column;text-align:center;font-size:11px;padding:10px 6px}
+.sova-footer-nav svg{width:21px;height:21px}
+.sova-footer-bottom{gap:6px}
+}
+@media(max-width:365px){.identity-copy b{font-size:12px}.status{display:none}.sova-footer-nav a{font-size:10px}.hero h1{font-size:30px}}
