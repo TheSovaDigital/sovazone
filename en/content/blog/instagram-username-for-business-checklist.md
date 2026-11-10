@@ -3,7 +3,7 @@ title: "Instagram Username for Business: How to Choose and Check It"
 slug: instagram-username-for-business-checklist
 date: 2026-11-10
 description: "How to choose an Instagram username for your business: practical criteria, availability checks, naming mistakes, and platform rules."
-cover: /og-image.png
+cover: /image/blog/instagram-username-for-business-checklist.jpg
 category: Articles
 author: SovaZone
 ---
