@@ -98,6 +98,6 @@ For a new brand, the most predictable approach is to develop an original name, c
 
 Explore the [SovaZone username catalogue](/en/usernames) to see how short names, readability, and character structure shape branding. A listing does not override the rules of the platform where a handle would be used.
 
-For a preliminary comparison, try the [username valuation tool](/en/tools/username-value). It evaluates naming characteristics, not legal ownership or a guaranteed transaction price. You can also read [how to estimate a username's value before selling](/en/post/how-to-value-username-before-selling) for more context.
+For a preliminary comparison, try the [username valuation tool](/en/tools/username-value). It evaluates naming characteristics, not legal ownership or a guaranteed transaction price. For a starting point on terminology, read [what a username is and why it matters](/en/post/what-is-username-nickname).
 
 Choose a handle designed to stay memorable as the brand grows, not merely one that looks unusual today.
