@@ -19,6 +19,11 @@ for(const language of ['ru','en']){
   assert.deepEqual(prices,expectedPrices,page+' visible prices unchanged');
   const urls=cards.map(s=>s.match(/<a class="username-buy" href="([^"]+)"/)?.[1]);
   assert.deepEqual(urls,expectedSlugs.map(s=>'username/'+s),page+' detail links unchanged');
+  // The homepage blog preview must keep same-day editorial order and indexable clean URLs.
+  assert.ok(html.includes('publishedOrder: Number(post.publishedOrder || 0)'),page+' blog order property');
+  assert.ok(html.includes('return dateB - dateA || (b.publishedOrder || 0) - (a.publishedOrder || 0);'),page+' same-day order');
+  assert.ok(html.includes("return '/"+dir+"post/' + encodeURIComponent(slug || '');"),page+' clean blog post link');
+  assert.ok(!html.includes("return '/"+dir+"post?slug='"),page+' must not use query-based legacy links');
   const script=html.match(/<script type="application\/ld\+json" id="featured-usernames-itemlist">([\s\S]*?)<\/script>/);
   assert.ok(script,page+' ItemList');
   const list=JSON.parse(script[1]);
