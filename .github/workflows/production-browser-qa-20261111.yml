@@ -24,10 +24,15 @@ jobs:
         run: npm --prefix /tmp/sovazone-audit install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
       - name: Test production site in real Chrome
         run: node .github/scripts/production-browser-audit.cjs
+      - name: Diagnose horizontal clipping in real Chrome
+        if: always()
+        run: node .github/scripts/overflow-diagnosis.cjs
       - name: Upload browser QA results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: production-browser-audit-20261111
-          path: browser-audit-results.json
+          path: |
+            browser-audit-results.json
+            layout-diagnosis.json
           if-no-files-found: ignore
