@@ -16,7 +16,7 @@ const short=t=>{
 function markdown(md){
   const lines=md.replace(/^---\s*\n[\s\S]*?\n---\s*\n/,'').split(/\r?\n/),out=[];
   let text=[],list=null;
-  const inline=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  const inline=s=>esc(s).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[A-Za-z0-9_./-]+)\)/g,(_match,label,url)=>'<a href="'+url+'">'+label+'</a>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
   const flush=()=>{if(text.length){out.push('<p>'+inline(text.join(' '))+'</p>');text=[];}};
   const close=()=>{if(list){out.push('</'+list+'>');list=null;}};
   for(const raw of lines){
