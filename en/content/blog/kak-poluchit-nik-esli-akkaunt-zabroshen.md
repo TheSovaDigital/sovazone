@@ -9,118 +9,59 @@ author: SovaZone
 ---
 # How to Get a Username If the Account Is Abandoned
 
-Many people want a handle that already exists but seems to be unused.  
-At first glance the logic feels simple: if the account is abandoned, the username should be obtainable.
+You find the ideal Instagram handle, but it is attached to a profile that has shown no visible activity for years. Can you still request that exact name when ordinary username settings show it as unavailable?
 
-In reality, the situation is more complicated.  
-Not every inactive-looking account is truly abandoned, and not every abandoned-looking handle is realistically obtainable.
+**Some such requests can be assessed individually.** But a lack of public posts does not make a handle automatically available, and no single approach applies to every case.
 
----
+## What does an abandoned-looking account tell you?
 
-## When an account can be considered abandoned
+Possible visible signs include:
 
-An abandoned account is not just a profile that posts rarely.
+- no recent posts or profile updates;
+- a long period without obvious activity;
+- a name that is not being used in active promotion;
+- an old or nearly empty profile.
 
-Usually the situation is more relevant when:
+These are starting observations, not a complete account history. An outside viewer cannot reliably establish the circumstances of the account or the prospects of a specific request. Be cautious of anyone claiming that every name attached to an inactive profile is obtainable.
 
-- the account has shown no real activity for years  
-- the owner is clearly absent  
-- the profile is not being used for its intended purpose  
-- there are no strong signs of active management  
-- the handle is locked on a long-dead account  
+## Ready-made listings versus one exact custom handle
 
-In practical work, one of the key markers is long-term inactivity rather than temporary silence.
+SovaZone offers two distinct formats:
 
----
+1. **[Ready-made usernames in the catalogue](/en/usernames).** Suitable when you are willing to consider several strong alternatives.
+2. **[Custom Username](/en/services/custom-username).** Intended for a business, public figure, or other client requiring one exact spelling, including an occupied handle.
 
-## Why not every username can be obtained
+A custom inquiry may involve a long-inactive profile, another occupied handle, or a specific destination account. **The prospects and terms are reviewed separately for each request.**
 
-Even if the account seems inactive, that does not automatically mean the handle is accessible.
+## What the initial assessment covers
 
-The reasons include:
+To review a request, we need:
 
-- the account may still have a real owner  
-- the platform may treat the profile as active enough  
-- the handle may be especially valuable or risky to move  
-- the technical scenario may not be available  
-- market interest may be high enough that the risk becomes unreasonable  
+- the exact spelling of the requested username;
+- the platform, such as Instagram or TikTok;
+- a profile link, if one is visible;
+- the intended purpose — business, personal brand, or public project;
+- whether the name is needed on an existing account;
+- the approximate budget and urgency.
 
-That is why “unused” does not automatically mean “obtainable.”
+After an initial review, we discuss whether the request is suitable for further work, its possible scope and timing, and the applicable terms. We may recommend an alternative. **Neither prolonged inactivity nor a substantial budget guarantees a result on its own.**
 
----
+## Can the name be used on an established account?
 
-## Why pre-check matters
+Sometimes the client wants to preserve an existing profile, followers, content, and history while changing its username. This is a distinct requirement that SovaZone can also assess.
 
-A preliminary review matters because it helps avoid false expectations.
+Please mention the intended destination account in your inquiry. Engagement terms and case-specific details are discussed privately.
 
-Before moving further, it is useful to evaluate:
+## What if the profile does not look abandoned?
 
-- how long the account has really been inactive  
-- the type of username  
-- whether the handle is a name, surname, or high-value word  
-- the likely difficulty of the scenario  
-- the realistic balance between budget and possible outcome  
+Do not assume that adding random digits is always your only option. If the exact spelling matters, you can submit the name for an **individual assessment** with the relevant circumstances and purpose. Not every request is suitable for work; scope and terms can only be discussed after review.
 
-Without that check, the request is mostly guesswork.
+If you are flexible about the name, browse our [short and rare username catalogue](/en/usernames).
 
----
+## How to get started
 
-## The custom username service
+Share the exact handle, the platform, and whether you need it on an existing account. Explain why the spelling matters to the brand or project.
 
-If a handle is not available in the public catalog, a custom request may make sense.
+**[Request a custom username assessment](/en/services/custom-username)**
 
-This format is usually relevant when:
-
-- the user wants a specific handle  
-- the profile behind it appears long inactive  
-- the budget allows a deeper review  
-- the task is worth evaluating individually  
-
-A custom request is not a universal guarantee.  
-It is simply the right format for cases that cannot be solved from a ready-made catalog page.
-
----
-
-## Where to see available username options
-
-If the exact handle is not realistic, the next best step is often to review available strong alternatives.
-
-That is why it helps to look at:
-
-- the public username catalog  
-- related short or memorable variants  
-- alternative naming logic  
-- handles that solve the same branding task in a cleaner way  
-
-In some cases, the best solution is not to chase one difficult handle but to choose a stronger available one.
-
----
-
-## When it makes sense to reach out
-
-It is worth reaching out when:
-
-- the target handle appears long inactive  
-- the task is important enough to justify a review  
-- you want a real assessment instead of guessing  
-- the budget is clear  
-- you are open either to the exact handle or to strong alternatives  
-
-The more precise the request is, the easier it is to review realistically.
-
----
-
-## Conclusion
-
-Getting an abandoned username is possible in some situations, but not in all of them.
-
-What matters most is:
-
-- the real inactivity of the account  
-- the type and rarity of the handle  
-- technical viability  
-- market risk  
-- the difference between appearance and reality  
-
-That is why the right starting point is not assumption, but review.  
-A clean pre-check saves time, budget, and false expectations.
+SovaZone evaluates the prospects of custom requests before accepting them, agrees on terms in advance, and keeps client-specific arrangements confidential.

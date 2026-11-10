@@ -56,7 +56,7 @@ An available handle is not proof of legal rights to a name. Search for competing
 
 ### 9. Compatible with the platform's rules
 
-A valuable-looking name is not the same as an available or transferable name. Platform rules and actual eligibility matter more than claims made in listings or messages.
+A valuable-looking name is not the same as an available or transferable name. A standard availability check cannot describe every individual situation. If the exact occupied handle matters to your brand, request a separate assessment rather than relying on promises made in listings or messages.
 
 ## How to check a candidate username
 
