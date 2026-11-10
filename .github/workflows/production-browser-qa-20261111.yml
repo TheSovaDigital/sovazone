@@ -1,0 +1,33 @@
+name: Temporary SovaZone production browser QA
+on:
+  push:
+    branches:
+      - qa/production-browser-20261111
+    paths:
+      - .github/workflows/production-browser-qa-20261111.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      NODE_PATH: /tmp/sovazone-audit/node_modules
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check Chrome availability
+        run: which google-chrome || which chromium || which chromium-browser
+      - name: Install headless browser driver
+        run: npm --prefix /tmp/sovazone-audit install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
+      - name: Test production site in real Chrome
+        run: node .github/scripts/production-browser-audit.cjs
+      - name: Upload browser QA results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-browser-audit-20261111
+          path: browser-audit-results.json
+          if-no-files-found: ignore
