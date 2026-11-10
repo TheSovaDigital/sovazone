@@ -23,6 +23,8 @@ for (const [lang,posts] of Object.entries(indexes)) {
     assert.ok(head.includes('<meta name="description" content="'),pagePath+' description');
     assert.ok(head.includes('hreflang="'+lang+'" href="'+url+'"'),pagePath+' language self-reference');
     assert.ok(head.includes('<meta property="og:image" content="'+base+p.cover+'">'),pagePath+' cover');
+    const expectedImageType=/\.jpe?g$/i.test(p.cover)?'image/jpeg':/\.webp$/i.test(p.cover)?'image/webp':'image/png';
+    assert.ok(head.includes('<meta property="og:image:type" content="'+expectedImageType+'">'),pagePath+' image MIME type');
     const title=head.match(/<title>([^<]+)<\/title>/i)?.[1]||'';
     assert.ok(title.includes('SovaZone')&&title.length<=75,pagePath+' title length '+title.length);
     const match=head.match(/<script[^>]+id="schema-article"[^>]*>([\s\S]*?)<\/script>/i);
