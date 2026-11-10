@@ -35,6 +35,7 @@ def canon(path):
 def is_public(path):
  s=path.as_posix()
  if path.name in ("header.html","footer.html","404.html","post.html"):return False
+ if path.parts[0]=="post" or (len(path.parts)>1 and path.parts[:2]==("en","post")):return False
  if "admin" in path.parts or path.name.startswith(("google","pinterest","yandex_","zen_")):return False
  raw=path.read_text(encoding="utf-8",errors="replace")
  if re.search(r'<meta\s+name=["\x27]robots["\x27][^>]*noindex',raw,re.I):return False
@@ -153,7 +154,7 @@ for lang,indexPath,output in [
   if not source.exists():raise RuntimeError(f"Blog index slug missing source {source}")
   published=str(post.get("date",""))
   md=lastmod(source) or (published if re.fullmatch(r"20\d\d-\d\d-\d\d",published) else None)
-  url=BASE+("/post?slug=" if lang=="ru" else "/en/post?slug=")+quote(slug,safe="")
+  url=BASE+("/post/" if lang=="ru" else "/en/post/")+quote(slug,safe="")
   output.append((url,md,None))
   stats[f"blog_posts_{lang}"]+=1
 

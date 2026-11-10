@@ -832,7 +832,7 @@
           const title = cleanText(post.title, "Без названия");
           const desc = cleanText(post.description, "Новая публикация блога SovaZone.");
           return `
-            <a class="post-side-link" href="/post?slug=${encodeURIComponent(post.slug)}">
+            <a class="post-side-link" href="/post/${encodeURIComponent(post.slug)}">
               <span class="post-side-link-kicker">${escapeHtml(kicker)}</span>
               <span class="post-side-link-title">${escapeHtml(title)}</span>
               <span class="post-side-link-desc">${escapeHtml(desc)}</span>
