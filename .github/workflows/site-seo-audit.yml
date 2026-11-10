@@ -1,7 +1,7 @@
 name: Full SEO and text audit
 on:
   push:
-    branches: [main,seo-content-audit-release-20261109]
+    branches: [main,seo-content-audit-release-20261109,seo-static-blog-20261110]
     paths:
       - '*.html'
       - '**/*.html'
@@ -10,8 +10,10 @@ on:
       - 'content/blog/**'
       - 'en/content/blog/**'
       - 'scripts/site-seo-audit.py'
-      - 'middleware.js'
-      - '.github/scripts/test_blog_seo_middleware.mjs'
+      - 'post/**'
+      - 'en/post/**'
+      - 'vercel.json'
+      - 'scripts/test-static-blog-seo.mjs'
       - '.github/workflows/site-seo-audit.yml'
   workflow_dispatch:
 permissions:
@@ -29,8 +31,8 @@ jobs:
         run: |
           python3 -m pip install beautifulsoup4 --quiet
           python3 scripts/site-seo-audit.py
-      - name: Blog SSR metadata regressions
-        run: node .github/scripts/test_blog_seo_middleware.mjs
+      - name: Prerendered blog SEO regressions
+        run: node scripts/test-static-blog-seo.mjs
       - name: JavaScript syntax
         run: |
           find . -path ./.git -prune -o -name '*.js' -type f -print0 | xargs -0 -r -n1 node --check

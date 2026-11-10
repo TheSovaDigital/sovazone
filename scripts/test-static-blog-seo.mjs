@@ -1,0 +1,57 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+
+const root=process.cwd(),base='https://sovazone.com';
+const read=name=>fs.readFileSync(path.join(root,name),'utf8');
+const indexes={
+  ru: JSON.parse(read('content/blog/index.json')),
+  en: JSON.parse(read('en/content/blog/index.json'))
+};
+const slugSets=Object.fromEntries(Object.entries(indexes).map(([k,v])=>[k,new Set(v.map(p=>p.slug))]));
+let checked=0,paired=0;
+for (const [lang,posts] of Object.entries(indexes)) {
+  for (const p of posts) {
+    assert.match(p.slug,/^[A-Za-z0-9_-]+$/);
+    const prefix=lang==='ru'?'':'en/';
+    const pagePath=prefix+'post/'+p.slug+'.html';
+    const html=read(pagePath);
+    const url=base+'/'+prefix+'post/'+p.slug;
+    const head=html.slice(0,html.indexOf('</head>'));
+    assert.ok(head.includes('<link rel="canonical" href="'+url+'">'),pagePath+' canonical');
+    assert.ok(head.includes('<meta property="og:url" content="'+url+'">'),pagePath+' OG url');
+    assert.ok(head.includes('<meta name="description" content="'),pagePath+' description');
+    assert.ok(head.includes('<meta property="og:image" content="'+base+p.cover+'">'),pagePath+' cover');
+    const title=head.match(/<title>([^<]+)<\/title>/i)?.[1]||'';
+    assert.ok(title.includes('SovaZone')&&title.length<=75,pagePath+' title length '+title.length);
+    const match=head.match(/<script[^>]+id="schema-article"[^>]*>([\s\S]*?)<\/script>/i);
+    assert.ok(match,pagePath+' JSON-LD');
+    const article=JSON.parse(match[1]);
+    assert.equal(article['@type'],'BlogPosting',pagePath+' schema type');
+    assert.equal(article.mainEntityOfPage,url,pagePath+' schema canonical');
+    assert.equal(article.headline,p.title,pagePath+' headline');
+    assert.equal(article.datePublished,p.date,pagePath+' published date');
+    assert.ok((html.match(/id="post-content"[\s\S]+?<p>/i)||[])[0],pagePath+' prerendered body');
+    assert.ok(html.includes('window.location.pathname.split("/")'),pagePath+' client slug fallback');
+    const other=lang==='ru'?'en':'ru';
+    if(slugSets[other].has(p.slug)){
+      const partner=base+'/'+(other==='ru'?'':'en/')+'post/'+p.slug;
+      assert.ok(head.includes('hreflang="'+other+'" href="'+partner+'"'),pagePath+' reciprocal hreflang');
+      paired++;
+    }
+    const sitemap=lang==='ru'?read('sitemap-blog.xml'):read('en/sitemap.xml');
+    assert.ok(sitemap.includes('<loc>'+url+'</loc>'),pagePath+' sitemap URL');
+    checked++;
+  }
+}
+for(const file of ['sitemap-blog.xml','en/sitemap.xml']){
+ assert.ok(!read(file).includes('post?slug='),'Old query-based sitemap entry in '+file);
+}
+const routes=JSON.parse(read('vercel.json')).redirects;
+for(const loc of ['/post','/en/post']){
+ assert.ok(routes.some(r=>r.source===loc&&r.has?.some(h=>h.type==='query'&&h.key==='slug')&&r.permanent===true),'Legacy redirect for '+loc);
+}
+for(const file of ['blog.html','en/blog.html']){
+ assert.ok(!read(file).includes('return "/'+(file.startsWith('en/')?'en/':'')+'post?slug="'),'Blog listing old URL in '+file);
+}
+console.log('STATIC_BLOG_SEO_PASS',JSON.stringify({articles:checked,reciprocalLocaleLinks:paired,redirects:2}));
