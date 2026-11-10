@@ -85,7 +85,7 @@ export default async function handler(req, res) {
     await api('setWebhook', {
       url: APP_URL + '/api/webhook',
       secret_token: secret,
-      allowed_updates: ['message'],
+      allowed_updates: ['message','callback_query','my_chat_member'],
       drop_pending_updates: false
     });
     const status = await api('getWebhookInfo');

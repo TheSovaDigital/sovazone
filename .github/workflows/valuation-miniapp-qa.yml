@@ -19,16 +19,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install Mini App dependencies
+        run: npm install --prefix valuation-miniapp --no-audit --no-fund
       - name: Install Chrome driver
         run: npm --prefix /tmp/valuation-qa install puppeteer-core@24.25.0 --no-save --no-audit --no-fund
       - name: Verify JS syntax
         run: |
           node --check valuation-miniapp/app.js
           node --check valuation-miniapp/api/webhook.js
+          node --check valuation-miniapp/api/subscriber-store.js
           node --check valuation-miniapp/api/setup.js
           node --check valuation-miniapp/scripts/configure-bot.mjs
       - name: Test Telegram webhook security and BotFather configuration
-        run: node --test valuation-miniapp/tests/bot-setup.test.mjs valuation-miniapp/tests/configure-bot.test.mjs
+        run: node --test valuation-miniapp/tests/bot-setup.test.mjs valuation-miniapp/tests/configure-bot.test.mjs valuation-miniapp/tests/subscriber-store.test.mjs
       - name: Run browser integration tests
         env:
           NODE_PATH: /tmp/valuation-qa/node_modules

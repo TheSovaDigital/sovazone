@@ -63,7 +63,7 @@ export async function configureBot({token,secret,callFetch=fetch}={}){
   await botApi('setWebhook',{
     url:APP_URL+'/api/webhook',
     secret_token:secret,
-    allowed_updates:['message'],
+    allowed_updates:['message','callback_query','my_chat_member'],
     drop_pending_updates:false
   });
   const info=await botApi('getWebhookInfo');

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import setup from '../api/setup.js';
-import webhook from '../api/webhook.js';
+import {handleUpdate} from '../api/webhook.js';
 
 const expectedUrl = 'https://valuation.sovazone.com';
 const setupKey = 'test-setup-key';
@@ -76,24 +76,27 @@ test('operator setup registers commands, menu, profile and verified webhook',asy
 
 test('webhook denies unauthenticated updates and handles language-specific /start',async()=>{
   setEnv();const original=globalThis.fetch;const sent=[];
+  const stored=[];const store={register:async (...args)=>{stored.push({action:'register',args})},setUpdates:async (...args)=>{stored.push({action:'updates',args})},erase:async (...args)=>{stored.push({action:'erase',args})}};
   globalThis.fetch=async (url,options)=>{
     sent.push(JSON.parse(options.body));
     return {ok:true,status:200,json:async()=>({ok:true,result:true})};
   };
   try{
     const invalid=response();
-    await webhook({method:'POST',headers:{'x-telegram-bot-api-secret-token':'bad'},body:{message:{chat:{id:32,type:'private'},text:'/start'}}},invalid);
+    await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':'bad'},body:{message:{chat:{id:32,type:'private'},text:'/start'}}},invalid,store);
     assert.equal(invalid.code,403);
     assert.equal(sent.length,0);
     const valid=response();
-    await webhook({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'en'},text:'/start'}}},valid);
+    await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'en'},text:'/start'}}},valid,store);
     assert.equal(valid.code,200);
     assert.equal(sent.length,1);
     assert.ok(sent[0].text.includes('Instagram'));
     assert.equal(sent[0].reply_markup.inline_keyboard[0][0].web_app.url,expectedUrl);
     const help=response();
-    await webhook({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'ru'},text:'/help'}}},help);
+    await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'ru'},text:'/help'}}},help,store);
     assert.equal(help.code,200);
     assert.ok(sent[1].text.includes('Как пользоваться'));
+    assert.equal(stored[0].action,'register');
+    assert.equal(stored[0].args[0],32);
   } finally {globalThis.fetch=original}
 });
