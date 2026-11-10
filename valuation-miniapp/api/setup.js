@@ -3,7 +3,7 @@
 // never in a URL, source code, GitHub Actions or the Mini App.
 import crypto from 'node:crypto';
 
-const APP_URL = 'https://sova-valuation-ai.vercel.app';
+const APP_URL = process.env.PUBLIC_APP_URL || 'https://valuation.sovazone.com';
 const COMMANDS = {
   ru: [
     { command: 'start', description: 'Открыть Valuation AI' },
