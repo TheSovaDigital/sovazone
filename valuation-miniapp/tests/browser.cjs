@@ -13,6 +13,17 @@ const pause=ms=>new Promise(r=>setTimeout(r,ms));
  try{
   for(const width of [390,1366]){
    const page=await browser.newPage();await page.setViewport({width,height:850,deviceScaleFactor:1});
+   // Exercise the valuation interface as an already-onboarded Telegram user.
+   // Server-side initData verification and /start enforcement are tested separately.
+   await page.setRequestInterception(true);
+   page.on('request',request=>{
+    const u=request.url();
+    if(u.startsWith('https://telegram.org/js/telegram-web-app.js'))
+      return request.respond({status:200,contentType:'application/javascript',body:"window.Telegram={WebApp:{initData:'ci-valid-initdata',initDataUnsafe:{user:{language_code:'en'}},ready(){},expand(){},openTelegramLink(){}}};"});
+    if(u.includes('/api/access'))
+      return request.respond({status:200,contentType:'application/json',body:'{"authorized":true}'});
+    return request.continue();
+   });
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
    page.on('response',r=>{if(/\/api\/estimate/.test(r.url()))results.calls.push({url:r.url(),status:r.status()})});
    const res=await page.goto(base+'/',{waitUntil:'networkidle2',timeout:30000});
