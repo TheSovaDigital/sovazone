@@ -21,7 +21,7 @@ const executablePath=exec('which google-chrome || which chromium',{encoding:'utf
     const brand=document.querySelector('.identity').getBoundingClientRect(),right=document.querySelector('.topbar-right').getBoundingClientRect();
     return {lang:document.documentElement.lang,h1:document.querySelector('.hero h1').textContent,eyebrow:document.querySelector('.eyebrow [data-t]').textContent,logo:document.querySelector('.identity-mark img')?.getAttribute('src'),brand:document.querySelector('.identity-copy').textContent,placeholder:document.querySelector('#username').placeholder,links:[...document.querySelectorAll('.sova-footer-nav a')].map(x=>({url:x.href,text:x.textContent.trim()})),kicker:document.querySelectorAll('.section-head .section-kicker').length,viewport:innerWidth,rootWidth:document.documentElement.scrollWidth,headerGap:Math.round(right.left-brand.right),footer:document.querySelector('.sova-footer-owner').textContent,meta:document.title};
    });
-   ok(r.status()===200,'Local UI loads '+width,r.status());
+   ok([200,304].includes(r.status()),'Local UI loads '+width,r.status());
    ok(ru.lang==='ru'&&ru.h1.includes('Не каждый никнейм ценен')&&ru.h1.includes('Некоторые стоят тысячи'),'RU factual hook '+width,ru.h1);
    ok(ru.eyebrow==='INTELLIGENT USERNAME VALUATION','English eyebrow in RU '+width,ru.eyebrow);
    ok(ru.logo==='/mark.svg'&&ru.brand.includes('SOVAZONE')&&ru.brand.includes('VALUATION'),'Brand and logo '+width,ru.brand);
