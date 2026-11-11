@@ -28,6 +28,12 @@ const executablePath=exec('which google-chrome || which chromium',{encoding:'utf
    ok(ru.placeholder==='username'&&ru.kicker===0,'No numbering and correct placeholder '+width,ru);
    ok(ru.links.length===3&&ru.links[0].url==='https://sovazone.com/'&&ru.links[1].url==='https://t.me/SovaDigital'&&ru.links[2].url==='https://t.me/SovaUsername','Three verified links '+width,ru.links);
    ok(ru.rootWidth<=width+1,'No root overflow '+width,ru.rootWidth-width);
+   const benefitRow=await page.evaluate(()=>{
+     const nodes=[...document.querySelectorAll('.hero-proof > span')];
+     return nodes.map(n=>{const r=n.getBoundingClientRect();return {top:Math.round(r.top),left:Math.round(r.left),right:Math.round(r.right),height:Math.round(r.height),label:n.innerText.trim()}});
+   });
+   ok(benefitRow.length===3&&benefitRow.every(x=>Math.abs(x.top-benefitRow[0].top)<=1)&&benefitRow.at(-1).right<=width+1,'Three benefits on one row '+width,benefitRow);
+
    ok(ru.headerGap>=-1,'Header does not collide '+width,ru.headerGap);
    if([390,1366].includes(width)){
     const name='valuation-sovazone-'+width+'.png';
