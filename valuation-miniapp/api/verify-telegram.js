@@ -8,7 +8,7 @@ export function verifyTelegramInitData(input, botToken, nowSeconds = Math.floor(
   const timestamp = Number(p.get('auth_date'));
   if (!hash || !/^[0-9a-f]{64}$/i.test(hash) || !userJson) return null;
   if (!Number.isSafeInteger(timestamp) || timestamp > nowSeconds + 60 || nowSeconds-timestamp > 86400) return null;
-  const lines = [...p.entries()].filter(([k])=>k!=='hash'&&k!=='signature').sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>k+'='+v);
+  const lines = [...p.entries()].filter(([k])=>k!=='hash').sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>k+'='+v);
   const secretKey = crypto.createHmac('sha256','WebAppData').update(botToken).digest();
   const expected = crypto.createHmac('sha256',secretKey).update(lines.join('\n')).digest('hex');
   const actualBytes = Buffer.from(hash.toLowerCase(),'hex');
