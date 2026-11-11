@@ -22,7 +22,7 @@ test('accept valid Telegram initData and reject forgeries, expired tokens, missi
   // Telegram may provide a separate Ed25519 signature alongside the hash.
   // For bot-token HMAC validation, signature IS part of the signed fields.
   const extras=new URLSearchParams({auth_date:String(now),user:JSON.stringify({id:100,language_code:'ru'}),query_id:'abc',signature:'signed_by_telegram_example'});
-  const extrasCheck=[...extras.entries()].sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>k+'='+v).join('\\n');
+  const extrasCheck=[...extras.entries()].sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>k+'='+v).join('\n');
   const extrasSecret=crypto.createHmac('sha256','WebAppData').update(token).digest();
   extras.set('hash',crypto.createHmac('sha256',extrasSecret).update(extrasCheck).digest('hex'));
   assert.equal(verifyTelegramInitData(extras.toString(),token,now)?.id,100,'accept HMAC-signed initData with signature field');
