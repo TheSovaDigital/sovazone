@@ -54,3 +54,20 @@
 .sova-footer-bottom{gap:6px}
 }
 @media(max-width:365px){.identity-copy b{font-size:12px}.status{display:none}.sova-footer-nav a{font-size:10px}.hero h1{font-size:30px}}
+
+/* Three valuation benefits must remain on one compact horizontal row. */
+.hero-proof{flex-wrap:nowrap;gap:clamp(5px,1.3vw,12px)}
+.hero-proof>span{min-width:0;flex:0 0 auto;gap:clamp(3px,.65vw,7px)}
+.hero-proof svg{flex:0 0 auto}
+.hero-proof>i{flex:0 0 3px}
+@media(max-width:650px){
+  .hero-proof{gap:clamp(3px,1vw,7px)}
+  .hero-proof>span{font-size:clamp(7px,2.12vw,9px);gap:3px;letter-spacing:-.025em}
+  .hero-proof svg{width:clamp(8px,2.3vw,11px);height:clamp(8px,2.3vw,11px)}
+  .hero-proof>i{display:none}
+}
+@media(max-width:365px){
+  .hero-proof{gap:3px}
+  .hero-proof>span{font-size:6.8px;gap:2px;letter-spacing:-.04em}
+  .hero-proof svg{width:8px;height:8px}
+}
