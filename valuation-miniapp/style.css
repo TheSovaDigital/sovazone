@@ -17,6 +17,9 @@
 .access-gate__card p{margin:0 0 25px;color:#aaa8b7;line-height:1.6;font-size:15px}
 .access-gate__card a{display:block;padding:17px 22px;border-radius:14px;background:#b595ec;color:#0a0710;text-decoration:none;font-size:15px;font-weight:750}
 .access-gate__card a:hover{background:#ceb4f7}
+/* Keep the highlighted second headline sentence on exactly one line. */
+.hero h1 em{display:inline-block;white-space:nowrap}
+@media(max-width:650px){.hero h1 em{font-size:clamp(24px,7vw,44px)}}
 /* SovaZone Valuation AI identity, logo and utility navigation */
 .identity{gap:10px;min-width:0}
 .identity-mark{padding:0;overflow:hidden;background:#14111d;border:1px solid rgba(185,153,225,.24)}
