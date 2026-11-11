@@ -28,6 +28,9 @@ const executablePath=exec('which google-chrome || which chromium',{encoding:'utf
    ok(ru.placeholder==='username'&&ru.kicker===0,'No numbering and correct placeholder '+width,ru);
    ok(ru.links.length===3&&ru.links[0].url==='https://sovazone.com/'&&ru.links[1].url==='https://t.me/SovaDigital'&&ru.links[2].url==='https://t.me/SovaUsername','Three verified links '+width,ru.links);
    ok(ru.rootWidth<=width+1,'No root overflow '+width,ru.rootWidth-width);
+   const rejected=await page.evaluate(()=>['.', '...', '___', '._._'].map(value=>({value,ig:validate(value,'instagram').error,tt:validate(value,'tiktok').error,tg:validate(value,'telegram').error})));
+   ok(rejected.every(x=>x.ig&&x.tt&&x.tg)&&!await page.evaluate(()=>Boolean(validate('aa','instagram').error)), 'Invalid separator-only usernames rejected by Mini App '+width,rejected);
+
    const ai=await page.evaluate(()=>{const f=document.querySelector('.ai-input-frame');const r=f?.getBoundingClientRect();return {present:!!f,animation:f?getComputedStyle(f).animationName:'',spark:!!f?.querySelector('.ai-input-spark svg'),right:r?.right,left:r?.left};});
    ok(ai.present&&ai.spark&&ai.animation.includes('ai-prism-flow')&&ai.left>=-1&&ai.right<=width+1,'Animated AI input fits viewport '+width,ai);
    const aiDuration=await page.$eval('.ai-input-frame',node=>getComputedStyle(node).animationDuration);
