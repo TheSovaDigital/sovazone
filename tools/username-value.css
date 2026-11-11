@@ -90,3 +90,91 @@
   letter-spacing:-.045em!important;
  }
 }
+
+/* SovaZone animated prismatic valuation field: same AI aesthetic as the bot, faster motion. */
+.uv-page .uv-input-row .uv-input-wrap{
+  min-width:0;
+  padding:2px;
+  isolation:isolate;
+  border-radius:15px;
+  background:linear-gradient(108deg,#5a9cff 0%,#927cf7 24%,#ec96c9 48%,#ffd293 72%,#71baf1 88%,#5a9cff 100%);
+  background-size:250% 100%;
+  animation:uv-ai-prism-flow 4.8s ease-in-out infinite alternate;
+  box-shadow:0 5px 24px rgba(14,12,31,.27),0 0 0 1px rgba(175,151,230,.1);
+  transition:box-shadow .22s ease;
+}
+.uv-page .uv-input-row .uv-input-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:inherit;
+  background:inherit;
+  filter:blur(12px);
+  opacity:.16;
+  z-index:-1;
+  pointer-events:none;
+  transition:opacity .22s ease;
+}
+.uv-page .uv-input-row .uv-input-wrap::after{
+  content:"✦";
+  position:absolute;
+  top:50%;
+  left:14px;
+  transform:translateY(-50%);
+  font-size:21px;
+  line-height:1;
+  font-weight:700;
+  background:linear-gradient(125deg,#80b7ff,#ac98ff 42%,#e4a3d6 72%,#ffdaa5);
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+  pointer-events:none;
+  transition:transform .35s ease,filter .35s ease;
+  filter:drop-shadow(0 0 4px rgba(145,126,242,.26));
+}
+.uv-page .uv-input-row .uv-input-wrap:focus-within{
+  box-shadow:0 0 0 1px rgba(177,155,249,.34),0 0 30px rgba(126,98,214,.19),0 9px 30px rgba(0,0,0,.23);
+}
+.uv-page .uv-input-row .uv-input-wrap:focus-within::before{opacity:.38}
+.uv-page .uv-input-row .uv-input-wrap:focus-within::after{
+  transform:translateY(-50%) rotate(20deg) scale(1.09);
+  filter:drop-shadow(0 0 8px rgba(145,126,242,.49));
+}
+.uv-page .uv-input-row .uv-input-wrap .uv-at{
+  left:43px;
+  z-index:1;
+  color:#d0bdf1;
+}
+.uv-page .uv-input-row .uv-input-wrap .uv-input{
+  display:block;
+  height:46px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(145deg,#0e101c,#0b0c15);
+  color:#fff;
+  padding:0 16px 0 64px;
+  caret-color:#bda8ff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055);
+}
+.uv-page .uv-input-row .uv-input-wrap .uv-input:focus{
+  border:0;
+  outline:2px solid transparent;
+  outline-offset:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09);
+}
+@keyframes uv-ai-prism-flow{
+  0%{background-position:0% 50%}
+  100%{background-position:100% 50%}
+}
+@media(max-width:720px){
+  .uv-page .uv-input-row .uv-input-wrap{border-radius:14px}
+  .uv-page .uv-input-row .uv-input-wrap .uv-input{border-radius:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  .uv-page .uv-input-row .uv-input-wrap{
+    animation:none;
+    background-position:50% 50%;
+  }
+  .uv-page .uv-input-row .uv-input-wrap::after{transition:none}
+}
