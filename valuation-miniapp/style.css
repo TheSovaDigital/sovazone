@@ -70,7 +70,7 @@
 }
 
 /* Flowing prismatic AI input. The form remains dark, legible and touch-friendly. */
-.ai-input-frame{position:relative;isolation:isolate;border-radius:19px;padding:2px;background:linear-gradient(108deg,#5a9cff 0%,#927cf7 24%,#ec96c9 48%,#ffd293 72%,#71baf1 88%,#5a9cff 100%);background-size:250% 100%;animation:ai-prism-flow 6s ease-in-out infinite alternate;box-shadow:0 5px 28px rgba(14,12,31,.4),0 0 0 1px rgba(175,151,230,.11);transition:box-shadow .28s ease}
+.ai-input-frame{position:relative;isolation:isolate;border-radius:19px;padding:2px;background:linear-gradient(108deg,#5a9cff 0%,#927cf7 24%,#ec96c9 48%,#ffd293 72%,#71baf1 88%,#5a9cff 100%);background-size:250% 100%;animation:ai-prism-flow 5s ease-in-out infinite alternate;box-shadow:0 5px 28px rgba(14,12,31,.4),0 0 0 1px rgba(175,151,230,.11);transition:box-shadow .28s ease}
 .ai-input-frame::before{content:"";position:absolute;inset:-3px;border-radius:inherit;background:inherit;filter:blur(14px);opacity:.17;pointer-events:none;z-index:-1;transition:opacity .28s ease}
 .ai-input-frame:focus-within{box-shadow:0 0 0 1px rgba(177,155,249,.42),0 0 32px rgba(126,98,214,.2),0 12px 35px rgba(0,0,0,.32)}
 .ai-input-frame:focus-within::before{opacity:.43}

@@ -30,6 +30,8 @@ const executablePath=exec('which google-chrome || which chromium',{encoding:'utf
    ok(ru.rootWidth<=width+1,'No root overflow '+width,ru.rootWidth-width);
    const ai=await page.evaluate(()=>{const f=document.querySelector('.ai-input-frame');const r=f?.getBoundingClientRect();return {present:!!f,animation:f?getComputedStyle(f).animationName:'',spark:!!f?.querySelector('.ai-input-spark svg'),right:r?.right,left:r?.left};});
    ok(ai.present&&ai.spark&&ai.animation.includes('ai-prism-flow')&&ai.left>=-1&&ai.right<=width+1,'Animated AI input fits viewport '+width,ai);
+   const aiDuration=await page.$eval('.ai-input-frame',node=>getComputedStyle(node).animationDuration);
+   ok(aiDuration==='5s','AI input animation is 5 seconds '+width,aiDuration);
 
    const benefitRow=await page.evaluate(()=>{
      const nodes=[...document.querySelectorAll('.hero-proof > span')];
