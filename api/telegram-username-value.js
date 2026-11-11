@@ -277,6 +277,7 @@ export default async function handler(req,res){
   if(body.website)return res.status(400).json({error:'Invalid request'});
   const username=normalizeUsername(body.username);
   if(!username||username.length>32||!/^[A-Za-z0-9_]+$/.test(username))return res.status(400).json({error:lang==='en'?'Invalid Telegram username format.':'Некорректный формат Telegram username.'});
+  if(!/[A-Za-z0-9]/.test(username))return res.status(400).json({error:lang==='en'?'A username cannot consist only of dots or underscores.':'Никнейм не может состоять только из точек или подчёркиваний.'});
   if(username.length<4)return res.status(400).json({error:lang==='en'?'Telegram collectible valuation currently supports usernames from 4 characters.':'Оценка collectible username Telegram сейчас поддерживает ники от 4 символов.'});
   if(username.startsWith('_')||username.endsWith('_'))return res.status(200).json(invalidUsernameResponse(username,lang));
 

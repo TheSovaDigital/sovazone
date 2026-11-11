@@ -66,6 +66,7 @@
     if(username.length>(platform==='telegram'?32:30)){showError(t('Никнейм слишком длинный.','Username is too long.'));return;}
     var valid=platform==='telegram'?/^[a-zA-Z0-9_]+$/.test(username):/^[a-zA-Z0-9._]+$/.test(username);
     if(!valid){showError(platform==='telegram'?t('Для Telegram используйте латинские буквы, цифры или _.','For Telegram use Latin letters, numbers, or _.'):t('Используйте латинские буквы, цифры, точку или _.','Use Latin letters, numbers, a dot, or _.'));return;}
+    if(!/[a-zA-Z0-9]/.test(username)){showError(t('Никнейм не может состоять только из точек или подчёркиваний.','A username cannot consist only of dots or underscores.'));return;}
     if(platform==='telegram'&&username.length<4){showError(t('Коллекционный никнейм Telegram должен содержать минимум 4 символа.','A Telegram collectible username must contain at least 4 characters.'));return;}
     if(platform==='telegram'&&(username.charAt(0)==='_'||username.charAt(username.length-1)==='_')){showError(t('Никнейм Telegram не может начинаться или заканчиваться символом _.','A Telegram username cannot start or end with _.'));return;}
     var cached=readCache(username);if(cached){render(cached);return;}

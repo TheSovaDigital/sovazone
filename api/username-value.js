@@ -652,6 +652,7 @@ export default async function handler(req,res){
   const platform=String(body.platform||'instagram').toLowerCase()==='tiktok'?'tiktok':'instagram';
   const lang=String(body.lang||'ru').toLowerCase()==='en'?'en':'ru';
   if(!username||username.length>30||!/^[A-Za-z0-9._]+$/.test(username))return res.status(400).json({error:lang==='en'?'Invalid username format.':'Некорректный формат username.'});
+  if(!/[A-Za-z0-9]/.test(username))return res.status(400).json({error:lang==='en'?'A username cannot consist only of dots or underscores.':'Никнейм не может состоять только из точек или подчёркиваний.'});
 
   const brand=specialBrandResponse(username,platform,lang);
   if(brand)return res.status(200).json(brand);

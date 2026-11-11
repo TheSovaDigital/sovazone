@@ -16,6 +16,7 @@ on:
       - 'en/tools/telegram-username-value.html'
       - '.github/scripts/test_username_valuation_v38.mjs'
       - '.github/scripts/test_telegram_valuation_v1.mjs'
+      - '.github/scripts/test_invalid_username_inputs.mjs'
       - '.github/workflows/valuation-regression.yml'
   workflow_dispatch:
 
@@ -34,6 +35,7 @@ jobs:
         run: |
           node .github/scripts/test_username_valuation_v38.mjs
           node .github/scripts/test_telegram_valuation_v1.mjs
+          node .github/scripts/test_invalid_username_inputs.mjs
       - name: Validate routes, cache versions and pages
         run: |
           grep -q "platform==='telegram'?'telegram-v1.2':'instagram-v4.0'" tools/username-value.js
