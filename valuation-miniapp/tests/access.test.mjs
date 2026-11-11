@@ -19,6 +19,15 @@ test('accept valid Telegram initData and reject forgeries, expired tokens, missi
   assert.equal(verifyTelegramInitData(signed(100),token+'wrong',now),null);
   assert.equal(verifyTelegramInitData(signed(100,90000),token,now),null);
   assert.equal(verifyTelegramInitData('',token,now),null);
+  // Telegram may provide a separate Ed25519 signature alongside the hash.
+  // For bot-token HMAC validation, signature IS part of the signed fields.
+  const extras=new URLSearchParams({auth_date:String(now),user:JSON.stringify({id:100,language_code:'ru'}),query_id:'abc',signature:'signed_by_telegram_example'});
+  const extrasCheck=[...extras.entries()].sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>k+'='+v).join('\\n');
+  const extrasSecret=crypto.createHmac('sha256','WebAppData').update(token).digest();
+  extras.set('hash',crypto.createHmac('sha256',extrasSecret).update(extrasCheck).digest('hex'));
+  assert.equal(verifyTelegramInitData(extras.toString(),token,now)?.id,100,'accept HMAC-signed initData with signature field');
+  extras.set('signature','tampered_signature');
+  assert.equal(verifyTelegramInitData(extras.toString(),token,now),null,'reject modified signature field');
 });
 test('access requires Telegram identity and a prior /start private record',async()=>{
  const old=process.env.VALUATION_BOT_TOKEN;process.env.VALUATION_BOT_TOKEN=token;
