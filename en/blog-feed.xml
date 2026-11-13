@@ -10,13 +10,47 @@
     <atom:link href="https://sovazone.com/en/blog-feed.xml" rel="self" type="application/rss+xml" />
     <description>SovaZone blog RSS feed: posts, updates, and articles about digital identity, accounts, and social platforms.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 10 Nov 2026 19:30:03 GMT</lastBuildDate>
-    <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
+    <lastBuildDate>Fri, 13 Nov 2026 11:21:52 GMT</lastBuildDate>
+    <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
     <image>
       <url>https://sovazone.com/logo.png</url>
       <title>SovaZone — blog</title>
       <link>https://sovazone.com/en/blog</link>
     </image>
+    <item>
+      <title>Available vs Transferable Username: What Brands Need to Know</title>
+      <link>https://sovazone.com/en/post/username-available-vs-transferable</link>
+      <guid isPermaLink="true">https://sovazone.com/en/post/username-available-vs-transferable</guid>
+      <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+      <dc:creator>SovaZone</dc:creator>
+      <category>Articles</category>
+      <description><![CDATA[An Instagram or TikTok handle may be invisible in search yet unavailable to claim. Learn the difference between availability and transferability.]]></description>
+      <content:encoded><![CDATA[<h1>Available vs Transferable Username: What Brands Need to Know</h1>
+<p>When a brand searches for a short Instagram or TikTok handle, three questions often get confused: does the account appear in search, can the username be claimed right now, and can it be placed on the brand&#39;s intended account? Those are separate questions. Confusing them can derail a launch after a name has already made it into packaging or advertising.</p>
+<h2>Three different states</h2>
+<p><strong>Not visible in search.</strong> A missing search result does not prove that a handle is available. Search results are not a registration check, and platforms may restrict particular strings.</p>
+<p><strong>Available in the username editor.</strong> This is a point-in-time indication for a particular account. Until a change is successfully saved, the name should not be treated as secured.</p>
+<p><strong>Already used by another account.</strong> An existing account does not mean that its owner or a third party can guarantee transfer of the handle. Platform rules and account restrictions matter.</p>
+<h2>Why an inactive account does not make a handle free</h2>
+<p>An account may have posted nothing for years while retaining its username. Do not plan a launch on the assumption that inactivity automatically releases a name. See our <a href="https://sovazone.com/en/post/kak-poluchit-nik-esli-akkaunt-zabroshen">guide to abandoned-account usernames</a>.</p>
+<h2>A practical pre-launch checklist</h2>
+<h3>Test the spelling</h3>
+<p>Compare a short candidate, a meaningful word, and a backup. Check pronunciation, ambiguous characters, and resemblance to existing brands. Our <a href="https://sovazone.com/en/post/username-effectiveness-testing">username testing framework</a> provides a simple method.</p>
+<h3>Check the intended platform and destination account</h3>
+<p>An Instagram availability check says nothing about TikTok. Identify the account that must ultimately use the name and verify which actions the platform permits. Never share passwords, recovery codes, or email access for a purported preliminary check.</p>
+<h3>Check legal and reputation risks</h3>
+<p>Even a technically usable string may conflict with a trademark, public identity, or established business. Assess potential confusion before investing in a rebrand.</p>
+<h3>Keep a credible fallback</h3>
+<p>Choose an alternative that could work permanently. Avoid announcing the final handle or printing packaging before it is actually secured on the intended account.</p>
+<h2>Questions to ask before paying for help</h2>
+<p>Ask a provider to distinguish <strong>candidate research</strong>, <strong>current availability checks</strong>, and <strong>assistance with username changes</strong>. Clarify the scope of work, platform-dependent limitations, and what happens if the desired handle cannot be used. Treat guaranteed-transfer claims with caution.</p>
+<p>There is no universal ownership guarantee for a social-media username outside the platform&#39;s own rules. Technical feasibility does not override service terms.</p>
+<h2>A better decision for a new brand</h2>
+<p>If speed matters, compare several clear candidates and test them with real users. If a short or rare handle is central to your identity, evaluate not only its appearance but also its suitability for the destination account and the platform&#39;s restrictions.</p>
+<p>Explore candidates in the <a href="https://sovazone.com/usernames">SovaZone catalog</a> or discuss your requirements through a <a href="https://sovazone.com/services/consultation">consultation</a>. A catalog listing alone is not a guarantee of transfer or successful assignment.</p>]]></content:encoded>
+      <enclosure url="https://sovazone.com/image/blog/username-available-vs-transferable.webp" type="image/webp" length="0" />
+      <media:content url="https://sovazone.com/image/blog/username-available-vs-transferable.webp" medium="image" />
+    </item>
     <item>
       <title>Instagram Username: Buy Ready-Made or Request a Custom Handle</title>
       <link>https://sovazone.com/en/post/instagram-username-purchase-risks</link>
