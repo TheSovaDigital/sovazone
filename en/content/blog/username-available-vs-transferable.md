@@ -51,4 +51,4 @@ There is no universal ownership guarantee for a social-media username outside th
 
 If speed matters, compare several clear candidates and test them with real users. If a short or rare handle is central to your identity, evaluate not only its appearance but also its suitability for the destination account and the platform's restrictions.
 
-Explore candidates in the [SovaZone catalog](/usernames) or discuss your requirements through a [consultation](/services/consultation). A catalog listing alone is not a guarantee of transfer or successful assignment.
+Explore candidates in the [SovaZone catalog](/en/usernames) or discuss your requirements through a [consultation](/en/services/consultation). A catalog listing alone is not a guarantee of transfer or successful assignment.
