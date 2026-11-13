@@ -35,7 +35,7 @@ def canon(path):
 def is_public(path):
  s=path.as_posix()
  if path.name in ("header.html","footer.html","404.html","post.html"):return False
- if path.parts[0]=="post" or (len(path.parts)>1 and path.parts[:2]==("en","post")):return False
+ # Resolve relative route before excluding prerendered blog pages.\n rel=path.relative_to(ROOT).as_posix() if path.is_absolute() else path.as_posix()\n if rel.startswith(("post/","en/post/")):return False
  if "admin" in path.parts or path.name.startswith(("google","pinterest","yandex_","zen_")):return False
  raw=path.read_text(encoding="utf-8",errors="replace")
  if re.search(r'<meta\s+name=["\x27]robots["\x27][^>]*noindex',raw,re.I):return False
