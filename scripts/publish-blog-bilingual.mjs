@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // Publish one bilingual post from existing Markdown without modifying unrelated site data.
+// Immutable cover revision URLs prevent stale thumbnails in CDN and social previews.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const slug=process.argv[2];
