@@ -42,8 +42,12 @@ for(const language of ['ru','en']){
 const expectedNewestFirst=["instagram-username-purchase-risks","username-effectiveness-testing","protect-brand-username-social-platforms","personal-brand-username-guide","instagram-username-for-business-checklist"];
 for (const prefix of ['', 'en/']) {
   const data=JSON.parse(fs.readFileSync(prefix+'content/blog/index.json','utf8'));
-  assert.deepEqual(data.slice(0,5).map(x=>x.slug),expectedNewestFirst,prefix+' newest posts first');
-  assert.deepEqual(data.slice(0,5).map(x=>x.publishedOrder),[1,2,3,4,5],prefix+' same-day chronological order');
+  // Newer editorial posts may precede the 2026-11-10 cohort. Preserve its internal sequence.
+  const cohort=data.filter(x=>x.date==='2026-11-10');
+  assert.deepEqual(cohort.map(x=>x.slug),expectedNewestFirst,prefix+' 2026-11-10 posts order');
+  assert.deepEqual(cohort.map(x=>x.publishedOrder),[1,2,3,4,5],prefix+' same-day chronological order');
+  const sorted=[...data].sort((a,b)=>b.date.localeCompare(a.date)||(a.publishedOrder||0)-(b.publishedOrder||0));
+  assert.deepEqual(data.map(x=>x.slug),sorted.map(x=>x.slug),prefix+' newest posts first');
   for (const page of [prefix+'index.html',prefix+'blog.html']) {
     const html=fs.readFileSync(page,'utf8');
     assert.ok(html.includes('return dateB - dateA || (a.publishedOrder || 0) - (b.publishedOrder || 0);'),page+' chronological tie-breaker');
