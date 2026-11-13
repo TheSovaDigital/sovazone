@@ -5,7 +5,7 @@ date: 2026-11-13
 description: "Почему свободный никнейм не всегда доступен для регистрации, а занятый нельзя гарантированно перенести. Чек-лист перед выбором Instagram и TikTok username."
 category: Статьи
 author: SovaZone
-cover: "/image/blog/username-available-vs-transferable.webp"
+cover: "/image/blog/username-available-vs-transferable-v2.webp"
 ---
 # Свободный никнейм и передаваемый username: в чём разница
 

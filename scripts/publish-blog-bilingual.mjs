@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 // Publish one bilingual post from existing Markdown without modifying unrelated site data.
+// Immutable cover revision URLs prevent stale thumbnails in CDN and social previews.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const slug=process.argv[2];
 assert.match(slug||'',/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
-const cover='/image/blog/'+slug+'.webp';
-assert.ok(fs.existsSync('image/blog/'+slug+'.webp'),'Unique WebP cover is mandatory');
+const suffix=process.argv[3]||'';
+assert.match(suffix,/^(?:v[1-9][0-9]{0,2})?$/,'Invalid cover revision');
+const coverFile=slug+(suffix?'-'+suffix:'')+'.webp';
+const cover='/image/blog/'+coverFile;
+assert.ok(fs.existsSync('image/blog/'+coverFile),'Unique WebP cover is mandatory');
 function parse(source){
  const match=source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
  assert.ok(match,'Missing frontmatter');

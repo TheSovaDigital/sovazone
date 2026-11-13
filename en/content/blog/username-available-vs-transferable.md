@@ -5,7 +5,7 @@ date: 2026-11-13
 description: "An Instagram or TikTok handle may be invisible in search yet unavailable to claim. Learn the difference between availability and transferability."
 category: Articles
 author: SovaZone
-cover: "/image/blog/username-available-vs-transferable.webp"
+cover: "/image/blog/username-available-vs-transferable-v2.webp"
 ---
 # Available vs Transferable Username: What Brands Need to Know
 
