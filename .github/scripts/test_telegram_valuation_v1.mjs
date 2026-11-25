@@ -1,88 +1,111 @@
-// Permanent Telegram v1.3 deterministic regression controls.
+// Telegram v1.4 regression suite: USD is the price basis for 5+ characters.
+import assert from 'node:assert/strict';
 import handler from '../../api/telegram-username-value.js';
-
 process.env.OPENAI_API_KEY='test-key';
-
-const classifications={
-  qzxvna:{category:'Random string',categoryCode:'random',marketTier:'zero',archetype:'random',demandScore:4,qualityScore:8,liquidity:'low',uncertain:false},
-  aaaa:{category:'Pattern',categoryCode:'pattern',marketTier:'strong',archetype:'pattern',demandScore:68,qualityScore:70,liquidity:'high',uncertain:false},
-  work:{category:'English word',categoryCode:'english_word',marketTier:'premium',archetype:'commercial',demandScore:88,qualityScore:90,liquidity:'high',uncertain:false},
-  alex:{category:'First name',categoryCode:'first_name',marketTier:'strong',archetype:'name',demandScore:91,qualityScore:92,liquidity:'high',uncertain:false},
-  volk:{category:'Russian transliteration',categoryCode:'russian_word_translit',marketTier:'strong',archetype:'generic',demandScore:78,qualityScore:86,liquidity:'high',uncertain:false},
-  hello:{category:'English word',categoryCode:'english_word',marketTier:'medium',archetype:'greeting',demandScore:82,qualityScore:88,liquidity:'high',uncertain:false},
-  money:{category:'English word',categoryCode:'english_word',marketTier:'premium',archetype:'finance',demandScore:94,qualityScore:94,liquidity:'high',uncertain:false},
-  cloud:{category:'English word',categoryCode:'english_word',marketTier:'premium',archetype:'generic',demandScore:92,qualityScore:92,liquidity:'high',uncertain:false},
-  dream:{category:'English word',categoryCode:'english_word',marketTier:'premium',archetype:'generic',demandScore:92,qualityScore:92,liquidity:'high',uncertain:false},
-  love:{category:'English word',categoryCode:'english_word',marketTier:'strong',archetype:'generic',demandScore:88,qualityScore:90,liquidity:'high',uncertain:false},
-  pavel:{category:'First name',categoryCode:'first_name',marketTier:'elite',archetype:'platform_identity',demandScore:98,qualityScore:96,liquidity:'high',uncertain:false},
-  pasha:{category:'First name',categoryCode:'first_name',marketTier:'low',archetype:'name',demandScore:68,qualityScore:75,liquidity:'medium',uncertain:false},
-  paris:{category:'Geography',categoryCode:'geography',marketTier:'micro',archetype:'geography',demandScore:60,qualityScore:82,liquidity:'medium',uncertain:false},
-  monkey:{category:'English word',categoryCode:'english_word',marketTier:'elite',archetype:'animal',demandScore:98,qualityScore:96,liquidity:'high',uncertain:false},
-  trading:{category:'English word',categoryCode:'english_word',marketTier:'medium',archetype:'commercial',demandScore:82,qualityScore:84,liquidity:'medium',uncertain:false},
-  hel_lo:{category:'English word',categoryCode:'english_word',marketTier:'medium',archetype:'generic',demandScore:40,qualityScore:35,liquidity:'low',uncertain:false},
-  aaaaa:{category:'Pattern',categoryCode:'pattern',marketTier:'strong',archetype:'pattern',demandScore:78,qualityScore:78,liquidity:'medium',uncertain:false},
-  zzqzx65:{category:'Random letters',categoryCode:'random',marketTier:'premium',archetype:'random',demandScore:97,qualityScore:95,liquidity:'high',uncertain:false},
-  smart123:{category:'Commercial name',categoryCode:'english_word',marketTier:'premium',archetype:'commercial',demandScore:95,qualityScore:95,liquidity:'high',uncertain:false},
-  num284693:{category:'Number with a prefix',categoryCode:'numeric',marketTier:'premium',archetype:'generic',demandScore:95,qualityScore:95,liquidity:'high',uncertain:false},
-  weakbrandword:{category:'Weak brand',categoryCode:'english_word',marketTier:'elite',archetype:'generic',demandScore:30,qualityScore:40,liquidity:'medium',uncertain:false},
-  modest:{category:'General term',categoryCode:'english_word',marketTier:'medium',archetype:'generic',demandScore:60,qualityScore:65,liquidity:'medium',uncertain:false}
+const list={
+ qzxvna:['random','zero','random',4], qzxv:['random','zero','random',4],
+ aaaa:['pattern','strong','pattern',68],work:['english_word','premium','commercial',88],
+ alex:['first_name','strong','name',91],volk:['russian_word_translit','strong','generic',78],
+ hello:['english_word','medium','greeting',82],money:['english_word','premium','finance',94],
+ cloud:['english_word','premium','generic',92],dream:['english_word','premium','generic',92],
+ love:['english_word','strong','generic',88],pavel:['first_name','elite','platform_identity',98],
+ pasha:['first_name','low','name',68],paris:['geography','micro','geography',60],
+ monkey:['english_word','elite','animal',98],trading:['english_word','medium','commercial',82],
+ hel_lo:['english_word','medium','generic',40],aaaaa:['pattern','strong','pattern',78],
+ zzqzx65:['random','premium','random',97],smart123:['english_word','premium','commercial',95],
+ num284693:['numeric','premium','generic',95],weakbrandword:['english_word','elite','generic',30],
+ modest:['english_word','medium','generic',60],
+ smith:['surname','strong','name',85],
+ zexov:['surname','premium','name',88],
+ brightforest:['english_word','premium','commercial',88,'two_word_compound'],
+ rareendemic:['other_language_word','strong','generic',65,'obscure_word'],
+ nametestrate:['first_name','strong','name',80],
+ normalfx:['english_word','medium','generic',60]
 };
-
 const originalFetch=globalThis.fetch;
-let fxApiDown=false;
+let fxDown=false, wikidataSearches=0;
 globalThis.fetch=async (url,opts={})=>{
-  const s=String(url);
-  if(s.includes('api.coingecko.com')){
-    if(fxApiDown)throw new Error('simulated FX outage');
-    return {ok:true,json:async()=>({'the-open-network':{usd:1.42}})};
+  const v=String(url);
+  if(v.includes('api.coingecko.com')){
+    if(fxDown)throw new Error('FX source down');
+    return {ok:true,json:async()=>({'the-open-network':{usd:0.95}})};
   }
-  if(s.includes('api.coinbase.com'))throw new Error('simulated backup FX outage');
-  if(s.includes('api.openai.com')){
-    const body=JSON.parse(opts.body||'{}');
-    const input=String(body.input||'');
-    const m=input.match(/@([A-Za-z0-9_]+)/);
-    const username=(m&&m[1]||'').toLowerCase();
-    const c=classifications[username];
-    if(!c)throw new Error(`Missing mock classification for ${username}`);
-    const factors=[{title:'Demand',text:'Mock demand factor.'},{title:'Structure',text:'Mock structure factor.'},{title:'Market',text:'Mock market factor.'}];
-    return {ok:true,json:async()=>({output_text:JSON.stringify({...c,factors})})};
+  if(v.includes('api.coinbase.com'))throw new Error('Backup down');
+  if(v.includes('www.wikidata.org/w/api.php')){
+    const qs=new URL(v).searchParams;
+    if(qs.get('action')==='wbsearchentities'){
+      wikidataSearches++;
+      return {ok:true,json:async()=>({search:qs.get('search')?.toLowerCase()==='smith'?[{id:'Q12345',label:'Smith'}]:[]})};
+    }
+    if(qs.get('action')==='wbgetentities')return {ok:true,json:async()=>({entities:{Q12345:{claims:{P31:[{mainsnak:{datavalue:{value:{id:'Q101352'}}}}]}}}})};
+    throw new Error('Unknown Wikidata API call: '+v);
   }
-  throw new Error(`Unexpected fetch ${s}`);
+  if(v.includes('api.openai.com')){
+    const match=String(JSON.parse(opts.body||'{}').input||'').match(/@([A-Za-z0-9_]+)/);
+    const name=(match?.[1]||'').toLowerCase(),row=list[name];
+    if(!row)throw new Error('No mock classification for '+name);
+    const [categoryCode,marketTier,archetype,demandScore,wordStructure='none']=row;
+    const c={category:categoryCode==='surname'?'Surname':'Generic word',categoryCode,marketTier,archetype,wordStructure,demandScore,
+      qualityScore:demandScore,liquidity:'medium',uncertain:false,
+      factors:[{title:'Claim',text:categoryCode==='surname'?'This is a surname':'Market demand'},{title:'Demand',text:'Demand tested'},{title:'Market',text:'Historical sales'}]};
+    return {ok:true,json:async()=>({output_text:JSON.stringify(c)})};
+  }
+  throw new Error('Unexpected fetch '+v);
 };
-
 async function evaluate(username){
   let statusCode=200,payload=null;
-  const req={method:'POST',headers:{origin:'https://sovazone.com','x-forwarded-for':`127.0.0.${Math.floor(Math.random()*200)+1}`},body:{username,lang:'en',website:''},socket:{remoteAddress:'127.0.0.1'}};
-  const res={setHeader(){},status(code){statusCode=code;return this;},json(obj){payload=obj;return obj;},end(){return null;}};
+  const req={method:'POST',headers:{origin:'https://sovazone.com','x-forwarded-for':'test-'+username},body:{username,lang:'en',website:''},socket:{remoteAddress:'127.0.0.1'}};
+  const res={setHeader(){},status(n){statusCode=n;return this},json(v){payload=v;return v},end(){}};
   await handler(req,res);
-  if(statusCode!==200)throw new Error(`${username}: HTTP ${statusCode} ${JSON.stringify(payload)}`);
+  assert.equal(statusCode,200,username+': HTTP '+statusCode+' '+JSON.stringify(payload));
   return payload;
 }
-
-const cases=[
-  ['qzxvna',0,0],['aaaa',5000,10000],['work',10000,20000],['alex',5000,10000],
-  ['volk',5000,10000],['hello',20,120],['money',1000,7000],['cloud',500,3000],
-  ['dream',500,3000],['love',5000,10000],['pavel',10000,30000],['pasha',5,30],
-  ['paris',0,10],['monkey',10000,30000],['trading',20,120],['hel_lo',0,5],
-  ['aaaaa',100,600],['zzqzx65',0,5],['smart123',0,20],
-  ['num284693',0,20],['weakbrandword',5,30]
-];
-for(const [u,minTon,maxTon] of cases){
-  const r=await evaluate(u);
-  if(r.engineVersion!=='telegram-v1.3')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
-  if(r.priceMinTon!==minTon||r.priceMaxTon!==maxTon)throw new Error(`${u}: TON ${r.priceMinTon}-${r.priceMaxTon}, expected ${minTon}-${maxTon}`);
-  if(maxTon>0&&!(Number(r.priceMax)>0))throw new Error(`${u}: missing USD conversion`);
+function checkUsd(r,min,max,u){
+  assert.equal(r.engineVersion,'telegram-v1.4',u);
+  assert.deepEqual([r.priceMin,r.priceMax],[min,max],u+' USD');
+  assert.equal(r.priceMinTon,Math.round(min/.95),u+' TON minimum');
+  assert.equal(r.priceMaxTon,Math.round(max/.95),u+' TON maximum');
+}
+for(const [u,min,max] of [
+ ['qzxvna',0,0],['hello',100,2000],['money',1000,30000],['cloud',1000,30000],
+ ['dream',1000,30000],['pavel',3500,10000],['pasha',800,3000],
+ ['paris',0,50],['monkey',1000,30000],['trading',100,2000],['hel_lo',0,0],
+ ['aaaaa',100,500],['zzqzx65',0,0],['smart123',0,0],['num284693',0,0],
+ ['weakbrandword',5,100],['modest',100,2000],['smith',800,3000],
+ ['zexov',0,50],['brightforest',5,100],['rareendemic',5,100],
+ ['nametestrate',1500,6500]
+]){
+ const data=await evaluate(u);checkUsd(data,min,max,u);
+ if(u==='smith'){
+   assert.equal(data.category,'Verified surname');
+   assert.equal(data.surnameEvidenceUrl,'https://www.wikidata.org/wiki/Q12345');
+ }
+ if(u==='zexov'){
+   assert.equal(data.category,'Surname not confirmed');
+   assert.equal(data.surnameEvidenceUrl,null);
+   assert.ok(data.factors.every(f=>!f.text.toLowerCase().includes('this is a surname')));
+ }
+}
+assert.ok(wikidataSearches>=2,'Independent surname verification performed');
+for(const [u,min,max] of [['aaaa',6500,15000],['qzxv',6500,8500],['alex',6500,15000],['volk',6500,15000],['love',6500,15000],['work',10000,30000]]){
+ const data=await evaluate(u);
+ assert.deepEqual([data.priceMinTon,data.priceMaxTon],[min,max],u+' 4-character TON benchmark');
+ assert.ok(data.priceMin>0,u+' USD derived from TON');
+ assert.equal(data.fourCharReferenceAsOf,'2026-11-24');
 }
 const invalid=await evaluate('hello_');
-if(invalid.specialCase!=='invalid_username'||invalid.priceMinTon!==0||invalid.priceMaxTon!==0)throw new Error(`hello_: invalid edge underscore rule failed ${JSON.stringify(invalid)}`);
+assert.equal(invalid.specialCase,'invalid_username');
+assert.deepEqual([invalid.priceMinTon,invalid.priceMaxTon],[0,0]);
 const brand=await evaluate('adidas');
-if(brand.specialCase!=='global_brand'||brand.priceMin!==0||brand.priceMax!==0)throw new Error('Brand special case failed');
-// A lost FX feed must never substitute an invented fixed $3/TON rate.
+assert.equal(brand.specialCase,'global_brand');
+// USD remains valid when crypto FX is unavailable; TON must not be fabricated.
 Object.assign(globalThis.__sovaTonUsdCache,{rate:null,at:0,lastSuccessAt:0,source:'unavailable'});
-fxApiDown=true;
-const fxOutage=await evaluate('modest');
-if(fxOutage.priceMin!==null||fxOutage.priceMax!==null||fxOutage.tonUsdRate!==null||fxOutage.tonUsdSource!=='unavailable')
-  throw new Error('FX outage must result in null USD fields, not a stale invented rate');
-if(!(fxOutage.priceMaxTon>0))throw new Error('TON valuation must remain available without USD FX');
-console.log('PASS 21 Telegram valuation cases plus FX outage regression on telegram-v1.3');
+fxDown=true;
+const noFx=await evaluate('normalfx');
+assert.deepEqual([noFx.priceMin,noFx.priceMax],[100,2000]);
+assert.equal(noFx.priceMinTon,null);assert.equal(noFx.priceMaxTon,null);
+const fourNoFx=await evaluate('qzxv');
+assert.deepEqual([fourNoFx.priceMinTon,fourNoFx.priceMaxTon],[6500,8500]);
+assert.equal(fourNoFx.priceMin,null);assert.equal(fourNoFx.priceMax,null);
 globalThis.fetch=originalFetch;
+console.log('PASS: Telegram v1.4 USD tiers, clean 4-char floor, independent surname proof, niche compounds, FX outage');
