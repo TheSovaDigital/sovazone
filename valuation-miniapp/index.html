@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090a10" />
+  <meta name="description" content="SovaZone Valuation AI — оценка стоимости username и никнеймов Instagram, TikTok и Telegram. Редкость, качество и ликвидность." />
+  <meta name="application-name" content="SovaZone Valuation AI" />
+  <meta property="og:site_name" content="SovaZone" />
+  <meta property="og:title" content="SovaZone Valuation AI — Username Valuation" />
+  <meta property="og:description" content="Оценка стоимости никнеймов Instagram, TikTok и Telegram от SovaZone." />
+  <title>SovaZone Valuation AI — Username Valuation</title>
+  <link rel="icon" type="image/svg+xml" href="/mark.svg" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="/style.css?v=6" />
+  <script src="/app.js?v=5" defer></script>
+</head>
+<body>
+  <div class="ambient ambient--one" aria-hidden="true"></div><div class="ambient ambient--two" aria-hidden="true"></div>
+  <div id="access-gate" class="access-gate" role="dialog" aria-modal="true" aria-labelledby="access-gate-title" hidden>
+    <div class="access-gate__card">
+      <div class="access-gate__eyebrow">VALUATION AI · TELEGRAM</div>
+      <h2 id="access-gate-title">Начните с бота</h2>
+      <p id="access-gate-desc">Для оценки никнеймов сначала откройте @ValuationAiBot и нажмите «Запустить». После этого вернитесь в приложение.</p>
+      <a id="access-gate-open" href="https://t.me/ValuationAiBot?start=join" rel="noopener noreferrer">Открыть @ValuationAiBot</a>
+    </div>
+  </div>
+  <div class="shell">
+    <header class="topbar">
+      <a href="https://sovazone.com/" class="identity" data-resource-link target="_blank" rel="noopener noreferrer" aria-label="SovaZone — официальный сайт">
+        <span class="identity-mark" aria-hidden="true"><img src="/mark.svg" width="42" height="42" alt="" /></span>
+        <span class="identity-copy"><span class="identity-overline">SOVAZONE</span><b>VALUATION<span>AI</span></b><small>USERNAME VALUATION</small></span>
+      </a>
+      <div class="topbar-right"><a id="admin-link" class="admin-link" href="/admin.html" data-t="adminStats" hidden>Статистика</a><span class="status"><i></i><span data-t="engine">AI ENGINE</span></span><button id="lang-btn" type="button" class="lang" aria-label="Change language"><span id="lang-label">EN</span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m7 10 5 5 5-5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></button></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span class="eyebrow-line"></span><span data-t="eyebrow">INTELLIGENT USERNAME VALUATION</span><span class="eyebrow-line"></span></div>
+        <p data-t="subhead">Оцени потенциальную стоимость никнейма с учётом редкости, языка, спроса и ликвидности.</p>
+        <div class="hero-proof"><span><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"/></svg><span data-t="p1">Три платформы</span></span><i></i><span><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"/></svg><span data-t="p2">Индивидуальная оценка</span></span><i></i><span><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"/></svg><span data-t="p3">Без регистрации</span></span></div>
+      </section>
+
+      <section class="evaluator" aria-labelledby="evaluation-title">
+        <div class="section-head"><div><h1 id="evaluation-title" data-t="estimateTitle">Узнать стоимость</h1></div><span class="section-helper" data-t="estimateHelper">Выбери платформу</span></div>
+        <div class="platforms" role="tablist" aria-label="Platform">
+          <button type="button" class="platform is-selected" role="tab" aria-selected="true" data-platform="instagram"><span class="platform-icon ig" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg></span><span>Instagram</span></button>
+          <button type="button" class="platform" role="tab" aria-selected="false" data-platform="tiktok"><span class="platform-icon tt" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M13.2 3.4v10.3a4.2 4.2 0 1 1-4.2-4.2v2.6a1.6 1.6 0 1 0 1.6 1.6V3.4h2.6c.5 2.5 2.2 4 5.6 4.2v2.6a8.4 8.4 0 0 1-5.6-2.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>TikTok</span></button>
+          <button type="button" class="platform" role="tab" aria-selected="false" data-platform="telegram"><span class="platform-icon tg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20.4 4.4 2.8 11.4c-.8.3-.8 1.3 0 1.6l4.4 1.4 1.7 5.1c.2.7 1.1.9 1.6.4l2.5-2.5 4.2 3c.6.4 1.4.1 1.5-.7l2.8-14.4c.1-.7-.5-1.2-1.1-.9ZM7.3 14.3l10.9-8.4-8 11.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Telegram</span></button>
+        </div>
+        <form id="estimate-form" novalidate>
+          <label for="username" class="field-title" data-t="inputLabel">Никнейм для оценки</label>
+          <div class="ai-input-frame"><div class="input-shell"><span class="ai-input-spark" aria-hidden="true"><svg viewBox="0 0 28 28" width="24" height="24" fill="none" focusable="false"><path d="M13.8 1.8c.8 6.1 3 9.8 11.4 12.2-8.4 2.4-10.6 6.1-11.4 12.2C13 20.1 10.8 16.4 2.4 14 10.8 11.6 13 7.9 13.8 1.8Z" fill="url(#ai-prism-fill)"/><defs><linearGradient id="ai-prism-fill" x1="1" y1="4" x2="27" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#80B7FF"/><stop offset=".37" stop-color="#A995FF"/><stop offset=".7" stop-color="#E4A3D6"/><stop offset="1" stop-color="#FFDCA5"/></linearGradient></defs></svg></span><span class="at" aria-hidden="true">@</span><input type="text" id="username" name="username" maxlength="100" placeholder="username" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="none" enterkeyhint="go" aria-describedby="input-hint input-error"/><button type="button" id="clear-input" class="clear" hidden aria-label="Clear">×</button></div></div>
+          <div class="field-meta"><span id="input-hint" data-t="inputHint">Можно вставить ник или ссылку на профиль</span><span id="counter">0/30</span></div>
+          <div id="input-error" role="alert" class="error" hidden></div>
+          <button id="submit-btn" type="submit" class="submit"><span class="submit-text" data-t="button">Оценить никнейм</span><span class="submit-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <div class="legal-tip"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.4"/><path d="M10 8v5m0-8v.4"/></svg><span data-t="estimateNote">Результат ориентировочный и не гарантирует цену продажи.</span></div>
+        </form>
+      </section>
+
+      <section id="loading" class="loading-panel" aria-live="polite" hidden><div class="scan-orb"><span></span><span></span><span></span></div><div><h2 data-t="thinking">Анализируем никнейм...</h2><p id="loading-caption" data-t="thinkingDesc">Оцениваем структуру, спрос и рыночную привлекательность</p></div><div class="loading-bar"><i></i></div></section>
+
+      <section id="result" class="result-panel" aria-live="polite" hidden>
+        <div class="result-topline"><span><i class="live-dot"></i><span data-t="resultLabel">РЕЗУЛЬТАТ ОЦЕНКИ</span></span><button id="new-estimate" type="button" class="new-estimate" data-t="newEstimate">Новая оценка ↗</button></div>
+        <div class="result-heading"><div><div class="result-platform" id="result-platform">INSTAGRAM</div><h2 id="result-username">@username</h2></div><div class="result-seal"><svg viewBox="0 0 34 34" fill="none"><path d="M10 21.5 16 27l10-18" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="17" r="15" stroke="currentColor" stroke-width="1.2" opacity=".6"/></svg></div></div>
+        <div class="price-block"><span data-t="estimatedRange">ОЦЕНОЧНАЯ СТОИМОСТЬ</span><div id="result-price" class="result-price">$0–$0</div><div id="result-ton" class="result-ton" hidden></div><p id="result-disclaimer" class="result-disclaimer"></p></div>
+        <div class="metrics"><div class="metric"><span data-t="quality">КАЧЕСТВО НИКНЕЙМА</span><div class="quality-line"><b id="quality-score">—</b><small id="quality-label">—</small></div><div class="progress"><i id="quality-progress"></i></div></div><div class="metric"><span data-t="liquidity">ЛИКВИДНОСТЬ</span><div class="metric-content" id="result-liquidity">—</div><small data-t="liquidityHint">Потенциальный интерес покупателей</small></div><div class="metric metric-wide"><span data-t="category">КАТЕГОРИЯ</span><div class="metric-content" id="result-category">—</div></div></div>
+        <div class="insights"><div class="insights-head"><h3 data-t="why">Что влияет на стоимость?</h3></div><div id="factors" class="factors"></div></div>
+        <div class="result-actions"><button id="share-result" type="button" class="share-result"><svg viewBox="0 0 24 24" fill="none"><path d="M12 16V3m-5 5 5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-t="share">Поделиться</span></button><button id="copy-result" type="button" class="copy-result"><svg viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M16 7V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h1" stroke="currentColor" stroke-width="1.6"/></svg><span data-t="copy">Скопировать результат</span></button></div>
+      </section>
+
+      <section id="history" class="history" hidden><div class="history-head"><div><h2 data-t="historyTitle">Недавние оценки</h2></div><button type="button" id="clear-history" data-t="clearHistory">Очистить</button></div><div id="history-list" class="history-list"></div><p data-t="localHistory">Хранятся только на этом устройстве.</p></section>
+      <section class="privacy-note"><div class="privacy-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2 4.5 5v6.5c0 4.8 3.1 8.4 7.5 10.5 4.4-2.1 7.5-5.7 7.5-10.5V5L12 2Z" stroke="currentColor" stroke-width="1.4"/><path d="m9.2 11.7 1.8 2 4-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div><div><strong data-t="privacyTitle">Оценка без лишних данных</strong><p data-t="privacyText">Никнеймы для расчёта отправляются в Valuation AI. История оценок сохраняется только в браузере. Не проверяем наличие или право владения ником.</p></div></section>
+    </main>
+    <footer class="sova-footer">
+      <nav class="sova-footer-nav" aria-label="SovaZone navigation">
+        <a href="https://sovazone.com/" data-resource-link target="_blank" rel="noopener noreferrer" aria-label="SovaZone official website"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c3 3.4 4.5 6.4 4.5 9S15 17.6 12 21C9 17.6 7.5 14.6 7.5 12S9 6.4 12 3" stroke="currentColor" stroke-width="1.4"/></svg><span data-t="navSite">Сайт</span></a>
+        <a href="https://t.me/SovaDigital" data-resource-link target="_blank" rel="noopener noreferrer" aria-label="SovaDigital Telegram channel"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 8 9-5 9 5v9l-9 5-9-5V8Zm0 0 9 5 9-5m-9 5v9" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 10.2 12 8l3 2.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span data-t="navBuy">Купить ник</span></a>
+        <a href="https://t.me/SovaUsername" data-resource-link target="_blank" rel="noopener noreferrer" aria-label="SovaUsername Telegram channel"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15V3m0 0L7 8m5-5 5 5M4 14v4a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="navSell">Продать ник</span></a>
+      </nav>
+      <div class="sova-footer-bottom">
+        <div class="sova-footer-owner">© <span id="year"></span> <a href="https://sovazone.com/" data-resource-link target="_blank" rel="noopener noreferrer"><strong>SovaZone</strong></a> <span class="footer-sep">·</span> <b>Valuation AI</b></div>
+        <span data-t="footer">Инструмент оценки никнеймов от SovaZone</span>
+      </div>
+    </footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

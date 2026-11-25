@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#090a10">
+<title>Статистика | SovaZone Valuation AI</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#090a10;color:#e9e9ef}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse 60% 30% at 50% 0,rgba(112,95,167,.18),transparent),#090a10}
+.wrap{width:min(1060px,calc(100% - 32px));margin:auto;padding:28px 0 72px}
+a{color:#cfc1ff}header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:38px}
+.brand{font-weight:800;letter-spacing:.12em;font-size:14px}.brand span{color:#a897ff}.back{text-decoration:none;font-size:13px;color:#afb0c0}
+.overline{font-size:11px;letter-spacing:.2em;color:#a69ac9;font-weight:700;margin-bottom:8px}
+h1{margin:0;font-size:clamp(26px,5vw,42px);letter-spacing:-.045em}p.subtitle{color:#a4a5b6;margin:12px 0 30px;line-height:1.65;font-size:14px}
+.status{padding:16px;border:1px solid #32323e;background:#14151b;border-radius:12px;color:#bec0d1;margin-bottom:22px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{padding:20px;border-radius:14px;border:1px solid #30303d;background:linear-gradient(140deg,#191922,#111116);min-height:126px}
+.metric small{display:block;font-size:12px;color:#a7a7b6;line-height:1.45}.metric strong{display:block;font-size:30px;margin:14px 0 0;letter-spacing:-.045em}
+.sections{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.section{border:1px solid #30303d;border-radius:14px;background:#14141c;padding:22px}
+.section h2{font-size:16px;margin:0 0 20px}.list{display:grid;gap:12px}
+.item{display:grid;grid-template-columns:minmax(90px,1fr) 3fr 50px;gap:14px;align-items:center;font-size:12px;color:#bcbccb}
+.item b{font-size:13px;text-align:right;color:#e7e5f0}
+.track{height:8px;background:#2a2936;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#8c7bc7,#c4adf3);border-radius:20px}
+.chart{display:flex;align-items:flex-end;gap:6px;height:158px;margin-top:18px}.bar{flex:1;min-height:2px;background:#907cce;border-radius:4px 4px 0 0;position:relative;opacity:.9}.bar:hover{background:#b6a1f1}.bar:hover::after{content:attr(data-label);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#303045;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap}
+.legend{display:flex;justify-content:space-between;color:#858498;font-size:11px;margin-top:7px}
+.note{margin-top:18px;font-size:12px;color:#8f8fa1;line-height:1.7}
+[hidden]{display:none!important}
+@media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}.sections{grid-template-columns:1fr}.metric{padding:16px;min-height:110px}.metric strong{font-size:26px}.wrap{padding-top:20px}}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script><script defer src="/admin.js"></script>
+</head><body><div class="wrap"><header><div class="brand">SOVAZONE <span>VALUATION AI</span></div><a class="back" href="/">Назад к оценке</a></header>
+<div class="overline">PRIVATE ANALYTICS · TELEGRAM</div>
+<h1>Статистика бота</h1>
+<p class="subtitle">Подтверждённые действия пользователей. Никнеймы, результаты оценки и личные сообщения в статистику не попадают.</p>
+<div id="status" class="status" role="status">Проверяем доступ администратора Telegram…</div>
+<div id="data" hidden>
+<section class="grid">
+<div class="metric"><small>Зарегистрированные пользователи</small><strong id="registered">—</strong></div>
+<div class="metric"><small>Активные за 7 дней</small><strong id="active7">—</strong></div>
+<div class="metric"><small>Успешные оценки за 30 дней</small><strong id="valuations">—</strong></div>
+<div class="metric"><small>Согласились на рассылку</small><strong id="optin">—</strong></div>
+<div class="metric"><small>Новые регистрации · 30 дней</small><strong id="new">—</strong></div>
+<div class="metric"><small>Запуски бота · 30 дней</small><strong id="starts">—</strong></div>
+<div class="metric"><small>Открытия приложения · 30 дней</small><strong id="opens">—</strong></div>
+<div class="metric"><small>Уникальные оценщики · 30 дней</small><strong id="evaluators">—</strong></div>
+</section>
+<div class="sections">
+<section class="section"><h2>Оценки по платформам</h2><div id="platforms" class="list"></div></section>
+<section class="section"><h2>Источники переходов в бот</h2><div id="sources" class="list"></div></section>
+<section class="section" style="grid-column:1/-1"><h2>Активность за последние 14 дней</h2><div class="chart" id="chart"></div><div class="legend"><span id="startdate">—</span><span id="enddate">—</span></div></section>
+</div>
+<div class="note" id="note"></div>
+</div></div></body></html>
