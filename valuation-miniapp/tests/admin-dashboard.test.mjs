@@ -69,7 +69,7 @@ test('admin statistics: no public access, only verified Telegram or browser sess
   assert.equal(res.code,200);
   res=response();
   await handleAdminStats({method:'POST',body:{initData:signed(111)},headers:{}},res,{readStats:getData});
-  assert.equal(res.code,401);
+  assert.equal(res.code,403);
   res=response();
   await handleAdminStats({method:'GET',body:{},headers:{}},res,{readStats:getData});
   assert.equal(res.code,405);
