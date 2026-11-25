@@ -1,4 +1,4 @@
-// Permanent Telegram v1.2 deterministic regression controls.
+// Permanent Telegram v1.3 deterministic regression controls.
 import handler from '../../api/telegram-username-value.js';
 
 process.env.OPENAI_API_KEY='test-key';
@@ -19,13 +19,24 @@ const classifications={
   paris:{category:'Geography',categoryCode:'geography',marketTier:'micro',archetype:'geography',demandScore:60,qualityScore:82,liquidity:'medium',uncertain:false},
   monkey:{category:'English word',categoryCode:'english_word',marketTier:'elite',archetype:'animal',demandScore:98,qualityScore:96,liquidity:'high',uncertain:false},
   trading:{category:'English word',categoryCode:'english_word',marketTier:'medium',archetype:'commercial',demandScore:82,qualityScore:84,liquidity:'medium',uncertain:false},
-  hel_lo:{category:'English word',categoryCode:'english_word',marketTier:'medium',archetype:'generic',demandScore:40,qualityScore:35,liquidity:'low',uncertain:false}
+  hel_lo:{category:'English word',categoryCode:'english_word',marketTier:'medium',archetype:'generic',demandScore:40,qualityScore:35,liquidity:'low',uncertain:false},
+  aaaaa:{category:'Pattern',categoryCode:'pattern',marketTier:'strong',archetype:'pattern',demandScore:78,qualityScore:78,liquidity:'medium',uncertain:false},
+  zzqzx65:{category:'Random letters',categoryCode:'random',marketTier:'premium',archetype:'random',demandScore:97,qualityScore:95,liquidity:'high',uncertain:false},
+  smart123:{category:'Commercial name',categoryCode:'english_word',marketTier:'premium',archetype:'commercial',demandScore:95,qualityScore:95,liquidity:'high',uncertain:false},
+  num284693:{category:'Number with a prefix',categoryCode:'numeric',marketTier:'premium',archetype:'generic',demandScore:95,qualityScore:95,liquidity:'high',uncertain:false},
+  weakbrandword:{category:'Weak brand',categoryCode:'english_word',marketTier:'elite',archetype:'generic',demandScore:30,qualityScore:40,liquidity:'medium',uncertain:false},
+  modest:{category:'General term',categoryCode:'english_word',marketTier:'medium',archetype:'generic',demandScore:60,qualityScore:65,liquidity:'medium',uncertain:false}
 };
 
 const originalFetch=globalThis.fetch;
+let fxApiDown=false;
 globalThis.fetch=async (url,opts={})=>{
   const s=String(url);
-  if(s.includes('api.coingecko.com'))return {ok:true,json:async()=>({'the-open-network':{usd:1.42}})};
+  if(s.includes('api.coingecko.com')){
+    if(fxApiDown)throw new Error('simulated FX outage');
+    return {ok:true,json:async()=>({'the-open-network':{usd:1.42}})};
+  }
+  if(s.includes('api.coinbase.com'))throw new Error('simulated backup FX outage');
   if(s.includes('api.openai.com')){
     const body=JSON.parse(opts.body||'{}');
     const input=String(body.input||'');
@@ -49,14 +60,16 @@ async function evaluate(username){
 }
 
 const cases=[
-  ['qzxvna',0,0],['aaaa',5000,10000],['work',10000,20000],['alex',5000,15000],
-  ['volk',5000,10000],['hello',2000,5000],['money',10000,30000],['cloud',10000,20000],
-  ['dream',10000,20000],['love',5000,10000],['pavel',20000,50000],['pasha',1000,3000],
-  ['paris',500,1000],['monkey',30000,50000],['trading',3000,5000],['hel_lo',0,30]
+  ['qzxvna',0,0],['aaaa',5000,10000],['work',10000,20000],['alex',5000,10000],
+  ['volk',5000,10000],['hello',20,120],['money',1000,7000],['cloud',500,3000],
+  ['dream',500,3000],['love',100,600],['pavel',10000,30000],['pasha',5,30],
+  ['paris',0,10],['monkey',10000,30000],['trading',20,120],['hel_lo',0,5],
+  ['aaaaa',100,600],['zzqzx65',0,5],['smart123',0,20],
+  ['num284693',0,20],['weakbrandword',5,30]
 ];
 for(const [u,minTon,maxTon] of cases){
   const r=await evaluate(u);
-  if(r.engineVersion!=='telegram-v1.2')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
+  if(r.engineVersion!=='telegram-v1.3')throw new Error(`${u}: wrong engine ${r.engineVersion}`);
   if(r.priceMinTon!==minTon||r.priceMaxTon!==maxTon)throw new Error(`${u}: TON ${r.priceMinTon}-${r.priceMaxTon}, expected ${minTon}-${maxTon}`);
   if(maxTon>0&&!(Number(r.priceMax)>0))throw new Error(`${u}: missing USD conversion`);
 }
@@ -64,5 +77,12 @@ const invalid=await evaluate('hello_');
 if(invalid.specialCase!=='invalid_username'||invalid.priceMinTon!==0||invalid.priceMaxTon!==0)throw new Error(`hello_: invalid edge underscore rule failed ${JSON.stringify(invalid)}`);
 const brand=await evaluate('adidas');
 if(brand.specialCase!=='global_brand'||brand.priceMin!==0||brand.priceMax!==0)throw new Error('Brand special case failed');
-console.log('PASS 18 Telegram valuation controls on telegram-v1.2');
+// A lost FX feed must never substitute an invented fixed $3/TON rate.
+Object.assign(globalThis.__sovaTonUsdCache,{rate:null,at:0,lastSuccessAt:0,source:'unavailable'});
+fxApiDown=true;
+const fxOutage=await evaluate('modest');
+if(fxOutage.priceMin!==null||fxOutage.priceMax!==null||fxOutage.tonUsdRate!==null||fxOutage.tonUsdSource!=='unavailable')
+  throw new Error('FX outage must result in null USD fields, not a stale invented rate');
+if(!(fxOutage.priceMaxTon>0))throw new Error('TON valuation must remain available without USD FX');
+console.log('PASS 21 Telegram valuation cases plus FX outage regression on telegram-v1.3');
 globalThis.fetch=originalFetch;
