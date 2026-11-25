@@ -1,6 +1,7 @@
 // Privacy-aware Telegram webhook for @ValuationAiBot. No username valuations are stored here.
 import crypto from 'node:crypto';
 import {recordEvent,isValuationAdmin} from './analytics.js';
+import {issueAdminCode} from './admin-auth.js';
 
 const APP_URL = process.env.PUBLIC_APP_URL || 'https://valuation.sovazone.com';
 function equalsSecret(value, secret) {
@@ -94,7 +95,12 @@ export async function handleUpdate(req, res, customStore, customRecordEvent) {
         await apiCall('sendMessage',{chat_id:chatId,text:'Telegram ID: '+String(chatId)});
       } else if(command==='stats'){
         if(isValuationAdmin(msg.from?.id)&&msg.from?.id===chatId){
-          await apiCall('sendMessage',{chat_id:chatId,text:lang?.startsWith('en')?'Private valuation statistics:':'Закрытая статистика Valuation AI:',
+          const code=await issueAdminCode(chatId);
+          await apiCall('sendMessage',{chat_id:chatId,
+            text:lang?.startsWith('en')
+              ?'Private analytics. Open inside Telegram, or sign in on your computer using this single-use code (valid 10 minutes):\n\n<code>'+code+'</code>\n\nNever share the code.'
+              :'Закрытая аналитика. Откройте панель в Telegram или войдите с компьютера по одноразовому коду (действует 10 минут):\n\n<code>'+code+'</code>\n\nНикому не передавайте этот код.',
+            parse_mode:'HTML',
             reply_markup:{inline_keyboard:[[{text:lang?.startsWith('en')?'Open statistics':'Открыть статистику',web_app:{url:APP_URL+'/admin.html'}}]]}});
         }else{
           await apiCall('sendMessage',{chat_id:chatId,text:lang?.startsWith('en')?'Administrator access only. Use /myid to view your Telegram ID.':'Доступ только администратору. Команда /myid покажет ваш Telegram ID.'});
