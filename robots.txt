@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /miniapp/
+Disallow: /valuation-miniapp/
 
 Sitemap: https://sovazone.com/sitemap.xml
 Sitemap: https://sovazone.com/en/sitemap.xml
