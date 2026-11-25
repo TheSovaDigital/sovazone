@@ -1,7 +1,7 @@
-const ENGINE_VERSION='telegram-v1.2';
+const ENGINE_VERSION='telegram-v1.3';
 const buckets=globalThis.__sovaTelegramValuationBuckets||(globalThis.__sovaTelegramValuationBuckets=new Map());
 const valuationCache=globalThis.__sovaTelegramValuationCache||(globalThis.__sovaTelegramValuationCache=new Map());
-const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:3,at:0,source:'fallback'});
+const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:null,at:0,lastSuccessAt:0,source:'unavailable'});
 
 const GLOBAL_BRANDS=new Set(['apple','nike','tesla','google','amazon','microsoft','instagram','facebook','tiktok','adidas','cocacola','samsung','youtube','netflix','spotify','bmw','mercedes','porsche','ferrari','gucci','chanel','rolex','nvidia','openai','mastercard']);
 
@@ -9,17 +9,17 @@ const MARKET_EVIDENCE=`
 You classify Telegram usernames for the SovaZone valuation engine. You do NOT set the final price. Return semantic category, demand score, quality score, liquidity and exactly three concise factors.
 
 The backend has a cleaned Fragment market layer from 15,626 historical sales. Treat sale prices as evidence, never ground truth.
-- 73.3% of raw sales were classified as technical/floor candidates. Very cheap purchases often reflect NFT conversion or low-information transactions and do not imply intrinsic resale value.
+- 73.3% of the older sample were classified as technical/floor candidates. Such purchases are evidence that many ordinary 5+ character usernames trade at very low prices. Some represent NFT conversion; do not automatically discard all cheap transactions or give weak names artificial premiums.
 - Frequent exact-price clusters are downweighted rather than treated as independent market prices.
-- 4-character clean collectible usernames are structurally scarce: the cleaned market has a strong cluster around 5,050 TON and a clean-market median around 5,923 TON. Four characters therefore deserve a structural premium even when the string is weak.
-- For 5+ characters, ordinary clean-market sales are concentrated around roughly 120-150 TON, but meaningless/random strings can have effectively no standalone resale value despite technical NFT-conversion purchases.
+- REAL 4-character collectible usernames are a separate scarce class: historical sales cluster near 5,050 TON. The tool cannot verify whether an entered 4-character string is an existing transferable collectible; treat this only as a conditional class benchmark.
+- For 5+ characters, do NOT use 120–150 TON as a universal floor. That figure came from a filtered subset of relatively expensive trades. A much larger on-chain sample shows most ordinary 5+ character sales close at 10 TON or less. Very weak, long, random, digit-suffixed, or underscore names have little independent resale demand.
 - High statistical outliers were quarantined and their NFT transfer histories checked. Do not use suspicious or unverified headline sales as direct calibration.
 - Examples with enough transfer history and no ownership cycle detected include trading 51,660 TON, monkey 26,686, white 8,105, moonbirds 7,500, glock 5,000, princess 4,166, phoenix 3,801, brand 3,000 and amazing 2,222. These show that genuinely attractive terms can trade far above ordinary medians, but a single transaction is not a fixed current value.
 - Examples such as weird 42,000 and jason 20,000 had ownership cycles near the recorded sale and must not be used as trusted price anchors. Other very large early sales without enough transfer history are also not trusted anchors.
 
 DEMAND SCORE
 Score standalone buyer demand from 0 to 100. It should measure how many real Telegram users/businesses would independently want the exact username, not how much one bidder once paid.
-0-20: random or almost no identity demand.
+0-20: random or almost no identity demand; classify unrecognizable strings as random even if pronounceable.
 21-40: weak/niche term.
 41-55: ordinary meaningful word/name with a limited buyer pool.
 56-70: useful, memorable term or common identity.
@@ -34,7 +34,9 @@ RULES
 - A short full word is usually stronger than a random string of the same length.
 - Diminutives, awkward transliterations and weak long phrases should be discounted.
 - Repetition and visually clean patterns can create collectible demand even without dictionary meaning.
-- Underscores are not comparable to the clean Fragment collectible dataset and should receive a very low demand score unless there is extraordinary reason.
+- Underscores and random letter-number suffixes sharply reduce buyer demand. Do not promote a weak username to premium because it is short, could hypothetically be a brand, or contains a generic English syllable.
+- Use premium/elite ONLY where there are many independently motivated buyers for this exact spelling. Default ordinary names, diminutives and niche transliterations to micro/low/medium rather than strong.
+- A common word is not automatically a high-value collectible; avoid conflating grammatical validity with real buyer demand.
 - Globally famous trademarks are special cases and should not receive an ordinary free-market score.
 - Do not copy any historical sale price into the score.
 
@@ -63,7 +65,7 @@ Calibration examples are classification references, not hardcoded prices:
 - love => strong / generic
 - pavel => elite / platform_identity because of the Telegram founder association
 - pasha => low / name
-- paris => micro / geography
+- paris => medium / geography (internationally known city, unlike ordinary obscure geography)
 - monkey => elite / animal
 - trading => medium / commercial
 - qzxvna => zero / random
@@ -110,31 +112,41 @@ function niceTon(n){
 
 function niceUsd(n){
   n=Math.max(0,Number(n)||0);
-  let step=10;
+  let step=1;
   if(n>=50000)step=5000;
   else if(n>=20000)step=1000;
   else if(n>=5000)step=500;
   else if(n>=1000)step=250;
   else if(n>=200)step=50;
+  else if(n>=50)step=10;
+  else if(n>=10)step=5;
   return Math.round(n/step)*step;
 }
 
 async function tonUsdRate(){
   const now=Date.now();
-  if(now-fxCache.at<30*60*1000&&fxCache.rate>0)return fxCache;
-  const urls=[
-    ['https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd','the-open-network']
+  if(now-fxCache.at<30*60*1000)return fxCache;
+  const sources=[
+    {url:'https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd',parse:d=>Number(d?.['the-open-network']?.usd),name:'coingecko'},
+    {url:'https://api.coinbase.com/v2/prices/TON-USD/spot',parse:d=>Number(d?.data?.amount),name:'coinbase'}
   ];
-  for(const [url,key] of urls){
+  for(const source of sources){
     try{
-      const r=await fetch(url,{headers:{Accept:'application/json'}});
+      const r=await fetch(source.url,{headers:{Accept:'application/json'}});
       if(!r.ok)continue;
       const data=await r.json();
-      const rate=Number(data&&data[key]&&data[key].usd);
-      if(Number.isFinite(rate)&&rate>0){fxCache.rate=rate;fxCache.at=now;fxCache.source='coingecko';return fxCache;}
+      const rate=source.parse(data);
+      if(Number.isFinite(rate)&&rate>0.05&&rate<100){
+        fxCache.rate=rate;fxCache.at=now;fxCache.lastSuccessAt=now;fxCache.source=source.name;
+        return fxCache;
+      }
     }catch{}
   }
-  fxCache.at=now;fxCache.source='fallback';
+  // Never invent a fixed USD conversion when providers fail.
+  if(Number.isFinite(fxCache.rate)&&fxCache.rate>0&&now-fxCache.lastSuccessAt<6*60*60*1000){
+    fxCache.at=now;fxCache.source='recent_cache';return fxCache;
+  }
+  fxCache.rate=null;fxCache.at=now;fxCache.source='unavailable';
   return fxCache;
 }
 
@@ -196,37 +208,65 @@ function legacyTier(score){
 }
 
 function tierBand(tier){
+  // Indicative current buyer-demand ranges in TON, NOT listing prices or an NFT conversion fee.
+  // Low-end tiers include cheap Fragment sales instead of excluding them from calibration.
   if(tier==='zero')return [0,0];
-  if(tier==='micro')return [500,1000];
-  if(tier==='low')return [1000,3000];
-  if(tier==='medium')return [2000,5000];
-  if(tier==='strong')return [5000,10000];
-  if(tier==='premium')return [10000,20000];
-  if(tier==='elite')return [20000,50000];
+  if(tier==='micro')return [0,10];
+  if(tier==='low')return [5,30];
+  if(tier==='medium')return [20,120];
+  if(tier==='strong')return [100,600];
+  if(tier==='premium')return [500,3000];
+  if(tier==='elite')return [3000,12000];
   return [0,0];
 }
 
+function cappedTier(tier,score){
+  const levels=['zero','micro','low','medium','strong','premium','elite'];
+  const chosen=Math.max(0,levels.indexOf(tier));
+  const ceiling=score<25?1:score<45?2:score<60?3:score<75?4:score<88?5:6;
+  return levels[Math.min(chosen,ceiling)];
+}
+
 function telegramRange(username,classification){
-  const lower=username.toLowerCase(),len=lower.length,score=Number(classification.demandScore)||0,code=classification.categoryCode;
-  const tier=classification.marketTier||legacyTier(score);
+  const lower=username.toLowerCase(),len=lower.length;
+  const score=Math.max(0,Math.min(100,Number(classification.demandScore)||0));
+  const code=classification.categoryCode;
+  const tier=cappedTier(classification.marketTier||legacyTier(score),score);
   const archetype=classification.archetype||'generic';
 
-  if(lower.includes('_'))return {min:0,max:30,note:'underscore'};
-  if(code==='random'&&tier==='zero')return {min:0,max:0,note:'random'};
-
-  if(code==='first_name'&&tier==='strong')return {min:5000,max:15000,note:'strong-name'};
-
-  // Four-character collectible scarcity is structural, but premium semantics may move above the floor.
+  if(lower.includes('_'))return {min:0,max:5,note:'underscore'};
+  // 4-character names have a separate scarcity market ONLY if they exist as collectibles.
   if(len===4){
     if(tier==='premium')return {min:10000,max:20000,note:'four-char-premium'};
     if(tier==='elite')return {min:20000,max:50000,note:'four-char-elite'};
-    return {min:5000,max:10000,note:'four-char-floor'};
+    return {min:5000,max:10000,note:'four-char-collectible'};
   }
 
-  if(archetype==='platform_identity'&&tier==='elite')return {min:20000,max:50000,note:'platform-identity'};
-  if(archetype==='animal'&&tier==='elite')return {min:30000,max:50000,note:'elite-animal'};
-  if(archetype==='finance'&&(tier==='premium'||tier==='elite'))return {min:10000,max:30000,note:'finance-premium'};
-  if(archetype==='commercial'&&tier==='medium')return {min:3000,max:5000,note:'commercial-medium'};
+  if(code==='random'||archetype==='random'){
+    return {min:0,max:tier==='zero'?0:5,note:'random'};
+  }
+  // Arbitrary alphanumeric tails and longer plain numbers are not scarce.
+  if(/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]+$/.test(lower)&&code!=='pattern'){
+    return {min:0,max:20,note:'alphanumeric'};
+  }
+  if(/^\d{5,}$/.test(lower)){
+    if(/^([0-9])\1{4,}$/.test(lower))return {min:100,max:600,note:'numeric-repeat'};
+    if('0123456789'.includes(lower)||'9876543210'.includes(lower))return {min:50,max:300,note:'numeric-sequence'};
+    return {min:0,max:20,note:'numeric-generic'};
+  }
+
+  // Explicit repetition has genuine but narrow collector appeal.
+  if(code==='pattern'&&/^([a-z0-9])\1{4,}$/.test(lower)){
+    return {min:100,max:600,note:'pattern-repeat'};
+  }
+  if(code==='pattern'&&len>=5&&len<=8&&lower===lower.split('').reverse().join('')){
+    return {min:20,max:120,note:'pattern-palindrome'};
+  }
+  if(tier==='zero')return {min:0,max:0,note:'zero'};
+  if(archetype==='platform_identity'&&tier==='elite')return {min:10000,max:30000,note:'platform-identity'};
+  if(archetype==='animal'&&tier==='elite')return {min:10000,max:30000,note:'elite-animal'};
+  if(archetype==='finance'&&tier==='premium')return {min:1000,max:7000,note:'finance-premium'};
+  if(archetype==='finance'&&tier==='elite')return {min:5000,max:25000,note:'finance-elite'};
 
   const [min,max]=tierBand(tier);
   return {min,max,note:'semantic-tier'};
@@ -250,16 +290,17 @@ function brandResponse(username,lang,rate){
 function applyRange(username,classification,lang,fx){
   const ton=telegramRange(username,classification);
   const minTon=niceTon(ton.min),maxTon=niceTon(ton.max);
-  const minUsd=niceUsd(minTon*fx.rate),maxUsd=niceUsd(maxTon*fx.rate);
+  const hasRate=Number.isFinite(fx.rate)&&fx.rate>0;
+  const minUsd=hasRate?niceUsd(minTon*fx.rate):null,maxUsd=hasRate?niceUsd(maxTon*fx.rate):null;
   const len=username.length;
   let factors=Array.isArray(classification.factors)?classification.factors.slice(0,3):[];
   if(len===4&&factors.length){
-    factors[0]={title:lang==='en'?'Four-character scarcity':'Редкость 4 символов',text:lang==='en'?'Clean four-character collectible usernames have a strong Fragment scarcity floor; mass 5,050 TON sales are treated as structural evidence, not as semantic price truth.':'Чистые 4-символьные collectible username имеют сильный минимум редкости на Fragment; массовые сделки по 5 050 TON используются как структурный ориентир, а не как истинная цена смысла ника.'};
-  }else if(ton.note==='random'&&factors.length){
-    factors[0]={title:lang==='en'?'No standalone demand':'Нет самостоятельного спроса',text:lang==='en'?'Cheap Fragment purchases of meaningless names are treated mainly as NFT-conversion evidence, not resale value.':'Дешёвые покупки бессмысленных ников на Fragment учитываются прежде всего как оформление NFT, а не как их перепродажная стоимость.'};
+    factors[0]={title:lang==='en'?'Four-character scarcity':'Редкость 4 символов',text:lang==='en'?'Existing four-character collectibles have their own scarcity market. This tool has not verified whether this exact name is a transferable collectible.':'Существующие четырёхсимвольные коллекционные ники имеют отдельный рынок редкости. Сервис не проверял, существует ли этот ник как передаваемый NFT.'};
+  }else if(['random','underscore','alphanumeric','numeric-generic'].includes(ton.note)&&factors.length){
+    factors[0]={title:lang==='en'?'No standalone demand':'Нет самостоятельного спроса',text:lang==='en'?'For weak usernames we use the low end of the market, not filtered expensive-sale medians or a generic scarcity premium.':'Для слабых ников используются нижние уровни рынка, а не медиана дорогих сделок или искусственная премия за длину.'};
   }
   while(factors.length<3)factors.push({title:lang==='en'?'Market factor':'Рыночный фактор',text:lang==='en'?'Included in the cleaned Fragment market model.':'Учтён в очищенной модели рынка Fragment.'});
-  return {username,platform:'telegram',engineVersion:ENGINE_VERSION,priceMin:minUsd,priceMax:maxUsd,priceMinTon:minTon,priceMaxTon:maxTon,tonUsdRate:Number(fx.rate.toFixed(4)),tonUsdSource:fx.source,openEnded:false,uncertain:Boolean(classification.uncertain),specialCase:'none',category:classification.category,categoryCode:classification.categoryCode,qualityScore:Math.max(0,Math.min(100,Math.round(Number(classification.qualityScore)||0))),demandScore:Math.max(0,Math.min(100,Math.round(Number(classification.demandScore)||0))),liquidity:['low','medium','high'].includes(classification.liquidity)?classification.liquidity:'low',liquidityLabel:localizedLiquidity(classification.liquidity,lang),factors,disclaimer:lang==='en'?'Indicative SovaZone estimate based on a cleaned Fragment market model; historical sales are evidence, not guaranteed current prices.':'Ориентировочная оценка SovaZone по очищенной модели рынка Fragment; исторические сделки используются как данные, а не как гарантированная текущая цена.'};
+  return {username,platform:'telegram',engineVersion:ENGINE_VERSION,priceMin:minUsd,priceMax:maxUsd,priceMinTon:minTon,priceMaxTon:maxTon,tonUsdRate:hasRate?Number(fx.rate.toFixed(4)):null,tonUsdSource:fx.source,openEnded:false,uncertain:true,specialCase:'none',category:classification.category,categoryCode:classification.categoryCode,qualityScore:Math.max(0,Math.min(100,Math.round(Number(classification.qualityScore)||0))),demandScore:Math.max(0,Math.min(100,Math.round(Number(classification.demandScore)||0))),liquidity:ton.max<=30?'low':(['low','medium','high'].includes(classification.liquidity)?classification.liquidity:'low'),liquidityLabel:localizedLiquidity(ton.max<=30?'low':classification.liquidity,lang),factors,disclaimer:lang==='en'?'Indicative SovaZone estimate, not a guaranteed sale price. Exact NFT/ownership status and current bids were not verified. USD may be unavailable when the live FX source fails.':'Ориентировочная оценка, не гарантированная цена сделки. Статус NFT, владение и текущие ставки не проверялись. Если актуальный курс недоступен, сумма в USD не показывается.'};
 }
 
 export default async function handler(req,res){
