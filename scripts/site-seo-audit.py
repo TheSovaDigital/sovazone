@@ -7,7 +7,7 @@ from urllib.parse import urlparse, unquote
 import re, json, xml.etree.ElementTree as ET
 
 ROOT=Path(".")
-files=sorted(x for x in ROOT.rglob("*.html") if not any(z in x.parts for z in (".git","node_modules")))
+files=sorted(x for x in ROOT.rglob("*.html") if not any(z in x.parts for z in (".git","node_modules","miniapp","valuation-miniapp")))
 public=[p for p in files if p.name not in ("header.html","footer.html","404.html","post.html") and p.parts[0] not in ("admin",) and not p.name.startswith(("google","pinterest","yandex_","zen_"))]
 fileset={p.as_posix() for p in files}
 assets={p.as_posix() for p in ROOT.rglob("*") if p.is_file() and ".git" not in p.parts}
