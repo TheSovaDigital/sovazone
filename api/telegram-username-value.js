@@ -1,8 +1,12 @@
-const ENGINE_VERSION='telegram-v1.3';
+const ENGINE_VERSION='telegram-v1.4';
 const buckets=globalThis.__sovaTelegramValuationBuckets||(globalThis.__sovaTelegramValuationBuckets=new Map());
 const valuationCache=globalThis.__sovaTelegramValuationCache||(globalThis.__sovaTelegramValuationCache=new Map());
 const fxCache=globalThis.__sovaTonUsdCache||(globalThis.__sovaTonUsdCache={rate:null,at:0,lastSuccessAt:0,source:'unavailable'});
 
+// The 2026-11-24 4-letter market benchmark is the lower quartile of sales >=100 TON,
+ // not the absolute Fragment listing minimum or a live confirmed bid.
+const FOUR_CHAR_REFERENCE_TON=6500;
+const surnameCache=globalThis.__sovaSurnameCache||(globalThis.__sovaSurnameCache=new Map());
 const GLOBAL_BRANDS=new Set(['apple','nike','tesla','google','amazon','microsoft','instagram','facebook','tiktok','adidas','cocacola','samsung','youtube','netflix','spotify','bmw','mercedes','porsche','ferrari','gucci','chanel','rolex','nvidia','openai','mastercard']);
 
 const MARKET_EVIDENCE=`
@@ -11,7 +15,7 @@ You classify Telegram usernames for the SovaZone valuation engine. You do NOT se
 The backend has a cleaned Fragment market layer from 15,626 historical sales. Treat sale prices as evidence, never ground truth.
 - 73.3% of the older sample were classified as technical/floor candidates. Such purchases are evidence that many ordinary 5+ character usernames trade at very low prices. Some represent NFT conversion; do not automatically discard all cheap transactions or give weak names artificial premiums.
 - Frequent exact-price clusters are downweighted rather than treated as independent market prices.
-- REAL 4-character collectible usernames are a separate scarce class: historical sales cluster near 5,050 TON. The tool cannot verify whether an entered 4-character string is an existing transferable collectible; treat this only as a conditional class benchmark.
+- Clean four-character usernames have their own collectible scarcity class. A conservative 6,500 TON benchmark uses sales data dated 2026-11-24 (4-letter names, sales over 100 TON). It is a benchmark, NOT a live or universal Fragment minimum.
 - For 5+ characters, do NOT use 120–150 TON as a universal floor. That figure came from a filtered subset of relatively expensive trades. A much larger on-chain sample shows most ordinary 5+ character sales close at 10 TON or less. Very weak, long, random, digit-suffixed, or underscore names have little independent resale demand.
 - High statistical outliers were quarantined and their NFT transfer histories checked. Do not use suspicious or unverified headline sales as direct calibration.
 - Examples with enough transfer history and no ownership cycle detected include trading 51,660 TON, monkey 26,686, white 8,105, moonbirds 7,500, glock 5,000, princess 4,166, phoenix 3,801, brand 3,000 and amazing 2,222. These show that genuinely attractive terms can trade far above ordinary medians, but a single transaction is not a fixed current value.
@@ -35,6 +39,9 @@ RULES
 - Diminutives, awkward transliterations and weak long phrases should be discounted.
 - Repetition and visually clean patterns can create collectible demand even without dictionary meaning.
 - Underscores and random letter-number suffixes sharply reduce buyer demand. Do not promote a weak username to premium because it is short, could hypothetically be a brand, or contains a generic English syllable.
+- First names carry a special USD band of $500–10,000, depending on demand, and surnames carry $300–5,000 ONLY when independent evidence confirms it is a surname.
+- Do NOT guess or invent surname origin or pronounceability. The backend verifies suspected surnames with Wikidata (instance of family name Q101352); without verification it explicitly declines surname categorization.
+- For globally obscure words or genuine two-recognizable-word combinations of 5+ characters, use the limited $5–100 USD band; do not misclassify an established single word as a compound.
 - Use premium/elite ONLY where there are many independently motivated buyers for this exact spelling. Default ordinary names, diminutives and niche transliterations to micro/low/medium rather than strong.
 - A common word is not automatically a high-value collectible; avoid conflating grammatical validity with real buyer demand.
 - Globally famous trademarks are special cases and should not receive an ordinary free-market score.
@@ -50,6 +57,8 @@ Also classify one deterministic marketTier. This is a demand class, not a price 
 - premium: broad memorable English identity term with many independent buyers.
 - elite: exceptional iconic identity or direct Telegram-specific identity association; use sparingly.
 
+WORD STRUCTURE
+Return wordStructure as one of none, single_word, two_word_compound, obscure_word. Two-word means two distinct recognizable standalone words, not an ordinary established single dictionary word. Use obscure_word for demonstrably niche vocabulary, not merely unfamiliar foreign words.
 ARCHETYPE
 Return archetype as one of generic, greeting, commercial, finance, animal, platform_identity, name, geography, pattern, random. Use platform_identity only when the exact word/name has an unusually strong direct association with Telegram itself.
 
@@ -207,71 +216,97 @@ function legacyTier(score){
   return 'elite';
 }
 
-function tierBand(tier){
-  // Indicative current buyer-demand ranges in TON, NOT listing prices or an NFT conversion fee.
-  // Low-end tiers include cheap Fragment sales instead of excluding them from calibration.
+// All ordinary tiers are denominated in USD and converted at the current TON/USD rate.
+function tierBandUsd(tier){
   if(tier==='zero')return [0,0];
-  if(tier==='micro')return [0,10];
-  if(tier==='low')return [5,30];
-  if(tier==='medium')return [20,120];
-  if(tier==='strong')return [100,600];
-  if(tier==='premium')return [500,3000];
-  if(tier==='elite')return [3000,12000];
-  return [0,0];
+  if(tier==='micro')return [0,50];
+  if(tier==='low')return [5,100];
+  if(tier==='medium')return [100,2000];
+  if(tier==='strong')return [500,5000];
+  if(tier==='premium'||tier==='elite')return [1000,30000];
+  return [0,50];
 }
-
 function cappedTier(tier,score){
   const levels=['zero','micro','low','medium','strong','premium','elite'];
   const chosen=Math.max(0,levels.indexOf(tier));
   const ceiling=score<25?1:score<45?2:score<60?3:score<75?4:score<88?5:6;
   return levels[Math.min(chosen,ceiling)];
 }
-
-function telegramRange(username,classification){
-  const lower=username.toLowerCase(),len=lower.length;
-  const score=Math.max(0,Math.min(100,Number(classification.demandScore)||0));
-  const code=classification.categoryCode;
-  const tier=cappedTier(classification.marketTier||legacyTier(score),score);
-  const archetype=classification.archetype||'generic';
-
-  if(lower.includes('_'))return {min:0,max:5,note:'underscore'};
-  // 4-character names have a separate scarcity market ONLY if they exist as collectibles.
-  if(len===4){
-    if(tier==='premium')return {min:10000,max:20000,note:'four-char-premium'};
-    if(tier==='elite')return {min:20000,max:50000,note:'four-char-elite'};
-    return {min:5000,max:10000,note:'four-char-collectible'};
-  }
-
-  if(code==='random'||archetype==='random'){
-    return {min:0,max:tier==='zero'?0:5,note:'random'};
-  }
-  // Arbitrary alphanumeric tails and longer plain numbers are not scarce.
-  if(/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]+$/.test(lower)&&code!=='pattern'){
-    return {min:0,max:20,note:'alphanumeric'};
-  }
-  if(/^\d{5,}$/.test(lower)){
-    if(/^([0-9])\1{4,}$/.test(lower))return {min:100,max:600,note:'numeric-repeat'};
-    if('0123456789'.includes(lower)||'9876543210'.includes(lower))return {min:50,max:300,note:'numeric-sequence'};
-    return {min:0,max:20,note:'numeric-generic'};
-  }
-
-  // Explicit repetition has genuine but narrow collector appeal.
-  if(code==='pattern'&&/^([a-z0-9])\1{4,}$/.test(lower)){
-    return {min:100,max:600,note:'pattern-repeat'};
-  }
-  if(code==='pattern'&&len>=5&&len<=8&&lower===lower.split('').reverse().join('')){
-    return {min:20,max:120,note:'pattern-palindrome'};
-  }
-  if(tier==='zero')return {min:0,max:0,note:'zero'};
-  if(archetype==='platform_identity'&&tier==='elite')return {min:10000,max:30000,note:'platform-identity'};
-  if(archetype==='animal'&&tier==='elite')return {min:10000,max:30000,note:'elite-animal'};
-  if(archetype==='finance'&&tier==='premium')return {min:1000,max:7000,note:'finance-premium'};
-  if(archetype==='finance'&&tier==='elite')return {min:5000,max:25000,note:'finance-elite'};
-
-  const [min,max]=tierBand(tier);
-  return {min,max,note:'semantic-tier'};
+function firstNameUsd(score){
+  if(score<60)return [500,1500];
+  if(score<75)return [800,3000];
+  if(score<90)return [1500,6500];
+  return [3500,10000];
 }
-
+function surnameUsd(score){
+  if(score<60)return [300,800];
+  if(score<75)return [400,1500];
+  if(score<90)return [800,3000];
+  return [1800,5000];
+}
+async function verifySurname(username){
+  const key=username.toLowerCase(),now=Date.now(),prev=surnameCache.get(key);
+  if(prev&&now-prev.at<24*60*60*1000)return prev.result;
+  let result={verified:false,source:null};
+  if(!/^[a-z]{4,32}$/.test(key))return result;
+  try{
+    for(const language of ['en','ru']){
+      const url='https://www.wikidata.org/w/api.php?'+new URLSearchParams({action:'wbsearchentities',search:username,language,format:'json',type:'item',limit:'10'});
+      const response=await fetch(url,{headers:{Accept:'application/json','User-Agent':'SovaZone-Surname-Verification/1.4'},signal:AbortSignal.timeout(2500)});
+      if(!response.ok)continue;
+      const hits=((await response.json()).search||[]).filter(x=>String(x.label||'').toLowerCase()===key&&/^Q[0-9]+$/.test(x.id)).slice(0,8);
+      if(!hits.length)continue;
+      const durl='https://www.wikidata.org/w/api.php?'+new URLSearchParams({action:'wbgetentities',ids:hits.map(x=>x.id).join('|'),props:'claims',format:'json'});
+      const details=await fetch(durl,{headers:{Accept:'application/json','User-Agent':'SovaZone-Surname-Verification/1.4'},signal:AbortSignal.timeout(2500)});
+      if(!details.ok)continue;
+      const entries=(await details.json()).entities||{};
+      for(const hit of hits){
+        const statements=entries[hit.id]?.claims?.P31||[];
+        if(statements.some(x=>x.mainsnak?.datavalue?.value?.id==='Q101352')){
+          result={verified:true,source:'https://www.wikidata.org/wiki/'+hit.id};break;
+        }
+      }
+      if(result.verified)break;
+    }
+  }catch{/* Missing independent verification must not become a surname premium. */}
+  if(surnameCache.size>2500)surnameCache.clear();
+  surnameCache.set(key,{at:now,result});
+  return result;
+}
+function telegramRange(username,c,surnameEvidence){
+  const lower=username.toLowerCase(),len=lower.length,score=Math.max(0,Math.min(100,Number(c.demandScore)||0));
+  const tier=cappedTier(c.marketTier||legacyTier(score),score);
+  if(lower.includes('_'))return {currency:'usd',min:0,max:0,note:'symbol-zero'};
+  if(len===4){
+    if(tier==='elite')return {currency:'ton',min:20000,max:50000,note:'four-char-elite'};
+    if(tier==='premium')return {currency:'ton',min:10000,max:30000,note:'four-char-premium'};
+    if(tier==='strong')return {currency:'ton',min:FOUR_CHAR_REFERENCE_TON,max:15000,note:'four-char-strong'};
+    return {currency:'ton',min:FOUR_CHAR_REFERENCE_TON,max:8500,note:'four-char-floor'};
+  }
+  if(c.categoryCode==='random'||c.archetype==='random'||tier==='zero')return {currency:'usd',min:0,max:0,note:'random-zero'};
+  if(/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]+$/.test(lower)&&c.categoryCode!=='pattern')return {currency:'usd',min:0,max:0,note:'alphanumeric-zero'};
+  if(/^\d{5,}$/.test(lower)){
+    if(/^([0-9])\1{4,}$/.test(lower)||'0123456789'.includes(lower)||'9876543210'.includes(lower))
+      return {currency:'usd',min:5,max:100,note:'numeric-pattern'};
+    return {currency:'usd',min:0,max:0,note:'numeric-zero'};
+  }
+  if(c.categoryCode==='first_name'){
+    const [min,max]=firstNameUsd(score);
+    return {currency:'usd',min,max,note:'first-name'};
+  }
+  if(c.categoryCode==='surname'){
+    if(surnameEvidence?.verified){
+      const [min,max]=surnameUsd(score);return {currency:'usd',min,max,note:'verified-surname'};
+    }
+    return {currency:'usd',min:0,max:50,note:'unverified-surname'};
+  }
+  if(c.wordStructure==='two_word_compound'||c.wordStructure==='obscure_word')
+    return {currency:'usd',min:5,max:100,note:c.wordStructure};
+  if(c.categoryCode==='pattern'&&/^([a-z0-9])\1{4,}$/.test(lower))
+    return {currency:'usd',min:len===5?100:5,max:len===5?500:100,note:'pattern'};
+  const [min,max]=tierBandUsd(tier);
+  return {currency:'usd',min,max,note:'tier'};
+}
 function localizedLiquidity(value,lang){
   if(lang==='en')return value[0].toUpperCase()+value.slice(1);
   return value==='high'?'Высокая':value==='medium'?'Средняя':'Низкая';
@@ -287,22 +322,44 @@ function brandResponse(username,lang,rate){
   return {username,platform:'telegram',engineVersion:ENGINE_VERSION,priceMin:0,priceMax:0,priceMinTon:0,priceMaxTon:0,tonUsdRate:rate,openEnded:false,uncertain:true,specialCase:'global_brand',category:lang==='en'?'Global trademark':'Глобальный товарный знак',categoryCode:'special',qualityScore:95,liquidity:'low',liquidityLabel:localizedLiquidity('low',lang),factors:lang==='en'?[{title:'Trademark',text:'An exact global trademark is not treated as an ordinary freely tradable username.'},{title:'Market evidence',text:'Headline Fragment transactions for famous brands are not used as normal comparables.'},{title:'Risk',text:'Legal, platform and buyer-specific factors make a generic market estimate misleading.'}]:[{title:'Товарный знак',text:'Точное совпадение с глобальным брендом не оценивается как обычный свободно торгуемый username.'},{title:'Данные рынка',text:'Громкие сделки Fragment с известными брендами не используются как обычные аналоги.'},{title:'Риск',text:'Юридические, платформенные и индивидуальные факторы делают обычную рыночную оценку некорректной.'}],disclaimer:lang==='en'?'Special case: no ordinary SovaZone market range is shown.':'Особый случай: обычный рыночный диапазон SovaZone не показывается.'};
 }
 
-function applyRange(username,classification,lang,fx){
-  const ton=telegramRange(username,classification);
-  const minTon=niceTon(ton.min),maxTon=niceTon(ton.max);
-  const hasRate=Number.isFinite(fx.rate)&&fx.rate>0;
-  const minUsd=hasRate?niceUsd(minTon*fx.rate):null,maxUsd=hasRate?niceUsd(maxTon*fx.rate):null;
-  const len=username.length;
+function applyRange(username,classification,lang,fx,surnameEvidence){
+  const range=telegramRange(username,classification,surnameEvidence);
+  const fxAvailable=Number.isFinite(fx.rate)&&fx.rate>0;
+  const four=range.currency==='ton';
+  const minUsd=four?(fxAvailable?niceUsd(range.min*fx.rate):null):range.min;
+  const maxUsd=four?(fxAvailable?niceUsd(range.max*fx.rate):null):range.max;
+  const minTon=four?range.min:(fxAvailable?Math.round(range.min/fx.rate):null);
+  const maxTon=four?range.max:(fxAvailable?Math.round(range.max/fx.rate):null);
   let factors=Array.isArray(classification.factors)?classification.factors.slice(0,3):[];
-  if(len===4&&factors.length){
-    factors[0]={title:lang==='en'?'Four-character scarcity':'Редкость 4 символов',text:lang==='en'?'Existing four-character collectibles have their own scarcity market. This tool has not verified whether this exact name is a transferable collectible.':'Существующие четырёхсимвольные коллекционные ники имеют отдельный рынок редкости. Сервис не проверял, существует ли этот ник как передаваемый NFT.'};
-  }else if(['random','underscore','alphanumeric','numeric-generic'].includes(ton.note)&&factors.length){
-    factors[0]={title:lang==='en'?'No standalone demand':'Нет самостоятельного спроса',text:lang==='en'?'For weak usernames we use the low end of the market, not filtered expensive-sale medians or a generic scarcity premium.':'Для слабых ников используются нижние уровни рынка, а не медиана дорогих сделок или искусственная премия за длину.'};
+  if(four){
+    factors[0]={title:lang==='en'?'Four-character scarcity benchmark':'Редкость четырёх символов',
+      text:lang==='en'?'The 6,500 TON benchmark is from 24 Nov 2026 4-letter sales >=100 TON. It is neither a live Fragment minimum nor a confirmed sale for this particular handle.':'Ориентир 6 500 TON взят из выборки сделок четырёхбуквенных ников от 100 TON за 24.11.2026, не является текущим минимумом Fragment или подтверждённой ценой этого ника.'};
+  }else if(range.note==='verified-surname'){
+    factors[0]={title:lang==='en'?'Independently verified surname':'Независимо подтверждённая фамилия',
+      text:(lang==='en'?'Surname record: ':'Запись о фамилии: ')+surnameEvidence.source};
+  }else if(range.note==='unverified-surname'){
+    factors=[
+      {title:lang==='en'?'Unverified surname':'Фамилия не подтверждена',text:lang==='en'?'An independent surname record was not found; no surname premium is applied.':'Независимая запись о фамилии не найдена, надбавка за фамилию не применяется.'},
+      {title:lang==='en'?'Limited evidence':'Недостаточно данных',text:lang==='en'?'The spelling has not been shown to have a broad identity buyer pool.':'Не подтверждён широкий спрос на это написание.'},
+      {title:lang==='en'?'Conditional estimate':'Условная оценка',text:lang==='en'?'The term is treated as an unverified identifier, not a confirmed surname.':'Обозначение оценивается без предположений о происхождении фамилии.'}
+    ];
+  }else if(range.note.endsWith('zero')){
+    factors[0]={title:lang==='en'?'No independent demand':'Нет самостоятельного спроса',text:lang==='en'?'Symbols, arbitrary numbers and meaningless combinations do not receive artificial collectible premiums.':'Символы, произвольные цифры и бессмысленные сочетания не получают искусственной коллекционной премии.'};
+  }else if(['two_word_compound','obscure_word'].includes(range.note)){
+    factors[0]={title:lang==='en'?'Niche buyer pool':'Узкая аудитория',text:lang==='en'?'The unusual word or two-word combination has limited independent demand.':'Редкое слово или комбинация двух слов имеет ограниченный круг покупателей.'};
   }
-  while(factors.length<3)factors.push({title:lang==='en'?'Market factor':'Рыночный фактор',text:lang==='en'?'Included in the cleaned Fragment market model.':'Учтён в очищенной модели рынка Fragment.'});
-  return {username,platform:'telegram',engineVersion:ENGINE_VERSION,priceMin:minUsd,priceMax:maxUsd,priceMinTon:minTon,priceMaxTon:maxTon,tonUsdRate:hasRate?Number(fx.rate.toFixed(4)):null,tonUsdSource:fx.source,openEnded:false,uncertain:true,specialCase:'none',category:classification.category,categoryCode:classification.categoryCode,qualityScore:Math.max(0,Math.min(100,Math.round(Number(classification.qualityScore)||0))),demandScore:Math.max(0,Math.min(100,Math.round(Number(classification.demandScore)||0))),liquidity:ton.max<=30?'low':(['low','medium','high'].includes(classification.liquidity)?classification.liquidity:'low'),liquidityLabel:localizedLiquidity(ton.max<=30?'low':classification.liquidity,lang),factors,disclaimer:lang==='en'?'Indicative SovaZone estimate, not a guaranteed sale price. Exact NFT/ownership status and current bids were not verified. USD may be unavailable when the live FX source fails.':'Ориентировочная оценка, не гарантированная цена сделки. Статус NFT, владение и текущие ставки не проверялись. Если актуальный курс недоступен, сумма в USD не показывается.'};
+  while(factors.length<3)factors.push({title:lang==='en'?'Market factor':'Рыночный фактор',text:lang==='en'?'Included in the indicative assessment.':'Учтён в ориентировочной оценке.'});
+  const liquidity=range.currency==='usd'&&range.max<=100?'low':(['low','medium','high'].includes(classification.liquidity)?classification.liquidity:'low');
+  const category=range.note==='unverified-surname'?(lang==='en'?'Surname not confirmed':'Фамилия не подтверждена'):range.note==='verified-surname'?(lang==='en'?'Verified surname':'Подтверждённая фамилия'):classification.category;
+  return {username,platform:'telegram',engineVersion:ENGINE_VERSION,priceMin:minUsd,priceMax:maxUsd,priceMinTon:minTon,priceMaxTon:maxTon,
+    tonUsdRate:fxAvailable?Number(fx.rate.toFixed(4)):null,tonUsdSource:fx.source,
+    openEnded:false,uncertain:true,specialCase:'none',category,categoryCode:range.note==='unverified-surname'?'unverified':classification.categoryCode,
+    qualityScore:Math.max(0,Math.min(100,Math.round(Number(classification.qualityScore)||0))),demandScore:Math.max(0,Math.min(100,Math.round(Number(classification.demandScore)||0))),
+    liquidity,liquidityLabel:localizedLiquidity(liquidity,lang),factors,
+    surnameEvidenceUrl:surnameEvidence?.verified?surnameEvidence.source:null,
+    fourCharReferenceAsOf:four?'2026-11-24':null,
+    disclaimer:lang==='en'?'Indicative estimate, not a guaranteed sale. Four-character benchmarks refer to a dated selection of sales, not the absolute Fragment listing minimum. Exact NFT status and bids were not verified.':'Ориентировочная оценка, не гарантия сделки. База для четырёх символов отражает датированную выборку продаж, а не абсолютный минимум Fragment. Точный статус NFT и ставки не проверялись.'};
 }
-
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
   res.setHeader('X-Sova-Engine-Version',ENGINE_VERSION);
@@ -326,13 +383,13 @@ export default async function handler(req,res){
   const brand=brandResponse(username,lang,fx.rate);
   if(brand)return res.status(200).json(brand);
 
-  const cacheKey=`${ENGINE_VERSION}:${lang}:${username.toLowerCase()}:${Math.round(fx.rate*100)/100}`;
+  const cacheKey=`${ENGINE_VERSION}:${lang}:${username.toLowerCase()}:${fx.rate===null?'no-fx':Math.round(fx.rate*100)/100}`;
   const cached=valuationCache.get(cacheKey);
   if(cached)return res.status(200).json(cached);
   if(rateLimited(req))return res.status(429).json({error:lang==='en'?'Too many estimates. Try again later.':'Слишком много оценок. Попробуйте позже.'});
   if(!process.env.OPENAI_API_KEY)return res.status(503).json({error:lang==='en'?'Valuation service is not connected yet.':'Сервис оценки ещё не подключён.'});
 
-  const schema={type:'object',additionalProperties:false,properties:{category:{type:'string'},categoryCode:{type:'string',enum:['english_word','russian_word_translit','other_language_word','first_name','surname','geography','numeric','pattern','leetspeak','abbreviation','random']},marketTier:{type:'string',enum:['zero','micro','low','medium','strong','premium','elite']},archetype:{type:'string',enum:['generic','greeting','commercial','finance','animal','platform_identity','name','geography','pattern','random']},demandScore:{type:'integer',minimum:0,maximum:100},qualityScore:{type:'integer',minimum:0,maximum:100},liquidity:{type:'string',enum:['low','medium','high']},uncertain:{type:'boolean'},factors:{type:'array',minItems:3,maxItems:3,items:{type:'object',additionalProperties:false,properties:{title:{type:'string'},text:{type:'string'}},required:['title','text']}}},required:['category','categoryCode','marketTier','archetype','demandScore','qualityScore','liquidity','uncertain','factors']};
+  const schema={type:'object',additionalProperties:false,properties:{category:{type:'string'},categoryCode:{type:'string',enum:['english_word','russian_word_translit','other_language_word','first_name','surname','geography','numeric','pattern','leetspeak','abbreviation','random']},marketTier:{type:'string',enum:['zero','micro','low','medium','strong','premium','elite']},archetype:{type:'string',enum:['generic','greeting','commercial','finance','animal','platform_identity','name','geography','pattern','random']},wordStructure:{type:'string',enum:['none','single_word','two_word_compound','obscure_word']},demandScore:{type:'integer',minimum:0,maximum:100},qualityScore:{type:'integer',minimum:0,maximum:100},liquidity:{type:'string',enum:['low','medium','high']},uncertain:{type:'boolean'},factors:{type:'array',minItems:3,maxItems:3,items:{type:'object',additionalProperties:false,properties:{title:{type:'string'},text:{type:'string'}},required:['title','text']}}},required:['category','categoryCode','marketTier','archetype','wordStructure','demandScore','qualityScore','liquidity','uncertain','factors']};
   const languageRule=lang==='en'?'Return category and factors in concise natural English.':'Верни category и факторы на коротком естественном русском языке.';
   const signals={length:username.length,hasUnderscore:username.includes('_'),allNumeric:/^\d+$/.test(username),lettersOnly:/^[a-z]+$/i.test(username),uniqueChars:new Set(username.toLowerCase()).size};
   const requestBody={model:process.env.VALUATION_MODEL||'gpt-5.6-luna',store:false,reasoning:{effort:'none'},temperature:0,instructions:MARKET_EVIDENCE+'\n'+languageRule,input:`Classify Telegram username @${username}. Deterministic signals: ${JSON.stringify(signals)}. Do not estimate price; only classify demand/quality.`,max_output_tokens:550,text:{verbosity:'low',format:{type:'json_schema',name:'telegram_username_classification_v2',strict:true,schema}}};
@@ -341,7 +398,9 @@ export default async function handler(req,res){
     const data=await r.json();
     if(!r.ok){console.error('Telegram valuation OpenAI error',r.status,data&&data.error?data.error.message:data);return res.status(502).json({error:lang==='en'?'Valuation service is temporarily unavailable.':'Сервис оценки временно недоступен.'});}
     const txt=outputText(data);if(!txt)throw new Error('Empty model response');
-    const parsed=applyRange(username,JSON.parse(txt),lang,fx);
+    const classification=JSON.parse(txt);
+    const surnameEvidence=classification.categoryCode==='surname'?await verifySurname(username):{verified:false,source:null};
+    const parsed=applyRange(username,classification,lang,fx,surnameEvidence);
     valuationCache.set(cacheKey,parsed);if(valuationCache.size>5000){const first=valuationCache.keys().next().value;valuationCache.delete(first);}
     return res.status(200).json(parsed);
   }catch(e){console.error('telegram-username-value error',e);return res.status(500).json({error:lang==='en'?'Could not complete the estimate.':'Не удалось выполнить оценку.'});}
