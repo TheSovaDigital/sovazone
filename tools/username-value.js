@@ -10,7 +10,7 @@
   var result=root.querySelector('.uv-result');
   var error=root.querySelector('.uv-error');
   var lastRun=0;
-  var CACHE_VERSION=platform==='telegram'?'telegram-v1.2':'instagram-v4.0';
+  var CACHE_VERSION=platform==='telegram'?'telegram-v1.3':'instagram-v4.0';
   var API_ENDPOINT=platform==='telegram'?'https://sovazone.vercel.app/api/telegram-username-value/':'https://sovazone.vercel.app/api/username-value/';
 
   function t(ru,en){return lang==='en'?en:ru;}
@@ -24,6 +24,11 @@
   function priceText(data){
     if(data&&data.specialCase==='global_brand')return t('Особый случай','Special case');
     if(data&&data.specialCase==='invalid_username')return t('Недопустимый никнейм','Invalid username');
+    if(platform==='telegram'&&(data.priceMin===null||data.priceMax===null)){
+      var tmin=Number(data.priceMinTon||0),tmax=Number(data.priceMaxTon||0);
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      return tmin===tmax?'≈ '+fmt(tmin)+' TON':fmt(tmin)+'–'+fmt(tmax)+' TON';
+    }
     var min=Number((data&&data.priceMin)||0),max=Number((data&&data.priceMax)||0);
     if(data&&data.openEnded)return money(min)+'+';
     if(min===max)return '≈ '+money(min);
@@ -31,6 +36,7 @@
   }
   function tonText(data){
     if(platform!=='telegram'||!data||(data.specialCase&&data.specialCase!=='none'))return '';
+    if(data.priceMin===null||data.priceMax===null)return '<div class="uv-confidence">'+t('Конвертация в USD временно недоступна','Live USD conversion unavailable')+'</div>';
     var min=Number(data.priceMinTon||0),max=Number(data.priceMaxTon||0);
     var txt=min===max?'≈ '+Math.round(min).toLocaleString('en-US')+' TON':Math.round(min).toLocaleString('en-US')+'–'+Math.round(max).toLocaleString('en-US')+' TON';
     return '<div class="uv-confidence">'+escapeHtml(txt)+'</div>';
