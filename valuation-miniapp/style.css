@@ -84,3 +84,8 @@
 @keyframes ai-prism-flow{0%{background-position:0% 50%}100%{background-position:100% 50%}}
 @media(max-width:650px){.ai-input-frame{border-radius:17px}.ai-input-frame .input-shell{height:61px;border-radius:15px;padding-inline:13px}.ai-input-spark{flex-basis:21px;margin-right:6px}.ai-input-spark svg{width:21px;height:21px}.ai-input-frame .at{margin-right:8px}}
 @media(prefers-reduced-motion:reduce){.ai-input-frame{animation:none;background-position:50% 50%}.ai-input-spark svg{transition:none}}
+
+/* Separate admin link is hidden until Telegram authorization confirms allowlisted ID. */
+.admin-link{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 11px;font-size:12px;color:#dedde8;text-decoration:none;background:rgba(255,255,255,.045)}
+.admin-link[hidden]{display:none!important}
+.admin-link:hover{background:rgba(255,255,255,.1)}
