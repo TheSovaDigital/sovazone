@@ -113,7 +113,7 @@ async function verifyAccessOnOpen() {
     if (resp.ok && data.authorized) {
       hideAccessGate();
       const adminLink=$('admin-link');
-      if(adminLink)adminLink.hidden!==undefined&&(adminLink.hidden=!Boolean(data.admin));
+      if(adminLink)adminLink.hidden=!Boolean(data.admin);
     }
     else showAccessGate(resp.status===403?'start':'error');
   } catch {showAccessGate('error')}
