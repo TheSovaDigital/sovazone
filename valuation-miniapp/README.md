@@ -3,9 +3,9 @@
 A standalone Telegram Mini App dedicated exclusively to username valuation (Instagram, TikTok and Telegram). **No catalog, advertising dashboard, or username sales. Bot updates/offers require explicit opt-in.**
 
 ## Architecture
-- Static, responsive UI and Russian/English localization; local-only valuation history.
-- `/api/estimate` and `/api/estimate-telegram` proxy existing SovaZone valuation engines through Vercel rewrites. The engines retain their own rate limits and valuations. The Mini App never pretends to check availability, ownership, or sale prices.
-- Optional `/api/webhook` supports `/start`, `/help`, `/estimate`, `/value` and returns a Web App button. It requires two Vercel environment variables and a Telegram webhook to be registered. No private data is stored.
+- Static, responsive RU/EN UI and local-only valuation history.\n- Server-side analytics of verified /start, Mini App opens and successful estimates by platform. All aggregate analytics live in private Vercel Blob; neither searched handles nor estimated prices are stored.\n- Private /admin.html dashboard protected by signed Telegram initData and an exact VALUATION_ADMIN_IDS allowlist.
+- `/api/estimate` and `/api/estimate-telegram` are authenticated server-side proxies of the SovaZone valuation engines. The bot checks Telegram initData and the user's /start subscriber record before forwarding. Successful evaluations emit event records with only platform and keyed pseudonymous ID; they do not store looked-up names or monetary values.
+- Optional `/api/webhook` supports `/start`, `/help`, `/estimate`, `/value`, `/myid` and `/stats` and returns a Web App button. It requires two Vercel environment variables and a Telegram webhook to be registered. No private data is stored.
 - Does not depend on the unrelated SovaUsername catalog Mini App.
 
 ## BotFather activation (no token in chat)
@@ -22,3 +22,14 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 ## Subscriber-only Mini App onboarding
 - Telegram initData is HMAC-verified server-side at `/api/access` against the bot token; only users whose private record exists after `/start` may interact with the Mini App UI.
 - Direct Main Mini App launches, and the website opened outside Telegram, show a bot-onboarding screen. The public valuation APIs on SovaZone remain independently accessible; this gate protects the Mini App user experience, not those unrelated public APIs.
+
+## Admin statistics (enabled after ID allowlisting)
+- Send `/myid` to @ValuationAiBot from your own account. It returns only your numerical Telegram user ID.
+- Add the number to `VALUATION_ADMIN_IDS` in the **sova-valuation-ai Vercel project**, target Production (comma-separated IDs are allowed). Never use a Bot API token or an arbitrary visitor username as an administrator credential.
+- Redeploy the production project with its root directory `valuation-miniapp` on the main branch.
+- Open `/stats` in the bot, then tap `Open statistics`. The dashboard calls `POST /api/admin-stats` with Telegram-signed initData; non-admins and ordinary browser sessions receive no statistics.
+- Metrics: total subscriber records, 7/30-day unique active visitors, 30-day valuations by platform, successful evaluations, /start sources, registration events and opt-in users.
+- Historical subscriber records are counted if available in private Blob. **Earlier valuation searches cannot be reconstructed**. Analytics records begin at deployment.
+- Raw analytics contain a keyed pseudonymous identifier and categorical event only; no raw Telegram ID, searched handles, result prices, private messages or IP data.
+- Analytics shown over the last 30 days; older event blobs should be periodically deleted according to the privacy retention policy. The dashboard reads a maximum of 3,000 subscriber records and 10,000 event paths, and reports a truncation warning if limits are reached.
+- Marketing consent remains opt-in, separate from necessary usage metrics. No broadcast sending was added.
