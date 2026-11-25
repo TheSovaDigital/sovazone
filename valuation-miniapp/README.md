@@ -33,3 +33,12 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - Raw analytics contain a keyed pseudonymous identifier and categorical event only; no raw Telegram ID, searched handles, result prices, private messages or IP data.
 - Analytics shown over the last 30 days; older event blobs should be periodically deleted according to the privacy retention policy. The dashboard reads a maximum of 3,000 subscriber records and 10,000 event paths, and reports a truncation warning if limits are reached.
 - Marketing consent remains opt-in, separate from necessary usage metrics. No broadcast sending was added.
+
+## Professional admin dashboard (Nov 25, 2026)
+- Admin UI: \`/admin.html\` (alias \`/admin\`). All CSS is served from \`/admin.css\` to satisfy the deployed CSP \`style-src 'self'\`. Do not use inline style blocks.
+- Genuine aggregate 7/14/30-day analytics, KPI cards, activity SVG, platform donut, source bars, strict sequential event funnel, recent anonymized event feed, CSV download, refresh and mobile navigation. No synthetic figures, fictitious retention trends or fake real-time uptime.
+- Login inside Telegram: \`/stats\` opens a signed Web App panel. Access also requires \`VALUATION_ADMIN_IDS\`, already stored in the separate Valuation AI Vercel project.
+- Login in an ordinary browser: send \`/stats\` to the bot. The bot sends a random 80-bit one-time code, valid for 10 minutes. Enter that code on the panel; \`/api/admin-login\` validates it against a private Blob record and sets a signed, Secure, HttpOnly, SameSite=Strict 8-hour cookie. \`/api/admin-stats\` independently checks the cookie or signed Telegram initData on every request. Logout clears the browser session cookie.
+- Never share login codes. The code is **not** a bot token or a username. Codes are stored only as keyed-hash blob paths, issued to allowlisted Telegram IDs, and deleted after a successful attempt.
+- The CSV report exports aggregates only; looked-up handles, Telegram IDs and prices are not exported.
+- The 30-day event scan has limits (10k events/3k subscriber profiles); the dashboard displays a partial-data warning when a cap is reached. Historic valuations before recording was deployed cannot be reconstructed.

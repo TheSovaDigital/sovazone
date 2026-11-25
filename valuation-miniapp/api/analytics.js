@@ -47,16 +47,18 @@ function decode(pathname){
 }
 function tally(map,key){map[key]=(map[key]||0)+1;}
 export async function collectStats({list,get},now=new Date(),caps={users:3000,events:10000}){
-  const limitDate=new Date(now.getTime()-30*86400000).toISOString().slice(0,10);
-  const weekDate=new Date(now.getTime()-7*86400000).toISOString().slice(0,10);
+  const days=Array.from({length:30},(_,i)=>{
+    const date=new Date(now);date.setUTCHours(0,0,0,0);date.setUTCDate(date.getUTCDate()-(29-i));
+    return date.toISOString().slice(0,10);
+  });
+  const today=days[29],dateFloor=days[0];
   const users=await scan(list,'valuation-bot/users/',caps.users);
   const events=await scan(list,PREFIX,caps.events);
   let optIns=0,blocked=0,profilesRead=0;
   if(get){
-    // Concurrency bounded: private records, never return contents or raw IDs to dashboard.
     for(let i=0;i<users.results.length;i+=20){
       await Promise.all(users.results.slice(i,i+20).map(async item=>{
-        try {
+        try{
           const blob=await get(item.pathname,{access:'private',useCache:false});
           if(blob?.statusCode===200&&blob.stream){
             const row=JSON.parse(await new Response(blob.stream).text());
@@ -64,37 +66,90 @@ export async function collectStats({list,get},now=new Date(),caps={users:3000,ev
             if(row.newsOptIn===true&&!row.blocked)optIns++;
             if(row.blocked===true)blocked++;
           }
-        }catch{/* Private store snapshot may have been concurrently deleted. */}
+        }catch{/* Subscription deleted while scanning, or unreadable. */}
       }));
     }
   }
-  const types={},platforms={instagram:0,tiktok:0,telegram:0},sources={},daily={};
-  const active30=new Set(),active7=new Set(),evaluators30=new Set(),newRegistrations=new Set();
-  let invalidEvents=0;
+  const dailyMap=new Map(days.map(day=>[day,{
+    day,events:0,botStarts:0,registrations:0,appOpens:0,valuations:0,
+    instagram:0,tiktok:0,telegram:0,sources:{},unique:new Set()
+  }]));
+  const accepted=[];let invalidEvents=0;
   for(const item of events.results){
-    const row=decode(item.pathname);if(!row){invalidEvents++;continue;}
-    if(row.day<limitDate||row.day>now.toISOString().slice(0,10))continue;
-    tally(types,row.type);tally(daily,row.day);
-    if(row.day>=weekDate)active7.add(row.id);
-    active30.add(row.id);
-    if(row.type==='bot_start')tally(sources,row.source);
-    if(row.type==='bot_registered')newRegistrations.add(row.id);
-    if(row.type==='estimate_success'){tally(platforms,row.platform);evaluators30.add(row.id);}
+    const row=decode(item.pathname);
+    if(!row){invalidEvents++;continue;}
+    if(row.day<dateFloor||row.day>today)continue;
+    const d=dailyMap.get(row.day);
+    if(!d)continue;
+    const timestamp=Number(String(item.pathname).split('/').pop().split('-')[0]);
+    row.timestamp=Number.isSafeInteger(timestamp)?timestamp:Date.parse(row.day+'T12:00:00Z');
+    accepted.push(row);d.events++;d.unique.add(row.id);
+    if(row.type==='bot_start'){d.botStarts++;tally(d.sources,row.source);}
+    if(row.type==='bot_registered')d.registrations++;
+    if(row.type==='app_open')d.appOpens++;
+    if(row.type==='estimate_success'){
+      d.valuations++;
+      if(Object.hasOwn(d,row.platform))d[row.platform]++;
+    }
   }
-  const lastDays=Array.from({length:14},(_,i)=>{const d=new Date(now);d.setUTCDate(d.getUTCDate()-(13-i));return d.toISOString().slice(0,10)});
+  accepted.sort((a,b)=>a.timestamp-b.timestamp);
+  const periods={};
+  for(const length of [7,14,30]){
+    const floor=days[30-length];
+    const selected=accepted.filter(x=>x.day>=floor);
+    const unique=new Set(),evalUsers=new Set(),regUsers=new Set(),startUsers=new Set();
+    const platform={instagram:0,tiktok:0,telegram:0},sources={direct:0,share:0,startapp:0,other:0};
+    let botStarts=0,appOpens=0,valuations=0;
+    const started=new Set(),opened=new Set(),completed=new Set();
+    for(const row of selected){
+      unique.add(row.id);
+      if(row.type==='bot_start'){
+        botStarts++;startUsers.add(row.id);tally(sources,row.source);started.add(row.id);
+      }
+      if(row.type==='bot_registered')regUsers.add(row.id);
+      if(row.type==='app_open'){
+        appOpens++;if(started.has(row.id))opened.add(row.id);
+      }
+      if(row.type==='estimate_success'){
+        valuations++;evalUsers.add(row.id);
+        if(Object.hasOwn(platform,row.platform))platform[row.platform]++;
+        if(opened.has(row.id))completed.add(row.id);
+      }
+    }
+    periods[length]={
+      days:length,botStarts,appOpens,valuations,
+      registrations:regUsers.size,uniqueActiveUsers:unique.size,
+      uniqueEvaluators:evalUsers.size,uniqueBotUsers:startUsers.size,
+      byPlatform:platform,sources,
+      funnel:{started:started.size,opened:opened.size,evaluated:completed.size}
+    };
+  }
+  const series30=days.map(day=>{
+    const row=dailyMap.get(day);
+    return {
+      day,events:row.events,botStarts:row.botStarts,registrations:row.registrations,
+      appOpens:row.appOpens,valuations:row.valuations,uniqueUsers:row.unique.size,
+      instagram:row.instagram,tiktok:row.tiktok,telegram:row.telegram
+    };
+  });
+  const recentEvents=accepted.slice(-25).reverse().map(x=>({
+    time:new Date(x.timestamp).toISOString(),type:x.type,
+    platform:x.platform,source:x.type==='bot_start'?x.source:null
+  }));
+  const p=periods[30];
   return {
     asOf:now.toISOString(),scope:'since-activation',windowDays:30,
     registeredUsers:users.results.length,registeredUsersTruncated:users.truncated,
     optInUsers:optIns,blockedUsers:blocked,profilesRead,
-    botStarts30:types.bot_start||0,newRegistrations30:newRegistrations.size,
-    appOpens30:types.app_open||0,valuationCount30:types.estimate_success||0,
-    uniqueActiveUsers30:active30.size,uniqueActiveUsers7:active7.size,
-    uniqueEvaluators30:evaluators30.size,
-    byPlatform:platforms,sources,
-    daily:lastDays.map(day=>({day,events:daily[day]||0})),
-    eventsObserved30:Object.values(types).reduce((a,b)=>a+b,0),
-    eventsTruncated:events.truncated,unrecognizedEvents:invalidEvents,
-    warning:users.truncated||events.truncated?'Scan capped; counts are partial.':'Analytics starts from deployment; earlier valuation searches are not recoverable.'
+    botStarts30:p.botStarts,newRegistrations30:p.registrations,appOpens30:p.appOpens,
+    valuationCount30:p.valuations,uniqueActiveUsers30:p.uniqueActiveUsers,
+    uniqueActiveUsers7:periods[7].uniqueActiveUsers,uniqueEvaluators30:p.uniqueEvaluators,
+    byPlatform:p.byPlatform,sources:p.sources,
+    daily:series30.slice(-14),series30,periods,recentEvents,
+    eventsObserved30:accepted.length,eventsTruncated:events.truncated,unrecognizedEvents:invalidEvents,
+    warning:users.truncated||events.truncated
+      ?'Analytics scan cap reached; some totals and trends may be incomplete.'
+      :'Historical estimates before analytics activation cannot be recovered.'
   };
 }
 export async function readProductionStats(){

@@ -54,7 +54,11 @@ test('aggregate counts exclude identities and query texts, include per-platform 
   assert.deepEqual(report.byPlatform,{instagram:1,tiktok:1,telegram:1});
   assert.equal(report.uniqueActiveUsers7,2);
   assert.equal(report.newRegistrations30,1);
-  assert.deepEqual(report.sources,{share:1,direct:1});
+  assert.equal(report.sources.share,1);
+  assert.equal(report.sources.direct,1);
+  assert.equal(report.sources.startapp,0);
+  assert.equal(report.periods[14].valuations,3);
+  assert.equal(report.series30.length,30);
   assert.equal(JSON.stringify(report).includes('valuation-bot/users/one'),false);
 });
 test('estimation is HMAC-gated; count only successful verified upstream replies',async()=>{

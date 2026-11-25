@@ -1,50 +1,173 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#090a10">
-<title>Статистика | SovaZone Valuation AI</title>
-<style>
-:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#090a10;color:#e9e9ef}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse 60% 30% at 50% 0,rgba(112,95,167,.18),transparent),#090a10}
-.wrap{width:min(1060px,calc(100% - 32px));margin:auto;padding:28px 0 72px}
-a{color:#cfc1ff}header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:38px}
-.brand{font-weight:800;letter-spacing:.12em;font-size:14px}.brand span{color:#a897ff}.back{text-decoration:none;font-size:13px;color:#afb0c0}
-.overline{font-size:11px;letter-spacing:.2em;color:#a69ac9;font-weight:700;margin-bottom:8px}
-h1{margin:0;font-size:clamp(26px,5vw,42px);letter-spacing:-.045em}p.subtitle{color:#a4a5b6;margin:12px 0 30px;line-height:1.65;font-size:14px}
-.status{padding:16px;border:1px solid #32323e;background:#14151b;border-radius:12px;color:#bec0d1;margin-bottom:22px;line-height:1.5}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{padding:20px;border-radius:14px;border:1px solid #30303d;background:linear-gradient(140deg,#191922,#111116);min-height:126px}
-.metric small{display:block;font-size:12px;color:#a7a7b6;line-height:1.45}.metric strong{display:block;font-size:30px;margin:14px 0 0;letter-spacing:-.045em}
-.sections{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.section{border:1px solid #30303d;border-radius:14px;background:#14141c;padding:22px}
-.section h2{font-size:16px;margin:0 0 20px}.list{display:grid;gap:12px}
-.item{display:grid;grid-template-columns:minmax(90px,1fr) 3fr 50px;gap:14px;align-items:center;font-size:12px;color:#bcbccb}
-.item b{font-size:13px;text-align:right;color:#e7e5f0}
-.track{height:8px;background:#2a2936;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#8c7bc7,#c4adf3);border-radius:20px}
-.chart{display:flex;align-items:flex-end;gap:6px;height:158px;margin-top:18px}.bar{flex:1;min-height:2px;background:#907cce;border-radius:4px 4px 0 0;position:relative;opacity:.9}.bar:hover{background:#b6a1f1}.bar:hover::after{content:attr(data-label);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#303045;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap}
-.legend{display:flex;justify-content:space-between;color:#858498;font-size:11px;margin-top:7px}
-.note{margin-top:18px;font-size:12px;color:#8f8fa1;line-height:1.7}
-[hidden]{display:none!important}
-@media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}.sections{grid-template-columns:1fr}.metric{padding:16px;min-height:110px}.metric strong{font-size:26px}.wrap{padding-top:20px}}
-</style>
-<script src="https://telegram.org/js/telegram-web-app.js"></script><script defer src="/admin.js"></script>
-</head><body><div class="wrap"><header><div class="brand">SOVAZONE <span>VALUATION AI</span></div><a class="back" href="/">Назад к оценке</a></header>
-<div class="overline">PRIVATE ANALYTICS · TELEGRAM</div>
-<h1>Статистика бота</h1>
-<p class="subtitle">Подтверждённые действия пользователей. Никнеймы, результаты оценки и личные сообщения в статистику не попадают.</p>
-<div id="status" class="status" role="status">Проверяем доступ администратора Telegram…</div>
-<div id="data" hidden>
-<section class="grid">
-<div class="metric"><small>Зарегистрированные пользователи</small><strong id="registered">—</strong></div>
-<div class="metric"><small>Активные за 7 дней</small><strong id="active7">—</strong></div>
-<div class="metric"><small>Успешные оценки за 30 дней</small><strong id="valuations">—</strong></div>
-<div class="metric"><small>Согласились на рассылку</small><strong id="optin">—</strong></div>
-<div class="metric"><small>Новые регистрации · 30 дней</small><strong id="new">—</strong></div>
-<div class="metric"><small>Запуски бота · 30 дней</small><strong id="starts">—</strong></div>
-<div class="metric"><small>Открытия приложения · 30 дней</small><strong id="opens">—</strong></div>
-<div class="metric"><small>Уникальные оценщики · 30 дней</small><strong id="evaluators">—</strong></div>
-</section>
-<div class="sections">
-<section class="section"><h2>Оценки по платформам</h2><div id="platforms" class="list"></div></section>
-<section class="section"><h2>Источники переходов в бот</h2><div id="sources" class="list"></div></section>
-<section class="section" style="grid-column:1/-1"><h2>Активность за последние 14 дней</h2><div class="chart" id="chart"></div><div class="legend"><span id="startdate">—</span><span id="enddate">—</span></div></section>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#0b0a13">
+  <meta name="description" content="Закрытая аналитика Telegram-бота SovaZone Valuation AI">
+  <title>Статистика бота — SovaZone Valuation AI</title>
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/admin.css?v=3">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script defer src="/admin.js?v=3"></script>
+</head>
+<body>
+<svg class="svg-assets" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="7.2" height="7.2" rx="1.8"/><rect x="13.6" y="3.2" width="7.2" height="7.2" rx="1.8"/><rect x="3.2" y="13.6" width="7.2" height="7.2" rx="1.8"/><rect x="13.6" y="13.6" width="7.2" height="7.2" rx="1.8"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 20v-2a4 4 0 0 0-3-3.87M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16l4-5 3 3 6-8"/></symbol>
+ <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 17l9 5 9-5"/></symbol>
+ <symbol id="i-donut" viewBox="0 0 24 24"><path d="M12 2v10h10A10 10 0 1 1 12 2Z"/><path d="M15 2.5A10 10 0 0 1 21.5 9H15V2.5Z"/></symbol>
+ <symbol id="i-inbox" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="17" rx="3"/><path d="M3 13h5l2 3h4l2-3h5"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.5 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6l8-3.5Z"/><path d="m9 12 2 2 4-4"/></symbol>
+ <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5 9a8 8 0 0 1 13-3l2 1M4 17l2 1a8 8 0 0 0 13-3"/></symbol>
+ <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3h16v-3"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+ <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8.5" cy="9" r="5"/><path d="m12 12 9 9m-4-4 2-2"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+ <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4m6-4 4-4-4-4m4 4H9"/></symbol>
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+ <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+ <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8v.2"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+</svg>
+
+<div class="shell" id="shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="/">
+      <span class="brand-mark"><img src="/mark.svg" width="43" height="43" alt=""></span>
+      <span class="brand-words"><strong>SOVAZONE</strong><small>VALUATION AI</small></span>
+    </a>
+    <div class="sidebar-tag">ADMIN CONSOLE <span>V2</span></div>
+    <nav class="navigation" aria-label="Разделы аналитики">
+      <a href="#overview" class="nav-link is-active" data-section="overview"><svg><use href="#i-grid"></use></svg>Дашборд</a>
+      <a href="#audience" class="nav-link" data-section="audience"><svg><use href="#i-users"></use></svg>Аудитория</a>
+      <a href="#valuations" class="nav-link" data-section="valuations"><svg><use href="#i-layers"></use></svg>Оценки и платформы</a>
+      <a href="#sources" class="nav-link" data-section="sources"><svg><use href="#i-chart"></use></svg>Источники</a>
+      <a href="#events" class="nav-link" data-section="events"><svg><use href="#i-inbox"></use></svg>Лента событий</a>
+      <a href="#security" class="nav-link" data-section="security"><svg><use href="#i-shield"></use></svg>Доступ и данные</a>
+    </nav>
+    <div class="side-spacer"></div>
+    <div class="sidebar-bottom">
+      <div class="sidebar-health"><span class="pulse-dot"></span><div><strong>Приватная аналитика</strong><small>Только подтверждённые данные</small></div></div>
+      <a class="sidebar-site" href="/" aria-label="Вернуться к оценке никнеймов">Вернуться к оценке <svg><use href="#i-arrow"></use></svg></a>
+    </div>
+  </aside>
+  <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" hidden aria-label="Закрыть меню"></button>
+
+  <div class="workspace">
+    <header class="topbar">
+      <div class="top-left">
+        <button id="menu-toggle" class="icon-button menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false"><svg><use href="#i-menu"></use></svg></button>
+        <span class="crumb">Рабочее пространство</span><span class="crumb-sep">/</span><strong>Аналитика</strong>
+      </div>
+      <div class="top-right">
+        <span class="top-security"><svg><use href="#i-shield"></use></svg>Защищённый доступ</span>
+        <span class="avatar" aria-hidden="true">SA</span><span class="top-admin">Администратор</span>
+      </div>
+    </header>
+
+    <main class="content" id="overview">
+      <div class="hero">
+        <div class="hero-text">
+          <div class="eyebrow"><span class="eyebrow-line"></span> DATA INTELLIGENCE / TELEGRAM</div>
+          <h1>Статистика <span>бота</span></h1>
+          <p>Пользователи, оценки никнеймов и эффективность Valuation AI. Данные только из подключённого хранилища.</p>
+        </div>
+        <div class="hero-controls">
+          <label class="period-control" for="period"><svg><use href="#i-clock"></use></svg><span>Период</span><select id="period" aria-label="Выбрать период"><option value="7">7 дней</option><option value="14" selected>14 дней</option><option value="30">30 дней</option></select></label>
+          <button class="button button-muted" id="export-btn" type="button" disabled><svg><use href="#i-download"></use></svg>CSV</button>
+          <button class="button button-primary" id="refresh-btn" type="button" disabled><svg><use href="#i-refresh"></use></svg>Обновить</button>
+        </div>
+      </div>
+
+      <section class="auth-panel" id="auth-panel" aria-labelledby="auth-heading">
+        <div class="auth-art" aria-hidden="true"><span class="auth-art-circle"><svg><use href="#i-shield"></use></svg></span><span class="auth-orbit auth-orbit-a"></span><span class="auth-orbit auth-orbit-b"></span></div>
+        <div class="auth-body">
+          <span class="auth-tag">RESTRICTED ACCESS</span>
+          <h2 id="auth-heading">Доступ к аналитике</h2>
+          <p id="auth-message" role="status" aria-live="polite">Проверяем авторизацию…</p>
+          <form id="login-form" class="login-form" hidden autocomplete="off">
+            <label for="login-code">Одноразовый код из Telegram</label>
+            <div class="login-row">
+              <input id="login-code" type="text" inputmode="text" maxlength="32" placeholder="XXXX XXXX XXXX XXXX XXXX" spellcheck="false" autocorrect="off" autocapitalize="characters" autocomplete="one-time-code" required>
+              <button class="button button-primary" id="login-btn" type="submit">Войти <svg><use href="#i-arrow"></use></svg></button>
+            </div>
+            <span id="login-error" class="login-error" role="alert" hidden></span>
+          </form>
+          <div class="auth-help"><span class="step-number">01</span>Отправьте <strong>/stats</strong> в <a href="https://t.me/ValuationAiBot" target="_blank" rel="noopener noreferrer">@ValuationAiBot</a><span class="step-divider"></span><span class="step-number">02</span>Вставьте полученный код сюда</div>
+          <p class="auth-note">Код действует 10 минут и используется один раз. При открытии внутри Telegram вход выполняется автоматически.</p>
+        </div>
+      </section>
+
+      <div id="dashboard" hidden>
+        <div class="data-toolbar">
+          <div class="data-ready"><span class="live-dot"></span><span id="sync-state">Данные получены</span><span class="data-divider"></span><span id="updated">—</span></div>
+          <div class="data-actions"><span class="data-badge">Суммарно за период · UTC</span><button id="logout-btn" class="quiet-button" type="button" hidden><svg><use href="#i-logout"></use></svg>Выйти</button></div>
+        </div>
+        <div class="alert" id="data-alert" hidden><svg><use href="#i-info"></use></svg><span id="data-alert-text"></span></div>
+
+        <section class="kpi-grid" aria-label="Ключевые показатели">
+          <article class="kpi-card kpi-primary"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-users"></use></svg></span><span class="kpi-indicator">ВСЕГО</span></div><span class="kpi-name">Зарегистрированные пользователи</span><strong class="kpi-value" id="registered">—</strong><span class="kpi-foot">Контакты после /start</span></article>
+          <article class="kpi-card"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-chart"></use></svg></span><span class="kpi-indicator" id="active-period">14 ДНЕЙ</span></div><span class="kpi-name">Активная аудитория</span><strong class="kpi-value" id="active">—</strong><span class="kpi-foot">Уникальные пользователи</span></article>
+          <article class="kpi-card"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-layers"></use></svg></span><span class="kpi-indicator" id="valuations-period">14 ДНЕЙ</span></div><span class="kpi-name">Успешные оценки</span><strong class="kpi-value" id="valuation-total">—</strong><span class="kpi-foot">Instagram · TikTok · Telegram</span></article>
+          <article class="kpi-card"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-inbox"></use></svg></span><span class="kpi-indicator">OPT-IN</span></div><span class="kpi-name">Разрешили рассылку</span><strong class="kpi-value" id="optins">—</strong><span class="kpi-foot" id="optin-rate">От зарегистрированных: —</span></article>
+          <article class="kpi-card kpi-secondary"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-users"></use></svg></span><span class="kpi-indicator">НОВЫЕ</span></div><span class="kpi-name">Новые регистрации</span><strong class="kpi-value" id="new-registrations">—</strong><span class="kpi-foot">За выбранный период</span></article>
+          <article class="kpi-card kpi-secondary"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-arrow"></use></svg></span><span class="kpi-indicator">БОТ</span></div><span class="kpi-name">Запуски /start</span><strong class="kpi-value" id="bot-starts">—</strong><span class="kpi-foot">Количество событий</span></article>
+          <article class="kpi-card kpi-secondary"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-grid"></use></svg></span><span class="kpi-indicator">MINI APP</span></div><span class="kpi-name">Открытия приложения</span><strong class="kpi-value" id="app-opens">—</strong><span class="kpi-foot">Подтверждённые открытия</span></article>
+          <article class="kpi-card kpi-secondary"><div class="kpi-top"><span class="kpi-icon"><svg><use href="#i-donut"></use></svg></span><span class="kpi-indicator">УНИКАЛЬНЫЕ</span></div><span class="kpi-name">Пользователи с оценками</span><strong class="kpi-value" id="unique-evaluators">—</strong><span class="kpi-foot">За выбранный период</span></article>
+        </section>
+
+        <div class="main-grid">
+          <section class="panel panel-chart" id="audience">
+            <div class="panel-head"><div><span class="panel-eyebrow">ENGAGEMENT OVERVIEW</span><h2>Динамика активности</h2><p>Фактические события по дням, время UTC</p></div>
+              <div class="chart-tabs" role="group" aria-label="Показатель графика">
+                <button type="button" data-chart="valuations" class="is-selected">Оценки</button>
+                <button type="button" data-chart="appOpens">Открытия</button>
+                <button type="button" data-chart="botStarts">Запуски</button>
+              </div>
+            </div>
+            <div class="chart-frame"><svg id="activity-chart" role="img" aria-label="График активности" viewBox="0 0 930 260" preserveAspectRatio="none"></svg><div class="chart-hint" id="chart-hint">Наведите на точку, чтобы увидеть значение</div></div>
+            <div class="chart-axis"><span id="chart-first-day">—</span><span id="chart-last-day">—</span></div>
+          </section>
+          <section class="panel panel-platform" id="valuations">
+            <div class="panel-head"><div><span class="panel-eyebrow">CHANNEL MIX</span><h2>Платформы</h2><p>Распределение успешных оценок</p></div></div>
+            <div class="donut-layout">
+              <div class="donut-wrap"><svg id="donut-chart" viewBox="0 0 200 200" aria-label="Распределение оценок по платформам" role="img">
+                 <circle cx="100" cy="100" r="76" class="donut-bg"></circle>
+                 <circle id="donut-instagram" cx="100" cy="100" r="76" class="donut-segment instagram"></circle>
+                 <circle id="donut-tiktok" cx="100" cy="100" r="76" class="donut-segment tiktok"></circle>
+                 <circle id="donut-telegram" cx="100" cy="100" r="76" class="donut-segment telegram"></circle>
+               </svg><div class="donut-center"><strong id="donut-total">—</strong><small>оценок</small></div>
+              </div>
+              <div class="platform-legend" id="platforms-list"></div>
+            </div>
+          </section>
+          <section class="panel panel-sources" id="sources"><div class="panel-head"><div><span class="panel-eyebrow">ACQUISITION</span><h2>Источники переходов</h2><p>Запуски бота по источнику</p></div></div><div class="source-list" id="sources-list"></div></section>
+          <section class="panel panel-funnel"><div class="panel-head"><div><span class="panel-eyebrow">CONVERSION PATH</span><h2>Воронка взаимодействия</h2><p>Уникальные пользователи, начавшие путь в выбранном периоде</p></div></div><div class="funnel-list" id="funnel-list"></div><p class="panel-caption">Учитываются последовательные события /start → открытие → успешная оценка внутри периода.</p></section>
+          <section class="panel panel-events" id="events"><div class="panel-head events-head"><div><span class="panel-eyebrow">RECENT ACTIVITY</span><h2>Лента событий</h2><p>Без никнеймов и персональных данных</p></div><select id="event-filter" class="event-select" aria-label="Фильтр событий"><option value="all">Все события</option><option value="estimate_success">Оценки</option><option value="app_open">Открытия</option><option value="bot_start">Запуски</option><option value="bot_registered">Регистрации</option></select></div><div class="event-list" id="events-list"></div></section>
+          <section class="panel panel-insights"><div class="panel-head"><div><span class="panel-eyebrow">AUDIENCE QUALITY</span><h2>Дополнительные метрики</h2><p>Рассчитано из собранных данных</p></div></div><div class="insight-list">
+             <div class="insight"><span>Доля согласий на рассылку</span><strong id="insight-optin">—</strong></div>
+             <div class="insight"><span>Оценок на одного оценщика</span><strong id="insight-evaluations">—</strong></div>
+             <div class="insight"><span>Уникальных запусков бота</span><strong id="insight-unique-starts">—</strong></div>
+             <div class="insight"><span>Пользователей с оценками</span><strong id="insight-unique-evaluators">—</strong></div>
+             <div class="insight"><span>Заблокировали бота</span><strong id="insight-blocked">—</strong></div>
+           </div></section>
+          <section class="panel panel-privacy" id="security"><div class="panel-head"><div><span class="panel-eyebrow">TRUST & PRIVACY</span><h2>Состояние аналитики</h2><p>Источник: приватное хранилище Vercel Blob</p></div></div>
+             <div class="health-rows">
+               <div class="health-row"><span><svg><use href="#i-shield"></use></svg>Проверка администратора</span><b class="health-ok">Подтверждена</b></div>
+               <div class="health-row"><span><svg><use href="#i-check"></use></svg>Получение статистики</span><b class="health-ok">Успешно</b></div>
+               <div class="health-row"><span><svg><use href="#i-info"></use></svg>Полнота выборки</span><b id="health-completeness">—</b></div>
+             </div>
+             <div class="privacy-foot"><svg><use href="#i-shield"></use></svg><span>В статистике не сохраняются проверяемые никнеймы, цены оценок, личные сообщения и IP-адреса.</span></div>
+          </section>
+        </div>
+        <footer class="footer"><span>© SovaZone Valuation AI · Private administration</span><span>Сведения обновляются по запросу · UTC</span></footer>
+      </div>
+    </main>
+  </div>
 </div>
-<div class="note" id="note"></div>
-</div></div></body></html>
+<noscript>Для панели статистики требуется JavaScript. Включите его и перезагрузите страницу.</noscript>
+</body>
+</html>
