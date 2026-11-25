@@ -1,0 +1,43 @@
+name: Telegram Mini App regression
+on:
+  pull_request:
+    paths:
+      - 'valuation-miniapp/**'
+      - 'miniapp/**'
+      - '.github/workflows/telegram-miniapp-regression.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'valuation-miniapp/**'
+      - 'miniapp/**'
+      - '.github/workflows/telegram-miniapp-regression.yml'
+  workflow_dispatch:
+
+jobs:
+  valuation-miniapp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Syntax validation
+        run: |
+          node --check valuation-miniapp/app.js
+          node --check valuation-miniapp/admin.js
+          for f in valuation-miniapp/api/*.js; do node --check "$f"; done
+      - name: Install and test isolated Valuation AI Mini App
+        working-directory: valuation-miniapp
+        run: |
+          npm install --no-audit --no-fund
+          npm test
+  username-miniapp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install and test isolated SOVA USERNAMES Mini App
+        working-directory: miniapp
+        run: |
+          npm install --no-audit --no-fund
+          npm test
