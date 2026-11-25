@@ -1,5 +1,6 @@
 // Privacy-aware Telegram webhook for @ValuationAiBot. No username valuations are stored here.
 import crypto from 'node:crypto';
+import {recordEvent,isValuationAdmin} from './analytics.js';
 
 const APP_URL = process.env.PUBLIC_APP_URL || 'https://valuation.sovazone.com';
 function equalsSecret(value, secret) {
@@ -12,9 +13,9 @@ const RU = {
   open: 'Оценить никнейм',
   optin: 'Получать новости и рекламу',
   start: '<b>SovaZone Valuation AI</b>\n\nОцените никнейм Instagram, TikTok или Telegram — бесплатно и за пару нажатий.\n\nНажмите «Оценить никнейм», чтобы открыть приложение.\n\nПродолжая пользоваться ботом, вы соглашаетесь с обработкой Telegram ID для работы сервиса. Новости и рекламные предложения — только по желанию: нажмите «Получать новости и рекламу». Отписаться можно в любой момент через /unsubscribe.',
-  help: '<b>Как пользоваться</b>\n\n1. Откройте приложение.\n2. Выберите платформу.\n3. Введите никнейм и запустите оценку.\n\nКоманды: /subscribe — подписка на новости, /unsubscribe — отказ, /delete — удалить запись, /privacy — конфиденциальность.',
+  help: '<b>Как пользоваться</b>\n\n1. Откройте приложение.\n2. Выберите платформу.\n3. Введите никнейм и запустите оценку.\n\nКоманды: /subscribe — новости по согласию, /unsubscribe — отказ, /delete — удалить запись, /privacy — конфиденциальность, /myid — ваш Telegram ID.',
   estimate: 'Выберите платформу и введите никнейм в приложении.',
-  privacy: '<b>Конфиденциальность</b>\n\nПосле /start мы сохраняем Telegram ID чата, язык, дату входа и источник перехода, чтобы бот работал. Рекламные и информационные рассылки включаются отдельно кнопкой «Получать новости и рекламу» или командой /subscribe. Согласие можно отозвать через /unsubscribe, а запись удалить через /delete. Оцениваемые никнеймы и результаты в базе подписчиков не хранятся.',
+  privacy: '<b>Конфиденциальность</b>\n\nПосле /start мы сохраняем Telegram ID чата, язык, дату входа и источник перехода, чтобы бот работал. Рекламные и информационные рассылки включаются отдельно кнопкой «Получать новости и рекламу» или командой /subscribe. Согласие можно отозвать через /unsubscribe, а запись удалить через /delete. Оцениваемые никнеймы и результаты не хранятся в аналитике. Фиксируем только анонимизированные события входа и успешной оценки по платформе.',
   subscribed: 'Вы дали согласие получать новости и рекламные предложения Valuation AI. Отписаться: /unsubscribe.',
   unsubscribed: 'Подписка на новости и предложения отключена. Оценка никнеймов по-прежнему доступна.',
   deleted: 'Ваша запись удалена. При повторном /start она будет создана заново.'
@@ -23,9 +24,9 @@ const EN = {
   open: 'Evaluate username',
   optin: 'Receive updates & offers',
   start: '<b>SovaZone Valuation AI</b>\n\nEstimate an Instagram, TikTok or Telegram username in just a few taps.\n\nTap “Evaluate username” to open the app.\n\nBy using the bot, you acknowledge processing of your Telegram ID to provide the service. News and promotional messages are optional: tap “Receive updates & offers” to opt in. Unsubscribe any time with /unsubscribe.',
-  help: '<b>How to use Valuation AI</b>\n\n1. Open the app.\n2. Choose a platform.\n3. Enter a username and run valuation.\n\nCommands: /subscribe — opt in, /unsubscribe — opt out, /delete — erase your record, /privacy — privacy details.',
+  help: '<b>How to use Valuation AI</b>\n\n1. Open the app.\n2. Choose a platform.\n3. Enter a username and run valuation.\n\nCommands: /subscribe — opt in, /unsubscribe — opt out, /delete — erase your record, /privacy — privacy details, /myid — your Telegram ID.',
   estimate: 'Choose a platform and enter the username in the app.',
-  privacy: '<b>Privacy</b>\n\nAfter /start, we store your Telegram chat ID, language, start date and referral source for bot operation. News and promotional messages are separate and require the “Receive updates & offers” button or /subscribe. Use /unsubscribe to withdraw consent and /delete to erase your record. Valued usernames and results are not stored in the subscriber database.',
+  privacy: '<b>Privacy</b>\n\nAfter /start, we store your Telegram chat ID, language, start date and referral source for bot operation. News and promotional messages are separate and require the “Receive updates & offers” button or /subscribe. Use /unsubscribe to withdraw consent and /delete to erase your record. Valued usernames and results are not stored in analytics. We count pseudonymous opens and successful estimates by platform.',
   subscribed: 'You have opted in to Valuation AI news and promotional messages. Unsubscribe: /unsubscribe.',
   unsubscribed: 'Updates and offers are now turned off. You can still use username valuations.',
   deleted: 'Your record was erased. Starting the bot again will create a new record.'
@@ -57,7 +58,7 @@ async function reply(chatId, lang, key, showOpen = true) {
   });
 }
 
-export async function handleUpdate(req, res, customStore) {
+export async function handleUpdate(req, res, customStore, customRecordEvent) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!process.env.VALUATION_BOT_TOKEN || !process.env.VALUATION_WEBHOOK_SECRET) return res.status(503).json({ error: 'Not configured' });
@@ -65,6 +66,8 @@ export async function handleUpdate(req, res, customStore) {
 
   try {
     const store = customStore || (await import('./subscriber-store.js')).getProductionStore && await (await import('./subscriber-store.js')).getProductionStore();
+    const analytics=customRecordEvent||(customStore?null:recordEvent);
+    async function log(entry){if(analytics)try{await analytics(entry)}catch(e){console.error('Valuation bot analytics event failed',e?.message)}}
     const update = req.body || {};
     const cb = update.callback_query;
     if (cb && typeof cb.id === 'string' && cb.message?.chat?.type === 'private' && Number.isSafeInteger(cb.message.chat.id)) {
@@ -87,7 +90,16 @@ export async function handleUpdate(req, res, customStore) {
       const match = msg.text.trim().match(/^\/([a-z]+)(?:@ValuationAiBot)?(?:\s+(.+))?$/i);
       const command = (match?.[1] || 'start').toLowerCase();
       const source = match?.[2]?.trim() === 'share' ? 'share' : 'direct';
-      if (command === 'delete' || command === 'stop') {
+      if(command==='myid'){
+        await apiCall('sendMessage',{chat_id:chatId,text:'Telegram ID: '+String(chatId)});
+      } else if(command==='stats'){
+        if(isValuationAdmin(msg.from?.id)&&msg.from?.id===chatId){
+          await apiCall('sendMessage',{chat_id:chatId,text:lang?.startsWith('en')?'Private valuation statistics:':'Закрытая статистика Valuation AI:',
+            reply_markup:{inline_keyboard:[[{text:lang?.startsWith('en')?'Open statistics':'Открыть статистику',web_app:{url:APP_URL+'/admin.html'}}]]}});
+        }else{
+          await apiCall('sendMessage',{chat_id:chatId,text:lang?.startsWith('en')?'Administrator access only. Use /myid to view your Telegram ID.':'Доступ только администратору. Команда /myid покажет ваш Telegram ID.'});
+        }
+      } else if (command === 'delete' || command === 'stop') {
         await store.erase(chatId);
         await reply(chatId, lang, 'deleted', false);
       } else if (command === 'subscribe') {
@@ -97,7 +109,12 @@ export async function handleUpdate(req, res, customStore) {
         await store.setUpdates(chatId, lang, false);
         await reply(chatId, lang, 'unsubscribed', false);
       } else {
-        await store.register(chatId, lang, source);
+        const subscriber=await store.register(chatId, lang, source);
+        if(command==='start'){
+          await log({userId:chatId,type:'bot_start',platform:'none',source});
+          if(subscriber?.createdAt&&subscriber.createdAt===subscriber.lastStartedAt)
+            await log({userId:chatId,type:'bot_registered',platform:'none',source});
+        }
         await reply(chatId, lang, ['start','help','estimate','value','privacy'].includes(command)
           ? (command === 'value' ? 'estimate' : command)
           : 'start', true);
