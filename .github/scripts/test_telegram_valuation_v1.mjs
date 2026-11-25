@@ -62,7 +62,7 @@ async function evaluate(username){
 const cases=[
   ['qzxvna',0,0],['aaaa',5000,10000],['work',10000,20000],['alex',5000,10000],
   ['volk',5000,10000],['hello',20,120],['money',1000,7000],['cloud',500,3000],
-  ['dream',500,3000],['love',100,600],['pavel',10000,30000],['pasha',5,30],
+  ['dream',500,3000],['love',5000,10000],['pavel',10000,30000],['pasha',5,30],
   ['paris',0,10],['monkey',10000,30000],['trading',20,120],['hel_lo',0,5],
   ['aaaaa',100,600],['zzqzx65',0,5],['smart123',0,20],
   ['num284693',0,20],['weakbrandword',5,30]
