@@ -1,0 +1,327 @@
+{
+  "source": "SovaZone published catalog snapshot",
+  "sourceUrl": "https://sovazone.com/usernames",
+  "items": [
+    {
+      "id": "m4d",
+      "handle": "M4D",
+      "priceUsd": 7000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Редкий",
+      "url": "https://sovazone.com/username/m4d",
+      "featured": true
+    },
+    {
+      "id": "o05",
+      "handle": "o0*",
+      "priceUsd": 2500,
+      "platform": "instagram",
+      "status": "sold",
+      "category": "Продан",
+      "url": "https://sovazone.com/username/o05",
+      "featured": true
+    },
+    {
+      "id": "krot",
+      "handle": "KROT",
+      "priceUsd": 2000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/krot",
+      "featured": true
+    },
+    {
+      "id": "tryd",
+      "handle": "TRYD",
+      "priceUsd": 1250,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Короткий",
+      "url": "https://sovazone.com/username/tryd",
+      "featured": true
+    },
+    {
+      "id": "podlets",
+      "handle": "PODLETS",
+      "priceUsd": 1500,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Русское слово",
+      "url": "https://sovazone.com/username/podlets",
+      "featured": true
+    },
+    {
+      "id": "koketka",
+      "handle": "KOKETKA",
+      "priceUsd": 1500,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Русское слово",
+      "url": "https://sovazone.com/username/koketka",
+      "featured": true
+    },
+    {
+      "id": "deluks",
+      "handle": "DELUKS",
+      "priceUsd": 1500,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Премиум",
+      "url": "https://sovazone.com/username/deluks",
+      "featured": true
+    },
+    {
+      "id": "keyed",
+      "handle": "KEYED",
+      "priceUsd": 1500,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Короткий",
+      "url": "https://sovazone.com/username/keyed",
+      "featured": true
+    },
+    {
+      "id": "cennik",
+      "handle": "Cennik",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/cennik",
+      "featured": false
+    },
+    {
+      "id": "prinzip",
+      "handle": "Prinzip",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/prinzip",
+      "featured": false
+    },
+    {
+      "id": "shtopor",
+      "handle": "Shtopor",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/shtopor",
+      "featured": false
+    },
+    {
+      "id": "geval",
+      "handle": "Geval",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/geval",
+      "featured": false
+    },
+    {
+      "id": "fulsome",
+      "handle": "Fulsome",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/fulsome",
+      "featured": false
+    },
+    {
+      "id": "inneren",
+      "handle": "Inneren",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/inneren",
+      "featured": false
+    },
+    {
+      "id": "nietzsche",
+      "handle": "Nietzsche",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Имя",
+      "url": "https://sovazone.com/username/nietzsche",
+      "featured": false
+    },
+    {
+      "id": "hatten",
+      "handle": "Hatten",
+      "priceUsd": 650,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/hatten",
+      "featured": false
+    },
+    {
+      "id": "affright",
+      "handle": "Affright",
+      "priceUsd": 400,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/affright",
+      "featured": false
+    },
+    {
+      "id": "meines",
+      "handle": "Meines",
+      "priceUsd": 400,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/meines",
+      "featured": false
+    },
+    {
+      "id": "sledopyt",
+      "handle": "Sledopyt",
+      "priceUsd": 400,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/sledopyt",
+      "featured": false
+    },
+    {
+      "id": "pricheska",
+      "handle": "Pricheska",
+      "priceUsd": 400,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/pricheska",
+      "featured": false
+    },
+    {
+      "id": "tekstura",
+      "handle": "Tekstura",
+      "priceUsd": 400,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/tekstura",
+      "featured": false
+    },
+    {
+      "id": "gourds",
+      "handle": "Gourds",
+      "priceUsd": 400,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/gourds",
+      "featured": false
+    },
+    {
+      "id": "prankersha",
+      "handle": "Prankersha",
+      "priceUsd": 250,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/prankersha",
+      "featured": false
+    },
+    {
+      "id": "dressirovka",
+      "handle": "Dressirovka",
+      "priceUsd": 250,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Слово",
+      "url": "https://sovazone.com/username/dressirovka",
+      "featured": false
+    },
+    {
+      "id": "gavriil",
+      "handle": "Gavriil",
+      "priceUsd": 2000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Имя",
+      "url": "https://sovazone.com/username/gavriil",
+      "featured": false
+    },
+    {
+      "id": "shelkov",
+      "handle": "Shelkov",
+      "priceUsd": 1000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Фамилия",
+      "url": "https://sovazone.com/username/shelkov",
+      "featured": false
+    },
+    {
+      "id": "zepov",
+      "handle": "Zepov",
+      "priceUsd": 1000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Имя",
+      "url": "https://sovazone.com/username/zepov",
+      "featured": false
+    },
+    {
+      "id": "zikova",
+      "handle": "Zikova",
+      "priceUsd": 1000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Фамилия",
+      "url": "https://sovazone.com/username/zikova",
+      "featured": false
+    },
+    {
+      "id": "lapik",
+      "handle": "Lapik",
+      "priceUsd": 1000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Фамилия",
+      "url": "https://sovazone.com/username/lapik",
+      "featured": false
+    },
+    {
+      "id": "molchanova",
+      "handle": "Molchanova",
+      "priceUsd": 1000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Фамилия",
+      "url": "https://sovazone.com/username/molchanova",
+      "featured": false
+    },
+    {
+      "id": "krasavchuc",
+      "handle": "Krasavchuc",
+      "priceUsd": 1000,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "Фамилия",
+      "url": "https://sovazone.com/username/krasavchuc",
+      "featured": false
+    },
+    {
+      "id": "andalusia",
+      "handle": "Andalusia",
+      "priceUsd": 500,
+      "platform": "instagram",
+      "status": "listed",
+      "category": "География",
+      "url": "https://sovazone.com/username/andalusia",
+      "featured": false
+    }
+  ],
+  "updatedAt": "2026-11-11"
+}
