@@ -146,7 +146,6 @@
           </section>
           <section class="panel panel-sources" id="sources"><div class="panel-head"><div><span class="panel-eyebrow">ACQUISITION</span><h2>Источники переходов</h2><p>Запуски бота по источнику</p></div></div><div class="source-list" id="sources-list"></div></section>
           <section class="panel panel-funnel"><div class="panel-head"><div><span class="panel-eyebrow">CONVERSION PATH</span><h2>Воронка взаимодействия</h2><p>Уникальные пользователи, начавшие путь в выбранном периоде</p></div></div><div class="funnel-list" id="funnel-list"></div><p class="panel-caption">Учитываются последовательные события /start → открытие → успешная оценка внутри периода.</p></section>
-          <section class="panel panel-events" id="events"><div class="panel-head events-head"><div><span class="panel-eyebrow">RECENT ACTIVITY</span><h2>Лента событий</h2><p>Без никнеймов и персональных данных</p></div><select id="event-filter" class="event-select" aria-label="Фильтр событий"><option value="all">Все события</option><option value="estimate_success">Оценки</option><option value="app_open">Открытия</option><option value="bot_start">Запуски</option><option value="bot_registered">Регистрации</option></select></div><div class="event-list" id="events-list"></div></section>
           <section class="panel panel-insights"><div class="panel-head"><div><span class="panel-eyebrow">AUDIENCE QUALITY</span><h2>Дополнительные метрики</h2><p>Рассчитано из собранных данных</p></div></div><div class="insight-list">
              <div class="insight"><span>Доля согласий на рассылку</span><strong id="insight-optin">—</strong></div>
              <div class="insight"><span>Оценок на одного оценщика</span><strong id="insight-evaluations">—</strong></div>
@@ -154,6 +153,7 @@
              <div class="insight"><span>Пользователей с оценками</span><strong id="insight-unique-evaluators">—</strong></div>
              <div class="insight"><span>Заблокировали бота</span><strong id="insight-blocked">—</strong></div>
            </div></section>
+          <section class="panel panel-events" id="events"><div class="panel-head events-head"><div><span class="panel-eyebrow">RECENT ACTIVITY</span><h2>Лента событий</h2><p>Без никнеймов и персональных данных</p></div><select id="event-filter" class="event-select" aria-label="Фильтр событий"><option value="all">Все события</option><option value="estimate_success">Оценки</option><option value="app_open">Открытия</option><option value="bot_start">Запуски</option><option value="bot_registered">Регистрации</option></select></div><div class="event-list" id="events-list"></div></section>
           <section class="panel panel-privacy" id="security"><div class="panel-head"><div><span class="panel-eyebrow">TRUST & PRIVACY</span><h2>Состояние аналитики</h2><p>Источник: приватное хранилище Vercel Blob</p></div></div>
              <div class="health-rows">
                <div class="health-row"><span><svg><use href="#i-shield"></use></svg>Проверка администратора</span><b class="health-ok">Подтверждена</b></div>

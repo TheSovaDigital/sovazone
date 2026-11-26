@@ -123,3 +123,16 @@ test('dashboard uses external stylesheet under strict CSP, and contains only dyn
   assert.ok(vercel.headers.some(h=>h.headers.some(v=>v.key==='Content-Security-Policy'&&v.value.includes("style-src 'self'"))));
   assert.ok(vercel.rewrites.some(r=>r.source==='/admin'&&r.destination==='/admin.html'));
 });
+
+test('desktop analytics grid fills all three columns without leaving an empty row',()=>{
+  const html=readFileSync(new URL('../admin.html',import.meta.url),'utf8');
+  const css=readFileSync(new URL('../admin.css',import.meta.url),'utf8');
+  const names=['panel-chart','panel-platform','panel-sources','panel-funnel','panel-insights','panel-events','panel-privacy'];
+  const positions=names.map(name=>html.indexOf('class="panel '+name+'"'));
+  assert.ok(positions.every(n=>n>=0),'all seven panels are present');
+  assert.deepEqual([...positions].sort((a,b)=>a-b),positions,'dashboard panels are placed in dense reading order');
+  assert.match(css,/\.main-grid\s*\{\s*display:grid;grid-template-columns:1\.25fr 1fr 1fr/);
+  assert.match(css,/\.panel-events\s*\{grid-column:span 2\}/);
+  assert.match(css,/@media\(max-width:760px\)/);
+  assert.match(css,/\.panel\{grid-column:1!important/);
+});
