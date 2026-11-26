@@ -16,15 +16,15 @@ const executablePath=exec('which google-chrome || which chromium',{encoding:'utf
    await page.waitForSelector('.sova-footer-nav a',{timeout:10000});
    await page.evaluate(()=>{document.getElementById('access-gate').hidden=true});
    let lang=await page.$eval('html',x=>x.lang);
-   if(lang!=='ru')await page.click('#lang-btn');
+   if(lang!=='ru')await page.click('[data-language="ru"]');
    const ru=await page.evaluate(()=>{
     const brand=document.querySelector('.identity').getBoundingClientRect(),right=document.querySelector('.topbar-right').getBoundingClientRect();
-    return {lang:document.documentElement.lang,h1:document.querySelector('h1')?.textContent,eyebrow:document.querySelector('.eyebrow [data-t]').textContent,logo:document.querySelector('.identity-mark img')?.getAttribute('src'),brand:document.querySelector('.identity-copy').textContent,placeholder:document.querySelector('#username').placeholder,links:[...document.querySelectorAll('.sova-footer-nav a')].map(x=>({url:x.href,text:x.textContent.trim()})),kicker:document.querySelectorAll('.section-head .section-kicker').length,viewport:innerWidth,rootWidth:document.documentElement.scrollWidth,headerGap:Math.round(right.left-brand.right),footer:document.querySelector('.sova-footer-owner').textContent,meta:document.title};
+    return {lang:document.documentElement.lang,h1:document.querySelector('h1')?.textContent,eyebrow:document.querySelector('.eyebrow [data-t]').textContent,brand:document.querySelector('.identity-site')?.textContent,siteUrl:document.querySelector('.identity')?.href,placeholder:document.querySelector('#username').placeholder,links:[...document.querySelectorAll('.sova-footer-nav a')].map(x=>({url:x.href,text:x.textContent.trim()})),kicker:document.querySelectorAll('.section-head .section-kicker').length,viewport:innerWidth,rootWidth:document.documentElement.scrollWidth,headerGap:Math.round(right.left-brand.right),footer:document.querySelector('.sova-footer-owner').textContent,meta:document.title};
    });
    ok([200,304].includes(r.status()),'Local UI loads '+width,r.status());
    ok(ru.lang==='ru'&&ru.h1==='Узнать стоимость'&&!await page.$('.hero h1'),'RU form heading without old marketing slogan '+width,ru.h1);
    ok(ru.eyebrow==='INTELLIGENT USERNAME VALUATION','English eyebrow in RU '+width,ru.eyebrow);
-   ok(ru.logo==='/mark.svg'&&ru.brand.includes('SOVAZONE')&&ru.brand.includes('VALUATION'),'Brand and logo '+width,ru.brand);
+   ok(ru.brand==='SovaZone.com'&&ru.siteUrl==='https://sovazone.com/','Compact website header link '+width,ru.brand);
    ok(ru.placeholder==='username'&&ru.kicker===0,'No numbering and correct placeholder '+width,ru);
    ok(ru.links.length===3&&ru.links[0].url==='https://sovazone.com/'&&ru.links[1].url==='https://t.me/SovaDigital'&&ru.links[2].url==='https://t.me/SovaUsername','Three verified links '+width,ru.links);
    ok(ru.rootWidth<=width+1,'No root overflow '+width,ru.rootWidth-width);
@@ -48,7 +48,7 @@ const executablePath=exec('which google-chrome || which chromium',{encoding:'utf
     await page.screenshot({path:name,fullPage:true});
     output.screenshots.push(name);
    }
-   await page.click('#lang-btn');
+   await page.click('[data-language="en"]');
    const en=await page.evaluate(()=>({lang:document.documentElement.lang,h1:document.querySelector('h1')?.textContent,title:document.title,footer:document.querySelector('.sova-footer-nav').textContent}));
    ok(en.lang==='en'&&en.h1==='Find its value','EN form heading '+width,en.h1);
    ok(en.title.includes('SovaZone Valuation AI')&&en.footer.includes('Buy a username')&&en.footer.includes('Sell a username'),'EN branding and links '+width,en);

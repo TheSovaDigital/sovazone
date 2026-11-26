@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import vm from 'node:vm';
 import { verifyTelegramInitData } from '../api/verify-telegram.js';
 import { verifyAccess } from '../api/access.js';
 const token='12345:test-token',now=1794350000;
@@ -60,7 +61,7 @@ test('Mini App waits for verified Telegram access before displaying onboarding g
   assert.match(js,/els\.submit\.disabled=true;\s*verifyAccessOnOpen\(\)/);
   assert.match(js,/if \(resp\.ok && data\.authorized\)/);
   assert.match(js,/else showAccessGate\(resp\.status===403\?'start':'error'\)/);
-  assert.match(html,/app\.js\?v=6/);
+  assert.match(html,/app\.js\?v=7/);
 });
 test('Telegram Mini App expands and requests fullscreen only when supported, with fallback and safe area',()=>{
   const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
@@ -73,4 +74,57 @@ test('Telegram Mini App expands and requests fullscreen only when supported, wit
   assert.match(js,/telegram\.onEvent\?\.\('fullscreenFailed'/);
   assert.match(css,/--tg-content-safe-area-inset-top/);
   assert.match(css,/--tg-content-safe-area-inset-bottom/);
+});
+
+test('Desktop Telegram never triggers expand or fullscreen and mobile content clears native controls',()=>{
+  const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
+  const css=readFileSync(new URL('../style.css',import.meta.url),'utf8');
+  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  assert.match(js,/if \(!isTelegramMobileClient\(\)\) return;/);
+  assert.match(js,/\['tdesktop','macos','unigram','web','weba','webk','windows'\]/);
+  assert.match(js,/\['ios','android','android_x'\]/);
+  assert.match(css,/html\.tg-mobile\.tg-fullscreen \.shell/);
+  assert.match(css,/padding-top:max\(104px/);
+  assert.match(css,/--tg-content-safe-area-inset-top/);
+  assert.match(html,/class="identity-site">SovaZone/);
+  assert.match(html,/class="identity-domain">\.com/);
+  assert.equal((html.match(/data-language="(?:ru|en)"/g)||[]).length,2);
+  assert.match(html,/class="sova-lang-toggle"/);
+  assert.match(js,/button\.setAttribute\('aria-pressed',String\(active\)\)/);
+});
+
+test('Telegram viewport behavior: iPhone fullscreen; desktop stays windowed',()=>{
+  const script=readFileSync(new URL('../app.js',import.meta.url),'utf8');
+  const viewportScript=script.slice(0,script.indexOf('\nconst copy ='));
+  assert.ok(viewportScript.includes('initializeTelegramViewport()'));
+  const emulate=(platform,userAgent)=>{
+    const calls=[],classes=new Set();
+    const webapp={
+      platform,isFullscreen:false,
+      ready:()=>calls.push('ready'),expand:()=>calls.push('expand'),
+      requestFullscreen:()=>calls.push('fullscreen'),isVersionAtLeast:()=>true,
+      setHeaderColor:()=>{},setBackgroundColor:()=>{},onEvent:()=>{}
+    };
+    vm.runInNewContext(viewportScript,{
+      window:{Telegram:{WebApp:webapp}},
+      navigator:{userAgent},
+      document:{documentElement:{classList:{
+        add:(name)=>classes.add(name),
+        toggle:(name,on)=>{if(on)classes.add(name);else classes.delete(name)}
+      }}}
+    });
+    return {calls,classes};
+  };
+  const ios=emulate('ios','Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)');
+  assert.deepEqual(ios.calls,['ready','expand','fullscreen']);
+  assert.equal(ios.classes.has('tg-mobile'),true);
+  const android=emulate('android','Mozilla/5.0 (Linux; Android 15; Mobile)');
+  assert.deepEqual(android.calls,['ready','expand','fullscreen']);
+  for(const desktopPlatform of ['tdesktop','macos','unigram','weba','webk']){
+    const desktop=emulate(desktopPlatform,'Mozilla/5.0 (Windows NT 10.0; Win64; x64)');
+    assert.deepEqual(desktop.calls,['ready'],desktopPlatform+' must not expand or fullscreen');
+    assert.equal(desktop.classes.has('tg-mobile'),false);
+  }
+  const unsupported=emulate('tdesktop','Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)');
+  assert.deepEqual(unsupported.calls,['ready'],'desktop platform takes priority over user agent');
 });
