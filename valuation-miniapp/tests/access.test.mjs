@@ -61,7 +61,7 @@ test('Mini App waits for verified Telegram access before displaying onboarding g
   assert.match(js,/els\.submit\.disabled=true;\s*verifyAccessOnOpen\(\)/);
   assert.match(js,/if \(resp\.ok && data\.authorized\)/);
   assert.match(js,/else showAccessGate\(resp\.status===403\?'start':'error'\)/);
-  assert.match(html,/app\.js\?v=7/);
+  assert.match(html,/app\.js\?v=8/);
 });
 test('Telegram Mini App expands and requests fullscreen only when supported, with fallback and safe area',()=>{
   const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
