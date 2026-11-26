@@ -61,7 +61,7 @@ test('Mini App waits for verified Telegram access before displaying onboarding g
   assert.match(js,/els\.submit\.disabled=true;\s*verifyAccessOnOpen\(\)/);
   assert.match(js,/if \(resp\.ok && data\.authorized\)/);
   assert.match(js,/else showAccessGate\(resp\.status===403\?'start':'error'\)/);
-  assert.match(html,/app\.js\?v=7/);
+  assert.match(html,/app\.js\?v=8/);
 });
 test('Telegram Mini App expands and requests fullscreen only when supported, with fallback and safe area',()=>{
   const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
@@ -128,4 +128,19 @@ test('Telegram viewport behavior: iPhone fullscreen; desktop stays windowed',()=
   }
   const unsupported=emulate('tdesktop','Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)');
   assert.deepEqual(unsupported.calls,['ready'],'desktop platform takes priority over user agent');
+});
+
+test('valuation interface does not show verbose privacy analytics card',()=>{
+  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
+  const css=readFileSync(new URL('../style.css',import.meta.url),'utf8');
+  assert.doesNotMatch(html,/class="privacy-note"/);
+  assert.doesNotMatch(html,/data-t="privacyText"/);
+  assert.doesNotMatch(js,/privacyTitle:|privacyText:/);
+  assert.doesNotMatch(css,/\.privacy-note\{/);
+  assert.match(html,/data-t="estimateNote"/);
+  assert.match(html,/data-t="localHistory"/);
+  assert.match(html,/class="sova-footer"/);
+  assert.match(html,/app\.js\?v=8/);
+  assert.match(html,/style\.css\?v=10/);
 });
