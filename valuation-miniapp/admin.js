@@ -56,7 +56,7 @@ function renderKpi(p){
   number('new-registrations',p.registrations);number('bot-starts',p.botStarts);
   number('app-opens',p.appOpens);number('unique-evaluators',p.uniqueEvaluators);
   el('active-period').textContent=state.period+' ДНЕЙ';el('valuations-period').textContent=state.period+' ДНЕЙ';
-  el('optin-rate').textContent='От всех пользователей: '+percent(state.stats.optInUsers,state.stats.registeredUsers);
+  el('optin-rate').textContent='Доля от всех: '+percent(state.stats.optInUsers,state.stats.registeredUsers);
   el('insight-optin').textContent=percent(state.stats.optInUsers,state.stats.registeredUsers);
   el('insight-evaluations').textContent=p.uniqueEvaluators?decimal(p.valuations/p.uniqueEvaluators):'—';
   number('insight-unique-starts',p.uniqueBotUsers);
@@ -116,7 +116,7 @@ function drawChart(data){
     const y=bottom-t/4*height;
     svg.append(svgNode('line',{x1:left,x2:right,y1:y,y2:y,class:'gridline'}));
     const label=svgNode('text',{x:39,y:y+4,'text-anchor':'end',class:'axis-label'});
-    label.textContent=fmt(Math.round(scaleMax*t/4));svg.append(label);
+    label.textContent=scaleMax<4?decimal(scaleMax*t/4):fmt(Math.round(scaleMax*t/4));svg.append(label);
   }
   if(!data.length){el('chart-hint').textContent='Пока нет данных по дням';return}
   const points=data.map((row,i)=>[atX(i),atY(values[i])]);

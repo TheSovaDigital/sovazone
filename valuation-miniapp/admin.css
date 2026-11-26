@@ -18,3 +18,120 @@
 @media(max-width:760px){.shell{display:block}.sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-101%);transition:transform .2s ease;width:265px;min-width:265px}.shell.menu-open .sidebar{transform:translateX(0)}.sidebar-backdrop{position:fixed;inset:0;z-index:14;background:#0009;display:block}.topbar{min-height:64px;padding:0 18px}.menu-toggle{display:grid}.top-security,.top-admin,.crumb{display:none}.top-left{gap:9px}.top-right{gap:5px}.content{padding:27px 17px 48px}.hero{gap:17px}.hero-controls{width:100%}.period-control{flex:1;justify-content:center}.button{padding:0 12px}.kpi-grid{gap:10px}.kpi-card{padding:15px;min-height:150px}.kpi-value{font-size:26px}.kpi-secondary{min-height:128px}.main-grid{grid-template-columns:1fr;gap:12px}.panel{grid-column:1!important;padding:20px 16px}.panel-chart{grid-column:1}.panel-head{flex-wrap:wrap}.chart-tabs{margin-top:5px}.chart-frame{height:205px}.chart-frame svg{height:170px}.donut-layout{justify-content:flex-start}.donut-wrap{width:160px}.footer{flex-direction:column}.data-toolbar{align-items:flex-start;flex-direction:column}.data-badge{display:none}.auth-panel{grid-template-columns:1fr}.auth-art{display:none}.auth-body{padding:28px 22px}.auth-help{gap:6px}.step-divider{display:none}}
 @media(max-width:420px){.kpi-card{padding:13px;min-height:140px}.kpi-name{font-size:11px}.kpi-foot{font-size:10px}.kpi-value{font-size:23px}.hero h1{font-size:30px}.login-row{flex-direction:column}.login-row button{width:100%}.panel-head h2{font-size:15px}.donut-wrap{width:139px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+
+/* Compact administration layout v4. The icon and KPI label share a single row.
+   Desktop typography and mobile overflow are verified by automated structural tests. */
+.sidebar{width:232px;min-width:232px;padding:22px 14px 17px}
+.sidebar-tag{padding:27px 13px 14px}
+.navigation{gap:3px}
+.nav-link{min-height:41px;padding:10px 12px;gap:11px;font-size:12px}
+.nav-link svg{flex-shrink:0;width:17px;height:17px}
+.topbar{min-height:61px;padding:0 26px}
+.content{padding:26px 26px 46px}
+.hero{gap:12px;margin-bottom:15px}
+.hero h1{font-size:clamp(28px,3vw,35px);margin:8px 0 8px}
+.hero p{font-size:12px;line-height:1.45}
+.eyebrow{font-size:9px}
+.hero-controls{gap:8px}
+.period-control,.button{height:36px;min-height:36px;padding:0 12px}
+.period-control select{font-size:11px}
+.button{font-size:11px}
+.data-toolbar{margin-bottom:13px;min-height:25px}
+.data-ready,.data-actions{gap:9px;font-size:10px}
+.data-badge,.quiet-button{padding:6px 8px}
+.kpi-grid{gap:10px;margin-bottom:13px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.kpi-card,.kpi-secondary{display:flex;flex-direction:column;gap:0;min-width:0;min-height:128px;border-radius:12px;padding:14px 15px 12px}
+.kpi-card .kpi-top,.kpi-secondary .kpi-top{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin:0 0 12px;min-height:29px}
+.kpi-title{display:flex;align-items:center;gap:9px;min-width:0;flex:1}
+.kpi-card .kpi-icon,.kpi-secondary .kpi-icon{display:grid;place-items:center;flex:0 0 29px;width:29px;height:29px;border-radius:8px}
+.kpi-card .kpi-icon svg,.kpi-secondary .kpi-icon svg{width:16px;height:16px}
+.kpi-card .kpi-name{display:block;min-width:0;min-height:0;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#d6cfe3;font-size:12px;font-weight:620;line-height:1.25}
+.kpi-card .kpi-indicator{flex-shrink:0;margin:0;color:#9a83bd;font-size:9px;letter-spacing:.065em;white-space:nowrap}
+.kpi-card .kpi-value,.kpi-secondary .kpi-value{font-size:27px;line-height:1.12;margin:0 0 7px;font-variant-numeric:tabular-nums}
+.kpi-card .kpi-foot,.kpi-secondary .kpi-foot{font-size:10px;line-height:1.25;margin:auto 0 0;color:#8c839d}
+.main-grid{gap:12px}
+.panel{padding:17px;border-radius:12px}
+.panel-head{margin-bottom:12px;gap:10px}
+.panel-head h2{margin:6px 0 4px;font-size:15px}
+.panel-head p{font-size:10px;line-height:1.35}
+.panel-eyebrow{font-size:9px;letter-spacing:.14em}
+.panel-sources,.panel-funnel,.panel-events,.panel-insights,.panel-privacy{min-height:0}
+.chart-tabs{padding:3px;gap:1px}
+.chart-tabs button{font-size:10px;padding:6px 9px}
+.chart-frame{height:196px;padding-top:3px}
+.chart-frame svg{height:161px}
+.chart-axis{margin-top:0}
+.chart-frame svg .hitbox{fill:transparent;stroke:none!important;stroke-width:0!important}
+.chart-frame svg .area{stroke:none!important}
+.chart-frame svg .axis-label{stroke:none!important}
+.chart-frame svg .dot{stroke:#744db5;stroke-width:2.6}
+.chart-frame svg .gridline{stroke:#302b44;stroke-width:1}
+.donut-layout{gap:11px;padding:4px 0 7px}
+.donut-wrap{width:140px;max-width:46%}
+.donut-center strong{font-size:21px}
+.platform-legend{gap:12px}
+.platform-item{font-size:10px}
+.platform-item b{font-size:10px;white-space:nowrap}
+.platform-item small{font-size:9px}
+.source-list{gap:13px;padding-top:4px}
+.source-title,.funnel-top{font-size:11px}
+.funnel-list{gap:11px;padding-top:4px}
+.funnel-track{height:24px}
+.panel-caption{margin-top:12px}
+.event-row{padding:9px 0;gap:10px}
+.event-icon{height:29px;width:29px}
+.insight{padding:12px 0}
+.health-rows{gap:11px}
+.footer{padding:19px 2px 0}
+@media(max-width:1350px){
+ .sidebar{width:220px;min-width:220px}
+ .content{padding:24px 22px 44px}
+ .kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .kpi-card,.kpi-secondary{padding:13px 11px}
+ .kpi-card .kpi-name{font-size:11px}
+ .kpi-title{gap:7px}
+ .kpi-card .kpi-indicator{font-size:8px}
+}
+@media(max-width:1160px){
+ .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero{flex-wrap:wrap}
+ .hero-controls{width:100%;justify-content:flex-start}
+ .kpi-card,.kpi-secondary{min-height:120px}
+ .kpi-card .kpi-name{font-size:12px}
+}
+@media(max-width:760px){
+ .sidebar{width:265px;min-width:265px;padding:22px 14px 17px}
+ .topbar{min-height:56px;padding:0 16px}
+ .content{padding:20px 14px 37px}
+ .hero{gap:14px;margin-bottom:14px}
+ .hero h1{font-size:29px}
+ .hero-controls{width:100%;gap:7px}
+ .period-control{flex:1;min-width:130px}
+ .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .kpi-card,.kpi-secondary{min-height:120px;padding:12px}
+ .kpi-card .kpi-top{gap:5px;margin-bottom:9px}
+ .kpi-title{gap:7px}
+ .kpi-card .kpi-icon{width:27px;height:27px;flex-basis:27px}
+ .kpi-card .kpi-name{font-size:11px}
+ .kpi-card .kpi-indicator{font-size:8px}
+ .kpi-card .kpi-value,.kpi-secondary .kpi-value{font-size:24px}
+ .panel{padding:16px 14px}
+ .chart-frame{height:191px}
+ .chart-frame svg{height:157px}
+ .donut-wrap{width:138px}
+ .data-toolbar{gap:6px}
+}
+@media(max-width:450px){
+ .kpi-grid{grid-template-columns:1fr}
+ .kpi-card,.kpi-secondary{min-height:105px;padding:12px 14px}
+ .kpi-card .kpi-top{margin-bottom:6px}
+ .kpi-card .kpi-name{font-size:12px}
+ .kpi-card .kpi-indicator{font-size:9px}
+ .kpi-card .kpi-value,.kpi-secondary .kpi-value{font-size:23px;margin-bottom:5px}
+ .data-ready{flex-wrap:wrap;row-gap:5px}
+ .data-divider{display:none}
+ .hero-controls{flex-wrap:wrap}
+ .chart-tabs button{font-size:9px;padding:6px 7px}
+ .panel-head h2{font-size:14px}
+}

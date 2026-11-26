@@ -113,6 +113,11 @@ test('dashboard uses external stylesheet under strict CSP, and contains only dyn
   assert.match(html,/id="activity-chart"/);
   assert.match(html,/id="export-btn"/);
   assert.ok(css.includes('.kpi-grid'));
+  assert.equal((html.match(/class="kpi-title"/g)||[]).length,8);
+  assert.match(css,/\.kpi-title\s*\{/);
+  assert.match(css,/\.chart-frame svg \.hitbox\s*\{[^}]*stroke:none/);
+  assert.match(css,/@media\(max-width:450px\)/);
+  assert.match(js,/scaleMax<4\?decimal/);
   assert.ok(js.includes('/api/admin-stats'));
   assert.ok(js.includes('/api/admin-login'));
   assert.ok(vercel.headers.some(h=>h.headers.some(v=>v.key==='Content-Security-Policy'&&v.value.includes("style-src 'self'"))));
