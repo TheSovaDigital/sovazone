@@ -74,3 +74,10 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - Avoid Telegram remote-photo fetching (400 Bad Request on /start). Read the same approved JPEG via server-side fetch and send a multipart upload to Telegram `sendPhoto`, retaining caption and all three rows of inline buttons. Never manually set the FormData Content-Type boundary.
 - A protected operator diagnostic on `/api/setup?testWelcome=1` sends one real welcome to the first configured `VALUATION_ADMIN_IDS` recipient only; requires the existing setup key and verified bot identity. It ignores any user-supplied chatId and has no unprotected recipient selection.
 - If photo upload fails, bot still sends the original /start text with buttons.
+
+## Complete owl favicon package (2026-11-26)
+- The favicon family is installed only on Valuation AI at valuation.sovazone.com, not the separate SovaZone marketplace site.
+- ICO (16/32/48), PNG favicons (16/32/48), Apple touch 180, Android chrome 192/512, Windows tile 150, Safari monochrome pinned-tab vector, webmanifest and browserconfig are provided as public static files.
+- The monochrome pinned-tab SVG is a simplified vector derived from the approved owl. Safari's mask-icon uses warm-metal `#c9a27a`; dark matte RGB raster icons use the existing approved WebP owl as their source.
+- Manifest display is browser rather than standalone because authenticated valuations require a Telegram session.
+- The one-time GitHub Actions bootstrapping workflow was deleted after its generated files were committed; no ongoing workflow is required.
