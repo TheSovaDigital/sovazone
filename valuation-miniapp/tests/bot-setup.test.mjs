@@ -90,7 +90,9 @@ test('webhook denies unauthenticated updates and handles language-specific /star
     await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'en'},text:'/start'}}},valid,store);
     assert.equal(valid.code,200);
     assert.equal(sent.length,1);
-    assert.ok(sent[0].text.includes('Instagram'));
+    assert.ok(sent[0].caption.includes('Instagram'));
+    assert.equal(sent[0].photo,expectedUrl+'/assets/welcome-banner.jpg');
+    assert.equal('text' in sent[0],false,'/start is a branded photo with caption');
     assert.equal(sent[0].reply_markup.inline_keyboard[0][0].web_app.url,expectedUrl);
     const englishButtons=sent[0].reply_markup.inline_keyboard;
     assert.deepEqual(englishButtons,[
@@ -106,6 +108,7 @@ test('webhook denies unauthenticated updates and handles language-specific /star
     await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'ru'},text:'/help'}}},help,store);
     assert.equal(help.code,200);
     assert.ok(sent[1].text.includes('Как пользоваться'));
+    assert.equal('photo' in sent[1],false,'/help stays a normal message');
     assert.deepEqual(sent[1].reply_markup.inline_keyboard,[
       [{text:'Оценить никнейм',web_app:{url:expectedUrl}}],
       [{text:'Купить ник',url:'https://t.me/SovaDigital'},{text:'Продать ник',url:'https://t.me/SovaUsername'}],
@@ -120,4 +123,56 @@ test('webhook denies unauthenticated updates and handles language-specific /star
     assert.equal(sent.at(-1).text.includes('disabled'),true);
     assert.equal('reply_markup' in sent.at(-1),false,'no marketing or navigation buttons for opt-out confirmation');
   } finally {globalThis.fetch=original}
+});
+
+
+test('branded greeting falls back to text if Telegram cannot fetch the photo',async()=>{
+  setEnv();const sent=[];const previous=globalThis.fetch;
+  globalThis.fetch=async(url,options)=>{
+    const method=String(url).split('/').pop();
+    const payload=JSON.parse(options.body);
+    sent.push({method,payload});
+    if(method==='sendPhoto')return {ok:false,status:400,json:async()=>({ok:false})};
+    return {ok:true,status:200,json:async()=>({ok:true,result:true})};
+  };
+  try{
+    const store={register:async()=>({}),setUpdates:async()=>{},setServiceUpdates:async()=>{}};
+    const res=response();
+    await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},
+      body:{message:{chat:{id:88,type:'private'},from:{language_code:'ru'},text:'/start'}}},
+      res,store);
+    assert.equal(res.code,200);
+    assert.deepEqual(sent.map(x=>x.method),['sendPhoto','sendMessage']);
+    assert.ok(sent[1].payload.text.includes('Оцените никнейм'));
+    assert.equal(sent[1].payload.reply_markup.inline_keyboard.length,3);
+  }finally{globalThis.fetch=previous}
+});
+test('authorized bot profile update uploads approved JPEG using Telegram multipart API',async()=>{
+  setEnv();const original=globalThis.fetch,methods=[];
+  globalThis.fetch=async(url,options)=>{
+    if(String(url)===expectedUrl+'/assets/bot-avatar.jpg'){
+      return {ok:true,headers:{get:()=> 'image/jpeg'},arrayBuffer:async()=>new Uint8Array(1536).buffer};
+    }
+    const method=String(url).split('/').pop();methods.push(method);
+    if(method==='setMyProfilePhoto'){
+      assert.ok(options.body instanceof FormData,'multipart upload required');
+      assert.deepEqual(JSON.parse(options.body.get('photo')),
+        {type:'static',photo:'attach://avatar'});
+      assert.equal(options.body.get('avatar').type,'image/jpeg');
+      return {ok:true,status:200,json:async()=>({ok:true,result:true})};
+    }
+    const result=method==='getMe'?{username:'ValuationAiBot'}:
+      method==='getWebhookInfo'?{url:expectedUrl+'/api/webhook'}:true;
+    return {ok:true,status:200,json:async()=>({ok:true,result})};
+  };
+  try{
+    const res=response();
+    await setup({method:'GET',query:{key:setupKey,profile:'1'}},res);
+    assert.equal(res.code,200);
+    assert.equal(res.payload.profileUpdated,true);
+    assert.equal(methods.includes('setMyProfilePhoto'),true);
+    const denied=response();
+    await setup({method:'GET',query:{key:'incorrect',profile:'1'}},denied);
+    assert.equal(denied.code,403);
+  }finally{globalThis.fetch=original}
 });

@@ -63,3 +63,9 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - Use `touch-action:manipulation` on mobile to disable double-tap smart zoom while preserving scroll and pinch accessibility. A mobile-only non-passive `dblclick` fallback prevents default on non-editable UI but not input fields.
 - Replace costly fixed blur layers with lightweight radial gradients on touch-screen mobile WebViews. Desktop styling unchanged.
 - **Limitation:** Telegram/iOS controls the native WebView lifecycle and may still briefly display its own black loading frame on resume. These changes shorten webpage startup and reduce GPU work, but cannot guarantee the client never displays an OS-owned blank frame.
+
+## Approved matte-black Valuation AI branding (November 26, 2026)
+- The Mini App header and favicon use `assets/app-icon.webp`; OG previews use `assets/welcome-banner.jpg`.
+- New /start bot greetings display the approved matte-black image via Telegram sendPhoto (RU/EN captions and four existing navigation buttons). Other commands continue using text. On photo errors the bot falls back to normal /start text, preserving functionality.
+- Avatar image `assets/bot-avatar.jpg` is uploaded to @ValuationAiBot using operator-authenticated setup `?profile=1`; never modify another bot or expose the token. This action is **not** called on routine deployment or ordinary setup.
+- SHA256 checks ensure the exact user-approved image assets were imported, not substitutions.
