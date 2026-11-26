@@ -102,7 +102,7 @@ test('webhook denies unauthenticated updates and handles language-specific /star
     ]);
     assert.equal(englishButtons.length,3,'one app button, two channel links in a row and one site button');
     assert.equal(JSON.stringify(englishButtons).includes('callback_data'),false,'no unwanted marketing opt-in');
-    assert.doesNotMatch(sent[0].text,/Receive updates & offers/);
+    assert.doesNotMatch(sent[0].caption,/Receive updates & offers/);
     assert.match(sent[0].text,/\/unsubscribe/);
     const help=response();
     await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'ru'},text:'/help'}}},help,store);
