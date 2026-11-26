@@ -1,0 +1,35 @@
+name: Import approved Valuation AI brand images
+on:
+  push:
+    branches:
+      - feat/valuation-brand-assets-welcome-avatar-20261126
+    paths:
+      - .github/workflows/valuation-import-approved-assets.yml
+permissions:
+  contents: write
+jobs:
+  import-approved:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout assets branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Transfer approved images and verify original bytes
+        env:
+          APPROVED_WELCOME: https://at.adobe.com/d0g0Zsk45hzCV8jZ
+          APPROVED_AVATAR: https://at.adobe.com/bY3wczkKZBEKpXSF
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --max-time 60 --silent --show-error "$APPROVED_WELCOME" --output valuation-miniapp/assets/welcome-banner.jpg
+          curl --fail --location --retry 3 --max-time 60 --silent --show-error "$APPROVED_AVATAR" --output valuation-miniapp/assets/bot-avatar.jpg
+          echo "a0f35ed509a33cec17d75c096f6a20e1aa6a76b372df8ce79406b5cfec23a996  valuation-miniapp/assets/welcome-banner.jpg" | sha256sum --check
+          echo "c29622598a3e2ebdded6f473a5792ad164f9fdb2e4221694ccf6686789cc2c75  valuation-miniapp/assets/bot-avatar.jpg" | sha256sum --check
+      - name: Commit the verified artwork only
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add valuation-miniapp/assets/welcome-banner.jpg valuation-miniapp/assets/bot-avatar.jpg
+          git commit -m "assets(valuation): import verified matte-black owl welcome banner and avatar"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
