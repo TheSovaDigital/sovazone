@@ -41,15 +41,37 @@ const EN = {
 };
 function copyFor(language) { return String(language || '').toLowerCase().startsWith('en') ? EN : RU }
 async function apiCall(method, data) {
+  const multipart=data instanceof FormData;
   const response = await fetch('https://api.telegram.org/bot' + process.env.VALUATION_BOT_TOKEN + '/' + method, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    ...(multipart ? {} : { headers: { 'Content-Type': 'application/json' } }),
+    body: multipart ? data : JSON.stringify(data)
   });
-  if (!response.ok) throw Error('Telegram API ' + method + ' HTTP ' + response.status);
-  const json = await response.json();
-  if (!json.ok) throw Error('Telegram API rejected ' + method);
+  const json=await response.json().catch(()=>({}));
+  if (!response.ok || !json.ok) {
+    // Telegram's human-readable error is essential to diagnosing rejected media.
+    // Never log the bot token, payload, recipient or full request URL.
+    const reason=String(json.description||'unknown').slice(0,250);
+    throw Error('Telegram API ' + method + ' HTTP ' + response.status + ': ' + reason);
+  }
   return json.result;
+}
+async function uploadWelcomePhoto(chatId,caption,buttons){
+  // Telegram occasionally rejects remotely hosted photos even when the asset
+  // returns HTTP 200 to a browser. Upload the exact JPG bytes as multipart instead.
+  const image=await fetch(APP_URL+'/assets/welcome-banner.jpg');
+  if(!image.ok || !String(image.headers?.get?.('content-type')||'').toLowerCase().includes('image/jpeg'))
+    throw Error('Approved welcome JPEG is not reachable from the bot server');
+  const bytes=await image.arrayBuffer();
+  if(bytes.byteLength<1024 || bytes.byteLength>8*1024*1024)
+    throw Error('Approved welcome JPEG has an unexpected size');
+  const form=new FormData();
+  form.append('chat_id',String(chatId));
+  form.append('caption',caption);
+  form.append('parse_mode','HTML');
+  form.append('photo',new Blob([bytes],{type:'image/jpeg'}),'welcome-banner.jpg');
+  if(buttons.length)form.append('reply_markup',JSON.stringify({inline_keyboard:buttons}));
+  return apiCall('sendPhoto',form);
 }
 async function reply(chatId, lang, key, showOpen = true) {
   const t = copyFor(lang);
@@ -70,11 +92,7 @@ async function reply(chatId, lang, key, showOpen = true) {
   // Telegram captions have a 1024-character limit; our RU/EN greeting fits.
   if(key==='start'){
     try{
-      await apiCall('sendPhoto',{
-        ...payload,
-        photo:APP_URL+'/assets/welcome-banner.jpg',
-        caption:t.start
-      });
+      await uploadWelcomePhoto(chatId,t.start,buttons);
       return;
     }catch(error){
       // A CDN/Telegram image failure should never block valuation onboarding.
@@ -86,6 +104,11 @@ async function reply(chatId, lang, key, showOpen = true) {
     text:t[key] || t.start,
     link_preview_options:{is_disabled:true}
   });
+}
+
+export async function previewWelcomeForOperator(chatId,language='ru'){
+  if(!Number.isSafeInteger(chatId) || chatId<=0)throw Error('Invalid admin recipient');
+  return reply(chatId,language,'start',true);
 }
 
 export async function handleUpdate(req, res, customStore, customRecordEvent) {

@@ -57,6 +57,16 @@ export default async function handler(req, res) {
     if (String(identity.username || '').toLowerCase() !== 'valuationaibot')
       return res.status(409).json({ ok: false, error: 'This token belongs to another bot' });
 
+    if(req.query?.testWelcome==='1'){
+      // Authorised diagnostic: send the real /start card only to one allowlisted
+      // administrator. Never accept arbitrary chat IDs from the request.
+      const adminId=String(process.env.VALUATION_ADMIN_IDS||'').split(',').map(x=>x.trim()).find(x=>/^\d{6,16}$/.test(x));
+      if(!adminId)return res.status(403).json({ok:false,error:'Admin recipient not configured'});
+      const {previewWelcomeForOperator}=await import('./webhook.js');
+      await previewWelcomeForOperator(Number(adminId),'ru');
+      return res.status(200).json({ok:true,bot:'@'+identity.username,welcomeSent:true});
+    }
+
     let profileUpdated=false;
     if(req.query?.profile==='1'){
       // Operator-authorized, explicit, one-time profile image update.
