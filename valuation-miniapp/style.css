@@ -89,3 +89,13 @@
 .admin-link{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 11px;font-size:12px;color:#dedde8;text-decoration:none;background:rgba(255,255,255,.045)}
 .admin-link[hidden]{display:none!important}
 .admin-link:hover{background:rgba(255,255,255,.1)}
+
+/* Telegram Bot API 8+: the true fullscreen viewport includes system cutouts.
+   Use Telegram's content-safe inset rather than covering the native controls. */
+html.tg-fullscreen body {
+  min-height:var(--tg-viewport-stable-height, 100dvh);
+}
+html.tg-fullscreen .shell {
+  padding-top:max(var(--tg-content-safe-area-inset-top, 0px), env(safe-area-inset-top, 0px));
+  padding-bottom:max(var(--tg-content-safe-area-inset-bottom, 0px), env(safe-area-inset-bottom, 0px));
+}
