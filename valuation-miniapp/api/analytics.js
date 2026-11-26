@@ -141,7 +141,7 @@ export async function collectStats({list,get},now=new Date(),caps={users:3000,ev
   return {
     asOf:now.toISOString(),scope:'since-activation',windowDays:30,
     registeredUsers:users.results.length,registeredUsersTruncated:users.truncated,
-    optInUsers:optIns,serviceUpdatesUsers,blockedUsers,profilesRead,
+    optInUsers:optIns,serviceUpdatesUsers,blockedUsers:blocked,profilesRead,
     botStarts30:p.botStarts,newRegistrations30:p.registrations,appOpens30:p.appOpens,
     valuationCount30:p.valuations,uniqueActiveUsers30:p.uniqueActiveUsers,
     uniqueActiveUsers7:periods[7].uniqueActiveUsers,uniqueEvaluators30:p.uniqueEvaluators,
