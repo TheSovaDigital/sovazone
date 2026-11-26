@@ -86,8 +86,9 @@ test('Desktop Telegram never triggers expand or fullscreen and mobile content cl
   assert.match(css,/html\.tg-mobile\.tg-fullscreen \.shell/);
   assert.match(css,/padding-top:max\(104px/);
   assert.match(css,/--tg-content-safe-area-inset-top/);
-  assert.match(html,/class="identity-site">SovaZone/);
-  assert.match(html,/class="identity-domain">\.com/);
+  assert.match(html,/class="identity-overline">SovaZone\.com/);
+  assert.match(html,/<b>VALUATION<span>AI<\/span><\/b><small>USERNAME VALUATION<\/small>/);
+  assert.match(html,/class="identity-mark"/);
   assert.equal((html.match(/data-language="(?:ru|en)"/g)||[]).length,2);
   assert.match(html,/class="sova-lang-toggle"/);
   assert.match(js,/button\.setAttribute\('aria-pressed',String\(active\)\)/);

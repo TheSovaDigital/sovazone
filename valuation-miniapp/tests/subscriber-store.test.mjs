@@ -25,6 +25,8 @@ test('registers minimal private contact and defaults to no marketing consent',as
  const rec=await store.register(123456,'ru','share');
  assert.equal(rec.chatId,123456);
  assert.equal(rec.newsOptIn,false);
+ assert.equal(rec.serviceUpdatesEnabled,true);
+ assert.equal(rec.serviceUnsubscribedAt,null);
  assert.equal(rec.marketingConsentAt,null);
  assert.equal(rec.source,'share');
  assert.equal(rec.language,'ru');
@@ -45,9 +47,17 @@ test('keeps explicit opt-in across repeated /start, supports opt-out and erasure
  await store.register(7,'en','direct');
  assert.equal((await store.get(7)).newsOptIn,true);
  assert.equal((await store.get(7)).source,'share');
- await store.setUpdates(7,'en',false);
+ await store.setServiceUpdates(7,'en',false);
+ assert.equal((await store.get(7)).serviceUpdatesEnabled,false);
  assert.equal((await store.get(7)).newsOptIn,false);
  assert.equal((await store.get(7)).marketingConsentAt,null);
+ assert.ok((await store.get(7)).serviceUnsubscribedAt);
+ await store.register(7,'ru','direct');
+ assert.equal((await store.get(7)).serviceUpdatesEnabled,false,'/start cannot undo an opt-out');
+ assert.equal((await store.get(7)).newsOptIn,false,'/start cannot synthesize marketing consent');
+ await store.setUpdates(7,'ru',true);
+ assert.equal((await store.get(7)).serviceUpdatesEnabled,true);
+ assert.equal((await store.get(7)).serviceUnsubscribedAt,null);
  await store.erase(7);
  assert.equal(await store.get(7),null);
 });

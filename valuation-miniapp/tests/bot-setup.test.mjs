@@ -76,7 +76,7 @@ test('operator setup registers commands, menu, profile and verified webhook',asy
 
 test('webhook denies unauthenticated updates and handles language-specific /start',async()=>{
   setEnv();const original=globalThis.fetch;const sent=[];
-  const stored=[];const store={register:async (...args)=>{stored.push({action:'register',args})},setUpdates:async (...args)=>{stored.push({action:'updates',args})},erase:async (...args)=>{stored.push({action:'erase',args})}};
+  const stored=[];const store={register:async (...args)=>{stored.push({action:'register',args})},setUpdates:async (...args)=>{stored.push({action:'updates',args})},setServiceUpdates:async (...args)=>{stored.push({action:'service-updates',args})},erase:async (...args)=>{stored.push({action:'erase',args})}};
   globalThis.fetch=async (url,options)=>{
     sent.push(JSON.parse(options.body));
     return {ok:true,status:200,json:async()=>({ok:true,result:true})};
@@ -92,11 +92,18 @@ test('webhook denies unauthenticated updates and handles language-specific /star
     assert.equal(sent.length,1);
     assert.ok(sent[0].text.includes('Instagram'));
     assert.equal(sent[0].reply_markup.inline_keyboard[0][0].web_app.url,expectedUrl);
+    assert.equal(sent[0].reply_markup.inline_keyboard.length,1,'/start offers only the valuation button');
+    assert.doesNotMatch(sent[0].text,/Receive updates & offers/);
+    assert.match(sent[0].text,/\/unsubscribe/);
     const help=response();
     await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'ru'},text:'/help'}}},help,store);
     assert.equal(help.code,200);
     assert.ok(sent[1].text.includes('Как пользоваться'));
     assert.equal(stored[0].action,'register');
     assert.equal(stored[0].args[0],32);
+    const unsub=response();
+    await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'en'},text:'/unsubscribe'}}},unsub,store);
+    assert.equal(unsub.code,200);
+    assert.ok(stored.some(x=>x.action==='service-updates'&&x.args[0]===32&&x.args[2]===false));
   } finally {globalThis.fetch=original}
 });

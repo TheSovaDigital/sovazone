@@ -19,12 +19,12 @@ const executablePath=exec('which google-chrome || which chromium',{encoding:'utf
    if(lang!=='ru')await page.click('[data-language="ru"]');
    const ru=await page.evaluate(()=>{
     const brand=document.querySelector('.identity').getBoundingClientRect(),right=document.querySelector('.topbar-right').getBoundingClientRect();
-    return {lang:document.documentElement.lang,h1:document.querySelector('h1')?.textContent,eyebrow:document.querySelector('.eyebrow [data-t]').textContent,brand:document.querySelector('.identity-site')?.textContent,siteUrl:document.querySelector('.identity')?.href,placeholder:document.querySelector('#username').placeholder,links:[...document.querySelectorAll('.sova-footer-nav a')].map(x=>({url:x.href,text:x.textContent.trim()})),kicker:document.querySelectorAll('.section-head .section-kicker').length,viewport:innerWidth,rootWidth:document.documentElement.scrollWidth,headerGap:Math.round(right.left-brand.right),footer:document.querySelector('.sova-footer-owner').textContent,meta:document.title};
+    return {lang:document.documentElement.lang,h1:document.querySelector('h1')?.textContent,eyebrow:document.querySelector('.eyebrow [data-t]').textContent,brand:document.querySelector('.identity-copy')?.textContent,siteUrl:document.querySelector('.identity')?.href,placeholder:document.querySelector('#username').placeholder,links:[...document.querySelectorAll('.sova-footer-nav a')].map(x=>({url:x.href,text:x.textContent.trim()})),kicker:document.querySelectorAll('.section-head .section-kicker').length,viewport:innerWidth,rootWidth:document.documentElement.scrollWidth,headerGap:Math.round(right.top>=brand.bottom-1?0:right.left-brand.right),footer:document.querySelector('.sova-footer-owner').textContent,meta:document.title};
    });
    ok([200,304].includes(r.status()),'Local UI loads '+width,r.status());
    ok(ru.lang==='ru'&&ru.h1==='Узнать стоимость'&&!await page.$('.hero h1'),'RU form heading without old marketing slogan '+width,ru.h1);
    ok(ru.eyebrow==='INTELLIGENT USERNAME VALUATION','English eyebrow in RU '+width,ru.eyebrow);
-   ok(ru.brand==='SovaZone.com'&&ru.siteUrl==='https://sovazone.com/','Compact website header link '+width,ru.brand);
+   ok(ru.brand.includes('SovaZone.com')&&ru.brand.includes('VALUATION')&&ru.brand.includes('USERNAME VALUATION')&&ru.siteUrl==='https://sovazone.com/','Compact website header link '+width,ru.brand);
    ok(ru.placeholder==='username'&&ru.kicker===0,'No numbering and correct placeholder '+width,ru);
    ok(ru.links.length===3&&ru.links[0].url==='https://sovazone.com/'&&ru.links[1].url==='https://t.me/SovaDigital'&&ru.links[2].url==='https://t.me/SovaUsername','Three verified links '+width,ru.links);
    ok(ru.rootWidth<=width+1,'No root overflow '+width,ru.rootWidth-width);
