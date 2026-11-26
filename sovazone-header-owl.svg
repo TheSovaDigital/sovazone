@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="150 195 730 760" role="img" aria-label="SovaZone owl">
+  <defs>
+    <linearGradient id="brow" x1="0" x2="1" y1="0" y2="0.7">
+      <stop offset="0" stop-color="#f6f5f1"/>
+      <stop offset="0.3" stop-color="#b6b8b8"/>
+      <stop offset="0.72" stop-color="#4f5154"/>
+      <stop offset="1" stop-color="#222326"/>
+    </linearGradient>
+    <linearGradient id="right-brow" x1="0" x2="0.85" y1="0.3" y2="1">
+      <stop offset="0" stop-color="#d9d9d7"/>
+      <stop offset="0.45" stop-color="#747779"/>
+      <stop offset="1" stop-color="#292a2d"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" x2="0.85" y1="0.12" y2="1">
+      <stop offset="0" stop-color="#757779"/>
+      <stop offset="0.38" stop-color="#3c3e42"/>
+      <stop offset="0.9" stop-color="#191a1e"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#585a5a"/>
+      <stop offset="0.8" stop-color="#292b2e"/>
+    </linearGradient>
+  </defs>
+  <path d="M256 362 C220 428 226 501 276 557 C314 604 403 641 490 678 C606 728 674 791 697 910 C607 828 513 787 412 732 C306 674 228 623 190 557 C160 502 162 434 256 362 Z" fill="url(#wing)"/>
+  <path d="M758 394 C797 450 822 519 807 585 C791 660 752 694 696 725 C665 700 643 681 608 668 C700 631 766 580 778 513 C786 462 773 428 758 394 Z" fill="url(#face)"/>
+  <path d="M194 224 C221 276 285 302 370 316 C441 326 547 318 626 319 C616 372 631 463 624 639 C603 549 561 484 496 441 C421 392 348 374 285 343 C233 316 208 275 194 224 Z" fill="url(#brow)"/>
+  <path d="M838 248 C827 323 782 377 716 421 C665 462 642 535 625 639 C618 555 632 452 672 393 C713 333 774 298 838 248 Z" fill="url(#right-brow)"/>
+  <path d="M440 465 C464 494 497 517 540 535 C510 557 476 552 455 532 C443 520 437 493 440 465 Z" fill="#f6ecda"/>
+  <path d="M674 547 C707 525 730 500 744 482 C748 521 728 549 709 557 C695 563 683 557 674 547 Z" fill="#f6ecda"/>
+</svg>

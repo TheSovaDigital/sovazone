@@ -154,32 +154,42 @@
  .sz-nav-panel,.sz-nav-card,.sz-nav-caret{transition:none!important}
 }
 
-    /* Brand additions use the approved owl silhouette and a restrained metallic/AI accent.
-       Keep this inside the shared header fragment so cached page CSS cannot undo the logo. */
+    /* Approved matte-black owl palette: graphite / silver / warm eyes.
+       Match LUSAR's real AI gradient (#b9b8ff, #a5ddfa, #eac0e1).
+       Inline to prevent cached page CSS from overriding shared menu fragments. */
     .sz-header__brand{gap:8px}
     .sz-header__owl{
       display:block;width:29px;height:29px;flex:0 0 29px;
-      background:linear-gradient(150deg,#f4e9dc 4%,#d8c6ae 36%,#a4cfc5 67%,#c19b7b 100%);
-      -webkit-mask:url('/safari-pinned-tab.svg') center / contain no-repeat;
-      mask:url('/safari-pinned-tab.svg') center / contain no-repeat;
+      object-fit:contain;
     }
     .sz-valuation-ai-label{
       display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
       min-width:0;line-height:1.2;vertical-align:middle;
     }
     .sz-valuation-ai-text{
-      display:inline-block;font-weight:800;color:#e5d4bd;
-      background-image:linear-gradient(110deg,#edcfa9 0%,#f0e7d8 31%,#a3d0c5 63%,#dec2a4 100%);
+      display:inline-block;font-weight:800;color:#c6baff;
+      background-image:linear-gradient(110deg,#b9b8ff 0%,#a5ddfa 27%,#eac0e1 53%,#c8b5ff 77%,#b9b8ff 100%);
+      background-size:220% 100%;
       -webkit-background-clip:text;background-clip:text;
       -webkit-text-fill-color:transparent;
+      animation:sz-header-ai-colour-flow 8s ease-in-out infinite alternate;
     }
     .sz-valuation-ai-symbol{
-      display:block;flex:0 0 17px;width:17px;height:17px;
-      background-image:linear-gradient(130deg,#f0d2ac 0%,#b1dbcf 58%,#dba686 100%);
+      display:block;flex:0 0 16px;width:16px;height:16px;
+      background-image:linear-gradient(110deg,#b9b8ff 0%,#a5ddfa 27%,#eac0e1 53%,#c8b5ff 77%,#b9b8ff 100%);
+      background-size:220% 100%;
       -webkit-mask:url('/ai-spark-mark.svg') center / contain no-repeat;
       mask:url('/ai-spark-mark.svg') center / contain no-repeat;
+      animation:sz-header-ai-colour-flow 8s ease-in-out infinite alternate;
     }
-    .sz-valuation-ai-label:hover .sz-valuation-ai-text{filter:brightness(1.13)}
+    @keyframes sz-header-ai-colour-flow{
+      from{background-position:0% 50%}
+      to{background-position:100% 50%}
+    }
+    .sz-valuation-ai-label:hover .sz-valuation-ai-text{filter:brightness(1.1)}
+    @media(prefers-reduced-motion:reduce){
+      .sz-valuation-ai-text,.sz-valuation-ai-symbol{animation:none;background-position:50% 50%}
+    }
     @media(max-width:760px){
       .sz-header__brand{gap:7px}
       .sz-header__owl{width:27px;height:27px;flex-basis:27px}
@@ -187,7 +197,7 @@
 </style>
   <div class="container sz-header__inner">
     <a class="sz-header__brand" href="/" aria-label="SovaZone — главная">
-      <span class="sz-header__owl" aria-hidden="true"></span>
+      <img class="sz-header__owl" src="/sovazone-header-owl.svg" width="29" height="29" alt="" aria-hidden="true" decoding="async">
       <span class="sz-header__brand-text">SovaZone</span>
     </a>
 
