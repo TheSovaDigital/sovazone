@@ -54,3 +54,6 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - A Telegram private-chat /start, /help, /estimate and /privacy response offers a three-row inline keyboard: **Оценить никнейм** (signed Mini App web_app), **Купить ник** (https://t.me/SovaDigital) + **Продать ник** (https://t.me/SovaUsername) side by side, and **Посетить сайт** (https://sovazone.com/).
 - RU and EN messages have translated button labels. These are external channel/website links, not buy/sell functionality inside the Valuation AI Mini App.
 - Notification opt-ins are unchanged. Admin replies and subscribe/unsubscribe/delete confirmations do not gain these navigation buttons.
+
+## Interface simplification (November 26, 2026)
+- Removed the verbose user-facing analytics/privacy information card below recent valuations. The valuation disclaimer and local-history note remain visible, while `/privacy` in the Telegram bot remains accessible. Event recording, access control and underlying data handling are unchanged.
