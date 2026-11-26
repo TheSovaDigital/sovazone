@@ -60,7 +60,7 @@ test('Mini App waits for verified Telegram access before displaying onboarding g
   assert.match(js,/els\.submit\.disabled=true;\s*verifyAccessOnOpen\(\)/);
   assert.match(js,/if \(resp\.ok && data\.authorized\)/);
   assert.match(js,/else showAccessGate\(resp\.status===403\?'start':'error'\)/);
-  assert.match(html,/app\.js\?v=6/);
+  assert.match(html,/app\.js\?v=7/);
 });
 test('Telegram Mini App expands and requests fullscreen only when supported, with fallback and safe area',()=>{
   const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
@@ -73,4 +73,21 @@ test('Telegram Mini App expands and requests fullscreen only when supported, wit
   assert.match(js,/telegram\.onEvent\?\.\('fullscreenFailed'/);
   assert.match(css,/--tg-content-safe-area-inset-top/);
   assert.match(css,/--tg-content-safe-area-inset-bottom/);
+});
+
+test('Desktop Telegram never triggers expand or fullscreen and mobile content clears native controls',()=>{
+  const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
+  const css=readFileSync(new URL('../style.css',import.meta.url),'utf8');
+  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  assert.match(js,/if \(!isTelegramMobileClient\(\)\) return;/);
+  assert.match(js,/\['tdesktop','macos','unigram','web','weba','webk','windows'\]/);
+  assert.match(js,/\['ios','android','android_x'\]/);
+  assert.match(css,/html\.tg-mobile\.tg-fullscreen \.shell/);
+  assert.match(css,/padding-top:max\(104px/);
+  assert.match(css,/--tg-content-safe-area-inset-top/);
+  assert.match(html,/class="identity-site">SovaZone/);
+  assert.match(html,/class="identity-domain">\.com/);
+  assert.equal((html.match(/data-language="(?:ru|en)"/g)||[]).length,2);
+  assert.match(html,/class="sova-lang-toggle"/);
+  assert.match(js,/button\.setAttribute\('aria-pressed',String\(active\)\)/);
 });

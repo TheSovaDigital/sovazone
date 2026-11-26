@@ -90,12 +90,34 @@
 .admin-link[hidden]{display:none!important}
 .admin-link:hover{background:rgba(255,255,255,.1)}
 
-/* Telegram Bot API 8+: the true fullscreen viewport includes system cutouts.
-   Use Telegram's content-safe inset rather than covering the native controls. */
-html.tg-fullscreen body {
-  min-height:var(--tg-viewport-stable-height, 100dvh);
+
+/* Match the main site's RU/EN segmented switch, not a single EN dropdown. */
+.identity-site{display:inline-flex;align-items:center;white-space:nowrap;font-size:19px;font-weight:780;letter-spacing:-.035em;color:#f4edf9}
+.identity-domain{color:var(--accent)}
+.sova-lang-toggle{display:inline-flex;align-items:center;gap:2px;padding:3px;flex-shrink:0;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:999px}
+.sova-lang-toggle__option{min-width:42px;height:28px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;background:transparent;font-size:12px;line-height:1;text-decoration:none;color:rgba(255,255,255,.72);transition:background .18s ease,color .18s ease}
+.sova-lang-toggle__option:hover{color:#fff;background:rgba(255,255,255,.05)}
+.sova-lang-toggle__option.is-active{color:#fff;background:rgba(255,255,255,.08);font-weight:700}
+.topbar .identity{min-width:0;flex:0 0 auto}
+.topbar .topbar-right{gap:11px}
+@media(max-width:650px){
+ .identity-site{font-size:16px}
+ .topbar .topbar-right{gap:7px}
+ .topbar .status{display:none}
+ .topbar .admin-link{padding:7px 8px;font-size:10px;white-space:nowrap}
+ .sova-lang-toggle__option{min-width:36px;height:27px;padding:0 8px;font-size:11px}
 }
-html.tg-fullscreen .shell {
-  padding-top:max(var(--tg-content-safe-area-inset-top, 0px), env(safe-area-inset-top, 0px));
-  padding-bottom:max(var(--tg-content-safe-area-inset-bottom, 0px), env(safe-area-inset-bottom, 0px));
+@media(max-width:355px){
+ .identity-site{font-size:14px}
+ .topbar .topbar-right{gap:5px}
+ .topbar .admin-link{padding:6px;font-size:9px}
+ .sova-lang-toggle__option{min-width:32px;padding:0 6px}
+}
+/* Telegram 8+ fullscreen: protect against the iOS status bar and Telegram's
+   own Close / menu buttons; clients may report zero or delayed insets.
+   Only mobile clients receive this padding. */
+html.tg-mobile.tg-fullscreen body{min-height:var(--tg-viewport-stable-height,100dvh)}
+html.tg-mobile.tg-fullscreen .shell{
+  padding-top:max(104px,var(--tg-content-safe-area-inset-top,0px),calc(var(--tg-safe-area-inset-top,0px) + 54px),calc(env(safe-area-inset-top,0px) + 54px));
+  padding-bottom:max(var(--tg-content-safe-area-inset-bottom,0px),env(safe-area-inset-bottom,0px));
 }
