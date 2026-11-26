@@ -92,18 +92,32 @@ test('webhook denies unauthenticated updates and handles language-specific /star
     assert.equal(sent.length,1);
     assert.ok(sent[0].text.includes('Instagram'));
     assert.equal(sent[0].reply_markup.inline_keyboard[0][0].web_app.url,expectedUrl);
-    assert.equal(sent[0].reply_markup.inline_keyboard.length,1,'/start offers only the valuation button');
+    const englishButtons=sent[0].reply_markup.inline_keyboard;
+    assert.deepEqual(englishButtons,[
+      [{text:'Evaluate username',web_app:{url:expectedUrl}}],
+      [{text:'Buy a username',url:'https://t.me/SovaDigital'},{text:'Sell a username',url:'https://t.me/SovaUsername'}],
+      [{text:'Visit website',url:'https://sovazone.com/'}]
+    ]);
+    assert.equal(englishButtons.length,3,'one app button, two channel links in a row and one site button');
+    assert.equal(JSON.stringify(englishButtons).includes('callback_data'),false,'no unwanted marketing opt-in');
     assert.doesNotMatch(sent[0].text,/Receive updates & offers/);
     assert.match(sent[0].text,/\/unsubscribe/);
     const help=response();
     await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'ru'},text:'/help'}}},help,store);
     assert.equal(help.code,200);
     assert.ok(sent[1].text.includes('Как пользоваться'));
+    assert.deepEqual(sent[1].reply_markup.inline_keyboard,[
+      [{text:'Оценить никнейм',web_app:{url:expectedUrl}}],
+      [{text:'Купить ник',url:'https://t.me/SovaDigital'},{text:'Продать ник',url:'https://t.me/SovaUsername'}],
+      [{text:'Посетить сайт',url:'https://sovazone.com/'}]
+    ]);
     assert.equal(stored[0].action,'register');
     assert.equal(stored[0].args[0],32);
     const unsub=response();
     await handleUpdate({method:'POST',headers:{'x-telegram-bot-api-secret-token':webhookSecret},body:{message:{chat:{id:32,type:'private'},from:{language_code:'en'},text:'/unsubscribe'}}},unsub,store);
     assert.equal(unsub.code,200);
     assert.ok(stored.some(x=>x.action==='service-updates'&&x.args[0]===32&&x.args[2]===false));
+    assert.equal(sent.at(-1).text.includes('disabled'),true);
+    assert.equal('reply_markup' in sent.at(-1),false,'no marketing or navigation buttons for opt-out confirmation');
   } finally {globalThis.fetch=original}
 });

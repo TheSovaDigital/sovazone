@@ -4,6 +4,9 @@ import {recordEvent,isValuationAdmin} from './analytics.js';
 import {issueAdminCode} from './admin-auth.js';
 
 const APP_URL = process.env.PUBLIC_APP_URL || 'https://valuation.sovazone.com';
+const BUY_CHANNEL_URL = 'https://t.me/SovaDigital';
+const SELL_CHANNEL_URL = 'https://t.me/SovaUsername';
+const WEBSITE_URL = 'https://sovazone.com/';
 function equalsSecret(value, secret) {
   if (!value || !secret) return false;
   const a = Buffer.from(String(value));
@@ -12,6 +15,9 @@ function equalsSecret(value, secret) {
 }
 const RU = {
   open: 'Оценить никнейм',
+  buy: 'Купить ник',
+  sell: 'Продать ник',
+  website: 'Посетить сайт',
   start: '<b>SovaZone Valuation AI</b>\n\nОцените никнейм Instagram, TikTok или Telegram — бесплатно и за пару нажатий.\n\nНажмите «Оценить никнейм», чтобы открыть приложение.\n\nПосле /start включаются уведомления о работе и обновлениях сервиса. Отключить их можно командой /unsubscribe. Рекламные предложения отправляются только при отдельной подписке через /subscribe.',
   help: '<b>Как пользоваться</b>\n\n1. Откройте приложение.\n2. Выберите платформу.\n3. Введите никнейм и запустите оценку.\n\nКоманды: /unsubscribe — отключить уведомления, /subscribe — включить уведомления и отдельно согласиться на рекламу, /delete — удалить запись, /privacy — конфиденциальность, /myid — ваш Telegram ID.',
   estimate: 'Выберите платформу и введите никнейм в приложении.',
@@ -22,6 +28,9 @@ const RU = {
 };
 const EN = {
   open: 'Evaluate username',
+  buy: 'Buy a username',
+  sell: 'Sell a username',
+  website: 'Visit website',
   start: '<b>SovaZone Valuation AI</b>\n\nEstimate an Instagram, TikTok or Telegram username in just a few taps.\n\nTap “Evaluate username” to open the app.\n\nStarting the bot enables service notices and product update notifications. Disable them any time with /unsubscribe. Promotional messages require a separate /subscribe command.',
   help: '<b>How to use Valuation AI</b>\n\n1. Open the app.\n2. Choose a platform.\n3. Enter a username and run valuation.\n\nCommands: /unsubscribe — disable notices, /subscribe — enable notices and opt in to promotions, /delete — erase your record, /privacy — privacy details, /myid — your Telegram ID.',
   estimate: 'Choose a platform and enter the username in the app.',
@@ -45,7 +54,12 @@ async function apiCall(method, data) {
 async function reply(chatId, lang, key, showOpen = true) {
   const t = copyFor(lang);
   const buttons = showOpen ? [
-    [{ text: t.open, web_app: { url: APP_URL } }]
+    [{ text: t.open, web_app: { url: APP_URL } }],
+    [
+      { text: t.buy, url: BUY_CHANNEL_URL },
+      { text: t.sell, url: SELL_CHANNEL_URL }
+    ],
+    [{ text: t.website, url: WEBSITE_URL }]
   ] : [];
   await apiCall('sendMessage', {
     chat_id: chatId,

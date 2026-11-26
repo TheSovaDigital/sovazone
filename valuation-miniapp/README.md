@@ -49,3 +49,8 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - `newsOptIn` and advertising consent fields remain false/null by default. Historic accounts without the service-notices flag are not counted by the admin service subscriber KPI until the next /start.
 - The dashboard separately shows service-notice enabled and explicitly opted-in advertising counts. There is no broadcast job.
 - The original icon and VALUATION AI / USERNAME VALUATION labels were restored, changing only the top brand name to SovaZone.com.
+
+## Telegram navigation buttons (November 26, 2026)
+- A Telegram private-chat /start, /help, /estimate and /privacy response offers a three-row inline keyboard: **Оценить никнейм** (signed Mini App web_app), **Купить ник** (https://t.me/SovaDigital) + **Продать ник** (https://t.me/SovaUsername) side by side, and **Посетить сайт** (https://sovazone.com/).
+- RU and EN messages have translated button labels. These are external channel/website links, not buy/sell functionality inside the Valuation AI Mini App.
+- Notification opt-ins are unchanged. Admin replies and subscribe/unsubscribe/delete confirmations do not gain these navigation buttons.
