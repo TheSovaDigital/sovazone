@@ -49,7 +49,7 @@ test('no other Mini App action invokes the input keyboard and the field keeps an
   assert.match(html,/id="username-label" class="field-title"/);
   assert.doesNotMatch(html,/<label for="username"/);
   assert.match(html,/id="username"[^>]*placeholder="username"[^>]*aria-labelledby="username-label"/);
-  assert.match(html,/app\.js\?v=9/);
+  assert.match(html,/app\.js\?v=10/);
 });
 test('Russian website valuation inputs use username placeholder on all three platforms',()=>{
   for(const platform of ['instagram','tiktok','telegram']){
