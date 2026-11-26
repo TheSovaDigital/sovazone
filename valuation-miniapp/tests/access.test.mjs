@@ -61,7 +61,7 @@ test('Mini App waits for verified Telegram access before displaying onboarding g
   assert.match(js,/els\.submit\.disabled=true;\s*verifyAccessOnOpen\(\)/);
   assert.match(js,/if \(resp\.ok && data\.authorized\)/);
   assert.match(js,/else showAccessGate\(resp\.status===403\?'start':'error'\)/);
-  assert.match(html,/app\.js\?v=9/);
+  assert.match(html,/app\.js\?v=10/);
 });
 test('Telegram Mini App expands and requests fullscreen only when supported, with fallback and safe area',()=>{
   const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
@@ -141,6 +141,38 @@ test('valuation interface does not show verbose privacy analytics card',()=>{
   assert.match(html,/data-t="estimateNote"/);
   assert.match(html,/data-t="localHistory"/);
   assert.match(html,/class="sova-footer"/);
-  assert.match(html,/app\.js\?v=9/);
-  assert.match(html,/style\.css\?v=10/);
+  assert.match(html,/app\.js\?v=10/);
+  assert.match(html,/style\.css\?v=11/);
+});
+
+test('Telegram script no longer blocks HTML parsing and CSS can paint before startup',()=>{
+  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  const firstStyle=html.indexOf('rel="stylesheet" href="/style.css?v=11"');
+  const tgSDK=html.indexOf('src="https://telegram.org/js/telegram-web-app.js" defer');
+  const appScript=html.indexOf('src="/app.js?v=10" defer');
+  assert.ok(firstStyle>0 && tgSDK>firstStyle && appScript>tgSDK,
+    'stylesheet first, deferred Telegram SDK before deferred application script');
+  assert.match(html,/rel="preconnect" href="https:\/\/telegram\.org"/);
+  assert.doesNotMatch(html,/maximum-scale=1|user-scalable=no/,
+    'do not disable pinch zoom or iOS accessibility zoom');
+});
+test('double tap smart zoom is suppressed only on non-editable mobile UI',()=>{
+  const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
+  const css=readFileSync(new URL('../style.css',import.meta.url),'utf8');
+  const start=js.indexOf('function preventNativeDoubleTapZoom(event){');
+  const end=js.indexOf('\nfunction setGlobalActions()',start);
+  assert.ok(start>=0 && end>start);
+  const handler=js.slice(start,end);
+  const outside={prevented:false,cancelable:true,target:{closest:()=>null},
+    preventDefault(){this.prevented=true}};
+  vm.runInNewContext(handler+';preventNativeDoubleTapZoom(event)',{event:outside});
+  assert.equal(outside.prevented,true);
+  const editable={prevented:false,cancelable:true,target:{closest:()=>({tagName:'INPUT'})},
+    preventDefault(){this.prevented=true}};
+  vm.runInNewContext(handler+';preventNativeDoubleTapZoom(event)',{event:editable});
+  assert.equal(editable.prevented,false,'input editing and selection must remain native');
+  assert.match(js,/if \(isTelegramMobileClient\(\)\) \{\s*document\.addEventListener\('dblclick',preventNativeDoubleTapZoom,\{capture:true,passive:false\}\)/);
+  assert.match(css,/touch-action:manipulation/);
+  assert.match(css,/-webkit-text-size-adjust:100%/);
+  assert.match(css,/\.ambient \{filter:none\}/);
 });

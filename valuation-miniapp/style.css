@@ -138,3 +138,20 @@ html.tg-mobile.tg-fullscreen .shell{
  .topbar .identity-copy small{font-size:6px;letter-spacing:.06em}
  .topbar .topbar-right{margin-left:auto}
 }
+
+/* iOS Telegram: retain normal scrolling and accessible pinch zoom, but
+   suppress WebKit's double-tap "smart zoom" that overflows Mini App cards. */
+@media (hover:none) and (pointer:coarse) {
+  html,body,.shell,.evaluator,.hero,.platforms,.history,.topbar,button,a {
+    touch-action:manipulation;
+  }
+  html,body {
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+  /* Fixed, giant blurred layers can be expensive to restore in WKWebView.
+     Equivalent radial fades avoid offscreen filter rasterization on phones. */
+  .ambient {filter:none}
+  .ambient--one {background:radial-gradient(ellipse at center,rgba(180,119,237,.32),transparent 72%);opacity:1}
+  .ambient--two {background:radial-gradient(ellipse at center,rgba(118,54,112,.22),transparent 72%);opacity:1}
+}

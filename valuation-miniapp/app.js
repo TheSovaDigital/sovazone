@@ -92,7 +92,16 @@ function openBrandLink(event){if(!telegram)return;const url=event.currentTarget.
 function dismissKeyboardOutsideInput(event){
   if(event.target!==els.input && document.activeElement===els.input)els.input.blur();
 }
+function preventNativeDoubleTapZoom(event){
+  // Preserve native editing and text selection inside fields. Only suppress
+  // smart zoom on non-editable UI, where it breaks the Telegram layout.
+  if (event.target?.closest?.('input,textarea,select,[contenteditable]')) return;
+  if (event.cancelable) event.preventDefault();
+}
 function setGlobalActions(){
+  if (isTelegramMobileClient()) {
+    document.addEventListener('dblclick',preventNativeDoubleTapZoom,{capture:true,passive:false});
+  }
   // iOS/Android keep the software keyboard open while a text input has focus.
   // Only tapping the input should focus it; tapping anywhere else dismisses it.
   document.addEventListener('pointerdown',dismissKeyboardOutsideInput,true);

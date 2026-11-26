@@ -57,3 +57,9 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 
 ## Interface simplification (November 26, 2026)
 - Removed the verbose user-facing analytics/privacy information card below recent valuations. The valuation disclaimer and local-history note remain visible, while `/privacy` in the Telegram bot remains accessible. Event recording, access control and underlying data handling are unchanged.
+
+## Mobile iOS WebView resume and gesture hardening (November 26, 2026)
+- Load application stylesheet before the external Telegram SDK; both SDK and local app JavaScript are `defer` and run in original order. Added preconnect for Telegram host. This removes a parser-blocking network request and improves early paint when Telegram recreates the WebView on reopening.
+- Use `touch-action:manipulation` on mobile to disable double-tap smart zoom while preserving scroll and pinch accessibility. A mobile-only non-passive `dblclick` fallback prevents default on non-editable UI but not input fields.
+- Replace costly fixed blur layers with lightweight radial gradients on touch-screen mobile WebViews. Desktop styling unchanged.
+- **Limitation:** Telegram/iOS controls the native WebView lifecycle and may still briefly display its own black loading frame on resume. These changes shorten webpage startup and reduce GPU work, but cannot guarantee the client never displays an OS-owned blank frame.
