@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import vm from 'node:vm';
 import { verifyTelegramInitData } from '../api/verify-telegram.js';
 import { verifyAccess } from '../api/access.js';
 const token='12345:test-token',now=1794350000;
@@ -90,4 +91,40 @@ test('Desktop Telegram never triggers expand or fullscreen and mobile content cl
   assert.equal((html.match(/data-language="(?:ru|en)"/g)||[]).length,2);
   assert.match(html,/class="sova-lang-toggle"/);
   assert.match(js,/button\.setAttribute\('aria-pressed',String\(active\)\)/);
+});
+
+test('Telegram viewport behavior: iPhone fullscreen; desktop stays windowed',()=>{
+  const script=readFileSync(new URL('../app.js',import.meta.url),'utf8');
+  const viewportScript=script.slice(0,script.indexOf('\nconst copy ='));
+  assert.ok(viewportScript.includes('initializeTelegramViewport()'));
+  const emulate=(platform,userAgent)=>{
+    const calls=[],classes=new Set();
+    const webapp={
+      platform,isFullscreen:false,
+      ready:()=>calls.push('ready'),expand:()=>calls.push('expand'),
+      requestFullscreen:()=>calls.push('fullscreen'),isVersionAtLeast:()=>true,
+      setHeaderColor:()=>{},setBackgroundColor:()=>{},onEvent:()=>{}
+    };
+    vm.runInNewContext(viewportScript,{
+      window:{Telegram:{WebApp:webapp}},
+      navigator:{userAgent},
+      document:{documentElement:{classList:{
+        add:(name)=>classes.add(name),
+        toggle:(name,on)=>{if(on)classes.add(name);else classes.delete(name)}
+      }}}
+    });
+    return {calls,classes};
+  };
+  const ios=emulate('ios','Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)');
+  assert.deepEqual(ios.calls,['ready','expand','fullscreen']);
+  assert.equal(ios.classes.has('tg-mobile'),true);
+  const android=emulate('android','Mozilla/5.0 (Linux; Android 15; Mobile)');
+  assert.deepEqual(android.calls,['ready','expand','fullscreen']);
+  for(const desktopPlatform of ['tdesktop','macos','unigram','weba','webk']){
+    const desktop=emulate(desktopPlatform,'Mozilla/5.0 (Windows NT 10.0; Win64; x64)');
+    assert.deepEqual(desktop.calls,['ready'],desktopPlatform+' must not expand or fullscreen');
+    assert.equal(desktop.classes.has('tg-mobile'),false);
+  }
+  const unsupported=emulate('tdesktop','Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)');
+  assert.deepEqual(unsupported.calls,['ready'],'desktop platform takes priority over user agent');
 });
