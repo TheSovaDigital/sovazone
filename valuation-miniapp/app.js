@@ -1,6 +1,25 @@
 'use strict';
 const telegram = window.Telegram?.WebApp || null;
-try { telegram?.ready(); telegram?.expand(); telegram?.setHeaderColor('#090a10'); telegram?.setBackgroundColor('#090a10'); } catch (_) {}
+// Telegram's compact bottom sheet is only the initial viewport. Expand first on
+// every supported client, then request real fullscreen when Bot API 8.0+ allows it.
+function initializeTelegramViewport() {
+  if (!telegram) return;
+  const attempt = callback => { try { callback(); } catch (_) { /* older Telegram clients */ } };
+  attempt(() => telegram.ready?.());
+  attempt(() => telegram.setHeaderColor?.('#090a10'));
+  attempt(() => telegram.setBackgroundColor?.('#090a10'));
+  attempt(() => telegram.expand?.());
+  const updateFullscreen = () => {
+    document.documentElement.classList.toggle('tg-fullscreen', Boolean(telegram.isFullscreen));
+  };
+  updateFullscreen();
+  attempt(() => telegram.onEvent?.('fullscreenChanged', updateFullscreen));
+  attempt(() => telegram.onEvent?.('fullscreenFailed', () => telegram.expand?.()));
+  const supportsFullscreen = typeof telegram.requestFullscreen === 'function' &&
+    typeof telegram.isVersionAtLeast === 'function' && telegram.isVersionAtLeast('8.0');
+  if (supportsFullscreen && !telegram.isFullscreen) attempt(() => telegram.requestFullscreen());
+}
+initializeTelegramViewport();
 
 const copy = {
   ru: {
@@ -128,4 +147,8 @@ $('access-gate-open').addEventListener('click',e=>{
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!state.accessAllowed)verifyAccessOnOpen()});
 window.addEventListener('focus',()=>{if(!state.accessAllowed)verifyAccessOnOpen()});
 
-$('year').textContent=String(new Date().getFullYear());loadHistory();setGlobalActions();setLang(state.lang);updateInput();showAccessGate('start');verifyAccessOnOpen();
+$('year').textContent=String(new Date().getFullYear());loadHistory();setGlobalActions();setLang(state.lang);updateInput();
+// The gate starts hidden in HTML. Do not flash a false "start the bot" warning
+// before Telegram's signed initData is checked by the backend.
+els.submit.disabled=true;
+verifyAccessOnOpen();
