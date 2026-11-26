@@ -52,12 +52,13 @@ function series(){return (state.stats?.series30||[]).slice(-state.period)}
 function number(id,value){el(id).textContent=fmt(value)}
 function renderKpi(p){
   number('registered',state.stats.registeredUsers);number('active',p.uniqueActiveUsers);
-  number('valuation-total',p.valuations);number('optins',state.stats.optInUsers);
+  number('valuation-total',p.valuations);number('optins',state.stats.serviceUpdatesUsers);
   number('new-registrations',p.registrations);number('bot-starts',p.botStarts);
   number('app-opens',p.appOpens);number('unique-evaluators',p.uniqueEvaluators);
   el('active-period').textContent=state.period+' ДНЕЙ';el('valuations-period').textContent=state.period+' ДНЕЙ';
-  el('optin-rate').textContent='Доля от всех: '+percent(state.stats.optInUsers,state.stats.registeredUsers);
-  el('insight-optin').textContent=percent(state.stats.optInUsers,state.stats.registeredUsers);
+  el('optin-rate').textContent='От зарегистрированных: '+percent(state.stats.serviceUpdatesUsers,state.stats.registeredUsers);
+  el('insight-optin').textContent=percent(state.stats.serviceUpdatesUsers,state.stats.registeredUsers);
+  number('insight-marketing',state.stats.optInUsers);
   el('insight-evaluations').textContent=p.uniqueEvaluators?decimal(p.valuations/p.uniqueEvaluators):'—';
   number('insight-unique-starts',p.uniqueBotUsers);
   number('insight-unique-evaluators',p.uniqueEvaluators);

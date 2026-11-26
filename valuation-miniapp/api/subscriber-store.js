@@ -1,5 +1,5 @@
 // Private storage for users who start @ValuationAiBot.
-// Never store the usernames they value; only contact and explicit notification preference.
+// Never store valued handles. Service notices default on; advertising is explicit opt-in.
 import crypto from 'node:crypto';
 
 function pathFor(chatId) {
@@ -35,6 +35,8 @@ export function createSubscriberStore({ get, put, del }) {
         createdAt: current?.createdAt || now,
         lastStartedAt: now,
         source: current?.source || (entrySource === 'share' ? 'share' : 'direct'),
+        serviceUpdatesEnabled: current?.serviceUpdatesEnabled !== false,
+        serviceUnsubscribedAt: current?.serviceUnsubscribedAt || null,
         newsOptIn: current?.newsOptIn === true,
         marketingConsentAt: current?.marketingConsentAt || null,
         marketingConsentSource: current?.marketingConsentSource || null,
@@ -51,6 +53,8 @@ export function createSubscriberStore({ get, put, del }) {
         createdAt: current?.createdAt || now,
         lastStartedAt: current?.lastStartedAt || now,
         source: current?.source || 'direct',
+        serviceUpdatesEnabled: permitted === true ? true : current?.serviceUpdatesEnabled !== false,
+        serviceUnsubscribedAt: permitted === true ? null : current?.serviceUnsubscribedAt || null,
         newsOptIn: permitted === true,
         marketingConsentAt: permitted === true ? now : null,
         marketingConsentSource: permitted === true ? (consentSource === 'button' ? 'button' : 'command') : null,
@@ -58,10 +62,30 @@ export function createSubscriberStore({ get, put, del }) {
         blocked: false
       });
     },
+    async setServiceUpdates(chatId, language, permitted) {
+      const current = await read(chatId);
+      const now = new Date().toISOString();
+      const allowed = permitted === true;
+      return save(chatId, {
+        ...(current || {}),
+        chatId,
+        language: current?.language || (String(language || '').toLowerCase().startsWith('en') ? 'en' : 'ru'),
+        createdAt: current?.createdAt || now,
+        lastStartedAt: current?.lastStartedAt || now,
+        source: current?.source || 'direct',
+        serviceUpdatesEnabled: allowed,
+        serviceUnsubscribedAt: allowed ? null : now,
+        newsOptIn: allowed && current?.newsOptIn === true,
+        marketingConsentAt: allowed ? current?.marketingConsentAt || null : null,
+        marketingConsentSource: allowed ? current?.marketingConsentSource || null : null,
+        marketingConsentVersion: allowed ? current?.marketingConsentVersion || null : null,
+        blocked: false
+      });
+    },
     async markBlocked(chatId, blocked) {
       const current = await read(chatId);
       if (!current) return null;
-      return save(chatId, { ...current, blocked: !!blocked, newsOptIn: blocked ? false : current.newsOptIn, marketingConsentAt: blocked ? null : current.marketingConsentAt || null });
+      return save(chatId, { ...current, blocked: !!blocked, serviceUpdatesEnabled: blocked ? false : current.serviceUpdatesEnabled, newsOptIn: blocked ? false : current.newsOptIn, marketingConsentAt: blocked ? null : current.marketingConsentAt || null });
     },
     async get(chatId) { return read(chatId) },
     async erase(chatId) {

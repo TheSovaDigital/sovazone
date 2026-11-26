@@ -121,3 +121,20 @@ html.tg-mobile.tg-fullscreen .shell{
   padding-top:max(104px,var(--tg-content-safe-area-inset-top,0px),calc(var(--tg-safe-area-inset-top,0px) + 54px),calc(env(safe-area-inset-top,0px) + 54px));
   padding-bottom:max(var(--tg-content-safe-area-inset-bottom,0px),env(safe-area-inset-bottom,0px));
 }
+
+/* Original three-line brand restored: only SOVAZONE becomes SovaZone.com. */
+.topbar .identity{display:inline-flex;align-items:center;gap:9px;min-width:0;flex:0 1 auto}
+.topbar .identity-mark{display:grid;flex:0 0 40px;width:40px;height:40px}
+.topbar .identity-copy{display:grid;gap:0;min-width:0}
+.topbar .identity-copy .identity-overline{font-size:10px;letter-spacing:.11em;line-height:1.15;white-space:nowrap}
+.topbar .identity-copy b{font-size:14px;letter-spacing:.085em;white-space:nowrap}
+.topbar .identity-copy small{font-size:7px;letter-spacing:.12em;white-space:nowrap}
+@media(max-width:650px){
+ .topbar{height:auto;min-height:76px;flex-wrap:wrap;row-gap:7px;padding-block:10px}
+ .topbar .identity{gap:8px}
+ .topbar .identity-mark{flex-basis:34px;width:34px;height:34px}
+ .topbar .identity-copy .identity-overline{font-size:9px;letter-spacing:.07em}
+ .topbar .identity-copy b{font-size:12px;letter-spacing:.06em}
+ .topbar .identity-copy small{font-size:6px;letter-spacing:.06em}
+ .topbar .topbar-right{margin-left:auto}
+}

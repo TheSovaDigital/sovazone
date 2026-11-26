@@ -12,24 +12,22 @@ function equalsSecret(value, secret) {
 }
 const RU = {
   open: 'Оценить никнейм',
-  optin: 'Получать новости и рекламу',
-  start: '<b>SovaZone Valuation AI</b>\n\nОцените никнейм Instagram, TikTok или Telegram — бесплатно и за пару нажатий.\n\nНажмите «Оценить никнейм», чтобы открыть приложение.\n\nПродолжая пользоваться ботом, вы соглашаетесь с обработкой Telegram ID для работы сервиса. Новости и рекламные предложения — только по желанию: нажмите «Получать новости и рекламу». Отписаться можно в любой момент через /unsubscribe.',
-  help: '<b>Как пользоваться</b>\n\n1. Откройте приложение.\n2. Выберите платформу.\n3. Введите никнейм и запустите оценку.\n\nКоманды: /subscribe — новости по согласию, /unsubscribe — отказ, /delete — удалить запись, /privacy — конфиденциальность, /myid — ваш Telegram ID.',
+  start: '<b>SovaZone Valuation AI</b>\n\nОцените никнейм Instagram, TikTok или Telegram — бесплатно и за пару нажатий.\n\nНажмите «Оценить никнейм», чтобы открыть приложение.\n\nПосле /start включаются уведомления о работе и обновлениях сервиса. Отключить их можно командой /unsubscribe. Рекламные предложения отправляются только при отдельной подписке через /subscribe.',
+  help: '<b>Как пользоваться</b>\n\n1. Откройте приложение.\n2. Выберите платформу.\n3. Введите никнейм и запустите оценку.\n\nКоманды: /unsubscribe — отключить уведомления, /subscribe — включить уведомления и отдельно согласиться на рекламу, /delete — удалить запись, /privacy — конфиденциальность, /myid — ваш Telegram ID.',
   estimate: 'Выберите платформу и введите никнейм в приложении.',
-  privacy: '<b>Конфиденциальность</b>\n\nПосле /start мы сохраняем Telegram ID чата, язык, дату входа и источник перехода, чтобы бот работал. Рекламные и информационные рассылки включаются отдельно кнопкой «Получать новости и рекламу» или командой /subscribe. Согласие можно отозвать через /unsubscribe, а запись удалить через /delete. Оцениваемые никнеймы и результаты не хранятся в аналитике. Фиксируем только анонимизированные события входа и успешной оценки по платформе.',
-  subscribed: 'Вы дали согласие получать новости и рекламные предложения Valuation AI. Отписаться: /unsubscribe.',
-  unsubscribed: 'Подписка на новости и предложения отключена. Оценка никнеймов по-прежнему доступна.',
+  privacy: '<b>Конфиденциальность</b>\n\nПосле /start мы сохраняем Telegram ID чата, язык, дату входа и источник перехода, чтобы бот работал. Обычные уведомления об обновлениях сервиса включаются после /start, но их можно отключить через /unsubscribe. Реклама допускается только при отдельном согласии через /subscribe; /unsubscribe также отзывает его. Запись можно удалить через /delete. Оцениваемые никнеймы и результаты не хранятся в аналитике. Фиксируем только анонимизированные события входа и успешной оценки по платформе.',
+  subscribed: 'Вы включили уведомления и отдельно согласились получать рекламные предложения Valuation AI. Отписаться: /unsubscribe.',
+  unsubscribed: 'Уведомления и рекламные рассылки отключены. Оценка никнеймов по-прежнему доступна.',
   deleted: 'Ваша запись удалена. При повторном /start она будет создана заново.'
 };
 const EN = {
   open: 'Evaluate username',
-  optin: 'Receive updates & offers',
-  start: '<b>SovaZone Valuation AI</b>\n\nEstimate an Instagram, TikTok or Telegram username in just a few taps.\n\nTap “Evaluate username” to open the app.\n\nBy using the bot, you acknowledge processing of your Telegram ID to provide the service. News and promotional messages are optional: tap “Receive updates & offers” to opt in. Unsubscribe any time with /unsubscribe.',
-  help: '<b>How to use Valuation AI</b>\n\n1. Open the app.\n2. Choose a platform.\n3. Enter a username and run valuation.\n\nCommands: /subscribe — opt in, /unsubscribe — opt out, /delete — erase your record, /privacy — privacy details, /myid — your Telegram ID.',
+  start: '<b>SovaZone Valuation AI</b>\n\nEstimate an Instagram, TikTok or Telegram username in just a few taps.\n\nTap “Evaluate username” to open the app.\n\nStarting the bot enables service notices and product update notifications. Disable them any time with /unsubscribe. Promotional messages require a separate /subscribe command.',
+  help: '<b>How to use Valuation AI</b>\n\n1. Open the app.\n2. Choose a platform.\n3. Enter a username and run valuation.\n\nCommands: /unsubscribe — disable notices, /subscribe — enable notices and opt in to promotions, /delete — erase your record, /privacy — privacy details, /myid — your Telegram ID.',
   estimate: 'Choose a platform and enter the username in the app.',
-  privacy: '<b>Privacy</b>\n\nAfter /start, we store your Telegram chat ID, language, start date and referral source for bot operation. News and promotional messages are separate and require the “Receive updates & offers” button or /subscribe. Use /unsubscribe to withdraw consent and /delete to erase your record. Valued usernames and results are not stored in analytics. We count pseudonymous opens and successful estimates by platform.',
-  subscribed: 'You have opted in to Valuation AI news and promotional messages. Unsubscribe: /unsubscribe.',
-  unsubscribed: 'Updates and offers are now turned off. You can still use username valuations.',
+  privacy: '<b>Privacy</b>\n\nAfter /start, we store your Telegram chat ID, language, start date and referral source for bot operation. Service notices and product update notifications are enabled after /start; use /unsubscribe to disable them. Promotional messages require separate explicit consent via /subscribe; /unsubscribe also withdraws that consent. Use /delete to erase your record. Valued usernames and results are not stored in analytics. We count pseudonymous opens and successful estimates by platform.',
+  subscribed: 'You have enabled service notices and explicitly opted in to Valuation AI promotions. Unsubscribe: /unsubscribe.',
+  unsubscribed: 'Service notices and promotional messages are now disabled. Username valuations remain available.',
   deleted: 'Your record was erased. Starting the bot again will create a new record.'
 };
 function copyFor(language) { return String(language || '').toLowerCase().startsWith('en') ? EN : RU }
@@ -47,8 +45,7 @@ async function apiCall(method, data) {
 async function reply(chatId, lang, key, showOpen = true) {
   const t = copyFor(lang);
   const buttons = showOpen ? [
-    [{ text: t.open, web_app: { url: APP_URL } }],
-    ...(key === 'start' ? [[{ text: t.optin, callback_data: 'optin_yes' }]] : [])
+    [{ text: t.open, web_app: { url: APP_URL } }]
   ] : [];
   await apiCall('sendMessage', {
     chat_id: chatId,
@@ -112,7 +109,7 @@ export async function handleUpdate(req, res, customStore, customRecordEvent) {
         await store.setUpdates(chatId, lang, true);
         await reply(chatId, lang, 'subscribed', false);
       } else if (command === 'unsubscribe') {
-        await store.setUpdates(chatId, lang, false);
+        await store.setServiceUpdates(chatId, lang, false);
         await reply(chatId, lang, 'unsubscribed', false);
       } else {
         const subscriber=await store.register(chatId, lang, source);

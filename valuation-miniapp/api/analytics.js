@@ -54,7 +54,7 @@ export async function collectStats({list,get},now=new Date(),caps={users:3000,ev
   const today=days[29],dateFloor=days[0];
   const users=await scan(list,'valuation-bot/users/',caps.users);
   const events=await scan(list,PREFIX,caps.events);
-  let optIns=0,blocked=0,profilesRead=0;
+  let optIns=0,serviceUpdatesUsers=0,blocked=0,profilesRead=0;
   if(get){
     for(let i=0;i<users.results.length;i+=20){
       await Promise.all(users.results.slice(i,i+20).map(async item=>{
@@ -64,6 +64,7 @@ export async function collectStats({list,get},now=new Date(),caps={users:3000,ev
             const row=JSON.parse(await new Response(blob.stream).text());
             profilesRead++;
             if(row.newsOptIn===true&&!row.blocked)optIns++;
+            if(row.serviceUpdatesEnabled===true&&!row.blocked)serviceUpdatesUsers++;
             if(row.blocked===true)blocked++;
           }
         }catch{/* Subscription deleted while scanning, or unreadable. */}
@@ -140,7 +141,7 @@ export async function collectStats({list,get},now=new Date(),caps={users:3000,ev
   return {
     asOf:now.toISOString(),scope:'since-activation',windowDays:30,
     registeredUsers:users.results.length,registeredUsersTruncated:users.truncated,
-    optInUsers:optIns,blockedUsers:blocked,profilesRead,
+    optInUsers:optIns,serviceUpdatesUsers,blockedUsers:blocked,profilesRead,
     botStarts30:p.botStarts,newRegistrations30:p.registrations,appOpens30:p.appOpens,
     valuationCount30:p.valuations,uniqueActiveUsers30:p.uniqueActiveUsers,
     uniqueActiveUsers7:periods[7].uniqueActiveUsers,uniqueEvaluators30:p.uniqueEvaluators,

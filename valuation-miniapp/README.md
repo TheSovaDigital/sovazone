@@ -1,6 +1,6 @@
 # Valuation AI / @ValuationAiBot
 
-A standalone Telegram Mini App dedicated exclusively to username valuation (Instagram, TikTok and Telegram). **No catalog, advertising dashboard, or username sales. Bot updates/offers require explicit opt-in.**
+A standalone Telegram Mini App dedicated exclusively to username valuation (Instagram, TikTok and Telegram). **No catalog, advertising dashboard, or username sales. Service notices default on after /start and can be disabled via /unsubscribe; promotional messages require explicit /subscribe.**
 
 ## Architecture
 - Static, responsive RU/EN UI and local-only valuation history.\n- Server-side analytics of verified /start, Mini App opens and successful estimates by platform. All aggregate analytics live in private Vercel Blob; neither searched handles nor estimated prices are stored.\n- Private /admin.html dashboard protected by signed Telegram initData and an exact VALUATION_ADMIN_IDS allowlist.
@@ -14,9 +14,9 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 3. To activate `/start` with an actual Web App button, set `VALUATION_BOT_TOKEN` (sensitive), `VALUATION_WEBHOOK_SECRET` (random 32-64 char string) and `PUBLIC_APP_URL` (public HTTPS site URL) in the **separate Valuation AI Vercel project**, then register the Telegram webhook using the Bot API `setWebhook` method with `secret_token` equal to the configured secret. Never paste the bot token in ChatGPT or commit it to git.
 
 ## Privacy
-- After /start the bot stores only Telegram chat ID, language, first/last start date and referral source in a private Vercel Blob store, solely to provide bot messages. Marketing opt-in is off by default.
+- After /start the bot stores only Telegram chat ID, language, first/last start date and referral source in a private Vercel Blob store, solely to provide bot messages. Service notices default on for users of /start, preserving explicit /unsubscribe. Promotional opt-in remains off by default.
 - A username entered for valuation is sent to the pre-existing SovaZone valuation engine; local history is stored in the user's browser only and can be cleared.
-- /subscribe explicitly opts into bot updates and offers; /unsubscribe opts out; /delete erases the contact record. No broadcasts are implemented or sent automatically.
+- /start enables non-promotional service notices. /subscribe expressly opts into promotional messages, /unsubscribe disables both notices and promotions and stays disabled across future /start, and /delete erases the contact record. No broadcasts are implemented or sent automatically.
 - Sharing an estimate links to t.me/ValuationAiBot?start=share, so first-time users enter via /start rather than immediately launching the Mini App.
 - External data from the valuation engine is rendered as escaped text.
 ## Subscriber-only Mini App onboarding
@@ -32,7 +32,7 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - Historical subscriber records are counted if available in private Blob. **Earlier valuation searches cannot be reconstructed**. Analytics records begin at deployment.
 - Raw analytics contain a keyed pseudonymous identifier and categorical event only; no raw Telegram ID, searched handles, result prices, private messages or IP data.
 - Analytics shown over the last 30 days; older event blobs should be periodically deleted according to the privacy retention policy. The dashboard reads a maximum of 3,000 subscriber records and 10,000 event paths, and reports a truncation warning if limits are reached.
-- Marketing consent remains opt-in, separate from necessary usage metrics. No broadcast sending was added.
+- Marketing consent remains opt-in, separate from service notice preferences and necessary usage metrics. No broadcast sending was added.
 
 ## Professional admin dashboard (Nov 25, 2026)
 - Admin UI: \`/admin.html\` (alias \`/admin\`). All CSS is served from \`/admin.css\` to satisfy the deployed CSP \`style-src 'self'\`. Do not use inline style blocks.
@@ -42,3 +42,10 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - Never share login codes. The code is **not** a bot token or a username. Codes are stored only as keyed-hash blob paths, issued to allowlisted Telegram IDs, and deleted after a successful attempt.
 - The CSV report exports aggregates only; looked-up handles, Telegram IDs and prices are not exported.
 - The 30-day event scan has limits (10k events/3k subscriber profiles); the dashboard displays a partial-data warning when a cap is reached. Historic valuations before recording was deployed cannot be reconstructed.
+
+## Bot controls (November 26, 2026)
+- /start now shows only the open-app button; the former marketing opt-in button is removed.
+- `serviceUpdatesEnabled` is set on /start, persists across repeated starts and is disabled by /unsubscribe; /subscribe can re-enable service notices with separate explicit marketing opt-in.
+- `newsOptIn` and advertising consent fields remain false/null by default. Historic accounts without the service-notices flag are not counted by the admin service subscriber KPI until the next /start.
+- The dashboard separately shows service-notice enabled and explicitly opted-in advertising counts. There is no broadcast job.
+- The original icon and VALUATION AI / USERNAME VALUATION labels were restored, changing only the top brand name to SovaZone.com.

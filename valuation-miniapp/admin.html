@@ -10,7 +10,7 @@
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/admin.css?v=4">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script defer src="/admin.js?v=4"></script>
+  <script defer src="/admin.js?v=5"></script>
 </head>
 <body>
 <svg class="svg-assets" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +112,7 @@
           <article class="kpi-card kpi-primary"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-users"></use></svg></span><span class="kpi-name" title="Зарегистрированные пользователи">Пользователи</span></div><span class="kpi-indicator">ВСЕГО</span></div><strong class="kpi-value" id="registered">—</strong><span class="kpi-foot">После команды /start</span></article>
           <article class="kpi-card"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-chart"></use></svg></span><span class="kpi-name" title="Активная аудитория">Активные</span></div><span class="kpi-indicator" id="active-period">14 ДНЕЙ</span></div><strong class="kpi-value" id="active">—</strong><span class="kpi-foot">Уникальные пользователи</span></article>
           <article class="kpi-card"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-layers"></use></svg></span><span class="kpi-name" title="Успешные оценки">Успешные оценки</span></div><span class="kpi-indicator" id="valuations-period">14 ДНЕЙ</span></div><strong class="kpi-value" id="valuation-total">—</strong><span class="kpi-foot">Все платформы</span></article>
-          <article class="kpi-card"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-inbox"></use></svg></span><span class="kpi-name" title="Разрешили рассылку">Подписчики</span></div><span class="kpi-indicator">OPT-IN</span></div><strong class="kpi-value" id="optins">—</strong><span class="kpi-foot" id="optin-rate">От зарегистрированных: —</span></article>
+          <article class="kpi-card"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-inbox"></use></svg></span><span class="kpi-name" title="Уведомления сервиса">Уведомления</span></div><span class="kpi-indicator">SERVICE</span></div><strong class="kpi-value" id="optins">—</strong><span class="kpi-foot" id="optin-rate">От зарегистрированных: —</span></article>
           <article class="kpi-card kpi-secondary"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-users"></use></svg></span><span class="kpi-name" title="Новые регистрации">Регистрации</span></div><span class="kpi-indicator">НОВЫЕ</span></div><strong class="kpi-value" id="new-registrations">—</strong><span class="kpi-foot">За период</span></article>
           <article class="kpi-card kpi-secondary"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-arrow"></use></svg></span><span class="kpi-name" title="Запуски /start">Запуски /start</span></div><span class="kpi-indicator">БОТ</span></div><strong class="kpi-value" id="bot-starts">—</strong><span class="kpi-foot">Количество событий</span></article>
           <article class="kpi-card kpi-secondary"><div class="kpi-top"><div class="kpi-title"><span class="kpi-icon"><svg><use href="#i-grid"></use></svg></span><span class="kpi-name" title="Открытия приложения">Открытия Mini App</span></div><span class="kpi-indicator">MINI APP</span></div><strong class="kpi-value" id="app-opens">—</strong><span class="kpi-foot">Подтверждённые открытия</span></article>
@@ -147,7 +147,8 @@
           <section class="panel panel-sources" id="sources"><div class="panel-head"><div><span class="panel-eyebrow">ACQUISITION</span><h2>Источники переходов</h2><p>Запуски бота по источнику</p></div></div><div class="source-list" id="sources-list"></div></section>
           <section class="panel panel-funnel"><div class="panel-head"><div><span class="panel-eyebrow">CONVERSION PATH</span><h2>Воронка взаимодействия</h2><p>Уникальные пользователи, начавшие путь в выбранном периоде</p></div></div><div class="funnel-list" id="funnel-list"></div><p class="panel-caption">Учитываются последовательные события /start → открытие → успешная оценка внутри периода.</p></section>
           <section class="panel panel-insights"><div class="panel-head"><div><span class="panel-eyebrow">AUDIENCE QUALITY</span><h2>Дополнительные метрики</h2><p>Рассчитано из собранных данных</p></div></div><div class="insight-list">
-             <div class="insight"><span>Доля согласий на рассылку</span><strong id="insight-optin">—</strong></div>
+             <div class="insight"><span>Доля с уведомлениями</span><strong id="insight-optin">—</strong></div>
+             <div class="insight"><span>Отдельно согласились на рекламу</span><strong id="insight-marketing">—</strong></div>
              <div class="insight"><span>Оценок на одного оценщика</span><strong id="insight-evaluations">—</strong></div>
              <div class="insight"><span>Уникальных запусков бота</span><strong id="insight-unique-starts">—</strong></div>
              <div class="insight"><span>Пользователей с оценками</span><strong id="insight-unique-evaluators">—</strong></div>

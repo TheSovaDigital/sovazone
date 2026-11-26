@@ -9,6 +9,8 @@ const COMMANDS = {
     { command: 'start', description: 'Открыть Valuation AI' },
     { command: 'estimate', description: 'Оценить никнейм' },
     { command: 'help', description: 'Как работает оценка' },
+    { command: 'unsubscribe', description: 'Отключить уведомления' },
+    { command: 'subscribe', description: 'Отдельное согласие на рекламу' },
     { command: 'privacy', description: 'Конфиденциальность' },
     { command: 'myid', description: 'Узнать свой Telegram ID' },
     { command: 'stats', description: 'Закрытая статистика (админ)' }
@@ -17,6 +19,8 @@ const COMMANDS = {
     { command: 'start', description: 'Open Valuation AI' },
     { command: 'estimate', description: 'Evaluate a username' },
     { command: 'help', description: 'How valuation works' },
+    { command: 'unsubscribe', description: 'Disable notices and promotions' },
+    { command: 'subscribe', description: 'Opt in to promotional messages' },
     { command: 'privacy', description: 'Privacy information' },
     { command: 'myid', description: 'Show my Telegram ID' },
     { command: 'stats', description: 'Private statistics (admin)' }
@@ -94,7 +98,7 @@ export default async function handler(req, res) {
     });
     const status = await api('getWebhookInfo');
     if (status.url !== APP_URL + '/api/webhook') throw new Error('Webhook address mismatch');
-    return res.status(200).json({ ok: true, bot: '@' + identity.username, webhook: true, commands: 6, app: APP_URL });
+    return res.status(200).json({ ok: true, bot: '@' + identity.username, webhook: true, commands: 8, app: APP_URL });
   } catch (err) {
     console.error('Valuation AI bot activation:', err?.message || 'unknown error');
     return res.status(502).json({ ok: false, error: 'Bot setup failed; check server logs' });
