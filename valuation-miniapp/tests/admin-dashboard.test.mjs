@@ -106,7 +106,7 @@ test('dashboard uses external stylesheet under strict CSP, and contains only dyn
   const css=readFileSync(new URL('../admin.css',import.meta.url),'utf8');
   const js=readFileSync(new URL('../admin.js',import.meta.url),'utf8');
   const vercel=JSON.parse(readFileSync(new URL('../vercel.json',import.meta.url),'utf8'));
-  assert.match(html,/href="\/admin\.css\?v=3"/);
+  assert.match(html,/href="\/admin\.css\?v=4"/);
   assert.doesNotMatch(html,/<style[\s>]/);
   assert.match(html,/id="login-code"/);
   assert.match(html,/id="dashboard"/);
