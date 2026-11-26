@@ -15,6 +15,9 @@ test('approved matte-black brand images are present and verified byte-for-byte',
     if(hash)assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   }
   const app=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  const admin=readFileSync(new URL('../admin.html',import.meta.url),'utf8');
   assert.match(app,/src="\/assets\/app-icon\.webp"/);
+  assert.match(admin,/src="\/assets\/app-icon\.webp"/);
+  assert.doesNotMatch(admin,/mark\.svg/);
   assert.match(app,/property="og:image" content="https:\/\/valuation\.sovazone\.com\/assets\/welcome-banner\.jpg"/);
 });
