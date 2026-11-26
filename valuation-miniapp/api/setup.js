@@ -57,6 +57,28 @@ export default async function handler(req, res) {
     if (String(identity.username || '').toLowerCase() !== 'valuationaibot')
       return res.status(409).json({ ok: false, error: 'This token belongs to another bot' });
 
+    let profileUpdated=false;
+    if(req.query?.profile==='1'){
+      // Operator-authorized, explicit, one-time profile image update.
+      // Telegram requires a freshly uploaded JPEG file, not a URL or file_id.
+      const img=await fetch(APP_URL+'/assets/bot-avatar.jpg');
+      if(!img.ok || !String(img.headers?.get?.('content-type')||'').includes('image/jpeg'))
+        throw Error('Approved JPEG avatar is unavailable');
+      const bytes=await img.arrayBuffer();
+      if(bytes.byteLength<1024 || bytes.byteLength>4*1024*1024)
+        throw Error('Approved avatar has unexpected size');
+      const data=new FormData();
+      data.append('photo',JSON.stringify({type:'static',photo:'attach://avatar'}));
+      data.append('avatar',new Blob([bytes],{type:'image/jpeg'}),'avatar.jpg');
+      const response=await fetch('https://api.telegram.org/bot'+token+'/setMyProfilePhoto',{
+        method:'POST',body:data
+      });
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok || !result.ok || result.result!==true)
+        throw Error('Telegram rejected approved bot profile image (HTTP '+response.status+')');
+      profileUpdated=true;
+    }
+
     await api('setMyName', { name: 'SovaZone Valuation AI' });
     await api('setMyName', { name: 'SovaZone Valuation AI — Оценка никнеймов', language_code: 'ru' });
     await api('setMyName', { name: 'SovaZone Valuation AI — Username Valuation', language_code: 'en' });
@@ -98,7 +120,7 @@ export default async function handler(req, res) {
     });
     const status = await api('getWebhookInfo');
     if (status.url !== APP_URL + '/api/webhook') throw new Error('Webhook address mismatch');
-    return res.status(200).json({ ok: true, bot: '@' + identity.username, webhook: true, commands: 8, app: APP_URL });
+    return res.status(200).json({ ok: true, bot: '@' + identity.username, webhook: true, commands: 8, app: APP_URL, profileUpdated });
   } catch (err) {
     console.error('Valuation AI bot activation:', err?.message || 'unknown error');
     return res.status(502).json({ ok: false, error: 'Bot setup failed; check server logs' });

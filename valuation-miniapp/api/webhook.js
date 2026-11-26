@@ -61,12 +61,30 @@ async function reply(chatId, lang, key, showOpen = true) {
     ],
     [{ text: t.website, url: WEBSITE_URL }]
   ] : [];
-  await apiCall('sendMessage', {
-    chat_id: chatId,
-    text: t[key] || t.start,
-    parse_mode: 'HTML',
-    link_preview_options: { is_disabled: true },
-    ...(buttons.length ? { reply_markup: { inline_keyboard: buttons } } : {})
+  const payload={
+    chat_id:chatId,
+    parse_mode:'HTML',
+    ...(buttons.length ? {reply_markup:{inline_keyboard:buttons}} : {})
+  };
+  // Use the approved brand banner only on /start, with the same inline actions.
+  // Telegram captions have a 1024-character limit; our RU/EN greeting fits.
+  if(key==='start'){
+    try{
+      await apiCall('sendPhoto',{
+        ...payload,
+        photo:APP_URL+'/assets/welcome-banner.jpg',
+        caption:t.start
+      });
+      return;
+    }catch(error){
+      // A CDN/Telegram image failure should never block valuation onboarding.
+      console.error('Valuation welcome photo failed; sending text',error?.message);
+    }
+  }
+  await apiCall('sendMessage',{
+    ...payload,
+    text:t[key] || t.start,
+    link_preview_options:{is_disabled:true}
   });
 }
 
