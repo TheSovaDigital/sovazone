@@ -69,3 +69,8 @@ A standalone Telegram Mini App dedicated exclusively to username valuation (Inst
 - New /start bot greetings display the approved matte-black image via Telegram sendPhoto (RU/EN captions and four existing navigation buttons). Other commands continue using text. On photo errors the bot falls back to normal /start text, preserving functionality.
 - Avatar image `assets/bot-avatar.jpg` is uploaded to @ValuationAiBot using operator-authenticated setup `?profile=1`; never modify another bot or expose the token. This action is **not** called on routine deployment or ordinary setup.
 - SHA256 checks ensure the exact user-approved image assets were imported, not substitutions.
+
+## Telegram welcome banner delivery fix (2026-11-26)
+- Avoid Telegram remote-photo fetching (400 Bad Request on /start). Read the same approved JPEG via server-side fetch and send a multipart upload to Telegram `sendPhoto`, retaining caption and all three rows of inline buttons. Never manually set the FormData Content-Type boundary.
+- A protected operator diagnostic on `/api/setup?testWelcome=1` sends one real welcome to the first configured `VALUATION_ADMIN_IDS` recipient only; requires the existing setup key and verified bot identity. It ignores any user-supplied chatId and has no unprotected recipient selection.
+- If photo upload fails, bot still sends the original /start text with buttons.

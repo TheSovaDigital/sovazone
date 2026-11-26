@@ -78,7 +78,21 @@ test('webhook denies unauthenticated updates and handles language-specific /star
   setEnv();const original=globalThis.fetch;const sent=[];
   const stored=[];const store={register:async (...args)=>{stored.push({action:'register',args})},setUpdates:async (...args)=>{stored.push({action:'updates',args})},setServiceUpdates:async (...args)=>{stored.push({action:'service-updates',args})},erase:async (...args)=>{stored.push({action:'erase',args})}};
   globalThis.fetch=async (url,options)=>{
-    sent.push(JSON.parse(options.body));
+    if(String(url)===expectedUrl+'/assets/welcome-banner.jpg')
+      return {ok:true,headers:{get:()=> 'image/jpeg'},arrayBuffer:async()=>new Uint8Array(2048).buffer};
+    if(options.body instanceof FormData){
+      sent.push({
+        chat_id:Number(options.body.get('chat_id')),
+        caption:options.body.get('caption'),
+        parse_mode:options.body.get('parse_mode'),
+        filename:options.body.get('photo')?.name,
+        mimetype:options.body.get('photo')?.type,
+        reply_markup:JSON.parse(options.body.get('reply_markup'))
+      });
+      assert.equal(options.headers,undefined,'let fetch set multipart boundary');
+    }else{
+      sent.push(JSON.parse(options.body));
+    }
     return {ok:true,status:200,json:async()=>({ok:true,result:true})};
   };
   try{
@@ -91,7 +105,8 @@ test('webhook denies unauthenticated updates and handles language-specific /star
     assert.equal(valid.code,200);
     assert.equal(sent.length,1);
     assert.ok(sent[0].caption.includes('Instagram'));
-    assert.equal(sent[0].photo,expectedUrl+'/assets/welcome-banner.jpg');
+    assert.equal(sent[0].filename,'welcome-banner.jpg');
+    assert.equal(sent[0].mimetype,'image/jpeg');
     assert.equal('text' in sent[0],false,'/start is a branded photo with caption');
     assert.equal(sent[0].reply_markup.inline_keyboard[0][0].web_app.url,expectedUrl);
     const englishButtons=sent[0].reply_markup.inline_keyboard;
@@ -129,10 +144,14 @@ test('webhook denies unauthenticated updates and handles language-specific /star
 test('branded greeting falls back to text if Telegram cannot fetch the photo',async()=>{
   setEnv();const sent=[];const previous=globalThis.fetch;
   globalThis.fetch=async(url,options)=>{
+    if(String(url)===expectedUrl+'/assets/welcome-banner.jpg')
+      return {ok:true,headers:{get:()=> 'image/jpeg'},arrayBuffer:async()=>new Uint8Array(2048).buffer};
     const method=String(url).split('/').pop();
-    const payload=JSON.parse(options.body);
+    const payload=options.body instanceof FormData
+      ?{chat_id:options.body.get('chat_id'),caption:options.body.get('caption')}
+      :JSON.parse(options.body);
     sent.push({method,payload});
-    if(method==='sendPhoto')return {ok:false,status:400,json:async()=>({ok:false})};
+    if(method==='sendPhoto')return {ok:false,status:400,json:async()=>({ok:false,description:'Bad Request: failed to send photo'})};
     return {ok:true,status:200,json:async()=>({ok:true,result:true})};
   };
   try{
@@ -175,4 +194,40 @@ test('authorized bot profile update uploads approved JPEG using Telegram multipa
     await setup({method:'GET',query:{key:'incorrect',profile:'1'}},denied);
     assert.equal(denied.code,403);
   }finally{globalThis.fetch=original}
+});
+
+
+test('operator-only welcome check sends the same photo to configured admin and no arbitrary recipients',async()=>{
+  setEnv();process.env.VALUATION_ADMIN_IDS='573773340';
+  const original=globalThis.fetch,methods=[];
+  globalThis.fetch=async(url,options)=>{
+    const address=String(url);
+    if(address===expectedUrl+'/assets/welcome-banner.jpg')
+      return {ok:true,headers:{get:()=> 'image/jpeg'},arrayBuffer:async()=>new Uint8Array(4096).buffer};
+    const method=address.split('/').pop();methods.push(method);
+    if(method==='sendPhoto'){
+      assert.ok(options.body instanceof FormData);
+      assert.equal(options.body.get('chat_id'),'573773340');
+      assert.ok(options.body.get('caption').includes('Оцените никнейм'));
+      assert.equal(options.body.get('photo').name,'welcome-banner.jpg');
+      assert.equal(JSON.parse(options.body.get('reply_markup')).inline_keyboard.length,3);
+      return {ok:true,status:200,json:async()=>({ok:true,result:{message_id:1}})};
+    }
+    return {ok:true,status:200,json:async()=>({ok:true,result:{username:'ValuationAiBot'}})};
+  };
+  try{
+    const denied=response();
+    await setup({method:'GET',query:{key:'incorrect',testWelcome:'1',chatId:'123456789'}},denied);
+    assert.equal(denied.code,403);
+    assert.equal(methods.length,0);
+    const accepted=response();
+    await setup({method:'GET',query:{key:setupKey,testWelcome:'1',chatId:'123456789'}},accepted);
+    assert.equal(accepted.code,200);
+    assert.equal(accepted.payload.welcomeSent,true);
+    assert.deepEqual(methods,['getMe','sendPhoto']);
+    const missing=response();
+    delete process.env.VALUATION_ADMIN_IDS;
+    await setup({method:'GET',query:{key:setupKey,testWelcome:'1'}},missing);
+    assert.equal(missing.code,403);
+  }finally{globalThis.fetch=original;delete process.env.VALUATION_ADMIN_IDS}
 });
