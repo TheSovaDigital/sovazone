@@ -55,22 +55,22 @@ test('access requires Telegram identity and a prior /start private record',async
 test('Mini App waits for verified Telegram access before displaying onboarding gate',()=>{
   const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
   const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
-  assert.match(html,/id="access-gate"[\\s\\S]*?hidden>/);
-  assert.doesNotMatch(js,/showAccessGate\\('start'\\);verifyAccessOnOpen\\(\\)/);
-  assert.match(js,/els\\.submit\\.disabled=true;\\s*verifyAccessOnOpen\\(\\)/);
-  assert.match(js,/if \\(resp\\.ok && data\\.authorized\\)/);
-  assert.match(js,/else showAccessGate\\(resp\\.status===403\\?'start':'error'\\)/);
-  assert.match(html,/app\\.js\\?v=6/);
+  assert.match(html,/id="access-gate"[\s\S]*?hidden>/);
+  assert.doesNotMatch(js,/showAccessGate\('start'\);verifyAccessOnOpen\(\)/);
+  assert.match(js,/els\.submit\.disabled=true;\s*verifyAccessOnOpen\(\)/);
+  assert.match(js,/if \(resp\.ok && data\.authorized\)/);
+  assert.match(js,/else showAccessGate\(resp\.status===403\?'start':'error'\)/);
+  assert.match(html,/app\.js\?v=6/);
 });
 test('Telegram Mini App expands and requests fullscreen only when supported, with fallback and safe area',()=>{
   const js=readFileSync(new URL('../app.js',import.meta.url),'utf8');
   const css=readFileSync(new URL('../style.css',import.meta.url),'utf8');
-  assert.match(js,/telegram\\.ready\\?\\.\\(\\)/);
-  assert.match(js,/telegram\\.expand\\?\\.\\(\\)/);
-  assert.match(js,/typeof telegram\\.requestFullscreen === 'function'/);
-  assert.match(js,/telegram\\.isVersionAtLeast\\('8\\.0'\\)/);
-  assert.match(js,/telegram\\.requestFullscreen\\(\\)/);
-  assert.match(js,/telegram\\.onEvent\\?\\.\\('fullscreenFailed'/);
+  assert.match(js,/telegram\.ready\?\.\(\)/);
+  assert.match(js,/telegram\.expand\?\.\(\)/);
+  assert.match(js,/typeof telegram\.requestFullscreen === 'function'/);
+  assert.match(js,/telegram\.isVersionAtLeast\('8\.0'\)/);
+  assert.match(js,/telegram\.requestFullscreen\(\)/);
+  assert.match(js,/telegram\.onEvent\?\.\('fullscreenFailed'/);
   assert.match(css,/--tg-content-safe-area-inset-top/);
   assert.match(css,/--tg-content-safe-area-inset-bottom/);
 });
